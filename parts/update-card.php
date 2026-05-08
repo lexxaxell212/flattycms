@@ -1,6 +1,6 @@
 <section class="container py-5" id="informasi-terkini">
     <div class="mb-4 px-3">
-        <h2 class="fw-bold h4">Informasi Terkini</h2>
+        <h2 class="fw-bold">Informasi Terkini</h2>
         <p class="text-muted small">Update terbaru seputar kota Bandung.</p>
     </div>
 
@@ -17,7 +17,7 @@
                 
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title fw-bold">Judul Artikel Kamu</h5>
-                    <p class="card-text text-muted small mb-4">
+                    <p class="card-text text-muted mb-4">
                         Ringkasan konten yang bikin penasaran pengunjung buat klik...
                     </p>
                     <div class="mt-auto">

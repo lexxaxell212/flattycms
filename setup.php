@@ -29,7 +29,7 @@ define("API_URL",   BASE_URL . "api/");
 // 5. FILES & UPLOADS (Disesuaikan dengan mapping: admin/uploads)
 define("UPLOADS_URL",  ADMIN_URL . "uploads/");
 define("UPLOADS_PATH", ROOT_PATH . "admin/uploads/");
-define("BASE_UPLOAD_URL", ROOT_PATH . "admin/uploads/");
+define("BASE_UPLOAD_URL", ROOT_PATH . "admin/");
 
 // 6. SYSTEM PATHS (Disesuaikan dengan struktur folder kamu)
 define("LOGS_PATH",     ROOT_PATH . "logs/");

@@ -48,49 +48,33 @@ safe_include("parts/blog-card.php", "Parts Artikel Terbaru");
 safe_include("parts/update-card.php", "Parts Update Terkini");
 ?>
 <script>
-let currentSlide = 0;
-let autoSlide = setInterval(nextSlide, 8000);
-let lastWheel = 0;
-function heroLandSlide(n) {
-  clearInterval(autoSlide);
-  showSlide((currentSlide + n + 3) % 3);
-  autoSlide = setInterval(nextSlide, 8000);
+  let currentHeroIndex = 0;
+const heroSlides = document.querySelectorAll('.hero-item');
+const heroDots = document.querySelectorAll('.dot');
+let heroInterval;
+
+function showHeroSlide(index) {
+    heroSlides.forEach(slide => slide.classList.remove('active'));
+    heroDots.forEach(dot => dot.classList.remove('active'));
+    heroSlides[index].classList.add('active');
+    heroDots[index].classList.add('active');
+    currentHeroIndex = index;
 }
-function heroLandGoTo(n) {
-  clearInterval(autoSlide);
-  showSlide(n);
-  autoSlide = setInterval(nextSlide, 8000);
+function nextHeroSlide() {
+    let next = (currentHeroIndex + 1) % heroSlides.length;
+    showHeroSlide(next);
 }
-function nextSlide() {
-  heroLandSlide(1);
+function heroJump(index) {
+    clearInterval(heroInterval);
+    showHeroSlide(index);
+    startHeroAutoSlide(); 
 }
-function showSlide(n) {
-  const slides = document.querySelectorAll('.hero-land-slide');
-  const indicators = document.querySelectorAll('.hero-land-indicator');
-    slides[currentSlide].classList.remove('active');
-    indicators[currentSlide].classList.remove('active');
-    currentSlide = n;
-    slides[currentSlide].classList.add('active');
-            indicators[currentSlide].classList.add('active');
+function startHeroAutoSlide() {
+    heroInterval = setInterval(nextHeroSlide, 5000); 
 }
-let startX = 0;
-const container = document.querySelector('.hero-land-container');
-  container.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-  container.addEventListener('touchend', e => {
-    let endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) nextSlide();
-    if (endX - startX > 50) heroLandSlide(-1);
-    });
-  container.addEventListener('wheel', e => {
-    const now = Date.now();
-      if (now - lastWheel < 500) return;
-        lastWheel = now;
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-        e.preventDefault();
-        if (e.deltaX > 0) nextSlide();
-        else heroLandSlide(-1);
-            }
-    }, { passive: false });
+document.addEventListener('DOMContentLoaded', () => {
+    startHeroAutoSlide();
+});
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {

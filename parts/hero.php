@@ -1,49 +1,156 @@
-<div id="hero-website" class="hero-land-container position-relative">
-  <div class="hero-land-slide active" style="background: linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,41,59,0.9) 50%, rgba(51,65,85,0.95) 100%), url('https://ayokebandung.id/assets/images/wisata.webp') center/cover;">
-    <div class="hero-land-content">
-      <div class="text-center">
-        <span class="text-hero font-bold mb-6 hero-land-title">WISATA</span>
-        <p class="hero-land-desc fs-4 mt-6 text-white mb-6">Eksplorasi destinasi ikonik Bandung dengan layanan premium dan kenyamanan tak tertandingi.</p>
-        <a href="#kenapaharusbandung" class="mt-6">
-          <button class="hero-land-btn-link btn btn-accent btn-md">MULAI JELAJAHI
-            <i class="fas fa-angle-right"></i>
-          </button>
-        </a>
+<section id="hero-website" class="hero-wrapper position-relative overflow-hidden">
+  <?php 
+  $slides = [
+    ['title' => 'WISATA', 'desc' => 'Eksplorasi destinasi ikonik Bandung dengan layanan premium.', 'img' => 'wisata.webp'],
+    ['title' => 'KULINER', 'desc' => 'Manjakan lidah dengan cita rasa autentik kelas dunia.', 'img' => 'kuliner.webp'],
+    ['title' => 'HOTEL', 'desc' => 'Temukan kemewahan menginap terbaik di lokasi strategis.', 'img' => 'hotel.webp']
+  ];
+  foreach ($slides as $i => $s): 
+  ?>
+  <div class="hero-item <?= $i === 0 ? 'active' : '' ?>" 
+       style="background-image: url('<?= IMG_URL . $s['img'] ?>')">
+    <div class="hero-overlay"></div>
+    <div class="container h-100 d-flex align-items-center">
+      <div class="glass-hero-card col-12 col-md-7 col-lg-5">
+        <h1 class="display-4 fw-bold mb-3 text-blue-800"><?= $s['title'] ?></h1>
+        <p class="lead mb-4 text-secondary"><?= $s['desc'] ?></p>
+        <div class="d-flex gap-3">
+          <a href="#explore" class="btn btn-gradient-blue shadow-lg">
+            Mulai Jelajahi <i class="fas fa-arrow-right ms-2"></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-  <div class="hero-land-slide" style="background: linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,41,59,0.9) 50%, rgba(51,65,85,0.95) 100%), url('https://ayokebandung.id/assets/images/kuliner.webp') center/cover;">
-    <div class="hero-land-content">
-      <div class="text-center text-white">
-        <span class="text-hero font-bold mb-6 hero-land-title">KULINER</span>
-        <p class="hero-land-desc fs-4 mt-6 text-white mb-6">Manjakan lidah dengan cita rasa autentik dan pengalaman bersantap kelas dunia di Bandung.</p>
-        <a href="#kenapaharusbandung" class="mt-6">
-          <button class="hero-land-btn-link btn btn-accent btn-md">MULAI JELAJAHI
-            <i class="fas fa-angle-right"></i>
-          </button>
-        </a>
-      </div>
-    </div>
+  <?php endforeach; ?>
+
+  <div class="hero-dots">
+    <?php foreach ($slides as $i => $s): ?>
+      <span class="dot <?= $i === 0 ? 'active' : '' ?>" onclick="heroJump(<?= $i ?>)"></span>
+    <?php endforeach; ?>
   </div>
-  <div class="hero-land-slide" style="background: linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,41,59,0.9) 50%, rgba(51,65,85,0.95) 100%), url('https://ayokebandung.id/assets/images/hotel.webp') center/cover;">
-    <div class="hero-land-content">
-      <div class="text-center text-white">
-        <span class="text-hero font-bold mb-6 hero-land-title">HOTEL</span>
-        <p class="hero-land-desc fs-4 mt-6 text-white mb-6">Temukan kemewahan menginap terbaik di lokasi strategis untuk istirahat Anda yang sempurna.</p>
-        <a href="#kenapaharusbandung" class="mt-6">
-          <button class="hero-land-btn-link btn btn-accent btn-md">MULAI JELAJAHI
-            <i class="fas fa-angle-right"></i>
-          </button>
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4 d-flex gap-2 pb-3">
-    <div class="hero-land-indicator active" onclick="heroLandGoTo(0)"></div>
-      <div class="hero-land-indicator" onclick="heroLandGoTo(1)"></div>
-      <div class="hero-land-indicator" onclick="heroLandGoTo(2)"></div>
-    </div>
-</div>
+</section>
 <style>
-.hero-land-container {width: 100vw;height: calc(100vh - var(--navbar-height));}@media (min-width:1100px){.hero-land-container{height:70vh}}.hero-land-slide{height:100%;background-size:cover;background-position:center;transition:opacity .7s;opacity:0;position:absolute;top:0;left:0;width:100%}.hero-land-slide.active{opacity:1}.hero-land-desc{opacity:0;transform:translateY(20px);transition:.6s;text-shadow:0 2px 6px rgba(50,50,80,.5)}.hero-land-title{text-shadow:0 2px 6px rgba(50,50,80,.2)}.hero-land-slide.active .hero-land-desc{opacity:1;transform:translateY(0)}.hero-land-content{position:absolute;top:70%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:800px}.hero-land-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.2);border:none;color:#fff;width:50px;height:50px;border-radius:50%;z-index:20;backdrop-filter:blur(10px)}.hero-land-prev{left:30px}.hero-land-next{right:30px}.hero-land-indicator{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5);transition:.3s;cursor:pointer}.hero-land-indicator.active{background:#fff;transform:scale(1.05)}.hero-land-btn-link{display:inline-block;text-decoration:none}
+  :root {
+    --misty-soft: #f8fafc; /* Tailwind Slate 50 */
+    --blue-500: #3b82f6;
+    --blue-700: #1d4ed8;
+    --blue-800: #1e40af;
+    --radius: 0.75rem;
+}
+
+.hero-wrapper {
+    height: 85vh;
+    background: var(--misty-soft);
+}
+
+.hero-item {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+    transform: scale(1.1); /* Ken Burns Effect */
+}
+
+.hero-item.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    /* Gradient tipis dari kiri ke kanan, bukan hitam pekat */
+    background: linear-gradient(90deg, rgba(248, 250, 252, 0.9) 0%, rgba(248, 250, 252, 0.2) 100%);
+}
+
+/* Glass Card */
+.glass-hero-card {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 3rem;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.btn-gradient-blue {
+    background: linear-gradient(to right, var(--blue-500), var(--blue-700));
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-gradient-blue:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.5);
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .hero-overlay {
+    background: linear-gradient(90deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.3) 100%);
+}
+[data-theme="dark"] .glass-hero-card {
+    background: rgba(30, 41, 59, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* Animasi buat konten di dalam slide aktif */
+.hero-item.active .glass-hero-card h1 {
+    animation: fadeInUp 0.8s ease forwards 0.2s;
+    opacity: 0;
+}
+
+.hero-item.active .glass-hero-card p {
+    animation: fadeInUp 0.8s ease forwards 0.4s;
+    opacity: 0;
+}
+
+.hero-item.active .glass-hero-card .btn {
+    animation: fadeInUp 0.8s ease forwards 0.6s;
+    opacity: 0;
+}
+
+/* Dots Navigation Style */
+.hero-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dot.active {
+    background: var(--blue-500);
+    width: 30px; /* Efek memanjang ala modern UI */
+    border-radius: 10px;
+}
+
+[data-theme="dark"] .dot {
+    background: rgba(255, 255, 255, 0.3);
+}
+
 </style>

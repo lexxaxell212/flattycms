@@ -3,7 +3,7 @@
         <div class="pe-md-4"> <h6 class="text-primary fw-bold text-uppercase ls-wide mb-2">The Essence of West Java</h6>
           <h2 class="fw-bold mb-4" style="letter-spacing: -1px;">Kenapa Harus Bandung?</h2>
           
-          <p class="text-muted mb-4" style="line-height: 1.8;">
+          <p class="text-muted mb-4" style="line-height: 1.7;">
             Lebih dari sekadar <strong>Paris van Java</strong>, Bandung kini berevolusi menjadi pusat gaya hidup modern yang bersinergi dengan alam. Dari destinasi kuliner legendaris hingga ekosistem kreatif kelas dunia, setiap sudutnya menawarkan peluang bisnis sekaligus kenyamanan rekreasi yang tak tertandingi.
           </p>
           
@@ -18,7 +18,8 @@
               </div>
           </div>
 
-          <a href="<?= PAGES_URL ?>kenapa-harus-bandung" class="btn btn-primary px-4 py-2">
+          <a href="<?= PAGES_URL ?>kenapa-harus-bandung" class="btn btn-primary
+          btn-sm px-4 py-2">
             Pelajari Lebih Lanjut <i class="fas fa-arrow-right ms-2"></i>
           </a>
         </div>

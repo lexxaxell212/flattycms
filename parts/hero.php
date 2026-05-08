@@ -32,10 +32,10 @@
 </section>
 <style>
   :root {
-    --misty-soft: #f8fafc; /* Tailwind Slate 50 */
-    --blue-500: #3b82f6;
-    --blue-700: #1d4ed8;
-    --blue-800: #1e40af;
+    --mistyG-soft: #f8fafc; 
+    --blueG-500: #3b82f6;
+    --blueG-700: #1d4ed8;
+    --blueG-800: #1e40af;
     --radius: 0.75rem;
 }
 
@@ -95,10 +95,10 @@
 }
 
 /* Dark Mode Support */
-[data-theme="dark"] .hero-overlay {
+[data-dark] .hero-overlay {
     background: linear-gradient(90deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.3) 100%);
 }
-[data-theme="dark"] .glass-hero-card {
+[data-dark] .glass-hero-card {
     background: rgba(30, 41, 59, 0.5);
     border-color: rgba(255, 255, 255, 0.1);
 }
@@ -149,7 +149,7 @@
     border-radius: 10px;
 }
 
-[data-theme="dark"] .dot {
+[data-dark] .dot {
     background: rgba(255, 255, 255, 0.3);
 }
 

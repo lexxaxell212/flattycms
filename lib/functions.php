@@ -1,11 +1,11 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 $dir = __DIR__;
 if (file_exists($dir . '/vendor/autoload.php')) {
     require_once $dir . '/vendor/autoload.php';
 }
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 if (!function_exists("autoload_core")) {
   function autoload_core()

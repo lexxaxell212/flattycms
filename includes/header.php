@@ -23,16 +23,18 @@ $page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? "Ayokebandung.
   <link rel="preload" as="font" href="<?= FONTS_URL ?>inter-v20-latin-900.woff2" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="<?= CSS_URL ?>bs533.min.css">
-  
-  <link rel="preload" as="style" href="<?= CSS_URL ?>fa651.all.min.css">
-  <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css"></noscript>
-  
   <link rel="stylesheet" href="<?= CSS_URL ?>indexes.min.css">
   
   <link rel="preload" as="style" href="<?= CSS_URL ?>style.min.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>style.min.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="<?= CSS_URL ?>style.min.css"></noscript>
+  
+  <link rel="preload" as="style" href="<?= CSS_URL ?>fa651.all.min.css">
+  <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css" media="print" onload="this.media='all'">
+  
+  <noscript>
+    <link rel="stylesheet" href="<?= CSS_URL ?>style.min.css">
+    <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css">
+  </noscript>
 
   <script>
     const CONFIG = {

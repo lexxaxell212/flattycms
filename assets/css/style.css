@@ -665,7 +665,7 @@
 .newsletter-section {
   padding:6rem 1rem
 }
-.newsletter-section:hover h2.newsletter-text {
+#registernewsletter:hover h2.newsletter-text {
   color: var(--blue-700) !important;
 }
 h2.newsletter-text {

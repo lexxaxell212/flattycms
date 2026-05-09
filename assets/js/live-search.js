@@ -6,10 +6,11 @@
     MIN_CHARS   : 2,
     DEBOUNCE_MS : 300,
 
-    TRIGGER     : '#btn-search',
-    WRAPPER     : '#live-search-wrapper',
-    INPUT       : '#searchInput2',   
-    DROPDOWN    : '#live-search-dropdown', 
+    TRIGGER  : '#btn-search',
+    WRAPPER  : '#live-search-wrapper',
+    INPUT    : '#searchInput2',
+    DROPDOWN : '#live-search-dropdown',
+    CLOSE    : '#ls-close-btn',
 
     LABELS : {
       admin_items      : 'Pages',
@@ -18,20 +19,20 @@
     },
 
     URLS : {
-     admin_items      : '/pages/?id={id}',
-     allcontent_posts : '/blogs/?id={id}',
-     pages            : '/pages/{slug}/',
+      admin_items      : '/pages/?id={id}',
+      allcontent_posts : '/blogs/?id={id}',
+      pages            : '/pages/{slug}/',
     },
   };
 
-
-  let debounceTimer   = null;
-  let currentRequest  = null;
+  let debounceTimer  = null;
+  let currentRequest = null;
 
   const wrapper  = document.querySelector(CONFIG.WRAPPER);
   const trigger  = document.querySelector(CONFIG.TRIGGER);
   const input    = document.querySelector(CONFIG.INPUT);
   const dropdown = document.querySelector(CONFIG.DROPDOWN);
+  const closeBtn = document.querySelector(CONFIG.CLOSE);
 
   function init() {
     if (!wrapper || !trigger || !input || !dropdown) {
@@ -39,33 +40,39 @@
       return;
     }
 
-    trigger.addEventListener('click', function (e) {
+    trigger.addEventListener('click', (e) => {
       e.preventDefault();
-      const isOpen = wrapper.classList.toggle('active');
-      if (isOpen) {
-        document.body.style.overflow = "hidden";
-        clearDropdown();
-      }
-      
+      openWrapper();
     });
+
+    closeBtn?.addEventListener('click', closeWrapper);
 
     input.addEventListener('input', onInput);
     input.addEventListener('keydown', onKeydown);
 
-    document.addEventListener('click', function (e) {
+    document.addEventListener('click', (e) => {
       if (!wrapper.contains(e.target) && !trigger.contains(e.target)) {
         closeWrapper();
       }
     });
 
-    document.addEventListener('keydown', function (e) {
+    document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeWrapper();
     });
   }
 
+  function openWrapper() {
+    wrapper.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input.focus(), 50);
+    clearDropdown();
+  }
+
   function closeWrapper() {
     wrapper.classList.remove('active');
-    document.body.style.overflow = "auto";
+    dropdown.classList.remove('open');
+    document.body.style.overflow = '';
+    input.value = '';
     clearDropdown();
   }
 
@@ -74,6 +81,7 @@
     clearTimeout(debounceTimer);
 
     if (q.length < CONFIG.MIN_CHARS) {
+      dropdown.classList.remove('open');
       clearDropdown();
       return;
     }
@@ -108,6 +116,7 @@
     if (!data.results || data.results.length === 0) {
       dropdown.innerHTML =
         '<div class="ls-empty">Tidak ada hasil untuk <strong>' + esc(q) + '</strong></div>';
+      dropdown.classList.add('open');
       return;
     }
 
@@ -117,30 +126,25 @@
       grouped[item.source].push(item);
     });
 
-    Object.keys(grouped).forEach(source => {
-      
-      const label = document.createElement('div');
+    const sources   = Object.keys(grouped);
+    let itemIndex   = 0;
+
+    sources.forEach((source, si) => {
+      const label       = document.createElement('div');
       label.className   = 'ls-group-label';
       label.textContent = CONFIG.LABELS[source] || source;
       dropdown.appendChild(label);
 
       grouped[source].forEach(item => {
-        // --- PERUBAHAN DI SINI ---
         let href = CONFIG.URLS[source] || '#';
-        
-        // Ganti {id} jika ada
-        href = href.replace('{id}', item.id);
-        
-        // Ganti {slug} jika ada (khusus untuk source 'pages')
-        if (item.slug) {
-          href = href.replace('{slug}', item.slug);
-        }
-        // -------------------------
+        href     = href.replace('{id}', item.id);
+        if (item.slug) href = href.replace('{slug}', item.slug);
 
-        const a    = document.createElement('a');
-        a.className = 'ls-item';
-        a.href      = href;
+        const a       = document.createElement('a');
+        a.className   = 'ls-item';
+        a.href        = href;
         a.setAttribute('role', 'option');
+        a.style.animationDelay = (itemIndex * 40) + 'ms';
 
         a.innerHTML =
           '<div class="ls-title">' + hilite(item.title, q) + '</div>' +
@@ -149,13 +153,22 @@
             : '');
 
         dropdown.appendChild(a);
+        itemIndex++;
       });
+
+      if (si < sources.length - 1) {
+        const div     = document.createElement('div');
+        div.className = 'ls-divider';
+        dropdown.appendChild(div);
+      }
     });
 
-    const footer = document.createElement('div');
+    const footer       = document.createElement('div');
     footer.className   = 'ls-footer';
     footer.textContent = data.total + ' hasil ditemukan';
     dropdown.appendChild(footer);
+
+    dropdown.classList.add('open');
   }
 
   function onKeydown(e) {
@@ -185,19 +198,27 @@
 
   function clearDropdown() {
     dropdown.innerHTML = '';
+    dropdown.classList.remove('open');
   }
 
   function showLoading() {
-    dropdown.innerHTML = '<div class="ls-loading">Mencari...</div>';
+    dropdown.innerHTML =
+      '<div class="ls-loading"><span class="ls-spinner"></span> Mencari...</div>';
+    dropdown.classList.add('open');
   }
 
   function showError() {
-    dropdown.innerHTML = '<div class="ls-empty">Terjadi kesalahan, coba lagi.</div>';
+    dropdown.innerHTML =
+      '<div class="ls-error">Terjadi kesalahan, coba lagi.</div>';
+    dropdown.classList.add('open');
   }
 
   function hilite(text, q) {
     if (!q || !text) return esc(text || '');
-    const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    const re = new RegExp(
+      '(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')',
+      'gi'
+    );
     return esc(text).replace(re, '<mark>$1</mark>');
   }
 
@@ -216,5 +237,4 @@
   } else {
     init();
   }
-
 })();

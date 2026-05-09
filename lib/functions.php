@@ -1,7 +1,7 @@
 <?php
 $dir = __DIR__;
-if (file_exists($dir . '/vendor/autoload.php')) {
-    require_once $dir . '/vendor/autoload.php';
+if (file_exists($dir . '/../vendor/autoload.php')) {
+    require_once $dir . '/../vendor/autoload.php';
 }
 
 use PHPMailer\PHPMailer\PHPMailer;

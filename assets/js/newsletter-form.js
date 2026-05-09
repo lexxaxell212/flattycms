@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .finally(() => {
             btn.disabled = false;
             btn.style.opacity = '1';
-            btn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+            btn.innerHTML = 'BERLANGGANAN <i class="fas fa-paper-plane"></i>';
         });
     });
 });

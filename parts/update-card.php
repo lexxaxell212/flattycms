@@ -1,7 +1,7 @@
-<section class="container py-5" id="informasi-terkini">
+<section class="container py-6" id="informasi-terkini">
     <div class="mb-4 px-3">
         <h2 class="fw-bold">Informasi Terkini</h2>
-        <p class="text-muted small">Update terbaru seputar kota Bandung.</p>
+        <p class="text-muted mb-3">Update terbaru seputar kota Bandung.</p>
     </div>
 
     <div class="row g-4 px-2 justify-content-center">

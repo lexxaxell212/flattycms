@@ -815,7 +815,6 @@ li.list a:hover,li.list a:active {
   display:flex;
   align-items:center;
   justify-content:center;
-  color:var(--blue-950);
   transition:all 0.3s ease;
   margin:10px
 }

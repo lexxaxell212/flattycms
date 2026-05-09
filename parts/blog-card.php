@@ -13,7 +13,7 @@ $categories = safe_get_categories($pdo);
 <section class="container py-6" name="artikel-terbaru">
   <div class="overflow-hidden">
     <div class="mb-5">
-      <h4 class="">ARTIKEL TERBARU</h4>
+      <h2 class="fw-bold">ARTIKEL TERBARU</h2>
     </div>
     <div class="slider-wrapper mb-6">
       <div class="slider-track" id="sliderTrack">

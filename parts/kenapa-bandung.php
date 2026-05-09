@@ -1,6 +1,6 @@
-<section id="kenapa-harus-bandung" class="container-fluid py-5" style="background: var(--bg-white)">
+<section id="kenapa-harus-bandung" class="container-fluid py-6" style="background: var(--bg-white)">
   <div class="container"> <div class="row align-items-center g-5"> <div class="col-12 col-md-6 element-1">
-        <div class="pe-md-4"> <h6 class="text-primary fw-bold text-uppercase ls-wide mb-2">The Essence of West Java</h6>
+        <div class="pe-md-4 mt-6"> <h6 class="text-primary fw-bold text-uppercase ls-wide mb-2">The Essence of West Java</h6>
           <h2 class="fw-bold mb-5">Kenapa Harus Bandung?</h2>
           
           <p class="text-muted mb-5">

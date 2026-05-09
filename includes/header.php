@@ -58,7 +58,7 @@ $page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? "Ayokebandung.
 <body>
   <nav class="navbar">
     <div class="container">
-      <a class="navbar-brand" href="<?= BASE_URL ?>">
+      <a class="navbar-brand" aria-label="Halaman awal" href="<?= BASE_URL ?>">
         <div class="logo-navbar"></div>
       </a>
       <div class="navbar-actions">

@@ -28,7 +28,8 @@ $categories = safe_get_categories($pdo);
             <img class="w-100 card-img-top" src="<?= $p["image"]
             ? BASE_UPLOAD_URL . $p["image"]
             : "/assets/images/default.jpg" ?>"
-             onerror="this.onerror=null; this.src='/assets/images/default.jpg'">
+             onerror="this.onerror=null; this.src='/assets/images/default.jpg'"
+             alt="<?= htmlspecialchars($p["title"] ?? "", ENT_QUOTES, "UTF-8") ?>">
             <div class="card-body py-5 px-3">
                 <a href="/blogs/?id=<?= (int) $p["id"] ?>"
                    class="h5 text-decoration-none card-title mb-4 mt-3 d-block">
@@ -49,8 +50,8 @@ $categories = safe_get_categories($pdo);
       </div>
     </div>
     <div class="slider-controls p-5">
-      <button style="color:var(--blue-700)" class="btn-sm btn btn-outline-primary border-0" id="btnPrev" onclick="moveSlide(-1)"><i class="fas fa-angle-left"></i></button>
-      <button style="color:var(--blue-700)" class="btn-sm btn btn-outline-primary border-0" id="btnNext" onclick="moveSlide(1)"><i class="fas fa-angle-right"></i></button>
+      <button aria-label="Card sebelumnya" style="color:var(--blue-700)" class="btn-sm btn btn-outline-primary border-0" id="btnPrev" onclick="moveSlide(-1)"><i class="fas fa-angle-left"></i></button>
+      <button aria-label="Card selanjutnya"  style="color:var(--blue-700)" class="btn-sm btn btn-outline-primary border-0" id="btnNext" onclick="moveSlide(1)"><i class="fas fa-angle-right"></i></button>
     </div>
   </div>
 </section>

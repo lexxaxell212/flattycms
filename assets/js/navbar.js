@@ -40,7 +40,7 @@ const ScrollLock = {
 
 function closeOffcanvas() {
   const activeOffcanvas = document.querySelector(".offcanvas.show");
-  if (activeOffcanvas && window.bootstrap?.Offcanvas) {
+  if (activeOffcanvas && window.bootstrap && window.bootstrap.Offcanvas) {
     const instance = window.bootstrap.Offcanvas.getInstance(activeOffcanvas);
     if (instance) instance.hide();
   }
@@ -111,7 +111,7 @@ class SmartFab {
 
   toggleChatbot() {
     const chatbotElement = document.getElementById("chatbot");
-    if (window.bootstrap?.Offcanvas && chatbotElement) {
+    if (chatbotElement && window.bootstrap && window.bootstrap.Offcanvas) {
       const existing = window.bootstrap.Offcanvas.getInstance(chatbotElement);
       const modal = existing ?? new window.bootstrap.Offcanvas(chatbotElement, {
         scroll: true,
@@ -243,8 +243,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const chatbotElement = document.getElementById("chatbot");
 
-  if (chatbotElement) {
-    new window.bootstrap?.Offcanvas(chatbotElement, {
+  if (chatbotElement && window.bootstrap && window.bootstrap.Offcanvas) {
+    new window.bootstrap.Offcanvas(chatbotElement, {
       scroll: true,
       backdrop: false
     });

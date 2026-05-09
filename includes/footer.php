@@ -6,7 +6,7 @@
         <div class="col-xl-8 col-lg-10 text-center">
           <i class="fas fa-envelope mb-4 text-muted" style="font-size:40px;"></i>
           <div id="registernewsletter" class="mb-4">
-            <h2 class="fw-bold newsletter-text">NEWSLETTER</h2>
+            <span class="fs-2 fw-bold newsletter-text">NEWSLETTER</span>
             <p class="text-muted">Dapatkan event dan update Bandung terkini via email.</p>
           </div>
           

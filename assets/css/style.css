@@ -665,11 +665,11 @@
 .newsletter-section {
   padding:6rem 1rem
 }
-#registernewsletter:hover h2.newsletter-text {
+#registernewsletter:hover .newsletter-text {
   color: var(--blue-700) !important;
 }
-h2.newsletter-text {
-  color: var(--text-muted);
+.newsletter-text {
+  color: var(--text-muted) !important;
 }
 .newsletter-card {
   max-width:650px;

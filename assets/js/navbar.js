@@ -1,42 +1,27 @@
-const toggler        = document.getElementById("navbarToggler");
-const menuOverlay    = document.getElementById("menuOverlay");
+const toggler       = document.getElementById("navbarToggler");
+const menuOverlay   = document.getElementById("menuOverlay");
 const navbarCollapse = document.getElementById("navbarNav");
 
 const ScrollLock = {
   _count: 0,
-  _pendingOpen: false, 
 
   lock() {
-    this._pendingOpen = false;
     this._count++;
-    document.body.style.overflow   = "hidden";
-    document.body.style.paddingRight = this._getScrollbarWidth() + "px";
+    document.body.style.overflow = "hidden";
   },
 
-  unlock(skipIfPending = false) {
+  unlock() {
     this._count = Math.max(0, this._count - 1);
     if (this._count === 0) {
-      if (skipIfPending && this._pendingOpen) {
-        return;
-      }
-      document.body.style.overflow    = "";
+      document.body.style.overflow = "";
       document.body.style.paddingRight = "";
     }
   },
 
-  flagPendingOpen() {
-    this._pendingOpen = true;
-  },
-
   reset() {
-    this._count       = 0;
-    this._pendingOpen = false;
-    document.body.style.overflow    = "";
+    this._count = 0;
+    document.body.style.overflow = "";
     document.body.style.paddingRight = "";
-  },
-
-  _getScrollbarWidth() {
-    return window.innerWidth - document.documentElement.clientWidth;
   }
 };
 
@@ -55,23 +40,14 @@ function toggleMenu() {
     menuOverlay.classList.remove("menu-open");
     navbarCollapse.classList.remove("menu-open");
     toggler.classList.remove("menu-open");
-    ScrollLock.unlock();
+    ScrollLock.unlock(); // [FIX] Pakai ScrollLock
   } else {
-    if (document.querySelector(".offcanvas.show")) {
-      ScrollLock.flagPendingOpen();
-      closeOffcanvas();
-      setTimeout(() => {
-        menuOverlay.classList.add("menu-open");
-        navbarCollapse.classList.add("menu-open");
-        toggler.classList.add("menu-open");
-        ScrollLock.lock();
-      }, 50);
-    } else {
-      menuOverlay.classList.add("menu-open");
-      navbarCollapse.classList.add("menu-open");
-      toggler.classList.add("menu-open");
-      ScrollLock.lock();
-    }
+    closeOffcanvas();
+
+    menuOverlay.classList.add("menu-open");
+    navbarCollapse.classList.add("menu-open");
+    toggler.classList.add("menu-open");
+    ScrollLock.lock(); // [FIX] Pakai ScrollLock
   }
 }
 
@@ -102,33 +78,34 @@ class SmartFab {
   }
 
   onFabClick = () => {
-    const isMenuOpen = menuOverlay?.classList.contains("menu-open");
+    const isMenuOpen = !!menuOverlay?.classList.contains("menu-open"); // [FIX] boolean eksplisit
     if (isMenuOpen) {
-      toggleMenu();
-      setTimeout(() => this.toggleChatbot(), 50);
-    } else {
-      this.toggleChatbot();
+      toggleMenu(); // toggleMenu sudah panggil ScrollLock.unlock()
     }
+    this.toggleChatbot();
   };
 
   toggleChatbot() {
     const chatbotElement = document.getElementById("chatbot");
     if (window.bootstrap?.Offcanvas && chatbotElement) {
-      const existing = window.bootstrap.Offcanvas.getInstance(chatbotElement);
-      const modal    = existing ?? new window.bootstrap.Offcanvas(chatbotElement, {
-        scroll: true,  
-        backdrop: false 
-      });
+      const modal =
+        window.bootstrap.Offcanvas.getInstance(chatbotElement) ||
+        new window.bootstrap.Offcanvas(chatbotElement);
       modal.toggle();
     }
   }
 
-  handleScroll()    { this.updateVisibility(); }
+  handleScroll() {
+    this.updateVisibility();
+  }
 
   updateVisibility() {
     const shouldShow = window.scrollY >= this.threshold;
-    if (shouldShow && !this.isVisible)  this.show();
-    else if (!shouldShow && this.isVisible) this.hide();
+    if (shouldShow && !this.isVisible) {
+      this.show();
+    } else if (!shouldShow && this.isVisible) {
+      this.hide();
+    }
   }
 
   show() {
@@ -160,7 +137,7 @@ class SmartFab {
   }
 
   destroy() {
-    window.removeEventListener("scroll", this._scrollHandler);
+    window.removeEventListener("scroll", this._scrollHandler); // [FIX] referensi benar
     this.fab.removeEventListener("click", this.onFabClick);
   }
 }
@@ -174,8 +151,10 @@ class SmartScrollTop {
 
   init() {
     if (!this.btn) return;
+
     this._scrollHandler = this.throttle(this.handleScroll.bind(this), 16);
     this._resizeHandler = this.throttle(this.handleResize.bind(this), 250);
+
     this.updateVisibility();
     window.addEventListener("scroll", this._scrollHandler, { passive: true });
     window.addEventListener("resize", this._resizeHandler);
@@ -183,27 +162,35 @@ class SmartScrollTop {
   }
 
   destroy() {
-    window.removeEventListener("scroll", this._scrollHandler);
-    window.removeEventListener("resize", this._resizeHandler);
+    window.removeEventListener("scroll", this._scrollHandler); // [FIX] referensi benar
+    window.removeEventListener("resize", this._resizeHandler); // [FIX] referensi benar
     this.btn?.removeEventListener("click", this.scrollToTop);
   }
 
   handleScroll() {
     const nearBottom = this.isNearBottom();
-    if (nearBottom && !this.isVisible)       this.show();
-    else if (!nearBottom && this.isVisible)  this.hide();
+    if (nearBottom && !this.isVisible)  this.show();
+    else if (!nearBottom && this.isVisible) this.hide();
   }
 
-  handleResize()   { this.updateVisibility(); }
-  updateVisibility() { this.handleScroll(); }
+  handleResize() {
+    this.updateVisibility();
+  }
+
+  updateVisibility() {
+    this.handleScroll();
+  }
 
   isNearBottom() {
+    const scrollTop         = window.scrollY;
     const docHeight         = document.documentElement.scrollHeight;
-    const scrolledFromBottom = docHeight - window.scrollY - window.innerHeight;
+    const scrolledFromBottom = docHeight - scrollTop - window.innerHeight;
     return scrolledFromBottom <= docHeight * 0.25;
   }
 
-  scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   show() {
     this.btn.style.opacity    = "1";
@@ -246,21 +233,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatbotElement = document.getElementById("chatbot");
 
   if (chatbotElement) {
-    new window.bootstrap?.Offcanvas(chatbotElement, {
-      scroll:   true,
-      backdrop: false
-    });
-
     chatbotElement.addEventListener("show.bs.offcanvas", () => {
       ScrollLock.lock();
     });
 
     chatbotElement.addEventListener("hidden.bs.offcanvas", () => {
-      ScrollLock.unlock(true);
+      ScrollLock.unlock();
     });
   }
 
-  // Dark mode
   if (localStorage.getItem("dark") === "true") {
     document.documentElement.setAttribute("data-dark", "");
     const switchEl = document.querySelector(".switch");

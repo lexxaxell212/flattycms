@@ -63,11 +63,25 @@ $page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? "Ayokebandung.
       </a>
       <div class="navbar-actions">
         <button class="search-btn" id="btn-search" aria-label="Search">
-          <i class="fas fa-magnifying-glass"></i>
+            <span class="search-btn-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+         stroke-width="2.2" stroke-linecap="round">
+                <circle class="s-circle" cx="10.5" cy="10.5" r="6.5"/>
+                <line class="s-handle" x1="15.5" y1="15.5" x2="21" y2="21"/>
+                <line class="s-cross" x1="4" y1="17" x2="20" y2="4"/>
+              </svg>
+            </span>
         </button>
         <button class="navbar-toggler" type="button" id="navbarToggler" aria-label="Toggle Menu">
-          <div class="hamburger"></div>
-        </button>
+            <span class="hamburger-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.2" stroke-linecap="round">
+                <line class="h-top" x1="3" y1="6"  x2="21" y2="6"/>
+                <line class="h-mid" x1="3" y1="12" x2="21" y2="12"/>
+                <line class="h-bot" x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </span>
+          </button>
       </div>
       <div class="menu-overlay" id="menuOverlay"></div>
       <div class="navbar-collapse" id="navbarNav">

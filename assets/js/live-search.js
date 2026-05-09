@@ -63,6 +63,7 @@
 
   function openWrapper() {
     wrapper.classList.add('active');
+    trigger.classList.add('is-active');
     document.body.style.overflow = 'hidden';
     setTimeout(() => input.focus(), 50);
     clearDropdown();
@@ -70,6 +71,7 @@
 
   function closeWrapper() {
     wrapper.classList.remove('active');
+    trigger.classList.remove('is-active');
     dropdown.classList.remove('open');
     document.body.style.overflow = '';
     input.value = '';

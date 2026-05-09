@@ -32,6 +32,11 @@ $page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? "Ayokebandung.
   <link rel="icon" href="<?= IMG_URL ?>favicon.ico">
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script>
+    const CONFIG = {
+        baseUrl: '<?= BASE_URL ?>',
+    };
+  </script>
   <script src="<?= JS_URL ?>chat.js" defer></script>
   <script src="<?= JS_URL ?>live-search.js" defer></script>
   <script src="<?= JS_URL ?>navbar.js" defer></script>
@@ -92,7 +97,8 @@ $page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? "Ayokebandung.
   <div class="chatbot offcanvas" id="chatbot">
     <div class="offcanvas-header">
       <div class="chatbot-header container">
-        <h6 class="offcanvas-title"><i class="fas fa-solid fa-circle-user me-2"></i>Asisten Web</h6>
+        <span class="offcanvas-title fw-bold fs-3"><i class="fas fa-solid fa-circle-user
+        me-2"></i>Asisten Web</span>
         <button class="close-btn text-white" data-bs-dismiss="offcanvas"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>

@@ -864,7 +864,6 @@ li.list a:hover,li.list a:active {
   color:var(--blue-50);
 }
 .offcanvas-title {
-  font-size:1.25rem;
   background:var(--blue-600);
   color:var(--blue-50);
   margin:0

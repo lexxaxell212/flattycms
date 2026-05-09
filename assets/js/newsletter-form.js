@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const domain = email.split('@')[1];
 
         if (!allowed.includes(domain)) {
-            alert('Gunakan domain email umum (Gmail/Yahoo/Outlook)!');
+            alert('Gunakan domain email umum (Gmail/Yahoo/Outlook)');
             return;
         }
 
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(form);
         formData.append('action', 'newsletter');
 
-        fetch('<?= BASE_URL ?>newsletter-ajax.php', {
+        fetch(CONFIG.baseUrl + 'newsletter-ajax.php', {
             method: 'POST',
             body: new URLSearchParams(formData)
         })

@@ -31,7 +31,7 @@ define("ADMIN_INCLUDES", BASE_URL . "admin/includes/");
 // Uploads source
 define("UPLOADS_URL",  BASE_URL . "uploads/");
 // User uploads
-define("BASE_UPLOAD_URL", ADMIN_URL . "uploads/");
+define("BASE_UPLOAD_URL", ADMIN_URL );
 // Admin uploads
 
 // Core

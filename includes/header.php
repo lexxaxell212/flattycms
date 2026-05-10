@@ -6,6 +6,25 @@ require_once $lib_path;
 autoload_core(); // Core Here //
 
 $page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? "Ayokebandung.id"));
+
+$currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+function isActive(string $path): string {
+    global $currentPath;
+    return str_starts_with($currentPath, $path) ? 'is-current' : '';
+}
+// Dropdown
+$pintasanPaths = [
+    '/pages/sejarah',
+    '/pages/budaya', 
+    '/pages/kuliner',
+    '/pages/layanan',
+    '/pages/wisata',
+    '/pages/penginapan'
+];
+$isPintasanActive = (bool) array_filter(
+    $pintasanPaths, 
+    fn($p) => str_starts_with($currentPath, $p)
+);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -68,7 +87,7 @@ $page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? "Ayokebandung.
     <div class="nav-desktop" id="navbarNav">
       <ul class="nav-desktop-list">
         <li class="nav-desktop-item nav-desktop-dropdown">
-          <button class="nav-desktop-link nav-dd-trigger" aria-expanded="false">
+          <button class="nav-desktop-link nav-dd-trigger <?= $isPintasanActive ? 'is-current' : '' ?>" aria-expanded="false">
             <i class="fa-solid fa-grip" aria-hidden="true"></i>
             Pintasan
             <i class="fa-solid fa-chevron-down nav-dd-chevron" aria-hidden="true"></i>
@@ -83,22 +102,22 @@ $page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? "Ayokebandung.
           </div>
         </li>
         <li class="nav-desktop-item">
-          <a class="nav-desktop-link" href="<?= PAGES_URL ?>informasi-terkini">
+          <a class="nav-desktop-link <?= isActive('/pages/informasi-terkini') ?>" href="<?= PAGES_URL ?>informasi-terkini">
             <i class="fa-solid fa-newspaper" aria-hidden="true"></i>Informasi Terkini
           </a>
         </li>
         <li class="nav-desktop-item">
-          <a class="nav-desktop-link" href="<?= BLOGS_URL ?>">
+          <a class="nav-desktop-link <?= isActive('/pages/blogs') ?>" href="<?= BLOGS_URL ?>">
             <i class="fa-solid fa-book" aria-hidden="true"></i>Blogs
           </a>
         </li>
         <li class="nav-desktop-item">
-          <a class="nav-desktop-link" href="<?= PAGES_URL ?>panduan-maps">
+          <a class="nav-desktop-link <?= isActive('/pages/panduan-maps') ?>" href="<?= PAGES_URL ?>panduan-maps">
             <i class="fa-solid fa-location-dot" aria-hidden="true"></i>Panduan Maps
           </a>
         </li>
         <li class="nav-desktop-item">
-          <a class="nav-desktop-link" href="<?= PAGES_URL ?>kritik-dan-saran">
+          <a class="nav-desktop-link <?= isActive('/pages/kritik-dan-saran') ?>" href="<?= PAGES_URL ?>kritik-dan-saran">
             <i class="fa-solid fa-envelope" aria-hidden="true"></i>Kritik dan Saran
           </a>
         </li>
@@ -156,7 +175,7 @@ $page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? "Ayokebandung.
     <div class="navbar-collapse" id="navbarNav-mobile">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle mb-2" href="#" role="button" data-bs-toggle="dropdown">
+          <a class="nav-link dropdown-toggle mb-2 <?= $isPintasanActive ? 'is-current' : '' ?>" href="#" role="button" data-bs-toggle="dropdown">
             <i class="fa-solid fa-grip"></i> Pintasan
           </a>
           <ul class="dropdown-menu p-5 me-2">
@@ -168,10 +187,16 @@ $page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? "Ayokebandung.
             <li><a class="dropdown-item" href="<?= PAGES_URL ?>penginapan"><i class="fa-solid fa-hotel me-2"></i>Penginapan</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" href="<?= PAGES_URL ?>informasi-terkini"><i class="fa-solid fa-newspaper"></i>Informasi Terkini</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?= BLOGS_URL ?>"><i class="fa-solid fa-book"></i>Blogs</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?= PAGES_URL ?>panduan-maps"><i class="fa-solid fa-location-dot"></i>Panduan Maps</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?= PAGES_URL ?>kritik-dan-saran"><i class="fa-solid fa-envelope"></i>Kritik dan Saran</a></li>
+        <li class="nav-item"><a class="nav-link <?= isActive('/pages/informasi-terkini') ?>" href="<?= PAGES_URL ?>informasi-terkini"><i class="fa-solid fa-newspaper"></i>Informasi Terkini</a></li>
+        <li class="nav-item"><a class="nav-link <?= isActive('/pages/blogs') ?>" href="<?= BLOGS_URL ?>"><i class="fa-solid fa-book"></i>Blogs</a></li>
+        <li class="nav-item"><a class="nav-link <?=
+        isActive('/pages/panduan-maps') ?>" href="<?= PAGES_URL
+        ?>panduan-maps"><i class="fa-solid fa-location-dot"></i>Panduan
+        Maps</a></li>
+        <li class="nav-item"><a class="nav-link <?=
+        isActive('/pages/kritik-dan-saran') ?>" href="<?= PAGES_URL
+        ?>kritik-dan-saran"><i class="fa-solid fa-envelope"></i>Kritik dan
+        Saran</a></li>
         <div class="weather" id="w"><small>Cek cuaca...</small></div>
       </ul>
     </div>

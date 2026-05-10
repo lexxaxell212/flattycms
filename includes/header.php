@@ -179,7 +179,7 @@ $page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? "Ayokebandung.
     <div class="ls-bar">
       <i class="fas fa-search ls-icon-search" aria-hidden="true"></i>
       <input type="text" id="searchInput2"
-             placeholder="Mau cari apa nih ?"
+             placeholder="Cari..."
              autocomplete="off"
              spellcheck="false"
              aria-label="Kolom pencarian"

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/maintenance.php';
+//
 // Hello Core //
 $lib_path = dirname(__DIR__) . "/lib/functions.php";
 if (!file_exists($lib_path)) die("lib/functions.php missing: " . $lib_path);

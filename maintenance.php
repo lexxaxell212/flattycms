@@ -1,6 +1,22 @@
 <?php
 define('BYPASS_KEY', 'lexxaccess');
-define('MAINTENANCE_MODE', true); 
+// Ambil dari DB
+$pdo = $GLOBALS["pdo"] ?? null;
+
+if ($pdo) {
+    $stmt = $pdo->prepare("SELECT setting_value FROM admin_setting WHERE setting_key = 'maintenance_mode'");
+    $stmt->execute();
+    $row = $stmt->fetch();
+    define('MAINTENANCE_MODE', $row ? (bool)$row['setting_value'] : false);
+} else {
+    define('MAINTENANCE_MODE', false); // fallback
+}
+
+$stmt = $pdo->prepare("SELECT setting_value FROM admin_setting WHERE setting_key = 'maintenance_mode'");
+$stmt->execute();
+$row = $stmt->fetch();
+
+define('MAINTENANCE_MODE', $row ? (bool)$row['setting_value'] : false);
 
 if (isset($_GET['key'])) {
     if ($_GET['key'] === BYPASS_KEY) {

@@ -1,7 +1,7 @@
 <?php
 // Hello Core //
-$lib_path = dirname(__DIR__) . "/lib/autoload.php";
-if (!file_exists($lib_path)) die("lib/autoload.php missing: " . $lib_path);
+$lib_path = dirname(__DIR__) . "/lib/functions.php";
+if (!file_exists($lib_path)) die("lib/functions.php missing: " . $lib_path);
 require_once $lib_path;
 autoload_core(); 
 

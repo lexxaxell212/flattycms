@@ -641,7 +641,7 @@ body::before {
     border: 1px solid var(--glass-border);
     border-radius: 14px;
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
-    padding: 6px;
+    padding: 0 !important;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;

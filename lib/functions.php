@@ -8,20 +8,15 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 if (!function_exists("autoload_core")) {
-  function autoload_core()
-  {
-    $dir = __DIR__;
-    foreach (["", "../", "../../"] as $level) {
-      $setup = $dir . "/" . $level . "setup.php";
-      $conf = $dir . "/" . $level . "config.php";
-      if (file_exists($setup)) {
-        require_once $setup;
-      }
-      if (file_exists($conf)) {
-        require_once $conf;
-      }
+    function autoload_core() {
+        $dir = __DIR__;
+        foreach (["", "../", "../../"] as $level) {
+            $setup = $dir . "/" . $level . "setup.php";
+            $conf  = $dir . "/" . $level . "config.php";
+            if (file_exists($setup)) require_once $setup;
+            if (file_exists($conf))  require_once $conf;
+        }
     }
-  }
 }
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -32,14 +27,49 @@ if (session_status() === PHP_SESSION_NONE) {
     ]);
 }
 
+// ========== CSRF ==========
+
+function generate_csrf_token(): string {
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+function regenerate_csrf_token(): void {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+function verify_csrf_token(string $token): bool {
+    return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
+}
+
+function validate_csrf(): void {
+    if (
+        !isset($_POST['csrf_token'], $_SESSION['csrf_token']) ||
+        !hash_equals((string)$_SESSION['csrf_token'], (string)$_POST['csrf_token'])
+    ) {
+        http_response_code(403);
+        die('Invalid CSRF token. Silakan refresh halaman dan coba lagi.');
+    }
+}
+
+// ========== HELPER ==========
+
+function safe_html($value): string {
+    return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8');
+}
+
+// ========== MAIL ==========
+
 function kirimEmailAyo($ke, $subjek, $pesan_html) {
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com'; 
+        $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
         $mail->Username   = SMTP_USER;
-        $mail->Password = SMTP_PASS;
+        $mail->Password   = SMTP_PASS;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
         $mail->setFrom(SMTP_USER, SITE_NAME);
@@ -48,7 +78,6 @@ function kirimEmailAyo($ke, $subjek, $pesan_html) {
         $mail->Subject = $subjek;
         $mail->Body    = $pesan_html;
         $mail->AltBody = strip_tags($pesan_html);
-
         return $mail->send();
     } catch (Exception $e) {
         if (defined('LOGS_PATH')) {
@@ -58,15 +87,10 @@ function kirimEmailAyo($ke, $subjek, $pesan_html) {
     }
 }
 
-function generateUnsubscribeToken($pdo, $subscriber_id)
-{
-    $token = bin2hex(random_bytes(32)); 
+function generateUnsubscribeToken($pdo, $subscriber_id) {
+    $token   = bin2hex(random_bytes(32));
     $expires = date("Y-m-d H:i:s", strtotime("+5 years"));
-
-    $stmt = $pdo->prepare(
-        "UPDATE subscribers SET unsubscribe_token = ?, token_expires = ? WHERE id = ?"
-    );
+    $stmt    = $pdo->prepare("UPDATE subscribers SET unsubscribe_token = ?, token_expires = ? WHERE id = ?");
     $stmt->execute([$token, $expires, $subscriber_id]);
-
     return $token;
 }

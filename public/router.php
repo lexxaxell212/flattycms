@@ -30,13 +30,6 @@ function resolve_route(): void
         return; // home
     }
 
-    // dynamic: /blogs/{slug}
-    if (preg_match('#^blogs/([a-z0-9\-]+)$#', $uri, $matches)) {
-        $slug = $matches[1];
-        require_once ROOT_PATH . 'public/blogs/index.php';
-        exit;
-    }
-
     // 404
     http_response_code(404);
     require_once ROOT_PATH . 'public/pages/404.php';

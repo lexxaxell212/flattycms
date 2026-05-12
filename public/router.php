@@ -3,6 +3,7 @@ $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
 $routes = [
     '' => SRC_PATH . 'pages/home.php',
+    'pages/wisata'              => SRC_PATH . 'pages/wisata.php',
     'pages/kuliner'              => SRC_PATH . 'pages/kuliner.php',
     'pages/penginapan'           => SRC_PATH . 'pages/penginapan.php',
     'pages/budaya'               => SRC_PATH . 'pages/budaya.php',
@@ -20,8 +21,6 @@ $routes = [
 
 if (array_key_exists($uri, $routes)) {
     $view_content = $routes[$uri];
-    $page_title = ($uri === '') ? "Home - Ayokebandung.id" : "Ayokebandung.id";
 } else {
-    http_response_code(404);
-    $view_content = SRC_PATH . "errors/404.php";
+    $view_content = null;
 }

@@ -1,4 +1,4 @@
-const API_URL = "../api/groq-chat.php";
+const API_URL = "api/api-assistant.php";
 const TOPIC   = "bandung";
 const TIMEOUT = 20_000;
 

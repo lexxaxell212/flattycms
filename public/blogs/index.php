@@ -1,4 +1,7 @@
 <?php
+require_once dirname(__DIR__, 2) . "/bootstrap.php";
+autoload_core();
+
 $page_title = "Blogs";
 
 require_once SRC_PATH . "header.php";

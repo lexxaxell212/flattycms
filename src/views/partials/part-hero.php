@@ -1,6 +1,7 @@
 <style>
 .main-content { padding-top: var(--navbar-height) !important; }
 </style>
+<script src="<?= JS_URL ?>hero.js" defer></script>
 <section id="hero-website" class="hero-wrapper position-relative overflow-hidden">
   <?php 
   $slides = [

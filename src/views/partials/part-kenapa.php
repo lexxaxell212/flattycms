@@ -1,3 +1,4 @@
+<script src="<?= JS_URL ?>autoslides.js" defer></script>
 <section id="kenapa-harus-bandung" class="container-fluid py-6" style="background: var(--bg-white)">
   <div class="container"> <div class="row align-items-center g-5"> <div class="col-12 col-md-6 element-1">
         <div class="pe-md-4 mt-6">

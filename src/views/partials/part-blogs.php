@@ -1,5 +1,5 @@
 <?php
-require_once LIB_PATH . "blogs.php";
+//require_once LIB_PATH . "blogs.php";
 $cat_id   = (int) ($_GET["cat"]  ?? 0);
 $page     = max(1, (int) ($_GET["page"] ?? 1));
 $per_page = 5;
@@ -7,7 +7,7 @@ $offset   = ($page - 1) * $per_page;
 $posts      = safe_get_posts($per_page, $offset, $cat_id);
 $categories = safe_get_categories();
 ?>
-
+<script src="<?= JS_URL ?>card-slider.js" defer></script>
 <section class="container py-6" name="artikel-terbaru">
   <div class="overflow-hidden">
     <div class="mb-5">

@@ -4,7 +4,7 @@ define("APP_LOADED", true);
 
 // https / http
 $protocol = (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== 'off') ? "https" : "http";
-$host = $_SERVER["HTTP_HOST"];
+$host = $_SERVER["HTTP_HOST"] ?? 'ayokebandung.id';
 $base_url = $protocol . "://" . $host . "/";
 
 // Base url
@@ -44,9 +44,8 @@ define("BASE_UPLOAD_PATH", ROOT_PATH . "public/uploads/");
 // Etc
 define("APP_TIMEZONE", "Asia/Jakarta");
 define("APP_VERSION",  "1.0.0");
-define("DEBUG_MODE", in_array($_SERVER["SERVER_NAME"], ["localhost", "127.0.0.1"]));
-define("APP_ENV",    DEBUG_MODE ? "development" : "production");
-date_default_timezone_set(APP_TIMEZONE);
+define("DEBUG_MODE", in_array($_SERVER["SERVER_NAME"] ?? '', ["localhost", "127.0.0.1"]));
+define("APP_ENV", (($_SERVER["SERVER_NAME"] ?? '') === 'localhost' || ($_SERVER["SERVER_NAME"] ?? '') === '127.0.0.1') ? "development" : "production");/
 
 // Error handling
 if (APP_ENV === "development") {

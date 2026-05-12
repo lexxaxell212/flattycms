@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../bootstrap.php";
+require_once dirname(__DIR__, 2) . "/bootstrap.php";
 autoload_core();
 
 const GROQ_ENDPOINT      = 'https://api.groq.com/openai/v1/chat/completions';

@@ -32,6 +32,6 @@ function resolve_route(): void
 
     // 404
     http_response_code(404);
-    require_once ROOT_PATH . 'public/pages/404.php';
+    require_once ROOT_PATH . 'public/errors/404.php';
     exit;
 }

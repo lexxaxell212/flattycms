@@ -1,7 +1,4 @@
 <?php
-require_once __DIR__ . "/../bootstrap.php";
-autoload_core();
-
 // Maintenance check
 require_once ROOT_PATH . "maintenance.php";
 

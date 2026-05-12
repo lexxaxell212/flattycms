@@ -7,7 +7,7 @@ if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
     exit;
 }
 
-require_once LIB_PATH "blogs.php";
+require_once LIB_PATH . "blogs.php";
 
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));

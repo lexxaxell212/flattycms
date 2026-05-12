@@ -1,8 +1,8 @@
 <?php
 $page_title = "Unsubscribe";
 
-//require_once LIB_PATH . "mailer.php";
-//require_once LIB_PATH . "subscriber.php";
+require_once LIB_PATH . "mailer.php";
+require_once LIB_PATH . "subscriber.php";
 
 $status    = "";
 $message   = "";

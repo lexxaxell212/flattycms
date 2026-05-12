@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const formData = new FormData(form);
 
-        fetch(CONFIG.baseUrl + 'newsletter-ajax.php', {
+        fetch(CONFIG.baseUrl + '/api/api-newsletter.php', {
             method: 'POST',
             body: new URLSearchParams(formData)
         })

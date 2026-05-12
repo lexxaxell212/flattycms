@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__DIR__, 3) "/lib/blogs.php";
+require_once dirname(__DIR__, 3) . "/lib/blogs.php";
 $cat_id   = (int) ($_GET["cat"]  ?? 0);
 $page     = max(1, (int) ($_GET["page"] ?? 1));
 $per_page = 5;

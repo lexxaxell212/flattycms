@@ -221,4 +221,4 @@ $page_title = "Privacy policy";
 </div>
 
 <?php
-require_once SRC_PATH "footer.php"; ?>
+require_once SRC_PATH . "footer.php"; ?>

@@ -223,4 +223,4 @@ $page_title = "Kritik dan Saran";
 </div>
 
 <?php
-require_once SRC_PATH "footer.php"; ?>
+require_once SRC_PATH . "footer.php"; ?>

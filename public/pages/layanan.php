@@ -169,4 +169,4 @@ $page_title = "Layanan";
 </div>
 
 <?php
-require_once SRC_PATH "footer.php"; ?>
+require_once SRC_PATH . "footer.php"; ?>

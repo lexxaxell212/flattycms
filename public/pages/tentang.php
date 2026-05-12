@@ -33,4 +33,4 @@ $page_title = "Tentang";
 </div>
 
 <?php
-require_once SRC_PATH "footer.php"; ?>
+require_once SRC_PATH . "footer.php"; ?>

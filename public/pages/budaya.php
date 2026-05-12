@@ -205,4 +205,4 @@ transform: translateX(3px);
 </div>
     
 <?php
-require_once SRC_PATH "footer.php"; ?>
+require_once SRC_PATH . "footer.php"; ?>

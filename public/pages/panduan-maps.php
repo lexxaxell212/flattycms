@@ -170,4 +170,4 @@ $page_title = "Panduan Maps";
 </div>
 
 <?php
-require_once SRC_PATH "footer.php"; ?>
+require_once SRC_PATH . "footer.php"; ?>

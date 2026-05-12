@@ -172,4 +172,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <?php
-require_once SRC_PATH "footer.php"; ?>
+require_once SRC_PATH . "footer.php"; ?>

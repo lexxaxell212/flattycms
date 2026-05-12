@@ -3,7 +3,6 @@ Header always edit Set-Cookie (.*) "$1; Secure; HttpOnly; SameSite=Strict"
 
 RewriteRule ^assets/ - [L,NC]
 RewriteRule ^config/ - [L,NC]
-RewriteRule ^includes/ - [L,NC]
 RewriteRule ^errors/ - [L,NC]
 
 # Block myphpnuke & PostNuke paths

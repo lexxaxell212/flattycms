@@ -1,6 +1,6 @@
 const API_URL = "api/api-assistant.php";
 const TOPIC   = "bandung";
-const TIMEOUT = 20_000;
+const TIMEOUT = 20000;
 
 let conversationHistory = [];
 let isLoading = false;

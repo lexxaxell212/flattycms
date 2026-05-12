@@ -1,14 +1,11 @@
 <?php
-// Hello Core //
-// $lib_path = dirname(__DIR__) . "/lib/functions.php";
-// if (!file_exists($lib_path)) die("lib/functions.php missing: " . $lib_path);
-// require_once $lib_path;
-// autoload_core(); 
+require_once __DIR__ . "/../bootstrap.php";
+autoload_core();
 
 // Maintenance check
-// require_once ROOT_PATH . 'maintenance.php';
+require_once ROOT_PATH . "maintenance.php";
 
-$page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? "Ayokebandung.id"));
+$page_title = htmlspecialchars($_POST["title"] ?? ($page_title ?? SITE_NAME));
 
 $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 function isActive(string $path): string {

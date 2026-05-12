@@ -1,10 +1,11 @@
 <?php
-// Set cookies
+// Cookies
 if (session_status() === PHP_SESSION_NONE) {
     session_start([
         "cookie_httponly" => true,
         "cookie_secure"   => isset($_SERVER["HTTPS"]),
-        "cookie_samesite" => "Lax",
+        "cookie_samesite" => "Strict",
+        "gc_maxlifetime" => defined("SESSION_EXPIRE") ? SESSION_EXPIRE : 86400,
     ]);
 }
 
@@ -74,4 +75,64 @@ function fallback_card($title = "Konten")
         </div>
       </div>
     </div>';
+}
+
+// image upload
+function fix_image_paths(string $html, string $post_title = ""): string
+{
+  $base = rtrim(BASE_UPLOAD_URL, "/") . "/";
+  $safe_alt = htmlspecialchars(
+    $post_title ?: "Gambar artikel",
+    ENT_QUOTES,
+    "UTF-8",
+  );
+  return preg_replace_callback(
+    '/<img([^>]*?)\ssrc="uploads\/([^"]*)"([^>]*?)(\s*\/?>)/i',
+    function (array $m) use ($base, $safe_alt): string {
+      [$full, $before, $filename, $after, $close] = $m;
+      if (!preg_match('/^[\w\-\.]+\.(jpg|jpeg|png|gif|webp)$/i', $filename)) {
+        return "";
+      }
+      $safe_src = htmlspecialchars($base . $filename, ENT_QUOTES, "UTF-8");
+      $has_alt = (bool) preg_match("/\balt\s*=/i", $before . $after);
+      $alt_attr = $has_alt ? "" : ' alt="' . $safe_alt . '"';
+      return "<img" .
+        $before .
+        ' src="' .
+        $safe_src .
+        '"' .
+        $after .
+        $alt_attr .
+        $close;
+    },
+    $html,
+  ) ?? $html;
+}
+
+// sanitize 
+function sanitize_content(string $html, string $post_title = ""): string
+{
+  $allowed =
+    "<p><br><b><i><u><s><strong><em><ul><ol><li><blockquote><h1><h2><h3><h4><h5><h6><a><img><span><div><figure><figcaption><table><thead><tbody><tr><th><td>";
+  return fix_image_paths(strip_tags($html, $allowed), $post_title);
+}
+
+// safe excerpt
+function safe_excerpt(string $raw, int $max = 160): string
+{
+  $plain = strip_tags($raw);
+  if (mb_strlen($plain) > $max) {
+    $cut = mb_substr($plain, 0, $max);
+    $last_space = mb_strrpos($cut, " ");
+    $plain =
+      ($last_space !== false ? mb_substr($cut, 0, $last_space) : $cut) . "…";
+  }
+  return htmlspecialchars($plain, ENT_QUOTES, "UTF-8");
+}
+
+// fmt date
+function fmt_date(string $val, string $fmt = "d M Y"): string
+{
+  $ts = strtotime($val);
+  return $ts !== false ? date($fmt, $ts) : "-";
 }

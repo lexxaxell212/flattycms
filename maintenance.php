@@ -34,6 +34,6 @@ $isAdmin  = str_starts_with($_SERVER['REQUEST_URI'], '/admin');
 if (MAINTENANCE_MODE && !$isBypass && !$isAsset && !$isAdmin) {
     http_response_code(503);
     header('Retry-After: 3600');
-    include_once ROOT_PATH . 'includes/maintenance-page.php';
+    include_once SRC_PATH . 'maintenance-page.php';
     exit();
 }

@@ -1,0 +1,51 @@
+<style>
+.card-unsubscribe { max-width: 450px; margin: auto; border: none; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+.icon-box { width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin: -40px auto 20px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+</style>
+<div class="container">
+  <div class="card card-unsubscribe p-4">
+    <div class="card-body text-center">
+      <div class="icon-box">
+        <?php if ($status == "success"): ?>
+          <i class="fa-solid fa-circle-check fa-3x text-success"></i>
+        <?php elseif ($status == "error" && !$show_form): ?>
+          <i class="fa-solid fa-circle-xmark fa-3x text-danger"></i>
+        <?php else: ?>
+          <i class="fa-solid fa-envelope-circle-check fa-3x text-primary"></i>
+        <?php endif; ?>
+      </div>
+      <h4 class="fw-bold mb-3">Unsubscribe</h4>
+
+      <?php if ($message): ?>
+        <div class="alert <?= $status == 'success' ? 'alert-success' : 'alert-danger' ?> border-0 small">
+          <?= $message ?>
+        </div>
+      <?php endif; ?>
+
+      <?php if ($show_form): ?>
+        <p class="text-muted small mb-4">Masukkan email Anda untuk berhenti berlangganan.</p>
+        <form action="" method="POST">
+          <div class="mb-3">
+            <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+            <input type="email" name="email" class="form-control form-control-lg fs-6" placeholder="nama@email.com" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 fw-bold">
+            Berhenti Berlangganan
+          </button>
+        </form>
+      <?php endif; ?>
+
+      <?php if ($status == "success" || ($status == "error" && !$show_form)): ?>
+        <div class="mt-3">
+          <a href="<?= BASE_URL ?>" class="btn btn-light w-100 text-muted">
+            <i class="fa-solid fa-arrow-left me-2"></i>Kembali ke Beranda
+          </a>
+        </div>
+      <?php endif; ?>
+
+      <p class="mt-4 mb-0 text-secondary" style="font-size: 0.75rem;">
+        <?= date('Y') ?> <?= SITE_NAME ?>
+      </p>
+    </div>
+  </div>
+</div>

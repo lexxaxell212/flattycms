@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/../bootstrap.php";
+autoload_core();
 
 $page_title = "Blogs";
 

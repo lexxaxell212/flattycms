@@ -2,7 +2,7 @@
   'use strict';
 
   const CONFIG = {
-    SEARCH_URL  : '/search.php',
+    SEARCH_URL  : 'api/api-search.php',
     MIN_CHARS   : 2,
     DEBOUNCE_MS : 300,
 

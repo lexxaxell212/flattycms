@@ -1,3 +1,6 @@
+<style>
+.main-content { padding-top: var(--navbar-height) !important; }
+</style>
 <section id="hero-website" class="hero-wrapper position-relative overflow-hidden">
   <?php 
   $slides = [

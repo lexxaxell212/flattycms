@@ -2,10 +2,6 @@
 <script src="<?= JS_URL ?>autoslides.js" defer></script>
 <script src="<?= JS_URL ?>card-slider.js" defer></script>
 
-<style>
-.main-content { padding-top: var(--navbar-height) !important; }
-</style>
-
 <?php
 safe_include(SRC_PATH . "partials/part-hero.php", "Parts Hero Section");
 safe_include(SRC_PATH . "partials/part-kenapa.php", "Parts Kenapa Bandung");

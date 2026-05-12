@@ -1,5 +1,6 @@
 <?php
-$_POST["title"] = "Unsubscribe";
+$page_title = "Unsubscribe";
+
 require_once LIB_PATH . "mailer.php";
 require_once LIB_PATH . "subscriber.php";
 

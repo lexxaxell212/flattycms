@@ -1,4 +1,5 @@
 <?php
+require_once LIB_PATH . "blogs.php";
 $cat_id   = (int) ($_GET["cat"]  ?? 0);
 $page     = max(1, (int) ($_GET["page"] ?? 1));
 $per_page = 5;

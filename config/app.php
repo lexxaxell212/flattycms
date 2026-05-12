@@ -45,7 +45,7 @@ define("BASE_UPLOAD_PATH", ROOT_PATH . "public/uploads/");
 define("APP_TIMEZONE", "Asia/Jakarta");
 define("APP_VERSION",  "1.0.0");
 define("DEBUG_MODE", in_array($_SERVER["SERVER_NAME"] ?? '', ["localhost", "127.0.0.1"]));
-define("APP_ENV", (($_SERVER["SERVER_NAME"] ?? '') === 'localhost' || ($_SERVER["SERVER_NAME"] ?? '') === '127.0.0.1') ? "development" : "production");/
+define("APP_ENV", (($_SERVER["SERVER_NAME"] ?? '') === 'localhost' || ($_SERVER["SERVER_NAME"] ?? '') === '127.0.0.1') ? "development" : "production");
 
 // Error handling
 if (APP_ENV === "development") {

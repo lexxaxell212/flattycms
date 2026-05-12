@@ -1,8 +1,4 @@
 <?php
-if (!defined('ROOT_PATH')) {
-    header('Location: /blogs');
-    exit;
-}
 
 $page_title = "Blogs";
 

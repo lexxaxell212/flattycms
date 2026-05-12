@@ -12,12 +12,6 @@ if ($pdo) {
     define('MAINTENANCE_MODE', false); // fallback
 }
 
-$stmt = $pdo->prepare("SELECT setting_value FROM admin_setting WHERE setting_key = 'maintenance_mode'");
-$stmt->execute();
-$row = $stmt->fetch();
-
-define('MAINTENANCE_MODE', $row ? (bool)$row['setting_value'] : false);
-
 if (isset($_GET['key'])) {
     if ($_GET['key'] === BYPASS_KEY) {
         setcookie('maintenance_bypass', hash('sha256', BYPASS_KEY), time() + 86400, '/', '', true, true);

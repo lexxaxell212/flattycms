@@ -1,7 +1,7 @@
 <?php
 if (!function_exists("autoload_core")) {
     function autoload_core() {
-      $dir = dirname(__DIR__);
+      $dir = __DIR__;
       $constants = $dir . "/config/constants.php";
       $db        = $dir . "/config/db.php";
       $key       = $dir . "/config/key.php";

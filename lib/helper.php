@@ -47,6 +47,7 @@ function safe_include($file_path, $fallback_title = "Konten")
     echo fallback_card($fallback_title);
     return;
   }
+  $pdo = $GLOBALS['pdo'] ?? null;
   ob_start();
   try {
     include $file_path;

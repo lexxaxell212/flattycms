@@ -19,6 +19,15 @@ $routes = [
     'pages/kenapa-harus-bandung' => SRC_PATH . 'pages/kenapa-harus-bandung.php',
     'pages/informasi-terkini'    => SRC_PATH . 'pages/informasi-terkini.php',
     'blogs'                      => SRC_PATH . 'blogs/index.php',
+    //admin
+    'admin/login'    => SRC_PATH . 'admin/login.php',
+    'admin/dashboard'    => SRC_PATH . 'admin/dashboard.php',
+    'admin/blog_manager'    => SRC_PATH . 'admin/blog_manager.php',
+    'admin/pages_builder'    => SRC_PATH . 'admin/pages_builder.php',
+    'admin/cmpt'    => SRC_PATH . 'admin/cmpt.php',
+    'admin/setting'    => SRC_PATH . 'admin/setting.php',
+    'admin/db_manager'    => SRC_PATH . 'admin/db_manager.php',
+    'admin/newsletter'    => SRC_PATH . 'admin/newsletter.php',
 ];
 
 if (array_key_exists($uri, $routes)) {

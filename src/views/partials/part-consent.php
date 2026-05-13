@@ -89,7 +89,10 @@ function saveConsent(all = true, rejectAll = false) {
 
     fetch("/api/api-consent.php", {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
         body: JSON.stringify({ consent_given: !rejectAll, categories: cats })
     })
     .then(() => location.reload())

@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . "/../bootstrap.php";
+require_once dirname(__DIR__, 2) . "/bootstrap.php";
 autoload_core();
+verify_ajax_request('POST');
 
 header('Content-Type: application/json');
 

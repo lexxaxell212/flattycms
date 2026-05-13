@@ -1,6 +1,7 @@
 <?php
 $request = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $request = preg_replace('#^admin/?#', '', $request);
+error_log("ADMIN REQUEST: [" . $request . "]");
 
 $routes = [
     ''               => ADMIN_VIEW_PATH . 'dashboard.php',

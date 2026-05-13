@@ -1,11 +1,4 @@
 <?php
-require_once dirname(__DIR__, 3) . "/bootstrap.php";
-autoload_core();
-
-if (!isset($_SESSION['admin_id'])) {
-    header('Location: /admin/login');
-    exit('Redirecting...');
-}
 
 // Pastikan PDO connection ada
 if (!isset($pdo)) {

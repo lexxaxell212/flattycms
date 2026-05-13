@@ -1,12 +1,4 @@
 <?php
-require_once dirname(__DIR__, 2) . "/bootstrap.php";
-autoload_core();
-
-if (isset($_SESSION['admin_id'])) {
-    header('Location: /admin/');
-    exit;
-}
-
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['password'])) {
     $stmt = $pdo->prepare("SELECT * FROM admins WHERE username = ?");
     $stmt->execute([$_POST['username']]);

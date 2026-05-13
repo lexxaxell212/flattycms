@@ -4,8 +4,9 @@ autoload_core();
 
 require_once ROOT_PATH . "maintenance.php";
 
-// Auth guard admin
-if (empty($_SESSION['admin_id'])) {
+// auth check
+$public_routes = ['login', 'logout'];
+if (!in_array($request, $public_routes) && empty($_SESSION['admin_id'])) {
     header('Location: /admin/login');
     exit;
 }

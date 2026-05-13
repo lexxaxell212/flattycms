@@ -1,6 +1,4 @@
 <?php
-require_once dirname(__DIR__, 3) . "/bootstrap.php";
-autoload_core();
 
 $pdo = $GLOBALS["pdo"] ?? null;
 if (!$pdo) die('DB connection not available');

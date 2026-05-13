@@ -1,10 +1,4 @@
 <?php
-require_once dirname(__DIR__, 3) . "/bootstrap.php";
-autoload_core();
-
-if (!isset($_GET['table']) || !isset($_SESSION['admin_id'])) {
-    exit('Access denied');
-}
 
 $table = $_GET['table'];
 

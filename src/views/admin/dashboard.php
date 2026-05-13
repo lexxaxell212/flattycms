@@ -1,14 +1,4 @@
 <?php
-require_once dirname(__DIR__, 3) . "/bootstrap.php";
-autoload_core();
-
-if (empty($_SESSION['admin_id'])) {
-    if (basename($_SERVER['PHP_SELF']) !== 'login.php') {
-        header('Location: /admin/login');
-        exit;
-    }
-}
-
 // CSRF token 
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));

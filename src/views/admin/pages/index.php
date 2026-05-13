@@ -1,11 +1,4 @@
 <?php
-require_once dirname(__DIR__, 4) . "/bootstrap.php";
-autoload_core();
-
-if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
-    header('Location: /admin/login');
-    exit;
-}
 
 $message  = '';
 $msg_type = 'success';

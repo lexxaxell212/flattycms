@@ -2,6 +2,7 @@
 require_once dirname(__DIR__, 2) . "/bootstrap.php";
 autoload_core();
 session_start();
+verify_ajax_request('POST');
 validate_csrf();
 require_once LIB_PATH . "mailer.php";
 require_once LIB_PATH . "subscriber.php";

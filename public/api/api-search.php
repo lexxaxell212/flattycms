@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__DIR__, 2) . "/bootstrap.php";
 autoload_core();
+verify_ajax_request('GET');
 
 if (!isset($GLOBALS['pdo'])) {
     http_response_code(500);

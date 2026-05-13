@@ -103,6 +103,7 @@
 
     fetch(CONFIG.SEARCH_URL + '?q=' + encodeURIComponent(q), {
       signal: currentRequest.signal,
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
     })
       .then(res => {
         if (!res.ok) throw new Error('HTTP ' + res.status);

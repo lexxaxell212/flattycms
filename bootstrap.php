@@ -34,3 +34,20 @@ if (!function_exists("autoload_core")) {
     if (file_exists($helper)) require_once $helper;
   }
 }
+
+function verify_ajax_request(string $method = 'POST'): void
+{
+    // Cek AJAX header
+    if (($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') !== 'XMLHttpRequest') {
+        http_response_code(403);
+        echo json_encode(['error' => 'Forbidden']);
+        exit;
+    }
+
+    // Cek method
+    if ($_SERVER['REQUEST_METHOD'] !== strtoupper($method)) {
+        http_response_code(405);
+        echo json_encode(['error' => 'Method not allowed']);
+        exit;
+    }
+}

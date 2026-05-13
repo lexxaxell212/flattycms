@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__DIR__, 2) . "/bootstrap.php";
 autoload_core();
+verify_ajax_request('GET');
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: https://ayokebandung.id');

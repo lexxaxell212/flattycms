@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__DIR__, 2) . "/bootstrap.php";
 autoload_core();
+verify_ajax_request('POST');
 
 const GROQ_ENDPOINT      = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_MODEL         = 'llama-3.1-8b-instant';

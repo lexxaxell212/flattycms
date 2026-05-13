@@ -4,14 +4,14 @@ autoload_core();
 
 require_once ROOT_PATH . "maintenance.php";
 
+require_once ADMIN_PATH . "router.php";
+
 // auth check
 $public_routes = ['login', 'logout'];
 if (!in_array($request, $public_routes) && empty($_SESSION['admin_id'])) {
     header('Location: /admin/login');
     exit;
 }
-
-require_once ADMIN_PATH . "router.php";
 
 $action_handlers = [
     'blog-manager' => LIB_PATH . 'blog-actions.php',

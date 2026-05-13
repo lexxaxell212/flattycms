@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__DIR__, 2) . "/../bootstrap.php";
+require_once dirname(__DIR__, 2) . "/bootstrap.php";
 autoload_core();
 
 http_response_code(404);

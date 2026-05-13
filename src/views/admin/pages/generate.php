@@ -24,6 +24,7 @@ define('PAGE_SLUG', '{$slug}');
 define('ROOT_PATH', __DIR__ . '/{$root_path}');
 
 require_once ROOT_PATH . 'lib/functions.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="id">

@@ -18,7 +18,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'toggle_maintenance') {
     ");
     $stmt->execute([':val' => $newVal]);
 
-    header('Location: /admin/setting.php?saved=1');
+    header('Location: /admin/setting?saved=1');
     exit();
 }
 
@@ -83,9 +83,5 @@ $saved = isset($_GET['saved']);
                 </div>
             </form>
         </div>
-
-        <!-- Divider untuk setting berikutnya nanti -->
-        <!-- <hr class="my-0"> -->
-
     </div>
 </div>

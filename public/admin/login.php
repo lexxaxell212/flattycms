@@ -3,10 +3,10 @@ require_once dirname(__DIR__, 2) . "/bootstrap.php";
 autoload_core();
 
 if (isset($_SESSION['admin_id'])) {
-    header('Location: /admin/dashboard.php');
+    header('Location: /admin/dashboard');
     exit;
 }
-// login
+
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['password'])) {
     $stmt = $pdo->prepare("SELECT * FROM admins WHERE username = ?");
     $stmt->execute([$_POST['username']]);
@@ -40,7 +40,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['pa
       margin: 0;
     }
     .login-card { 
-      max-width: 420px;
+      max-width: 380px;
       width: 100%;
       box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.1);
       margin: 0 auto;
@@ -55,14 +55,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['pa
       background: #0d6efd;
       border: none;
       color: white;
-      border-radius: 0.5rem;
+      border-radius: 0.75rem;
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       width: 100%;
     }
     .form-control {
-      border-radius: 0.5rem;
+      border-radius: 0.75rem;
       border: 1px solid #dee2e6;
       padding: 0.75rem 1rem;
     }
@@ -70,9 +70,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['pa
       border-color: #0d6efd;
       box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.25);
     }
-    @media (max-width: 576px) { 
-      .login-card { margin: 1rem; } 
-    }
+    
   </style>
 </head>
 <body>
@@ -95,7 +93,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['pa
               </div>
             <?php endif; ?>
 
-            <!-- Form Simpel -->
+            <!-- Form -->
             <form method="POST">
               <div class="mb-3">
                 <label class="form-label fw-semibold">Username</label>

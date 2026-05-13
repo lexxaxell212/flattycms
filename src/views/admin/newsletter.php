@@ -3,7 +3,7 @@ require_once dirname(__DIR__, 3) . "/bootstrap.php";
 autoload_core();
 
 if (!isset($_SESSION['admin_id'])) {
-    header('Location: /admin/login.php');
+    header('Location: /admin/login');
     exit('Redirecting...');
 }
 
@@ -12,23 +12,20 @@ if (!isset($pdo)) {
     die('Database connection missing!');
 }
 
-// Proses kirim newsletter
+
 if (isset($_POST['send_newsletter'])) {
     $subject = trim($_POST['subject']);
     $message = trim($_POST['message']);
     
     if ($subject && $message) {
-        // 1. Simpan ke database dulu
         $stmt = $pdo->prepare("INSERT INTO newsletters (subject, message, total_recipients, status) VALUES (?, ?, 0, 'draft')");
         $stmt->execute([$subject, $message]);
         $newsletter_id = $pdo->lastInsertId();
         
-        // 2. Kirim email ke subscribers
         $stmt = $pdo->query('SELECT id, email FROM subscribers WHERE status = "active"');
         $sent = 0; $total = 0;
         
         while ($sub = $stmt->fetch()) {
-            // Generate token unsubscribe untuk link di footer
             $unsubscribe_token = generateUnsubscribeToken($pdo, $sub['id']);
             $unsub_link = "https://ayokebandung.id/pages/unsubscribe?token=" . $unsubscribe_token;
             
@@ -74,7 +71,6 @@ if (isset($_POST['send_newsletter'])) {
             usleep(100000);
         }
         
-        // 3. Update status final
         $stmt = $pdo->prepare("UPDATE newsletters SET total_recipients = ?, sent_recipients = ?, status = 'sent', sent_at = NOW() WHERE id = ?");
         $stmt->execute([$total, $sent, $newsletter_id]);
         
@@ -84,7 +80,6 @@ if (isset($_POST['send_newsletter'])) {
     }
 }
 
-// Statistik
 $total_active = $pdo->query("SELECT COUNT(*) FROM subscribers WHERE status='active'")->fetchColumn();
 $total_unsub = $pdo->query("SELECT COUNT(*) FROM subscribers WHERE status='unsubscribed'")->fetchColumn();
 $total_deleted = $pdo->query("SELECT COUNT(*) FROM subscribers WHERE status='deleted'")->fetchColumn();
@@ -105,7 +100,6 @@ $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $newsletters = $pdo->query('SELECT * FROM newsletters ORDER BY sent_at DESC LIMIT 10')->fetchAll(PDO::FETCH_ASSOC);
 
-// Delete Logic
 if (isset($_GET['delete'])) {
     $stmt = $pdo->prepare("UPDATE subscribers SET status = 'deleted' WHERE id = ?");
     $stmt->execute([(int)$_GET['delete']]);
@@ -114,11 +108,8 @@ if (isset($_GET['delete'])) {
 }
 ?>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Newsletter Admin - Ayokebandung.id</title>
-    <link href="<?= CSS_URL ?>fa651.all.min.css" rel="stylesheet">
-    <style>
+
+<style>
         :root{--p:#667eea;--s:#64748b;--bg:#f8fafc;--card:#fff;--sh:0 4px 20px rgba(0,0,0,.08);--radius:16px}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:#1e293b;padding:20px}
         .container{max-width:1200px;margin:0 auto}
@@ -137,10 +128,8 @@ if (isset($_GET['delete'])) {
         .stats{display:flex;gap:16px;margin-bottom:24px}
         .stat-card{background:#fff;padding:20px;flex:1;border-radius:16px;box-shadow:var(--sh);text-align:center}
         .stat-num{font-size:32px;font-weight:700;color:var(--p)}
-    </style>
-</head>
-
-    <div class="container">
+</style>
+<div class="container py-5">
         <?php if (isset($_SESSION['newsletter_success'])): ?>
             <div class="alert"><i class="fas fa-check-circle"></i> <?php echo $_SESSION['newsletter_success']; unset($_SESSION['newsletter_success']); ?></div>
         <?php endif; ?>

@@ -4,230 +4,7 @@ $admin_url  = defined('ADMIN_URL') ? ADMIN_URL : '/admin/';
 $request_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $current = preg_replace('#^admin/?#', '', $request_path);
 
-function nav_active(string $page, string $current): string {
-    return $page === $current ? ' nav-active' : '';
-}
-$page_title = "Dashboard";
 ?>
-
-<!--
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="<?= CSS_URL ?>bs533.min.css" rel="stylesheet">
-  <link href="<?= CSS_URL ?>assets.css" rel="stylesheet">
-  <link href="<?= CSS_URL ?>component.css" rel="stylesheet">
-  <link href="<?= CSS_URL ?>style.css" rel="stylesheet">
-  <style>
-    #mobile-toggle {
-      display: none;
-    }
-
-    .admin-container {
-      display: flex;
-      position: relative;
-    }
-
-    .mobile-header {
-      display: flex;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: var(--blue-200);
-      color: var(--blue-950);
-      padding: 14px 20px;
-      z-index: 3000;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .mobile-menu-btn {
-      background: none;
-      border: none;
-      font-size: 22px;
-      color: var(--blue-950);
-      cursor: pointer;
-      padding: 6px 8px;
-      border-radius: 8px;
-      transition: color .2s;
-    }
-
-    .mobile-menu-btn:hover {
-      color: var(--blue-800);
-    }
-
-    .mobile-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--blue-950);
-    }
-
-    .mobile-header-user {
-      font-size: .8rem;
-      color: var(--blue-800);
-    }
-
-    .sidebar {
-      width: 260px;
-      background: var(--blue-100);
-      position: fixed;
-      height: 100vh;
-      top: 56px;
-      left: 0;
-      transform: translateX(-100%);
-      transition: transform .3s cubic-bezier(.4, 0, .2, 1);
-      z-index: 2000;
-    }
-
-    #mobile-toggle:checked~.admin-container .sidebar {
-      transform: translateX(0);
-    }
-
-    #mobile-toggle:checked~.admin-container::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .45);
-      backdrop-filter: blur(3px);
-      z-index: 1500;
-    }
-
-    .sidebar-header {
-      padding: 20px;
-      text-align: center;
-      background: var(--blue-200);
-      border-bottom: 1px solid var(--blue-300);
-    }
-
-    .logo {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--blue-950);
-      margin-bottom: 4px;
-    }
-
-    .sidebar-user {
-      font-size: .78rem;
-      color: var(--blue-800);
-    }
-
-    .sidebar-nav {
-      padding: 12px 0;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 13px 20px;
-      color: var(--blue-950);
-      text-decoration: none;
-      border-left: 3px solid transparent;
-      font-size: .88rem;
-      transition: all .2s;
-    }
-
-    .nav-item i {
-      width: 18px;
-      text-align: center;
-      font-size: .9rem;
-    }
-
-    .nav-item:hover,
-    .nav-item.nav-active {
-      background: var(--blue-200);
-      color: var(--blue-800);
-      border-left-color: var(--blue-700);
-    }
-
-    .nav-logout {
-      margin-top: 8px;
-      border-top: 1px solid var(--blue-200);
-    }
-
-    .nav-logout:hover {
-      color: #c0392b;
-      border-left-color: #c0392b;
-    }
-
-    .main-content {
-      flex: 1;
-      margin-top: 56px;
-      padding: 20px;
-    }
-
-    /* ── Topbar ── */
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      background: var(--blue-100);
-      border: 1px solid var(--blue-200);
-      border-radius: 12px;
-      padding: 12px 20px;
-      margin-bottom: 20px;
-    }
-
-    .topbar-user {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: .88rem;
-      color: var(--blue-950);
-    }
-
-    .topbar-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--blue-300);
-      color: var(--blue-950);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: .9rem;
-    }
-  </style>
-</head>
-<body>
-  <input type="checkbox" id="mobile-toggle">
-  <header class="mobile-header">
-    <label for="mobile-toggle" class="mobile-menu-btn" aria-label="Toggle menu">
-      <i class="fas fa-bars"></i>
-    </label>
-    <span class="mobile-title">DASHBOARD</span>
-    <span class="mobile-header-user">
-      <i class="fas fa-user-circle" style="margin-right:5px"></i><?= $admin_name ?>
-    </span>
-  </header>
-  <div class="admin-container">
-    <aside class="sidebar" role="navigation" aria-label="Sidebar">
-      <div class="sidebar-header">
-        <div class="logo"><i class="fas fa-shield-halved" style="margin-right:6px"></i>Admin</div>
-        <small class="sidebar-user"><?= $admin_name ?></small>
-      </div>
-      <nav class="sidebar-nav">
-        <a href="<?= $admin_url ?>" class="nav-item<?= nav_active('dashboard', $current) ?>"><i class="fas fa-gauge-high"></i>Dashboard</a>
-        <a href="<?= $admin_url ?>database-manager" class="nav-item<?=
-        nav_active('database-manager', $current) ?>"><i class="fas
-        fa-database"></i>DB Manager</a>
-        <a href="<?= $admin_url ?>newsletter" class="nav-item<?= nav_active('newsletter', $current) ?>"><i class="fas fa-envelope"></i>Newsletter</a>
-        <a href="<?= $admin_url ?>pages" class="nav-item<?=
-        nav_active('pages-builder', $current) ?>"><i class="fas
-        fa-file-lines"></i>Pages Builder</a>
-        <a href="<?= $admin_url ?>blog-manager" class="nav-item<?= nav_active('blog-manager', $current) ?>"><i class="fas fa-pen-to-square"></i>Blog Builder</a>
-        <a href="<?= $admin_url ?>modal-manager" class="nav-item<?= nav_active('modal-manager', $current) ?>"><i class="fas fa-puzzle-piece"></i>CMPT Manager</a>
-        <a href="<?= $admin_url ?>setting" class="nav-item<?= nav_active('setting', $current) ?>"><i class="fas fa-gear"></i>Settings</a>
-        <a href="<?= $admin_url ?>logout" class="nav-item nav-logout"><i class="fas fa-right-from-bracket"></i>Logout</a>
-      </nav>
-    </aside>
-  </div>
-  <div class="main-content">
-</html>
--->
 
 <!DOCTYPE html>
 <html lang="id">
@@ -269,74 +46,74 @@ $page_title = "Dashboard";
 <body>
 <nav class="navbar">
   <div class="container">
-    <a class="navbar-brand" aria-label="Admin Dashboard" href="<?= BASE_URL
-    ?>/admin/">
+    <a class="navbar-brand" aria-label="Admin Dashboard" href="<?= $admin_url
+    ?>">
       Dashboard
     </a>
     <div class="nav-desktop" id="navbarNav">
       <ul class="nav-desktop-list">
         <li class="nav-desktop-item nav-desktop-dropdown">
           <button class="nav-desktop-link nav-dd-trigger" aria-expanded="false">
-            <i class="fa-solid fa-grip" aria-hidden="true"></i>
+            <i class="fa-regular fa-grip" aria-hidden="true"></i>
             Pintasan
-            <i class="fa-solid fa-chevron-down nav-dd-chevron" aria-hidden="true"></i>
+            <i class="fa-regular fa-chevron-down nav-dd-chevron" aria-hidden="true"></i>
           </button>
           <div class="nav-dd-panel">
-            <a class="nav-dd-item" href="#"><i class="fa-solid fa-landmark"></i></a>
-            <a class="nav-dd-item" href="#"><i class="fa-solid fa-broom-ball"></i></a>
-            <a class="nav-dd-item" href="#"><i class="fa-solid fa-bowl-rice"></i></a>
-            <a class="nav-dd-item" href="#"><i class="fa-solid fa-bus"></i></a>
-            <a class="nav-dd-item" href="#"><i class="fa-solid fa-map-location-dot"></i></a>
-            <a class="nav-dd-item" href="#"><i class="fa-solid fa-hotel"></i></a>
+            <a class="nav-dd-item" href="#"><i class="fa-regular fa-landmark"></i></a>
+            <a class="nav-dd-item" href="#"><i class="fa-regular fa-broom-ball"></i></a>
+            <a class="nav-dd-item" href="#"><i class="fa-regular fa-bowl-rice"></i></a>
+            <a class="nav-dd-item" href="#"><i class="fa-regular fa-bus"></i></a>
+            <a class="nav-dd-item" href="#"><i class="fa-regular fa-map-location-dot"></i></a>
+            <a class="nav-dd-item" href="#"><i class="fa-regular fa-hotel"></i></a>
           </div>
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="#">
-            <i class="fa-solid fa-newspaper" aria-hidden="true"></i>Dashboard
+            <i class="fa-regular fa-house" aria-hidden="true"></i>Dashboard
           </a>
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
           ?>blog-manager">
-            <i class="fa-solid fa-book" aria-hidden="true"></i>blog-manager
+            <i class="fa-regular fa-book" aria-hidden="true"></i>blog-manager
           </a>
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
           ?>pages/index">
-            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>Pages
+            <i class="fa-regular fa-file-lines" aria-hidden="true"></i>Pages
             Builder
           </a>
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
           ?>modal-manager">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>CMPT MANAGER
+            <i class="fa-regular fa-bell" aria-hidden="true"></i>CMPT MANAGER
           </a>
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
           ?>setting">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>Setting
+            <i class="fa-regular fa-gear" aria-hidden="true"></i>Setting
           </a>
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
           ?>database-manager">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>Database
+            <i class="fa-regular fa-database" aria-hidden="true"></i>Database
             Manager
           </a>
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
           ?>newsletter">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>Newsletter
+            <i class="fa-regular fa-envelope" aria-hidden="true"></i>Newsletter
           </a>
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
           ?>logout">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>Logout
+            <i class="fa-regular fa-right-from-bracket" aria-hidden="true"></i>Logout
           </a>
         </li>
 
@@ -386,60 +163,60 @@ $page_title = "Dashboard";
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mb-2" href="#" role="button" data-bs-toggle="dropdown">
-            <i class="fa-solid fa-grip"></i> Pintasan
+            <i class="fa-regular fa-grip"></i> Pintasan
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-landmark me-2"></i></a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa-regular fa-landmark me-2"></i></a></li>
             
           </ul>
         </li>
          <li class="nav-item">
           <a class="nav-link" href="/admin/">
-            <i class="fa-solid fa-newspaper" aria-hidden="true"></i>Dashboard
+            <i class="fa-regular fa-house" aria-hidden="true"></i>Dashboard
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
           ?>blog-manager">
-            <i class="fa-solid fa-book" aria-hidden="true"></i>blog-manager
+            <i class="fa-regular fa-book" aria-hidden="true"></i>blog-manager
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
           ?>pages/index">
-            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>Pages
+            <i class="fa-regular fa-file-lines" aria-hidden="true"></i>Pages
             Builder
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
           ?>modal-manager">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>CMPT MANAGER
+            <i class="fa-regular fa-bell" aria-hidden="true"></i>CMPT MANAGER
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
           ?>setting">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>Setting
+            <i class="fa-regular fa-gear" aria-hidden="true"></i>Setting
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
           ?>database-manager">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>Database
+            <i class="fa-regular fa-database" aria-hidden="true"></i>Database
             Manager
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
           ?>newsletter">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>Newsletter
+            <i class="fa-regular fa-envelope" aria-hidden="true"></i>Newsletter
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
           ?>logout">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>Logout
+            <i class="fa-regular fa-right-from-bracket" aria-hidden="true"></i>Logout
           </a>
         </li>
           <div>

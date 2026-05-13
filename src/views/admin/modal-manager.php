@@ -3,7 +3,7 @@ require_once dirname(__DIR__, 3) . "/bootstrap.php";
 autoload_core();
 
 if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
-    header('Location: /admin/login.php');
+    header('Location: /admin/login');
     exit;
 }
 
@@ -148,13 +148,7 @@ foreach ($items as &$item) {
 unset($item);
 ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CMPT Manager</title>
-    <link href="<?= CSS_URL ?>bs533.min.css" rel="stylesheet">
-    <link href="<?= CSS_URL ?>fa651.all.min.css" rel="stylesheet">
-    <style>
+<style>
         .upload-zone {border:3px dashed #0d6efd;border-radius:15px;padding:30px;text-align:center;cursor:pointer;transition:all 0.3s;background:#f8f9ff;}
         .upload-zone:hover,.upload-zone.dragover {border-color:#0a58ca;background:#e3f2fd;transform:scale(1.02);}
         .upload-zone i {font-size:2.5rem;color:#0d6efd;margin-bottom:10px;}
@@ -193,8 +187,7 @@ unset($item);
         .cat-consent {background-color: #ffc107 !important; color: #000 !important;}
         .cat-notifikasi {background-color: #0dcaf0 !important;}
     </style>
-</head>
-<div class="container my-5">
+<div class="container py-5">
     <div class="text-center mb-5">
         <h1 class="display-5 fw-bold text-primary mb-3"><i class="fas
         fa-layer-group me-2"></i>CMPT Manager</h1>
@@ -203,7 +196,6 @@ unset($item);
         </button>
     </div>
 
-    <!-- FILTER DITAMBAH SEARCH + KATEGORI LENGKAP -->
     <div class="row mb-4">
         <div class="col-md-5">
             <div class="input-group">
@@ -380,7 +372,7 @@ unset($item);
     </div>
 </div>
 
-<script src="<?= JS_URL ?>bs533.bundle.min.js"></script>
+
 <script>
 let uploading = false;
 const categories = <?= json_encode($categories) ?>;

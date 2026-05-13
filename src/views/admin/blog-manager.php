@@ -3,7 +3,7 @@ require_once dirname(__DIR__, 3) . "/bootstrap.php";
 autoload_core();
 
 if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
-    header('Location: /admin/login.php');
+    header('Location: /admin/login');
     exit;
 }
 
@@ -196,7 +196,6 @@ if (isset($_POST['add'])) {
 }
 
 if ($action === 'toggle' && isset($_GET['id']) && isset($_GET['tok'])) {
-    // Token berbasis session untuk validasi GET toggle
     $expected_tok = hash_hmac('sha256', 'toggle_' . (int)$_GET['id'], $_SESSION['csrf_token']);
     if (!hash_equals($expected_tok, $_GET['tok'])) {
         die('Invalid token.');
@@ -257,14 +256,8 @@ $categories = $pdo->query('SELECT * FROM allcontent_categories ORDER BY name')->
 $count_active   = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE status='active'")->fetchColumn();
 $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE source_domain IS NOT NULL")->fetchColumn();
 ?>
-<!DOCTYPE html>
-<html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Blog Manager - <?= safe_html($_SESSION['admin_name'] ?? 'Admin') ?></title>
-<link href="<?= CSS_URL ?>bs533.min.css" rel="stylesheet">
-<link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css">
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <style>
 :root {
@@ -272,16 +265,8 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
     --primary-dark: #233876;
     --primary-rgb: 26, 86, 219;
 }
-.card {
-    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
-    border: none;
-    border-radius: .5rem;
-}
 .table-hover tbody tr:hover {
     background: rgba(26, 86, 219, .05);
-}
-.btn-primary:focus {
-    box-shadow: 0 0 0 .25rem rgba(26, 86, 219, .25);
 }
 .ql-container {
     min-height: 200px;
@@ -325,7 +310,6 @@ summary {
     cursor: pointer;
     font-weight: 500;
 }
-.fs-2rem { font-size: 1.1rem; }
 
 @keyframes slideDown {
     from { opacity: 0; transform: translateY(-10px); }
@@ -333,9 +317,7 @@ summary {
 }
 </style>
 </head>
-
-<div class="container mt-4">
-
+<div class="container py-5">
     <?php if ($msg): ?>
     <div class="alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert">
         <i class="fas fa-check-circle-fill me-2"></i><?= safe_html($msg) ?>
@@ -646,13 +628,14 @@ summary {
                                 <a href="../blogs/?id=<?= (int)$p['id'] ?>" target="_blank" class="btn btn-primary" title="Lihat Post">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <!-- Source -->
-                                <?php if (!empty($p['url_main'])): ?>
-                                <a href="<?= safe_html($p['url_main']) ?>" target="_blank" rel="noopener noreferrer"
+                                <!-- Source 
+                        <php // if (!empty($p['url_main'])): ?>
+                                <a href="<= // safe_html($p['url_main']) ?>" target="_blank" rel="noopener noreferrer"
                                    class="btn btn-outline-secondary" title="Source">
                                     <i class="fas fa-box-arrow-up-right"></i>
                                 </a>
-                                <?php endif; ?>
+                                <php // endif; >
+                                -->
                             </div>
                         </td>
                     </tr>
@@ -663,17 +646,12 @@ summary {
         </div>
     </div>
 
-    <div class="text-center mt-4 text-muted small">
-        <a href="<?= defined('ADMIN_URL') ? safe_html(ADMIN_URL) . 'dashboard' : '?' ?>" class="text-decoration-none">
-            <i class="fas fa-house-door"></i> Dashboard
-        </a>
-    </div>
-
+    
     <?php endif; ?>
 </div><!-- /container -->
 
-<script src="<?= JS_URL ?>bs533.bundle.min.js"></script>
-<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js" defer></script>
+
 <script>
 (function () {
     'use strict';

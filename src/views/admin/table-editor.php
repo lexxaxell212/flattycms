@@ -123,24 +123,14 @@ $stmt = $pdo->query("SELECT * FROM `$table` ORDER BY id DESC LIMIT 50");
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Tabel - <?php echo htmlspecialchars($table); ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .form-control:invalid {
             border-color: #dc3545;
         }
     </style>
-</head>
-<div class="container mt-4">
+<div class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3><i class="fas fa-table text-primary"></i> <?php echo htmlspecialchars($table); ?></h3>
-        <a href="database_manager.php" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> Kembali
-        </a>
     </div>
     
     <?php if ($success): ?>
@@ -291,5 +281,3 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

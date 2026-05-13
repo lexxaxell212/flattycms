@@ -1,13 +1,9 @@
 <?php
-$lib_path = dirname(__DIR__) . '/../lib/functions.php';
-if (!file_exists($lib_path)) die('../lib/functions.php missing: ' . $lib_path);
-require_once $lib_path;
+require_once dirname(__DIR__, 4) . "/bootstrap.php";
 autoload_core();
 
-require_once 'functions.php';
-
 if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
-    header('Location: ../login.php');
+    header('Location: /admin/login');
     exit;
 }
 
@@ -65,16 +61,15 @@ if (isset($_GET['edit'])) {
 if (isset($_GET['saved']))   { $msg_type = 'success'; $msg_text = 'Page berhasil disimpan!'; }
 if (isset($_GET['deleted'])) { $msg_type = 'success'; $msg_text = 'Page berhasil dihapus!'; }
 ?>
-<!DOCTYPE html>
-<html lang="id">
+
+
 <head>
-    <meta charset="UTF-8">
+   <!-- <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pages Builder - <?= htmlspecialchars($page['title'] ?? 'New Page') ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Pages Builder - <//?= htmlspecialchars($page['title'] ?? 'New Page') ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -84,14 +79,7 @@ if (isset($_GET['deleted'])) { $msg_type = 'success'; $msg_text = 'Page berhasil
             --text-secondary: #94a3b8;
             --accent: #3b82f6;
         }
-        * { box-sizing: border-box; }
-        body {
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-            min-height: 100vh;
-            font-family: system-ui, -apple-system, sans-serif;
-            overflow-x: hidden;
-            color: var(--text-primary);
-        }
+       
         .header {
             background: rgba(30, 41, 59, 0.98) !important;
             backdrop-filter: blur(20px);
@@ -194,13 +182,13 @@ if (isset($_GET['deleted'])) { $msg_type = 'success'; $msg_text = 'Page berhasil
         }
     </style>
 </head>
-<body>
+
     <nav class="navbar navbar-expand-lg navbar-dark header py-4 mb-4">
         <div class="container-fluid px-3 px-lg-0">
             <a class="navbar-brand fw-bold fs-2" href="#">
                 <i class="fas fa-file-code me-3"></i>Pages Builder
             </a>
-            <a href="../dashboard.php" class="btn btn-primary btn-modern ms-2">
+            <a href="/admin/dasboard" class="btn btn-primary btn-modern ms-2">
                 <i class="fas fa-arrow-left me-1"></i>Kembali
             </a>
         </div>
@@ -338,7 +326,6 @@ if (isset($_GET['deleted'])) { $msg_type = 'success'; $msg_text = 'Page berhasil
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
@@ -379,7 +366,7 @@ if (isset($_GET['deleted'])) { $msg_type = 'success'; $msg_text = 'Page berhasil
 
     if (titleInput) {
         titleInput.addEventListener('input', function () {
-            if (editSlug) return; // jangan ubah slug saat edit
+            if (editSlug) return;
             const title = this.value.trim();
             slugPreview.value = title
                 ? title.toLowerCase()
@@ -396,18 +383,16 @@ if (isset($_GET['deleted'])) { $msg_type = 'success'; $msg_text = 'Page berhasil
             const content = editor.getValue();
             const iframe  = document.getElementById('previewFrame');
             const title   = titleInput?.value || 'Preview';
-            iframe.srcdoc = `<!DOCTYPE html>
+            iframe.srcdoc = `
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>* { margin:0; padding:0; box-sizing:border-box; } body { padding:16px; font-family:system-ui,sans-serif; }</style>
 </head>
 <body>
 ${content}
-<scr` + `ipt src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></scr` + `ipt>
 </body>
 </html>`;
         } catch(e) { console.error('Preview error:', e); }
@@ -427,5 +412,3 @@ ${content}
         updatePreview();
     };
     </script>
-</body>
-</html>

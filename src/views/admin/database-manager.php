@@ -3,7 +3,7 @@ require_once dirname(__DIR__, 3) . "/bootstrap.php";
 autoload_core();
 
 if (!isset($_SESSION['admin_id'])) {
-    header('Location: /admin/login.php');
+    header('Location: /admin/login');
     exit;
 }
 
@@ -42,29 +42,7 @@ if (isset($_GET['drop_table'])) {
 $tables = $pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
 ?>
 
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Manager</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        .card-hover {
-            transition: all 0.2s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
-        }
-        @media (max-width: 768px) {
-            .btn-group-sm .btn { padding: 0.25rem 0.5rem; font-size: 0.75rem; }
-        }
-    </style>
-</head>
-
-<div class="container mt-4 mb-5">
+<div class="container py-5">
     <!-- ALERTS -->
     <?php if (isset($success)): ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -227,7 +205,6 @@ price DECIMAL(10,2)"
     </div>
 </div>
 
-<script src="<?= CSS_URL ?>bs533.bundle.min.js"></script>
 <script>
 document.getElementById('columnCount').addEventListener('change', function() {
     // Auto-generate column examples
@@ -245,4 +222,3 @@ document.getElementById('columnCount').addEventListener('change', function() {
     textarea.value = example.trim();
 });
 </script>
-

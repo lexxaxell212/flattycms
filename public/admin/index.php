@@ -12,6 +12,16 @@ if (empty($_SESSION['admin_id'])) {
 
 require_once ADMIN_PATH . "router.php";
 
+$action_handlers = [
+    'blog-manager' => LIB_PATH . 'blog-actions.php',
+    // 'newsletter'  => LIB_PATH . 'newsletter-actions.php',
+];
+
+if (isset($action_handlers[$request])) {
+    require_once $action_handlers[$request];
+}
+
+
 $page_title = $page_title ?? "Admin - " . SITE_NAME;
 
 if (isset($view_content) && file_exists($view_content)) {

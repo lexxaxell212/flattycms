@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__DIR__, 2) . "/bootstrap.php";
+require_once dirname(__DIR__, 3) . "/bootstrap.php";
 autoload_core();
 
 if (empty($_SESSION['admin_id'])) {
@@ -97,7 +97,7 @@ try {
     </style>
 </head>
 
-<?php require_once ADMIN_URL . 'includes/header.php'; ?>
+<?php require_once ADMIN_VIEW_PATH . 'includes/header.php'; ?>
 
 <div>
 
@@ -139,4 +139,4 @@ try {
 
 </div>
 
-<?php require_once ADMIN_URL . 'includes/footer.php'; ?>
+<?php require_once ADMIN_VIEW_PATH . 'includes/footer.php'; ?>

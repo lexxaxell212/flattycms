@@ -169,17 +169,18 @@ $page_title = "Kritik dan Saran";
 
               const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-              const response = await fetch('feedback-send-feedback.php', {
-                method: 'POST',
-                body: formData,
-                signal: controller.signal
+              const response = await fetch('/api/api-feedback.php', {
+                  method: 'POST',
+                  body: formData,
+                  signal: controller.signal,
+                  headers: { 'X-Requested-With': 'XMLHttpRequest' }
               });
 
               clearTimeout(timeoutId);
 
               const data = await response.json();
 
-              if (data.status === 'success') {
+              if (data.success) {
                 // Show success
                 document.getElementById('feedback-summaryDetail').innerHTML =
                 `Nama: ${sanitize(data.data.nama)}<br>` +

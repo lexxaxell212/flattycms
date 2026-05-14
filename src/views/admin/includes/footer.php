@@ -1,4 +1,3 @@
-</div>
 <footer id="footer" class="footer mt-5">
   <div class="container">
     <div class="text-center mt-5 pb-3">
@@ -8,5 +7,6 @@
     </div>
   </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 </body>
 </html>

@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image']) && empty($_
     $target_file = $upload_dir . $filename;
 
     if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-        echo json_encode(['success' => true, 'path' => . $filename]);
+        echo json_encode(['success' => true, 'path' => $filename]);
     } else {
         echo json_encode(['success' => false, 'error' => 'Upload gagal']);
     }

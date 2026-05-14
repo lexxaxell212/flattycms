@@ -9,7 +9,6 @@ $routes = [
     'pages'            => ADMIN_VIEW_PATH . 'pages/index.php',
     'modal-manager'    => ADMIN_VIEW_PATH . 'modal-manager.php',
     'setting'          => ADMIN_VIEW_PATH . 'setting.php',
-    'database-manager' => ADMIN_VIEW_PATH . 'database-manager.php',
     'newsletter'       => ADMIN_VIEW_PATH . 'newsletter.php',
     'login'           => ADMIN_PATH . 'login.php',
     'logout'           => ADMIN_PATH . 'logout.php',

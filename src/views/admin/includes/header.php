@@ -68,11 +68,6 @@ $current = preg_replace('#^admin/?#', '', $request_path);
           </div>
         </li>
         <li class="nav-desktop-item">
-          <a class="nav-desktop-link" href="#">
-            <i class="fa-regular fa-house" aria-hidden="true"></i>Dashboard
-          </a>
-        </li>
-        <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
           ?>blog-manager">
             <i class="fa-regular fa-book" aria-hidden="true"></i>blog-manager
@@ -93,21 +88,14 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
-          ?>setting">
-            <i class="fa-regular fa-gear" aria-hidden="true"></i>Setting
-          </a>
-        </li>
-        <li class="nav-desktop-item">
-          <a class="nav-desktop-link" href="<?= $admin_url
-          ?>database-manager">
-            <i class="fa-regular fa-database" aria-hidden="true"></i>Database
-            Manager
-          </a>
-        </li>
-        <li class="nav-desktop-item">
-          <a class="nav-desktop-link" href="<?= $admin_url
           ?>newsletter">
             <i class="fa-regular fa-envelope" aria-hidden="true"></i>Newsletter
+          </a>
+        </li>
+        <li class="nav-desktop-item">
+          <a class="nav-desktop-link" href="<?= $admin_url
+          ?>setting">
+            <i class="fa-regular fa-gear" aria-hidden="true"></i>Setting
           </a>
         </li>
         <li class="nav-desktop-item">
@@ -170,11 +158,6 @@ $current = preg_replace('#^admin/?#', '', $request_path);
             
           </ul>
         </li>
-         <li class="nav-item">
-          <a class="nav-link" href="/admin/">
-            <i class="fa-regular fa-house" aria-hidden="true"></i>Dashboard
-          </a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
           ?>blog-manager">
@@ -196,21 +179,14 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
-          ?>setting">
-            <i class="fa-regular fa-gear" aria-hidden="true"></i>Setting
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?= $admin_url
-          ?>database-manager">
-            <i class="fa-regular fa-database" aria-hidden="true"></i>Database
-            Manager
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?= $admin_url
           ?>newsletter">
             <i class="fa-regular fa-envelope" aria-hidden="true"></i>Newsletter
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= $admin_url
+          ?>setting">
+            <i class="fa-regular fa-gear" aria-hidden="true"></i>Setting
           </a>
         </li>
         <li class="nav-item">

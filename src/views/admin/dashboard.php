@@ -17,6 +17,8 @@ try {
 $csrf = generate_csrf_token();
 ?>
 
+<div class="container py-5">
+
 <!-- Stats Cards -->
 <div class="row g-3 mb-4">
     <div class="col-6 col-lg-3">
@@ -196,6 +198,8 @@ $csrf = generate_csrf_token();
             </div>
         </div>
     </div>
+</div>
+
 </div>
 
 <script>

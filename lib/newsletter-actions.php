@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_newsletter'])) {
         $sent = 0;
 
         foreach ($subs as $sub) {
-            $token    = generateUnsubscribeToken($pdo, $sub['id']);
+            $token    = generateUnsubscribeToken($sub['id']);
             $unsub    = "https://ayokebandung.id/pages/unsubscribe?token=" . $token;
             $html     = newsletter_template($subject, $message, $unsub);
             if (kirimEmailAyo($sub['email'], $subject, $html)) $sent++;

@@ -18,6 +18,7 @@ $action_handlers = [
     'newsletter'   => LIB_PATH . 'newsletter-actions.php',
     'setting'      => LIB_PATH . 'setting-actions.php',
     'modal-manager' => LIB_PATH . 'modal-actions.php',
+    'pages'        => LIB_PATH . 'pages-actions.php',
     // 'newsletter'  => LIB_PATH . 'newsletter-actions.php',
 ];
 

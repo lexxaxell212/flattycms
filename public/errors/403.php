@@ -9,7 +9,7 @@ http_response_code(403);
     <title>403 - Forbidden Access</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
+        body.errors {
             font-family: -apple-system, sans-serif;
             background: #0f0f0f;
             color: #fff;
@@ -24,11 +24,13 @@ http_response_code(403);
     </style>
 </head>
 <body>
-<h1 style="font-size:24px;color:#1d4ed8;">403</h1>
-<h2 style="font-weight:300;color:#94a3b8">|</h2>
-<h1 style="font-size:14px;font-weight:400;color:#94a3b8;">NO ACCESS</h1>
-<div style="position:fixed;bottom:20px;font-size:14px;font-weight:400;color:#94a3b8;">
+<div class="errors">
+    <h1 style="font-size:24px;color:#1d4ed8;">403</h1>
+    <h2 style="font-weight:300;color:#94a3b8">|</h2>
+    <h1 style="font-size:14px;font-weight:400;color:#94a3b8;">NO ACCESS</h1>
+    <div style="position:fixed;bottom:20px;font-size:14px;font-weight:400;color:#94a3b8;">
   ::::::: o.O :::::::
 </div>
+  </div>
 </body>
 </html>

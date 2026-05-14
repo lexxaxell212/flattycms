@@ -11,6 +11,7 @@ $routes = [
     'setting'          => ADMIN_VIEW_PATH . 'setting.php',
     'newsletter'       => ADMIN_VIEW_PATH . 'newsletter.php',
     'maps' => ADMIN_VIEW_PATH . 'maps.php',
+    'feedback' => ADMIN_VIEW_PATH . 'feedback.php',
     'login'           => ADMIN_PATH . 'login.php',
     'logout'           => ADMIN_PATH . 'logout.php',
 ];

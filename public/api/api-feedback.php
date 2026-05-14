@@ -33,7 +33,7 @@ $html = "
 <h2>Feedback Baru</h2>
 <p><strong>Nama:</strong> $nama</p>
 <p><strong>Email:</strong> $email</p>
-<p><strong>Rating:</strong> $rating/5</p>
+<p><strong>Rating:</strong> $rating/10</p>
 <p><strong>Pesan:</strong><br>$pesan</p>
 ";
 

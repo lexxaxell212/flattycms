@@ -98,6 +98,12 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
+          ?>feedback">
+            <i class="fa-solid fa-message" aria-hidden="true"></i>Feedback
+          </a>
+        </li>
+        <li class="nav-desktop-item">
+          <a class="nav-desktop-link" href="<?= $admin_url
           ?>maps">
             <i class="fa-solid fa-map" aria-hidden="true"></i>Add Marker
             Maps
@@ -196,6 +202,12 @@ $current = preg_replace('#^admin/?#', '', $request_path);
           <a class="nav-link" href="<?= $admin_url
           ?>newsletter">
             <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Newsletter
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= $admin_url
+          ?>feedback">
+            <i class="fa-solid fa-message" aria-hidden="true"></i>Feedback
           </a>
         </li>
         <li class="nav-item">

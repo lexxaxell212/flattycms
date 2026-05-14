@@ -75,7 +75,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
-          ?>pages/index">
+          ?>pages">
             <i class="fa-regular fa-file-lines" aria-hidden="true"></i>Pages
             Builder
           </a>
@@ -166,7 +166,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
-          ?>pages/index">
+          ?>pages">
             <i class="fa-regular fa-file-lines" aria-hidden="true"></i>Pages
             Builder
           </a>

@@ -1,5 +1,4 @@
 <?php
-
 $message  = '';
 $msg_type = 'success';
 $msg_text = '';

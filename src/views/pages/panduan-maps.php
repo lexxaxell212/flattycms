@@ -42,70 +42,46 @@ $page_title = "Panduan Maps";
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <script>
-        const tourismData = [
-            {
-                name: "Kawah Putih", 
-                desc: "Danau vulkanik dengan warna putih kehijauan yang memukau", 
-                lat: -7.1194, lng: 107.6333, 
-                icon: "fas fa-mountain-sun",
-                distance: "45 km"
-            },
-            {
-                name: "Farmhouse Lembang", 
-                desc: "Wisata keluarga bertema Eropa dengan spot foto Instagramable", 
-                lat: -6.8261, lng: 107.6147, 
-                icon: "fas fa-camera-retro",
-                distance: "22 km"
-            },
-            {
-                name: "Tangkuban Perahu", 
-                desc: "Gunung berapi aktif dengan kawah yang masih mengeluarkan asap", 
-                lat: -6.7578, lng: 107.5904, 
-                icon: "fas fa-fire",
-                distance: "30 km"
-            },
-            {
-                name: "Floating Market Lembang", 
-                desc: "Pasar terapung dengan wahana perahu dan kuliner khas Sunda", 
-                lat: -6.8292, lng: 107.6181, 
-                icon: "fas fa-water",
-                distance: "25 km"
-            },
-            {
-                name: "Trans Studio Bandung", 
-                desc: "Taman hiburan indoor terbesar di Asia Tenggara", 
-                lat: -6.9258, lng: 107.6211, 
-                icon: "fas fa-star",
-                distance: "3 km"
-            }
-        ];
+        let tourismData = [];
+
+        async function loadLocations() {
+            const res = await fetch('/api/api-maps.php', {
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            });
+            const json = await res.json();
+            tourismData = json.data;
+            initMap();
+            generateCards();
+        }
 
         let map;
-
+        
         function initMap() {
-            map = L.map('map').setView([-6.9175, 107.6191], 11);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    map = L.map('map').setView([-6.9175, 107.6191], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-            tourismData.forEach((place, index) => {
-                const marker = L.marker([place.lat, place.lng]).addTo(map);
-                marker.bindPopup(`
-                    <div style="text-align:center;padding:1.5rem;width:260px">
-                        <div style="font-size:2.2rem;color:#3b82f6;margin-bottom:0.8rem">
-                            <i class="${place.icon}"></i>
-                        </div>
-                        <div style="font-weight:700;font-size:1.2rem;color:#1e293b;margin-bottom:0.5rem">
-                            ${place.name}
-                        </div>
-                        <div style="color:#64748b;font-size:0.95rem;margin-bottom:1rem;line-height:1.4">
-                            ${place.desc}
-                        </div>
-                        <div style="color:#475569;font-weight:500;font-size:0.9rem">
-                            📍 ${place.distance} dari pusat kota
-                        </div>
-                    </div>
-                `);
-            });
-        }
+    tourismData.forEach((place, index) => {
+        const marker = L.marker([place.lat, place.lng]).addTo(map);
+        marker.bindPopup(`
+            <div style="text-align:center;padding:1.5rem;width:260px">
+                <div style="font-size:2.2rem;color:#3b82f6;margin-bottom:0.8rem">
+                    <i class="${place.icon}"></i>
+                </div>
+                <div style="font-weight:700;font-size:1.2rem;color:#1e293b;margin-bottom:0.5rem">
+                    ${place.name}
+                </div>
+                <div style="color:#64748b;font-size:0.95rem;margin-bottom:1rem;line-height:1.4">
+                    ${place.description}
+                </div>
+                <div style="color:#475569;font-weight:500;font-size:0.9rem">
+                    📍 ${place.distance} dari pusat kota
+                </div>
+            </div>
+        `);
+    });
+}
+
+        loadLocations();
 
         function generateCards() {
             const container = document.getElementById('tourismList');
@@ -120,7 +96,7 @@ $page_title = "Panduan Maps";
                     </div>
                     <div class="tourism-content">
                         <div class="tourism-name">${place.name}</div>
-                        <div class="tourism-desc">${place.desc}</div>
+                        <div class="tourism-desc">${place.description}</div>
                         <div class="tourism-meta">
                             <div class="tourism-distance">
                                 <i class="fas fa-road"></i> ${place.distance} dari pusat kota
@@ -157,10 +133,6 @@ $page_title = "Panduan Maps";
                 : '<i class="fas fa-times"></i>';
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initMap();
-            generateCards();
-        });
     </script>
 
 </div>

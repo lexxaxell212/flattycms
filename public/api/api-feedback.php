@@ -36,4 +36,11 @@ $html = "
 
 $sent = kirimEmailAyo(SMTP_USER, $subject, $html);
 
-echo json_encode(['success' => true]);
+echo json_encode([
+    'success' => true,
+    'data'    => [
+        'nama'     => $nama,
+        'rating'   => $rating,
+        'kategori' => $_POST['kategori'] ?? '-',
+    ]
+]);

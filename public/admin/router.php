@@ -11,8 +11,8 @@ $routes = [
     'setting'          => ADMIN_VIEW_PATH . 'setting.php',
     'database-manager' => ADMIN_VIEW_PATH . 'database-manager.php',
     'newsletter'       => ADMIN_VIEW_PATH . 'newsletter.php',
-    'login'           => ADMIN_VIEW_PATH . 'login.php',
-    'logout'           => ADMIN_VIEW_PATH . 'logout.php',
+    'login'           => ADMIN_PATH . 'login.php',
+    'logout'           => ADMIN_PATH . 'logout.php',
 ];
 
 $view_content = $routes[$request] ?? null;

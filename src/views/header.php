@@ -28,41 +28,32 @@ $isPintasanActive = (bool) array_filter(
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="<?= BASE_URL ?>">
-  
   <!-- assets -->
   <link rel="preload" as="font" href="<?= FONTS_URL ?>inter-v20-latin-regular.woff2" type="font/woff2" crossorigin>
   <link rel="preload" as="font" href="<?= FONTS_URL ?>inter-v20-latin-700.woff2" type="font/woff2" crossorigin>
   <link rel="preload" as="font" href="<?= FONTS_URL ?>inter-v20-latin-900.woff2" type="font/woff2" crossorigin>
-
   <link rel="stylesheet" href="<?= CSS_URL ?>bs533.min.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>assets.css">
-  
   <?php
   $isMobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT']);
   $heroImg = $isMobile ? 'wisata-mobile.webp' : 'wisata.webp'; ?>
   <link rel="preload" as="image" href="<?= IMG_URL . $heroImg ?>" type="image/webp" fetchpriority="high">
-  
   <link rel="preload" as="style" href="<?= CSS_URL ?>component.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>component.css" media="print" onload="this.media='all'">
-  
   <link rel="preload" as="style" href="<?= CSS_URL ?>style.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>style.css" media="print" onload="this.media='all'">
-  
   <link rel="preload" as="style" href="<?= CSS_URL ?>fa651.all.min.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css" media="print" onload="this.media='all'">
-  
   <noscript>
     <link rel="stylesheet" href="<?= CSS_URL ?>component.css">
     <link rel="stylesheet" href="<?= CSS_URL ?>style.css">
     <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css">
   </noscript>
-
   <script>
     const CONFIG = {
       baseUrl: '<?= BASE_URL ?>',
     };
   </script>
-
   <script src="<?= JS_URL ?>bs533.bundle.min.js" defer></script>
   <script src="<?= JS_URL ?>swal2.all.min.js" defer></script>
   <script src="<?= JS_URL ?>chat.js" defer></script>
@@ -70,28 +61,19 @@ $isPintasanActive = (bool) array_filter(
   <script src="<?= JS_URL ?>navbar.js" defer></script>
   <script src="<?= JS_URL ?>weather.js" defer></script>
   <script src="<?= JS_URL ?>newsletter-form.js" defer></script>
-  
-  
   <?php 
   $s = $GLOBALS['site_settings'] ?? []; 
   ?>
-  
   <title><?= $page_title ?></title>
   <meta name="description" content="<?= safe_html($s['site_description'] ?? 'Eksplorasi Wisata, Kuliner, dan Budaya Bandung Terlengkap.') ?>">
   <meta property="og:description" content="<?= safe_html($s['site_tagline'] ?? '') ?>">
   <link rel="icon" href="<?= !empty($s['favicon_url']) ? safe_html($s['favicon_url']) : IMG_URL . 'favicon.ico' ?>" type="image/x-icon">
-  
-    <!-- Meta Keywords -->
   <?php if (!empty($s['meta_keywords'])): ?>
   <meta name="keywords" content="<?= safe_html($s['meta_keywords']) ?>">
   <?php endif; ?>
-  
-  <!-- OG Image -->
   <?php if (!empty($s['og_image'])): ?>
   <meta property="og:image" content="<?= safe_html($s['og_image']) ?>">
   <?php endif; ?>
-  
-  <!-- Twitter -->
   <?php if (!empty($s['twitter_handle'])): ?>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="<?= safe_html($s['twitter_handle']) ?>">
@@ -99,8 +81,6 @@ $isPintasanActive = (bool) array_filter(
   <meta name="twitter:image" content="<?= safe_html($s['og_image']) ?>">
   <?php endif; ?>
   <?php endif; ?>
-  
-  <!-- Google Tag -->
   <?php if (!empty($s['gtag_id'])): ?>
   <script async src="https://www.googletagmanager.com/gtag/js?id=<?= safe_html($s['gtag_id']) ?>"></script>
   <script>
@@ -110,8 +90,6 @@ $isPintasanActive = (bool) array_filter(
       gtag('config', '<?= safe_html($s['gtag_id']) ?>');
   </script>
   <?php endif; ?>
-  
-  <!-- Facebook Pixel -->
   <?php if (!empty($s['fb_pixel_id'])): ?>
   <script>
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -123,8 +101,6 @@ $isPintasanActive = (bool) array_filter(
       fbq('track', 'PageView');
   </script>
   <?php endif; ?>
-  
-  <!-- Schema.org Organization -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",

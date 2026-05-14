@@ -65,7 +65,8 @@ $current = preg_replace('#^admin/?#', '', $request_path);
             <a class="nav-dd-item" href="<?= $admin_url
           ?>logout">
               <small>
-                <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>Logout
+                <i class="fa-solid fa-right-from-bracket"
+                aria-hidden="true"></i>logout
                 </small>
               </a>
           </div>
@@ -73,20 +74,20 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
           ?>blog-manager">
-            <i class="fa-solid fa-newspaper" aria-hidden="true"></i>blog-manager
+            <i class="fa-solid fa-newspaper" aria-hidden="true"></i>Kelola Blogs
           </a>
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
           ?>pages">
-            <i class="fa-solid fa-file" aria-hidden="true"></i>Pages
-            Builder
+            <i class="fa-solid fa-file" aria-hidden="true"></i>Buat Halaman
           </a>
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
           ?>modal-manager">
-            <i class="fa-solid fa-layer-group" aria-hidden="true"></i>CMPT MANAGER
+            <i class="fa-solid fa-layer-group" aria-hidden="true"></i>CMPT
+            Manager
           </a>
         </li>
         <li class="nav-desktop-item">
@@ -98,7 +99,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
           ?>setting">
-            <i class="fa-solid fa-gear" aria-hidden="true"></i>Setting
+            <i class="fa-solid fa-gear" aria-hidden="true"></i>Pengaturan
           </a>
         </li>
       </ul>
@@ -156,7 +157,8 @@ $current = preg_replace('#^admin/?#', '', $request_path);
             </a>
             <a class="dropdown-item" href="<?= $admin_url ?>logout">
               <small>
-                <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>Logout
+                <i class="fa-solid fa-right-from-bracket"
+                aria-hidden="true"></i>logout
                 </small>
               </a>
             </a>
@@ -166,20 +168,21 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
           ?>blog-manager">
-            <i class="fa-solid fa-newspaper" aria-hidden="true"></i>blog-manager
+            <i class="fa-solid fa-newspaper" aria-hidden="true"></i>Kelola Blogs
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
           ?>pages">
-            <i class="fa-solid fa-file" aria-hidden="true"></i>Pages
-            Builder
-          </a>
+            <i class="fa-solid fa-file" aria-hidden="true"></i>
+            Buat Halaman
+            </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
           ?>modal-manager">
-            <i class="fa-solid fa-layer-group" aria-hidden="true"></i>CMPT MANAGER
+            <i class="fa-solid fa-layer-group" aria-hidden="true"></i>CMPT
+            Manager
           </a>
         </li>
         <li class="nav-item">
@@ -191,7 +194,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
           ?>setting">
-            <i class="fa-solid fa-gear" aria-hidden="true"></i>Setting
+            <i class="fa-solid fa-gear" aria-hidden="true"></i>Pengaturan
           </a>
         </li>
       </ul>

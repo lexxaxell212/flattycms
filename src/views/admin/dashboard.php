@@ -167,37 +167,6 @@ $csrf = generate_csrf_token();
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white border-bottom py-3 px-4">
-                <div class="d-flex align-items-center gap-2">
-                    <span class="bg-primary bg-opacity-10 text-primary rounded p-1 lh-1">
-                        <i class="fa-solid fa-bolt fa-sm"></i>
-                    </span>
-                    <span class="fw-semibold">Quick Actions</span>
-                </div>
-            </div>
-            <div class="card-body px-4 py-3">
-                <div class="d-grid gap-2">
-                    <a href="/admin/blog-manager" class="btn btn-outline-primary btn-sm text-start">
-                        <i class="fa-solid fa-newspaper me-2"></i> Tambah Blog Post
-                    </a>
-                    <a href="/admin/pages" class="btn btn-outline-primary btn-sm text-start">
-                        <i class="fa-solid fa-file me-2"></i> Buat Halaman Baru
-                    </a>
-                    <a href="/admin/modal-manager" class="btn btn-outline-primary btn-sm text-start">
-                        <i class="fa-solid fa-layer-group me-2"></i> Kelola Modal/Card
-                    </a>
-                    <a href="/admin/newsletter" class="btn btn-outline-primary btn-sm text-start">
-                        <i class="fa-solid fa-paper-plane me-2"></i> Kirim Newsletter
-                    </a>
-                    <a href="/admin/setting" class="btn btn-outline-primary btn-sm text-start">
-                        <i class="fa-solid fa-gear me-2"></i> Pengaturan
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 </div>

@@ -48,7 +48,7 @@ if (isset(\$_SESSION['user'])) {
     \$_user_liked = (bool) \$_r_stmt->fetch();
 }
 
-require_once SRC_PATH . 'header.php';
+require_once SRC_PATH . 'headerv2.php';
 ?>
 {$html_content}
 <div class="container">

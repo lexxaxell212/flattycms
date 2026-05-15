@@ -11,7 +11,7 @@ function generateUniqueSlug($pdo, $base_slug) {
     }
 }
 
-function generateStaticPage($slug, $html_content, $page_id) {
+function generateStaticPage($slug, $html_content, $page_id, $title) {
     $pages_dir = PUBLIC_PATH . 'pages/';
     $page_dir  = $pages_dir . $slug . '/';
     

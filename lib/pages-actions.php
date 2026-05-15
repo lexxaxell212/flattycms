@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verify_csrf_token($_POST['csrf_toke
                          ->execute([$title, $slug, $html_content]);
         $page_id   = (int) $pdo->lastInsertId();
     }
-    if ($saved && generateStaticPage($slug, $html_content, $page_id)) {
+    if ($saved && generateStaticPage($slug, $html_content, $page_id, $title)) {
         header("Location: /admin/pages?edit=" . urlencode($slug) . "&saved=1");
     } else {
         header("Location: /admin/pages?error=1");

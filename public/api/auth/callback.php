@@ -48,7 +48,5 @@ if (!$user) {
 }
 
 $_SESSION['user'] = $user;
-var_dump($_SESSION['user']);
-die();
 // header('Location: /');
 // exit;

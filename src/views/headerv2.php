@@ -26,7 +26,6 @@ $isPintasanActive = (bool) array_filter(
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="csrf-token" content="<?= generate_csrf_token() ?>">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="<?= BASE_URL ?>">
   <!-- assets -->
@@ -52,7 +51,9 @@ $isPintasanActive = (bool) array_filter(
   </noscript>
   <script>
     const CONFIG = {
-      baseUrl: '<?= BASE_URL ?>',
+        baseUrl: '<?= BASE_URL ?>',
+        isLoggedIn: <?= isset($_SESSION['user']) ? 'true' : 'false' ?>,
+        csrfToken: '<?= generate_csrf_token() ?>',
     };
   </script>
   <script src="<?= JS_URL ?>bs533.bundle.min.js" defer></script>

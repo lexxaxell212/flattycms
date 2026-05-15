@@ -139,14 +139,13 @@ $categories = safe_get_categories($pdo);
             }
             ?>
             <div class="d-flex align-items-center gap-2 mb-4">
-                <button 
-                    id="btn-reaction"
-                    class="btn btn-sm <?= $user_liked ? 'btn-danger' : 'btn-outline-danger' ?>"
-                    data-id="<?= $id ?>"
-                    <?= !isset($_SESSION['user']) ? 'onclick="alert(\'Login dulu ya~\')"' : '' ?>>
-                    <i class="fas fa-heart me-1"></i>
-                    <span id="reaction-count"><?= $reaction_count ?></span>
-                </button>
+               <button 
+                  id="btn-reaction"
+                  class="btn btn-sm <?= $user_liked ? 'btn-danger' : 'btn-outline-danger' ?>"
+                  data-id="<?= $id ?>">
+                  <i class="fas fa-heart me-1"></i>
+                  <span id="reaction-count"><?= $reaction_count ?></span>
+              </button>
             </div>
             
             <a href="/blogs/<?= $cat_id > 0 ? "?cat=" . $cat_id : "" ?>"

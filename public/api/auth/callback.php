@@ -31,13 +31,20 @@ $profile = json_decode(file_get_contents('https://www.googleapis.com/oauth2/v3/u
     'http' => ['header' => 'Authorization: Bearer ' . $accessToken]
 ])), true);
 
-// Simpen ke DB & bikin session
-$user = dbQuerySingle("SELECT * FROM users WHERE google_id = ?", [$profile['sub']]);
+$pdo = $GLOBALS['pdo'];
+
+// Cek user exist
+$stmt = $pdo->prepare("SELECT * FROM users WHERE google_id = ?");
+$stmt->execute([$profile['sub']]);
+$user = $stmt->fetch();
+
 if (!$user) {
-    dbExecute("INSERT INTO users (google_id, name, email, avatar) VALUES (?, ?, ?, ?)", [
-        $profile['sub'], $profile['name'], $profile['email'], $profile['picture']
-    ]);
-    $user = dbQuerySingle("SELECT * FROM users WHERE google_id = ?", [$profile['sub']]);
+    $stmt = $pdo->prepare("INSERT INTO users (google_id, name, email, avatar) VALUES (?, ?, ?, ?)");
+    $stmt->execute([$profile['sub'], $profile['name'], $profile['email'], $profile['picture']]);
+    
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE google_id = ?");
+    $stmt->execute([$profile['sub']]);
+    $user = $stmt->fetch();
 }
 
 $_SESSION['user'] = $user;

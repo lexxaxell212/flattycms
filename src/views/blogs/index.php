@@ -142,7 +142,8 @@ $categories = safe_get_categories($pdo);
                 <!-- Reaction -->
                 <button 
                     id="btn-reaction"
-                    class="btn btn-sm <?= $user_liked ? 'btn-danger' : 'btn-outline-danger' ?>"
+                    class="btn btn-sm <?= $user_liked ? 'btn-danger' :
+                    'btn-outline-primary' ?>"
                     data-id="<?= $id ?>">
                     <i class="fas fa-heart me-1"></i>
                     <span id="reaction-count"><?= $reaction_count ?></span>
@@ -154,7 +155,7 @@ $categories = safe_get_categories($pdo);
                 
                 <a href="https://wa.me/?text=<?= $share_title ?>%20<?= $share_url ?>"
                    target="_blank" rel="noopener"
-                   class="btn btn-sm btn-outline-success">
+                   class="btn btn-sm btn-outline-primary">
                     <i class="fab fa-whatsapp"></i>
                 </a>
             
@@ -165,7 +166,7 @@ $categories = safe_get_categories($pdo);
                 </a>
             
                 <button onclick="copyLink()"
-                   class="btn btn-sm btn-outline-secondary">
+                   class="btn btn-sm btn-outline-primary">
                     <i class="fab fa-instagram"></i>
                 </button>
             </div>

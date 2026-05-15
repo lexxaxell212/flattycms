@@ -14,6 +14,7 @@ function generateUniqueSlug($pdo, $base_slug) {
 function generateStaticPage($slug, $html_content, $page_id, $title) {
     $pages_dir = PUBLIC_PATH . 'pages/';
     $page_dir  = $pages_dir . $slug . '/';
+    $page_title_val = addslashes($title);
     
             // Strip PHP tags
         $html_content = preg_replace('/<\?(?:php|=)?.*?\?>/is', '', $html_content);
@@ -47,8 +48,6 @@ if (isset(\$_SESSION['user'])) {
     \$_r_stmt->execute([\$_SESSION['user']['id'], \$_page_id]);
     \$_user_liked = (bool) \$_r_stmt->fetch();
 }
-
-$page_title_val = addslashes($title);
 
 \$page_title = '{$page_title_val}';
 

@@ -1,7 +1,4 @@
 <?php
-//require_once dirname(__DIR__, 2) . "/bootstrap.php";
-//autoload_core();
-
 $page_title = "Blogs";
 
 require_once LIB_PATH . "blogs.php";
@@ -127,6 +124,31 @@ $categories = safe_get_categories($pdo);
             </div>
 
             <hr class="my-5">
+            
+            <!-- Reaction Button -->
+            <?php
+            $stmt = $GLOBALS['pdo']->prepare("SELECT COUNT(*) FROM reactions WHERE content_type='blog' AND content_id=?");
+            $stmt->execute([$id]);
+            $reaction_count = $stmt->fetchColumn();
+            
+            $user_liked = false;
+            if (isset($_SESSION['user'])) {
+                $stmt = $GLOBALS['pdo']->prepare("SELECT id FROM reactions WHERE user_id=? AND content_type='blog' AND content_id=?");
+                $stmt->execute([$_SESSION['user']['id'], $id]);
+                $user_liked = (bool) $stmt->fetch();
+            }
+            ?>
+            <div class="d-flex align-items-center gap-2 mb-4">
+                <button 
+                    id="btn-reaction"
+                    class="btn btn-sm <?= $user_liked ? 'btn-danger' : 'btn-outline-danger' ?>"
+                    data-id="<?= $id ?>"
+                    <?= !isset($_SESSION['user']) ? 'onclick="alert(\'Login dulu ya~\')"' : '' ?>>
+                    <i class="fas fa-heart me-1"></i>
+                    <span id="reaction-count"><?= $reaction_count ?></span>
+                </button>
+            </div>
+            
             <a href="/blogs/<?= $cat_id > 0 ? "?cat=" . $cat_id : "" ?>"
                class="btn btn-sm btn-primary">
                 <i class="fas fa-angle-left me-1"></i>Kembali
@@ -345,12 +367,8 @@ $categories = safe_get_categories($pdo);
             </div>
         </div>
 
-    </div><!-- /row -->
+    </div>
 
 <?php endif; ?>
 
-</div><!-- /container -->
-
-<?php
-//require_once SRC_PATH . "footer.php";
-?>
+</div>

@@ -26,6 +26,7 @@ $isPintasanActive = (bool) array_filter(
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="<?= generate_csrf_token() ?>">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="<?= BASE_URL ?>">
   <!-- assets -->
@@ -61,6 +62,7 @@ $isPintasanActive = (bool) array_filter(
   <script src="<?= JS_URL ?>navbar.js" defer></script>
   <script src="<?= JS_URL ?>weather.js" defer></script>
   <script src="<?= JS_URL ?>newsletter-form.js" defer></script>
+  <script src="<?= JS_URL ?>reactions.js" defer></script>
   <?php 
   $s = $GLOBALS['site_settings'] ?? []; 
   ?>

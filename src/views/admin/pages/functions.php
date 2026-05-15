@@ -48,7 +48,9 @@ if (isset(\$_SESSION['user'])) {
     \$_user_liked = (bool) \$_r_stmt->fetch();
 }
 
-\$page_title = '{$title}';
+$page_title_val = addslashes($title);
+
+\$page_title = '{$page_title_val}';
 
 require_once SRC_PATH . 'headerv2.php';
 ?>

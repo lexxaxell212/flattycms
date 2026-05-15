@@ -26,7 +26,8 @@ $categories = safe_get_categories($pdo);
         <div class="slide-card glass glass-hover overflow-hidden"> 
             <img class="w-100 card-img-top" src="<?= BASE_UPLOAD_URL . $p["image"] ?>"
              onerror="this.onerror=null; this.src='/assets/images/default.jpg'"
-             alt="<?= htmlspecialchars($p["title"] ?? "", ENT_QUOTES, "UTF-8") ?>">
+             alt="<?= htmlspecialchars($p["title"] ?? "", ENT_QUOTES, "UTF-8")
+             ?>" loading="lazy">
             <div class="card-body py-5 px-3">
                 <a href="/blogs/?id=<?= (int) $p["id"] ?>"
                    class="h5 text-decoration-none card-title mb-4 mt-3 d-block">

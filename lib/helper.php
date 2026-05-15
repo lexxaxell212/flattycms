@@ -19,7 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start([
         "cookie_httponly" => true,
         "cookie_secure"   => isset($_SERVER["HTTPS"]),
-        "cookie_samesite" => "Strict",
+        "cookie_samesite" => "Lax",
         "gc_maxlifetime" => defined("SESSION_EXPIRE") ? SESSION_EXPIRE : 86400,
     ]);
 }

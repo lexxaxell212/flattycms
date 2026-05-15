@@ -5,6 +5,6 @@ safe_include(SRC_PATH . "partials/part-blogs.php", "Artikel Terbaru");
 safe_include(SRC_PATH . "partials/part-informasi.php", "Update Terkini");
 ?>
 
-<a href="/api/auth/google" class="btn btn-outline-danger">
+<a href="/api/auth/google.php" class="btn btn-outline-danger">
     <i class="fab fa-google me-2"></i>Login with Google
 </a>

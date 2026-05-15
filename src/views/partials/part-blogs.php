@@ -25,8 +25,7 @@ $categories = safe_get_categories($pdo);
         <?php foreach ($posts as $p): ?>
         <div class="slide-card glass glass-hover overflow-hidden"> 
             <img class="w-100 card-img-top" src="<?= $p["image"]
-            ? BASE_UPLOAD_URL . $p["image"]
-            : "/assets/images/default.jpg" ?>"
+            ? BASE_UPLOAD_URL . $p["image"] ?>"
              onerror="this.onerror=null; this.src='/assets/images/default.jpg'"
              alt="<?= htmlspecialchars($p["title"] ?? "", ENT_QUOTES, "UTF-8") ?>">
             <div class="card-body py-5 px-3">

@@ -67,6 +67,48 @@
       renderMarkers();
     });
   });
+  
+  // Search POI diatas kategori
+  document.getElementById('searchPoi').addEventListener('input', function() {
+  const q      = this.value.toLowerCase();
+  const box    = document.getElementById('searchPoiResults');
+  box.innerHTML = '';
+
+  if (!q) { box.style.display = 'none'; return; }
+
+  const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
+  box.style.display = '';
+
+  if (!matches.length) {
+    box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
+    return;
+  }
+
+  matches.forEach(p => {
+    const el = document.createElement('button');
+    el.type      = 'button';
+    el.className = 'list-group-item list-group-item-action small';
+    el.innerHTML = `<i class="fa-solid ${p.category_icon} me-2 text-primary"></i>${p.name}`;
+    el.addEventListener('click', () => {
+      box.style.display = 'none';
+      document.getElementById('searchPoi').value = '';
+      // Fly ke marker + buka popup
+      const marker = markers[p.id];
+      if (marker) {
+        map.flyTo([p.latitude, p.longitude], 16, { duration: 1 });
+        setTimeout(() => marker.openPopup(), 1000);
+      }
+    });
+    box.appendChild(el);
+  });
+});
+
+  // Tutup dropdown kalau klik di luar
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#searchPoi') && !e.target.closest('#searchPoiResults')) {
+      document.getElementById('searchPoiResults').style.display = 'none';
+    }
+  });
 
   // ── SEARCH STARTING POINT (dari DB, live search) ─────────
   function searchStartPoint(q) {

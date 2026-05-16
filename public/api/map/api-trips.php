@@ -130,7 +130,7 @@ if ($action === 'save') {
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ");
         $stmt->execute([$user_id, $title, $start_name, $start_lat, $start_lng,
-        $total_dist ?: null], $route_polyline ?: null);
+        $total_dist ?: null, $route_polyline ?: null)];
         $trip_id = $pdo->lastInsertId();
 
         if (!empty($items)) {

@@ -32,6 +32,14 @@ $cats_json  = json_encode($categories);
 
     <!-- ── KIRI: MAP ───────────────────────────────────── -->
     <div class="col-lg-8">
+      
+      <div class="position-relative mb-3" style="max-width:320px">
+        <div class="input-group input-group-sm">
+          <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
+          <input type="text" id="searchPoi" class="form-control" placeholder="Cari lokasi di peta...">
+        </div>
+        <div id="searchPoiResults" class="list-group shadow" style="position:absolute;top:100%;left:0;right:0;z-index:999;max-height:200px;overflow-y:auto;display:none"></div>
+      </div>
 
       <!-- Filter Kategori -->
       <div class="d-flex gap-2 flex-wrap mb-3">

@@ -19,6 +19,10 @@ $csrf = generate_csrf_token();
 
 <div class="container py-5">
 
+<?php
+safe_include(SRC_PATH . "partials/part-cloudflare.php", "Cloudflare Analytics");
+?>
+
 <!-- Stats Cards -->
 <div class="row g-3 mb-4">
     <div class="col-6 col-lg-3">

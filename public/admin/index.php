@@ -20,7 +20,7 @@ $action_handlers = [
     'setting'      => LIB_PATH . 'setting-actions.php',
     'modal-manager' => LIB_PATH . 'modal-actions.php',
     'pages'        => LIB_PATH . 'pages-actions.php',
-    'maps' => LIB_PATH . 'maps-actions.php',
+    // 'maps' => LIB_PATH . 'maps-actions.php',
     // 'newsletter'  => LIB_PATH . 'newsletter-actions.php',
 ];
 

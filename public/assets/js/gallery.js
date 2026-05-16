@@ -1,10 +1,4 @@
 (function () {
-  const CSRF      = CONFIG.csrfToken;
-  const BASE      = CONFIG.baseUrl;
-  const IS_LOGGED = <?= $is_logged ? 'true' : 'false' ?>;
-  const POIS      = <?= $pois_json ?>;
-  const API_GAL   = BASE + '/api/map/api-gallery.php';
-
   let currentPage   = 1;
   let currentPoi    = '';
   let totalPhotos   = 0;

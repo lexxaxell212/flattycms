@@ -6,6 +6,13 @@ $is_logged  = isset($_SESSION['user']);
 $pois_json  = json_encode($pois);
 ?>
 
+<script>
+  const CSRF      = CONFIG.csrfToken;
+  const BASE      = CONFIG.baseUrl;
+  const IS_LOGGED = <?= $is_logged ? 'true' : 'false' ?>;
+  const POIS      = <?= $pois_json ?>;
+  const API_GAL   = BASE + '/api/map/api-gallery.php';
+</script>
 <script src="<?= JS_URL ?>gallery.js" defer></script>
 
 <div class="container py-4">

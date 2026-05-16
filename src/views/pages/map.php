@@ -9,7 +9,15 @@ $cats_json  = json_encode($categories);
 ?>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const CSRF      = CONFIG.csrfToken;
+  const BASE      = CONFIG.baseUrl;
+  const IS_LOGGED = <?= $is_logged ? 'true' : 'false' ?>;
+  const POIS      = <?= $pois_json ?>;
+  const API_TRIP  = BASE + '/api/map/api-trips.php';
+  const API_GAL   = BASE + '/api/map/api-gallery.php';
+</script>
 <script src="<?= JS_URL ?>map.js" defer></script>
 
 <div class="container-fluid py-4 px-3 px-md-4">

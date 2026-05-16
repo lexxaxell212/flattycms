@@ -1,11 +1,4 @@
 (function () {
-  const CSRF      = CONFIG.csrfToken;
-  const BASE      = CONFIG.baseUrl;
-  const IS_LOGGED = <?= $is_logged ? 'true' : 'false' ?>;
-  const POIS      = <?= $pois_json ?>;
-  const API_TRIP  = BASE + '/api/map/api-trips.php';
-  const API_GAL   = BASE + '/api/map/api-gallery.php';
-
   // ── STATE ────────────────────────────────────────────────
   let startPoint = null; // {name, lat, lng}
   let routes     = [];   // [{poi_id, name, lat, lng, distance_from_prev, note}]

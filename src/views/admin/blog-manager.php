@@ -132,7 +132,7 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-medium">Judul <span class="text-danger">*</span></label>
+                <label class="form-label fw-medium">Judulnya diisi yang<span class="text-danger">*</span></label>
                 <input type="text" name="title" class="form-control" maxlength="255" value="<?= safe_html($edit_post['title']) ?>" required>
             </div>
 
@@ -142,7 +142,7 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-medium">Konten <span class="text-danger">*</span></label>
+                <label class="form-label fw-medium">Uda makan belom? <span class="text-danger">*</span></label>
                 <div id="quill-editor"></div>
                 <input type="hidden" name="content" id="quill-content">
                 <div id="edit-content-data" data-content="<?= safe_html($edit_post['content']) ?>" style="display:none"></div>
@@ -239,7 +239,7 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
                 <input type="hidden" name="content" id="quill-add-content">
             </div>
             <div class="mb-3">
-                <label class="form-label fw-medium">Gambar Utama <span class="text-danger">*</span></label>
+                <label class="form-label fw-medium">Gambar Thumbnail <span class="text-danger">*</span></label>
                 <input type="file" name="image" id="add-image" class="form-control" accept="image/jpeg,image/png,image/gif,image/webp" required>
                 <input type="hidden" name="image_url" id="add-image-url">
                 <div id="image-preview-add" class="mt-2"></div>
@@ -406,7 +406,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (existingContent) {
-            quill.root.innerHTML = existingContent;
+            const decoded = document.createElement('textarea');
+            decoded.innerHTML = existingContent;
+            quill.root.innerHTML = decoded.value;
         }
 
         quill.on('text-change', () => {

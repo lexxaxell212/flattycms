@@ -19,7 +19,7 @@ $pois_json  = json_encode($pois);
       <i class="fa-solid fa-camera me-1"></i>Upload Foto
     </button>
     <?php else: ?>
-    <a href="/auth/google" class="btn btn-outline-primary btn-sm">
+    <a href="/api/auth/google.php" class="btn btn-outline-primary btn-sm">
       <i class="fa-brands fa-google me-1"></i>Login untuk Upload
     </a>
     <?php endif; ?>

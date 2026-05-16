@@ -84,9 +84,6 @@ $cats_json  = json_encode($categories);
             </label>
             <div class="input-group input-group-sm">
               <input type="text" id="startInput" class="form-control" placeholder="Cari titik awal...">
-              <button class="btn btn-outline-secondary" id="btnCariStart" type="button">
-                <i class="fa-solid fa-search"></i>
-              </button>
             </div>
             <div id="startResults" class="list-group mt-1" style="max-height:150px;overflow-y:auto;display:none;position:relative;z-index:100"></div>
             <div id="startSelected" class="small text-success mt-1" style="display:none">
@@ -154,9 +151,6 @@ $cats_json  = json_encode($categories);
         <label class="form-label small fw-semibold">Lokasi <span class="text-danger">*</span></label>
         <div class="input-group input-group-sm">
           <input type="text" id="uploadPoiSearch" class="form-control" placeholder="Cari nama tempat...">
-          <button class="btn btn-outline-secondary" id="btnCariUploadPoi" type="button">
-            <i class="fa-solid fa-search"></i>
-          </button>
         </div>
         <div id="uploadPoiResults" class="list-group mt-1" style="max-height:140px;overflow-y:auto;display:none"></div>
         <input type="hidden" id="uploadPoiId">
@@ -194,7 +188,6 @@ $cats_json  = json_encode($categories);
   const BASE      = CONFIG.baseUrl;
   const IS_LOGGED = <?= $is_logged ? 'true' : 'false' ?>;
   const POIS      = <?= $pois_json ?>;
-  const API_NOM   = BASE + '/api/map/api-nominatim.php';
   const API_TRIP  = BASE + '/api/map/api-trips.php';
   const API_GAL   = BASE + '/api/map/api-gallery.php';
 
@@ -267,45 +260,43 @@ $cats_json  = json_encode($categories);
     });
   });
 
-  // ── NOMINATIM SEARCH (STARTING POINT) ───────────────────
-  async function searchNominatim(q, resultsEl, onSelect) {
-    if (!q) return;
-    try {
-      const res  = await fetch(`${API_NOM}?q=${encodeURIComponent(q)}`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
-      const json = await res.json();
-      resultsEl.innerHTML = '';
-      resultsEl.style.display = '';
-      if (!json.success || !json.data.length) {
-        resultsEl.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
-        return;
-      }
-      json.data.forEach(item => {
+  // ── SEARCH STARTING POINT (dari DB, live search) ─────────
+  function searchStartPoint(q) {
+    const resultsEl = document.getElementById('startResults');
+    if (!q) { resultsEl.style.display = 'none'; return; }
+  
+    const matches = POIS.filter(p => p.name.toLowerCase().includes(q.toLowerCase())).slice(0, 6);
+    resultsEl.innerHTML = '';
+    resultsEl.style.display = '';
+  
+    if (!matches.length) {
+      resultsEl.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
+      return;
+    }
+
+      matches.forEach(p => {
         const el = document.createElement('button');
         el.type      = 'button';
         el.className = 'list-group-item list-group-item-action small';
-        el.textContent = item.display_name;
-        el.addEventListener('click', () => { onSelect(item); resultsEl.style.display = 'none'; });
+        el.textContent = p.name;
+        el.addEventListener('click', () => {
+          startPoint = { name: p.name, lat: parseFloat(p.latitude), lng: parseFloat(p.longitude) };
+          document.getElementById('startName').textContent = startPoint.name;
+          document.getElementById('startSelected').style.display = '';
+          document.getElementById('startInput').value = '';
+          resultsEl.style.display = 'none';
+          updatePlannerUI();
+        });
         resultsEl.appendChild(el);
       });
-    } catch(e) {}
-  }
+    }
 
-  // Starting point search
-  document.getElementById('btnCariStart').addEventListener('click', () => {
-    searchNominatim(document.getElementById('startInput').value.trim(),
-      document.getElementById('startResults'),
-      item => {
-        startPoint = { name: item.display_name.split(',')[0], lat: parseFloat(item.lat), lng: parseFloat(item.lon) };
-        document.getElementById('startName').textContent = startPoint.name;
-        document.getElementById('startSelected').style.display = '';
-        document.getElementById('startInput').value = '';
-        updatePlannerUI();
-      }
-    );
-  });
-  document.getElementById('startInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('btnCariStart').click();
-  });
+    document.getElementById('startInput').addEventListener('input', function() {
+      searchStartPoint(this.value.trim());
+    });
+    document.getElementById('startInput').addEventListener('keydown', e => {
+      if (e.key === 'Escape') document.getElementById('startResults').style.display = 'none';
+    });
 
   // ── ADD TO ROUTE ─────────────────────────────────────────
   window.addToRoute = function(poi_id) {
@@ -524,17 +515,21 @@ $cats_json  = json_encode($categories);
     });
 
     // Search POI di modal upload
-    document.getElementById('btnCariUploadPoi').addEventListener('click', async () => {
-      const q   = document.getElementById('uploadPoiSearch').value.trim();
+    document.getElementById('uploadPoiSearch').addEventListener('input', function() {
+      const q   = this.value.toLowerCase();
       const box = document.getElementById('uploadPoiResults');
       box.innerHTML = '';
+    
+      if (!q) { box.style.display = 'none'; return; }
+    
       box.style.display = '';
-
-      const matches = POIS.filter(p => p.name.toLowerCase().includes(q.toLowerCase())).slice(0, 6);
+      const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
+    
       if (!matches.length) {
         box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
         return;
       }
+    
       matches.forEach(p => {
         const el = document.createElement('button');
         el.type      = 'button';
@@ -548,10 +543,6 @@ $cats_json  = json_encode($categories);
         });
         box.appendChild(el);
       });
-    });
-
-    document.getElementById('uploadPoiSearch').addEventListener('keydown', e => {
-      if (e.key === 'Enter') document.getElementById('btnCariUploadPoi').click();
     });
 
     // Preview foto

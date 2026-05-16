@@ -95,9 +95,6 @@ $pois_json  = json_encode($pois);
         <label class="form-label small fw-semibold">Lokasi <span class="text-danger">*</span></label>
         <div class="input-group input-group-sm">
           <input type="text" id="uploadPoiSearch" class="form-control" placeholder="Ketik nama tempat...">
-          <button class="btn btn-outline-secondary" id="btnCariPoi" type="button">
-            <i class="fa-solid fa-search"></i>
-          </button>
         </div>
         <div id="uploadPoiResults" class="list-group mt-1" style="max-height:150px;overflow-y:auto;display:none"></div>
         <input type="hidden" id="uploadPoiId">
@@ -285,15 +282,23 @@ $pois_json  = json_encode($pois);
 
     document.getElementById('btnOpenUpload').addEventListener('click', () => openUploadModal());
     document.getElementById('btnBatalUpload').addEventListener('click', () => { modal.style.display = 'none'; });
-
-    // Search POI
-    document.getElementById('btnCariPoi').addEventListener('click', () => {
-      const q   = document.getElementById('uploadPoiSearch').value.toLowerCase();
+    
+    // poi search
+    document.getElementById('uploadPoiSearch').addEventListener('input', function() {
+      const q   = this.value.toLowerCase();
       const box = document.getElementById('uploadPoiResults');
       box.innerHTML = '';
+    
+      if (!q) { box.style.display = 'none'; return; }
+    
       box.style.display = '';
-      const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0,6);
-      if (!matches.length) { box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>'; return; }
+      const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
+    
+      if (!matches.length) {
+        box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
+        return;
+      }
+    
       matches.forEach(p => {
         const el = document.createElement('button');
         el.type      = 'button';
@@ -307,10 +312,6 @@ $pois_json  = json_encode($pois);
         });
         box.appendChild(el);
       });
-    });
-
-    document.getElementById('uploadPoiSearch').addEventListener('keydown', e => {
-      if (e.key === 'Enter') document.getElementById('btnCariPoi').click();
     });
 
     // Preview

@@ -46,9 +46,14 @@ if ($method === 'GET') {
         $stmt->execute([$user_id]);
         $trips = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // Reactions
+        // Reactions + judul konten
         $stmt = $pdo->prepare("
-            SELECT r.id, r.content_type, r.content_id, r.created_at
+            SELECT r.id, r.content_type, r.content_id, r.created_at,
+                   CASE
+                     WHEN r.content_type = 'blog' THEN (SELECT title FROM allcontent_posts WHERE id = r.content_id)
+                     WHEN r.content_type = 'page' THEN (SELECT title FROM pages WHERE id = r.content_id)
+                     ELSE NULL
+                   END AS content_title
             FROM reactions r
             WHERE r.user_id = ?
             ORDER BY r.created_at DESC

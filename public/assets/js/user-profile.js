@@ -125,7 +125,7 @@
             <i class="fa-solid ${typeIcon[r.content_type] ?? 'fa-heart'}"></i>
           </span>
           <div>
-            <div class="small fw-semibold">${typeLabel[r.content_type] ?? r.content_type} #${r.content_id}</div>
+            <div class="small fw-semibold">${r.content_title ?? `${typeLabel[r.content_type] ?? r.content_type} #${r.content_id}`}</div>
             <div class="text-muted" style="font-size:.7rem">${formatDate(r.created_at)}</div>
           </div>
         </div>

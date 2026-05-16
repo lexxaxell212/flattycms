@@ -412,7 +412,7 @@ $isPintasanActive = (bool) array_filter(
             referrerpolicy="no-referrer">
         </button>
         <div class="nav-user-panel" id="userDropdownPanel">
-          <a href="/pages/profile">
+          <a href="/pages/profile" style="text-decoration: none;">
           <div class="nav-user-info">
             <img
               src="<?= htmlspecialchars($_SESSION['user']['avatar']) ?>"
@@ -483,7 +483,7 @@ $isPintasanActive = (bool) array_filter(
   <!-- Mobile: User Section -->
   <div class="mobile-user-section">
     <?php if (isset($_SESSION['user'])): ?>
-    <a href="/pages/profile">
+    <a href="/pages/profile" style="text-decoration: none;">
     <div class="mobile-user-info">
       <img
         src="<?= htmlspecialchars($_SESSION['user']['avatar']) ?>"

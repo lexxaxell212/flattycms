@@ -98,15 +98,15 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
-          ?>feedback">
-            <i class="fa-solid fa-message" aria-hidden="true"></i>Feedback
+          ?>poi-manager">
+            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>POI
+            Manager
           </a>
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
-          ?>maps">
-            <i class="fa-solid fa-map" aria-hidden="true"></i>Add Marker
-            Maps
+          ?>feedback">
+            <i class="fa-solid fa-message" aria-hidden="true"></i>Feedback
           </a>
         </li>
         <li class="nav-desktop-item">

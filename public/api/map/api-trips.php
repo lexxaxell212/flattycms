@@ -111,6 +111,7 @@ if ($action === 'save') {
     $start_lat  = (float)($_POST['start_lat'] ?? 0);
     $start_lng  = (float)($_POST['start_lng'] ?? 0);
     $route_polyline = $_POST['route_polyline'] ?? null;
+    $duration       = isset($_POST['duration']) ? (float)$_POST['duration'] : null;
     $items      = json_decode($_POST['items'] ?? '[]', true) ?: [];
 
     if (!$start_name || !$start_lat || !$start_lng) {
@@ -126,11 +127,11 @@ if ($action === 'save') {
 
         $stmt = $pdo->prepare("
             INSERT INTO trips (user_id, title, start_point_name, start_lat,
-            start_lng, total_distance, route_polyline)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            start_lng, total_distance, route_polyline, duration)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         ");
         $stmt->execute([$user_id, $title, $start_name, $start_lat, $start_lng,
-        $total_dist ?: null, $route_polyline ?: null]);
+        $total_dist ?: null, $route_polyline ?: null, $duration]);
         $trip_id = $pdo->lastInsertId();
 
         if (!empty($items)) {

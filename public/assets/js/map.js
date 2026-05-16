@@ -5,6 +5,8 @@
   let routeLine  = null;
   let markers    = {};
   let activeCat  = '';
+  let routePolyline = null; // simpan raw polyline dari ORS
+  let routeDuration = 0;    // simpan durasi dari ORS
 
   // ── MAP INIT ─────────────────────────────────────────────
   const map = L.map('mainMap').setView([-6.9175, 107.6191], 13);
@@ -254,12 +256,13 @@
         const data = await res.json();
 
         if (data.success) {
-            updateRouteOnMap(data.polyline);
-            // Update jarak dari ORS (lebih akurat dari Haversine)
-            document.getElementById('totalDist').textContent = data.distance;
-            document.getElementById('totalStops').textContent = `· ${routes.length} lokasi · ~${data.duration} menit`;
-            document.getElementById('distanceInfo').style.display = '';
-            Swal.fire({ toast:true, position:'top-end', icon:'success', title:'Rute berhasil digenerate!', showConfirmButton:false, timer:2000 });
+        updateRouteOnMap(data.polyline);
+        routePolyline = data.polyline; // ← simpan ke state
+        routeDuration = data.duration; // ← simpan ke state
+        document.getElementById('totalDist').textContent = data.distance;
+        document.getElementById('totalStops').textContent = `· ${routes.length} lokasi · ~${data.duration} menit`;
+        document.getElementById('distanceInfo').style.display = '';
+        Swal.fire({ toast:true, position:'top-end', icon:'success', title:'Rute berhasil digenerate!', showConfirmButton:false, timer:2000 });
         } else {
             Swal.fire('Gagal', data.message, 'error');
         }
@@ -325,12 +328,12 @@
       const res  = await fetch(`${API_TRIP}?id=${id}`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
       const json = await res.json();
       if (!json.success) { Swal.fire('Gagal', json.message, 'error'); return; }
-
+    
       const trip = json.data;
       startPoint = { name: trip.start_point_name, lat: parseFloat(trip.start_lat), lng: parseFloat(trip.start_lng) };
       document.getElementById('startName').textContent = startPoint.name;
       document.getElementById('startSelected').style.display = '';
-
+    
       routes = trip.items.map(item => ({
         poi_id             : item.poi_id,
         name               : item.poi_name,
@@ -339,20 +342,22 @@
         distance_from_prev : item.distance_from_prev,
         note               : item.note || ''
       }));
-
+    
       updatePlannerUI();
-      if (routes.length) {
-        const points = [[startPoint.lat, startPoint.lng], ...routes.map(r => [r.lat, r.lng])];
-        updateRouteOnMap(points);
-      }
+    
+      // Render polyline dari DB kalau ada
       if (trip.route_polyline) {
-        const polyline = JSON.parse(trip.route_polyline);
-        updateRouteOnMap(polyline);
-      } else if (routes.length) {
-        // fallback garis lurus kalau belum ada polyline tersimpan
+        routePolyline = JSON.parse(trip.route_polyline);
+        updateRouteOnMap(routePolyline);
+        // Tampilkan info jarak
+        document.getElementById('totalDist').textContent = trip.total_distance ?? '—';
+        document.getElementById('totalStops').textContent = `· ${routes.length} lokasi${trip.duration ? ' · ~' + trip.duration + ' menit' : ''}`;
+        document.getElementById('distanceInfo').style.display = '';
+      } else {
         const points = [[startPoint.lat, startPoint.lng], ...routes.map(r => [r.lat, r.lng])];
         updateRouteOnMap(points);
       }
+    
       Swal.fire({ toast:true, position:'top-end', icon:'success', title:`Trip "${trip.title}" dimuat!`, showConfirmButton:false, timer:2000 });
     };
 
@@ -372,7 +377,8 @@
       fd.append('start_point_name', startPoint.name);
       fd.append('start_lat',        startPoint.lat);
       fd.append('start_lng',        startPoint.lng);
-      fd.append('route_polyline', routeLine ? JSON.stringify(routeLine.getLatLngs()) : '');
+      fd.append('route_polyline', routePolyline ? JSON.stringify(routePolyline) : '');
+      fd.append('duration', routeDuration ?? 0);
       fd.append('items',            JSON.stringify(routes.map((r,i) => ({
         poi_id: r.poi_id, order_index: i+1, distance_from_prev: r.distance_from_prev || 0, note: r.note
       }))));

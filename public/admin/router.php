@@ -10,6 +10,7 @@ $routes = [
     'modal-manager'    => ADMIN_VIEW_PATH . 'modal-manager.php',
     'setting'          => ADMIN_VIEW_PATH . 'setting.php',
     'newsletter'       => ADMIN_VIEW_PATH . 'newsletter.php',
+    'poi-manager' => ADMIN_VIEW_PATH . 'poi-manager.php',
     // 'maps' => ADMIN_VIEW_PATH . 'maps.php',
     'feedback' => ADMIN_VIEW_PATH . 'feedback.php',
     'login'           => ADMIN_PATH . 'login.php',

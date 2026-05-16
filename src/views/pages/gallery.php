@@ -46,7 +46,8 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
           <input type="text" id="searchPoiFilter" class="form-control" placeholder="Cari tempat...">
           <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
         </div>
-        <div id="searchPoiFilterResults" class="list-group shadow" style="position:absolute;top:100%;left:0;right:0;z-index:999;max-height:200px;overflow-y:auto;display:none"></div>
+        <div id="searchPoiFilterResults" class="list-group shadow"
+        style="position:absolute;top:100%;left:0;right:0;z-index:1555;max-height:200px;overflow-y:auto;display:none"></div>
       </div>
     </div>
   </div>

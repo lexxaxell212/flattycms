@@ -85,7 +85,7 @@ $pois_json  = json_encode($pois);
 
 <!-- ── MODAL UPLOAD ────────────────────────────────────────── -->
 <?php if ($is_logged): ?>
-<div id="uploadModal" style="display:none;position:fixed;inset:0;z-index:4444;background:rgba(0,0,0,.6);align-items:center;justify-content:center">
+<div id="uploadModal" style="display:none;position:fixed;inset:0;z-index:1111;background:rgba(0,0,0,.6);align-items:center;justify-content:center">
   <div class="card border-0 shadow-lg" style="width:100%;max-width:480px;margin:1rem">
     <div class="card-header border-bottom d-flex align-items-center justify-content-between py-3 px-4">
       <span class="fw-semibold"><i class="fa-solid fa-camera me-2 text-primary"></i>Upload Foto</span>

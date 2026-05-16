@@ -39,7 +39,7 @@
             <div class="position-relative"
             style="padding-top:75%;cursor:pointer"
             onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${p.poi_name}','${p.uploader_name}','${p.caption
-            || ''}','${p.created_at}','${p.id}', '${p.user_id}')">
+            || ''}','${p.created_at}',${p.id}, ${p.user_id})">
               <img src="${BASE}/uploads/${p.photo_path}" 
                    class="position-absolute top-0 start-0 w-100 h-100"
                    style="object-fit:cover;transition:.2s"

@@ -314,15 +314,50 @@
           return;
         }
         ul.innerHTML = json.data.map(t => `
-          <li><button class="dropdown-item small d-flex justify-content-between align-items-center" onclick="loadTrip(${t.id})">
-            <span><i class="fa-solid fa-route me-2 text-primary"></i>${t.title}</span>
-            <span class="badge bg-light text-muted">${t.total_stops} stop</span>
-          </button></li>
-        `).join('');
+        <li>
+          <div class="dropdown-item small d-flex justify-content-between align-items-center gap-2">
+            <button class="btn btn-link btn-sm p-0 text-start flex-grow-1" onclick="loadTrip(${t.id})">
+              <i class="fa-solid fa-route me-2 text-primary"></i>${t.title}
+              <span class="badge bg-light text-muted ms-1">${t.total_stops} stop</span>
+            </button>
+            <button class="btn btn-sm btn-outline-danger py-0 px-1" onclick="deleteTrip(${t.id},'${t.title.replace(/'/g,"\\'")}')">
+              <i class="fa-solid fa-trash fa-xs"></i>
+            </button>
+          </div>
+        </li>
+      `).join('');
       } catch(e) {}
     }
     
     loadSavedTrips();
+    
+    window.deleteTrip = async function(id, title) {
+      const conf = await Swal.fire({
+        title: 'Hapus trip?',
+        text: `"${title}" akan dihapus permanen`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        confirmButtonText: 'Hapus',
+        cancelButtonText: 'Batal'
+      });
+      if (!conf.isConfirmed) return;
+    
+      const fd = new FormData();
+      fd.append('action',     'delete');
+      fd.append('csrf_token', CONFIG.csrfToken);
+      fd.append('trip_id',    id);
+    
+      const res  = await fetch(API_TRIP, { method:'POST', headers:{'X-Requested-With':'XMLHttpRequest'}, body: fd });
+      const data = await res.json();
+    
+      if (data.success) {
+        Swal.fire({ toast:true, position:'top-end', icon:'success', title:'Trip dihapus!', showConfirmButton:false, timer:2000 });
+        loadSavedTrips();
+      } else {
+        Swal.fire('Gagal', data.message, 'error');
+      }
+    };
 
     window.loadTrip = async function(id) {
       const res  = await fetch(`${API_TRIP}?id=${id}`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });

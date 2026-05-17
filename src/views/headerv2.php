@@ -135,7 +135,7 @@ $isPintasanActive = (bool) array_filter(
   <?php if (!empty($_SESSION['flash'])): ?>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-    Toast.fire({
+    Swal.fire({
       toast: true,
       position: 'top-end',
       icon: '<?= $_SESSION['flash']['type'] ?>',

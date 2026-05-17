@@ -121,7 +121,7 @@ $isPintasanActive = (bool) array_filter(
   </script>
   
    <script>
-    const Toast = Swal.mixin({
+    var Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
@@ -135,7 +135,7 @@ $isPintasanActive = (bool) array_filter(
   <?php if (!empty($_SESSION['flash'])): ?>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-    Swal.fire({
+    Toast.fire({
       toast: true,
       position: 'top-end',
       icon: '<?= $_SESSION['flash']['type'] ?>',

@@ -120,6 +120,34 @@ $isPintasanActive = (bool) array_filter(
   }
   </script>
   
+  <?php if (!empty($_SESSION['flash'])): ?>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    Swal.fire({
+      toast: true,
+      position: 'top-end',
+      icon: '<?= $_SESSION['flash']['type'] ?>',
+      title: '<?= addslashes($_SESSION['flash']['message']) ?>',
+      showConfirmButton: false,
+      timer: 3000
+    });
+  });
+  </script>
+  <?php unset($_SESSION['flash']); ?>
+  <?php endif; ?>
+  
+  <script>
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      background: '#1e1b4b',
+      color: '#e2e8f0',
+      iconColor: '#6366f1',
+    });
+  </script>
+  
 </head>
 <body>
 <style>

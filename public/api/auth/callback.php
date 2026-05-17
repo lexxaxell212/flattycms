@@ -50,6 +50,7 @@ if (!$user) {
 $_SESSION['user'] = $user;
 $redirect = $_SESSION['redirect_after_login'] ?? '/';
 unset($_SESSION['redirect_after_login']);
+$_SESSION['flash'] = ['type' => 'success', 'message' => 'Berhasil login sebagai ' . ($user['display_name'] ?? $user['name'])];
 session_write_close();
 header('Location: ' . $redirect);
 exit;

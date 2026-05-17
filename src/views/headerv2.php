@@ -120,6 +120,18 @@ $isPintasanActive = (bool) array_filter(
   }
   </script>
   
+   <script>
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      background: '#e8f1fb',
+      color: '#071a36',
+      iconColor: '#1e40af',
+    });
+  </script>
+  
   <?php if (!empty($_SESSION['flash'])): ?>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -135,18 +147,6 @@ $isPintasanActive = (bool) array_filter(
   </script>
   <?php unset($_SESSION['flash']); ?>
   <?php endif; ?>
-  
-  <script>
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      background: '#e8f1fb',
-      color: '#071a36',
-      iconColor: '#1e40af',
-    });
-  </script>
   
 </head>
 <body>

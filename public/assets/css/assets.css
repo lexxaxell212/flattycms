@@ -10,9 +10,8 @@
   --pu-800: #5521B5;
   --pu-900: #4A1D96;
   --pu-950: #3b0764;
-  --or-500: #f97316;  
-  --or-600: #ea580c;
-  --or-700: #c2410c;
+  --or-500: #F59E0B;  
+  --or-600: #D97706;
 
   /* glass */
   --glass-bg: rgba(255,255,255,0.55);
@@ -20,15 +19,11 @@
   --glass-bg-active: rgba(255,255,255,0.65);
   --glass-backdrop: rgba(255, 255, 255, 0.15);
   --glass-blur: blur(18px);
-  --glass-border: none !important;
+  --glass-border: 1px solid rgba(0,0,0,0.1);
   --glass-shadow: none !important;
   
   /* body bg */
-  --bg-html: #fff;
-  --misty-soft: 
-  radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
-  radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
-  linear-gradient(135deg, #fafafa 0%, #F6F5FF 50%, #fbfbfb 100%);
+  --bg-white: #fff;
 
   /* background block / element */
   --bg-primary: #F6F5FF;
@@ -40,8 +35,8 @@
   --text-muted: #1F2937;
   
   /* navigasi */
-  --bg-nav: rgba(130,10,130,0.1);
-  --bg-nav-hover: #EDEBFE;
+  --bg-nav: transparent;
+  --bg-nav-hover: rgba(150,100,170,0.08);
   --text-nav: #030712;
   --text-nav-hover: #6C2BD9;
   
@@ -99,27 +94,26 @@
   --glass-bg-active: #1F2937;
   --glass-backdrop: none !important;
   --glass-blur: none !important;
-  --glass-border: 1px solid rgba(0,0,0,0.1);
+  --glass-border: 1px solid rgba(200,200,200,0.1);
   --glass-shadow: none !important;
   
   /* body bg */
-  --bg-html: #000;
-  --misty-soft: #030712;
+  --bg-white: #030712;
 
   /* background block / element */
   --bg-primary: #111827;
-  --bg-hover: #6C2BD9;
+  --bg-hover: #7E3AF2;
   
   /* surface */
   --text-primary: #fff;
-  --text-hover: #6C2BD9;
+  --text-hover: #7E3AF2;
   --text-muted: #6B7280;
   
   /* navigasi */
   --bg-nav: transparent;
-  --bg-nav-hover: #374151;
+  --bg-nav-hover: rgba(127,127,127,0.1);
   --text-nav: #fff;
-  --text-nav-hover: #6C2BD9;
+  --text-nav-hover: #7E3AF2;
   
   --logo-path: url("https://ayokebandung.id/assets/images/logo.png");
 }
@@ -132,38 +126,26 @@
 }
 html {
   scroll-behavior: smooth;
-  background: var(--bg-html);
+  background: var(--bg-white);
   height: 100%;
   transition: background 0.3s ease, color 0.3s ease;
 }
 body {
   font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
   font-style: normal;
   font-display: swap;
   font-weight: 400;
   color: var(--text-primary);
-  background: var(--misty-soft);
+  background: var(--bg-white);
   min-height: 100vh;
   height: 100%;
   overflow-x: hidden;
-  background-attachment: fixed;
   padding: 0;
   position: relative;
   margin: 0;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.5;
   transition: background 0.3s ease, color 0.3s ease;
-}
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: inherit;
-  z-index: -1;
 }
 @font-face {
   font-display: swap;
@@ -229,7 +211,7 @@ body::before {
     animation: fadeInUp 0.3s ease forwards;
 }
 .btn-gradient-blue {
-    background: linear-gradient(to right, var(--pu-700), var(--pu-800));
+    background: linear-gradient(to right, var(--pu-600), var(--pu-700));
     color: #fff;
     border: none !important;
     padding: 0.75rem 1.5rem;
@@ -314,7 +296,7 @@ body::before {
   min-width: 100px;
 }
 .navbar-brand:hover {
-  color: var(--text-nav-hover);
+  color: var(--text-nav-hover) !important;
 }
 .modal-content {
   background: var(--glass-bg) !important;
@@ -336,7 +318,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(127, 137, 147, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -367,7 +349,7 @@ body::before {
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
-  box-shadow: 0 14px 32px rgba(60,60,60,0.30);
+  box-shadow: 0 14px 32px rgba(60,60,60,0.10);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px) scale(0.98);
@@ -468,13 +450,13 @@ body::before {
 }
 .nav-link i {
   width: 18px;
-  opacity: 0.92;
+  opacity: 0.85;
   font-size: 1.1rem;
   margin-right: 12px;
 }
 .dropdown-menu {
   border: none;
-  background: var(--bg-primary);
+  background: transparent;
   transition: all 0.3s ease;
 }
 .dropdown-item {
@@ -888,7 +870,7 @@ body::before {
 }
 .search-btn:hover, .dm-btn:hover {
   background: var(--bg-nav-hover);
-  color: var(--text-nav);
+  color: var(--text-nav-hover);
 }
 .dm-icon {
   color: var(--text-nav);
@@ -1040,10 +1022,10 @@ body::before {
   z-index:1064;
   width:52px;
   height:52px;
-  background:var(--pu-50);
+  background:var(--pu-100);
   border:none;
   border-radius:50%;
-  color: #333;
+  color: var(--pu-500);
   font-size:20px;
   font-weight: 700;
   cursor:pointer;
@@ -1058,10 +1040,6 @@ body::before {
     opacity 0.3s ease;
   opacity:0;
   visibility:hidden;
-}
-[data-dark] .scroll-top-btn {
-  background: var(--pu-800);
-  color: #fff;
 }
 .scroll-top-btn:hover {
   transform:scale(1.01)!important;
@@ -1102,7 +1080,7 @@ body::before {
   z-index:1062;
   width:52px;
   height:52px;
-  background:var(--pu-700);
+  background:var(--text-nav-hover);
   border:none;
   border-radius:50%;
   color: #fff;
@@ -1117,18 +1095,16 @@ body::before {
   transition:
     background 0.25s ease,
     transform 0.25s ease,
-    box-shadow 0.25s ease,
-    opacity 0.3s ease;
+    opacity 0.3s ease
 }
-.fab-chatbot:hover {
-  background: var(--pu-800);
-  transform: scale(1.08) translateY(-2px);
-}
-.fab-chatbot:active { 
-  transform: scale(0.96); 
+.fab-chatbot:hover, .fab-chatbot:active {
+  background: #9061F9 !important;
+  color: #fff;
+  transform: scale(1.05) translateY(-4px);
 }
 [data-dark] .fab-chatbot {
-  background: var(--pu-700);
+  background: var(--text-nav-hover);
+  color: #fff;
   box-shadow: none;
 }
 @keyframes fabSlideIn {
@@ -1341,13 +1317,14 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: rgba(4, 14, 31, 0.1);
+  background: transparent;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: -1;
   opacity: 0;
   transition: opacity var(--ls-duration) var(--ls-ease);
   pointer-events: none;
+  box-shadow: var(--glass-shadow);
 }
 #live-search-wrapper.active::before {
   opacity: 1;
@@ -1500,7 +1477,7 @@ body::before {
   text-overflow: ellipsis;
 }
 #live-search-dropdown mark {
-  background: var(--bg-nav-hover);
+  background: rgba(127,127,127,0.05);
   color: var(--text-nav-hover);
   border-radius: 3px;
   padding: 0 2px;

@@ -3,7 +3,10 @@
   padding-bottom: var(--navbar-height);
 }
 section {
-  padding: var(--space-10);
+  margin-bottom: var(--space-10);
+}
+.section {
+  margin-bottom: var(--space-6);
 }
 @media (min-width: 576px) {
   .container {
@@ -389,11 +392,11 @@ section {
   cursor: pointer !important;
 }
 ::selection {
-  background: var(--pu-900);
+  background: #3b0764;
   color: #fff;
 }
 ::-moz-selection {
-  background:var(--pu-900);
+  background:#3b0764;
   color: #fff;
 }
 .card,
@@ -438,7 +441,6 @@ footer,
   object-fit:cover;
   border-radius:12px;
   max-width:600px;
-  padding:5px;
   margin:0
 }
 @media (max-width:767px) {
@@ -512,7 +514,7 @@ footer,
 }
 .offcanvas-header {
   height:var(--navbar-height)!important;
-  background:var(--pu-800);
+  background:#5521B5;
   color:#fff;
    z-index: 1096;
 }
@@ -520,8 +522,8 @@ footer,
   display:flex;
   justify-content:space-between;
   align-items:center;
-  background:var(--pu-800);
-  color: #fff;
+  background:#5521B5;
+  color:#fff;
 }
 .offcanvas-title {
   color: #fff;
@@ -533,25 +535,26 @@ footer,
   outline:none!important
 }
 .input-chat .form-control:focus,.input-chat .form-control:active,.input-chat .form-control:focus-within {
-  border-color:transparent!important;
+  border:1px solid #6C2BD9 !important;
   box-shadow:none!important;
-  outline:none!important
+  outline:1px solid #6C2BD9 !important;
 }
 .input-chat {
-  background:rgba(127,127,127,0.1);
+  background:var(--bg-primary);
   border-radius: var(--radius);
   color:var(--text-primary);
-  padding:12px 18px;
-  margin-bottom:10px;
-  outline:none;
-  border:none;
+  padding:14px 18px;
+  margin-bottom:12px;
+  border: var(--glass-border);
   width:100%
 }
 .input-chat::placeholder {
-  color: var(--text-muted);
+  color: var(--text-muted) !important;
 }
 .input-chat:focus,.input-chat:active {
-  border:none!important
+  border:1px solid #6C2BD9 !important;
+  box-shadow:none!important;
+  outline:1px solid #6C2BD9 !important;
 }
 .bottom-area {
   position: absolute;
@@ -584,7 +587,7 @@ footer,
 }
 .message {
   display:flex!important;
-  max-width:70%;
+  max-width:85%;
   width:fit-content;
   margin:0 auto 0 0;
   text-align:left!important
@@ -745,13 +748,16 @@ footer,
 }
 .btn-slider {
   padding:12px 18px;
-  border:none;
-  color:var(--pu-700);
+  border:50%;
+  color:var(--pu-900);
   cursor:pointer;
   background: none !important;
+  box-shadow: none !important;
 }
 .btn-slider:hover {
-  color:var(--pu-900)
+  color:var(--pu-700);
+  background: none !important;
+  box-shadow: none !important;
 }
 .bdg-reason-card {
   transition:all 0.4s cubic-bezier(.4,0,.2,1)
@@ -773,7 +779,7 @@ footer,
 }
 .bdg-reason-number {
   background:var(--pu-700);
-  color:#fff;
+  color:var(--pu-50);
   padding:6px 11px;
   border-radius:50%;
   transition:all 0.5s ease-in-out;
@@ -788,8 +794,7 @@ footer,
 }
 .feedback-feedbackForm {
   padding:25px 10px;
-  margin-top:70px;
-  border-radius:16px
+  border-radius:var(--radius)
 }
 .feedback-success-card {
   background:green;
@@ -838,7 +843,7 @@ footer,
   z-index:1005;
   width:56px;
   height:56px;
-  background:var(--text-nav-hover);
+  background:#5521B5;
   border:none;
   border-radius:14px;
   color:#fff;
@@ -874,7 +879,7 @@ footer,
   transform:translateY(-2px);
 }
 .floating-toggle.open {
-  background:var(--pu-800);
+  background:#5521B5;
   color: #fff;
 }
 .sidebar {
@@ -1026,9 +1031,11 @@ footer,
   height:30px;
   background:rgb(127 127 127 / .1);
   border-radius:var(--radius);
-  display:flex;
+  display:inline-flex;
   align-items:center;
   justify-content:center;
+  align-content: center;
+  text-align: center;
   color:var(--pu-700);
   font-size:1.25rem;
   margin-bottom:1rem
@@ -1076,7 +1083,8 @@ footer,
   font-size:.8rem
 }
 .badge-year {
-  background-color:var(--pu-200);
+  background-color:var(--pu-100);
+  color: var(--pu-800);
   font-weight:700;
   padding:6px 12px;
   border-radius:var(--radius);
@@ -1162,16 +1170,10 @@ footer,
 }
 .email-input {
   padding:16px 20px;
-  border:1px solid var(--pu-70p);
   border-radius:var(--radius);
   font-size:14px;
   transition:all .3s;
   background: var(--bg-primary)
-}
-.email-input:focus {
-  outline:none;
-  border-color:var(--bg-hover);
-  background:var(--bg-primary)
 }
 @media (max-width:480px) {
   .newsletter-container {

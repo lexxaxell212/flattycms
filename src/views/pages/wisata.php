@@ -3,14 +3,8 @@ $page_title = "Wisata Bandung";
 //
 ?>
 <main id="content" class="container py-5">
-  <style>
-  .btn-outline-primary.active {
-    background: var(--bg-hover) !important;
-    color: #fff !important;
-  }
-  </style>
   <section id="Wisata-Bandung" class="py-5 mb-5">
-    <h1>WISATA BANDUNG</h1>
+    <h1 class="text-title">WISATA BANDUNG</h1>
     <p class="lead">Temukan destinasi wisata alam, kuliner, dan budaya <strong>terbaik</strong> di Kota Kembang</p>
   </section>
   

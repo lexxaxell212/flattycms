@@ -5,7 +5,7 @@ $page_title = "Sejarah Bandung";
 <main id="content" class="container py-5">
   <div class="col-lg-9">
     <section id="Sejarah-Bandung" class="py-5 mb-5">
-            <h1>Sejarah Bandung</h1>
+            <h1 class="text-title">Sejarah Bandung</h1>
             <p class="lead">Berawal dari dasar danau purba yang mengering, Bandung berevolusi dari sekadar titik nol di Jalan Raya Pos menjadi 'Paris van Java' yang anggun, hingga kini bertransformasi menjadi pusat kreativitas digital dunia.</p>
     </section>
         <div class="timeline-container">

@@ -6,8 +6,8 @@ $page_title = "Kebijakan Privasi";
   <div class="row justify-content-center">
     <div class="col-lg-7">
       <div class="mb-6">
-        <h1>Kebijakan Privasi</h1>
-        <p>Kami berkomitmen melindungi data pribadi Anda secara bertanggung jawab.</p>
+        <h1 class="text-title">Kebijakan Privasi</h1>
+        <p class="lead">Kami berkomitmen melindungi data pribadi Anda secara bertanggung jawab.</p>
         <p class="text-muted small mb-2">
           Berlaku sejak 30 April 2026 • Diperbarui 30 April 2026
         </p>

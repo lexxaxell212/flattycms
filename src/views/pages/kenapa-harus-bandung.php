@@ -9,7 +9,7 @@ $page_title = "Kenapa harus Bandung";
           class="card-img-top w-100 mb-5 rounded-lg" alt="Pemandangan Kota Bandung">
     </div>
     <div>
-        <h1>Kenapa Harus Bandung?</h1>
+        <h1 class="text-title">Kenapa Harus Bandung?</h1>
         <p class="lead">
           Bandung 2026: Perpaduan sempurna inovasi digital, kesejukan alam, dan kreativitas kuliner terbaik.
         </p>

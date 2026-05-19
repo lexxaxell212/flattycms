@@ -5,7 +5,7 @@ $page_title = "Kritik dan Saran";
 <script src="<?= JS_URL ?>feedback.js" defer></script>
 <main id="content" class="container py-5">
     <section id="Kritik-dan-saran" class="py-5">
-        <h1>Kritik & Saran</h1>
+        <h1 class="text-title">Kritik & Saran</h1>
         <p class="lead">Bantu kami menjadi lebih baik dengan feedback Anda.</p>
     </section>
     <div id="feedback-successMsg" class="mx-auto mb-5 d-none" style="max-width:320px">

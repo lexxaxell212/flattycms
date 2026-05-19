@@ -3,14 +3,8 @@ $page_title = "Hotel dan Penginapan";
 //
 ?>
 <main id="content" class="container py-5">
-<style>
-  .btn-outline-primary.active {
-    background: var(--bg-hover) !important;
-    color: #fff !important;
-}
-</style>
 <section id="Hotel-dan-penginapan" class="py-5 mb-5">
-  <h1>Hotel dan Penginapan Rekomendasi</h1>
+  <h1 class="text-title">Hotel dan Penginapan Rekomendasi</h1>
   <p class="lead">Hotel dan penginapan terbaik untukmu di Bandung</p>
 </section>
   <div class="mb-3">

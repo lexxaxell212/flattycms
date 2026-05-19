@@ -4,7 +4,7 @@ $page_title = "Tentang";
 ?>
 <main id="content" class="container py-5">
   <section id="Tentang">
-    <h1>Tentang</h1>
+    <h1 class="text-title">Tentang</h1>
       <p class="lead">Dokumentasi website</p>
   </section>
   <div class="row g-4">

@@ -107,6 +107,25 @@
   margin: 0;
   padding: 0;
 }
+.btn:focus,
+.btn:focus-visible,
+.btn:active,
+.btn:active:focus {
+  outline: none;
+  box-shadow: none;
+}
+.btn-primary:focus-visible {
+  box-shadow: 0 0 0 3px rgba(108, 43, 217, 0.3);
+}
+.btn-accent:focus-visible {
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+}
+.btn-outline-primary:focus-visible {
+  box-shadow: 0 0 0 3px rgba(108, 43, 217, 0.2);
+}
+.btn-outline-accent:focus-visible {
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
 
 html {
   scroll-behavior: smooth;

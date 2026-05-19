@@ -63,6 +63,7 @@
     --text-primary: #374151;
     --text-heading: #1f2937;
     --text-white: #fafafa;
+    --text-white-hover: #e5e7eb;
     --text-muted: #6b7280;
     --text-nav: #374151;
     --text-nav-hover: #6c2bd9;
@@ -94,7 +95,6 @@
     --bg-nav-hover: rgba(172, 148, 250, 0.1);
     --text-primary: #cdd5e0;
     --text-heading: #e2e8f0;
-    --text-white: #fafafa;
     --text-muted: #6b7280;
     --text-nav: #cdd5e0;
     --text-nav-hover: #ac94fa;
@@ -160,7 +160,6 @@ i {
 
 p {
     color: var(--text-primary);
-    max-width: 68ch;
 }
 p:last-child {
     margin-bottom: 0;

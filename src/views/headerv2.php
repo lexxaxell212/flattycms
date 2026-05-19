@@ -154,7 +154,7 @@ $isPintasanActive = (bool) array_filter(
   gap: 7px;
   padding: 7px 14px;
   border-radius: 10px;
-  background: rgba(167, 99, 176, 0.09);
+  background: var(--glass-bg);
   color: var(--text-nav);
   font-size: var(--space-4);
   font-weight: 500;
@@ -163,8 +163,8 @@ $isPintasanActive = (bool) array_filter(
   transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 .nav-login-btn:hover {
-  background: rgba(167, 99, 176, 0.16);
-  color: var(--pu-700);
+  background: var(--glass-bg-hover);
+  color: var(--text-nav-hover);
   transform: translateY(-1px);
 }
 .nav-login-btn--full {
@@ -267,14 +267,14 @@ $isPintasanActive = (bool) array_filter(
 .nav-user-name {
   font-size: 13.5px;
   font-weight: 600;
-  color: var(--blue-900);
+  color: var(--pu-900);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .nav-user-email {
   font-size: 11.5px;
-  color: var(--blue-900);
+  color: var(--pu-900);
   opacity: 0.55;
   white-space: nowrap;
   overflow: hidden;

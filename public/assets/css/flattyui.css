@@ -167,7 +167,7 @@ table tbody td {
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding: var(--space-2) var(--space-5);
+  padding: var(--space-3) var(--space-5);
   font-size: var(--space-4);
   font-weight: 600; 
   text-transform: uppercase;
@@ -290,7 +290,7 @@ table tbody td {
   border:none
 }
 .close-btn:hover, .btn-close:hover {
-  color: var(--text-muted) !important;
+  color: var(--text-white-hover) !important;
   background: var(--bg-nav-hover) !important;
   border:none !important;
 }
@@ -582,7 +582,7 @@ table tbody td {
 .nav-link {
   color: var(--text-nav);
   padding: var(--space-3) !important;
-  gap: 3px;
+  margin-bottom: 6px;
   border-radius: var(--radius);
   border: none;
   display: flex;
@@ -611,7 +611,7 @@ table tbody td {
   color: var(--text-nav);
   background: transparent;
   padding: var(--space-2) var(--space-3) !important;
-  gap: 3px;
+  margin-bottom: 6px;
   font-size: var(--space-3);
   border-radius: var(--radius);
   border: none;
@@ -1121,7 +1121,7 @@ table tbody td {
 input.newsletter {
   max-width:320px;
   margin:0 auto;
-  height: 40px;
+  height: 48px;
 }
 
 input.email-input {

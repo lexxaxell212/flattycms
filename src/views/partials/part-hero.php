@@ -19,7 +19,7 @@
     <div class="container h-100 d-flex align-items-center">
       <div class="glass-hero-card col-12 col-md-7 col-lg-5">
         <h1 class="mb-3 text-title"><?= $s['title'] ?></h1>
-        <p class="text-white mb-4"><?= $s['desc'] ?></p>
+        <p class="lead"><?= $s['desc'] ?></p>
         <div class="d-flex gap-3">
           <a href="#kenapa-harus-bandung" class="btn btn-primary">
             Mulai Jelajahi <i class="arrow-icon fas fa-arrow-right ms-2"></i>

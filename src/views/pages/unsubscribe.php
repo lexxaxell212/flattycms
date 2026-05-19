@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
         } else {
             if (unsubscribeById($subscriber["id"])) {
                 $status  = "success";
-                $message = "Berhasil unsubscribe melalui link aman.";
+                $message = "Berhasil unsubscribe.";
                 $subject = "Berhasil Unsubscribe - Ayokebandung.id";
                 $msg     = "<h2>Unsubscribe Berhasil</h2><p>Kamu tidak akan lagi menerima email dari kami.</p>";
                 kirimEmailAyo($subscriber['email'], $subject, $msg);

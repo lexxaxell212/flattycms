@@ -2,11 +2,12 @@
   padding-top: var(--navbar-height);
   padding-bottom: var(--navbar-height);
 }
-section {
-  margin-bottom: var(--space-10);
-}
 .section {
   margin-bottom: var(--space-6);
+}
+main, section, footer {
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
 }
 @media (min-width: 576px) {
   .container {
@@ -53,6 +54,14 @@ section {
   50% {
     box-shadow: var(--glass-shadow), 0 0 30px rgba(245, 158, 11, 0.3);
   }
+}
+table thead th {
+  background: var(--pu-200) !important;
+  color: var(--text-primary) !important;
+}
+table tbody td {
+  background: var(--pu-100) !important;
+  color: var(--text-primary) !important;
 }
 .pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
@@ -1083,9 +1092,9 @@ footer,
   font-size:.8rem
 }
 .badge-year {
-  background-color:var(--pu-100);
-  color: var(--pu-800);
-  font-weight:700;
+  background-color:var(--pu-50);
+  color: var(--text-muted);
+  font-weight:400;
   padding:6px 12px;
   border-radius:var(--radius);
   font-size:.85rem;

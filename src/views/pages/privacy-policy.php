@@ -1,194 +1,163 @@
 <?php
-$page_title = "Privacy policy";
-//require_once SRC_PATH . "header.php";
+$page_title = "Kebijakan Privasi";
+//
 ?>
+<main id="content" class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="mb-6">
+        <h1>Kebijakan Privasi</h1>
+        <p>Kami berkomitmen melindungi data pribadi Anda secara bertanggung jawab.</p>
+        <p class="text-muted small mb-2">
+          Berlaku sejak 30 April 2026 • Diperbarui 30 April 2026
+        </p>
+        <hr/>
+      </div>
 
-<div class="container py-5">
-<section id="Kebijakan Privasi" class="text-center mb-6">
-    <h1 class="fs-1 mb-3">Kebijakan Privasi</h1>
-    <p>
-      Kami berkomitmen melindungi data pribadi Anda
-    </p>
-</section>
-<div class="spacer"></div>
-  <div class="col-lg-12 p-3">
-    <div class="text-start mb-6">
-      <i class="privacy-icon fas fa-database"></i>
-    </div>
-      <h5 class="mb-3">
-      1. Informasi yang Kami Kumpulkan
-    </h5>
-      <p class="mb-6">
-      Kami mengumpulkan informasi berikut untuk memberikan layanan terbaik:
-    </p>
-    <div class="row g-3">
-      <div class="col-md-4">
-        <div class="text-center text-muted glass glass-hover p-5">
-          <i class="fas fa-user fa-2x mb-2"></i>
-          <div>
-            <strong>Nama & Email</strong>
-          </div>
-          <small>Saat mendaftar</small>
-        </div>
+      <div class="mb-6">
+        <h3>1. Informasi yang Kami Kumpulkan</h3>
+        <p class="text-muted">Kami mengumpulkan data berikut saat Anda menggunakan layanan kami:</p>
+        <ul class="list-unstyled text-muted small">
+          <li class="mb-2"><i class="fas fa-circle-dot me-2
+          text-primary"></i><strong>Nama & Email</strong> — dikumpulkan saat
+          pendaftaran akun.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Data Kunjungan</strong> — alamat IP, jenis browser, dan halaman yang dikunjungi.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Cookie</strong> — untuk analitik dan preferensi pengguna.</li>
+        </ul>
       </div>
-      <div class="col-md-4">
-        <div class="text-center p-5 glass glass-hover text-muted">
-          <i class="fas fa-globe fa-2x mb-2"></i>
-          <div>
-            <strong>Data Kunjungan</strong>
-          </div>
-          <small>IP, browser</small>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="text-center p-5 glass glass-hover text-muted">
-          <i class="fas fa-cookie-bite fa-2x mb-2"></i>
-          <div>
-            <strong>Cookie</strong>
-          </div>
-          <small>Analitik</small>
-        </div>
-      </div>
-    </div>
- </div>
-  <div class="row mt-6 p-3">
-    <div class="text-start mb-4">
-      <i class="privacy-icon fas fa-gears"></i>
-    </div>
-    <h5 class="mb-3">
-      2. Penggunaan Data
-    </h5>
-    <p class="mb-3">
-      Data digunakan <strong>hanya</strong> untuk:
-    </p>
-    <ul class="list-unstyled">
-      <li class="list-group-item px-0 border-0 py-2 text-muted">
-        <i class="fas fa-check-circle text-success me-3"></i>
-        Menyediakan layanan optimal
-      </li>
-      <li class="list-group-item px-0 border-0 py-2 text-muted">
-        <i class="fas fa-check-circle text-success me-3"></i>
-        Kirim berita & event terbaru
-      </li>
-      <li class="list-group-item px-0 border-0 py-2 text-muted">
-        <i class="fas fa-check-circle text-success me-3"></i>
-        Analisis pengunjung (anonim)
-      </li>
-    </ul>
-  </div>
-  <div class="privacy-highlight text-start">
-    <strong class="d-inline-block">
-      Kami <span class="text-decoration-underline text-danger">TIDAK</span> menjual data pribadi Anda.
-    </strong>
-  </div>
-  <div class="col-lg-12 p-3 mb-6">
-    <div class="mb-6">
-      <i class="privacy-icon fas fa-share-nodes"></i>
-    </div>
-    <h5 class="mb-3">
-      3. Berbagi Data
-    </h5>
-    <p class="mb-6">
-      Data dibagikan TERBATAS dengan:
-    </p>
-    <div class="row g-3">
-      <div class="col-md-4">
-        <div class="glass glass-hover h-100">
-          <div class="text-center p-4 text-muted">
-            <i class="fas fa-server fa-2x mb-3"></i>
-            <div><strong>Penyedia Layanan</strong>
-            </div>
-            <small class="text-muted">Hosting, email service</small>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="glass glass-hover h-100">
-          <div class="text-center p-4 text-muted">
-            <i class="fab fa-google fa-2x mb-3"></i>
-            <div>
-            <strong>Google Analytics</strong>
-            </div>
-            <small>Data anonim</small>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="glass glass-hover h-100">
-          <div class="text-center p-4 text-muted">
-            <i class="fas fa-gavel fa-2x mb-3"></i>
-            <div>
-            <strong>Otoritas Hukum</strong>
-            </div>
-            <small>Jika diminta resmi</small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-12 p-3">
-    <div class="mb-6">
-      <i class="privacy-icon fas fa-cookie"></i>
-    </div>
-    <h5 class="mb-3">
-      4. Cookie
-    </h5>
-    <p class="mb-6">
-      Kami menggunakan cookie untuk pengalaman terbaik.
-      <strong>Anda bisa nonaktifkan di pengaturan browser kapan saja.</strong>
-    </p>
-  </div>
-  <div class="p-3 mb-6">
-    <div class="mb-6">
-      <i class="privacy-icon fas fa-user-check"></i>
-    </div>
-    <h5 class="mb-6">
-      5. Hak Anda
-    </h5>
-    <div class="row g-3">
-      <div class="col-md-6">
-        <div class="d-flex align-items-center p-5 glass glass-hover">
-          <i class="fas fa-bell-slash fa-2x text-muted me-3"></i>
-          <div>
-            <strong>Batal Langganan</strong>
-            <small class="d-flex"><a
-            href="<?= PAGES_URL ?>unsubscribe"
-            class="mr-1">Unsubscribe</a>
-            email</small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="mb-6 p-3">
-    <div class="mb-6">
-      <i class="privacy-icon fas fa-lock"></i>
-    </div>
-    <h5 class="mb-6">
-      6. Keamanan
-    </h2>
-    <div class="row g-4">
-      <div class="col-lg-6">
-        <div class="glass glass-hover p-3 text-muted">
-          <i class="fas fa-lock-open mr-1"></i>
-          <strong>SSL Encryption</strong><br>
-          <small>
-            Semua data dienkripsi end-to-end
-          </small>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="glass glass-hover p-3 text-muted">
-          <i class="fas fa-exclamation-triangle mr-1"></i>
-          <strong>Waspada Phishing</strong><br>
-          <small>
-            Jangan klik link mencurigakan
-          </small>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
+      <div class="mb-6">
+        <h3>2. Penggunaan Data</h3>
+        <p class="text-muted">Data digunakan <strong>hanya</strong> untuk:</p>
+        <ul class="list-unstyled text-muted small">
+          <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Menyediakan dan meningkatkan layanan kami.</li>
+          <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Mengirimkan newsletter dan informasi event (dengan persetujuan Anda).</li>
+          <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Analisis pengunjung secara anonim dan agregat.</li>
+        </ul>
+        <div class="alert alert-danger py-2 small mb-0">
+          <i class="fas fa-ban me-2"></i>Kami <strong>TIDAK</strong> menjual, menyewakan, atau memperdagangkan data pribadi Anda kepada pihak ketiga manapun.
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <h3>3. Berbagi Data</h3>
+        <p class="text-muted">Data hanya dibagikan secara terbatas kepada:</p>
+        <ul class="list-unstyled text-muted small">
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Penyedia Layanan</strong> — hosting dan email service yang terikat perjanjian kerahasiaan.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Google Analytics</strong> — data anonim untuk statistik pengunjung.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Otoritas Hukum</strong> — hanya jika diminta secara resmi berdasarkan hukum yang berlaku.</li>
+        </ul>
+      </div>
+
+      <div class="mb-6">
+        <h3>4. Cookie</h3>
+        <p class="text-muted mb-2">Kami menggunakan tiga jenis cookie:</p>
+        <ul class="list-unstyled text-muted small">
+          <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Esensial</strong> — diperlukan agar situs berfungsi dengan benar.</li>
+          <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Analitik</strong> — membantu kami memahami cara pengunjung menggunakan situs.</li>
+          <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Preferensi</strong> — menyimpan pengaturan dan preferensi tampilan Anda.</li>
+        </ul>
+        <p class="text-muted small mb-0">Anda dapat menonaktifkan cookie melalui pengaturan browser kapan saja, namun hal ini dapat memengaruhi fungsi situs.</p>
+      </div>
+
+      <div class="mb-6">
+        <h3>5. Hak Anda</h3>
+        <p class="text-muted">Sebagai pengguna, Anda berhak untuk:</p>
+        <ul class="list-unstyled text-muted small">
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Akses</strong> — meminta salinan data pribadi yang kami simpan.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Koreksi</strong> — meminta perbaikan data yang tidak akurat.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Penghapusan</strong> — meminta penghapusan data Anda dari sistem kami.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Portabilitas</strong> — menerima data Anda dalam format yang dapat dibaca mesin.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Keberatan</strong> — menolak pemrosesan data untuk tujuan pemasaran langsung.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2
+          text-primary"></i><strong>Berhenti Berlangganan</strong> — klik <a
+          href="/pages/unsubscribe" class="link">Unsubscribe</a> di email kami atau
+          hubungi kami langsung.</li>
+        </ul>
+        <p class="text-muted small mb-0">Permintaan dapat dikirim ke
+        <strong>admin@ayokebandung.id</strong> dan akan direspons dalam <strong>14
+        hari kerja</strong>.</p>
+      </div>
+
+      <div class="mb-6">
+        <h3>6. Keamanan Data</h3>
+        <p class="text-muted mb-2">Langkah perlindungan yang kami terapkan:</p>
+        <ul class="list-unstyled text-muted small">
+          <li class="mb-2"><i class="fas fa-lock me-2 text-primary"></i><strong>SSL/TLS Encryption</strong> — semua data yang ditransmisikan dienkripsi end-to-end.</li>
+          <li class="mb-2"><i class="fas fa-lock me-2 text-primary"></i><strong>Enkripsi Penyimpanan</strong> — data sensitif disimpan dalam bentuk terenkripsi.</li>
+          <li class="mb-2"><i class="fas fa-lock me-2 text-primary"></i><strong>Akses Terbatas</strong> — hanya personel berwenang yang dapat mengakses data pengguna.</li>
+          <li class="mb-2"><i class="fas fa-triangle-exclamation me-2
+          text-primary"></i><strong>Waspada Phishing</strong> — kami tidak
+          pernah meminta kata sandi melalui email.</li>
+        </ul>
+        <p class="text-muted small mb-0">Temukan celah keamanan? Laporkan ke
+        <strong>security@ayokebandung.id</strong>.</p>
+      </div>
+
+      <div class="mb-6">
+        <h3>7. Retensi Data</h3>
+        <p class="text-muted mb-3">Data disimpan hanya selama diperlukan:</p>
+        <div class="table-responsive">
+          <table class="table table-sm table-bordered text-muted small align-middle">
+            <thead>
+              <tr>
+                <th>Jenis Data</th>
+                <th>Durasi</th>
+                <th>Keterangan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Data akun</td>
+                <td>Selama aktif</td>
+                <td>Dihapus 30 hari setelah akun ditutup</td>
+              </tr>
+              <tr>
+                <td>Log kunjungan</td>
+                <td>90 hari</td>
+                <td>Dihapus otomatis</td>
+              </tr>
+              <tr>
+                <td>Data newsletter</td>
+                <td>Hingga unsubscribe</td>
+                <td>Dihapus segera setelah permintaan</td>
+              </tr>
+              <tr>
+                <td>Cookie analitik</td>
+                <td>13 bulan</td>
+                <td>Sesuai kebijakan Google Analytics</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <h3>8. Notifikasi Pelanggaran Data</h3>
+        <p class="text-muted mb-2">Jika terjadi pelanggaran data, kami berkomitmen untuk:</p>
+        <ul class="list-unstyled text-muted small">
+          <li class="mb-2"><i class="fas fa-clock me-2 text-primary"></i>Melaporkan kepada otoritas dalam <strong>72 jam</strong> sejak insiden diketahui.</li>
+          <li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i>Memberitahu pengguna terdampak melalui email sesegera mungkin.</li>
+          <li class="mb-2"><i class="fas fa-file-shield me-2 text-primary"></i>Mendokumentasikan insiden beserta langkah penanggulangan yang diambil.</li>
+        </ul>
+      </div>
+
+      <div class="mb-6">
+        <h3>9. Perubahan Kebijakan</h3>
+        <p class="text-muted mb-0">Kami dapat memperbarui kebijakan ini sewaktu-waktu. Perubahan signifikan akan diinformasikan melalui notifikasi email, banner pengumuman di situs, dan pembaruan tanggal di halaman ini. Penggunaan layanan setelah tanggal berlaku baru dianggap sebagai persetujuan Anda.</p>
+      </div>
+
+      <div class="mb-6">
+        <h3>10. Hubungi Kami</h3>
+        <p class="text-muted mb-2">Pertanyaan atau keluhan terkait privasi dapat disampaikan melalui:</p>
+        <ul class="list-unstyled text-muted small">
+          <li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i><a
+          href="mailto:admin@ayokebandung.id" class="link
+          text-decoration-none">admin@ayokebandung.id</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
 <?php
-//require_once SRC_PATH . "footer.php"; ?>
+// ?>

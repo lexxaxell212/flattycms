@@ -1,10 +1,11 @@
+  </div>
 </div>
 <footer id="footer" class="footer mt-5">
   <div class="container">
     <section class="newsletter-section py-5">
       <div class="row justify-content-center">
         <div class="col-xl-8 col-lg-10 text-center">
-          <i class="fas fa-envelope mb-4 text-muted" style="font-size:40px;"></i>
+          <i class="fas fa-envelope mb-4 icon" style="font-size:40px;"></i>
           <div id="registernewsletter" class="mb-4">
             <span class="fs-2 fw-bold newsletter-text">NEWSLETTER</span>
             <p class="text-muted">Dapatkan event dan update Bandung terkini via email.</p>
@@ -14,7 +15,7 @@
               <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
               <input type="email" name="email" class="form-control email-input"
               id="emailInput" placeholder="nama@email.com" required>
-              <button type="submit" class="btn btn-primary px-4 btn-sm" id="submitBtn">
+              <button type="submit" class="btn btn-primary px-4" id="submitBtn">
                 Berlangganan
                 <i class="fas fa-paper-plane"></i>
               </button>
@@ -33,9 +34,9 @@
     </div>
     <div class="footer-links text-center mt-4">
       <ul class="list-inline">
-        <li class="list-inline-item"><a href="<?= PAGES_URL ?>tentang" class="text-decoration-none">Tentang</a></li>
+        <li class="list-inline-item"><a class="link" href="<?= PAGES_URL ?>tentang">Tentang</a></li>
         <li class="list-inline-item px-3 text-muted">|</li>
-        <li class="list-inline-item"><a href="<?= PAGES_URL ?>privacy-policy" class="text-decoration-none">Privasi</a></li>
+        <li class="list-inline-item"><a class="link" href="<?= PAGES_URL ?>privacy-policy">Privasi</a></li>
       </ul>
     </div>
     <div class="text-center mt-5 pb-3">

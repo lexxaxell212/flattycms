@@ -31,8 +31,9 @@
   
   /* surface */
   --text-primary: #030712;
+  --text-heading: #1F2937;
   --text-hover: #fff;
-  --text-muted: #1F2937;
+  --text-muted: #374151;
   
   /* navigasi */
   --bg-nav: transparent;
@@ -90,8 +91,8 @@
   
   /* glass */
   --glass-bg: #111827;
-  --glass-bg-hover: #1F2937;
-  --glass-bg-active: #1F2937;
+  --glass-bg-hover: #111827;
+  --glass-bg-active: #111827;
   --glass-backdrop: none !important;
   --glass-blur: none !important;
   --glass-border: 1px solid rgba(200,200,200,0.1);
@@ -106,6 +107,7 @@
   
   /* surface */
   --text-primary: #fff;
+  --text-heading: #DCD7FE;
   --text-hover: #7E3AF2;
   --text-muted: #6B7280;
   

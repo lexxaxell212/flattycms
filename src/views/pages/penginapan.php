@@ -1,51 +1,46 @@
 <?php
-$page_title = "Penginapan";
-//require_once SRC_PATH . "header.php";
-//require_once LIB_PATH . "blogs.php";
+$page_title = "Hotel dan Penginapan";
+//
 ?>
-
-<div class="container py-5">
- 
-<!-- Hero Section -->
-<section id="hoteldanpenginapan">
-        <div class="row align-items-center">
-            <div class="mx-auto col-lg-6 text-center mb-5">
-                <h1 class="fs-1 mb-6">Hotel dan Penginapan Rekomendasi</h1>
-                <p class="fs-6 mb-5">Hotel dan penginapan terbaik untukmu di Bandung</p>
-            </div>
-        </div>
+<main id="content" class="container py-5">
+<style>
+  .btn-outline-primary.active {
+    background: var(--bg-hover) !important;
+    color: #fff !important;
+}
+</style>
+<section id="Hotel-dan-penginapan" class="py-5 mb-5">
+  <h1>Hotel dan Penginapan Rekomendasi</h1>
+  <p class="lead">Hotel dan penginapan terbaik untukmu di Bandung</p>
 </section>
-
-<!-- Filter -->
-<div class="d-flex flex-wrap gap-3 justify-content-center mt-6 mb-5 px-3">
-    <button class="btn btn-outline-primary rounded-pill px-5 py-3 fw-semibold lokasi-btn active shadow-sm fs-6" data-category="all">
+  <div class="mb-3">
+    <button class="btn btn-outline-primary lokasi-btn active" data-category="all">
       <i class="fas fa-th-large me-2"></i>Semua
     </button>
-    <button class="btn btn-outline-primary rounded-pill px-5 py-3 fw-semibold lokasi-btn shadow-sm fs-6" data-category="pusat_kota">
+  </div>
+  <div class="d-flex flex-wrap gap-2">
+    <button class="btn btn-outline-primary lokasi-btn" data-category="pusat_kota">
       Pusat Bandung
     </button>
-    <button class="btn btn-outline-primary rounded-pill px-5 py-3 fw-semibold lokasi-btn shadow-sm fs-6" data-category="bandung_utara">
+    <button class="btn btn-outline-primary lokasi-btn" data-category="bandung_utara">
       Bandung utara
     </button>
-    <button class="btn btn-outline-primary rounded-pill px-5 py-3 fw-semibold lokasi-btn shadow-sm fs-6" data-category="riau">
+    <button class="btn btn-outline-primary lokasi-btn" data-category="riau">
       Riau
     </button>
-    <button class="btn btn-outline-primary rounded-pill px-5 py-3 fw-semibold lokasi-btn shadow-sm fs-6" data-category="dago">
+    <button class="btn btn-outline-primary lokasi-btn" data-category="dago">
       Dago
     </button>
-    <button class="btn btn-outline-primary rounded-pill px-5 py-3 fw-semibold lokasi-btn shadow-sm fs-6" data-category="pasteur">
+    <button class="btn btn-outline-primary lokasi-btn" data-category="pasteur">
       Pasteur
     </button>
-    <button class="btn btn-outline-primary rounded-pill px-5 py-3 fw-semibold lokasi-btn shadow-sm fs-6" data-category="cihampelas">
+    <button class="btn btn-outline-primary lokasi-btn" data-category="cihampelas">
       Cihampelas
     </button>
   </div>
-
-<!-- Rooms Section -->
 <div class="row g-4 mt-6" id="hotel-grid">
  
  <?php
- //  RANDOM QUERY - ORDER BY RAND()
  $stmt = $pdo->query("SELECT * FROM admin_items WHERE status = 'active' AND
     category IN ('pusat_kota', 'bandung_utara', 'dago', 'riau', 'pasteur',
     'cihampelas') ORDER BY RAND()");
@@ -53,22 +48,22 @@ $page_title = "Penginapan";
 
  if (empty($all_items)) { ?>
       <div class="col-12 text-center py-5">
-        <div class="alert alert-warning border-0 shadow-lg" style="max-width: 600px; margin: auto;">
-          <i class="fas fa-dice fa-3x text-warning mb-4 d-block animate__animated animate__tada"></i>
-          <h4 class="fw-bold fs-3">Belum Ada Cards Hotel</h4>
-          <p class="fs-5 mb-4">Tambahkan cards melalui <strong>Dashboard</strong></p>
+          <div class="alert alert-warning" style="margin: auto;max-width:320px">
+            <i class="icon d-block fa-3x fas fa-dice"></i>
+            <span class="fw-semibold h5">Belum ada Card</span>
+            <p class="text-muted">Tambahkan cards melalui <strong>Dashboard</strong></p>
+          </div>
         </div>
-      </div>
-    <?php } else {// RANDOM 10 PERTAMA
+    <?php } else {
    $visible_items = array_slice($all_items, 0, 10);
    $total_items = count($all_items);
    $hidden_count = $total_items - 10;
 
    foreach ($visible_items as $item) {
 
-     $image = $item["image"] ?? "cards/default.jpg";
+     $image = $item["image"] ?? "/default.jpg";
      $image_path =
-       strpos($image, "http") === 0 ? $image : "../assets/images/" . $image;
+       strpos($image, "http") === 0 ? $image : "uploads/" . $image;
      $category = strtolower($item["category"] ?? "general");
      $cat_label = ucwords(str_replace(["-", "_"], " ", $category));
      $title = htmlspecialchars($item["title"] ?? "Untitled");
@@ -76,17 +71,17 @@ $page_title = "Penginapan";
      $link = htmlspecialchars($item["button_link"] ?? "#");
      ?>
 <div class="col-lg-4 col-md-6 hotel-item" data-category="<?= $category ?>">
-<div class="glass glass-hover h-100"> 
-<!-- Random Badge -->
-<span class="position-absolute top-3 start-3 badge bg-accent px-3 py-2 rounded-pill fw-semibold fs-6">
+<div class="card card-glass h-100"> 
+<span class="position-absolute top-3 start-3 badge bg-accent">
 <?= $cat_label ?> 
 </span>
 <img src="<?= $image_path ?>" class="card-img-top" alt="<?= $title ?>"
-onerror="this.src='../assets/images/cards/default.jpg'">
-<div class="card-body d-flex flex-column p-5">
-<h5 class="mt-6 mb-3"><?= $title ?></h5>
-<p class="mb-3"><?= $excerpt ?>...</p>
-<a href="<?= $link ?>" target="_blank"><button class="btn btn-primary mt-6 w-100">Pesan Sekarang<i class="fas fa-angle-right me-1"></i></button>
+onerror="this.src='uploads/default.jpg'">
+<div class="card-body">
+<h3><?= $title ?></h3>
+<p class="text-muted"><?= $excerpt ?>...</p>
+<a href="<?= $link ?>" target="_blank" class="btn btn-primary">Pesan Sekarang<i
+class="arrow-icon fas fa-angle-right"></i>
 </a>
 </div>
 </div>
@@ -96,28 +91,23 @@ onerror="this.src='../assets/images/cards/default.jpg'">
  ?>
 
 </div>
-
  <?php if (!empty($all_items) && $total_items > 10): ?>
-  <!-- EXPAND BUTTON -->
-  <div class="text-center mt-5 pt-5">
-    <button class="btn btn-outline-primary btn-md px-6 py-3 fw-bold fs-5
-    rounded-pill expand-btn" id="loadhotelMoreBtn">
+  <div class="text-center">
+    <button class="btn btn-outline-accent expand-btn" id="loadhotelMoreBtn">
       <span class="btn-text">LEBARKAN</span>
       <i class="fas fa-chevron-down ms-2"></i>
     </button>
   </div>
   <?php endif; ?>
-
-  <!-- Hidden Items -->
   <?php if (!empty($all_items) && $total_items > 10): ?>
-  <div class="row g-4 mt-4 hidden-items d-none" id="hiddenhotelItems">
+  <div class="py-5 row g-4 mt-4 hidden-items d-none" id="hiddenhotelItems">
     <?php
     $hidden_items = array_slice($all_items, 10);
     foreach ($hidden_items as $item) {
 
-      $image = $item["image"] ?? "cards/default.jpg";
+      $image = $item["image"] ?? "/default.jpg";
       $image_path =
-        strpos($image, "http") === 0 ? $image : "../assets/images/" . $image;
+        strpos($image, "http") === 0 ? $image : "uploads/" . $image;
       $category = strtolower($item["category"] ?? "general");
       $cat_label = ucwords(str_replace(["-", "_"], " ", $category));
       $title = htmlspecialchars($item["title"] ?? "Untitled");
@@ -125,17 +115,17 @@ onerror="this.src='../assets/images/cards/default.jpg'">
       $link = htmlspecialchars($item["button_link"] ?? "#");
       ?>
       <div class="col-lg-4 col-md-6 hotel-item" data-category="<?= $category ?>">
-<div class="glass glass-hover h-100"> 
-<!-- Random Badge -->
-<span class="position-absolute top-3 start-3 badge bg-accent px-3 py-2 rounded-pill fw-semibold fs-6">
+<div class="card card-glass h-100"> 
+<span class="position-absolute top-3 start-3 badge bg-accent">
 <?= $cat_label ?> 
 </span>
 <img src="<?= $image_path ?>" class="card-img-top" alt="<?= $title ?>"
-onerror="this.src='../assets/images/cards/default.jpg'">
-<div class="card-body d-flex flex-column p-5">
-<h5 class="mt-6 mb-3"><?= $title ?></h5>
-<p class="mb-3"><?= $excerpt ?>...</p>
-<a href="<?= $link ?>" target="_blank"><button class="btn btn-primary mt-6 w-100">Pesan Sekarang<i class="fas fa-angle-right me-1"></i></button>
+onerror="this.src='/default.jpg'">
+<div class="card-body">
+<h3><?= $title ?></h3>
+<p class="text-muted"><?= $excerpt ?>...</p>
+<a href="<?= $link ?>" target="_blank" class="btn btn-primary">Pesan Sekarang<i
+class="arrow-icon fas fa-angle-right"></i>
 </a>
 </div>
 </div>
@@ -145,20 +135,15 @@ onerror="this.src='../assets/images/cards/default.jpg'">
     ?>
   </div>
   <?php endif; ?>
-</div>
-<div class="text-center mt-6 p-6" id="noMore" style="display:none">
- <div class="spacer">
+<div class="alert alert-warning" id="noMore" style="display:none">
   <p class="text-muted">
    Tidak ada lagi ...
   </p>
- </div>
 </div>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   let isExpanded = false;
   
-  // Filter functionality
   document.querySelectorAll('.lokasi-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.lokasi-btn').forEach(b => {
@@ -177,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // EXPAND TOGGLE
   const expandBtn = document.getElementById('loadhotelMoreBtn');
   const hiddenItems = document.getElementById('hiddenhotelItems');
   const noMore = document.getElementById('noMore');
@@ -205,6 +189,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
-
+</main>
 <?php
-//require_once SRC_PATH . "footer.php"; ?>
+// ?>

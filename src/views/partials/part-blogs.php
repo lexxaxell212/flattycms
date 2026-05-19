@@ -9,11 +9,10 @@ $posts      = safe_get_posts($pdo, $per_page, $offset, $cat_id);
 $categories = safe_get_categories($pdo);
 ?>
 <script src="<?= JS_URL ?>card-slider.js" defer></script>
-<main id="content">
-<section id="artikel-terbaru">
-  <div class="overflow-hidden">
-      <h2 class="fw-bold">ARTIKEL TERBARU</h2>
-    <div class="slider-wrapper">
+<section id="artikel-terbaru" class="container-fluid">
+    <div class="container overflow-hidden">
+      <h2 class="mb-4">ARTIKEL TERBARU</h2>
+    <div class="slider-wrapper mb-3">
       <div class="slider-track" id="sliderTrack">
         <?php if (empty($posts)): ?>
         <div class="text-center text-muted">
@@ -46,10 +45,9 @@ $categories = safe_get_categories($pdo);
         <?php endif; ?>
       </div>
     </div>
-    <div class="slider-controls py-3">
+    <div class="d-flex justify-content-center py-3 gap-3">
       <button aria-label="Card sebelumnya" class="btn btn-outline-primary" id="btnPrev" onclick="moveSlide(-1)"><i class="fas fa-angle-left"></i></button>
       <button aria-label="Card selanjutnya" class="btn btn-outline-primary" id="btnNext" onclick="moveSlide(1)"><i class="fas fa-angle-right"></i></button>
     </div>
-  </div>
+    </div>
 </section>
-</main>

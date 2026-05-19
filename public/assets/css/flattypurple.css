@@ -54,7 +54,7 @@
     --glass-blur: blur(20px);
     --glass-border: 1px solid rgba(0, 0, 0, 0.1);
     --glass-border-hover: 1px solid rgba(0,0,0,0.2);
-    --glass-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);;
+    --glass-shadow: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
     --bg-white: #fafafa;
     --bg-primary: #f6f5ff;
     --bg-hover: #6c2bd9;
@@ -62,7 +62,7 @@
     --bg-nav-hover: rgba(108, 43, 217, 0.08);
     --text-primary: #374151;
     --text-heading: #1f2937;
-    --text-white: #fff;
+    --text-white: #fafafa;
     --text-muted: #6b7280;
     --text-nav: #374151;
     --text-nav-hover: #6c2bd9;
@@ -86,7 +86,7 @@
     --glass-blur: none;
     --glass-border: 1px solid rgba(255, 255, 255, 0.1);
     --glass-border-hover: 1px solid rgba(255,255,255,0.2);
-    --glass-shadow: 0 1px 3px rgba(255,255,255,0.06), 0 1px 2px rgba(255,255,255,0.04);
+    --glass-shadow: none;
     --bg-white: #0f1117;
     --bg-primary: #1a1f2e;
     --bg-hover: #7e3af2;
@@ -94,8 +94,8 @@
     --bg-nav-hover: rgba(172, 148, 250, 0.1);
     --text-primary: #cdd5e0;
     --text-heading: #e2e8f0;
-    --text-white: #fff;
-    --text-muted: #8896a5;
+    --text-white: #fafafa;
+    --text-muted: #6b7280;
     --text-nav: #cdd5e0;
     --text-nav-hover: #ac94fa;
 }
@@ -111,7 +111,7 @@
 
 html {
     scroll-behavior: smooth;
-    font-size: 13px;
+    font-size: 14px;
     height: 100%;
     background: var(--bg-white);
 }
@@ -129,8 +129,11 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+h2 + p { margin-top:var(--space-1);}
+p + a.btn {margin-top:var(--space-4);}
+
 a {
-    color: var(--pu-500);
+    color: var(--pu-600);
     text-decoration: none;
 }
 a:hover,
@@ -138,7 +141,7 @@ a:active {
     color: var(--pu-700);
 }
 a:focus-visible {
-    outline: 2px solid var(--pu-500);
+    outline: 2px solid var(--pu-600);
     outline-offset: 2px;
     border-radius: 2px;
 }
@@ -206,7 +209,6 @@ h6 {
 
 .main-content {
     padding-top: var(--navbar-height);
-    padding-bottom: var(--navbar-height);
 }
 
 /* ============= fast hero ============= */

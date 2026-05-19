@@ -60,9 +60,9 @@ select {
   font: inherit;
 }
 
-section, footer {
-  padding-top: var(--space-3);
-  padding-bottom: var(--space-3);
+section {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
 }
 
 table thead th {
@@ -112,8 +112,8 @@ table tbody td {
 
 .text-gradient {
   font-weight: 800;
-  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-  line-height: 1.2;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.1;
   letter-spacing: -0.02em;
   background: linear-gradient(
     135deg,
@@ -136,8 +136,12 @@ table tbody td {
   background-clip: text;
 }
 
-.text-muted   {
-  color: var(--text-muted);
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.text-white {
+  color: var(--text-white);
 }
   
 .text-primary {
@@ -155,21 +159,22 @@ table tbody td {
 .btn:active:focus {
   outline: none;
   box-shadow: none;
+  background: none;
+  border: none;
 }
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding: var(--space-2) var(--space-6);
-  font-size: 0.95rem;
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--space-4);
   font-weight: 600; 
-  letter-spacing: 0.04em; 
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
-  color: #fff;
   border: none;
+  color: #fff;
   border-radius: var(--radius);
   cursor: pointer;
   user-select: none;
@@ -177,9 +182,9 @@ table tbody td {
   -moz-user-select: none;
   position: relative;
   overflow: hidden;
-  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
               transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .btn::before {
@@ -198,23 +203,21 @@ table tbody td {
 .btn:hover::before {
   transform: translateX(100%);
 }
-.btn:active {
-  transform: scale(0.97);
-}
+
 .btn:focus-visible {
-  outline: 2px solid var(--pu-400);
-  outline-offset: 3px;
+  outline: 1px solid var(--pu-400);
+  outline-offset: 1px;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--pu-600), var(--pu-700));
+  background: linear-gradient(135deg, var(--pu-600), var(--pu-700)) !important;
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--pu-500), var(--pu-600));
+  background: linear-gradient(135deg, var(--pu-500), var(--pu-600)) !important;
   box-shadow: 0 4px 15px rgba(108, 43, 217, 0.35);
 }
 .btn-primary:active {
-  background: linear-gradient(135deg, var(--pu-700), var(--pu-800));
+  background: linear-gradient(135deg, var(--pu-700), var(--pu-800)) !important;
   box-shadow: 0 4px 15px rgba(108, 43, 217, 0.35);
 }
 .btn-primary:focus-visible {
@@ -222,14 +225,14 @@ table tbody td {
 }
 
 .btn-accent {
-  background: linear-gradient(135deg, var(--or-500), var(--or-600));
+  background: linear-gradient(135deg, var(--or-500), var(--or-600)) !important;
 }
 .btn-accent:hover {
-  background: linear-gradient(135deg, #FBBF24, var(--or-500));
+  background: linear-gradient(135deg, #FBBF24, var(--or-500)) !important;
   box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
 }
 .btn-accent:active {
-  background: linear-gradient(135deg, var(--or-600), #B45309);
+  background: linear-gradient(135deg, var(--or-600), #B45309) !important;
   box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
 }
 .btn-accent:focus-visible {
@@ -237,39 +240,37 @@ table tbody td {
 }
 
 .btn-outline-primary {
-  color: var(--pu-600);
-  border: 1px solid var(--pu-600);
-  background: rgba(255,255,255,0.01);
+  color: var(--pu-600) !important;
+  border: 1px solid var(--pu-600) !important;
+  background: rgba(255,255,255,0.01) !important;
 }
 .btn-outline-primary:hover {
-  background: var(--pu-600);
-  color: #fff;
-  border-color: var(--pu-600);
-  box-shadow: 0 4px 15px rgba(108, 43, 217, 0.25);
+  background: var(--pu-600) !important;
+  color: #fff !important;
+  border: 1px solid var(--pu-600) !important;
 }
 .btn-outline-primary:active {
-  background: var(--pu-700);
-  border-color: var(--pu-700);
-  box-shadow: 0 4px 15px rgba(108, 43, 217, 0.25);
+  background: var(--pu-700) !important;
+  border-color: var(--pu-700) !important;
 }
 .btn-outline-primary:focus-visible {
   box-shadow: 0 0 0 3px rgba(108, 43, 217, 0.2);
 }
 
 .btn-outline-accent {
-  color: var(--or-500);
-  border: 1px solid var(--or-500);
-  background: rgba(255,255,255,0.01);
+  color: var(--or-500) !important;
+  border: 1px solid var(--or-500) !important;
+  background: rgba(255,255,255,0.01) !important;
 }
 .btn-outline-accent:hover {
-  background: var(--or-500);
-  color: #fff;
-  border-color: var(--or-500);
+  background: var(--or-500) !important;
+  color: #fff !important;
+  border-color: var(--or-500) !important;
   box-shadow: 0 4px 15px rgba(245, 158, 11, 0.25);
 }
 .btn-outline-accent:active {
-  background: var(--or-600);
-  border-color: var(--or-600);
+  background: var(--or-600) !important;
+  border-color: var(--or-600) !important;
   box-shadow: 0 4px 15px rgba(245, 158, 11, 0.25);
 }
 .btn-outline-accent:focus-visible {
@@ -279,7 +280,7 @@ table tbody td {
 .close-btn, .btn-close {
   width:40px;
   height:40px;
-  color:var(--text-nav);
+  color:var(--text-white);
   background: transparent;
   font-size:1.1rem;
   display:flex;
@@ -289,7 +290,7 @@ table tbody td {
   border:none
 }
 .close-btn:hover, .btn-close:hover {
-  color: var(--text-nav-hover) !important;
+  color: var(--text-muted) !important;
   background: var(--bg-nav-hover) !important;
   border:none !important;
 }
@@ -476,7 +477,7 @@ table tbody td {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: var(--glass-bg);
+  background: rgba(30,30,30,0.1)
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -581,6 +582,7 @@ table tbody td {
 .nav-link {
   color: var(--text-nav);
   padding: var(--space-3) !important;
+  gap: 3px;
   border-radius: var(--radius);
   border: none;
   display: flex;
@@ -609,6 +611,7 @@ table tbody td {
   color: var(--text-nav);
   background: transparent;
   padding: var(--space-2) var(--space-3) !important;
+  gap: 3px;
   font-size: var(--space-3);
   border-radius: var(--radius);
   border: none;
@@ -635,6 +638,7 @@ table tbody td {
 .temp {
   font-size: var(--space-5);
   line-height: var(--space-4);
+  margin: 6px 0;
   font-weight:800;
 }
 .cond, .city {
@@ -812,7 +816,7 @@ table tbody td {
               box-shadow var(--ls-duration) var(--ls-ease);
 }
 .ls-bar:focus-within {
-  border: solid 1px rgba(100,0,100,0.08);
+  border: var(--glass-border);
   box-shadow: var(--glass-shadow), 0 0 0 2px rgba(227,155,227,0.05);
 }
 .ls-icon-search {
@@ -1114,9 +1118,10 @@ table tbody td {
 .newsletter-section {
   padding: var(--space-24) var(--space-8);
 }
-.newsletter-card {
-  max-width:650px;
-  margin:0 auto
+input.newsletter {
+  max-width:320px;
+  margin:0 auto;
+  height: 40px;
 }
 
 input.email-input {
@@ -1437,29 +1442,25 @@ var(--pu-700); font-size: .8rem; transform: scale(.9) translateY(-.6rem) transla
   }
 }
 
-
+/* ============= footer ============= */
 .logo-main {
   width:120px;
   background-image:var(--logo-path);
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-  opacity: 0.9;
+  opacity: 0.78;
 }
 .logo-social {
   text-decoration:none;
   color: var(--text-muted);
-  font-size:25px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  font-size:var(--space-6);
   transition:all 0.3s ease;
-  margin:10px
 }
 .logo-social:hover,.logo-social:active {
   color:var(--pu-700)
 }
-/* ============= footer ============= 
+/* 
 .logo-container {
   display:flex!important;
   flex-direction:column!important;
@@ -1482,7 +1483,7 @@ var(--pu-700); font-size: .8rem; transform: scale(.9) translateY(-.6rem) transla
 }
 .slider-track {
   display:flex;
-  gap: var(--space-4);
+  gap: 1rem;
   transition:transform 0.2s ease;
   will-change:transform
 }

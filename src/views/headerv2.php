@@ -123,9 +123,9 @@ $isPintasanActive = (bool) array_filter(
       position: 'top-end',
       showConfirmButton: false,
       timer: 3000,
-      background: '#e8f1fb',
-      color: '#071a36',
-      iconColor: '#1e40af',
+      background: '#f6f5ff',
+      color: '#3b0764',
+      iconColor: '#6c2bd9',
     });
   </script>
   
@@ -154,17 +154,17 @@ $isPintasanActive = (bool) array_filter(
   gap: 7px;
   padding: 7px 14px;
   border-radius: 10px;
-  background: rgba(37, 99, 176, 0.09);
-  color: var(--blue-900);
-  font-size: 13.5px;
+  background: rgba(167, 99, 176, 0.09);
+  color: var(--text-nav);
+  font-size: var(--space-4);
   font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
   transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 .nav-login-btn:hover {
-  background: rgba(37, 99, 176, 0.16);
-  color: var(--blue-700);
+  background: rgba(167, 99, 176, 0.16);
+  color: var(--pu-700);
   transform: translateY(-1px);
 }
 .nav-login-btn--full {
@@ -220,7 +220,7 @@ $isPintasanActive = (bool) array_filter(
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
-  border-radius: 14px;
+  border-radius: var(--radius);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
   padding: 8px;
   opacity: 0;
@@ -571,7 +571,7 @@ $isPintasanActive = (bool) array_filter(
       <div class="chatbot-header container">
         <span class="offcanvas-title fw-semibold fs-5"><i class="fas fa-solid fa-circle-user
         me-2"></i>Asisten</span>
-        <button aria-label="Close chat" class="close-btn text-white" data-bs-dismiss="offcanvas"><i class="fa-solid fa-xmark"></i></button>
+        <button aria-label="Close chat" class="close-btn" data-bs-dismiss="offcanvas"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
     <div class="offcanvas-body p-3">

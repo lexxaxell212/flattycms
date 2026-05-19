@@ -1,44 +1,49 @@
 </div>
-<footer id="footer" class="mt-5">
+<footer id="footer">
   <div class="container">
-    <section class="py-5">
+    <section id="newsletter-ayokebandung.id">
       <div class="row justify-content-center">
-        <div class="col text-center">
-          <div id="registernewsletter" class="mb-4">
+        <div class="col text-center newsletter-section">
+          <div id="registernewsletter" class="mb-5">
             <h2 class="text-gradient">NEWSLETTER</h2>
-            <p class="text-muted">Dapatkan event dan update Bandung terkini via email.</p>
+            <span class="text-muted">Dapatkan event dan update Bandung terkini
+            via email.</span>
           </div>
           <div class="mx-auto">
             <form class="newsletter-form" id="newsletterForm">
               <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
-              <input type="email" name="email" class="form-control email-input"
+              <input type="email" name="email" class="form-control newsletter
+              mb-3"
               id="emailInput" placeholder="nama@email.com" required>
               <button type="submit" class="btn btn-primary" id="submitBtn">
                 Berlangganan
-                <i class="fas fa-paper-plane"></i>
+                <i class="arrow-icon fas fa-paper-plane"></i>
               </button>
             </form>
           </div>
         </div>
       </div>
     </section>
-    <div class="">
+    <div class="mb-5">
       <div class="logo-main mx-auto"></div>
-      <div class="d-flex justify-content-center gap-3">
+      <p class="text-muted text-center">Ikuti kami :</p>
+      <div class="d-flex justify-content-center gap-4">
         <a class="logo-social" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
         <a class="logo-social" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
         <a class="logo-social" href="#" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
       </div>
     </div>
-    <div class="text-center mt-4">
-      <ul class="list-inline">
-        <li class="list-inline-item"><a class="link" href="<?= PAGES_URL ?>tentang">Tentang</a></li>
-        <li class="list-inline-item px-3 text-muted">|</li>
-        <li class="list-inline-item"><a class="link" href="<?= PAGES_URL ?>privacy-policy">Privasi</a></li>
+    <div class="text-center py-2">
+      <ul class="list-inline ">
+        <li class="list-inline-item"><a href="<?= PAGES_URL ?>tentang">Tentang</a></li>
+        <li class="list-inline-item text-muted"> - </li>
+        <li class="list-inline-item"><a href="<?= PAGES_URL ?>privacy-policy">Privasi</a></li>
       </ul>
     </div>
-    <div class="text-center mt-5 pb-3">
-      <p class="text-uppercase ls-wide" style="font-size:10px; opacity:0.5; letter-spacing: 2px;">
+    <hr>
+    <div class="text-center">
+      <p class="text-uppercase ls-wide small py-3"
+      style="opacity:0.5;letter-spacing:2px;">
         <?= date('Y') ?> <?= SITE_NAME ?>
       </p>
     </div>

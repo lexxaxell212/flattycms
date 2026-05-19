@@ -18,9 +18,9 @@ $current = preg_replace('#^admin/?#', '', $request_path);
   <link rel="canonical" href="<?= BASE_URL ?>">
   <link rel="icon" href="<?= IMG_URL ?>favicon.ico" type="image/x-icon">
   
-  <link rel="preload" as="font" href="<?= FONTS_URL ?>inter-v20-latin-regular.woff2" type="font/woff2" crossorigin>
-  <link rel="preload" as="font" href="<?= FONTS_URL ?>inter-v20-latin-700.woff2" type="font/woff2" crossorigin>
-  <link rel="preload" as="font" href="<?= FONTS_URL ?>inter-v20-latin-900.woff2" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="<?= CSS_URL ?>bs533.min.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>flattypurple.css">

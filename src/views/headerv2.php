@@ -33,20 +33,17 @@ $isPintasanActive = (bool) array_filter(
   <link rel="preload" as="font" href="<?= FONTS_URL ?>inter-v20-latin-700.woff2" type="font/woff2" crossorigin>
   <link rel="preload" as="font" href="<?= FONTS_URL ?>inter-v20-latin-900.woff2" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="<?= CSS_URL ?>bs533.min.css">
-  <link rel="stylesheet" href="<?= CSS_URL ?>assets.css">
+  <link rel="stylesheet" href="<?= CSS_URL ?>flattypurple.css">
   <?php
   $isMobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT']);
   $heroImg = $isMobile ? 'wisata-mobile.webp' : 'wisata.webp'; ?>
   <link rel="preload" as="image" href="<?= IMG_URL . $heroImg ?>" type="image/webp" fetchpriority="high">
-  <link rel="preload" as="style" href="<?= CSS_URL ?>component.css">
-  <link rel="stylesheet" href="<?= CSS_URL ?>component.css" media="print" onload="this.media='all'">
-  <link rel="preload" as="style" href="<?= CSS_URL ?>style.css">
-  <link rel="stylesheet" href="<?= CSS_URL ?>style.css" media="print" onload="this.media='all'">
+  <link rel="preload" as="style" href="<?= CSS_URL ?>flattyui.css">
+  <link rel="stylesheet" href="<?= CSS_URL ?>flattyui.css" media="print" onload="this.media='all'">
   <link rel="preload" as="style" href="<?= CSS_URL ?>fa651.all.min.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css" media="print" onload="this.media='all'">
   <noscript>
-    <link rel="stylesheet" href="<?= CSS_URL ?>component.css">
-    <link rel="stylesheet" href="<?= CSS_URL ?>style.css">
+    <link rel="stylesheet" href="<?= CSS_URL ?>flattyui.css">
     <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css">
   </noscript>
   <script>

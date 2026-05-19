@@ -58,7 +58,7 @@ require_once SRC_PATH . 'headerv2.php';
   <hr class="my-4">
   <div class="d-flex align-items-center gap-2 mb-4">
     <button id="btn-reaction"
-      class="btn btn-sm <?php echo \$_user_liked ? 'btn-primary' :
+      class="btn <?php echo \$_user_liked ? 'btn-primary' :
       'btn-outline-primary'; ?>"
       data-id="<?php echo \$_page_id; ?>">
       <i class="fas fa-heart me-1"></i>
@@ -69,14 +69,14 @@ require_once SRC_PATH . 'headerv2.php';
     \$_share_title = urlencode('{$slug}');
     ?>
     <a href="https://wa.me/?text=<?php echo \$_share_title; ?>%20<?php echo \$_share_url; ?>"
-       target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
+       target="_blank" rel="noopener" class="btn btn-outline-primary">
       <i class="fab fa-whatsapp"></i>
     </a>
     <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo \$_share_url; ?>"
-       target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
+       target="_blank" rel="noopener" class="btn btn-outline-primary">
       <i class="fab fa-facebook-f"></i>
     </a>
-    <button onclick="copyLink()" class="btn btn-sm btn-outline-primary">
+    <button onclick="copyLink()" class="btn btn-outline-primary">
       <i class="fab fa-instagram"></i>
     </button>
   </div>

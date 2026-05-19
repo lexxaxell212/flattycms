@@ -19,6 +19,10 @@ if ($consent_accepted): ?>
 <?php endif; ?>
 
 <?php if (!$consent_accepted): ?>
+
+<link rel="stylesheet" href="<?= CSS_URL ?>consent.css">
+<script src="<?= JS_URL ?>consent.js" defer></script>
+
 <div id="consentBanner" class="consent-banner show">
     <h5 class="fw-bold mb-2">Kami Menghargai Privasi Anda</h5>
     <p class="small text-muted mb-3">
@@ -78,28 +82,3 @@ if ($consent_accepted): ?>
         </div>
     </div>
 </div>
-
-<script>
-function saveConsent(all = true, rejectAll = false) {
-    const cats = {
-        necessary: true,
-        analytics: rejectAll ? false : (all || document.getElementById('check_analytics').checked),
-        marketing: rejectAll ? false : (all || document.getElementById('check_marketing').checked)
-    };
-
-    fetch("/api/api-consent.php", {
-        method: 'POST',
-        headers: { 
-            'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
-        },
-        body: JSON.stringify({ consent_given: !rejectAll, categories: cats })
-    })
-    .then(() => location.reload())
-    .catch(err => console.error('Consent error:', err));
-}
-
-function openPreferences() {
-    document.getElementById('prefModal').style.display = 'block';
-}
-</script>

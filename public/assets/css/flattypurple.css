@@ -25,46 +25,45 @@
   --sl-900: #111827;
   --sl-950: #030712;
   --font-primary: "Inter", sans-serif;
-  --space-0: 0;
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 4rem;
-  --space-12: 6rem;
-  --space-16: 10rem; 
+    --space-0:  0;
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
   --radius-none: 0;
-  --radius-sm: 0.375rem;
-  --radius: 0.5rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
-  --radius-3xl: 2rem;
+  --radius-sm:   0.375rem;
+  --radius:      0.75rem;
+  --radius-lg:   1rem;
+  --radius-xl:   1.5rem;
   --radius-full: 9999px;
   --navbar-height:70px;
 
   /* === === base === === */
   --logo-path: url("https://ayokebandung.id/assets/images/logo-d.png");
-  --glass-bg: rgba(255,255,255,0.55);
-  --glass-bg-hover: rgba(255,255,255,0.70);
-  --glass-bg-active: rgba(255,255,255,0.65);
-  --glass-backdrop: rgba(255, 255, 255, 0.15);
-  --glass-blur: blur(18px);
-  --glass-border: 1px solid rgba(0,0,0,0.1);
-  --glass-shadow: none;
-  --bg-white: #fff;
+  --glass-bg:       rgba(255,255,255,0.55);
+  --glass-bg-hover: rgba(255,255,255,0.68);
+  --glass-bg-active:rgba(255,255,255,0.80);
+  --glass-backdrop: rgba(255,255,255,0.15);
+  --glass-blur:     blur(18px);
+  --glass-border:   1px solid rgba(0,0,0,0.1);
+  --glass-shadow:   none;
+  --bg-white: #FAFAFA;
   --bg-primary: #F6F5FF;
   --bg-hover: #6C2BD9;
   --bg-nav: transparent;
-  --bg-nav-hover: rgba(150,100,170,0.08);
-  --text-primary: #111827;
+  --bg-nav-hover: rgba(108, 43, 217, 0.08);
+  --text-primary: #374151;
   --text-heading: #1F2937;
+  --text-white:   #fff;
   --text-muted: #6B7280;
-  --text-nav: #030712;
+  --text-nav: #374151;
   --text-nav-hover: #6C2BD9;
 
   /* === === custom === === */
@@ -86,17 +85,17 @@
   --glass-blur: none;
   --glass-border:1px solid rgba(255,255,255,0.1);
   --glass-shadow: none;
-  --bg-white: #030712;
-  --bg-primary: #111827;
+  --bg-white: #0F1117;
+  --bg-primary: #1a1f2e;
   --bg-hover: #7E3AF2;
   --bg-nav: transparent;
-  --bg-nav-hover: rgba(127,127,127,0.1);
-  --text-primary: #F9FAFB;
-  --text-heading: #DCD7FE;
-  --text-hover: #fff;
-  --text-muted: #9CA3AF;
-  --text-nav: #fff;
-  --text-nav-hover: #7E3AF2;
+  --bg-nav-hover: rgba(172, 148, 250, 0.10);
+  --text-primary: #CDD5E0;
+  --text-heading: #E2E8F0;
+  --text-white: #fff;
+  --text-muted: #8896A5;
+  --text-nav: #CDD5E0;
+  --text-nav-hover: #AC94FA;
   
 }
 
@@ -105,25 +104,24 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
+  font-size: 14px;
   height: 100%;
   background: var(--bg-white);
 }
 
 body {
   font-family: "Inter", sans-serif;
-  font-style: normal;
   color: var(--text-primary);
   background: var(--bg-white);
   min-height: 100vh;
   overflow-x: hidden;
-  padding: 0;
-  margin: 0;
-  font-size: 1rem;
+  font-size: var(--space-4);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -153,16 +151,12 @@ body {
 }
 
 a {
-  color: #9061F9;
+  color: var(--pu-500);
   text-decoration: none;
-  font-weight: 400;
-  transition: color 0.2s ease;
+  transition: color 0.3s ease;
 }
 a:hover, a:active {
-  color: #6C2BD9;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
+  color: var(--pu-700);
 }
 a:focus-visible {
   outline: 2px solid var(--pu-500);
@@ -182,9 +176,7 @@ em, i {
 
 p {
   color: var(--text-primary);
-  font-size: 1rem;
-  line-height: 1.7;
-  margin: 0 0 1em 0;
+  font-size: var(--space-4);
   max-width: 68ch;
 }
 p:last-child {
@@ -192,16 +184,14 @@ p:last-child {
 }
 p.lead {
   font-size: 1.125rem;
-  line-height: 1.75;
   color: var(--text-muted);
-  font-weight: 400;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-8);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Inter", sans-serif;
   color: var(--text-heading);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.02em;
   margin: 0 0 0.5em 0;
@@ -254,27 +244,24 @@ h6 { font-size: 0.875rem; font-weight: 600; }
 }
 .glass-hero-card {
     background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
     border: var(--glass-border);
-    padding: 3rem;
+    padding: var(--space-12);
     border-radius: var(--radius);
     box-shadow: var(--glass-shadow);
     animation: fadeInUp 0.3s ease forwards;
 }
 .btn-gradient-blue {
-    background: linear-gradient(to right, #7E3AF2, #6C2BD9);
-    color: #fff;
-    border: none !important;
-    padding: 0.75rem 1.5rem;
+    background: linear-gradient(to right, var(--pu-500), var(--pu-700));
+    color: var(--text-white);
     border-radius: var(--radius);
-    font-weight: 700;
     transition: 0.3s;
 }
 .btn-gradient-blue:hover {
     transform: translateY(-2px);
     box-shadow: var(--glass-shadow);
-    color: #fff;
+    color: var(--text-white);
 }
 [data-dark] .hero-overlay {
     background: linear-gradient(90deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.3) 100%);
@@ -336,8 +323,8 @@ h6 { font-size: 0.875rem; font-weight: 600; }
   display:flex;
   align-items:center;
   background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border-bottom: var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
@@ -345,7 +332,7 @@ h6 { font-size: 0.875rem; font-weight: 600; }
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
   min-width: 100px;
   justify-content: flex-end;
 }
@@ -368,7 +355,7 @@ h6 { font-size: 0.875rem; font-weight: 600; }
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: all 0.3s ease-in-out;
+  transition: background-image 0.2s ease;
 }
 .search-btn, .dm-btn {
   position: relative;
@@ -382,7 +369,7 @@ h6 { font-size: 0.875rem; font-weight: 600; }
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background 0.3s ease;
+  transition: background 0.2s ease;
   -webkit-tap-highlight-color: transparent;
 }
 .search-btn:hover, .dm-btn:hover {
@@ -513,7 +500,7 @@ h6 { font-size: 0.875rem; font-weight: 600; }
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .hamburger-icon svg {
   width: 20px;
@@ -523,8 +510,8 @@ h6 { font-size: 0.875rem; font-weight: 600; }
 .h-top, .h-mid, .h-bot {
   transform-box: fill-box;
   transform-origin: center;
-  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1),
-  opacity 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1),
+  opacity 0.3s ease;
 }
 .menu-open .h-top { transform: translateY(6px) rotate(45deg); }
 .menu-open .h-mid { opacity: 0; }

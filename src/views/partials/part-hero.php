@@ -21,8 +21,8 @@
         <h1 class="display-4 fw-bold mb-3 text-blue-800"><?= $s['title'] ?></h1>
         <p class="lead mb-4 text-secondary"><?= $s['desc'] ?></p>
         <div class="d-flex gap-3">
-          <a href="#kenapa-harus-bandung" class="btn btn-gradient-blue shadow-lg">
-            Mulai Jelajahi <i class="fas fa-arrow-right ms-2"></i>
+          <a href="#kenapa-harus-bandung" class="btn btn-primary shadow-lg">
+            Mulai Jelajahi <i class="arrow-icon fas fa-arrow-right ms-2"></i>
           </a>
         </div>
       </div>

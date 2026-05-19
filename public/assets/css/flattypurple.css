@@ -51,9 +51,10 @@
     --glass-bg-hover: rgba(255, 255, 255, 0.68);
     --glass-bg-active: rgba(255, 255, 255, 0.8);
     --glass-backdrop: rgba(255, 255, 255, 0.15);
-    --glass-blur: blur(18px);
+    --glass-blur: blur(20px);
     --glass-border: 1px solid rgba(0, 0, 0, 0.1);
-    --glass-shadow: none;
+    --glass-border-hover: 1px solid rgba(0,0,0,0.2);
+    --glass-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);;
     --bg-white: #fafafa;
     --bg-primary: #f6f5ff;
     --bg-hover: #6c2bd9;
@@ -84,7 +85,8 @@
     --glass-backdrop: rgba(0, 0, 0, 0.3);
     --glass-blur: none;
     --glass-border: 1px solid rgba(255, 255, 255, 0.1);
-    --glass-shadow: none;
+    --glass-border-hover: 1px solid rgba(255,255,255,0.2);
+    --glass-shadow: 0 1px 3px rgba(255,255,255,0.06), 0 1px 2px rgba(255,255,255,0.04);
     --bg-white: #0f1117;
     --bg-primary: #1a1f2e;
     --bg-hover: #7e3af2;
@@ -109,7 +111,7 @@
 
 html {
     scroll-behavior: smooth;
-    font-size: 14px;
+    font-size: 13px;
     height: 100%;
     background: var(--bg-white);
 }
@@ -130,7 +132,6 @@ body {
 a {
     color: var(--pu-500);
     text-decoration: none;
-    transition: color 0.3s ease;
 }
 a:hover,
 a:active {
@@ -263,24 +264,13 @@ h6 {
 }
 .glass-hero-card {
     background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: var(--glass-border);
     padding: var(--space-12);
     border-radius: var(--radius);
     box-shadow: var(--glass-shadow);
     animation: fadeInUp 0.3s ease forwards;
-}
-.btn-gradient-blue {
-    background: linear-gradient(to right, var(--pu-500), var(--pu-700));
-    color: var(--text-white);
-    border-radius: var(--radius);
-    transition: 0.3s;
-}
-.btn-gradient-blue:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--glass-shadow);
-    color: var(--text-white);
 }
 [data-dark] .hero-overlay {
     background: linear-gradient(
@@ -360,7 +350,7 @@ h6 {
     margin-left: auto;
     display: flex;
     align-items: center;
-    gap: 13px;
+    gap: 12px;
     min-width: 100px;
     justify-content: flex-end;
 }
@@ -374,7 +364,7 @@ h6 {
     min-width: 100px;
 }
 .navbar-brand:hover {
-    color: var(--text-nav-hover) !important;
+    color: var(--text-nav-hover);
 }
 .logo-navbar {
     height: 40px;
@@ -384,6 +374,7 @@ h6 {
     background-position: center;
     background-repeat: no-repeat;
     transition: background-image 0.2s ease;
+    opacity: 0.9;
 }
 .search-btn,
 .dm-btn {

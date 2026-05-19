@@ -10,7 +10,7 @@ nav,
 .dropdown-menu,
 .glass-hero-card,
 .btn,
-.btn-close
+.btn-close,
 .close-btn {
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
@@ -56,21 +56,6 @@ button,
 textarea,
 select {
   font: inherit;
-}
-
-h1 + p,
-h2 + p,
-h3 + p {
-  margin-top: 0.5rem;
-}
-p + h2,
-p + h3,
-ul + h2,
-ul + h3 {
-  margin-top: 2.5rem;
-}
-h2 + p {
-  margin-top: 0.4rem;
 }
 
 main, section, footer {

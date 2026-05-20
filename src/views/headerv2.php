@@ -450,21 +450,7 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
 var(--text-nav-hover); }
 </style>
   <!-- login: User Section -->
-<div class="mt-4 mb-4 p-4">
 <?php if (empty($_SESSION['user'])): ?>
-    <script>
-        function handleGSI(response) {
-            fetch('/api/auth/gsi.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ token: response.credential })
-            })
-            .then(r => r.json())
-            .then(data => {
-                if (data.success) window.location.href = data.redirect;
-            });
-        }
-    </script>
     <script src="https://accounts.google.com/gsi/client" async></script>
     <div id="g_id_onload"
         data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
@@ -473,10 +459,12 @@ var(--text-nav-hover); }
         data-cancel_on_tap_outside="true"
         data-delay_notification="10000">
     </div>
-    <div class="g_id_signin" data-type="standard" data-shape="pill"></div>
+    <div class="g_id_signin" data-type="standard"></div>
 
 <?php else: ?>
     <div class="d-flex align-items-center gap-2">
+
+        <!-- Profile Pill -->
         <a href="/profile" class="profile-pill">
             <?php if (!empty($_SESSION['user']['avatar'])): ?>
                 <img src="<?= safe_html($_SESSION['user']['avatar']) ?>"
@@ -489,13 +477,16 @@ var(--text-nav-hover); }
                 </div>
             <?php endif; ?>
             <div>
-                <span class="account-label">AKUN</span>
                 <span class="account-name text-truncate" style="max-width: 120px;">
                     <?= safe_html($_SESSION['user']['name']) ?>
                 </span>
             </div>
         </a>
+
+        <!-- Divider -->
         <div class="divider-v"></div>
+
+        <!-- Logout -->
         <a href="/logout" class="btn-logout">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
@@ -506,7 +497,19 @@ var(--text-nav-hover); }
         </a>
     </div>
 <?php endif; ?>
-</div>
+<script>
+    function handleGSI(response) {
+        fetch('/api/auth/gsi.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: response.credential })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) window.location.href = data.redirect;
+        });
+    }
+</script>
   
 </div>
 

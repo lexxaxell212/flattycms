@@ -65,6 +65,10 @@ section {
   padding-bottom: var(--space-16);
 }
 
+footer {
+  padding-bottom: var(--space-8);
+}
+
 table thead th {
   background: var(--pu-200) !important;
   color: var(--text-primary) !important;

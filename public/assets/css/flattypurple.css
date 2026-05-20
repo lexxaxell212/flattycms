@@ -84,6 +84,12 @@
     --text-nav: #201b33;
     --text-nav-hover: #6c2bd9;
     --text-dark: #0a0118;
+    
+    /* logo */
+    --ayoke: #26213a;
+    --bandung: #201b33;
+    --dotid: #6c2bd9;
+    --strips: #6c2bd933;
 }
 
 /* ============= flatty dark ============= */
@@ -109,6 +115,12 @@
     --text-muted: #6b7280;
     --text-nav: #e8e2ff;
     --text-nav-hover: #ac94fa;
+    
+    /* logo dark */
+    --ayoke: #e2e8f0;
+    --bandung: #e8e2ff;
+    --dotid: #7e3af2;
+    --strips: #6c2bd94d;
 }
 
 /* ================= base ================= */
@@ -369,16 +381,15 @@ h6 {
 }
 /* brand - dm, search, menu button */
 .navbar-brand {
-    font-weight: var(--fw-extrabold);
-    font-size: 1.5rem;
-    color: var(--text-nav);
-    letter-spacing: -0.5px;
-    padding: 5px;
-    min-width: 100px;
+  height: 35px;
+  margin-left: 8px;
 }
-.navbar-brand:hover {
-    color: var(--text-nav-hover);
+
+.navbar-brand svg {
+  width: 100% !important;
+  height: 100% !important;
 }
+
 .logo-navbar {
     height: 40px;
     width: 80px;

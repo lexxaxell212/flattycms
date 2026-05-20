@@ -24,15 +24,15 @@ $page_title = "Kenapa harus Bandung";
         <div class="col-12 text-center py-5">
           <div class="alert alert-warning" style="margin: auto;max-width:320px">
             <i class="icon d-block fa-3x fas fa-dice"></i>
-            <span class="fw-semibold h5">Belum ada Card</span>
+            <h3>Belum ada Card</h3>
             <p class="text-muted">Tambahkan cards melalui <strong>Dashboard</strong></p>
           </div>
         </div>
       <?php } else {foreach ($all_items as $item) {
   
-       $image = $item["image"] ?? "default.jpg";
+       $image = $item["image"] ?? "/uploads/default.jpg";
        $image_path =
-         strpos($image, "http") === 0 ? $image : "uploads/" . $image;
+         strpos($image, "http") === 0 ? $image : BASE_UPLOAD_URL . $image;
        $category = strtolower($item["category"] ?? "general");
        $cat_label = ucwords(str_replace(["-", "_"], " ", $category));
        $title = htmlspecialchars($item["title"] ?? "Untitled");
@@ -41,8 +41,8 @@ $page_title = "Kenapa harus Bandung";
        ?>
           <div class="col-lg-6 col-xl-4">
             <div class="card card-glass h-100 overflow-hidden">
-                <img src="<?= $image_path ?>" alt="<?= $title ?>" class="card-img-top w-100 mb-4"
-                onerror="this.src='uploads/default.jpg'"
+                <img src="<?= $image_path ?>" alt="<?= $title ?>" class="card-img-top"
+                onerror="this.src='/uploads/default.jpg'"
                 >
                 <div class="card-body">
                   <h3>

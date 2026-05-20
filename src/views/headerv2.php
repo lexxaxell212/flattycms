@@ -563,45 +563,6 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
           </svg>
         </span>
       </button>
-
-      <?php if (isset($_SESSION['user'])): ?>
-      <!-- Desktop: User Avatar + Dropdown -->
-      <div class="nav-user-wrap" id="userDropdownWrap">
-        <button class="nav-user-btn" id="userDropdownTrigger" aria-label="Menu pengguna">
-          <img
-            src="<?= htmlspecialchars($_SESSION['user']['avatar']) ?>"
-            alt="<?= htmlspecialchars($_SESSION['user']['name']) ?>"
-            class="nav-user-avatar"
-            referrerpolicy="no-referrer">
-        </button>
-        <div class="nav-user-panel" id="userDropdownPanel">
-          <a href="/profile" style="text-decoration: none;">
-          <div class="nav-user-info">
-            <img
-              src="<?= htmlspecialchars($_SESSION['user']['avatar']) ?>"
-              alt="<?= htmlspecialchars($_SESSION['user']['name']) ?>"
-              class="nav-user-avatar-lg"
-              referrerpolicy="no-referrer">
-            <div class="nav-user-meta">
-              <div class="nav-user-name"><?= htmlspecialchars($_SESSION['user']['name']) ?></div>
-              <div class="nav-user-email"><?= htmlspecialchars($_SESSION['user']['email']) ?></div>
-            </div>
-          </div>
-          </a>
-          <div class="nav-user-divider"></div>
-          <a href="/api/auth/logout.php" class="nav-user-logout">
-            <i class="fa-solid fa-right-from-bracket"></i> Keluar
-          </a>
-        </div>
-      </div>
-      <?php else: ?>
-      <!-- Desktop: Login Button -->
-      <a href="/api/auth/google.php" class="nav-login-btn">
-        <i class="fab fa-google"></i>
-        <span>Masuk</span>
-      </a>
-      <?php endif; ?>
-
       <button class="navbar-toggler" type="button" id="navbarToggler" aria-label="Toggle Menu">
         <span class="hamburger-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -644,30 +605,27 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
   </ul>
 
   <!-- Mobile: User Section -->
-  <div class="mobile-user-section">
-    <?php if (isset($_SESSION['user'])): ?>
-    <a href="/profile" style="text-decoration: none;">
-    <div class="mobile-user-info">
-      <img
-        src="<?= htmlspecialchars($_SESSION['user']['avatar']) ?>"
-        alt="<?= htmlspecialchars($_SESSION['user']['name']) ?>"
-        class="nav-user-avatar-lg"
-        referrerpolicy="no-referrer">
-      <div class="nav-user-meta">
-        <div class="nav-user-name"><?= htmlspecialchars($_SESSION['user']['name']) ?></div>
-        <div class="nav-user-email"><?= htmlspecialchars($_SESSION['user']['email']) ?></div>
+  <script src="https://accounts.google.com/gsi/client" async></script>
+      <div id="g_id_onload"
+        data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
+        data-callback="handleGSI"
+        data-auto_select="false">
       </div>
-    </div>
-    </a>
-    <a href="/api/auth/logout.php" class="nav-user-logout">
-      <i class="fa-solid fa-right-from-bracket"></i> Keluar
-    </a>
-    <?php else: ?>
-    <a href="/api/auth/google.php" class="nav-login-btn nav-login-btn--full">
-      <i class="fab fa-google"></i> Masuk dengan Google
-    </a>
-    <?php endif; ?>
-  </div>
+      <div class="g_id_signin" data-type="standard"></div>
+      <script>
+      function handleGSI(response) {
+        fetch('/api/auth/gsi.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: response.credential })
+        })
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) window.location.href = data.redirect;
+        });
+      }
+      </script>
+      
 </div>
 <script>
 (function () {

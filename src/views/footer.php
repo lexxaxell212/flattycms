@@ -42,8 +42,8 @@
     </div>
     <hr>
     <div class="text-center">
-      <p class="text-uppercase ls-wide small py-3"
-      style="opacity:0.5;letter-spacing:2px;">
+      <p class="text-uppercase text-muted ls-wide small py-3"
+      style="opacity:0.9;letter-spacing:2px;">
         <?= date('Y') ?> <?= SITE_NAME ?>
       </p>
     </div>

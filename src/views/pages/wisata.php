@@ -40,7 +40,7 @@ $page_title = "Wisata Bandung";
       <div class="col-12 text-center py-5">
           <div class="alert alert-warning" style="margin: auto;max-width:320px">
             <i class="icon d-block fa-3x fas fa-dice"></i>
-            <span class="fw-semibold h5">Belum ada Card</span>
+            <h2>Belum ada Card</h2>
             <p class="text-muted">Tambahkan cards melalui <strong>Dashboard</strong></p>
           </div>
         </div>
@@ -51,9 +51,9 @@ $page_title = "Wisata Bandung";
 
       foreach ($visible_items as $item) {
 
-        $image = $item["image"] ?? "uploads/default.jpg";
+        $image = $item["image"] ?? "default.jpg";
         $image_path =
-          strpos($image, "http") === 0 ? $image : "uploads/" . $image;
+          strpos($image, "http") === 0 ? $image : $image;
         $category = strtolower($item["category"] ?? "general");
         $cat_label = ucwords(str_replace(["-", "_"], " ", $category));
         $title = htmlspecialchars($item["title"] ?? "Untitled");
@@ -62,21 +62,20 @@ $page_title = "Wisata Bandung";
         ?>
         <div class="col-lg-4 col-md-6 wisata-item" data-category="<?= $category ?>">
           <div class="card card-glass h-100">
-            <span class="position-absolute top-3 start-3 badge bg-accent">
+            <span class="position-absolute top-3 start-3 badge bg-primary">
               <?= $cat_label ?> 
             </span>
             <img src="<?= $image_path ?>" 
-                 class="card-img-top w-100" 
-                 style="height: 220px; object-fit: cover;"
+                 class="card-img-top" 
                  alt="<?= $title ?>"
-                 onerror="this.src='uploads/default.jpg'">
+                 onerror="this.src='default.jpg'">
             <div class="card-body">
               <h3><?= $title ?></h3>
               <p class="text-muted"><?= $excerpt ?>...</p>
               <a href="<?= $link ?>" 
                    class="btn btn-primary" 
                    target="_blank">
-                  Lihat Lokasi
+                  Baca selengkapnya
                   <i class="arrow-icon fas fa-angle-right"></i>
                 </a>
             </div>
@@ -102,7 +101,7 @@ $page_title = "Wisata Bandung";
 
       $image = $item["image"] ?? "default.jpg";
       $image_path =
-        strpos($image, "http") === 0 ? $image : "uploads/" . $image;
+        strpos($image, "http") === 0 ? $image : $image;
       $category = strtolower($item["category"] ?? "general");
       $cat_label = ucwords(str_replace(["-", "_"], " ", $category));
       $title = htmlspecialchars($item["title"] ?? "Untitled");
@@ -111,21 +110,20 @@ $page_title = "Wisata Bandung";
       ?>
       <div class="col-lg-4 col-md-6 col-sm-12 wisata-item" data-category="<?= $category ?>">
         <div class="card card-glass h-100">
-          <span class="position-absolute top-3 start-3 badge bg-accent">
+          <span class="position-absolute top-3 start-3 badge bg-primary">
             <?= $cat_label ?> 
           </span>
           <img src="<?= $image_path ?>" 
-               class="card-img-top w-100" 
-               style="height: 220px; object-fit: cover;"
+               class="card-img-top" 
                alt="<?= $title ?>"
-               onerror="this.src='uploads/default.jpg'">
+               onerror="this.src='default.jpg'">
           <div class="card-body">
             <h3><?= $title ?></h3>
             <p class="text-muted"><?= $excerpt ?>...</p>
               <a href="<?= $link ?>" 
                  class="btn btn-primary" 
                  target="_blank">
-                Lihat Lokasi<i class="arrow-icon fas fa-angle-right"></i>
+                Baca selengkapnya<i class="arrow-icon fas fa-angle-right"></i>
               </a>
           </div>
         </div>
@@ -136,7 +134,7 @@ $page_title = "Wisata Bandung";
   </div>
   <?php endif; ?>
 </main>
-  <div class="alert alert-warning" id="noMores" style="display:none">
+  <div class="btn btn-outline-primary" id="noMores" style="display:none">
   <p class="text-muted">
    Tidak ada lagi ...
   </p>

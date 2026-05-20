@@ -93,7 +93,7 @@ $csrf        = generate_csrf_token();
 
             <?php if (!empty($item['image']) && $item['image'] !== 'default.jpg'): ?>
             <img src="<?= BASE_UPLOAD_URL . safe_html($item['image']) ?>"
-                 class="card-img-top" style="height:150px;object-fit:cover;"
+                 class="card-img-top" style="object-fit:cover;"
                  alt="<?= safe_html($item['title']) ?>"
                  onerror="this.onerror=null;this.src='<?= BASE_UPLOAD_URL ?>default.jpg'">
             <?php else: ?>

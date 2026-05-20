@@ -453,27 +453,26 @@ var(--text-nav-hover); }
 <div class="mt-4 mb-4 p-4">
 <?php if (empty($_SESSION['user'])): ?>
     <script>
-        function handleGSI(response) {
-            fetch('/api/auth/gsi.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ token: response.credential })
-            })
-            .then(r => r.json())
-            .then(data => {
-                if (data.success) window.location.href = data.redirect;
-            });
-        }
-    </script>
-    <script src="https://accounts.google.com/gsi/client" async></script>
-    <div id="g_id_onload"
-        data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
-        data-callback="handleGSI"
-        data-auto_select="false"
-        data-cancel_on_tap_outside="true"
-        data-delay_notification="10000">
-    </div>
-    <div class="g_id_signin" data-type="standard" data-shape="pill"></div>
+    function handleGSI(response) {
+        fetch('/api/auth/gsi.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: response.credential })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) window.location.href = data.redirect;
+        });
+    }
+</script>
+<script src="https://accounts.google.com/gsi/client" async></script>
+<div id="g_id_onload"
+    data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
+    data-callback="handleGSI"
+    data-auto_select="false"
+    data-cancel_on_tap_outside="true">
+</div>
+<div class="g_id_signin" data-type="standard" data-shape="pill"></div>
 
 <?php else: ?>
     <div class="d-flex align-items-center gap-2">

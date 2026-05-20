@@ -518,7 +518,7 @@ var(--text-nav-hover); }
             observer.observe(target);
         }
     });
-  }
+    }
 </script>
   
 </div>

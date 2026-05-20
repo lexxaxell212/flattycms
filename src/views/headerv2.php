@@ -450,17 +450,31 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
 var(--text-nav-hover); }
 </style>
   <!-- login: User Section -->
-  <div class="mt-4 mb-4 p-4">
+<div class="mt-4 mb-4 p-4">
 <?php if (empty($_SESSION['user'])): ?>
+    <script>
+        function handleGSI(response) {
+            fetch('/api/auth/gsi.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token: response.credential })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) window.location.href = data.redirect;
+            });
+        }
+    </script>
     <script src="https://accounts.google.com/gsi/client" async></script>
     <div id="g_id_onload"
         data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
         data-callback="handleGSI"
         data-auto_select="false"
         data-cancel_on_tap_outside="true"
-        data-delay_notification="7000">
+        data-delay_notification="10000">
     </div>
-    <div class="g_id_signin" data-type="standard"></div>
+    <div class="g_id_signin" data-type="standard" data-shape="pill"></div>
+
 <?php else: ?>
     <div class="d-flex align-items-center gap-2">
         <a href="/profile" class="profile-pill">
@@ -475,6 +489,7 @@ var(--text-nav-hover); }
                 </div>
             <?php endif; ?>
             <div>
+                <span class="account-label">AKUN</span>
                 <span class="account-name text-truncate" style="max-width: 120px;">
                     <?= safe_html($_SESSION['user']['name']) ?>
                 </span>
@@ -492,34 +507,6 @@ var(--text-nav-hover); }
     </div>
 <?php endif; ?>
 </div>
-<script>
-    function handleGSI(response) {
-        fetch('/api/auth/gsi.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token: response.credential })
-        })
-        .then(r => r.json())
-        .then(data => {
-            if (data.success) window.location.href = data.redirect;
-        });
-    }
-
-    if (!CONFIG.isLoggedIn) {
-    document.addEventListener('DOMContentLoaded', () => {
-        const target = document.getElementById('part-trip-planner');
-        if (target) {
-            const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    setTimeout(() => google.accounts.id.prompt(), 3000);
-                    observer.disconnect();
-                }
-            }, { threshold: 0.8 });
-            observer.observe(target);
-        }
-    });
-    }
-</script>
   
 </div>
 

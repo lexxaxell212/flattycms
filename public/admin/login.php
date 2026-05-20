@@ -24,6 +24,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['pa
   <link href="<?= CSS_URL ?>bs533.min.css" rel="stylesheet">
   <link href="<?= CSS_URL ?>flattypurple.css" rel="stylesheet">
   <link href="<?= CSS_URL ?>flattyui.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -31,12 +41,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['pa
       <div class="col-12 col-md-8 col-lg-5">
         <div class="card card-glass">
           <div class="card-body">
-            <!-- Header -->
             <div class="text-center">
               <h1 class="text-title">Admin Login</h1>
               <p class="text-muted">Masukkan kredensial Anda</p>
             </div>
-
             <!-- Error Alert -->
             <?php if(isset($error)): ?>
               <div class="alert alert-danger mb-4">
@@ -44,8 +52,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['pa
                 <?= htmlspecialchars($error) ?>
               </div>
             <?php endif; ?>
-
-            <!-- Form -->
             <form method="POST">
               <div class="mb-3">
                 <label class="form-label fw-semibold">Username</label>
@@ -53,13 +59,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['pa
                        value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>" 
                        placeholder="Masukkan username" required autofocus>
               </div>
-
               <div class="mb-4">
                 <label class="form-label fw-semibold">Password</label>
                 <input type="password" class="form-control" name="password" 
                        placeholder="Masukkan password" required>
               </div>
-
               <button type="submit" class="btn btn-primary mb-3">
                 Masuk
               </button>

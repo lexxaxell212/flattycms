@@ -431,12 +431,12 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
                    style="width: 26px; height: 26px; font-size: 11px;">
                   <?= strtoupper(substr($_SESSION['user']['name'], 0, 1)) ?>
               </div>
-              <span class="fw-medium small d-none d-sm-inline">
+              <span class="fw-medium small d-sm-inline">
                   <?= htmlspecialchars($_SESSION['user']['name']) ?>
               </span>
           </a>
           <div class="vr text-muted my-1" style="width: 1px; height: 16px;"></div>
-          <a href="/api/auth/logout" class="btn btn-link btn-sm text-danger border-0 py-1 px-2.5 text-decoration-none" title="Keluar">
+          <a href="/logout" class="btn btn-link btn-sm text-danger border-0 py-1 px-2.5 text-decoration-none" title="Keluar">
               <span class="d-sm-none small fw-medium">Keluar</span>
               <span class="d-none d-sm-inline small fw-medium">Logout</span>
           </a>

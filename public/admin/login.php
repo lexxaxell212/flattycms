@@ -31,7 +31,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['pa
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
     }
   </style>
 </head>
@@ -54,13 +53,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['pa
             <?php endif; ?>
             <form method="POST">
               <div class="mb-3">
-                <label class="form-label fw-semibold">Username</label>
+                <label class="form-label fw-semibold text-start">Username</label>
                 <input type="text" class="form-control" name="username" 
                        value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>" 
                        placeholder="Masukkan username" required autofocus>
               </div>
               <div class="mb-4">
-                <label class="form-label fw-semibold">Password</label>
+                <label class="form-label fw-semibold text-start">Password</label>
                 <input type="password" class="form-control" name="password" 
                        placeholder="Masukkan password" required>
               </div>

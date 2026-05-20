@@ -29,9 +29,9 @@ $page_title = "Kuliner Bandung";
 
       foreach ($visible_items as $item) {
 
-        $image = $item["image"] ?? "/default.jpg";
+        $image = $item["image"] ?? "/uploads/default.jpg";
         $image_path =
-          strpos($image, "http") === 0 ? $image : "uploads/" . $image;
+          strpos($image, "http") === 0 ? $image : BASE_UPLOAD_URL . $image;
         $category = strtolower($item["category"] ?? "general");
         $cat_label = ucwords(str_replace(["-", "_"], " ", $category));
         $title = htmlspecialchars($item["title"] ?? "Untitled");
@@ -42,9 +42,8 @@ $page_title = "Kuliner Bandung";
           <div class="card card-glass h-100">
             <img src="<?= $image_path ?>" 
                  class="card-img-top w-100" 
-                 style="height: 220px; object-fit: cover;"
                  alt="<?= $title ?>"
-                 onerror="this.src='uploads/default.jpg'">
+                 onerror="this.src='/uploads/default.jpg'">
             <div class="card-body">
               <h3><?= $title ?></h3>
               <p class="text-muted"><?= $excerpt ?>...</p>
@@ -76,9 +75,9 @@ $page_title = "Kuliner Bandung";
     $hidden_items = array_slice($all_items, 10);
     foreach ($hidden_items as $item) {
 
-      $image = $item["image"] ?? "/default.jpg";
+      $image = $item["image"] ?? "/uploads/default.jpg";
       $image_path =
-        strpos($image, "http") === 0 ? $image : "/uploads/" . $image;
+        strpos($image, "http") === 0 ? $image : BASE_UPLOAD_URL . $image;
       $category = strtolower($item["category"] ?? "general");
       $cat_label = ucwords(str_replace(["-", "_"], " ", $category));
       $title = htmlspecialchars($item["title"] ?? "Untitled");
@@ -89,9 +88,8 @@ $page_title = "Kuliner Bandung";
         <div class="card card-glass h-100">
           <img src="<?= $image_path ?>" 
                class="card-img-top w-100" 
-               style="height: 220px; object-fit: cover;"
                alt="<?= $title ?>"
-               onerror="this.src='uploads/default.jpg'">
+               onerror="this.src='/uploads/default.jpg'">
           <div class="card-body">
             <h3><?= $title ?></h3>
             <p class="text-muted"><?= $excerpt ?>...</p>

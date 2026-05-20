@@ -44,7 +44,7 @@ $page_title = "Hotel dan Penginapan";
       <div class="col-12 text-center py-5">
           <div class="alert alert-warning" style="margin: auto;max-width:320px">
             <i class="icon d-block fa-3x fas fa-dice"></i>
-            <span class="fw-semibold h5">Belum ada Card</span>
+            <h3>Belum ada Card</h3>
             <p class="text-muted">Tambahkan cards melalui <strong>Dashboard</strong></p>
           </div>
         </div>
@@ -55,9 +55,9 @@ $page_title = "Hotel dan Penginapan";
 
    foreach ($visible_items as $item) {
 
-     $image = $item["image"] ?? "/default.jpg";
+     $image = $item["image"] ?? "/uploads/default.jpg";
      $image_path =
-       strpos($image, "http") === 0 ? $image : "uploads/" . $image;
+       strpos($image, "http") === 0 ? $image : BASE_UPLOAD_URL . $image;
      $category = strtolower($item["category"] ?? "general");
      $cat_label = ucwords(str_replace(["-", "_"], " ", $category));
      $title = htmlspecialchars($item["title"] ?? "Untitled");
@@ -66,11 +66,11 @@ $page_title = "Hotel dan Penginapan";
      ?>
 <div class="col-lg-4 col-md-6 hotel-item" data-category="<?= $category ?>">
 <div class="card card-glass h-100"> 
-<span class="position-absolute top-3 start-3 badge bg-accent">
+<span class="position-absolute top-3 start-3 badge bg-primary">
 <?= $cat_label ?> 
 </span>
 <img src="<?= $image_path ?>" class="card-img-top" alt="<?= $title ?>"
-onerror="this.src='uploads/default.jpg'">
+onerror="this.src='/uploads/default.jpg'">
 <div class="card-body">
 <h3><?= $title ?></h3>
 <p class="text-muted"><?= $excerpt ?>...</p>
@@ -99,9 +99,9 @@ class="arrow-icon fas fa-angle-right"></i>
     $hidden_items = array_slice($all_items, 10);
     foreach ($hidden_items as $item) {
 
-      $image = $item["image"] ?? "/default.jpg";
+      $image = $item["image"] ?? "/uploads/default.jpg";
       $image_path =
-        strpos($image, "http") === 0 ? $image : "uploads/" . $image;
+        strpos($image, "http") === 0 ? $image : BASE_UPLOAD_URL . $image;
       $category = strtolower($item["category"] ?? "general");
       $cat_label = ucwords(str_replace(["-", "_"], " ", $category));
       $title = htmlspecialchars($item["title"] ?? "Untitled");
@@ -110,11 +110,11 @@ class="arrow-icon fas fa-angle-right"></i>
       ?>
       <div class="col-lg-4 col-md-6 hotel-item" data-category="<?= $category ?>">
 <div class="card card-glass h-100"> 
-<span class="position-absolute top-3 start-3 badge bg-accent">
+<span class="position-absolute top-3 start-3 badge bg-primary">
 <?= $cat_label ?> 
 </span>
 <img src="<?= $image_path ?>" class="card-img-top" alt="<?= $title ?>"
-onerror="this.src='/default.jpg'">
+onerror="this.src='/uploads/default.jpg'">
 <div class="card-body">
 <h3><?= $title ?></h3>
 <p class="text-muted"><?= $excerpt ?>...</p>

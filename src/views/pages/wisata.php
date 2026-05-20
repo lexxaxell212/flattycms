@@ -53,7 +53,7 @@ $page_title = "Wisata Bandung";
 
         $image = $item["image"] ?? "/uploads/default.jpg";
         $image_path =
-          strpos($image, "http") === 0 ? $image : BASE_UPLOAD_PATH . $image;
+          strpos($image, "http") === 0 ? $image : BASE_UPLOAD_URL . $image;
         $category = strtolower($item["category"] ?? "general");
         $cat_label = ucwords(str_replace(["-", "_"], " ", $category));
         $title = htmlspecialchars($item["title"] ?? "Untitled");
@@ -101,7 +101,7 @@ $page_title = "Wisata Bandung";
 
       $image = $item["image"] ?? "/uploads/default.jpg";
       $image_path =
-        strpos($image, "http") === 0 ? $image : BASE_UPLOAD_PATH . $image;
+        strpos($image, "http") === 0 ? $image : BASE_UPLOAD_URL . $image;
       $category = strtolower($item["category"] ?? "general");
       $cat_label = ucwords(str_replace(["-", "_"], " ", $category));
       $title = htmlspecialchars($item["title"] ?? "Untitled");
@@ -134,7 +134,7 @@ $page_title = "Wisata Bandung";
   </div>
   <?php endif; ?>
 </main>
-  <div class="btn btn-outline-primary" id="noMores" style="display:none">
+  <div class="alert alert-warning" id="noMores" style="display:none">
   <p class="text-muted">
    Tidak ada lagi ...
   </p>

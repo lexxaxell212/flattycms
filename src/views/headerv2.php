@@ -46,13 +46,13 @@ $isPintasanActive = (bool) array_filter(
     <link rel="stylesheet" href="<?= CSS_URL ?>flattyui.css">
     <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css">
   </noscript>
-  <script>
+<script>
     const CONFIG = {
         baseUrl: '<?= BASE_URL ?>',
-        isLoggedIn: <?= isset($_SESSION['user']) ? 'true' : 'false' ?>,
+        isLoggedIn: <?= !empty($_SESSION['user']) ? 'true' : 'false' ?>,
         csrfToken: '<?= generate_csrf_token() ?>',
     };
-  </script>
+</script>
   <script src="<?= JS_URL ?>bs533.bundle.min.js" defer></script>
   <script src="<?= JS_URL ?>swal2.all.min.js" defer></script>
   <script src="<?= JS_URL ?>chat.js" defer></script>
@@ -450,13 +450,15 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
 var(--text-nav-hover); }
 </style>
   <!-- login: User Section -->
+  <div class="mt-4 mb-4 p-4">
 <?php if (empty($_SESSION['user'])): ?>
     <script src="https://accounts.google.com/gsi/client" async></script>
     <div id="g_id_onload"
         data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
         data-callback="handleGSI"
         data-auto_select="false"
-        data-cancel_on_tap_outside="true">
+        data-cancel_on_tap_outside="true"
+        data-delay_notification="7000">
     </div>
     <div class="g_id_signin" data-type="standard"></div>
 <?php else: ?>
@@ -489,24 +491,31 @@ var(--text-nav-hover); }
         </a>
     </div>
 <?php endif; ?>
+</div>
 <script>
-      function handleGSI(response) {
+    function handleGSI(response) {
         fetch('/api/auth/gsi.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token: response.credential })
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: response.credential })
         })
         .then(r => r.json())
         .then(data => {
-          if (data.success) window.location.href = data.redirect;
+            if (data.success) window.location.href = data.redirect;
         });
-      }
-      const isLoggedIn = <?= !empty($_SESSION['user']) ? 'true' : 'false' ?>;
-      if (isLoggedIn) {
-        google.accounts.id.cancel();
-        google.accounts.id.disableAutoSelect();
-      }
-      </script>
+    }
+
+    if (!CONFIG.isLoggedIn) {
+        const target = document.getElementById('part-trip-planner');
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setTimeout(() => google.accounts.id.prompt(), 3000);
+                observer.disconnect();
+            }
+        }, { threshold: 0.8 });
+        observer.observe(target);
+    } 
+</script>
   
 </div>
 

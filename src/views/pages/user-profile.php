@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION['user'])) {
-    header('Location: /api/auth/google.php');
+    header('Location: /');
     exit;
 }
 $page_title = 'Profil Saya — ' . SITE_NAME;

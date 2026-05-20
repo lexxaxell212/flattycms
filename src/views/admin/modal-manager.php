@@ -91,11 +91,10 @@ $csrf        = generate_csrf_token();
                 #<?= (int)$item['id'] ?>
             </span>
 
-            <?php if (!empty($item['image']) && $item['image'] !== 'default.jpg'): ?>
+            <?php if (!empty($item['image']) && $item['image'] !== '/uploads/default.jpg'): ?>
             <img src="<?= BASE_UPLOAD_URL . safe_html($item['image']) ?>"
-                 class="card-img-top" style="object-fit:cover;"
-                 alt="<?= safe_html($item['title']) ?>"
-                 onerror="this.onerror=null;this.src='<?= BASE_UPLOAD_URL ?>default.jpg'">
+                 class="card-img-top" alt="<?= safe_html($item['title']) ?>"
+                 onerror="this.onerror=null;this.src='/uploads/default.jpg'">
             <?php else: ?>
             <div class="d-flex align-items-center justify-content-center bg-light text-muted" style="height:150px;">
                 <i class="fa-solid fa-image fa-2x opacity-50"></i>
@@ -111,7 +110,8 @@ $csrf        = generate_csrf_token();
                             onclick="editItem(<?= $item['id'] ?>,'<?= addslashes($item['title']) ?>','<?= addslashes($item['image']) ?>','<?= addslashes($item['excerpt']) ?>','<?= addslashes($item['button_link']) ?>','<?= addslashes($item['type']) ?>','<?= addslashes($item['status']) ?>','<?= addslashes($item['category']) ?>')">
                         <i class="fa-solid fa-pencil"></i>
                     </button>
-                    <form method="POST" class="flex-fill" onsubmit="return confirm('Arsipkan card ini?')">
+                    <form method="POST" class="flex-fill" onsubmit="return
+                    confirm('Hapus card ini?')">
                         <input type="hidden" name="csrf_token" value="<?= $csrf ?>">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="id" value="<?= (int)$item['id'] ?>">
@@ -288,7 +288,7 @@ function editItem(id, title, image, excerpt, link, type, status, category) {
     document.getElementById('modalType').value = type;
     document.getElementById('modalStatus').value = status;
     document.getElementById('modalCategory').value = category;
-    if (image && image !== 'default.jpg') {
+    if (image && image !== '/uploads/default.jpg') {
         document.getElementById('imagePreview').src = BASE_UPLOAD_URL + image + '?t=' + Date.now();
         document.getElementById('previewContainer').classList.remove('d-none');
     }
@@ -326,7 +326,7 @@ function resetForm() {
     document.getElementById('modalTitle').textContent = 'Buat Card Baru';
     document.getElementById('modalAction').value = 'create';
     document.getElementById('cardForm').reset();
-    document.getElementById('modalImage').value = 'default.jpg';
+    document.getElementById('modalImage').value = '/uploads/default.jpg';
     document.getElementById('modalCategory').value = 'general';
     document.getElementById('modalType').value = 'card';
     document.getElementById('modalStatus').value = 'active';

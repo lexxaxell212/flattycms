@@ -147,196 +147,6 @@ $isPintasanActive = (bool) array_filter(
   
 </head>
 <body>
-<style>
-.nav-login-btn {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 7px 14px;
-  border-radius: 10px;
-  background: var(--glass-bg);
-  color: var(--text-nav);
-  font-size: var(--space-4);
-  font-weight: 500;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
-}
-.nav-login-btn:hover {
-  background: var(--glass-bg-hover);
-  color: var(--text-nav-hover);
-  transform: translateY(-1px);
-}
-.nav-login-btn--full {
-  width: 100%;
-  justify-content: center;
-  padding: 11px 14px;
-  margin-top: 4px;
-}
-
-.nav-user-wrap {
-  position: relative;
-}
-.nav-user-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.nav-user-btn:hover {
-  transform: scale(1.06);
-  box-shadow: 0 0 0 3px rgba(37, 99, 176, 0.15);
-  border-radius: 50%;
-}
-.nav-user-avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  border: 2px solid var(--glass-border);
-}
-.nav-user-avatar-lg {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  border: 2px solid var(--glass-border);
-  flex-shrink: 0;
-}
-
-.nav-user-panel {
-  position: absolute;
-  top: calc(100% + 12px);
-  right: 0;
-  min-width: 220px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
-  padding: 8px;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateY(-6px) scale(0.98);
-  transform-origin: top right;
-  z-index: 1080;
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    visibility 0s linear 0.2s;
-}
-.nav-user-wrap.dd-open .nav-user-panel,
-.nav-user-wrap:hover .nav-user-panel {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: all;
-  transform: translateY(0) scale(1);
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    visibility 0s linear 0s;
-}
-[data-dark] .nav-user-panel {
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.50),
-    0 4px 16px rgba(0, 0, 0, 0.30);
-}
-
-.nav-user-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px;
-  border-radius: 10px;
-}
-.nav-user-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  overflow: hidden;
-}
-.nav-user-name {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--pu-900);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.nav-user-email {
-  font-size: 11.5px;
-  color: var(--pu-900);
-  opacity: 0.55;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.nav-user-divider {
-  height: 1px;
-  background: var(--glass-border);
-  margin: 6px 4px;
-}
-
-.nav-user-logout {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 9px 12px;
-  border-radius: 10px;
-  font-size: 13.5px;
-  font-weight: 500;
-  color: #e53e3e;
-  text-decoration: none;
-  transition: background 0.15s ease, transform 0.15s ease;
-  width: 100%;
-}
-.nav-user-logout:hover {
-  background: rgba(229, 62, 62, 0.08);
-  transform: translateX(2px);
-  color: #e53e3e;
-}
-.nav-user-logout i {
-  font-size: 13px;
-  opacity: 0.85;
-}
-
-.mobile-user-section {
-  border-top: 1px solid var(--glass-border);
-  margin-top: 8px;
-  padding-top: 10px;
-  padding-bottom: 4px;
-}
-.mobile-user-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px;
-  border-radius: 10px;
-  margin-bottom: 4px;
-}
-
-@media (max-width: 991px) {
-  .nav-user-wrap,
-  .nav-login-btn:not(.nav-login-btn--full) {
-    display: none !important;
-  }
-}
-@media (min-width: 992px) {
-  .mobile-user-section {
-    display: none !important;
-  }
-}
-</style>
 <nav class="navbar">
   <div class="container">
     <a aria-label="Halaman awal" href="<?= BASE_URL ?>">
@@ -614,9 +424,25 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
       data-cancel_on_tap_outside="true">
     </div>
     <div class="g_id_signin" data-type="standard"></div>
-  <?php else: ?>
-    <a href="/profile"><?= $_SESSION['user']['name'] ?></a>
-  <?php endif; ?>
+    <?php else: ?>
+      <div class="btn-group align-items-center bg-light border rounded-pill p-1 shadow-sm" role="group">
+          <a href="/profile" class="btn btn-link btn-sm text-decoration-none text-dark d-flex align-items-center gap-2 border-0 py-1 px-2">
+              <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center fw-medium" 
+                   style="width: 26px; height: 26px; font-size: 11px;">
+                  <?= strtoupper(substr($_SESSION['user']['name'], 0, 1)) ?>
+              </div>
+              <span class="fw-medium small d-none d-sm-inline">
+                  <?= htmlspecialchars($_SESSION['user']['name']) ?>
+              </span>
+          </a>
+          <div class="vr text-muted my-1" style="width: 1px; height: 16px;"></div>
+          <a href="/logout" class="btn btn-link btn-sm text-danger border-0 py-1 px-2.5 text-decoration-none" title="Keluar">
+              <span class="d-sm-none small fw-medium">Keluar</span>
+              <span class="d-none d-sm-inline small fw-medium">Logout</span>
+          </a>
+      </div>
+    <?php endif; ?>
+
     <script>
       function handleGSI(response) {
         fetch('/api/auth/gsi.php', {
@@ -637,22 +463,6 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
       </script>
   
 </div>
-<script>
-(function () {
-  const wrap = document.getElementById('userDropdownWrap');
-  const trigger = document.getElementById('userDropdownTrigger');
-  if (!wrap || !trigger) return;
-
-  trigger.addEventListener('click', function (e) {
-    e.stopPropagation();
-    wrap.classList.toggle('dd-open');
-  });
-
-  document.addEventListener('click', function () {
-    wrap.classList.remove('dd-open');
-  });
-})();
-</script>
 
 <div id="live-search-wrapper" role="search" aria-label="Pencarian situs">
   <div class="ls-inner container">

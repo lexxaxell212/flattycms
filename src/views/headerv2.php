@@ -604,15 +604,20 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
     <div class="weather" id="w"><small>Cek cuaca...</small></div>
   </ul>
 
-  <!-- Mobile: User Section -->
-  <script src="https://accounts.google.com/gsi/client" async></script>
-      <div id="g_id_onload"
-        data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
-        data-callback="handleGSI"
-        data-auto_select="false">
-      </div>
-      <div class="g_id_signin" data-type="standard"></div>
-      <script>
+  <!-- login: User Section -->
+    <?php if (empty($_SESSION['user'])): ?>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <div id="g_id_onload"
+      data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
+      data-callback="handleGSI"
+      data-auto_select="false"
+      data-cancel_on_tap_outside="true">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+  <?php else: ?>
+    <a href="/profile"><?= $_SESSION['user']['name'] ?></a>
+  <?php endif; ?>
+    <script>
       function handleGSI(response) {
         fetch('/api/auth/gsi.php', {
           method: 'POST',
@@ -624,8 +629,13 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
           if (data.success) window.location.href = data.redirect;
         });
       }
+      const isLoggedIn = <?= !empty($_SESSION['user']) ? 'true' : 'false' ?>;
+      if (isLoggedIn) {
+        google.accounts.id.cancel();
+        google.accounts.id.disableAutoSelect();
+      }
       </script>
-      
+  
 </div>
 <script>
 (function () {

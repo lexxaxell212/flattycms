@@ -54,7 +54,7 @@ $isPintasanActive = (bool) array_filter(
     };
 </script>
   <script src="<?= JS_URL ?>bs533.bundle.min.js" defer></script>
-  <script src="<?= JS_URL ?>swal2.all.min.js" defer></script>
+  <script src="<?= JS_URL ?>swal2.all.min.js">//no defer</script>
   <script src="<?= JS_URL ?>chat.js" defer></script>
   <script src="<?= JS_URL ?>live-search.js" defer></script>
   <script src="<?= JS_URL ?>navbar.js" defer></script>
@@ -506,15 +506,19 @@ var(--text-nav-hover); }
     }
 
     if (!CONFIG.isLoggedIn) {
+    document.addEventListener('DOMContentLoaded', () => {
         const target = document.getElementById('part-trip-planner');
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                setTimeout(() => google.accounts.id.prompt(), 3000);
-                observer.disconnect();
-            }
-        }, { threshold: 0.8 });
-        observer.observe(target);
-    } 
+        if (target) {
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    setTimeout(() => google.accounts.id.prompt(), 3000);
+                    observer.disconnect();
+                }
+            }, { threshold: 0.8 });
+            observer.observe(target);
+        }
+    });
+  }
 </script>
   
 </div>

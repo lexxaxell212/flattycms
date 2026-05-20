@@ -8,7 +8,8 @@ $settings = $pdo->query("SELECT setting_key, setting_value FROM admin_setting")
 $csrf = generate_csrf_token();
 ?>
 
-<div class="container py-5">
+<main id="content" class="container-fluid">
+<div class="container">
 
 <?php if ($saved): ?>
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999">
@@ -158,3 +159,4 @@ $csrf = generate_csrf_token();
 </div>
 
 </div>
+</main>

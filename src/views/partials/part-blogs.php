@@ -9,10 +9,13 @@ $posts      = safe_get_posts($pdo, $per_page, $offset, $cat_id);
 $categories = safe_get_categories($pdo);
 ?>
 <script src="<?= JS_URL ?>card-slider.js" defer></script>
-<section id="artikel-terbaru" class="container-fluid">
-    <div class="container overflow-hidden">
-      <h2 class="mb-4">ARTIKEL TERBARU</h2>
-    <div class="slider-wrapper mb-3">
+
+<div class="container-fluid">
+<div class="container">
+<section id="artikel-terbaru">
+   <h2 class="mb-4">ARTIKEL TERBARU</h2>
+    <div class="overflow-hidden">
+     <div class="slider-wrapper mb-3">
       <div class="slider-track" id="sliderTrack">
         <?php if (empty($posts)): ?>
         <div class="text-center text-muted">
@@ -51,3 +54,5 @@ $categories = safe_get_categories($pdo);
     </div>
     </div>
 </section>
+</div>
+</div>

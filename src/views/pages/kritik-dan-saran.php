@@ -3,8 +3,9 @@ $page_title = "Kritik dan Saran";
 //
 ?>
 <script src="<?= JS_URL ?>feedback.js" defer></script>
-<main id="content" class="container py-5">
-    <section id="Kritik-dan-saran" class="py-5">
+<main id="content" class="container-fluid">
+<div class="container">
+    <section id="Kritik-dan-saran">
         <h1 class="text-title">Kritik & Saran</h1>
         <p class="lead">Bantu kami menjadi lebih baik dengan feedback Anda.</p>
     </section>
@@ -85,6 +86,8 @@ $page_title = "Kritik dan Saran";
             </div>
         </div>
     </div>
+
+</div>
 </main>
 <?php
 // ?>

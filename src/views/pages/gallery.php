@@ -17,7 +17,8 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 </script>
 <script src="<?= JS_URL ?>gallery.js" defer></script>
 
-<div class="container py-4">
+<main id="content" class="container-fluid">
+<div class="container">
 
   <!-- Header -->
   <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-3">
@@ -84,7 +85,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
   <!-- Pagination -->
   <div class="d-flex justify-content-center gap-2 mt-4" id="pagination"></div>
 
-</div>
+
 
 <!-- ── MODAL LIGHTBOX ──────────────────────────────────────── -->
 <div class="modal fade" id="lightboxModal" tabindex="-1">
@@ -143,3 +144,5 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 </div>
 <?php endif; ?>
 
+</div>
+</main>

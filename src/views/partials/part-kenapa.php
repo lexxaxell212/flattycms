@@ -1,6 +1,6 @@
 <script src="<?= JS_URL ?>autoslides.js" defer></script>
-<section id="kenapa-harus-bandung" class="container-fluid"
-style="background: var(--bg-primary)">
+<div class="container-fluid">
+<section id="kenapa-harus-bandung" style="background: var(--bg-primary)">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-12 col-md-6">
@@ -28,3 +28,4 @@ style="background: var(--bg-primary)">
     </div>
   </div>
 </section>
+</div>

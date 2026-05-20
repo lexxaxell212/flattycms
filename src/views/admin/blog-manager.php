@@ -45,7 +45,8 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
 .ql-editor   { font-size:1rem; line-height:1.6; }
 </style>
 
-<div class="container py-5">
+<main id="content" class="container-fluid">
+<div class="container">
 
 <?php if ($msg): ?>
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -339,6 +340,7 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
 <?php endif; ?>
 
 </div>
+</main>
 
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js" defer></script>
 <script>

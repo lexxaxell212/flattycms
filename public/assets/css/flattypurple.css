@@ -61,7 +61,6 @@
     --fw-black: 900;
 
     /* === === base === === */
-    --logo-path: url("https://ayokebandung.id/assets/images/logo-d.png");
     --glass-bg: rgba(255, 255, 255, 0.55);
     --glass-bg-hover: rgba(255, 255, 255, 0.68);
     --glass-bg-active: rgba(255, 255, 255, 0.8);
@@ -95,7 +94,6 @@
 /* ============= flatty dark ============= */
 [data-dark] {
     /* === === base === === */
-    --logo-path: url("https://ayokebandung.id/assets/images/logo.png");
     --glass-bg: rgba(17, 24, 39, 1);
     --glass-bg-hover: rgba(17, 24, 39, 0.9);
     --glass-bg-active: rgba(17, 24, 39, 1);
@@ -390,16 +388,10 @@ h6 {
   height: 100% !important;
 }
 
-.logo-navbar {
-    height: 40px;
-    width: 80px;
-    background-image: var(--logo-path);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: background-image var(--duration) var(--ease);
-    opacity: 0.9;
+.navbar-brand:hover svg {
+  transform: translateX(2px) !important;
 }
+
 .search-btn,
 .dm-btn {
     position: relative;

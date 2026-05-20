@@ -6,7 +6,8 @@ $total     = (int)$pdo->query("SELECT COUNT(*) FROM feedback")->fetchColumn();
 $feedbacks = $pdo->query("SELECT * FROM feedback ORDER BY created_at DESC LIMIT $limit")->fetchAll();
 ?>
 
-<div class="container py-5">
+<main id="content" class="container-fluid">
+<div class="container">
 
 <!-- Header -->
 <div class="card border-0 shadow-sm mb-4">
@@ -68,3 +69,4 @@ $feedbacks = $pdo->query("SELECT * FROM feedback ORDER BY created_at DESC LIMIT 
 <?php endif; ?>
 
 </div>
+</main>

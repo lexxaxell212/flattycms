@@ -2,8 +2,9 @@
 $page_title = "Kebudayaan Bandung";
 //
 ?>
-<main id="content" class="container py-5">
-  <section id="Kebudayaan-Bandung" class="mb-5">
+<main id="content" class="container-fluid">
+<div class="container">
+  <section id="Kebudayaan-Bandung">
     <h1 class="text-title">Warisan Kebudayaan Bandung</h1>
     <p class="lead">
       Kekayaan seni, tradisi, dan kearifan lokal Sunda yang telah diwariskan turun-temurun dan diakui dunia internasional.
@@ -177,6 +178,8 @@ $page_title = "Kebudayaan Bandung";
     </div>
   </div>
     
+
+</div>
 </main>
 <?php
 // ?>

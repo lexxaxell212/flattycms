@@ -2,7 +2,8 @@
 $page_title = "Kenapa harus Bandung";
 //
 ?>
-<main id="content" class="container py-5">
+<main id="content" class="container-fluid">
+<div class="container">
   <section id="Kenapa-Harus-Bandung">
     <div class="overflow-hidden mb-5 h-100">
           <img src="https://ayokebandung.id/uploads/default.jpg"
@@ -75,6 +76,8 @@ $page_title = "Kenapa harus Bandung";
           </a>
         </div>
       </section>
+
+</div>
 </main>
 <?php
 // ?>

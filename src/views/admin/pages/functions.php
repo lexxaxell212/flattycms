@@ -53,8 +53,9 @@ if (isset(\$_SESSION['user'])) {
 
 require_once SRC_PATH . 'headerv2.php';
 ?>
-{$html_content}
-<div class="container">
+<main id="content" class="container-fluid">
+  <div class="container">
+    {$html_content}
   <hr class="my-4">
   <div class="d-flex align-items-center gap-2 mb-4">
     <button id="btn-reaction"
@@ -80,7 +81,8 @@ require_once SRC_PATH . 'headerv2.php';
       <i class="fab fa-instagram"></i>
     </button>
   </div>
-</div>
+  </div>
+</main>
 <?php
 require_once SRC_PATH . 'footer.php';
 ?>

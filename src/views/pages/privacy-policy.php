@@ -2,7 +2,8 @@
 $page_title = "Kebijakan Privasi";
 //
 ?>
-<main id="content" class="container py-5">
+<main id="content" class="container-fluid">
+<div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-7">
       <div class="mb-6">
@@ -158,6 +159,8 @@ $page_title = "Kebijakan Privasi";
       </div>
     </div>
   </div>
+
+</div>
 </main>
 <?php
 // ?>

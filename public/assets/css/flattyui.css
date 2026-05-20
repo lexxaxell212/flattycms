@@ -3,6 +3,7 @@ body,
 nav,
 a,
 .navbar,
+.navbar-brand,
 .navbar-collapse,
 .glass,
 .card,
@@ -65,16 +66,12 @@ section {
   padding-bottom: var(--space-16);
 }
 
-footer {
-  padding-bottom: var(--space-8);
-}
-
 table thead th {
-  background: var(--pu-200) !important;
+  background: var(--bg-primary) !important;
   color: var(--text-primary) !important;
 }
 table tbody td {
-  background: var(--pu-100) !important;
+  background: var(--bg-white) !important;
   color: var(--text-primary) !important;
 }
 

@@ -2,7 +2,8 @@
 $page_title = "Sejarah Bandung";
 //
 ?>
-<main id="content" class="container py-5">
+<main id="content" class="container-fluid">
+<div class="container">
   <div class="col-lg-9">
     <section id="Sejarah-Bandung" class="py-5 mb-5">
             <h1 class="text-title">Sejarah Bandung</h1>
@@ -103,6 +104,8 @@ $page_title = "Sejarah Bandung";
 
             </div> 
         </div>
+
+</div>
 </main>  
 <?php
 // ?>

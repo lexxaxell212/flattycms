@@ -17,7 +17,8 @@ try {
 $csrf = generate_csrf_token();
 ?>
 
-<div class="container py-5">
+<main id="content" class="container-fluid">
+<div class="container">
 
 <?php
 safe_include(SRC_PATH . "partials/part-cloudflare.php", "Cloudflare Analytics");
@@ -174,6 +175,7 @@ safe_include(SRC_PATH . "partials/part-cloudflare.php", "Cloudflare Analytics");
 </div>
 
 </div>
+</main>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {

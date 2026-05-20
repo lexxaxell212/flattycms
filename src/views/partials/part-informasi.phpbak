@@ -1,4 +1,5 @@
-<section class="container-fluid" id="informasi-terkini">
+<div class="container-fluid">
+<section id="informasi-terkini">
   <div class="container">
         <h2>Informasi Terkini</h2>
         <p class="text-muted mb-4">Update terbaru seputar kota Bandung.</p>
@@ -21,3 +22,4 @@
       </div>
   </div>
 </section>
+</div>

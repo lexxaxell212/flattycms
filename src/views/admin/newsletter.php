@@ -19,7 +19,8 @@ $newsletters = $pdo->query("SELECT * FROM newsletters ORDER BY sent_at DESC LIMI
 $csrf = generate_csrf_token();
 ?>
 
-<div class="container py-5">
+<main id="content" class="container-fluid">
+<div class="container">
 
 <?php if ($msg): ?>
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -171,3 +172,4 @@ $csrf = generate_csrf_token();
 </div>
 
 </div>
+</main>

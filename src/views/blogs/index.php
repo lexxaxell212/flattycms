@@ -43,7 +43,8 @@ if ($id > 0) {
 $categories = safe_get_categories($pdo);
 ?>
 
-<div class="container py-5">
+<main id="content" class="container-fluid">
+<div class="container">
 
 <?php if ($post):// ══════════ SINGLE POST VIEW ══════════
    ?>
@@ -394,3 +395,4 @@ $categories = safe_get_categories($pdo);
 <?php endif; ?>
 
 </div>
+</main>

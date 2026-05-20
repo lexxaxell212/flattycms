@@ -20,7 +20,8 @@ $cats_json  = json_encode($categories);
 </script>
 <script src="<?= JS_URL ?>map.js" defer></script>
 
-<div class="container-fluid py-4 px-3 px-md-4">
+<main id="content" class="container-fluid">
+<div class="container">
 
   <!-- Title -->
   <div class="mb-3">
@@ -159,7 +160,7 @@ $cats_json  = json_encode($categories);
     </div>
 
   </div>
-</div>
+
 
 <!-- ── MODAL UPLOAD FOTO ──────────────────────────────────── -->
 <?php if ($is_logged): ?>
@@ -202,3 +203,6 @@ $cats_json  = json_encode($categories);
   </div>
 </div>
 <?php endif; ?>
+
+</div>
+</main>

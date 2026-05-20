@@ -4,7 +4,8 @@ $error_msg   = $error_msg   ?? null;
 $csrf        = generate_csrf_token();
 ?>
 
-<div class="container py-5">
+<main id="content" class="container-fluid">
+<div class="container">
 
 <?php if (isset($_GET['success']) || $success_msg): ?>
 <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
@@ -210,6 +211,7 @@ $csrf        = generate_csrf_token();
 </div>
 
 </div>
+</main>
 
 <script>
 let uploading = false;

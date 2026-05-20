@@ -5,7 +5,8 @@ $pois       = get_all_poi();
 $total      = count($pois);
 ?>
 
-<div class="container py-5">
+<main id="content" class="container-fluid">
+  <div class="container">
 
     <!-- Header -->
     <div class="card border-0 shadow-sm mb-4">
@@ -84,10 +85,8 @@ $total      = count($pois);
     </div>
     <?php endif; ?>
 
-</div>
-
-<!-- Modal Tambah POI -->
-<div class="modal fade" id="modalTambahPoi" tabindex="-1">
+  <!-- Modal Tambah POI -->
+  <div class="modal fade" id="modalTambahPoi" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content border-0 shadow">
             <div class="modal-header border-bottom">
@@ -166,6 +165,9 @@ $total      = count($pois);
         </div>
     </div>
 </div>
+
+  </div>
+</main>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

@@ -2,7 +2,8 @@
 $page_title = "Kuliner Bandung";
 //
 ?>
-<main id="content" class="container py-5">
+<main id="content" class="container-fluid">
+<div class="container">
   <section id="Kuliner-Khas-Bandung">
     <h1 class="text-title">KULINER KHAS BANDUNG</h1>
     <p class="lead">Surga gastronomi yang memadukan kreativitas modern dengan resep tradisional turun-temurun. Keanekaragaman cita rasa dari gurihnya bumbu kacang hingga kesegaran kaldu sapi menciptakan pengalaman kuliner tak terlupakan di setiap sudut jalanan kota yang sejuk ini.</p>
@@ -142,6 +143,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+
+</div>
 </main>
 <?php
 // ?>

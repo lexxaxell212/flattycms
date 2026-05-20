@@ -2,8 +2,9 @@
 $page_title = "Layanan Publik Bandung";
 //
 ?>
-<main id="content" class="container py-5">
-  <section id="Layanan-Publik-Bandung" class="py-5">
+<main id="content" class="container-fluid">
+<div class="container">
+  <section id="Layanan-Publik-Bandung">
     <h1 class="text-title">Transportasi Bandung</h1>
     <p class="lead">Opsi transportasi tercepat, termurah, dan terpercaya di Kota Kembang.</p>
   </section>
@@ -169,6 +170,8 @@ $page_title = "Layanan Publik Bandung";
       </div>
     </div>
   </div>
+
+</div>
 </main>
 <?php
 // ?>

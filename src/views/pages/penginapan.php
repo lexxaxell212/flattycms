@@ -2,8 +2,9 @@
 $page_title = "Hotel dan Penginapan";
 //
 ?>
-<main id="content" class="container py-5">
-<section id="Hotel-dan-penginapan" class="py-5 mb-5">
+<main id="content" class="container-fluid">
+<div class="container">
+<section id="Hotel-dan-penginapan">
   <h1 class="text-title">Hotel dan Penginapan Rekomendasi</h1>
   <p class="lead">Hotel dan penginapan terbaik untukmu di Bandung</p>
 </section>
@@ -183,6 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+</div>
 </main>
 <?php
 // ?>

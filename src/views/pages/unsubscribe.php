@@ -58,7 +58,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
 .card-unsubscribe { max-width: 450px; margin: auto; border: none; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
 .icon-box { width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin: -40px auto 20px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 </style>
-<div class="container py-5">
+<main id="content" class="container-fluid">
+<div class="container">
+  <section id="Unsubscribe">
+    <h1 class="text-title">
+      Unsubscribe Newsletter
+    </h1>
+  </section>
   <div class="card card-unsubscribe p-4">
     <div class="card-body text-center">
       <div class="icon-box">
@@ -70,7 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
           <i class="fa-solid fa-envelope-circle-check fa-3x text-primary"></i>
         <?php endif; ?>
       </div>
-      <h4 class="fw-bold mb-3">Unsubscribe</h4>
 
       <?php if ($message): ?>
         <div class="alert <?= $status == 'success' ? 'alert-success' : 'alert-danger' ?> border-0 small">
@@ -105,3 +110,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
     </div>
   </div>
 </div>
+</main>

@@ -8,7 +8,10 @@ $user       = $_SESSION['user'];
 $display    = $user['display_name'] ?? $user['name'];
 ?>
 
-<div class="container py-4" style="max-width:900px">
+<script src="<?= JS_URL ?>user-profile.js" defer></script>
+
+<main id="content" class="container-fluid">
+<div class="container">
 
   <!-- Profile Header -->
   <div class="card border-0 shadow-sm mb-4">
@@ -116,5 +119,4 @@ $display    = $user['display_name'] ?? $user['name'];
   </div>
 
 </div>
-
-<script src="<?= JS_URL ?>user-profile.js" defer></script>
+</main>

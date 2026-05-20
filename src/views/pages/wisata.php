@@ -2,8 +2,9 @@
 $page_title = "Wisata Bandung";
 //
 ?>
-<main id="content" class="container py-5">
-  <section id="Wisata-Bandung" class="py-5 mb-5">
+<main id="content" class="container-fluid">
+<div class="container">
+  <section id="Wisata-Bandung">
     <h1 class="text-title">WISATA BANDUNG</h1>
     <p class="lead">Temukan destinasi wisata alam, kuliner, dan budaya <strong>terbaik</strong> di Kota Kembang</p>
   </section>
@@ -133,12 +134,16 @@ $page_title = "Wisata Bandung";
     ?>
   </div>
   <?php endif; ?>
-</main>
+
   <div class="alert alert-warning" id="noMores" style="display:none">
   <p class="text-muted">
    Tidak ada lagi ...
   </p>
 </div>
+
+</div>
+</main>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   let isExpanded = false;

@@ -414,44 +414,79 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
     <div class="weather" id="w"><small>Cek cuaca...</small></div>
   </ul>
 
-  <!-- login: User Section -->
-   <?php if (empty($_SESSION['user'])): ?>
-    <script src="https://accounts.google.com/gsi/client" async></script>
-      <div id="g_id_onload"
-            data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
-            data-callback="handleGSI"
-            data-auto_select="false"
-            data-cancel_on_tap_outside="true">
-      </div>
-      <div class="g_id_signin" data-type="standard"></div>
-      <?php else: ?>
-      <div class="d-flex align-items-center gap-2 p-2" role="group">
-          <a href="/profile" class="d-inline-flex align-items-center gap-2 p-1 pe-3 bg-light border rounded-pill text-decoration-none text-dark shadow-sm" style="height: 42px;">
-          <?php if (!empty($_SESSION['user']['avatar'])): ?>
-              <img src="<?= safe_html($_SESSION['user']['avatar']) ?>" class="rounded-circle shadow-sm" width="32" height="32" style="object-fit: cover; flex-shrink: 0;">
-              <?php else: ?>
-              <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-semibold text-center" style="width: 32px; height: 32px; font-size: 13px; flex-shrink: 0;">
-                <?= strtoupper(substr($_SESSION['user']['name'] ?? 'U', 0, 1)) ?>
-               </div>
-                <?php endif; ?>
-               <div class="d-flex flex-column lh-1">
-                 <span class="text-muted mb-1" style="font-size: 10px; letter-spacing: 0.5px;">AKUN</span>
-                <span class="fw-medium small text-truncate" style="max-width: 130px;">
-                  <?= safe_html($_SESSION['user']['name']) ?>
-                </span>
-              </div>
-          </a>
-      
-              <div class="vr text-muted my-1" style="width: 1px; height: 16px;"></div>
-      
-              <a href="/logout" class="btn btn-link btn-sm text-danger border-0 py-1 px-2 text-decoration-none" title="Keluar">
-                  <span class="d-sm-none small fw-medium">Keluar</span>
-                  <span class="d-none d-sm-inline small fw-medium">Logout</span>
-              </a>
-          </div>
-      <?php endif; ?>
 
-    <script>
+<style>
+.profile-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 14px 5px 5px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50px;
+    text-decoration: none; color: #fff;
+    font-size: 13px; transition: background 0.2s;
+}
+.profile-pill:hover { background: rgba(255,255,255,0.25); color: #fff; }
+.avatar-circle {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #fff;
+}
+.account-label { font-size: 10px; opacity: 0.65; letter-spacing: 0.5px; display: block; }
+.account-name { font-size: 13px; font-weight: 500; display: block; }
+.divider-v { width: 1px; height: 18px; background: rgba(255,255,255,0.3); }
+.btn-logout {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px; color: rgba(255,255,255,0.9);
+    font-size: 13px; text-decoration: none; transition: background 0.2s;
+}
+.btn-logout:hover { background: rgba(255,80,80,0.35); color: #fff; }
+</style>
+  <!-- login: User Section -->
+<?php if (empty($_SESSION['user'])): ?>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <div id="g_id_onload"
+        data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
+        data-callback="handleGSI"
+        data-auto_select="false"
+        data-cancel_on_tap_outside="true">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+<?php else: ?>
+    <div class="d-flex align-items-center gap-2">
+        <a href="/profile" class="profile-pill">
+            <?php if (!empty($_SESSION['user']['avatar'])): ?>
+                <img src="<?= safe_html($_SESSION['user']['avatar']) ?>"
+                     class="rounded-circle"
+                     width="30" height="30"
+                     style="object-fit: cover; flex-shrink: 0;">
+            <?php else: ?>
+                <div class="avatar-circle">
+                    <?= strtoupper(substr($_SESSION['user']['name'] ?? 'U', 0, 1)) ?>
+                </div>
+            <?php endif; ?>
+            <div>
+                <span class="account-label">AKUN</span>
+                <span class="account-name text-truncate" style="max-width: 120px;">
+                    <?= safe_html($_SESSION['user']['name']) ?>
+                </span>
+            </div>
+        </a>
+        <div class="divider-v"></div>
+        <a href="/logout" class="btn-logout">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Logout
+        </a>
+    </div>
+<?php endif; ?>
+<script>
       function handleGSI(response) {
         fetch('/api/auth/gsi.php', {
           method: 'POST',

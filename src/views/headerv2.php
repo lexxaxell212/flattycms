@@ -419,31 +419,35 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
 .profile-pill {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 5px 14px 5px 5px;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 50px;
-    text-decoration: none; color: #fff;
-    font-size: 13px; transition: background 0.2s;
+    background: rgba(255,255,255,0.35);
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: var(--radius);
+    text-decoration: none; color: var(--text-nav);
+    font-size: 1rem; transition: background 0.2s;
 }
-.profile-pill:hover { background: rgba(255,255,255,0.25); color: #fff; }
+.profile-pill:hover { background: rgba(255,255,255,0.55); color: #fff; }
 .avatar-circle {
     width: 30px; height: 30px; border-radius: 50%;
     background: rgba(255,255,255,0.3);
     display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700; color: #fff;
+    font-size: 1rem; font-weight: 700; color: var(--text-nav);
 }
-.account-label { font-size: 10px; opacity: 0.65; letter-spacing: 0.5px; display: block; }
-.account-name { font-size: 13px; font-weight: 500; display: block; }
-.divider-v { width: 1px; height: 18px; background: rgba(255,255,255,0.3); }
+.account-name { font-size: 1rem; font-weight: 500; display: block; }
+.divider-v { width: 1px; height: 18px; background: rgba(255,255,255,0.4); }
 .btn-logout {
-    display: inline-flex; align-items: center; gap: 5px;
+    display: inline-flex;
+    align-items: center; gap: 5px;
     padding: 5px 12px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 50px; color: rgba(255,255,255,0.9);
-    font-size: 13px; text-decoration: none; transition: background 0.2s;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: var(--radius);
+    color: var(--text-nav);
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background 0.2s;
 }
-.btn-logout:hover { background: rgba(255,80,80,0.35); color: #fff; }
+.btn-logout:hover { background: rgba(127,40,217,0.1); color:
+var(--text-nav-hover); }
 </style>
   <!-- login: User Section -->
 <?php if (empty($_SESSION['user'])): ?>
@@ -469,7 +473,6 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
                 </div>
             <?php endif; ?>
             <div>
-                <span class="account-label">AKUN</span>
                 <span class="account-name text-truncate" style="max-width: 120px;">
                     <?= safe_html($_SESSION['user']['name']) ?>
                 </span>

@@ -510,13 +510,13 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
           </a>
         </li>
         <li class="nav-desktop-item">
-          <a class="nav-desktop-link <?= isActive('/map') ?>" href="map">
+          <a class="nav-desktop-link <?= isActive('/map') ?>" href="/map">
             <i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i>Trip
             Planner
           </a>
         </li>
         <li class="nav-desktop-item">
-          <a class="nav-desktop-link <?= isActive('/gallery') ?>" href="gallery">
+          <a class="nav-desktop-link <?= isActive('/gallery') ?>" href="/gallery">
             <i class="fa-solid fa-images" aria-hidden="true"></i>Gallery
           </a>
         </li>
@@ -575,7 +575,7 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
             referrerpolicy="no-referrer">
         </button>
         <div class="nav-user-panel" id="userDropdownPanel">
-          <a href="profile" style="text-decoration: none;">
+          <a href="/profile" style="text-decoration: none;">
           <div class="nav-user-info">
             <img
               src="<?= htmlspecialchars($_SESSION['user']['avatar']) ?>"
@@ -634,10 +634,10 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
     <li class="nav-item"><a class="nav-link <?= isActive('/pages/informasi-terkini') ?>" href="<?= PAGES_URL ?>informasi-terkini"><i class="fa-solid fa-newspaper"></i>Informasi Terkini</a></li>
     <li class="nav-item"><a class="nav-link <?= isActive('/blogs') ?>" href="<?= BLOGS_URL ?>"><i class="fa-solid fa-book"></i>Blogs</a></li>
     <li class="nav-item"><a class="nav-link <?= isActive('/map') ?>"
-    href="map"><i class="fa-solid
+    href="/map"><i class="fa-solid
     fa-suitcase-rolling"></i>Trip Planner</a></li>
     <li class="nav-item"><a class="nav-link <?= isActive('/gallery') ?>"
-      href="gallery"><i class="fa-solid
+      href="/gallery"><i class="fa-solid
       fa-images"></i>Gallery</a></li>
     <li class="nav-item"><a class="nav-link <?= isActive('/pages/kritik-dan-saran') ?>" href="<?= PAGES_URL ?>kritik-dan-saran"><i class="fa-solid fa-envelope"></i>Kritik dan Saran</a></li>
     <div class="weather" id="w"><small>Cek cuaca...</small></div>
@@ -646,7 +646,7 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
   <!-- Mobile: User Section -->
   <div class="mobile-user-section">
     <?php if (isset($_SESSION['user'])): ?>
-    <a href="profile" style="text-decoration: none;">
+    <a href="/profile" style="text-decoration: none;">
     <div class="mobile-user-info">
       <img
         src="<?= htmlspecialchars($_SESSION['user']['avatar']) ?>"

@@ -7,9 +7,6 @@ load_site_settings();
 /////////
 require_once LIB_PATH . 'analytics.php';
 record_pageview($pdo);
-////============>>>>
-////=========>>>>
-////======>>>>
 ///
 // Maintenance check
 require_once ROOT_PATH . "maintenance.php";
@@ -29,9 +26,7 @@ if (isset($view_content) && file_exists ($view_content)) {
     require_once SRC_PATH . "footer.php";
 } else {
     http_response_code(404);
-    require_once SRC_PATH . "headerv2.php";
     require_once PUBLIC_PATH . "errors/404.php";
-    require_once SRC_PATH . "footer.php";
 }
 ////// =============================== //////
 ?>

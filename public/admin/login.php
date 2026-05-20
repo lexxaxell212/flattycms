@@ -22,59 +22,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['pa
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Login</title>
   <link href="<?= CSS_URL ?>bs533.min.css" rel="stylesheet">
-  <style>
-    body {
-      background: #f8f9fa;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 0;
-      margin: 0;
-    }
-    .login-card { 
-      max-width: 380px;
-      width: 100%;
-      box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.1);
-      margin: 0 auto;
-    }
-    .login-header h1 { 
-      color: #212529;
-      font-weight: 700;
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    .btn-login { 
-      background: #0d6efd;
-      border: none;
-      color: white;
-      border-radius: 0.75rem;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      font-weight: 700;
-      width: 100%;
-    }
-    .form-control {
-      border-radius: 0.75rem;
-      border: 1px solid #dee2e6;
-      padding: 0.75rem 1rem;
-    }
-    .form-control:focus {
-      border-color: #0d6efd;
-      box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.25);
-    }
-    
-  </style>
+  <link href="<?= CSS_URL ?>flattypurple.css" rel="stylesheet">
+  <link href="<?= CSS_URL ?>flattyui.css" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 col-md-8 col-lg-5">
-        <div class="card login-card border-0">
-          <div class="card-body p-5">
+        <div class="card card-glass">
+          <div class="card-body">
             <!-- Header -->
-            <div class="text-center mb-4">
-              <h1 class="login-header">Admin Login</h1>
-              <p class="text-muted mb-0">Masukkan kredensial Anda</p>
+            <div class="text-center">
+              <h1 class="text-title">Admin Login</h1>
+              <p class="text-muted">Masukkan kredensial Anda</p>
             </div>
 
             <!-- Error Alert -->
@@ -100,7 +60,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['pa
                        placeholder="Masukkan password" required>
               </div>
 
-              <button type="submit" class="btn btn-login mb-3">
+              <button type="submit" class="btn btn-primary mb-3">
                 Masuk
               </button>
             </form>

@@ -87,7 +87,7 @@ class="arrow-icon fas fa-angle-right"></i>
 </div>
  <?php if (!empty($all_items) && $total_items > 10): ?>
   <div class="text-center">
-    <button class="btn btn-outline-accent expand-btn" id="loadhotelMoreBtn">
+    <button class="btn btn-outline-primary expand-btn" id="loadhotelMoreBtn">
       <span class="btn-text">LEBARKAN</span>
       <i class="fas fa-chevron-down ms-2"></i>
     </button>

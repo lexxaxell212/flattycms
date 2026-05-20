@@ -208,6 +208,7 @@ class SmartScrollTop {
     this.btn.style.opacity = "1";
     this.btn.style.transform = "scale(1) translateY(0)";
     this.btn.style.visibility = "visible";
+    this.btn.style.animation = "fabSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
     this.isVisible = true;
   }
 

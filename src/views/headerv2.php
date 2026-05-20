@@ -587,6 +587,6 @@ $isPintasanActive = (bool) array_filter(
       </div>
     </div>
   </div>
-<button class="fab-chatbot" id="chatbotFabBtn" aria-label="Open Chat"><i class="fas fa-comment-dots"></i></button>
-<button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top">↑</button>
+<button class="fab fab-chatbot" id="chatbotFabBtn" aria-label="Open Chat"><i class="fas fa-comment-dots"></i></button>
+<button id="scrollTopBtn" class="fab scroll-top-btn" aria-label="Scroll to top">↑</button>
 <div class="main-content">

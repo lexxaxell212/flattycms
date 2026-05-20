@@ -24,7 +24,9 @@
     --sl-800: #1f2937;
     --sl-900: #111827;
     --sl-950: #030712;
+    
     --font-primary: "Inter", sans-serif;
+    
     --space-0: 0;
     --space-1: 0.25rem;
     --space-2: 0.5rem;
@@ -37,13 +39,26 @@
     --space-12: 3rem;
     --space-16: 4rem;
     --space-24: 6rem;
+    
     --radius-none: 0;
     --radius-sm: 0.375rem;
     --radius: 0.75rem;
     --radius-lg: 1rem;
     --radius-xl: 1.5rem;
     --radius-full: 9999px;
+    
     --navbar-height: 70px;
+    
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --duration: 0.3s;
+    
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+    --fw-black: 900;
 
     /* === === base === === */
     --logo-path: url("https://ayokebandung.id/assets/images/logo-d.png");
@@ -55,25 +70,20 @@
     --glass-border: 1px solid rgba(0, 0, 0, 0.1);
     --glass-border-hover: 1px solid rgba(0,0,0,0.2);
     --glass-shadow: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+    
     --bg-white: #fafafa;
     --bg-primary: #f6f5ff;
     --bg-hover: #6c2bd9;
     --bg-nav: transparent;
-    --bg-nav-hover: rgba(108, 43, 217, 0.08);
-    --text-primary: #374151;
-    --text-heading: #1f2937;
+    --bg-nav-hover: rgba(138, 43, 217, 0.08);
+    --text-primary: #2d2740;
+    --text-heading: #26213a;
     --text-white: #fafafa;
     --text-white-hover: #e5e7eb;
-    --text-muted: #6b7280;
-    --text-nav: #374151;
+    --text-muted: #6e6a7c;
+    --text-nav: #201b33;
     --text-nav-hover: #6c2bd9;
-
-    /* === === custom === === */
-    --ls-z: 1068;
-    --ls-radius: 0.75rem;
-    --ls-duration: 0.25s;
-    --ls-ease: cubic-bezier(0.4, 0, 0.2, 1);
-    --ls-shadow: 0 8px 16px rgba(0, 0, 0, 0.14), 0 4px 16px rgba(0, 0, 0, 0.08);
+    --text-dark: #0a0118;
 }
 
 /* ============= flatty dark ============= */
@@ -88,6 +98,7 @@
     --glass-border: 1px solid rgba(255, 255, 255, 0.1);
     --glass-border-hover: 1px solid rgba(255,255,255,0.2);
     --glass-shadow: none;
+    
     --bg-white: #0f1117;
     --bg-primary: #1a1f2e;
     --bg-hover: #7e3af2;
@@ -96,7 +107,7 @@
     --text-primary: #cdd5e0;
     --text-heading: #e2e8f0;
     --text-muted: #6b7280;
-    --text-nav: #cdd5e0;
+    --text-nav: #e8e2ff;
     --text-nav-hover: #ac94fa;
 }
 
@@ -123,14 +134,12 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     font-size: var(--space-4);
+    font-weight: var(--fw-regular);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
 }
-
-h2 + p { margin-top:var(--space-1);}
-p + a.btn {margin-top:var(--space-4);}
 
 a {
     color: var(--pu-600);
@@ -148,7 +157,7 @@ a:focus-visible {
 
 strong,
 b {
-    font-weight: 700;
+    font-weight: var(--fw-medium);
     color: var(--text-heading);
 }
 
@@ -166,6 +175,7 @@ p:last-child {
 }
 .lead {
     font-size: 1.125rem;
+    font-weight: var(--fw-medium);
     color: var(--text-nav);
     margin-bottom: var(--space-8);
 }
@@ -178,7 +188,6 @@ h5,
 h6 {
     font-family: "Inter", sans-serif;
     color: var(--text-heading);
-    font-weight: 800;
     line-height: 1.2;
     letter-spacing: -0.02em;
     margin: 0 0 0.5em 0;
@@ -186,24 +195,27 @@ h6 {
 }
 h1 {
     font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: var(--fw-extrabold);
 }
 h2 {
     font-size: clamp(1.375rem, 3vw, 2rem);
+    font-weight: var(--fw-extrabold);
 }
 h3 {
     font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    font-weight: var(--fw-extrabold);
 }
 h4 {
     font-size: 1.125rem;
-    font-weight: 600;
+    font-weight: var(--fw-bold);
 }
 h5 {
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: var(--fw-bold);
 }
 h6 {
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: var(--fw-bold);
 }
 
 .main-content {
@@ -222,8 +234,8 @@ h6 {
     background-position: center;
     opacity: 0;
     transition:
-        transform 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.8s ease;
+        transform 1s var(--ease),
+        opacity 0.5s var(--ease);
     transform: scale(1.07);
 }
 .hero-item.active {
@@ -271,7 +283,7 @@ h6 {
     padding: var(--space-12);
     border-radius: var(--radius);
     box-shadow: var(--glass-shadow);
-    animation: fadeInUp 0.3s ease forwards;
+    animation: fadeInUp var(--duration) var(--ease) forwards;
 }
 [data-dark] .hero-overlay {
     background: linear-gradient(
@@ -295,15 +307,15 @@ h6 {
     }
 }
 .hero-item.active .glass-hero-card h1 {
-    animation: fadeInUp 0.3s ease forwards 0.2s;
+    animation: fadeInUp var(--duration) var(--ease) forwards var(--duration);
     opacity: 0;
 }
 .hero-item.active .glass-hero-card p {
-    animation: fadeInUp 0.3s ease forwards 0.4s;
+    animation: fadeInUp var(--duration) var(--ease) forwards var(--duration);
     opacity: 0;
 }
 .hero-item.active .glass-hero-card .btn {
-    animation: fadeInUp 0.3s ease forwards 0.6s;
+    animation: fadeInUp var(--duration) var(--ease) forwards var(--duration);
     opacity: 0;
 }
 .hero-dots {
@@ -321,7 +333,7 @@ h6 {
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    transition: 0.3s;
+    transition: var(--duration);
 }
 .dot.active {
     background: var(--bg-primary);
@@ -357,7 +369,7 @@ h6 {
 }
 /* brand - dm, search, menu button */
 .navbar-brand {
-    font-weight: 700;
+    font-weight: var(--fw-extrabold);
     font-size: 1.5rem;
     color: var(--text-nav);
     letter-spacing: -0.5px;
@@ -374,7 +386,7 @@ h6 {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: background-image 0.2s ease;
+    transition: background-image var(--duration) var(--ease);
     opacity: 0.9;
 }
 .search-btn,
@@ -390,7 +402,7 @@ h6 {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: background 0.2s ease;
+    transition: background var(--duration) var(--ease);
     -webkit-tap-highlight-color: transparent;
 }
 .search-btn:hover,
@@ -419,22 +431,22 @@ h6 {
 .sun-core {
     transform-origin: 10px 10px;
     transition:
-        r 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.3s ease;
+        r var(--duration) var(--ease),
+        opacity var(--duration) var(--ease);
     color: var(--text-nav);
 }
 .sun-ray {
     transform-origin: 10px 10px;
     transition:
-        opacity 0.3s ease,
-        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity var(--duration) var(--ease),
+        transform var(--duration) var(--ease);
     stroke-linecap: round;
     color: var(--text-nav);
 }
 .moon-path {
     transition:
-        opacity 0.3s ease 0.1s,
-        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity var(--duration) var(--ease) var(--duration),
+        transform var(--duration) var(--ease);
     transform-origin: 10px 10px;
     opacity: 0;
     transform: scale(0.6) rotate(-30deg);
@@ -442,8 +454,8 @@ h6 {
 }
 .star {
     transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
+        opacity var(--duration) var(--ease),
+        transform var(--duration) var(--ease);
     opacity: 0;
     transform: scale(0);
     transform-origin: center;
@@ -464,17 +476,17 @@ h6 {
 .dm-btn.dark .star-1 {
     opacity: 1;
     transform: scale(1);
-    transition-delay: 0.15s;
+    transition-delay: var(--duration);
 }
 .dm-btn.dark .star-2 {
     opacity: 0.6;
     transform: scale(1);
-    transition-delay: 0.25s;
+    transition-delay: var(--duration);
 }
 .dm-btn.dark .star-3 {
     opacity: 0.4;
     transform: scale(1);
-    transition-delay: 0.2s;
+    transition-delay: var(--duration);
 }
 
 .dm-btn.dark .dm-svg {
@@ -487,7 +499,7 @@ h6 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--duration) var(--ease);
 }
 .search-btn-icon svg {
     width: 20px;
@@ -497,25 +509,25 @@ h6 {
 .s-circle {
     transform-origin: 10.5px 10.5px;
     transition:
-        r 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-        cx 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-        cy 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.25s ease;
+        r var(--duration) var(--ease),
+        cx var(--duration) var(--ease),
+        cy var(--duration) var(--ease),
+        opacity var(--duration) var(--ease);
 }
 .s-handle {
     transition:
-        x1 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-        y1 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-        x2 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-        y2 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        x1 var(--duration) var(--ease),
+        y1 var(--duration) var(--ease),
+        x2 var(--duration) var(--ease),
+        y2 var(--duration) var(--ease);
 }
 .s-cross {
     opacity: 0;
     stroke-dasharray: 20;
     stroke-dashoffset: 20;
     transition:
-        opacity 0.2s ease 0.1s,
-        stroke-dashoffset 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+        opacity var(--duration) var(--ease) var(--duration),
+        stroke-dashoffset var(--duration) var(--ease) var(--duration);
 }
 .search-btn.is-active .search-btn-icon {
     transform: rotate(90deg);
@@ -541,7 +553,7 @@ h6 {
     height: 40px;
     border-radius: 50%;
     background: transparent;
-    transition: background 0.2s ease;
+    transition: background var(--duration) var(--ease);
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -560,7 +572,7 @@ h6 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--duration) var(--ease);
 }
 .hamburger-icon svg {
     width: 20px;
@@ -573,8 +585,8 @@ h6 {
     transform-box: fill-box;
     transform-origin: center;
     transition:
-        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.3s ease;
+        transform var(--duration) var(--ease),
+        opacity var(--duration) var(--ease);
 }
 .menu-open .h-top {
     transform: translateY(6px) rotate(45deg);

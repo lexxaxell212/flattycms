@@ -1,17 +1,13 @@
 <?php
 $token = trim($_GET['token'] ?? '');
-if (!$token) {
-    echo '<script>window.location.href="/forgot-password";</script>';
-    exit;
-}
+$invalid = true;
 
-$pdo  = $GLOBALS['pdo'];
-$stmt = $pdo->prepare("SELECT * FROM password_resets WHERE token = ? AND expires_at > NOW() LIMIT 1");
-$stmt->execute([$token]);
-$reset = $stmt->fetch();
-
-if (!$reset) {
-    $invalid = true;
+if ($token) {
+    $pdo  = $GLOBALS['pdo'];
+    $stmt = $pdo->prepare("SELECT * FROM password_resets WHERE token = ? AND expires_at > NOW() LIMIT 1");
+    $stmt->execute([$token]);
+    $reset = $stmt->fetch();
+    if ($reset) $invalid = false;
 }
 
 $page_title = 'Reset Password — ' . SITE_NAME;
@@ -22,7 +18,7 @@ $page_title = 'Reset Password — ' . SITE_NAME;
         <i class="fa-solid fa-arrow-left fa-xs"></i> Kembali ke login
     </a>
 
-    <?php if (!empty($invalid)): ?>
+    <?php if ($invalid): ?>
         <div class="text-center py-3">
             <i class="fa-solid fa-circle-xmark fa-3x text-danger mb-3"></i>
             <h5 class="fw-semibold">Link tidak valid</h5>

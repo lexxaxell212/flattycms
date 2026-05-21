@@ -1,18 +1,33 @@
 <?php
 function record_pageview(PDO $pdo): void {
-    $page       = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $page       = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
     $ip         = $_SERVER['REMOTE_ADDR'] ?? '';
     $referrer   = substr($_SERVER['HTTP_REFERER'] ?? '', 0, 500);
     $user_agent = substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 255);
 
-    // Skip bot/crawler
-    $bots = ['bot', 'crawler', 'spider', 'slurp', 'facebookexternalhit'];
+    if (empty($page)) return;
+
+    if (str_starts_with($page, '/admin')) return;
+
+    $bots = [
+        'bot', 'crawler', 'spider', 'slurp', 'facebookexternalhit',
+        'curl', 'wget', 'python', 'java', 'ruby', 'php',
+        'headless', 'phantomjs', 'selenium', 'puppeteer',
+        'googlebot', 'bingbot', 'yandex', 'baidu', 'duckduck',
+        'ahrefsbot', 'semrushbot', 'mj12bot', 'dotbot',
+        'petalbot', 'applebot', 'twitterbot', 'linkedinbot',
+        'whatsapp', 'telegram', 'discord', 'slack',
+    ];
     foreach ($bots as $bot) {
         if (stripos($user_agent, $bot) !== false) return;
     }
 
-    // Skip admin
-    if (str_starts_with($page, '/admin')) return;
+    if (empty($user_agent)) return;
+
+    $skip_referrers = ['android-app://', 'com.google.android'];
+    foreach ($skip_referrers as $ref) {
+        if (str_contains($referrer, $ref) || str_contains($_SERVER['HTTP_REFERER'] ?? '', $ref)) return;
+    }
 
     $pdo->prepare("INSERT INTO analytics (page, ip, referrer, user_agent) VALUES (?,?,?,?)")
         ->execute([$page, $ip, $referrer, $user_agent]);

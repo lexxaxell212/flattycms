@@ -1,11 +1,10 @@
 <?php
 $token = trim($_GET['token'] ?? '');
 if (!$token) {
-    header('Location: /forgot-password');
+    echo '<script>window.location.href="/forgot-password";</script>';
     exit;
 }
 
-// validasi token
 $pdo  = $GLOBALS['pdo'];
 $stmt = $pdo->prepare("SELECT * FROM password_resets WHERE token = ? AND expires_at > NOW() LIMIT 1");
 $stmt->execute([$token]);
@@ -81,9 +80,9 @@ $page_title = 'Reset Password — ' . SITE_NAME;
     togglePw('rp-pw-confirm', 'toggle-pw-confirm');
 
     document.getElementById('btn-rp')?.addEventListener('click', async () => {
-        const password = document.getElementById('rp-pw').value;
-        const confirm  = document.getElementById('rp-pw-confirm').value;
-        const errorEl  = document.getElementById('rp-error');
+        const password  = document.getElementById('rp-pw').value;
+        const confirm   = document.getElementById('rp-pw-confirm').value;
+        const errorEl   = document.getElementById('rp-error');
         const successEl = document.getElementById('rp-success');
 
         errorEl.classList.add('d-none');

@@ -1,10 +1,4 @@
 <?php
-
-if (!empty($_SESSION['user'])) {
-    header('Location: /');
-    exit;
-}
-
 $token = trim($_GET['token'] ?? '');
 if (!$token) {
     header('Location: /forgot-password');

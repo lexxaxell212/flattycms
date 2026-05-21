@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__DIR__, 3) . "/bootstrap.php";
+require_once LIB_PATH . "mailer.php";
 autoload_core();
-
 verify_ajax_request();
 
 $csrf = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
@@ -10,8 +10,6 @@ if (!verify_csrf_token($csrf)) {
     echo json_encode(['success' => false, 'message' => 'Invalid request.']);
     exit;
 }
-
-require_once LIB_PATH . "mailer.php";
 
 $input = json_decode(file_get_contents('php://input'), true);
 $email = trim($input['email'] ?? '');

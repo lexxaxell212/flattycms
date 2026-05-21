@@ -1,9 +1,4 @@
 <?php
-
-if (!empty($_SESSION['user'])) {
-    header('Location: /');
-    exit;
-}
 $page_title = 'Lupa Password — ' . SITE_NAME;
 ?>
 

@@ -13,7 +13,7 @@ require_once ROOT_PATH . "maintenance.php";
 // Router
 require_once PUBLIC_PATH . "router.php";
 // Session expired check untuk protected routes
-$protected_routes = ['pages/profile'];
+$protected_routes = ['user/profile'];
 if (in_array($uri, $protected_routes) && !isset($_SESSION['user'])) {
     header('Location: /');
     exit;

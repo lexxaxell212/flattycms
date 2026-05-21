@@ -435,48 +435,74 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
 .account-name { font-size: 1rem; font-weight: 500; display: block; }
 .divider-v { width: 1px; height: 18px; background: rgba(255,255,255,0.4); }
 .btn-logout {
-    display: inline-flex;
-    align-items: center; gap: 5px;
+    display: inline-flex; align-items: center; gap: 5px;
     padding: 5px 12px;
     background: rgba(255,255,255,0.55);
     border: 1px solid rgba(255,255,255,0.45);
     border-radius: var(--radius);
-    color: var(--text-nav);
-    font-size: 1rem;
-    text-decoration: none;
-    transition: background 0.2s;
+    color: var(--text-nav); font-size: 1rem;
+    text-decoration: none; transition: background 0.2s;
 }
-.btn-logout:hover { background: rgba(127,40,217,0.1); color:
-var(--text-nav-hover); }
+.btn-logout:hover { background: rgba(127,40,217,0.1); color: var(--text-nav-hover); }
+.btn-glass {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 16px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: var(--radius);
+    color: var(--text-nav); font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: background 0.2s;
+}
+.btn-glass:hover { background: rgba(255,255,255,0.35); color: var(--text-nav); }
+.btn-glass-solid {
+    background: rgba(255,255,255,0.85);
+    color: #333;
+}
+.btn-glass-solid:hover { background: #fff; color: #222; }
 </style>
-  <!-- login: User Section -->
-<div class="mt-4 mb-4 p-4">
+
 <?php if (empty($_SESSION['user'])): ?>
     <script>
     function handleGSI(response) {
-    fetch('/api/auth/gsi.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-Token': CONFIG.csrfToken
-        },
-        body: JSON.stringify({ token: response.credential })
-    })
-    .then(r => r.json())
-    .then(data => {
-        if (data.success) window.location.href = data.redirect;
-    });
+        fetch('/api/auth/gsi.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-Token': CONFIG.csrfToken
+            },
+            body: JSON.stringify({ token: response.credential })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) window.location.href = data.redirect;
+        });
     }
     </script>
-<script src="https://accounts.google.com/gsi/client" async></script>
-<div id="g_id_onload"
-    data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
-    data-callback="handleGSI"
-    data-auto_select="false"
-    data-cancel_on_tap_outside="true">
-</div>
-<div class="g_id_signin" data-type="standard" data-shape="pill"></div>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <div id="g_id_onload"
+        data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
+        data-callback="handleGSI"
+        data-auto_select="false"
+        data-cancel_on_tap_outside="true">
+    </div>
+
+    <div class="d-flex align-items-center gap-2">
+        <!-- Tombol Google Sign In -->
+        <div class="g_id_signin" data-type="icon" data-shape="circle" data-size="medium"></div>
+
+        <div class="divider-v"></div>
+
+        <!-- Tombol Login/Daftar Password -->
+        <a href="/login" class="btn-glass">
+            <i class="fa-regular fa-user fa-sm"></i>
+            Masuk
+        </a>
+        <a href="/register" class="btn-glass btn-glass-solid">
+            <i class="fa-solid fa-pen fa-sm"></i>
+            Daftar
+        </a>
+    </div>
 
 <?php else: ?>
     <div class="d-flex align-items-center gap-2">
@@ -485,18 +511,15 @@ var(--text-nav-hover); }
                 <img src="<?= safe_html($_SESSION['user']['avatar']) ?>"
                      class="rounded-circle"
                      width="30" height="30"
-                     style="object-fit: cover; flex-shrink: 0;">
+                     style="object-fit:cover;flex-shrink:0;">
             <?php else: ?>
                 <div class="avatar-circle">
                     <?= strtoupper(substr($_SESSION['user']['name'] ?? 'U', 0, 1)) ?>
                 </div>
             <?php endif; ?>
-            <div>
-                <span class="account-label">AKUN</span>
-                <span class="account-name text-truncate" style="max-width: 120px;">
-                    <?= safe_html($_SESSION['user']['name']) ?>
-                </span>
-            </div>
+            <span class="account-name text-truncate" style="max-width:120px;">
+                <?= safe_html($_SESSION['user']['display_name'] ?? $_SESSION['user']['name']) ?>
+            </span>
         </a>
         <div class="divider-v"></div>
         <a href="/api/auth/logout.php" class="btn-logout">
@@ -509,8 +532,6 @@ var(--text-nav-hover); }
         </a>
     </div>
 <?php endif; ?>
-
-</div>
 
 </div>
 

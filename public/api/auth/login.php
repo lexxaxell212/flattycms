@@ -27,8 +27,13 @@ $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? OR username = ? LIMIT
 $stmt->execute([$identifier, $identifier]);
 $user = $stmt->fetch();
 
-if (!$user || !$user['password']) {
+if (!$user) {
     echo json_encode(['success' => false, 'message' => 'Akun tidak ditemukan.']);
+    exit;
+}
+
+if (!$user['password']) {
+    echo json_encode(['success' => false, 'message' => 'Akun ini terdaftar via Google. Silakan login dengan Google.']);
     exit;
 }
 

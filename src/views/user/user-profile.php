@@ -17,11 +17,17 @@ $display    = $user['display_name'] ?? $user['name'];
   <div class="card border-0 shadow-sm mb-4">
     <div class="card-body p-4">
       <div class="d-flex align-items-center gap-4 flex-wrap">
-        <img src="<?= safe_html($user['avatar'] ?? '') ?>"
-             class="rounded-circle shadow"
-             width="80" height="80"
-             style="object-fit:cover"
-             onerror="this.src='/assets/img/avatar.png'">
+        <?php if (!empty($user['avatar'])): ?>
+            <img src="<?= safe_html($user['avatar']) ?>"
+                 class="rounded-circle shadow"
+                 width="80" height="80"
+                 style="object-fit:cover">
+        <?php else: ?>
+            <div class="rounded-circle shadow bg-primary text-white d-flex align-items-center justify-content-center fw-semibold"
+                 style="width:80px;height:80px;font-size:28px;">
+                <?= strtoupper(substr($user['name'] ?? 'U', 0, 1)) ?>
+            </div>
+        <?php endif; ?>
         <div class="flex-grow-1">
           <div class="d-flex align-items-center gap-2 flex-wrap">
             <h5 class="fw-bold mb-0" id="displayNameText"><?= safe_html($display) ?></h5>

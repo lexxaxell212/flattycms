@@ -72,7 +72,7 @@ $page_title = "Kebijakan Privasi";
           <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Keberatan</strong> — menolak pemrosesan data untuk tujuan pemasaran langsung.</li>
           <li class="mb-2"><i class="fas fa-circle-dot me-2
           text-primary"></i><strong>Berhenti Berlangganan</strong> — klik <a
-          href="/pages/unsubscribe" class="link">Unsubscribe</a> di email kami atau
+          href="/unsubscribe" class="link">Unsubscribe</a> di email kami atau
           hubungi kami langsung.</li>
         </ul>
         <p class="text-muted small mb-0">Permintaan dapat dikirim ke

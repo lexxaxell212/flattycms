@@ -13,17 +13,20 @@ $routes = [
     'pages/tentang'              => SRC_PATH . 'pages/tentang.php',
     'pages/layanan'              => SRC_PATH . 'pages/layanan.php',
     'pages/privacy-policy'       => SRC_PATH . 'pages/privacy-policy.php',
-    'pages/unsubscribe'          => SRC_PATH . 'pages/unsubscribe.php',
     'pages/kritik-dan-saran'     => SRC_PATH . 'pages/kritik-dan-saran.php',
     'pages/kenapa-harus-bandung' => SRC_PATH . 'pages/kenapa-harus-bandung.php',
     'pages/informasi-terkini'    => SRC_PATH . 'pages/informasi-terkini.php',
     'blogs'                      => SRC_PATH . 'blogs/index.php',
-    'profile'    => SRC_PATH . 'user/user-profile.php',
+  // user
     'register'=> SRC_PATH . 'user/register.php',
     'login'   => SRC_PATH . 'user/login.php',
-    'map'        => SRC_PATH . 'pages/map.php',
-    'gallery'    => SRC_PATH . 'pages/gallery.php',
-    
+    'forgot-password' => SRC_PATH . 'user/forgot-password.php',
+    'reset-password' => SRC_PATH . 'user/reset-password.php',
+    'profile'    => SRC_PATH . 'user/user-profile.php',
+    'unsubscribe'          => SRC_PATH . 'user/unsubscribe.php',
+  // app
+    'map'        => SRC_PATH . 'apps/map.php',
+    'gallery'    => SRC_PATH . 'apps/gallery.php',
 ];
 
 if (array_key_exists($uri, $routes)) {

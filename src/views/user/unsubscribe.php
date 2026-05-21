@@ -97,16 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
       <?php endif; ?>
 
       <?php if ($status == "success" || ($status == "error" && !$show_form)): ?>
-        <div class="mt-3">
-          <a href="<?= BASE_URL ?>" class="btn btn-light w-100 text-muted">
-            <i class="fa-solid fa-arrow-left me-2"></i>Kembali ke Beranda
-          </a>
-        </div>
       <?php endif; ?>
-
-      <p class="mt-4 mb-0 text-secondary" style="font-size: 0.75rem;">
-        <?= date('Y') ?> <?= SITE_NAME ?>
-      </p>
     </div>
   </div>
 </div>

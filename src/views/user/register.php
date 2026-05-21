@@ -77,8 +77,6 @@ $page_title = 'Daftar — ' . SITE_NAME;
     </div>
 </div>
 <script>
-    const CONFIG = { csrfToken: '<?= generate_csrf_token() ?>' };
-
     function togglePw(inputId, btnId) {
         document.getElementById(btnId).addEventListener('click', () => {
             const input = document.getElementById(inputId);

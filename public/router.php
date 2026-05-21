@@ -20,7 +20,6 @@ $routes = [
     'blogs'                      => SRC_PATH . 'blogs/index.php',
     'profile'    => SRC_PATH . 'user/user-profile.php',
     'login'   => SRC_PATH . 'user/login.php',
-    'logout'  => PUBLIC_PATH . 'api/auth/logout.php',
     'map'        => SRC_PATH . 'pages/map.php',
     'gallery'    => SRC_PATH . 'pages/gallery.php',
     

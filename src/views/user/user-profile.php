@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION['user'])) {
-    header('Location: /');
+    header('Location: /login');
     exit;
 }
 $page_title = 'Profil Saya — ' . SITE_NAME;

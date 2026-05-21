@@ -55,7 +55,10 @@ $message_html = "
     <p style='font-size:12px;color:#999;'>Abaikan email ini jika kamu tidak merasa melakukan permintaan ini.</p>
 </div>";
 
-kirimEmailAyo($email, $subject, $message_html);
+$result = kirimEmailAyo($email, $subject, $message_html);
+error_log("[forgot-password] result: " . var_export($result, true));
+echo json_encode(['success' => true, 'debug' => $result]);
+exit;
 
 echo json_encode(['success' => true]);
 exit;

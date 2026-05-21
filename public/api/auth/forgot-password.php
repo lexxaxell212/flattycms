@@ -35,6 +35,9 @@ if (!$user || !$user['password']) {
 $token   = bin2hex(random_bytes(32));
 $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
+var_dump(LIB_PATH);
+var_dump(file_exists(LIB_PATH . 'mailer.php'));
+
 $stmt = $pdo->prepare("
     INSERT INTO password_resets (email, token, expires_at) 
     VALUES (?, ?, ?)
@@ -54,9 +57,6 @@ $message_html = "
     <hr style='border:0;border-top:1px solid #eee;margin:20px 0;'>
     <p style='font-size:12px;color:#999;'>Abaikan email ini jika kamu tidak merasa melakukan permintaan ini.</p>
 </div>";
-
-var_dump(LIB_PATH);
-var_dump(file_exists(LIB_PATH . 'mailer.php'));
 
 kirimEmailAyo($email, $subject, $message_html);
 

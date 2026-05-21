@@ -454,17 +454,21 @@ var(--text-nav-hover); }
 <?php if (empty($_SESSION['user'])): ?>
     <script>
     function handleGSI(response) {
-        fetch('/api/auth/gsi.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token: response.credential })
-        })
-        .then(r => r.json())
-        .then(data => {
-            if (data.success) window.location.href = data.redirect;
-        });
+    fetch('/api/auth/gsi.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-Token': CONFIG.csrfToken
+        },
+        body: JSON.stringify({ token: response.credential })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.success) window.location.href = data.redirect;
+    });
     }
-</script>
+    </script>
 <script src="https://accounts.google.com/gsi/client" async></script>
 <div id="g_id_onload"
     data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"

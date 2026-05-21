@@ -2,6 +2,15 @@
 require_once dirname(__DIR__, 3) . "/bootstrap.php";
 autoload_core();
 
+verify_ajax_request();
+
+$csrf = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
+if (!verify_csrf_token($csrf)) {
+    http_response_code(403);
+    echo json_encode(['success' => false, 'message' => 'Invalid request.']);
+    exit;
+}
+
 $config = require_once dirname(__DIR__, 3) . "/config/oauth.php";
 
 $input = json_decode(file_get_contents('php://input'), true);

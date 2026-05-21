@@ -15,7 +15,7 @@ require_once PUBLIC_PATH . "router.php";
 // Session expired check untuk protected routes
 $protected_routes = ['pages/profile'];
 if (in_array($uri, $protected_routes) && !isset($_SESSION['user'])) {
-    header('Location: /api/auth/google.php');
+    header('Location: /');
     exit;
 }
 ////// =============================== //////

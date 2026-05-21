@@ -2,6 +2,12 @@
 $page_title = "Wisata Bandung";
 //
 ?>
+<style>
+  .btn-outline-primary.active {
+  background: var(--pu-700) !important;
+  border-color: var(--pu-700) !important;
+  }
+</style>
 <main id="content" class="container-fluid">
 <div class="container">
   <section id="Wisata-Bandung">

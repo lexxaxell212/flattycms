@@ -4,6 +4,7 @@ nav,
 a,
 .navbar,
 .navbar-brand,
+.navbar-brand svg,
 .navbar-collapse,
 .glass,
 .card,
@@ -14,7 +15,11 @@ a,
 .btn,
 .btn-close,
 .close-btn {
-  transition: background var(--duration) var(--ease), color var(--duration) var(--ease), border-color var(--duration) var(--ease);
+  transition: 
+  transform var(--duration) var(--ease), 
+  background var(--duration) var(--ease), 
+  color var(--duration) var(--ease), 
+  border-color var(--duration) var(--ease);
 }
 
 .card,

@@ -35,9 +35,6 @@ if (!$user || !$user['password']) {
 $token   = bin2hex(random_bytes(32));
 $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
-var_dump(LIB_PATH);
-var_dump(file_exists(LIB_PATH . 'mailer.php'));
-
 $stmt = $pdo->prepare("
     INSERT INTO password_resets (email, token, expires_at) 
     VALUES (?, ?, ?)

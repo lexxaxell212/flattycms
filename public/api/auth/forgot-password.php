@@ -55,6 +55,9 @@ $message_html = "
     <p style='font-size:12px;color:#999;'>Abaikan email ini jika kamu tidak merasa melakukan permintaan ini.</p>
 </div>";
 
+var_dump(LIB_PATH);
+var_dump(file_exists(LIB_PATH . 'mailer.php'));
+
 kirimEmailAyo($email, $subject, $message_html);
 
 echo json_encode(['success' => true]);

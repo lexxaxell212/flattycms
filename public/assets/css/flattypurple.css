@@ -388,10 +388,6 @@ h6 {
   height: 100% !important;
 }
 
-.navbar-brand:hover svg {
-  transform: translateX(2px) !important;
-}
-
 .search-btn,
 .dm-btn {
     position: relative;

@@ -39,7 +39,7 @@ $stmt = $pdo->prepare("
 ");
 $stmt->execute([$email, $token, $expires]);
 
-$resetLink    = BASE_URL . '/reset-password?token=' . $token;
+$resetLink = rtrim(BASE_URL, '/') . '/reset-password?token=' . $token;
 $subject      = 'Reset Password — ' . SITE_NAME;
 $message_html = "
 <div style='font-family:sans-serif;max-width:600px;margin:0 auto;padding:20px;border:1px solid #eee;border-radius:10px;'>

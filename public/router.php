@@ -19,6 +19,7 @@ $routes = [
     'pages/informasi-terkini'    => SRC_PATH . 'pages/informasi-terkini.php',
     'blogs'                      => SRC_PATH . 'blogs/index.php',
     'profile'    => SRC_PATH . 'user/user-profile.php',
+    'register'=> SRC_PATH . 'user/register.php',
     'login'   => SRC_PATH . 'user/login.php',
     'map'        => SRC_PATH . 'pages/map.php',
     'gallery'    => SRC_PATH . 'pages/gallery.php',

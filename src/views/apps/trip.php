@@ -158,18 +158,6 @@ $cats_json  = json_encode($categories);
         <span class="title">
           <i class="fa-solid fa-route text-primary me-2"></i>Buat Trip Baru
         </span>
-        <?php if ($is_logged): ?>
-        <div class="dropdown">
-          <button class="btn btn-outline-secondary btn-sm dropdown-toggle"
-                  data-bs-toggle="dropdown">
-            <i class="fa-solid fa-folder-open me-1"></i>Tersimpan
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end shadow" id="savedTripsList"
-              style="min-width:250px">
-            <li><span class="dropdown-item text-muted small">Memuat...</span></li>
-          </ul>
-        </div>
-        <?php endif; ?>
       </div>
 
       <div class="tp-planner-body">

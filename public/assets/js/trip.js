@@ -516,10 +516,10 @@
 
   window.refreshTripku = loadTripku;
 
-  function loadSavedTrip(tripId) {
+  window.loadSavedTrip = function (tripId) {
     document.querySelector('[data-tab="map"]').click();
     if (typeof window.loadTripById === 'function') window.loadTripById(tripId);
-  }
+  };
 
   window.openPoiGallery = function (poiId) {
     if (typeof window.showPoiGallery === 'function') window.showPoiGallery(poiId);

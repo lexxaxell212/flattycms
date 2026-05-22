@@ -73,7 +73,7 @@
     });
   });
 
-  // ── SEARCH POI (atas peta) ───────────────────────────────
+  // ── SEARCH POI ───────────────────────────────
   document.getElementById('searchPoi').addEventListener('input', function () {
     const q   = this.value.toLowerCase();
     const box = document.getElementById('searchPoiResults');
@@ -81,7 +81,7 @@
     if (!q) { box.style.display = 'none'; return; }
 
     const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
-    box.style.display = '';
+    box.style.display = 'block';
 
     if (!matches.length) {
       box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';

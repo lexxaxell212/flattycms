@@ -111,18 +111,6 @@ $cats_json  = json_encode($categories);
   <!-- ── TAB: MAP POI ───────────────────────────────── -->
   <div id="tab-map" class="tp-tab-content" style="display:none">
 
-    <!-- Search -->
-    <div class="tp-search-wrap">
-      <div class="input-group input-group-sm">
-        <span class="input-group-text border-end-0">
-          <i class="fa-solid fa-search text-muted"></i>
-        </span>
-        <input type="text" id="searchPoi" class="form-control border-start-0"
-               placeholder="Cari lokasi di peta...">
-      </div>
-      <div id="searchPoiResults" class="list-group shadow"></div>
-    </div>
-
     <!-- Filter Kategori -->
     <div class="cat-filters">
       <button class="btn btn-primary btn-sm cat-filter active" data-cat="">
@@ -139,6 +127,18 @@ $cats_json  = json_encode($categories);
     <!-- Map -->
     <div class="tp-map-wrap">
       <div id="mainMap"></div>
+    </div>
+    
+    <!-- Search -->
+    <div class="tp-search-wrap">
+      <div class="input-group input-group-sm">
+        <span class="input-group-text border-end-0">
+          <i class="fa-solid fa-search text-muted"></i>
+        </span>
+        <input type="text" id="searchPoi" class="form-control border-start-0"
+               placeholder="Cari lokasi di peta...">
+      </div>
+      <div id="searchPoiResults" class="list-group shadow"></div>
     </div>
 
     <!-- Info strip -->

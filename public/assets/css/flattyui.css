@@ -1421,7 +1421,7 @@ var(--pu-700); font-size: .8rem; transform: scale(.9) translateY(-.6rem) transla
   border-radius: var(--radius);
   border: 1.5px solid var(--bg-hover);
   background: transparent;
-  color: var(--text-nav-hover);
+  color: var(--text-nav-hover) !important;
   cursor: pointer;
   transition: background var(--duration), color var(--duration), transform var(--duration);
   flex-shrink: 0;
@@ -1624,6 +1624,7 @@ var(--pu-700); font-size: .8rem; transform: scale(.9) translateY(-.6rem) transla
 }
 
 /* =========== /breakpoint =========== */
+/* Mobile approach */
 .container {
   padding: 0 var(--space-4);
   width: 100%;
@@ -1664,6 +1665,17 @@ var(--pu-700); font-size: .8rem; transform: scale(.9) translateY(-.6rem) transla
 @media (min-width: 992px) {
   .container {
     max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  /* dekstop breakpoint */
+  .container {
+    max-width: 1140px;
+  }
+  /* artikel -slider */
+  /* dekstop: 4 cards */
+  .artikel-slide-card {
+    flex: 0 0 calc((100% - 1rem) / 4);
   }
   /* /utility */
   .swal2-container.swal2-top-end {
@@ -1777,11 +1789,6 @@ var(--pu-700); font-size: .8rem; transform: scale(.9) translateY(-.6rem) transla
     background: var(--bg-nav-hover);
     color: var(--text-nav-hover);
     transform: translateX(2px);
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
   }
 }
 @media (min-width: 1400px) {

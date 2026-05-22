@@ -47,14 +47,17 @@ $isPintasanActive = (bool) array_filter(
     <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css">
   </noscript>
 <script>
+  //Globals
     const CONFIG = {
         baseUrl: '<?= BASE_URL ?>',
         isLoggedIn: <?= !empty($_SESSION['user']) ? 'true' : 'false' ?>,
         csrfToken: '<?= generate_csrf_token() ?>',
     };
 </script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="<?= JS_URL ?>bs533.bundle.min.js" defer></script>
   <script src="<?= JS_URL ?>swal2.all.min.js">//no defer</script>
+  <script src="<?= JS_URL ?>gsi.js" defer></script>
   <script src="<?= JS_URL ?>chat.js" defer></script>
   <script src="<?= JS_URL ?>live-search.js" defer></script>
   <script src="<?= JS_URL ?>navbar.js" defer></script>
@@ -301,21 +304,21 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
             <i class="fa-solid fa-chevron-down nav-dd-chevron" aria-hidden="true"></i>
           </button>
           <div class="nav-dd-panel">
-            <a class="nav-dd-item <?= isActive('/pages/sejarah') ?>" href="<?= PAGES_URL ?>sejarah"><i class="fa-solid fa-landmark"></i>Sejarah</a>
-            <a class="nav-dd-item <?= isActive('/pages/budaya') ?>" href="<?= PAGES_URL ?>budaya"><i class="fa-solid fa-broom-ball"></i>Budaya</a>
-            <a class="nav-dd-item <?= isActive('/pages/kuliner') ?>" href="<?= PAGES_URL ?>kuliner"><i class="fa-solid fa-bowl-rice"></i>Kuliner</a>
-            <a class="nav-dd-item <?= isActive('/pages/layanan') ?>" href="<?= PAGES_URL ?>layanan"><i class="fa-solid fa-bus"></i>Layanan</a>
-            <a class="nav-dd-item <?= isActive('/pages/wisata') ?>" href="<?= PAGES_URL ?>wisata"><i class="fa-solid fa-map-location-dot"></i>Wisata</a>
-            <a class="nav-dd-item <?= isActive('/pages/penginapan') ?>" href="<?= PAGES_URL ?>penginapan"><i class="fa-solid fa-hotel"></i>Penginapan</a>
+            <a class="nav-dd-item <?= isActive('/pages/sejarah') ?>" href="/pages/sejarah"><i class="fa-solid fa-landmark"></i>Sejarah</a>
+            <a class="nav-dd-item <?= isActive('/pages/budaya') ?>" href="/pages/budaya"><i class="fa-solid fa-broom-ball"></i>Budaya</a>
+            <a class="nav-dd-item <?= isActive('/pages/kuliner') ?>" href="/pages/kuliner"><i class="fa-solid fa-bowl-rice"></i>Kuliner</a>
+            <a class="nav-dd-item <?= isActive('/pages/layanan') ?>" href="/pages/layanan"><i class="fa-solid fa-bus"></i>Layanan</a>
+            <a class="nav-dd-item <?= isActive('/pages/wisata') ?>" href="/pages/wisata"><i class="fa-solid fa-map-location-dot"></i>Wisata</a>
+            <a class="nav-dd-item <?= isActive('/pages/penginapan') ?>" href="/pages/penginapan"><i class="fa-solid fa-hotel"></i>Penginapan</a>
           </div>
         </li>
         <li class="nav-desktop-item">
-          <a class="nav-desktop-link <?= isActive('/pages/informasi-terkini') ?>" href="<?= PAGES_URL ?>informasi-terkini">
+          <a class="nav-desktop-link <?= isActive('/pages/informasi-terkini') ?>" href="/pages/informasi-terkini">
             <i class="fa-solid fa-newspaper" aria-hidden="true"></i>Informasi Terkini
           </a>
         </li>
         <li class="nav-desktop-item">
-          <a class="nav-desktop-link <?= isActive('/blogs') ?>" href="<?= BLOGS_URL ?>">
+          <a class="nav-desktop-link <?= isActive('/blogs') ?>" href="/blogs">
             <i class="fa-solid fa-book" aria-hidden="true"></i>Blogs
           </a>
         </li>
@@ -331,7 +334,7 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
           </a>
         </li>
         <li class="nav-desktop-item">
-          <a class="nav-desktop-link <?= isActive('/pages/kritik-dan-saran') ?>" href="<?= PAGES_URL ?>kritik-dan-saran">
+          <a class="nav-desktop-link <?= isActive('/pages/kritik-dan-saran') ?>" href="/pages/kritik-dan-saran">
             <i class="fa-solid fa-envelope" aria-hidden="true"></i>Kritik dan Saran
           </a>
         </li>
@@ -394,111 +397,39 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
         <i class="fa-solid fa-grip"></i> Pintasan
       </a>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item <?= isActive('/pages/sejarah') ?>" href="<?= PAGES_URL ?>sejarah"><i class="fa-solid fa-landmark me-2"></i>Sejarah</a></li>
-        <li><a class="dropdown-item <?= isActive('/pages/budaya') ?>" href="<?= PAGES_URL ?>budaya"><i class="fa-solid fa-broom-ball me-2"></i>Budaya</a></li>
-        <li><a class="dropdown-item <?= isActive('/pages/kuliner') ?>" href="<?= PAGES_URL ?>kuliner"><i class="fa-solid fa-bowl-rice me-2"></i>Kuliner</a></li>
-        <li><a class="dropdown-item <?= isActive('/pages/layanan') ?>" href="<?= PAGES_URL ?>layanan"><i class="fa-solid fa-bus me-2"></i>Layanan</a></li>
-        <li><a class="dropdown-item <?= isActive('/pages/wisata') ?>" href="<?= PAGES_URL ?>wisata"><i class="fa-solid fa-map-location-dot me-2"></i>Wisata</a></li>
-        <li><a class="dropdown-item <?= isActive('/pages/penginapan') ?>" href="<?= PAGES_URL ?>penginapan"><i class="fa-solid fa-hotel me-2"></i>Penginapan</a></li>
+        <li><a class="dropdown-item <?= isActive('/pages/sejarah') ?>" href="/pages/sejarah"><i class="fa-solid fa-landmark me-2"></i>Sejarah</a></li>
+        <li><a class="dropdown-item <?= isActive('/pages/budaya') ?>" href="/pages/budaya"><i class="fa-solid fa-broom-ball me-2"></i>Budaya</a></li>
+        <li><a class="dropdown-item <?= isActive('/pages/kuliner') ?>" href="/pages/kuliner"><i class="fa-solid fa-bowl-rice me-2"></i>Kuliner</a></li>
+        <li><a class="dropdown-item <?= isActive('/pages/layanan') ?>" href="/pages/layanan"><i class="fa-solid fa-bus me-2"></i>Layanan</a></li>
+        <li><a class="dropdown-item <?= isActive('/pages/wisata') ?>" href="/pages/wisata"><i class="fa-solid fa-map-location-dot me-2"></i>Wisata</a></li>
+        <li><a class="dropdown-item <?= isActive('/pages/penginapan') ?>" href="/pages/penginapan"><i class="fa-solid fa-hotel me-2"></i>Penginapan</a></li>
       </ul>
     </li>
-    <li class="nav-item"><a class="nav-link <?= isActive('/pages/informasi-terkini') ?>" href="<?= PAGES_URL ?>informasi-terkini"><i class="fa-solid fa-newspaper"></i>Informasi Terkini</a></li>
-    <li class="nav-item"><a class="nav-link <?= isActive('/blogs') ?>" href="<?= BLOGS_URL ?>"><i class="fa-solid fa-book"></i>Blogs</a></li>
+    <li class="nav-item"><a class="nav-link <?= isActive('/pages/informasi-terkini') ?>" href="/pages/informasi-terkini"><i class="fa-solid fa-newspaper"></i>Informasi Terkini</a></li>
+    <li class="nav-item"><a class="nav-link <?= isActive('/blogs') ?>"
+    href="/blogs"><i class="fa-solid fa-book"></i>Blogs</a></li>
     <li class="nav-item"><a class="nav-link <?= isActive('/map') ?>"
     href="/map"><i class="fa-solid
     fa-suitcase-rolling"></i>Trip Planner</a></li>
     <li class="nav-item"><a class="nav-link <?= isActive('/gallery') ?>"
       href="/gallery"><i class="fa-solid
       fa-images"></i>Gallery</a></li>
-    <li class="nav-item"><a class="nav-link <?= isActive('/pages/kritik-dan-saran') ?>" href="<?= PAGES_URL ?>kritik-dan-saran"><i class="fa-solid fa-envelope"></i>Kritik dan Saran</a></li>
-    <div class="weather" id="w"><small>Cek cuaca...</small></div>
+    <li class="nav-item"><a class="nav-link <?= isActive('/pages/kritik-dan-saran') ?>" href="/pages/kritik-dan-saran"><i class="fa-solid fa-envelope"></i>Kritik dan Saran</a></li>
+    <div class="weather mb-4" id="w"><small>Cek cuaca...</small></div>
   </ul>
 
-
-<style>
-.profile-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 5px 14px 5px 5px;
-    background: rgba(255,255,255,0.35);
-    border: 1px solid rgba(255,255,255,0.45);
-    border-radius: var(--radius);
-    text-decoration: none; color: var(--text-nav);
-    font-size: 1rem; transition: background 0.2s;
-}
-.profile-pill:hover { background: rgba(255,255,255,0.55); color: #fff; }
-.avatar-circle {
-    width: 30px; height: 30px; border-radius: 50%;
-    background: rgba(255,255,255,0.3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem; font-weight: 700; color: var(--text-nav);
-}
-.account-name { font-size: 1rem; font-weight: 500; display: block; }
-.divider-v { width: 1px; height: 18px; background: rgba(255,255,255,0.4); }
-.btn-logout {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 5px 12px;
-    background: rgba(255,255,255,0.55);
-    border: 1px solid rgba(255,255,255,0.45);
-    border-radius: var(--radius);
-    color: var(--text-nav); font-size: 1rem;
-    text-decoration: none; transition: background 0.2s;
-}
-.btn-logout:hover { background: rgba(127,40,217,0.1); color: var(--text-nav-hover); }
-.btn-glass {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 16px;
-    background: rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.35);
-    border-radius: var(--radius);
-    color: var(--text-nav); font-size: 0.9rem; font-weight: 500;
-    text-decoration: none; transition: background 0.2s;
-}
-.btn-glass:hover { background: rgba(255,255,255,0.35); color: var(--text-nav); }
-.btn-glass-solid {
-    background: rgba(255,255,255,0.85);
-    color: #333;
-}
-.btn-glass-solid:hover { background: #fff; color: #222; }
-</style>
-
 <?php if (empty($_SESSION['user'])): ?>
-    <script>
-    function handleGSI(response) {
-        fetch('/api/auth/gsi.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-Token': CONFIG.csrfToken
-            },
-            body: JSON.stringify({ token: response.credential })
-        })
-        .then(r => r.json())
-        .then(data => {
-            if (data.success) window.location.href = data.redirect;
-        });
-    }
-    </script>
-    <script src="https://accounts.google.com/gsi/client" async></script>
-    <div id="g_id_onload"
-        data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
-        data-callback="handleGSI"
-        data-auto_select="false"
-        data-cancel_on_tap_outside="true">
-    </div>
 
     <div class="d-flex align-items-center gap-2">
-        <!-- Tombol Google Sign In -->
         <div class="g_id_signin" data-type="icon" data-shape="circle" data-size="medium"></div>
 
         <div class="divider-v"></div>
 
-        <!-- Tombol Login/Daftar Password -->
-        <a href="/login" class="btn-glass">
+        <a href="/login" class="btn btn-glass">
             <i class="fa-regular fa-user fa-sm"></i>
             Masuk
         </a>
-        <a href="/register" class="btn-glass btn-glass-solid">
+        <a href="/register" class="btn btn-glass btn-glass-solid">
             <i class="fa-solid fa-pen fa-sm"></i>
             Daftar
         </a>

@@ -5,11 +5,11 @@ verify_ajax_request('POST');
 
 const GROQ_ENDPOINT      = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_MODEL         = 'llama-3.1-8b-instant';
-const MAX_TOKENS         = 350;
+const MAX_TOKENS         = 500;
 const TEMPERATURE        = 0.7;
-const CURL_TIMEOUT       = 20;
+const CURL_TIMEOUT       = 15;
 const MAX_MESSAGE_LENGTH = 500;
-const MAX_HISTORY_PAIRS  = 10;
+const MAX_HISTORY_PAIRS  = 5;
 const ALLOWED_ORIGIN     = 'https://ayokebandung.id';
 const DEV_MODE           = false;
 

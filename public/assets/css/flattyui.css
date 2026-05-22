@@ -4,7 +4,6 @@ nav,
 a,
 .navbar,
 .navbar-brand,
-.navbar-brand svg,
 .navbar-collapse,
 .glass,
 .card,
@@ -20,12 +19,10 @@ a,
   background var(--duration) var(--ease), 
   color var(--duration) var(--ease), 
   border-color var(--duration) var(--ease);
+  box-shadow var(--duration) var(--ease);
 }
 
-.card,
-.card-glass,
-.glass,
-.glass-hover,
+.card-body p,
 footer,
 .navbar,
 .hero-land-content,
@@ -72,7 +69,7 @@ section {
 }
 
 table thead th {
-  background: var(--bg-primary) !important;
+  background: var(--bg-white) !important;
   color: var(--text-primary) !important;
 }
 table tbody td {
@@ -81,11 +78,11 @@ table tbody td {
 }
 
 ::selection {
-  background: var(--pu-950);
+  background: var(--pu-900);
   color: #fff;
 }
 ::-moz-selection {
-  background: var(--pu-950);
+  background: var(--pu-900);
   color: #fff;
 }
 
@@ -202,7 +199,6 @@ table tbody td {
   text-decoration: none;
   text-align: center;
   border: none;
-  color: #fff;
   border-radius: var(--radius);
   cursor: pointer;
   user-select: none;
@@ -210,10 +206,6 @@ table tbody td {
   -moz-user-select: none;
   position: relative;
   overflow: hidden;
-  transition: background-color var(--duration) var(--ease),
-              box-shadow var(--duration) var(--ease),
-              opacity var(--duration) var(--ease),
-              transform var(--duration) var(--ease);
 }
 .btn::before {
   content: "";
@@ -305,33 +297,56 @@ table tbody td {
   box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
 }
 
+.btn-glass {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: var(--text-nav); 
+}
+.btn-glass:hover { 
+  background: rgba(255,255,255,0.35); 
+  color: var(--text-nav); 
+}
+.btn-glass-solid {
+    background: rgba(255,255,255,0.85);
+    color: var(--text-nav);
+}
+.btn-glass-solid:hover { 
+  background: var(--bg-white); 
+  color: var(--text-nav-hover);
+}
+
+.btn-logout {
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    border-radius: var(--radius);
+    color: var(--text-nav); 
+}
+.btn-logout:hover { 
+  background: var(--bg-nav-hover); 
+  color: var(--text-nav-hover);
+}
+
 .close-btn, .btn-close {
   width:40px;
   height:40px;
   color:var(--text-white);
-  background: transparent;
-  font-size:1.1rem;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  background: var(--glass-bg);
   border-radius: var(--radius-full);
   border:none
 }
 .close-btn:hover, .btn-close:hover {
   color: var(--text-white-hover) !important;
   background: var(--bg-nav-hover) !important;
-  border:none !important;
 }
 
-.submit-btn {
+.submit-btn, .btn-submit {
   border:none !important;
   border-radius: var(--radius);
-  font-weight:var(--fw-medium);
   cursor:pointer;
   background: var(--pu-700);
   color: #fff;
 }
-.submit-btn:hover {
+.submit-btn:hover, .btn-submit:hover {
   transform:translateY(-2px);
   background: var(--pu-600);
   color: #fff;
@@ -664,6 +679,44 @@ table tbody td {
   background:rgb(255 255 255 / .1);
   border-radius:10px;
   display:none
+}
+
+.profile-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 14px 5px 5px;
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    border-radius: var(--radius);
+    text-decoration: none; 
+    color: var(--text-nav);
+    font-size: var(--space-4); 
+    transition: background var(--duration);
+}
+.profile-pill:hover {
+  background: var(--glass-bg-hover); 
+  color: var(--text-nav-hover); 
+}
+.avatar-circle {
+    width: 30px; 
+    height: 30px; 
+    border-radius: var(--radius-full);
+    background: var(--glass-bg);
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    font-size: var(--space-4); 
+    font-weight: var(--fw-bold); 
+    color: var(--text-nav);
+}
+.account-name { 
+  font-size: var(--space-4); 
+  font-weight: var(--fw-bold); 
+  display: block; 
+}
+.divider-v { 
+  width: 1px; 
+  height: 18px; 
+  background: rgba(255,255,255,0.4);
 }
 
 /* ============= /live-search ============= */

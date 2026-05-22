@@ -1,6 +1,7 @@
 <?php
 $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
+// static
 $routes = [
   // home
     '' => SRC_PATH . 'pages/home.php',
@@ -29,6 +30,7 @@ $routes = [
     'gallery'    => SRC_PATH . 'apps/gallery.php',
 ];
 
+// dynamic
 if (array_key_exists($uri, $routes)) {
     $view_content = $routes[$uri];
 } elseif (str_starts_with($uri, 'pages/')) {

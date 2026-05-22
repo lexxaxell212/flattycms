@@ -1,7 +1,3 @@
-/**
- * artikel-slider.js
- * Scoped to #artikel-slider-wrapper. No CSS transitions — pure snap.
- */
 (function () {
   "use strict";
 
@@ -28,7 +24,6 @@
 
     if (total === 0) return;
 
-    // Always no transition
     track.style.transition = "none";
 
     let current   = 0;
@@ -40,7 +35,7 @@
     }
 
     function snap(offsetX) {
-      const cardW = cards[0].offsetWidth;
+      const cardW = Math.round(cards[0].getBoundingClientRect().width);
       const step  = cardW + GAP;
       track.style.transform = `translateX(${-(current * step) + (offsetX || 0)}px)`;
     }
@@ -99,7 +94,7 @@
       if (!touching) return;
       touching = false;
       const delta     = e.changedTouches[0].clientX - startX;
-      const threshold = cards[0].offsetWidth * 0.25;
+      const threshold = Math.round(cards[0].getBoundingClientRect().width) * 0.25;
       if (delta < -threshold) {
         current = Math.min(current + 1, maxIndex());
       } else if (delta > threshold) {

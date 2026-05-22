@@ -1,5 +1,4 @@
 (function () {
-  // ── STATE ────────────────────────────────────────────────
   let startPoint    = null;
   let routes        = [];
   let routeLine     = null;
@@ -8,16 +7,12 @@
   let routePolyline = null;
   let routeDuration = 0;
 
-  // ── MAP INIT ─────────────────────────────────────────────
   const map = L.map('mainMap').setView([-6.9175, 107.6191], 13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
   }).addTo(map);
-
-  // Expose map supaya PHP bisa panggil invalidateSize()
   window.mainMap = map;
 
-  // ── POI ICONS ────────────────────────────────────────────
   const iconColors = { 1: '#6366f1', 2: '#f59e0b', 3: '#10b981' };
   function makeIcon(cat_id) {
     const c = iconColors[cat_id] || '#6366f1';
@@ -28,7 +23,6 @@
     });
   }
 
-  // ── RENDER MARKERS ───────────────────────────────────────
   function renderMarkers() {
     Object.values(markers).forEach(m => map.removeLayer(m));
     markers = {};
@@ -59,7 +53,6 @@
 
   renderMarkers();
 
-  // ── FILTER KATEGORI ──────────────────────────────────────
   document.querySelectorAll('.cat-filter').forEach(btn => {
     btn.addEventListener('click', function () {
       document.querySelectorAll('.cat-filter').forEach(b => {
@@ -73,21 +66,17 @@
     });
   });
 
-  // ── SEARCH POI ───────────────────────────────
   document.getElementById('searchPoi').addEventListener('input', function () {
     const q   = this.value.toLowerCase();
     const box = document.getElementById('searchPoiResults');
     box.innerHTML = '';
     if (!q) { box.style.display = 'none'; return; }
-
     const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
     box.style.display = 'block';
-
     if (!matches.length) {
       box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
       return;
     }
-
     matches.forEach(p => {
       const el = document.createElement('button');
       el.type      = 'button';
@@ -107,39 +96,34 @@
   });
 
   document.addEventListener('click', e => {
-    if (!e.target.closest('#searchPoi') && !e.target.closest('#searchPoiResults')) {
+    if (!e.target.closest('#searchPoi') && !e.target.closest('#searchPoiResults'))
       document.getElementById('searchPoiResults').style.display = 'none';
-    }
   });
 
-  // ── SEARCH STARTING POINT ────────────────────────────────
   function searchStartPoint(q) {
-    const resultsEl = document.getElementById('startResults');
-    if (!q) { resultsEl.style.display = 'none'; return; }
-
+    const el = document.getElementById('startResults');
+    if (!q) { el.style.display = 'none'; return; }
     const matches = POIS.filter(p => p.name.toLowerCase().includes(q.toLowerCase())).slice(0, 6);
-    resultsEl.innerHTML = '';
-    resultsEl.style.display = '';
-
+    el.innerHTML = '';
+    el.style.display = '';
     if (!matches.length) {
-      resultsEl.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
+      el.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
       return;
     }
-
     matches.forEach(p => {
-      const el = document.createElement('button');
-      el.type      = 'button';
-      el.className = 'list-group-item list-group-item-action small';
-      el.textContent = p.name;
-      el.addEventListener('click', () => {
+      const btn = document.createElement('button');
+      btn.type      = 'button';
+      btn.className = 'list-group-item list-group-item-action small';
+      btn.textContent = p.name;
+      btn.addEventListener('click', () => {
         startPoint = { name: p.name, lat: parseFloat(p.latitude), lng: parseFloat(p.longitude) };
         document.getElementById('startName').textContent = startPoint.name;
         document.getElementById('startSelected').style.display = '';
         document.getElementById('startInput').value = '';
-        resultsEl.style.display = 'none';
+        el.style.display = 'none';
         updatePlannerUI();
       });
-      resultsEl.appendChild(el);
+      el.appendChild(btn);
     });
   }
 
@@ -150,7 +134,6 @@
     if (e.key === 'Escape') document.getElementById('startResults').style.display = 'none';
   });
 
-  // ── ADD TO ROUTE ─────────────────────────────────────────
   window.addToRoute = function (poi_id) {
     if (!startPoint) {
       Swal.fire({ toast: true, position: 'top-end', icon: 'warning', title: 'Pilih titik awal dulu!', showConfirmButton: false, timer: 2000 });
@@ -168,7 +151,6 @@
     updateRouteOnMap();
   };
 
-  // ── UPDATE PLANNER UI ────────────────────────────────────
   function updatePlannerUI() {
     const list  = document.getElementById('routeList');
     const empty = document.getElementById('routeEmpty');
@@ -193,20 +175,16 @@
         <div class="flex-grow-1 min-w-0">
           <div class="small fw-semibold text-truncate">${r.name}</div>
           ${r.distance_from_prev ? `<div class="text-muted" style="font-size:.7rem"><i class="fa-solid fa-ruler me-1"></i>${r.distance_from_prev} km dari titik sebelumnya</div>` : ''}
-          ${IS_LOGGED ? `<div class="mt-1">
-            <input type="text" class="form-control form-control-sm note-input" data-idx="${i}" placeholder="Tambah catatan..." value="${r.note}" style="font-size:.75rem">
-          </div>` : ''}
+          ${IS_LOGGED ? `<div class="mt-1"><input type="text" class="form-control form-control-sm note-input" data-idx="${i}" placeholder="Tambah catatan..." value="${r.note}" style="font-size:.75rem"></div>` : ''}
         </div>
         <button class="btn btn-sm btn-outline-danger btn-remove-route" data-idx="${i}">
           <i class="fa-solid fa-xmark"></i>
         </button>
-      </div>
-    `).join('');
+      </div>`).join('');
 
     list.querySelectorAll('.note-input').forEach(inp => {
       inp.addEventListener('input', function () { routes[this.dataset.idx].note = this.value; });
     });
-
     list.querySelectorAll('.btn-remove-route').forEach(btn => {
       btn.addEventListener('click', function () {
         routes.splice(parseInt(this.dataset.idx), 1);
@@ -226,30 +204,17 @@
     }
   }
 
-  // ── GENERATE ROUTE ───────────────────────────────────────
   document.getElementById('btnGenerateRoute').addEventListener('click', async () => {
     if (!startPoint || routes.length === 0) return;
-
-    const points = [
-      [startPoint.lat, startPoint.lng],
-      ...routes.map(r => [r.lat, r.lng])
-    ];
-
+    const points = [[startPoint.lat, startPoint.lng], ...routes.map(r => [r.lat, r.lng])];
     const fd = new FormData();
     fd.append('coordinates', JSON.stringify(points));
-
     const btn = document.getElementById('btnGenerateRoute');
     btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>Generating...';
     btn.disabled  = true;
-
     try {
-      const res  = await fetch(`${BASE}/api/map/api-route.php`, {
-        method: 'POST',
-        headers: { 'X-Requested-With': 'XMLHttpRequest' },
-        body: fd
-      });
+      const res  = await fetch(`${BASE}/api/map/api-route.php`, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
       const data = await res.json();
-
       if (data.success) {
         routePolyline = data.polyline;
         routeDuration = data.duration;
@@ -269,7 +234,6 @@
     }
   });
 
-  // ── UPDATE POLYLINE ON MAP ───────────────────────────────
   function updateRouteOnMap(points) {
     if (routeLine) map.removeLayer(routeLine);
     if (!points || points.length < 2) return;
@@ -277,7 +241,6 @@
     map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
   }
 
-  // ── RESET ────────────────────────────────────────────────
   document.getElementById('btnResetTrip').addEventListener('click', async () => {
     const conf = await Swal.fire({
       title: 'Reset trip?', icon: 'warning',
@@ -285,10 +248,7 @@
       cancelButtonText: 'Batal', confirmButtonColor: '#dc3545'
     });
     if (!conf.isConfirmed) return;
-    startPoint    = null;
-    routes        = [];
-    routePolyline = null;
-    routeDuration = 0;
+    startPoint = null; routes = []; routePolyline = null; routeDuration = 0;
     document.getElementById('startSelected').style.display = 'none';
     document.getElementById('startInput').value = '';
     if (routeLine) { map.removeLayer(routeLine); routeLine = null; }
@@ -296,7 +256,6 @@
     renderMarkers();
   });
 
-  // ── SAVE TRIP ────────────────────────────────────────────
   if (IS_LOGGED) {
     document.getElementById('btnSaveTrip').addEventListener('click', () => {
       const sf = document.getElementById('saveForm');
@@ -304,8 +263,7 @@
     });
 
     document.getElementById('tripTitle').addEventListener('keydown', async e => {
-      if (e.key !== 'Enter') return;
-      await doSaveTrip();
+      if (e.key === 'Enter') await doSaveTrip();
     });
     document.getElementById('btnConfirmSave').addEventListener('click', doSaveTrip);
 
@@ -322,17 +280,14 @@
       fd.append('duration',         routeDuration ?? 0);
       fd.append('items', JSON.stringify(routes.map((r, i) => ({
         poi_id: r.poi_id, order_index: i + 1,
-        distance_from_prev: r.distance_from_prev || 0,
-        note: r.note
+        distance_from_prev: r.distance_from_prev || 0, note: r.note
       }))));
-
       try {
         const res  = await fetch(API_TRIP, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
         const data = await res.json();
         if (data.success) {
           Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Trip disimpan!', showConfirmButton: false, timer: 2000 });
           document.getElementById('saveForm').style.display = 'none';
-          // Refresh tab Tripku kalau sudah pernah dibuka
           if (typeof window.refreshTripku === 'function') window.refreshTripku();
         } else {
           Swal.fire('Gagal', data.message, 'error');
@@ -343,88 +298,53 @@
     }
   }
 
-  // ── LOAD TRIP BY ID (dipanggil dari tab Tripku) ──────────
   window.loadTripById = async function (id) {
     try {
       const res  = await fetch(`${API_TRIP}?id=${id}`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
       const json = await res.json();
       if (!json.success) { Swal.fire('Gagal', json.message, 'error'); return; }
-
       const trip = json.data;
-
-      // Set start point
-      startPoint = {
-        name: trip.start_point_name,
-        lat:  parseFloat(trip.start_lat),
-        lng:  parseFloat(trip.start_lng)
-      };
+      startPoint = { name: trip.start_point_name, lat: parseFloat(trip.start_lat), lng: parseFloat(trip.start_lng) };
       document.getElementById('startName').textContent = startPoint.name;
       document.getElementById('startSelected').style.display = '';
-
-      // Set routes
       routes = trip.items.map(item => ({
-        poi_id:             item.poi_id,
-        name:               item.poi_name,
-        lat:                parseFloat(item.latitude),
-        lng:                parseFloat(item.longitude),
-        distance_from_prev: item.distance_from_prev,
-        note:               item.note || ''
+        poi_id: item.poi_id, name: item.poi_name,
+        lat: parseFloat(item.latitude), lng: parseFloat(item.longitude),
+        distance_from_prev: item.distance_from_prev, note: item.note || ''
       }));
-
       updatePlannerUI();
-
-      // Load & render polyline
       if (trip.route_polyline) {
         routePolyline = JSON.parse(trip.route_polyline);
         routeDuration = trip.duration || 0;
         updateRouteOnMap(routePolyline);
         document.getElementById('totalDist').textContent = trip.total_distance ?? '—';
-        document.getElementById('totalStops').textContent =
-          `· ${routes.length} lokasi${trip.duration ? ' · ~' + trip.duration + ' menit' : ''}`;
+        document.getElementById('totalStops').textContent = `· ${routes.length} lokasi${trip.duration ? ' · ~' + trip.duration + ' menit' : ''}`;
         document.getElementById('distanceInfo').style.display = '';
       } else {
         routePolyline = null;
-        const points  = [[startPoint.lat, startPoint.lng], ...routes.map(r => [r.lat, r.lng])];
-        updateRouteOnMap(points);
+        updateRouteOnMap([[startPoint.lat, startPoint.lng], ...routes.map(r => [r.lat, r.lng])]);
       }
-
-      // Scroll ke peta
       setTimeout(() => {
         const mapEl = document.getElementById('mainMap');
-        if (mapEl) {
-          mapEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          map.invalidateSize();
-        }
+        if (mapEl) { mapEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); map.invalidateSize(); }
       }, 150);
-
       Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: `Trip "${trip.title}" dimuat!`, showConfirmButton: false, timer: 2000 });
-
     } catch (e) {
       Swal.fire('Error', 'Gagal memuat trip', 'error');
     }
   };
 
-  // ── DELETE TRIP (expose untuk tab Tripku) ────────────────
   window.deleteTripById = async function (id, title) {
     const conf = await Swal.fire({
-      title: 'Hapus trip?',
-      text: `"${title}" akan dihapus permanen`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#dc3545',
-      confirmButtonText: 'Hapus',
-      cancelButtonText: 'Batal'
+      title: 'Hapus trip?', text: `"${title}" akan dihapus permanen`, icon: 'warning',
+      showCancelButton: true, confirmButtonColor: '#dc3545',
+      confirmButtonText: 'Hapus', cancelButtonText: 'Batal'
     });
     if (!conf.isConfirmed) return;
-
     const fd = new FormData();
-    fd.append('action',     'delete');
-    fd.append('csrf_token', CSRF);
-    fd.append('trip_id',    id);
-
+    fd.append('action', 'delete'); fd.append('csrf_token', CSRF); fd.append('trip_id', id);
     const res  = await fetch(API_TRIP, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
     const data = await res.json();
-
     if (data.success) {
       Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Trip dihapus!', showConfirmButton: false, timer: 2000 });
       if (typeof window.refreshTripku === 'function') window.refreshTripku();
@@ -433,46 +353,33 @@
     }
   };
 
-  // ── UPLOAD FOTO ──────────────────────────────────────────
   if (IS_LOGGED) {
     window.openUpload = function (poi_id, poi_name) {
-      // Delegate ke Bootstrap Modal yang di-init di PHP
       if (typeof window.openUploadModal === 'function') {
         window.openUploadModal(poi_id, poi_name);
         return;
       }
-      // Fallback: isi field manual lalu show modal
-      document.getElementById('uploadPoiId').value        = poi_id;
+      document.getElementById('uploadPoiId').value = poi_id;
       document.getElementById('uploadPoiName').textContent = poi_name;
       document.getElementById('uploadPoiSelected').style.display = '';
-      document.getElementById('uploadPoiSearch').value    = poi_name;
+      document.getElementById('uploadPoiSearch').value = poi_name;
       document.getElementById('uploadPreview').style.display = 'none';
       document.getElementById('uploadFile').value = '';
       document.getElementById('uploadCredit').value = '';
-      const bsModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('uploadModal'));
-      bsModal.show();
+      bootstrap.Modal.getOrCreateInstance(document.getElementById('uploadModal')).show();
     };
 
-    // Search POI di modal upload
     document.getElementById('uploadPoiSearch').addEventListener('input', function () {
       const q   = this.value.toLowerCase();
       const box = document.getElementById('uploadPoiResults');
       box.innerHTML = '';
       if (!q) { box.style.display = 'none'; return; }
-
       box.style.display = '';
       const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
-
-      if (!matches.length) {
-        box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
-        return;
-      }
-
+      if (!matches.length) { box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>'; return; }
       matches.forEach(p => {
         const el = document.createElement('button');
-        el.type      = 'button';
-        el.className = 'list-group-item list-group-item-action small';
-        el.textContent = p.name;
+        el.type = 'button'; el.className = 'list-group-item list-group-item-action small'; el.textContent = p.name;
         el.addEventListener('click', () => {
           document.getElementById('uploadPoiId').value = p.id;
           document.getElementById('uploadPoiName').textContent = p.name;
@@ -483,7 +390,6 @@
       });
     });
 
-    // Preview foto
     document.getElementById('uploadFile').addEventListener('change', function () {
       const file = this.files[0];
       if (!file) return;
@@ -500,33 +406,21 @@
       reader.readAsDataURL(file);
     });
 
-    // Submit upload
     document.getElementById('btnKirimUpload').addEventListener('click', async () => {
       const poi_id = document.getElementById('uploadPoiId').value;
       const file   = document.getElementById('uploadFile').files[0];
-      const credit = document.getElementById('uploadCredit').value.trim();
-
-      if (!poi_id || !file) {
-        Swal.fire('Oops!', 'Pilih lokasi dan foto dulu', 'warning');
-        return;
-      }
-
+      if (!poi_id || !file) { Swal.fire('Oops!', 'Pilih lokasi dan foto dulu', 'warning'); return; }
       const btn = document.getElementById('btnKirimUpload');
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>Mengupload...';
       btn.disabled  = true;
-
       const fd = new FormData();
-      fd.append('csrf_token', CSRF);
-      fd.append('poi_id',     poi_id);
-      fd.append('photo',      file);
-      fd.append('caption',    credit);
-
+      fd.append('csrf_token', CSRF); fd.append('poi_id', poi_id);
+      fd.append('photo', file); fd.append('caption', document.getElementById('uploadCredit').value.trim());
       try {
         const res  = await fetch(API_GAL, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
         const data = await res.json();
         if (data.success) {
-          const bsModal = bootstrap.Modal.getInstance(document.getElementById('uploadModal'));
-          if (bsModal) bsModal.hide();
+          bootstrap.Modal.getInstance(document.getElementById('uploadModal'))?.hide();
           Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Foto berhasil diupload!', showConfirmButton: false, timer: 2500 });
         } else {
           Swal.fire('Gagal', data.message, 'error');
@@ -538,6 +432,134 @@
         btn.disabled  = false;
       }
     });
+
+    const _uploadModal = new bootstrap.Modal(document.getElementById('uploadModal'));
+    window.openUploadModal = function (poiId, poiName) {
+      document.getElementById('uploadPoiId').value = poiId || '';
+      document.getElementById('uploadPoiName').textContent = poiName || '';
+      document.getElementById('uploadPoiSelected').style.display = (poiId && poiName) ? '' : 'none';
+      _uploadModal.show();
+    };
   }
+
+  function escHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function loadExplorePoi() {
+    const wrap = document.getElementById('explorePoiList');
+    if (!POIS.length) {
+      wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-compass"></i><p>Belum ada POI tersedia.</p></div>`;
+      return;
+    }
+    wrap.innerHTML = POIS.map(poi => `
+      <div class="poi-card">
+        <div class="poi-card-body">
+          <div class="poi-card-title">${escHtml(poi.name)}</div>
+          <div class="poi-card-desc">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</div>
+          <div class="poi-card-actions">
+            ${poi.poi_url
+              ? `<a href="${escHtml(poi.poi_url)}" class="btn btn-primary btn-sm" target="_blank" rel="noopener">
+                   <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Kunjungi
+                 </a>`
+              : `<span class="btn btn-outline-secondary btn-sm disabled">
+                   <i class="fa-solid fa-link-slash me-1"></i>Belum ada link
+                 </span>`
+            }
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  function loadTripku() {
+    const wrap = document.getElementById('tripkuList');
+    wrap.innerHTML = `<div class="text-center py-4 text-muted small" style="grid-column:1/-1"><i class="fa-solid fa-spinner fa-spin me-1"></i>Memuat trip tersimpan...</div>`;
+    fetch(API_TRIP + '?action=list')
+      .then(r => r.json())
+      .then(data => {
+        const list    = Array.isArray(data) ? data : (data.data || []);
+        const countEl = document.getElementById('profileTripCount');
+        if (countEl) countEl.textContent = list.length;
+        if (!list.length) {
+          wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-suitcase"></i><p>Belum ada trip tersimpan.<br>Buat trip pertamamu di tab Map POI!</p></div>`;
+          return;
+        }
+        wrap.innerHTML = list.map(trip => `
+          <div class="trip-saved-card">
+            <img class="trip-saved-thumb"
+                 src="${trip.thumbnail || BASE + 'uploads/poi-placeholder.jpg'}"
+                 alt="${escHtml(trip.title)}"
+                 onerror="this.src='${BASE}uploads/poi-placeholder.jpg'">
+            <div class="trip-saved-body">
+              <div class="trip-saved-title">${escHtml(trip.title || 'Trip tanpa nama')}</div>
+              <div class="trip-saved-note">
+                ${trip.total_stops ? `<span class="me-2"><i class="fa-solid fa-map-pin me-1 text-primary"></i>${trip.total_stops} stop</span>` : ''}
+                ${trip.total_distance ? `<span><i class="fa-solid fa-ruler me-1 text-muted"></i>${trip.total_distance} km</span>` : ''}
+                ${(!trip.total_stops && !trip.total_distance) ? escHtml(trip.notes || 'Catatan kosong.') : ''}
+              </div>
+              <div class="d-flex gap-2 mt-2 flex-wrap">
+                <button class="btn btn-primary btn-sm" onclick="loadSavedTrip(${trip.id})">
+                  <i class="fa-solid fa-route me-1"></i>Buka di Peta
+                </button>
+                <button class="btn btn-outline-danger btn-sm" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || 'Trip ini')}')">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>`).join('');
+      })
+      .catch(() => {
+        wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-triangle-exclamation"></i><p>Gagal memuat trip. Coba refresh halaman.</p></div>`;
+      });
+  }
+
+  window.refreshTripku = loadTripku;
+
+  function loadSavedTrip(tripId) {
+    document.querySelector('[data-tab="map"]').click();
+    if (typeof window.loadTripById === 'function') window.loadTripById(tripId);
+  }
+
+  window.openPoiGallery = function (poiId) {
+    if (typeof window.showPoiGallery === 'function') window.showPoiGallery(poiId);
+  };
+
+  (function initTabs() {
+    const tabs     = document.querySelectorAll('.tp-tab');
+    const contents = document.querySelectorAll('.tp-tab-content');
+    let tripkuLoaded   = false;
+    let mapInitialized = false;
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function () {
+        tabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        const target = this.dataset.tab;
+        contents.forEach(c => c.style.display = 'none');
+        document.getElementById('tab-' + target).style.display = '';
+
+        if (target === 'tripku' && !tripkuLoaded && IS_LOGGED) {
+          loadTripku();
+          tripkuLoaded = true;
+        }
+        if (target === 'map' && !mapInitialized) {
+          setTimeout(() => { if (window.mainMap) window.mainMap.invalidateSize(); }, 50);
+          mapInitialized = true;
+        }
+      });
+    });
+
+    loadExplorePoi();
+
+    if (IS_LOGGED) {
+      fetch(API_TRIP + '?action=count')
+        .then(r => r.json())
+        .then(d => {
+          const el = document.getElementById('profileTripCount');
+          if (el && d.count !== undefined) el.textContent = d.count;
+        }).catch(() => {});
+    }
+  })();
 
 })();

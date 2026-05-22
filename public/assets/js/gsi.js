@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    const targetElement = document.getElementById("show-gsi");
+    const targetElement = document.getElementById("part-trip-planner");
 
     if (targetElement) {
         const observer = new IntersectionObserver((entries, observerInstance) => {

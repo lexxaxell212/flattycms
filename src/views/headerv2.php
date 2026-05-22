@@ -421,12 +421,9 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
 <?php if (empty($_SESSION['user'])): ?>
 
     <div class="d-flex align-items-center gap-2">
-        <button id="gsi-custom" 
-             data-type="icon" data-shape="circle" data-size="medium">
-        </button>
-
+        <div id="google-login-btn">
+        </div>
         <div class="divider-v"></div>
-
         <a href="/login" class="btn btn-glass">
             <i class="fa-regular fa-user fa-sm"></i>
             Masuk

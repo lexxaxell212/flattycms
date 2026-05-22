@@ -12,10 +12,6 @@ $categories = safe_get_categories($pdo);
 <script src="<?= JS_URL ?>artikel-slider.js" defer></script>
 
 <style>
-#artikel-slider-wrapper {
-  --asl-gap:    1rem;
-  --asl-radius: 1rem;
-}
 
 .artikel-slider-viewport {
   overflow-x: scroll;
@@ -30,29 +26,29 @@ $categories = safe_get_categories($pdo);
 
 .artikel-slider-track {
   display: flex;
-  gap: var(--asl-gap);
+  gap: 1rem;
 }
 
 .artikel-slide-card {
   /* desktop: 4 cards — subtract 3 gaps split across 4 items */
-  flex: 0 0 calc((100% - var(--asl-gap) * 3) / 4);
+  flex: 0 0 calc((100% - 1rem * 3) / 4);
   min-width: 0;
   scroll-snap-align: start;
-  border-radius: var(--asl-radius);
+  border-radius: var(--radius);
   overflow: hidden;
-  background: var(--bs-body-bg, #fff);
-  border: 1px solid rgba(0,0,0,.09);
-  transition: box-shadow .2s ease, transform .2s ease;
+  background: var(--bg-white);
+  border: var(--glass-border);
+  transition: box-shadow var(--duration) var(--ease), transform var(--duration) var(--ease);
 }
 .artikel-slide-card:hover {
-  box-shadow: 0 8px 28px rgba(0,0,0,.10);
-  transform: translateY(-3px);
+  box-shadow: var(--glass-shadow-hover);
+  transform: translateY(-2px);
 }
 
 /* tablet: 2 cards */
 @media (max-width: 1199px) {
   .artikel-slide-card {
-    flex: 0 0 calc((100% - var(--asl-gap)) / 2);
+    flex: 0 0 calc((100% - 1rem) / 2);
   }
 }
 
@@ -75,8 +71,8 @@ $categories = safe_get_categories($pdo);
 }
 .artikel-slide-card .asl-title {
   font-size: 1rem;
-  font-weight: 600;
-  color: var(--bs-body-color);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
   text-decoration: none;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -86,12 +82,11 @@ $categories = safe_get_categories($pdo);
   line-height: 1.4;
 }
 .artikel-slide-card .asl-title:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: var(--text-nav-hover);
 }
 .artikel-slide-card .asl-excerpt {
   font-size: .875rem;
-  color: var(--bs-secondary-color, #6c757d);
+  color: var(--text-muted);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -101,11 +96,11 @@ $categories = safe_get_categories($pdo);
 }
 .artikel-slide-card .btn-asl-read {
   font-size: .8rem;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   letter-spacing: .03em;
   text-transform: uppercase;
   padding: .45rem 1rem;
-  border-radius: 2rem;
+  border-radius: var(--radius);
 }
 
 .asl-controls-row {
@@ -130,17 +125,17 @@ $categories = safe_get_categories($pdo);
   border: none;
   padding: 0;
   cursor: pointer;
-  transition: background .25s, width .25s;
+  transition: background var(--duration), width var(--duration);
 }
 .artikel-dot.is-active {
-  background: var(--bs-primary, #0d6efd);
+  background: var(--bg-hover);
   width: 22px;
   border-radius: 4px;
 }
-@media (prefers-color-scheme: dark) {
-  .artikel-dot            { background: rgba(255,255,255,.25); }
-  .artikel-dot.is-active  { background: var(--bs-primary, #0d6efd); }
-}
+
+[data-dark] .artikel-dot { background: rgba(255,255,255,.25); }
+  
+[data-dark]  .artikel-dot.is-active  { background: var(--bg-hover); }
 
 .asl-nav-btn {
   width: 40px;
@@ -149,18 +144,18 @@ $categories = safe_get_categories($pdo);
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 1.5px solid currentColor;
+  border: 1.5px solid var(--text-nav-hover);
   background: transparent;
   cursor: pointer;
-  transition: background .18s, color .18s, transform .15s;
+  transition: background var(--duration), color var(--duration), transform var(--duration);
   flex-shrink: 0;
   padding: 0;
   line-height: 1;
 }
 .asl-nav-btn:not(:disabled):hover {
-  background: var(--bs-primary, #0d6efd);
-  border-color: var(--bs-primary, #0d6efd);
-  color: #fff;
+  background: var(--bg-hover);
+  border-color: var(--bg-hover);
+  color: var(--text-white);
   transform: scale(1.06);
 }
 .asl-nav-btn:disabled {

@@ -596,7 +596,6 @@ $cats_json  = json_encode($categories);
 </div><!-- /container-fluid -->
 </main>
 
-
 <!-- ── MODAL UPLOAD FOTO ──────────────────────────────── -->
 <?php if ($is_logged): ?>
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-hidden="true">
@@ -763,10 +762,8 @@ function loadTripku() {
   fetch(API_TRIP + '?action=list')
     .then(r => r.json())
     .then(data => {
-      /* Normalkan: support {data:[...]} atau langsung [...] */
       const list = Array.isArray(data) ? data : (data.data || []);
 
-      /* Update profile count */
       const countEl = document.getElementById('profileTripCount');
       if (countEl) countEl.textContent = list.length;
 
@@ -779,12 +776,20 @@ function loadTripku() {
         return;
       }
 
-      wrap.innerHTML = list.map(trip => `
+      wrap.innerHTML = list.map(trip => {
+        const initials = (trip.title || 'T')
+          .trim().split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+
+        const thumbHtml = trip.thumbnail
+          ? `<img class="trip-saved-thumb"
+                  src="${trip.thumbnail}"
+                  alt="${escHtml(trip.title)}"
+                  onerror="this.outerHTML='<div class=\\'trip-saved-thumb\\' style=\\'background:#6366f1;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.1rem\\'>${initials}</div>'">`
+          : `<div class="trip-saved-thumb" style="background:#6366f1;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.1rem">${initials}</div>`;
+
+        return `
         <div class="trip-saved-card">
-          <img class="trip-saved-thumb"
-               src="${trip.thumbnail || BASE + '/assets/img/poi-placeholder.jpg'}"
-               alt="${escHtml(trip.title)}"
-               onerror="this.src='${BASE}/assets/img/poi-placeholder.jpg'">
+          ${thumbHtml}
           <div class="trip-saved-body">
             <div class="trip-saved-title">${escHtml(trip.title || 'Trip tanpa nama')}</div>
             <div class="trip-saved-note">
@@ -803,7 +808,8 @@ function loadTripku() {
               </button>
             </div>
           </div>
-        </div>`).join('');
+        </div>`;
+      }).join('');
     })
     .catch(() => {
       wrap.innerHTML = `
@@ -813,6 +819,7 @@ function loadTripku() {
         </div>`;
     });
 }
+
 
 /* Expose refreshTripku supaya map.js bisa trigger reload setelah save/delete */
 window.refreshTripku = function () {

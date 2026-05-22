@@ -660,9 +660,8 @@ $cats_json  = json_encode($categories);
 (function () {
   const tabs     = document.querySelectorAll('.tp-tab');
   const contents = document.querySelectorAll('.tp-tab-content');
-  let tripkuLoaded    = false;
-  let trendingLoaded  = false;
-  let mapInitialized  = false;
+  let tripkuLoaded   = false;
+  let trendingLoaded = false;
 
   tabs.forEach(tab => {
     tab.addEventListener('click', function () {
@@ -681,21 +680,20 @@ $cats_json  = json_encode($categories);
         loadTripku();
         tripkuLoaded = true;
       }
-      if (target === 'map' && !mapInitialized) {
-        /* Trigger resize supaya Leaflet render benar setelah tab muncul */
+      if (target === 'map') {
+        if (typeof window._initMapTab === 'function') {
+          window._initMapTab();
+        }
         setTimeout(() => {
           if (window.mainMap) window.mainMap.invalidateSize();
         }, 50);
-        mapInitialized = true;
       }
     });
   });
 
-  /* Load trending saat pertama buka (tab default) */
   loadTrendingPoi();
   trendingLoaded = true;
 
-  /* Update trip count di profile card */
   if (IS_LOGGED) {
     fetch(API_TRIP + '?action=count')
       .then(r => r.json())

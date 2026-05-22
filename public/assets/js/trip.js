@@ -1,5 +1,4 @@
 (function () {
-  let map           = null;
   let startPoint    = null;
   let routes        = [];
   let routeLine     = null;
@@ -7,21 +6,13 @@
   let activeCat     = '';
   let routePolyline = null;
   let routeDuration = 0;
-  let mapReady      = false;
 
-  function initMap() {
-    if (mapReady) return;
-    mapReady = true;
+  const map = L.map('mainMap').setView([-6.9175, 107.6191], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
 
-    map = L.map('mainMap').setView([-6.9175, 107.6191], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap'
-    }).addTo(map);
-
-    window.mainMap = map;
-    renderMarkers();
-    bindMapTabListeners();
-  }
+  window.mainMap = map;
 
   const iconColors = { 1: '#6366f1', 2: '#f59e0b', 3: '#10b981' };
   function makeIcon(cat_id) {
@@ -34,7 +25,6 @@
   }
 
   function renderMarkers() {
-    if (!map) return;
     Object.values(markers).forEach(m => map.removeLayer(m));
     markers = {};
     POIS.forEach(poi => {
@@ -64,73 +54,58 @@
       </div>`;
   }
 
-  function bindMapTabListeners() {
-    document.querySelectorAll('.cat-filter').forEach(btn => {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('.cat-filter').forEach(b => {
-          b.classList.remove('active', 'btn-primary');
-          b.classList.add('btn-outline-secondary');
-        });
-        this.classList.add('active', 'btn-primary');
-        this.classList.remove('btn-outline-secondary');
-        activeCat = this.dataset.cat;
-        renderMarkers();
+  renderMarkers();
+
+  document.querySelectorAll('.cat-filter').forEach(btn => {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.cat-filter').forEach(b => {
+        b.classList.remove('active', 'btn-primary');
+        b.classList.add('btn-outline-secondary');
       });
+      this.classList.add('active', 'btn-primary');
+      this.classList.remove('btn-outline-secondary');
+      activeCat = this.dataset.cat;
+      renderMarkers();
     });
+  });
 
-    const searchPoiInput = document.getElementById('searchPoi');
-    const searchPoiBox   = document.getElementById('searchPoiResults');
+  document.getElementById('searchPoi').addEventListener('input', function () {
+    const q   = this.value.toLowerCase();
+    const box = document.getElementById('searchPoiResults');
+    box.innerHTML = '';
+    if (!q) { box.style.display = 'none'; return; }
 
-    searchPoiInput.addEventListener('input', function () {
-      const q = this.value.toLowerCase().trim();
-      searchPoiBox.innerHTML = '';
-      if (!q) { searchPoiBox.style.display = 'none'; return; }
+    const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
+    box.style.display = '';
 
-      const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
-      searchPoiBox.style.display = '';
-
-      if (!matches.length) {
-        searchPoiBox.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
-        return;
-      }
-
-      matches.forEach(p => {
-        const el = document.createElement('button');
-        el.type      = 'button';
-        el.className = 'list-group-item list-group-item-action small';
-        el.innerHTML = `<i class="fa-solid ${p.category_icon || 'fa-location-dot'} me-2 text-primary"></i>${p.name}`;
-        el.addEventListener('mousedown', e => e.preventDefault());
-        el.addEventListener('click', () => {
-          searchPoiBox.style.display = 'none';
-          searchPoiInput.value = '';
-          map.flyTo([parseFloat(p.latitude), parseFloat(p.longitude)], 16, { duration: 1 });
-          setTimeout(() => {
-            if (!markers[p.id]) renderMarkers();
-            if (markers[p.id]) markers[p.id].openPopup();
-          }, 1100);
-        });
-        searchPoiBox.appendChild(el);
-      });
-    });
-
-    searchPoiInput.addEventListener('blur', () => {
-      setTimeout(() => { searchPoiBox.style.display = 'none'; }, 200);
-    });
-
-    document.getElementById('btnGenerateRoute').addEventListener('click', handleGenerateRoute);
-    document.getElementById('btnResetTrip').addEventListener('click', handleResetTrip);
-
-    if (IS_LOGGED) {
-      document.getElementById('btnSaveTrip').addEventListener('click', () => {
-        const sf = document.getElementById('saveForm');
-        sf.style.display = sf.style.display === 'none' ? '' : 'none';
-      });
-      document.getElementById('tripTitle').addEventListener('keydown', async e => {
-        if (e.key === 'Enter') await doSaveTrip();
-      });
-      document.getElementById('btnConfirmSave').addEventListener('click', doSaveTrip);
+    if (!matches.length) {
+      box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
+      return;
     }
-  }
+
+    matches.forEach(p => {
+      const el = document.createElement('button');
+      el.type      = 'button';
+      el.className = 'list-group-item list-group-item-action small';
+      el.innerHTML = `<i class="fa-solid ${p.category_icon} me-2 text-primary"></i>${p.name}`;
+      el.addEventListener('click', () => {
+        box.style.display = 'none';
+        document.getElementById('searchPoi').value = '';
+        map.flyTo([parseFloat(p.latitude), parseFloat(p.longitude)], 16, { duration: 1 });
+        setTimeout(() => {
+          if (!markers[p.id]) renderMarkers();
+          if (markers[p.id]) markers[p.id].openPopup();
+        }, 1000);
+      });
+      box.appendChild(el);
+    });
+  });
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#searchPoi') && !e.target.closest('#searchPoiResults')) {
+      document.getElementById('searchPoiResults').style.display = 'none';
+    }
+  });
 
   function searchStartPoint(q) {
     const resultsEl = document.getElementById('startResults');
@@ -181,10 +156,15 @@
     const poi = POIS.find(p => p.id == poi_id);
     if (!poi) return;
     routes.push({ poi_id: poi.id, name: poi.name, lat: parseFloat(poi.latitude), lng: parseFloat(poi.longitude), note: '' });
-    if (map) map.closePopup();
+    map.closePopup();
     updatePlannerUI();
     updateRouteOnMap();
   };
+
+  function getInitials(name) {
+    if (!name) return '?';
+    return name.trim().split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+  }
 
   function updatePlannerUI() {
     const list  = document.getElementById('routeList');
@@ -243,7 +223,7 @@
     }
   }
 
-  async function handleGenerateRoute() {
+  document.getElementById('btnGenerateRoute').addEventListener('click', async () => {
     if (!startPoint || routes.length === 0) return;
 
     const points = [
@@ -283,17 +263,16 @@
       btn.innerHTML = '<i class="fa-solid fa-route me-1"></i>Generate Rute';
       btn.disabled  = false;
     }
-  }
+  });
 
   function updateRouteOnMap(points) {
-    if (!map) return;
     if (routeLine) map.removeLayer(routeLine);
     if (!points || points.length < 2) return;
     routeLine = L.polyline(points, { color: '#6366f1', weight: 4, opacity: .85 }).addTo(map);
     map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
   }
 
-  async function handleResetTrip() {
+  document.getElementById('btnResetTrip').addEventListener('click', async () => {
     const conf = await Swal.fire({
       title: 'Reset trip?', icon: 'warning',
       showCancelButton: true, confirmButtonText: 'Ya, reset',
@@ -306,40 +285,53 @@
     routeDuration = 0;
     document.getElementById('startSelected').style.display = 'none';
     document.getElementById('startInput').value = '';
-    if (map && routeLine) { map.removeLayer(routeLine); routeLine = null; }
+    if (routeLine) { map.removeLayer(routeLine); routeLine = null; }
     updatePlannerUI();
     renderMarkers();
-  }
+  });
 
-  async function doSaveTrip() {
-    const title = document.getElementById('tripTitle').value.trim() || 'Trip Bandungku';
-    const fd    = new FormData();
-    fd.append('action',           'save');
-    fd.append('csrf_token',       CSRF);
-    fd.append('title',            title);
-    fd.append('start_point_name', startPoint.name);
-    fd.append('start_lat',        startPoint.lat);
-    fd.append('start_lng',        startPoint.lng);
-    fd.append('route_polyline',   routePolyline ? JSON.stringify(routePolyline) : '');
-    fd.append('duration',         routeDuration ?? 0);
-    fd.append('items', JSON.stringify(routes.map((r, i) => ({
-      poi_id: r.poi_id, order_index: i + 1,
-      distance_from_prev: r.distance_from_prev || 0,
-      note: r.note
-    }))));
+  if (IS_LOGGED) {
+    document.getElementById('btnSaveTrip').addEventListener('click', () => {
+      const sf = document.getElementById('saveForm');
+      sf.style.display = sf.style.display === 'none' ? '' : 'none';
+    });
 
-    try {
-      const res  = await fetch(API_TRIP, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
-      const data = await res.json();
-      if (data.success) {
-        Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Trip disimpan!', showConfirmButton: false, timer: 2000 });
-        document.getElementById('saveForm').style.display = 'none';
-        if (typeof window.refreshTripku === 'function') window.refreshTripku();
-      } else {
-        Swal.fire('Gagal', data.message, 'error');
+    document.getElementById('tripTitle').addEventListener('keydown', async e => {
+      if (e.key !== 'Enter') return;
+      await doSaveTrip();
+    });
+    document.getElementById('btnConfirmSave').addEventListener('click', doSaveTrip);
+
+    async function doSaveTrip() {
+      const title = document.getElementById('tripTitle').value.trim() || 'Trip Bandungku';
+      const fd    = new FormData();
+      fd.append('action',           'save');
+      fd.append('csrf_token',       CSRF);
+      fd.append('title',            title);
+      fd.append('start_point_name', startPoint.name);
+      fd.append('start_lat',        startPoint.lat);
+      fd.append('start_lng',        startPoint.lng);
+      fd.append('route_polyline',   routePolyline ? JSON.stringify(routePolyline) : '');
+      fd.append('duration',         routeDuration ?? 0);
+      fd.append('items', JSON.stringify(routes.map((r, i) => ({
+        poi_id: r.poi_id, order_index: i + 1,
+        distance_from_prev: r.distance_from_prev || 0,
+        note: r.note
+      }))));
+
+      try {
+        const res  = await fetch(API_TRIP, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
+        const data = await res.json();
+        if (data.success) {
+          Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Trip disimpan!', showConfirmButton: false, timer: 2000 });
+          document.getElementById('saveForm').style.display = 'none';
+          if (typeof window.refreshTripku === 'function') window.refreshTripku();
+        } else {
+          Swal.fire('Gagal', data.message, 'error');
+        }
+      } catch (e) {
+        Swal.fire('Error', 'Tidak bisa menyimpan trip', 'error');
       }
-    } catch (e) {
-      Swal.fire('Error', 'Tidak bisa menyimpan trip', 'error');
     }
   }
 
@@ -388,7 +380,7 @@
         const mapEl = document.getElementById('mainMap');
         if (mapEl) {
           mapEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          if (map) map.invalidateSize();
+          map.invalidateSize();
         }
       }, 150);
 
@@ -433,12 +425,12 @@
         window.openUploadModal(poi_id, poi_name);
         return;
       }
-      document.getElementById('uploadPoiId').value         = poi_id;
+      document.getElementById('uploadPoiId').value        = poi_id;
       document.getElementById('uploadPoiName').textContent = poi_name;
       document.getElementById('uploadPoiSelected').style.display = '';
-      document.getElementById('uploadPoiSearch').value     = poi_name;
+      document.getElementById('uploadPoiSearch').value    = poi_name;
       document.getElementById('uploadPreview').style.display = 'none';
-      document.getElementById('uploadFile').value   = '';
+      document.getElementById('uploadFile').value = '';
       document.getElementById('uploadCredit').value = '';
       const bsModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('uploadModal'));
       bsModal.show();
@@ -527,7 +519,5 @@
       }
     });
   }
-
-  window._initMapTab = initMap;
 
 })();

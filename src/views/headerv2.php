@@ -323,7 +323,7 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
           </a>
         </li>
         <li class="nav-desktop-item">
-          <a class="nav-desktop-link <?= isActive('/map') ?>" href="/map">
+          <a class="nav-desktop-link <?= isActive('/trip') ?>" href="/trip">
             <i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i>Trip
             Planner
           </a>
@@ -408,8 +408,8 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
     <li class="nav-item"><a class="nav-link <?= isActive('/pages/informasi-terkini') ?>" href="/pages/informasi-terkini"><i class="fa-solid fa-newspaper"></i>Informasi Terkini</a></li>
     <li class="nav-item"><a class="nav-link <?= isActive('/blogs') ?>"
     href="/blogs"><i class="fa-solid fa-book"></i>Blogs</a></li>
-    <li class="nav-item"><a class="nav-link <?= isActive('/map') ?>"
-    href="/map"><i class="fa-solid
+    <li class="nav-item"><a class="nav-link <?= isActive('/trip') ?>"
+    href="/trip"><i class="fa-solid
     fa-suitcase-rolling"></i>Trip Planner</a></li>
     <li class="nav-item"><a class="nav-link <?= isActive('/gallery') ?>"
       href="/gallery"><i class="fa-solid

@@ -204,7 +204,7 @@
     `).join('');
 
     list.querySelectorAll('.note-input').forEach(inp => {
-      inp.addEventListener('change', function () { routes[this.dataset.idx].note = this.value; });
+      inp.addEventListener('input', function () { routes[this.dataset.idx].note = this.value; });
     });
 
     list.querySelectorAll('.btn-remove-route').forEach(btn => {

@@ -421,10 +421,9 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
 <?php if (empty($_SESSION['user'])): ?>
 
     <div class="d-flex align-items-center gap-2">
-        <div class="g_id_signin" 
-             data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
+        <button id="gsi-custom" 
              data-type="icon" data-shape="circle" data-size="medium">
-        </div>
+        </button>
 
         <div class="divider-v"></div>
 

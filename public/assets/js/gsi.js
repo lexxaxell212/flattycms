@@ -16,24 +16,31 @@ function handleGSI(response) {
 
 document.addEventListener("DOMContentLoaded", function () {
     if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+        
         google.accounts.id.initialize({
             client_id: "353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com", 
             callback: handleGSI,
             auto_select: false,
             cancel_on_tap_outside: true
         });
+
+        const buttonElement = document.getElementById("gsi-custom");
+        if (buttonElement) {
+            google.accounts.id.renderButton(buttonElement, {
+                theme: "outline",
+                size: "large"
+            });
+        }
     }
 
-    const targetElement = document.getElementById("part-trip-planner");
+    const targetElement = document.getElementById("show-gsi");
 
     if (targetElement) {
         const observer = new IntersectionObserver((entries, observerInstance) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
-                        
                         google.accounts.id.prompt();
-                        
                         observerInstance.unobserve(entry.target);
                     }
                 }

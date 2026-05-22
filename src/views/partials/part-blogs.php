@@ -3,7 +3,7 @@ require_once LIB_PATH . "blogs.php";
 
 $cat_id   = (int) ($_GET["cat"]  ?? 0);
 $page     = max(1, (int) ($_GET["page"] ?? 1));
-$per_page = 10; 
+$per_page = 10;
 $offset   = ($page - 1) * $per_page;
 $posts      = safe_get_posts($pdo, $per_page, $offset, $cat_id);
 $categories = safe_get_categories($pdo);
@@ -15,28 +15,34 @@ $categories = safe_get_categories($pdo);
 #artikel-slider-wrapper {
   --asl-gap:    1rem;
   --asl-radius: 1rem;
-  --asl-ease:   cubic-bezier(0.25, 0.8, 0.25, 1);
-  --asl-dur:    0.42s;
 }
+
+.artikel-slider-viewport {
+  overflow-x: scroll;
+  overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge */
+  padding-bottom: 4px;            /* room for hover shadow */
+}
+.artikel-slider-viewport::-webkit-scrollbar { display: none; }
 
 .artikel-slider-track {
   display: flex;
   gap: var(--asl-gap);
-  will-change: transform;
-  cursor: grab;
-  user-select: none;
 }
-.artikel-slider-track:active { cursor: grabbing; }
 
 .artikel-slide-card {
-  flex: 0 0 calc(25% - var(--asl-gap) * 3 / 4);  /* desktop: 4 */
+  /* desktop: 4 cards — subtract 3 gaps split across 4 items */
+  flex: 0 0 calc((100% - var(--asl-gap) * 3) / 4);
   min-width: 0;
+  scroll-snap-align: start;
   border-radius: var(--asl-radius);
   overflow: hidden;
   background: var(--bs-body-bg, #fff);
   border: 1px solid rgba(0,0,0,.09);
-  transition: box-shadow .2s var(--asl-ease),
-              transform .2s var(--asl-ease);
+  transition: box-shadow .2s ease, transform .2s ease;
 }
 .artikel-slide-card:hover {
   box-shadow: 0 8px 28px rgba(0,0,0,.10);
@@ -46,7 +52,7 @@ $categories = safe_get_categories($pdo);
 /* tablet: 2 cards */
 @media (max-width: 1199px) {
   .artikel-slide-card {
-    flex: 0 0 calc(50% - var(--asl-gap) / 2);
+    flex: 0 0 calc((100% - var(--asl-gap)) / 2);
   }
 }
 
@@ -107,7 +113,7 @@ $categories = safe_get_categories($pdo);
   align-items: center;
   justify-content: flex-end;
   gap: .5rem;
-  margin-top: 1.1rem;
+  margin-top: 1rem;
 }
 
 .artikel-slider-dots {
@@ -124,17 +130,16 @@ $categories = safe_get_categories($pdo);
   border: none;
   padding: 0;
   cursor: pointer;
-  transition: background .25s, transform .25s, width .25s;
+  transition: background .25s, width .25s;
 }
 .artikel-dot.is-active {
   background: var(--bs-primary, #0d6efd);
   width: 22px;
   border-radius: 4px;
 }
-
 @media (prefers-color-scheme: dark) {
-  .artikel-dot { background: rgba(255,255,255,.25); }
-  .artikel-dot.is-active { background: var(--bs-primary, #0d6efd); }
+  .artikel-dot            { background: rgba(255,255,255,.25); }
+  .artikel-dot.is-active  { background: var(--bs-primary, #0d6efd); }
 }
 
 .asl-nav-btn {
@@ -147,7 +152,7 @@ $categories = safe_get_categories($pdo);
   border: 1.5px solid currentColor;
   background: transparent;
   cursor: pointer;
-  transition: background .18s, color .18s, opacity .18s, transform .15s;
+  transition: background .18s, color .18s, transform .15s;
   flex-shrink: 0;
   padding: 0;
   line-height: 1;
@@ -170,63 +175,58 @@ $categories = safe_get_categories($pdo);
 
       <h2 class="mb-4">Artikel Terbaru</h2>
 
-      <div id="artikel-slider-wrapper" class="overflow-hidden">
+      <div id="artikel-slider-wrapper">
 
-        <!-- Track -->
-        <div class="artikel-slider-track" id="aslTrack" role="list">
-          <?php if (empty($posts)): ?>
-            <div class="text-center text-muted py-5 w-100">
-              <i class="fas fa-newspaper fs-1 d-block mb-3 opacity-50" aria-hidden="true"></i>
-              <p>Belum ada artikel.</p>
-            </div>
-          <?php else: ?>
-            <?php foreach ($posts as $p): ?>
-            <article class="artikel-slide-card" role="listitem">
-              <img
-                class="asl-img"
-                src="<?= BASE_UPLOAD_URL . htmlspecialchars($p['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                onerror="this.onerror=null;this.src='/uploads/default.jpg'"
-                alt="<?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                loading="lazy"
-              >
-              <div class="card-body">
-                <a href="/blogs/?id=<?= (int) $p['id'] ?>"
-                   class="asl-title">
-                  <?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>
-                </a>
-                <p class="asl-excerpt">
-                  <?= safe_excerpt($p['excerpt'] ?? ($p['content'] ?? ''), 130) ?>
-                </p>
-                <a href="/blogs/?id=<?= (int) $p['id'] ?>"
-                   class="btn btn-primary btn-asl-read">
-                  Baca Selengkapnya
-                  <i class="fas fa-angle-right ms-1" aria-hidden="true"></i>
-                </a>
+        <!-- Scrollable viewport -->
+        <div class="artikel-slider-viewport">
+          <div class="artikel-slider-track" role="list">
+            <?php if (empty($posts)): ?>
+              <div class="text-center text-muted py-5 w-100">
+                <i class="fas fa-newspaper fs-1 d-block mb-3 opacity-50" aria-hidden="true"></i>
+                <p>Belum ada artikel.</p>
               </div>
-            </article>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </div>
+            <?php else: ?>
+              <?php foreach ($posts as $p): ?>
+              <article class="artikel-slide-card" role="listitem">
+                <img
+                  class="asl-img"
+                  src="<?= BASE_UPLOAD_URL . htmlspecialchars($p['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                  onerror="this.onerror=null;this.src='/uploads/default.jpg'"
+                  alt="<?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                  loading="lazy"
+                >
+                <div class="card-body">
+                  <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="asl-title">
+                    <?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+                  </a>
+                  <p class="asl-excerpt">
+                    <?= safe_excerpt($p['excerpt'] ?? ($p['content'] ?? ''), 130) ?>
+                  </p>
+                  <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="btn btn-primary btn-asl-read">
+                    Baca Selengkapnya
+                    <i class="fas fa-angle-right ms-1" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </article>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+        </div><!-- /.artikel-slider-viewport -->
 
         <div class="asl-controls-row">
           <div class="artikel-slider-dots" role="tablist" aria-label="Navigasi slide"></div>
 
-          <button
-            class="asl-nav-btn artikel-btn-prev text-primary"
-            aria-label="Artikel sebelumnya"
-            disabled
-          >
+          <button class="asl-nav-btn artikel-btn-prev text-primary"
+                  aria-label="Artikel sebelumnya" disabled>
             <i class="fas fa-angle-left" aria-hidden="true"></i>
           </button>
-          <button
-            class="asl-nav-btn artikel-btn-next text-primary"
-            aria-label="Artikel selanjutnya"
-          >
+          <button class="asl-nav-btn artikel-btn-next text-primary"
+                  aria-label="Artikel selanjutnya">
             <i class="fas fa-angle-right" aria-hidden="true"></i>
           </button>
         </div>
 
-      </div>
+      </div><!-- /#artikel-slider-wrapper -->
 
     </section>
   </div>

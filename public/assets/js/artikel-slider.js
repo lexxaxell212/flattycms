@@ -1,20 +1,20 @@
 (function () {
   "use strict";
 
-  const BREAKPOINTS = { mobile: 1, tablet: 2, desktop: 4 };
   const GAP = 16;
 
   function getVisible() {
     const w = window.innerWidth;
-    if (w >= 1200) return BREAKPOINTS.desktop;
-    if (w >= 768)  return BREAKPOINTS.tablet;
-    return BREAKPOINTS.mobile;
+    if (w >= 1200) return 4;
+    if (w >= 768)  return 2;
+    return 1;
   }
 
   function initArtikelSlider(wrapperId) {
-    const wrapper = document.getElementById(wrapperId);
+    const wrapper  = document.getElementById(wrapperId);
     if (!wrapper) return;
 
+    const viewport = wrapper.querySelector(".artikel-slider-viewport");
     const track    = wrapper.querySelector(".artikel-slider-track");
     const cards    = Array.from(track.querySelectorAll(".artikel-slide-card"));
     const dotsWrap = wrapper.querySelector(".artikel-slider-dots");
@@ -24,24 +24,23 @@
 
     if (total === 0) return;
 
-    track.style.transition = "none";
+    let current = 0;
 
-    let current   = 0;
-    let startX    = 0;
-    let touching  = false;
+    function cardStep() {
+      return cards[0].getBoundingClientRect().width + GAP;
+    }
 
     function maxIndex() {
       return Math.max(0, total - getVisible());
     }
 
-    function snap(offsetX) {
-      const cardW = Math.round(cards[0].getBoundingClientRect().width);
-      const step  = cardW + GAP;
-      track.style.transform = `translateX(${-(current * step) + (offsetX || 0)}px)`;
+    function scrollToIndex(idx) {
+      current = Math.min(Math.max(idx, 0), maxIndex());
+      viewport.scrollLeft = current * cardStep();
+      updateUI();
     }
 
     function updateUI() {
-      snap();
       const dots     = dotsWrap.querySelectorAll(".artikel-dot");
       const activeIdx = Math.floor(current / getVisible());
       dots.forEach((d, i) => {
@@ -60,56 +59,41 @@
         const dot = document.createElement("button");
         dot.className = "artikel-dot";
         dot.setAttribute("aria-label", `Halaman ${i + 1}`);
-        dot.addEventListener("click", () => {
-          current = Math.min(i * vis, maxIndex());
-          updateUI();
-        });
+        dot.addEventListener("click", () => scrollToIndex(i * vis));
         dotsWrap.appendChild(dot);
       }
     }
 
-    // Nav buttons
-    if (btnPrev) btnPrev.addEventListener("click", () => {
-      current = Math.max(current - 1, 0);
-      updateUI();
-    });
-    if (btnNext) btnNext.addEventListener("click", () => {
-      current = Math.min(current + 1, maxIndex());
+    viewport.addEventListener("scrollend", () => {
+      const step = cardStep();
+      current = Math.round(viewport.scrollLeft / step);
+      current = Math.min(current, maxIndex());
       updateUI();
     });
 
-    // Touch swipe — follow finger, snap on release
-    track.addEventListener("touchstart", e => {
-      startX   = e.touches[0].clientX;
-      touching = true;
-    }, { passive: true });
-
-    track.addEventListener("touchmove", e => {
-      if (!touching) return;
-      const delta = e.touches[0].clientX - startX;
-      snap(delta);
-    }, { passive: true });
-
-    track.addEventListener("touchend", e => {
-      if (!touching) return;
-      touching = false;
-      const delta     = e.changedTouches[0].clientX - startX;
-      const threshold = Math.round(cards[0].getBoundingClientRect().width) * 0.25;
-      if (delta < -threshold) {
-        current = Math.min(current + 1, maxIndex());
-      } else if (delta > threshold) {
-        current = Math.max(current - 1, 0);
-      }
-      updateUI();
+    let scrollTimer;
+    viewport.addEventListener("scroll", () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const step = cardStep();
+        current = Math.round(viewport.scrollLeft / step);
+        current = Math.min(current, maxIndex());
+        updateUI();
+      }, 80);
     });
 
-    // Resize
+    if (btnPrev) btnPrev.addEventListener("click", () => scrollToIndex(current - 1));
+    if (btnNext) btnNext.addEventListener("click", () => scrollToIndex(current + 1));
+
     let resizeTimer;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         current = Math.min(current, maxIndex());
         buildDots();
+        viewport.style.scrollBehavior = "auto";
+        viewport.scrollLeft = current * cardStep();
+        viewport.style.scrollBehavior = "";
         updateUI();
       }, 120);
     });

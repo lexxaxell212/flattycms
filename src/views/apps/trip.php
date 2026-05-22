@@ -360,9 +360,9 @@ function loadTrendingPoi() {
       wrap.innerHTML = data.map((poi, i) => `
         <div class="poi-card">
           <img class="poi-card-img"
-               src="${poi.thumbnail || BASE + '/assets/img/poi-placeholder.jpg'}"
+               src="${poi.thumbnail || BASE + 'uploads/poi-placeholder.jpg'}"
                alt="${escHtml(poi.name)}"
-               onerror="this.src='${BASE}/assets/img/poi-placeholder.jpg'">
+               onerror="this.src='${BASE}uploads/poi-placeholder.jpg'">
           <div class="poi-card-body">
             <div class="poi-card-title">
               ${escHtml(poi.name)}
@@ -418,9 +418,9 @@ function loadTripku() {
       wrap.innerHTML = list.map(trip => `
         <div class="trip-saved-card">
           <img class="trip-saved-thumb"
-               src="${trip.thumbnail || BASE + '/assets/img/poi-placeholder.jpg'}"
+               src="${trip.thumbnail || BASE + 'uploads/poi-placeholder.jpg'}"
                alt="${escHtml(trip.title)}"
-               onerror="this.src='${BASE}/assets/img/poi-placeholder.jpg'">
+               onerror="this.src='${BASE}/uploads/poi-placeholder.jpg'">
           <div class="trip-saved-body">
             <div class="trip-saved-title">${escHtml(trip.title || 'Trip tanpa nama')}</div>
             <div class="trip-saved-note">

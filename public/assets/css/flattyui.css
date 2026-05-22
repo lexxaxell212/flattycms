@@ -1301,38 +1301,7 @@ var(--pu-700); font-size: .8rem; transform: scale(.9) translateY(-.6rem) transla
   padding: 0;
 }
 
-/* ====== /card-slider ====== */
-.slider-wrapper {
-  width:100%
-}
-.slider-track {
-  display:flex;
-  gap: 1rem;
-  transition:transform var(--duration) var(--ease);
-  will-change:transform
-}
-.slide-card {
-  flex:0 0 100%;
-  max-width:100%
-}
-.slider-controls {
-  display:flex;
-  justify-content:center;
-  gap: var(--space-4)
-}
-.btn-slider {
-  padding:var(--space-4);
-  border-radius: var(--radius-full);
-  color:var(--pu-700);
-  cursor:pointer;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-.btn-slider:hover {
-  color:var(--pu-800);
-  background: transparent !important;
-  box-shadow: none !important;
-}
+/* ======= / artikel-slider ========*/
 
 /* ======= /sejarah-page ======= */
 .timeline-container {

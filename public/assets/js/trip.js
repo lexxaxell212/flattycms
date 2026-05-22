@@ -1,4 +1,5 @@
 (function () {
+  // ── STATE ────────────────────────────────────────────────
   let startPoint    = null;
   let routes        = [];
   let routeLine     = null;
@@ -7,13 +8,16 @@
   let routePolyline = null;
   let routeDuration = 0;
 
+  // ── MAP INIT ─────────────────────────────────────────────
   const map = L.map('mainMap').setView([-6.9175, 107.6191], 13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
   }).addTo(map);
 
+  // Expose map supaya PHP bisa panggil invalidateSize()
   window.mainMap = map;
 
+  // ── POI ICONS ────────────────────────────────────────────
   const iconColors = { 1: '#6366f1', 2: '#f59e0b', 3: '#10b981' };
   function makeIcon(cat_id) {
     const c = iconColors[cat_id] || '#6366f1';
@@ -24,6 +28,7 @@
     });
   }
 
+  // ── RENDER MARKERS ───────────────────────────────────────
   function renderMarkers() {
     Object.values(markers).forEach(m => map.removeLayer(m));
     markers = {};
@@ -35,8 +40,6 @@
       markers[poi.id] = m;
     });
   }
-
-  window.renderMarkers = renderMarkers;
 
   function buildPopup(poi) {
     const inRoute = routes.some(r => r.poi_id == poi.id);
@@ -56,6 +59,7 @@
 
   renderMarkers();
 
+  // ── FILTER KATEGORI ──────────────────────────────────────
   document.querySelectorAll('.cat-filter').forEach(btn => {
     btn.addEventListener('click', function () {
       document.querySelectorAll('.cat-filter').forEach(b => {
@@ -69,6 +73,7 @@
     });
   });
 
+  // ── SEARCH POI (atas peta) ───────────────────────────────
   document.getElementById('searchPoi').addEventListener('input', function () {
     const q   = this.value.toLowerCase();
     const box = document.getElementById('searchPoiResults');
@@ -91,11 +96,11 @@
       el.addEventListener('click', () => {
         box.style.display = 'none';
         document.getElementById('searchPoi').value = '';
-        map.flyTo([parseFloat(p.latitude), parseFloat(p.longitude)], 16, { duration: 1 });
-        setTimeout(() => {
-          if (!markers[p.id]) renderMarkers();
-          if (markers[p.id]) markers[p.id].openPopup();
-        }, 1000);
+        const marker = markers[p.id];
+        if (marker) {
+          map.flyTo([p.latitude, p.longitude], 16, { duration: 1 });
+          setTimeout(() => marker.openPopup(), 1000);
+        }
       });
       box.appendChild(el);
     });
@@ -107,6 +112,7 @@
     }
   });
 
+  // ── SEARCH STARTING POINT ────────────────────────────────
   function searchStartPoint(q) {
     const resultsEl = document.getElementById('startResults');
     if (!q) { resultsEl.style.display = 'none'; return; }
@@ -144,6 +150,7 @@
     if (e.key === 'Escape') document.getElementById('startResults').style.display = 'none';
   });
 
+  // ── ADD TO ROUTE ─────────────────────────────────────────
   window.addToRoute = function (poi_id) {
     if (!startPoint) {
       Swal.fire({ toast: true, position: 'top-end', icon: 'warning', title: 'Pilih titik awal dulu!', showConfirmButton: false, timer: 2000 });
@@ -161,11 +168,7 @@
     updateRouteOnMap();
   };
 
-  function getInitials(name) {
-    if (!name) return '?';
-    return name.trim().split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
-  }
-
+  // ── UPDATE PLANNER UI ────────────────────────────────────
   function updatePlannerUI() {
     const list  = document.getElementById('routeList');
     const empty = document.getElementById('routeEmpty');
@@ -223,6 +226,7 @@
     }
   }
 
+  // ── GENERATE ROUTE ───────────────────────────────────────
   document.getElementById('btnGenerateRoute').addEventListener('click', async () => {
     if (!startPoint || routes.length === 0) return;
 
@@ -265,6 +269,7 @@
     }
   });
 
+  // ── UPDATE POLYLINE ON MAP ───────────────────────────────
   function updateRouteOnMap(points) {
     if (routeLine) map.removeLayer(routeLine);
     if (!points || points.length < 2) return;
@@ -272,6 +277,7 @@
     map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
   }
 
+  // ── RESET ────────────────────────────────────────────────
   document.getElementById('btnResetTrip').addEventListener('click', async () => {
     const conf = await Swal.fire({
       title: 'Reset trip?', icon: 'warning',
@@ -290,6 +296,7 @@
     renderMarkers();
   });
 
+  // ── SAVE TRIP ────────────────────────────────────────────
   if (IS_LOGGED) {
     document.getElementById('btnSaveTrip').addEventListener('click', () => {
       const sf = document.getElementById('saveForm');
@@ -325,6 +332,7 @@
         if (data.success) {
           Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Trip disimpan!', showConfirmButton: false, timer: 2000 });
           document.getElementById('saveForm').style.display = 'none';
+          // Refresh tab Tripku kalau sudah pernah dibuka
           if (typeof window.refreshTripku === 'function') window.refreshTripku();
         } else {
           Swal.fire('Gagal', data.message, 'error');
@@ -335,6 +343,7 @@
     }
   }
 
+  // ── LOAD TRIP BY ID (dipanggil dari tab Tripku) ──────────
   window.loadTripById = async function (id) {
     try {
       const res  = await fetch(`${API_TRIP}?id=${id}`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
@@ -343,6 +352,7 @@
 
       const trip = json.data;
 
+      // Set start point
       startPoint = {
         name: trip.start_point_name,
         lat:  parseFloat(trip.start_lat),
@@ -351,6 +361,7 @@
       document.getElementById('startName').textContent = startPoint.name;
       document.getElementById('startSelected').style.display = '';
 
+      // Set routes
       routes = trip.items.map(item => ({
         poi_id:             item.poi_id,
         name:               item.poi_name,
@@ -362,6 +373,7 @@
 
       updatePlannerUI();
 
+      // Load & render polyline
       if (trip.route_polyline) {
         routePolyline = JSON.parse(trip.route_polyline);
         routeDuration = trip.duration || 0;
@@ -376,6 +388,7 @@
         updateRouteOnMap(points);
       }
 
+      // Scroll ke peta
       setTimeout(() => {
         const mapEl = document.getElementById('mainMap');
         if (mapEl) {
@@ -391,6 +404,7 @@
     }
   };
 
+  // ── DELETE TRIP (expose untuk tab Tripku) ────────────────
   window.deleteTripById = async function (id, title) {
     const conf = await Swal.fire({
       title: 'Hapus trip?',
@@ -419,12 +433,15 @@
     }
   };
 
+  // ── UPLOAD FOTO ──────────────────────────────────────────
   if (IS_LOGGED) {
     window.openUpload = function (poi_id, poi_name) {
+      // Delegate ke Bootstrap Modal yang di-init di PHP
       if (typeof window.openUploadModal === 'function') {
         window.openUploadModal(poi_id, poi_name);
         return;
       }
+      // Fallback: isi field manual lalu show modal
       document.getElementById('uploadPoiId').value        = poi_id;
       document.getElementById('uploadPoiName').textContent = poi_name;
       document.getElementById('uploadPoiSelected').style.display = '';
@@ -436,6 +453,7 @@
       bsModal.show();
     };
 
+    // Search POI di modal upload
     document.getElementById('uploadPoiSearch').addEventListener('input', function () {
       const q   = this.value.toLowerCase();
       const box = document.getElementById('uploadPoiResults');
@@ -465,6 +483,7 @@
       });
     });
 
+    // Preview foto
     document.getElementById('uploadFile').addEventListener('change', function () {
       const file = this.files[0];
       if (!file) return;
@@ -481,6 +500,7 @@
       reader.readAsDataURL(file);
     });
 
+    // Submit upload
     document.getElementById('btnKirimUpload').addEventListener('click', async () => {
       const poi_id = document.getElementById('uploadPoiId').value;
       const file   = document.getElementById('uploadFile').files[0];

@@ -20,358 +20,6 @@ $cats_json  = json_encode($categories);
 </script>
 <script src="<?= JS_URL ?>trip.js" defer></script>
 
-<style>
-/* ── Trip Planner Page ── */
-.tp-hero {
-  position: relative;
-  height: 200px;
-  background: url('<?= BASE_URL ?>assets/img/bandung-hero.jpg') center/cover no-repeat;
-  border-radius: 0 0 1.25rem 1.25rem;
-  overflow: hidden;
-  margin-bottom: 1rem;
-}
-.tp-hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,.25) 0%, rgba(0,0,0,.65) 100%);
-}
-.tp-hero-content {
-  position: absolute;
-  bottom: 1.25rem;
-  left: 1.25rem;
-  z-index: 1;
-  color: #fff;
-}
-.tp-hero-content h4 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin: 0;
-  text-shadow: 0 1px 4px rgba(0,0,0,.4);
-}
-.tp-hero-content p {
-  font-size: .82rem;
-  margin: .15rem 0 0;
-  opacity: .85;
-}
-
-/* Profile Card */
-.tp-profile-card {
-  display: flex;
-  align-items: center;
-  gap: .9rem;
-  background: #fff;
-  border: 1px solid #e9ecef;
-  border-radius: .875rem;
-  padding: .85rem 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,.06);
-}
-.tp-profile-avatar {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: var(--bs-primary);
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.tp-profile-avatar img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-}
-.tp-profile-info .name {
-  font-weight: 600;
-  font-size: .92rem;
-  line-height: 1.2;
-  color: #212529;
-}
-.tp-profile-info .email {
-  font-size: .78rem;
-  color: #6c757d;
-  line-height: 1.3;
-}
-.tp-profile-info .trip-count {
-  font-size: .78rem;
-  font-weight: 600;
-  color: var(--bs-primary);
-  margin-top: .15rem;
-}
-.tp-profile-login {
-  margin-left: auto;
-}
-
-/* Tabs */
-.tp-tabs {
-  display: flex;
-  border-bottom: 2px solid #e9ecef;
-  margin-bottom: 1rem;
-  gap: 0;
-}
-.tp-tabs .tp-tab {
-  flex: 1;
-  text-align: center;
-  padding: .6rem .5rem;
-  font-size: .82rem;
-  font-weight: 600;
-  color: #6c757d;
-  cursor: pointer;
-  border: none;
-  background: none;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
-  transition: color .2s, border-color .2s;
-  white-space: nowrap;
-}
-.tp-tabs .tp-tab.active {
-  color: var(--bs-primary);
-  border-bottom-color: var(--bs-primary);
-}
-.tp-tabs .tp-tab:hover:not(.active) {
-  color: #343a40;
-}
-
-/* POI Card */
-.poi-card {
-  display: flex;
-  gap: .85rem;
-  background: #fff;
-  border: 1px solid #e9ecef;
-  border-radius: .875rem;
-  padding: .85rem;
-  margin-bottom: .75rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,.05);
-  transition: box-shadow .2s;
-}
-.poi-card:hover {
-  box-shadow: 0 3px 10px rgba(0,0,0,.1);
-}
-.poi-card-img {
-  width: 80px;
-  height: 80px;
-  border-radius: .625rem;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: #f0f0f0;
-}
-.poi-card-body { flex: 1; min-width: 0; }
-.poi-card-title {
-  font-size: .9rem;
-  font-weight: 700;
-  color: var(--bs-primary);
-  margin-bottom: .2rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.poi-card-desc {
-  font-size: .78rem;
-  color: #6c757d;
-  line-height: 1.4;
-  margin-bottom: .5rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.poi-card-actions { display: flex; gap: .4rem; flex-wrap: wrap; }
-.poi-card-actions .btn { font-size: .72rem; padding: .2rem .55rem; border-radius: .4rem; }
-
-/* Trip Saved Card */
-.trip-saved-card {
-  display: flex;
-  gap: .85rem;
-  background: #fff;
-  border: 1px solid #e9ecef;
-  border-radius: .875rem;
-  padding: .85rem;
-  margin-bottom: .75rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,.05);
-}
-.trip-saved-thumb {
-  width: 80px;
-  height: 80px;
-  border-radius: .625rem;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: #f0f0f0;
-}
-.trip-saved-body { flex: 1; min-width: 0; }
-.trip-saved-title {
-  font-size: .9rem;
-  font-weight: 700;
-  color: var(--bs-primary);
-  margin-bottom: .15rem;
-}
-.trip-saved-note {
-  font-size: .78rem;
-  color: #6c757d;
-  margin-bottom: .5rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Map Tab */
-.tp-map-wrap {
-  border-radius: .875rem;
-  overflow: hidden;
-  border: 1px solid #e9ecef;
-  margin-bottom: .875rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,.07);
-}
-#mainMap { height: 340px; }
-
-.tp-search-wrap {
-  position: relative;
-  margin-bottom: .875rem;
-}
-.tp-search-wrap .input-group-text {
-  background: #fff;
-  border-right: none;
-}
-.tp-search-wrap .form-control {
-  border-left: none;
-  font-size: .85rem;
-}
-.tp-search-wrap .form-control:focus {
-  box-shadow: none;
-  border-color: #dee2e6;
-}
-#searchPoiResults {
-  position: absolute;
-  top: 100%;
-  left: 0; right: 0;
-  z-index: 999;
-  max-height: 200px;
-  overflow-y: auto;
-  display: none;
-}
-
-.cat-filters {
-  display: flex;
-  gap: .45rem;
-  overflow-x: auto;
-  padding-bottom: .5rem;
-  margin-bottom: .875rem;
-  scrollbar-width: none;
-}
-.cat-filters::-webkit-scrollbar { display: none; }
-.cat-filters .btn { white-space: nowrap; font-size: .75rem; }
-
-/* Trip Planner Panel */
-.tp-planner-panel {
-  background: #fff;
-  border: 1px solid #e9ecef;
-  border-radius: .875rem;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,.06);
-}
-.tp-planner-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: .875rem 1rem;
-  border-bottom: 1px solid #e9ecef;
-  background: #fafafa;
-}
-.tp-planner-header .title {
-  font-weight: 600;
-  font-size: .9rem;
-  color: #212529;
-}
-.tp-planner-body { padding: 1rem; }
-
-.tp-start-section { margin-bottom: .875rem; }
-.tp-section-label {
-  font-size: .76rem;
-  font-weight: 600;
-  color: #6c757d;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  margin-bottom: .4rem;
-}
-
-.route-empty {
-  text-align: center;
-  padding: 2rem 1rem;
-  color: #adb5bd;
-}
-.route-empty i { font-size: 2rem; display: block; margin-bottom: .5rem; }
-.route-empty span { font-size: .82rem; }
-
-#distanceInfo { font-size: .82rem; border-radius: .5rem; }
-
-.tp-action-row {
-  display: flex;
-  gap: .5rem;
-  flex-wrap: wrap;
-  margin-top: .875rem;
-}
-.tp-action-row .btn { font-size: .8rem; flex: 1; }
-.tp-action-row .btn-icon { flex: 0 0 auto; }
-
-#saveForm { margin-top: .75rem; }
-#saveForm .form-control { font-size: .82rem; border-radius: .5rem; }
-
-.tp-info-strip {
-  background: #f8f9fa;
-  border: 1px solid #e9ecef;
-  border-radius: .875rem;
-  padding: .65rem 1rem;
-  margin-top: .875rem;
-}
-.tp-info-strip span {
-  font-size: .76rem;
-  color: #6c757d;
-  display: inline-flex;
-  align-items: center;
-  gap: .3rem;
-}
-
-/* Empty/placeholder states */
-.tp-empty-state {
-  text-align: center;
-  padding: 2.5rem 1rem;
-  color: #adb5bd;
-}
-.tp-empty-state i { font-size: 2.5rem; display: block; margin-bottom: .75rem; opacity: .4; }
-.tp-empty-state p { font-size: .85rem; margin: 0; }
-
-/* Trending badge */
-.trending-badge {
-  font-size: .68rem;
-  font-weight: 700;
-  background: #fff3cd;
-  color: #856404;
-  border-radius: .3rem;
-  padding: .1rem .4rem;
-  margin-left: .35rem;
-  vertical-align: middle;
-}
-
-/* Desktop: 2-col card grid for Trending & Tripku */
-@media (min-width: 768px) {
-  .tp-card-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: .75rem;
-  }
-  .tp-card-grid .poi-card,
-  .tp-card-grid .trip-saved-card { margin-bottom: 0; }
-
-  #mainMap { height: 460px; }
-  .tp-hero { height: 240px; }
-}
-</style>
-
 <main id="content">
 <div class="container-fluid">
 <div class="container px-3 px-md-4" style="max-width:960px">
@@ -463,6 +111,18 @@ $cats_json  = json_encode($categories);
   <!-- ── TAB: MAP POI ───────────────────────────────── -->
   <div id="tab-map" class="tp-tab-content" style="display:none">
 
+    <!-- Search -->
+    <div class="tp-search-wrap">
+      <div class="input-group input-group-sm">
+        <span class="input-group-text border-end-0">
+          <i class="fa-solid fa-search text-muted"></i>
+        </span>
+        <input type="text" id="searchPoi" class="form-control border-start-0"
+               placeholder="Cari lokasi di peta...">
+      </div>
+      <div id="searchPoiResults" class="list-group shadow"></div>
+    </div>
+
     <!-- Filter Kategori -->
     <div class="cat-filters">
       <button class="btn btn-primary btn-sm cat-filter active" data-cat="">
@@ -480,8 +140,6 @@ $cats_json  = json_encode($categories);
     <div class="tp-map-wrap">
       <div id="mainMap"></div>
     </div>
-
-    <!-- Search POI disuntik JS di bawah map setelah map ready -->
 
     <!-- Info strip -->
     <div class="tp-info-strip d-flex flex-wrap gap-3 mb-3">
@@ -586,6 +244,7 @@ $cats_json  = json_encode($categories);
 </div><!-- /container-fluid -->
 </main>
 
+
 <!-- ── MODAL UPLOAD FOTO ──────────────────────────────── -->
 <?php if ($is_logged): ?>
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-hidden="true">
@@ -650,8 +309,9 @@ $cats_json  = json_encode($categories);
 (function () {
   const tabs     = document.querySelectorAll('.tp-tab');
   const contents = document.querySelectorAll('.tp-tab-content');
-  let tripkuLoaded   = false;
-  let trendingLoaded = false;
+  let tripkuLoaded    = false;
+  let trendingLoaded  = false;
+  let mapInitialized  = false;
 
   tabs.forEach(tab => {
     tab.addEventListener('click', function () {
@@ -670,20 +330,21 @@ $cats_json  = json_encode($categories);
         loadTripku();
         tripkuLoaded = true;
       }
-      if (target === 'map') {
-        if (typeof window._initMapTab === 'function') {
-          window._initMapTab();
-        }
+      if (target === 'map' && !mapInitialized) {
+        /* Trigger resize supaya Leaflet render benar setelah tab muncul */
         setTimeout(() => {
           if (window.mainMap) window.mainMap.invalidateSize();
         }, 50);
+        mapInitialized = true;
       }
     });
   });
 
+  /* Load trending saat pertama buka (tab default) */
   loadTrendingPoi();
   trendingLoaded = true;
 
+  /* Update trip count di profile card */
   if (IS_LOGGED) {
     fetch(API_TRIP + '?action=count')
       .then(r => r.json())
@@ -750,8 +411,10 @@ function loadTripku() {
   fetch(API_TRIP + '?action=list')
     .then(r => r.json())
     .then(data => {
+      /* Normalkan: support {data:[...]} atau langsung [...] */
       const list = Array.isArray(data) ? data : (data.data || []);
 
+      /* Update profile count */
       const countEl = document.getElementById('profileTripCount');
       if (countEl) countEl.textContent = list.length;
 
@@ -764,20 +427,12 @@ function loadTripku() {
         return;
       }
 
-      wrap.innerHTML = list.map(trip => {
-        const initials = (trip.title || 'T')
-          .trim().split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
-
-        const thumbHtml = trip.thumbnail
-          ? `<img class="trip-saved-thumb"
-                  src="${trip.thumbnail}"
-                  alt="${escHtml(trip.title)}"
-                  onerror="this.outerHTML='<div class=\\'trip-saved-thumb\\' style=\\'background:#6366f1;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.1rem\\'>${initials}</div>'">`
-          : `<div class="trip-saved-thumb" style="background:#6366f1;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.1rem">${initials}</div>`;
-
-        return `
+      wrap.innerHTML = list.map(trip => `
         <div class="trip-saved-card">
-          ${thumbHtml}
+          <img class="trip-saved-thumb"
+               src="${trip.thumbnail || BASE + '/assets/img/poi-placeholder.jpg'}"
+               alt="${escHtml(trip.title)}"
+               onerror="this.src='${BASE}/assets/img/poi-placeholder.jpg'">
           <div class="trip-saved-body">
             <div class="trip-saved-title">${escHtml(trip.title || 'Trip tanpa nama')}</div>
             <div class="trip-saved-note">
@@ -796,8 +451,7 @@ function loadTripku() {
               </button>
             </div>
           </div>
-        </div>`;
-      }).join('');
+        </div>`).join('');
     })
     .catch(() => {
       wrap.innerHTML = `
@@ -807,7 +461,6 @@ function loadTripku() {
         </div>`;
     });
 }
-
 
 /* Expose refreshTripku supaya map.js bisa trigger reload setelah save/delete */
 window.refreshTripku = function () {

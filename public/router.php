@@ -26,6 +26,7 @@ $routes = [
     'profile'    => SRC_PATH . 'user/user-profile.php',
     'unsubscribe'          => SRC_PATH . 'user/unsubscribe.php',
   // app
+    'trip'        => SRC_PATH . 'apps/trip.php',
     'map'        => SRC_PATH . 'apps/map.php',
     'gallery'    => SRC_PATH . 'apps/gallery.php',
 ];

@@ -18,7 +18,7 @@ $cats_json  = json_encode($categories);
   const API_TRIP  = BASE + '/api/map/api-trips.php';
   const API_GAL   = BASE + '/api/map/api-gallery.php';
 </script>
-<script src="<?= JS_URL ?>map.js" defer></script>
+<script src="<?= JS_URL ?>trip.js" defer></script>
 
 <style>
 /* ── Trip Planner Page ── */
@@ -756,26 +756,30 @@ function loadTrendingPoi() {
 
 /* ── Load Tripku ──────────────────────────────── */
 function loadTripku() {
+  const wrap = document.getElementById('tripkuList');
+  wrap.innerHTML = `<div class="text-center py-4 text-muted small" style="grid-column:1/-1">
+    <i class="fa-solid fa-spinner fa-spin me-1"></i>Memuat trip tersimpan...</div>`;
+
   fetch(API_TRIP + '?action=list')
     .then(r => r.json())
     .then(data => {
-      const wrap = document.getElementById('tripkuList');
-      if (!data.length) {
+      /* Normalkan: support {data:[...]} atau langsung [...] */
+      const list = Array.isArray(data) ? data : (data.data || []);
+
+      /* Update profile count */
+      const countEl = document.getElementById('profileTripCount');
+      if (countEl) countEl.textContent = list.length;
+
+      if (!list.length) {
         wrap.innerHTML = `
           <div class="tp-empty-state" style="grid-column:1/-1">
             <i class="fa-solid fa-suitcase"></i>
             <p>Belum ada trip tersimpan.<br>Buat trip pertamamu di tab Map POI!</p>
           </div>`;
-        /* Update profile count juga */
-        const el = document.getElementById('profileTripCount');
-        if (el) el.textContent = '0';
         return;
       }
-      /* Update profile count */
-      const el = document.getElementById('profileTripCount');
-      if (el) el.textContent = data.length;
 
-      wrap.innerHTML = data.map(trip => `
+      wrap.innerHTML = list.map(trip => `
         <div class="trip-saved-card">
           <img class="trip-saved-thumb"
                src="${trip.thumbnail || BASE + '/assets/img/poi-placeholder.jpg'}"
@@ -783,22 +787,37 @@ function loadTripku() {
                onerror="this.src='${BASE}/assets/img/poi-placeholder.jpg'">
           <div class="trip-saved-body">
             <div class="trip-saved-title">${escHtml(trip.title || 'Trip tanpa nama')}</div>
-            <div class="trip-saved-note text-muted">${escHtml(trip.notes || 'Catatan trip kosong.')}</div>
-            <button class="btn btn-primary btn-sm"
-                    onclick="loadSavedTrip(${trip.id})">
-              <i class="fa-solid fa-route me-1"></i>Buka di Peta
-            </button>
+            <div class="trip-saved-note">
+              ${trip.total_stops ? `<span class="me-2"><i class="fa-solid fa-map-pin me-1 text-primary"></i>${trip.total_stops} stop</span>` : ''}
+              ${trip.total_distance ? `<span><i class="fa-solid fa-ruler me-1 text-muted"></i>${trip.total_distance} km</span>` : ''}
+              ${(!trip.total_stops && !trip.total_distance) ? escHtml(trip.notes || 'Catatan kosong.') : ''}
+            </div>
+            <div class="d-flex gap-2 mt-2 flex-wrap">
+              <button class="btn btn-primary btn-sm"
+                      onclick="loadSavedTrip(${trip.id})">
+                <i class="fa-solid fa-route me-1"></i>Buka di Peta
+              </button>
+              <button class="btn btn-outline-danger btn-sm"
+                      onclick="deleteSavedTrip(${trip.id}, '${escHtml(trip.title || 'Trip ini')}')">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
           </div>
         </div>`).join('');
     })
     .catch(() => {
-      document.getElementById('tripkuList').innerHTML = `
+      wrap.innerHTML = `
         <div class="tp-empty-state" style="grid-column:1/-1">
           <i class="fa-solid fa-triangle-exclamation"></i>
           <p>Gagal memuat trip. Coba refresh halaman.</p>
         </div>`;
     });
 }
+
+/* Expose refreshTripku supaya map.js bisa trigger reload setelah save/delete */
+window.refreshTripku = function () {
+  loadTripku();
+};
 
 /* ── Helpers ──────────────────────────────────── */
 function escHtml(str) {

@@ -24,7 +24,7 @@ if (isset($_GET['edit'])) {
 .CodeMirror-scroll { min-height:450px; }
 .preview-frame     { width:100%; height:320px; border:none; border-radius:.5rem; background:#fff; }
 .page-list-item    { transition:all .2s; border-radius:.5rem; }
-.page-list-item:hover { background:rgba(13,110,253,.08)!important; transform:translateX(4px); }
+.page-list-item:hover  { background:rgba(13,110,253,.08)!important; transform:translateX(4px); }
 .page-list-item.active { background:rgba(13,110,253,.12)!important; border-left:3px solid #0d6efd; }
 </style>
 
@@ -39,7 +39,6 @@ if (isset($_GET['edit'])) {
 <?php endif; ?>
 
 <div class="row g-4">
-    <!-- Sidebar -->
     <div class="col-xl-3 col-lg-4">
         <div class="card border-0 shadow-sm" style="position:sticky;top:20px">
             <div class="card-header bg-white border-bottom py-3 px-4">
@@ -94,13 +93,11 @@ if (isset($_GET['edit'])) {
         </div>
     </div>
 
-    <!-- Main Editor -->
     <div class="col-xl-9 col-lg-8">
         <form method="POST" id="pageForm">
             <input type="hidden" name="csrf_token" value="<?= $csrf_token ?>">
             <input type="hidden" name="edit_slug" value="<?= safe_html($page['slug'] ?? '') ?>">
 
-            <!-- Title & Slug -->
             <div class="card border-0 shadow-sm mb-3">
                 <div class="card-body px-4 py-3">
                     <div class="row g-3 align-items-end">
@@ -138,7 +135,6 @@ if (isset($_GET['edit'])) {
                 </div>
             </div>
 
-            <!-- Editor + Preview -->
             <div class="row g-3">
                 <div class="col-xl-8">
                     <div class="card border-0 shadow-sm">
@@ -148,7 +144,7 @@ if (isset($_GET['edit'])) {
                                     <i class="fa-solid fa-code fa-sm"></i>
                                 </span>
                                 <span class="fw-semibold">Code Editor</span>
-                                <small class="text-muted ms-auto">HTML / CSS / JS</small>
+                                <small class="text-muted ms-auto">HTML / CSS</small>
                             </div>
                         </div>
                         <div class="card-body p-2">
@@ -185,7 +181,6 @@ if (isset($_GET['edit'])) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closetag.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
 

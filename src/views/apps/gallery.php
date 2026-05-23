@@ -31,7 +31,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
       <i class="fa-solid fa-camera me-1"></i>Upload Foto
     </button>
     <?php else: ?>
-    <a href="/api/auth/google.php" class="btn btn-outline-primary btn-sm">
+    <a href="/login" class="btn btn-outline-primary btn-sm">
       <i class="fa-brands fa-google me-1"></i>Login untuk Upload
     </a>
     <?php endif; ?>
@@ -40,8 +40,6 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
    <!-- Filter POI -->
   <div class="card border-0 shadow-sm mb-4">
     <div class="card-body py-3 px-4 d-flex gap-2 flex-wrap align-items-center">
-      <span class="small text-muted me-1"><i class="fa-solid fa-filter me-1"></i>Filter:</span>
-      <button class="btn btn-primary btn-sm poi-filter active" data-poi="">Semua Tempat</button>
       <div class="ms-auto" style="max-width:220px">
         <div class="input-group input-group-sm">
           <input type="text" id="searchPoiFilter" class="form-control" placeholder="Cari tempat...">

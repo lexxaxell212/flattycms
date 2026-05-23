@@ -60,7 +60,7 @@ try {
 
     $stmt = $pdo->prepare("
         SELECT p.id, p.name, p.slug, p.description, p.address,
-               p.latitude, p.longitude, p.cover_image,
+               p.latitude, p.longitude, p.poi_image,
                c.id AS category_id, c.name AS category_name,
                c.slug AS category_slug, c.icon AS category_icon
         FROM poi p

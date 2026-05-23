@@ -48,15 +48,16 @@ function get_poi_by_category($category_id) {
     $stmt->execute([(int)$category_id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-function generate_poi_slug($name) {
+function generate_poi_slug($name, $exclude_id = null) {
     $pdo       = $GLOBALS['pdo'];
     $base_slug = strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', trim($name)));
     $base_slug = trim($base_slug, '-');
     $slug      = $base_slug;
     $counter   = 1;
     while (true) {
-        $stmt = $pdo->prepare("SELECT id FROM poi WHERE slug = ?");
-        $stmt->execute([$slug]);
+        $stmt = $pdo->prepare("SELECT id FROM poi WHERE slug = ?" . ($exclude_id ? " AND id != ?" : ""));
+        $params = $exclude_id ? [$slug, (int)$exclude_id] : [$slug];
+        $stmt->execute($params);
         if (!$stmt->fetch()) break;
         $slug = $base_slug . '-' . $counter++;
     }
@@ -84,6 +85,32 @@ function add_poi($data) {
         trim($data['poi_image'] ?? '') ?: null,
     ]);
     return (int)$pdo->lastInsertId();
+}
+function update_poi($id, $data) {
+    $pdo  = $GLOBALS['pdo'];
+    $id   = (int)$id;
+    $name = trim($data['name'] ?? '');
+    $cat  = (int)($data['category_id'] ?? 0);
+    $lat  = (float)($data['latitude'] ?? 0);
+    $lng  = (float)($data['longitude'] ?? 0);
+    if (!$name || !$cat || !$lat || !$lng) return false;
+    $slug = generate_poi_slug($name, $id);
+    $stmt = $pdo->prepare("
+        UPDATE poi SET
+            category_id = ?, name = ?, slug = ?, description = ?,
+            address = ?, latitude = ?, longitude = ?, poi_url = ?, is_active = ?
+        WHERE id = ?
+    ");
+    $stmt->execute([
+        $cat, $name, $slug,
+        trim($data['description'] ?? '') ?: null,
+        trim($data['address'] ?? '') ?: null,
+        $lat, $lng,
+        trim($data['poi_url'] ?? '') ?: null,
+        isset($data['is_active']) ? (int)$data['is_active'] : 1,
+        $id,
+    ]);
+    return $stmt->rowCount() >= 0;
 }
 function update_poi_image($id, $image_path) {
     $pdo  = $GLOBALS['pdo'];

@@ -6,149 +6,117 @@ $total      = count($pois);
 ?>
 
 <main id="content" class="container-fluid">
-  <div class="container">
+<div class="container">
 
-    <div class="card border-0 shadow-sm mb-4">
-      <div class="card-header bg-white border-bottom py-3 px-4">
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="d-flex align-items-center gap-2">
-            <span class="bg-success bg-opacity-10 text-success rounded p-1 lh-1">
-              <i class="fa-solid fa-map-pin fa-sm"></i>
-            </span>
-            <span class="fw-semibold">POI Manager</span>
-            <span class="badge bg-success ms-1"><?= $total ?> lokasi</span>
-          </div>
-          <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambahPoi">
-            <i class="fa-solid fa-plus me-1"></i> Tambah Lokasi
-          </button>
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-white border-bottom py-3 px-4">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <span class="bg-success bg-opacity-10 text-success rounded p-1 lh-1">
+            <i class="fa-solid fa-map-pin fa-sm"></i>
+          </span>
+          <span class="fw-semibold">POI Manager</span>
+          <span class="badge bg-success ms-1"><?= $total ?> lokasi</span>
         </div>
+        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambahPoi">
+          <i class="fa-solid fa-plus me-1"></i>Tambah Lokasi
+        </button>
       </div>
     </div>
+  </div>
 
-    <div class="d-flex gap-2 mb-3 flex-wrap">
-      <button class="btn btn-sm btn-primary filter-btn active" data-category="">Semua</button>
-      <?php foreach ($categories as $cat): ?>
-      <button class="btn btn-sm btn-outline-secondary filter-btn" data-category="<?= $cat['id'] ?>">
-        <i class="fa-solid <?= safe_html($cat['icon']) ?> me-1"></i><?= safe_html($cat['name']) ?>
-      </button>
-      <?php endforeach; ?>
+  <div class="d-flex gap-2 mb-3 flex-wrap">
+    <button class="btn btn-sm btn-primary filter-btn active" data-category="">Semua</button>
+    <?php foreach ($categories as $cat): ?>
+    <button class="btn btn-sm btn-outline-secondary filter-btn" data-category="<?= $cat['id'] ?>">
+      <i class="fa-solid <?= safe_html($cat['icon']) ?> me-1"></i><?= safe_html($cat['name']) ?>
+    </button>
+    <?php endforeach; ?>
+  </div>
+
+  <?php if (empty($pois)): ?>
+  <div class="card border-0 shadow-sm">
+    <div class="card-body text-center text-muted py-5">
+      <i class="fa-solid fa-map fa-2x mb-3 opacity-50 d-block"></i>
+      Belum ada lokasi. Tambah sekarang!
     </div>
+  </div>
+  <?php else: ?>
+  <div class="row g-3" id="poiList">
+    <?php foreach ($pois as $p): ?>
+    <div class="col-12 poi-item" data-category="<?= $p['category_id'] ?>">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body px-3 px-md-4 py-3">
 
-    <?php if (empty($pois)): ?>
-    <div class="card border-0 shadow-sm">
-      <div class="card-body text-center text-muted py-5">
-        <i class="fa-solid fa-map fa-2x mb-3 opacity-50 d-block"></i>
-        Belum ada lokasi. Tambah sekarang!
-      </div>
-    </div>
-    <?php else: ?>
-    <div class="row g-3" id="poiList">
-      <?php foreach ($pois as $p): ?>
-      <div class="col-12 poi-item" data-category="<?= $p['category_id'] ?>">
-        <div class="card border-0 shadow-sm">
-          <div class="card-body px-3 px-md-4 py-3">
-            <div class="d-flex gap-3">
-
-              <!-- Thumbnail -->
-              <div class="flex-shrink-0">
-                <?php if (!empty($p['poi_image'])): ?>
-                <img src="<?= safe_html(BASE_URL . $p['poi_image']) ?>"
-                     alt="<?= safe_html($p['name']) ?>"
-                     style="width:52px;height:52px;object-fit:cover;border-radius:.5rem">
-                <?php else: ?>
-                <div class="rounded bg-light d-flex align-items-center justify-content-center" style="width:52px;height:52px">
-                  <i class="fa-solid <?= safe_html($p['category_icon']) ?> text-muted"></i>
-                </div>
-                <?php endif; ?>
+          <div class="d-flex gap-3">
+            <!-- Thumbnail -->
+            <div class="flex-shrink-0">
+              <?php if (!empty($p['poi_image'])): ?>
+              <img src="<?= safe_html(BASE_URL . $p['poi_image']) ?>"
+                   alt="<?= safe_html($p['name']) ?>"
+                   style="width:52px;height:52px;object-fit:cover;border-radius:.5rem">
+              <?php else: ?>
+              <div class="rounded bg-light d-flex align-items-center justify-content-center" style="width:52px;height:52px">
+                <i class="fa-solid <?= safe_html($p['category_icon']) ?> text-muted"></i>
               </div>
+              <?php endif; ?>
+            </div>
 
-              <!-- Info + Actions -->
-              <div class="flex-grow-1 min-w-0">
-                <div class="d-flex align-items-start justify-content-between gap-2">
-                  <div class="fw-semibold text-truncate"><?= safe_html($p['name']) ?></div>
-                  <!-- Aksi: desktop inline, mobile dropdown -->
-                  <div class="dropdown flex-shrink-0">
-                    <button class="btn btn-sm btn-outline-secondary d-md-none" data-bs-toggle="dropdown">
-                      <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end d-md-none">
-                      <li>
-                        <button class="dropdown-item small btn-edit-poi"
-                                data-id="<?= $p['id'] ?>"
-                                data-name="<?= safe_html($p['name']) ?>"
-                                data-url="<?= safe_html($p['poi_url'] ?? '') ?>"
-                                data-image="<?= safe_html($p['poi_image'] ?? '') ?>">
-                          <i class="fa-solid fa-pen-to-square me-2 text-primary"></i>Edit
-                        </button>
-                      </li>
-                      <li>
-                        <button class="dropdown-item small btn-toggle-poi"
-                                data-id="<?= $p['id'] ?>" data-name="<?= safe_html($p['name']) ?>">
-                          <i class="fa-solid fa-toggle-on me-2 text-success"></i>
-                          <?= $p['is_active'] ? 'Nonaktifkan' : 'Aktifkan' ?>
-                        </button>
-                      </li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li>
-                        <button class="dropdown-item small text-danger btn-hapus-poi"
-                                data-id="<?= $p['id'] ?>" data-name="<?= safe_html($p['name']) ?>">
-                          <i class="fa-solid fa-trash me-2"></i>Hapus
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- Desktop buttons -->
-                  <div class="d-none d-md-flex align-items-center gap-2 flex-shrink-0">
-                    <button class="btn btn-sm btn-outline-primary btn-edit-poi"
-                            data-id="<?= $p['id'] ?>"
-                            data-name="<?= safe_html($p['name']) ?>"
-                            data-url="<?= safe_html($p['poi_url'] ?? '') ?>"
-                            data-image="<?= safe_html($p['poi_image'] ?? '') ?>">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button class="btn btn-sm <?= $p['is_active'] ? 'btn-success' : 'btn-outline-secondary' ?> btn-toggle-poi"
-                            data-id="<?= $p['id'] ?>" data-name="<?= safe_html($p['name']) ?>">
-                      <?= $p['is_active'] ? 'Aktif' : 'Nonaktif' ?>
-                    </button>
-                    <button class="btn btn-sm btn-outline-danger btn-hapus-poi"
-                            data-id="<?= $p['id'] ?>" data-name="<?= safe_html($p['name']) ?>">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="small text-muted mt-1">
-                  <i class="fa-solid fa-tag me-1"></i><?= safe_html($p['category_name']) ?>
-                  <span class="mx-1">·</span>
-                  <i class="fa-solid fa-location-dot me-1"></i><?= $p['latitude'] ?>, <?= $p['longitude'] ?>
-                </div>
-                <?php if ($p['address']): ?>
-                <div class="small text-muted mt-1 text-truncate">
-                  <i class="fa-solid fa-road me-1"></i><?= safe_html($p['address']) ?>
-                </div>
-                <?php endif; ?>
-                <?php if (!empty($p['poi_url'])): ?>
-                <div class="small mt-1 text-truncate">
-                  <i class="fa-solid fa-link me-1 text-primary"></i>
-                  <a href="<?= safe_html($p['poi_url']) ?>" target="_blank" rel="noopener"
-                     class="text-primary text-decoration-none"><?= safe_html($p['poi_url']) ?></a>
-                </div>
-                <?php endif; ?>
-                <!-- Mobile: status badge -->
-                <div class="d-md-none mt-2">
-                  <span class="badge <?= $p['is_active'] ? 'bg-success' : 'bg-secondary' ?>">
-                    <?= $p['is_active'] ? 'Aktif' : 'Nonaktif' ?>
-                  </span>
-                </div>
+            <!-- Info -->
+            <div class="flex-grow-1" style="min-width:0">
+              <div class="fw-semibold mb-1"><?= safe_html($p['name']) ?></div>
+              <div class="small text-muted">
+                <i class="fa-solid fa-tag me-1"></i><?= safe_html($p['category_name']) ?>
+                <span class="mx-1">·</span>
+                <i class="fa-solid fa-location-dot me-1"></i><?= $p['latitude'] ?>, <?= $p['longitude'] ?>
               </div>
+              <?php if ($p['address']): ?>
+              <div class="small text-muted mt-1">
+                <i class="fa-solid fa-road me-1"></i><?= safe_html($p['address']) ?>
+              </div>
+              <?php endif; ?>
+              <?php if (!empty($p['poi_url'])): ?>
+              <div class="small mt-1">
+                <i class="fa-solid fa-link me-1 text-primary"></i>
+                <a href="<?= safe_html($p['poi_url']) ?>" target="_blank" rel="noopener"
+                   class="text-primary text-decoration-none"
+                   style="word-break:break-all"><?= safe_html($p['poi_url']) ?></a>
+              </div>
+              <?php endif; ?>
 
+              <!-- Aksi — selalu di bawah info, wrap kalau perlu -->
+              <div class="d-flex flex-wrap gap-2 mt-2">
+                <button class="btn btn-sm btn-outline-primary btn-edit-poi"
+                        data-id="<?= $p['id'] ?>"
+                        data-name="<?= safe_html($p['name']) ?>"
+                        data-category="<?= $p['category_id'] ?>"
+                        data-lat="<?= $p['latitude'] ?>"
+                        data-lng="<?= $p['longitude'] ?>"
+                        data-address="<?= safe_html($p['address'] ?? '') ?>"
+                        data-desc="<?= safe_html($p['description'] ?? '') ?>"
+                        data-url="<?= safe_html($p['poi_url'] ?? '') ?>"
+                        data-image="<?= safe_html($p['poi_image'] ?? '') ?>"
+                        data-active="<?= $p['is_active'] ?>">
+                  <i class="fa-solid fa-pen-to-square me-1"></i>Edit
+                </button>
+                <button class="btn btn-sm <?= $p['is_active'] ? 'btn-success' : 'btn-outline-secondary' ?> btn-toggle-poi"
+                        data-id="<?= $p['id'] ?>" data-name="<?= safe_html($p['name']) ?>">
+                  <?= $p['is_active'] ? 'Aktif' : 'Nonaktif' ?>
+                </button>
+                <button class="btn btn-sm btn-outline-danger btn-hapus-poi"
+                        data-id="<?= $p['id'] ?>" data-name="<?= safe_html($p['name']) ?>">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
-      <?php endforeach; ?>
     </div>
-    <?php endif; ?>
+    <?php endforeach; ?>
+  </div>
+  <?php endif; ?>
 
   <!-- Modal Tambah POI -->
   <div class="modal fade" id="modalTambahPoi" tabindex="-1">
@@ -161,23 +129,20 @@ $total      = count($pois);
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body p-3 p-md-4">
-
           <div class="mb-4">
-            <label class="form-label fw-semibold small">Cari Lokasi</label>
+            <label class="form-label fw-semibold small">Cari Lokasi via Nominatim</label>
             <div class="input-group">
               <input type="text" id="searchNominatim" class="form-control" placeholder="Contoh: Kawah Putih Bandung...">
               <button class="btn btn-outline-secondary" id="btnCariLokasi" type="button">
-                <i class="fa-solid fa-search me-1"></i><span class="d-none d-md-inline">Cari</span>
+                <i class="fa-solid fa-search me-1"></i>Cari
               </button>
             </div>
             <div id="hasilNominatim" class="list-group mt-2" style="max-height:200px;overflow-y:auto;display:none"></div>
           </div>
-
           <div id="mapPreviewWrap" class="mb-4" style="display:none">
             <label class="form-label fw-semibold small">Preview Lokasi</label>
             <div id="mapPreview" style="height:180px;border-radius:8px;overflow:hidden;border:1px solid #dee2e6"></div>
           </div>
-
           <div class="row g-3">
             <div class="col-12">
               <label class="form-label small fw-semibold">Nama Lokasi <span class="text-danger">*</span></label>
@@ -230,62 +195,98 @@ $total      = count($pois);
               </div>
             </div>
           </div>
-
         </div>
         <div class="modal-footer border-top">
           <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
           <button type="button" class="btn btn-success btn-sm" id="btnSimpanPoi">
-            <i class="fa-solid fa-save me-1"></i> Simpan Lokasi
+            <i class="fa-solid fa-save me-1"></i>Simpan Lokasi
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal Edit URL & Gambar -->
+  <!-- Modal Edit POI -->
   <div class="modal fade" id="modalEditPoi" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content border-0 shadow">
         <div class="modal-header border-bottom">
           <h6 class="modal-title fw-semibold">
-            <i class="fa-solid fa-pen-to-square me-2 text-primary"></i>Edit — <span id="editPoiName"></span>
+            <i class="fa-solid fa-pen-to-square me-2 text-primary"></i>Edit Lokasi
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body p-3 p-md-4">
           <input type="hidden" id="editPoiId">
-          <div class="mb-3">
-            <label class="form-label small fw-semibold">URL / Link <span class="text-muted fw-normal">(opsional)</span></label>
-            <div class="input-group input-group-sm">
-              <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
-              <input type="url" id="editPoiUrl" class="form-control" placeholder="https://...">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label small fw-semibold">Nama Lokasi <span class="text-danger">*</span></label>
+              <input type="text" id="editPoiName" class="form-control" placeholder="Nama tampilan di peta">
             </div>
-          </div>
-          <div class="mb-1">
-            <label class="form-label small fw-semibold">Ganti Gambar <span class="text-muted fw-normal">(opsional)</span></label>
-            <input type="file" id="editPoiImage" class="form-control form-control-sm" accept="image/jpeg,image/png,image/webp">
-            <div class="form-text">Maks 5MB · kosongkan jika tidak ingin mengganti</div>
-            <div id="editPoiCurrentImg" class="mt-2" style="display:none">
-              <p class="small text-muted mb-1">Gambar saat ini:</p>
-              <img id="editPoiCurrentImgEl" src="" class="img-fluid rounded" style="max-height:130px;object-fit:cover">
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-semibold">Kategori <span class="text-danger">*</span></label>
+              <select id="editPoiCategory" class="form-select">
+                <option value="">-- Pilih Kategori --</option>
+                <?php foreach ($categories as $cat): ?>
+                <option value="<?= $cat['id'] ?>"><?= safe_html($cat['name']) ?></option>
+                <?php endforeach; ?>
+              </select>
             </div>
-            <div id="editPoiNewPreview" class="mt-2" style="display:none">
-              <p class="small text-muted mb-1">Preview baru:</p>
-              <img id="editPoiNewPreviewImg" src="" class="img-fluid rounded" style="max-height:130px;object-fit:cover">
+            <div class="col-6 col-md-3">
+              <label class="form-label small fw-semibold">Latitude <span class="text-danger">*</span></label>
+              <input type="text" id="editPoiLat" class="form-control" placeholder="-6.9xxx">
+            </div>
+            <div class="col-6 col-md-3">
+              <label class="form-label small fw-semibold">Longitude <span class="text-danger">*</span></label>
+              <input type="text" id="editPoiLng" class="form-control" placeholder="107.6xxx">
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-semibold">Alamat</label>
+              <input type="text" id="editPoiAddress" class="form-control" placeholder="Opsional">
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-semibold">Deskripsi</label>
+              <textarea id="editPoiDesc" class="form-control" rows="3" placeholder="Opsional"></textarea>
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-semibold">URL / Link <span class="text-muted fw-normal">(opsional)</span></label>
+              <div class="input-group input-group-sm">
+                <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
+                <input type="url" id="editPoiUrl" class="form-control" placeholder="https://...">
+              </div>
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-semibold">Ganti Gambar <span class="text-muted fw-normal">(opsional)</span></label>
+              <input type="file" id="editPoiImage" class="form-control form-control-sm" accept="image/jpeg,image/png,image/webp">
+              <div class="form-text">Maks 5MB · kosongkan jika tidak ingin mengganti</div>
+              <div id="editPoiCurrentImg" class="mt-2" style="display:none">
+                <p class="small text-muted mb-1">Gambar saat ini:</p>
+                <img id="editPoiCurrentImgEl" src="" class="img-fluid rounded" style="max-height:130px;object-fit:cover">
+              </div>
+              <div id="editPoiNewPreview" class="mt-2" style="display:none">
+                <p class="small text-muted mb-1">Preview baru:</p>
+                <img id="editPoiNewPreviewImg" src="" class="img-fluid rounded" style="max-height:130px;object-fit:cover">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="editPoiActive">
+                <label class="form-check-label small" for="editPoiActive">Aktif (tampil di peta)</label>
+              </div>
             </div>
           </div>
         </div>
         <div class="modal-footer border-top">
           <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
           <button type="button" class="btn btn-primary btn-sm" id="btnSimpanEdit">
-            <i class="fa-solid fa-save me-1"></i> Simpan Perubahan
+            <i class="fa-solid fa-save me-1"></i>Simpan Perubahan
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  </div>
+</div>
 </main>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -346,7 +347,7 @@ $total      = count($pois);
     } catch (e) {
       Swal.fire('Gagal', 'Tidak bisa menghubungi server', 'error');
     } finally {
-      btn.innerHTML = '<i class="fa-solid fa-search me-1"></i><span class="d-none d-md-inline">Cari</span>';
+      btn.innerHTML = '<i class="fa-solid fa-search me-1"></i>Cari';
       btn.disabled  = false;
     }
   }
@@ -378,33 +379,27 @@ $total      = count($pois);
     if (!file) return;
     if (file.size > 5 * 1024 * 1024) { Swal.fire('File terlalu besar', 'Maksimal 5MB', 'warning'); this.value = ''; return; }
     const reader = new FileReader();
-    reader.onload = e => {
-      document.getElementById('poiPreviewImg').src = e.target.result;
-      document.getElementById('poiImagePreview').style.display = '';
-    };
+    reader.onload = e => { document.getElementById('poiPreviewImg').src = e.target.result; document.getElementById('poiImagePreview').style.display = ''; };
     reader.readAsDataURL(file);
   });
 
   document.getElementById('btnSimpanPoi').addEventListener('click', async () => {
-    const name     = document.getElementById('poiName').value.trim();
-    const category = document.getElementById('poiCategory').value;
-    const lat      = document.getElementById('poiLat').value;
-    const lng      = document.getElementById('poiLng').value;
-    if (!name || !category || !lat || !lng) { Swal.fire('Oops!', 'Nama, kategori, dan lokasi wajib diisi', 'warning'); return; }
+    const name = document.getElementById('poiName').value.trim();
+    const cat  = document.getElementById('poiCategory').value;
+    const lat  = document.getElementById('poiLat').value;
+    const lng  = document.getElementById('poiLng').value;
+    if (!name || !cat || !lat || !lng) { Swal.fire('Oops!', 'Nama, kategori, dan lokasi wajib diisi', 'warning'); return; }
     const btn = document.getElementById('btnSimpanPoi');
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Menyimpan...';
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>Menyimpan...';
     btn.disabled  = true;
     const fd = new FormData();
-    fd.append('action',      'add');
-    fd.append('csrf_token',  CSRF);
-    fd.append('name',        name);
-    fd.append('category_id', category);
-    fd.append('latitude',    lat);
-    fd.append('longitude',   lng);
-    fd.append('address',     document.getElementById('poiAddress').value.trim());
+    fd.append('action', 'add'); fd.append('csrf_token', CSRF);
+    fd.append('name', name); fd.append('category_id', cat);
+    fd.append('latitude', lat); fd.append('longitude', lng);
+    fd.append('address', document.getElementById('poiAddress').value.trim());
     fd.append('description', document.getElementById('poiDesc').value.trim());
-    fd.append('poi_url',     document.getElementById('poiUrl').value.trim());
-    fd.append('is_active',   document.getElementById('poiActive').checked ? 1 : 0);
+    fd.append('poi_url', document.getElementById('poiUrl').value.trim());
+    fd.append('is_active', document.getElementById('poiActive').checked ? 1 : 0);
     const imgFile = document.getElementById('poiImage').files[0];
     if (imgFile) fd.append('poi_image', imgFile);
     try {
@@ -415,7 +410,7 @@ $total      = count($pois);
     } catch (e) {
       Swal.fire('Error', 'Tidak bisa menghubungi server', 'error');
     } finally {
-      btn.innerHTML = '<i class="fa-solid fa-save me-1"></i> Simpan Lokasi';
+      btn.innerHTML = '<i class="fa-solid fa-save me-1"></i>Simpan Lokasi';
       btn.disabled  = false;
     }
   });
@@ -430,9 +425,7 @@ $total      = count($pois);
       if (data.success) {
         Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: `${name} — status diubah`, showConfirmButton: false, timer: 2000 });
         setTimeout(() => location.reload(), 1500);
-      } else {
-        Swal.fire('Gagal', data.message, 'error');
-      }
+      } else Swal.fire('Gagal', data.message, 'error');
     });
   });
 
@@ -456,18 +449,20 @@ $total      = count($pois);
 
   document.querySelectorAll('.btn-edit-poi').forEach(btn => {
     btn.addEventListener('click', function () {
-      const id    = this.dataset.id;
-      const name  = this.dataset.name;
-      const url   = this.dataset.url;
-      const image = this.dataset.image;
-      document.getElementById('editPoiId').value          = id;
-      document.getElementById('editPoiName').textContent  = name;
-      document.getElementById('editPoiUrl').value         = url;
-      document.getElementById('editPoiImage').value       = '';
+      document.getElementById('editPoiId').value       = this.dataset.id;
+      document.getElementById('editPoiName').value     = this.dataset.name;
+      document.getElementById('editPoiCategory').value = this.dataset.category;
+      document.getElementById('editPoiLat').value      = this.dataset.lat;
+      document.getElementById('editPoiLng').value      = this.dataset.lng;
+      document.getElementById('editPoiAddress').value  = this.dataset.address;
+      document.getElementById('editPoiDesc').value     = this.dataset.desc;
+      document.getElementById('editPoiUrl').value      = this.dataset.url;
+      document.getElementById('editPoiActive').checked = this.dataset.active === '1';
+      document.getElementById('editPoiImage').value    = '';
       document.getElementById('editPoiNewPreview').style.display = 'none';
       const curImg = document.getElementById('editPoiCurrentImg');
-      if (image) {
-        document.getElementById('editPoiCurrentImgEl').src = BASE + image;
+      if (this.dataset.image) {
+        document.getElementById('editPoiCurrentImgEl').src = BASE + this.dataset.image;
         curImg.style.display = '';
       } else {
         curImg.style.display = 'none';
@@ -481,23 +476,28 @@ $total      = count($pois);
     if (!file) return;
     if (file.size > 5 * 1024 * 1024) { Swal.fire('File terlalu besar', 'Maksimal 5MB', 'warning'); this.value = ''; return; }
     const reader = new FileReader();
-    reader.onload = e => {
-      document.getElementById('editPoiNewPreviewImg').src = e.target.result;
-      document.getElementById('editPoiNewPreview').style.display = '';
-    };
+    reader.onload = e => { document.getElementById('editPoiNewPreviewImg').src = e.target.result; document.getElementById('editPoiNewPreview').style.display = ''; };
     reader.readAsDataURL(file);
   });
 
   document.getElementById('btnSimpanEdit').addEventListener('click', async () => {
-    const id  = document.getElementById('editPoiId').value;
+    const name = document.getElementById('editPoiName').value.trim();
+    const cat  = document.getElementById('editPoiCategory').value;
+    const lat  = document.getElementById('editPoiLat').value.trim();
+    const lng  = document.getElementById('editPoiLng').value.trim();
+    if (!name || !cat || !lat || !lng) { Swal.fire('Oops!', 'Nama, kategori, dan koordinat wajib diisi', 'warning'); return; }
     const btn = document.getElementById('btnSimpanEdit');
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Menyimpan...';
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>Menyimpan...';
     btn.disabled  = true;
     const fd = new FormData();
-    fd.append('action',     'update_image');
-    fd.append('csrf_token', CSRF);
-    fd.append('poi_id',     id);
-    fd.append('poi_url',    document.getElementById('editPoiUrl').value.trim());
+    fd.append('action', 'update'); fd.append('csrf_token', CSRF);
+    fd.append('poi_id', document.getElementById('editPoiId').value);
+    fd.append('name', name); fd.append('category_id', cat);
+    fd.append('latitude', lat); fd.append('longitude', lng);
+    fd.append('address', document.getElementById('editPoiAddress').value.trim());
+    fd.append('description', document.getElementById('editPoiDesc').value.trim());
+    fd.append('poi_url', document.getElementById('editPoiUrl').value.trim());
+    fd.append('is_active', document.getElementById('editPoiActive').checked ? 1 : 0);
     const imgFile = document.getElementById('editPoiImage').files[0];
     if (imgFile) fd.append('poi_image', imgFile);
     try {
@@ -507,13 +507,11 @@ $total      = count($pois);
         bootstrap.Modal.getInstance(document.getElementById('modalEditPoi'))?.hide();
         await Swal.fire('Berhasil!', data.message, 'success');
         location.reload();
-      } else {
-        Swal.fire('Gagal', data.message, 'error');
-      }
+      } else Swal.fire('Gagal', data.message, 'error');
     } catch (e) {
       Swal.fire('Error', 'Tidak bisa menghubungi server', 'error');
     } finally {
-      btn.innerHTML = '<i class="fa-solid fa-save me-1"></i> Simpan Perubahan';
+      btn.innerHTML = '<i class="fa-solid fa-save me-1"></i>Simpan Perubahan';
       btn.disabled  = false;
     }
   });

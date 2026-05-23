@@ -27,16 +27,21 @@ switch ($action) {
         }
         break;
 
-    case 'update_image':
-        $id = (int)($_POST['poi_id'] ?? 0);
+    case 'update':
+        $id     = (int)($_POST['poi_id'] ?? 0);
         if (!$id) { http_response_code(400); echo json_encode(['success' => false, 'message' => 'POI ID tidak valid']); break; }
+        $result = update_poi($id, $_POST);
+        if ($result === false) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Nama, kategori, dan koordinat wajib diisi']);
+            break;
+        }
         if (!empty($_FILES['poi_image']['tmp_name'])) {
             $upload = upload_poi_image($id, $_FILES['poi_image']);
-            if (!$upload['success']) { http_response_code(400); echo json_encode(['success' => false, 'message' => $upload['message']]); break; }
-            update_poi_image($id, $upload['path']);
+            if ($upload['success']) update_poi_image($id, $upload['path']);
+            else { http_response_code(400); echo json_encode(['success' => false, 'message' => $upload['message']]); break; }
         }
-        if (isset($_POST['poi_url'])) update_poi_url($id, $_POST['poi_url']);
-        echo json_encode(['success' => true, 'message' => 'Data berhasil diperbarui']);
+        echo json_encode(['success' => true, 'message' => 'Lokasi berhasil diperbarui!']);
         break;
 
     case 'delete':
@@ -76,11 +81,11 @@ function upload_poi_image($poi_id, $file) {
         return ['success' => false, 'message' => 'Format gambar tidak didukung (JPG, PNG, WebP)'];
     if ($file['size'] > $maxSize)
         return ['success' => false, 'message' => 'Ukuran gambar maksimal 5MB'];
-    $ext    = pathinfo($file['name'], PATHINFO_EXTENSION);
-    $fname  = 'poi_' . $poi_id . '_' . time() . '.' . strtolower($ext);
-    $dir    = PUBLIC_PATH . 'uploads/poi/';
+    $ext   = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $fname = 'poi_' . $poi_id . '_' . time() . '.' . strtolower($ext);
+    $dir   = PUBLIC_PATH . 'uploads/poi/';
     if (!is_dir($dir)) mkdir($dir, 0755, true);
-    $dest   = $dir . $fname;
+    $dest  = $dir . $fname;
     if (!move_uploaded_file($file['tmp_name'], $dest))
         return ['success' => false, 'message' => 'Gagal menyimpan gambar'];
     return ['success' => true, 'path' => 'uploads/poi/' . $fname];

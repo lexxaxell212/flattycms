@@ -288,8 +288,17 @@
 
 /* Compass spin subtle */
 .tp-compass {
+  animation: fadeUp .5s ease forwards 0.4s;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.tp-compass circle, .tp-compass path, .tp-compass text {
+  transform-box: fill-box;
+}
+.tp-compass {
   animation: fadeUp .5s ease forwards 0.4s, compassSpin 20s linear infinite 1s;
-  transform-origin: 370px 55px;
+  transform-box: fill-box;
+  transform-origin: center;
 }
 @keyframes compassSpin {
   from { transform: rotate(0deg); }

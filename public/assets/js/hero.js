@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function loadBg(el) {
     const slug = el.dataset.slug;
     if (!slug) return;
-    const isMobile = window.innerWidth <= 768;
-    el.classList.add(isMobile ? `hero-slide-${slug}-mobile` : `hero-slide-${slug}`);
+    el.classList.add(`hero-slide-${slug}`);
     delete el.dataset.slug;
   }
 

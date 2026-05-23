@@ -454,6 +454,7 @@
       return;
     }
     wrap.innerHTML = POIS.map(poi => `
+    <div class="g-4 container">
       <div class="card card-glass">
           ${poi.poi_image 
             ? `<img src="${escHtml(poi.poi_image)}" class="card-img-top"
@@ -471,6 +472,7 @@
                    <i class="fa-solid fa-link-slash me-1"></i>Belum ada link
                  </span>`
             }
+          </div>
         </div>
       </div>`).join('');
   }

@@ -45,7 +45,7 @@ if ($method === 'GET') {
     ";
 
     $stmtData = $pdo->prepare($sql);
-    $stmtData->execute([...$params, $limit, $offset]);
+    $stmtData->execute([...$params, (int)$limit, (int)$offset]);
     $rows = $stmtData->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode([

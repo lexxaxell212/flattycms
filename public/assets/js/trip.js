@@ -456,8 +456,8 @@
     wrap.innerHTML = POIS.map(poi => `
       <div class="poi-card">
           ${poi.poi_image 
-            ? `<img src="uploads/poi/${escHtml(poi.poi_image)}"
-            style="height:70px;width:100%" onerror="this.src='uploads/poi-placeholder.jpg'">`
+            ? `<img src="${escHtml(poi.poi_image)}" style="height:70px;width:80px"
+            onerror="this.src='uploads/poi-placeholder.jpg'">`
             : `<img src="uploads/poi-placeholder.jpg" style="height:70px;width:100%">`
           }
         <div class="poi-card-body">

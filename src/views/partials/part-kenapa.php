@@ -1,31 +1,356 @@
-<script src="<?= JS_URL ?>autoslides.js" defer></script>
-<div class="container-fluid">
-<section id="kenapa-harus-bandung" style="background: var(--bg-primary)">
+<?php
+$_khb_stmt = $pdo->query("SELECT * FROM admin_items WHERE status = 'active' AND category IN ('trending') ORDER BY id ASC");
+$_khb_items = $_khb_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$_khb_icons = [
+    'Pusat Inovasi Digital'    => '<path d="M12 2a7 7 0 0 1 7 7c0 3.17-2.11 5.84-5 6.71V17h-4v-1.29C7.11 14.84 5 12.17 5 9a7 7 0 0 1 7-7zm0 2a5 5 0 0 0-5 5c0 2.38 1.63 4.41 4 4.9V15h2v-1.1c2.37-.49 4-2.52 4-4.9a5 5 0 0 0-5-5zm-1 13h2v2h-2z"/>',
+    'Konektivitas Kilat'        => '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
+    'Ikon Kuliner Global'       => '<path d="M3 2v7c0 2.76 2.24 5 5 5h1v6h2v-6h1c2.76 0 5-2.24 5-5V2h-2v5h-2V2h-2v5H9V2H3zm15 0h-2v9h2V2z"/>',
+    'Wisata Alam Estetik'       => '<path d="M14 6l-1-2H5v17h2v-7h5l1 2h7V6h-6zm4 8h-4l-1-2H7V6h5l1 2h5v6z"/><path d="M8.5 11.5l1.5-2 1.5 2 2.5-3.5L17 13H7l1.5-2.5z"/>',
+    'Kiblat Fashion Lokal'      => '<path d="M12 3C9.24 3 7 5.24 7 8c0 1.85 1.01 3.45 2.5 4.33V21h5v-8.67C15.99 11.45 17 9.85 17 8c0-2.76-2.24-5-5-5zm0 2c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3zm-1.5 8.5h3V19h-3v-5.5z"/>',
+    'Arsitektur Bersejarah'     => '<path d="M12 3L2 9v1h2v9h3v-6h6v6h3V10h2V9L12 3zm0 2.31L19 9.5V10h-1v9h-1v-6H7v6H6V10H5v-.5L12 5.31z"/><path d="M10 14h4v5h-4z" opacity=".3"/>',
+    'Kultur Ngopi yang Kuat'    => '<path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/>',
+    'Ruang Publik Inklusif'     => '<path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>',
+    'Event Seni Internasional'  => '<path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v3H8v2h3v3h2v-3h3v-2h-3V8z"/><circle cx="12" cy="12" r="2" opacity=".5"/>',
+    'Udara Sejuk Menenangkan'   => '<path d="M12 4C9.24 4 7 6.24 7 9c0 2.85 2.22 5.19 5 5.46V18H9v2h6v-2h-3v-3.54c2.78-.27 5-2.61 5-5.46 0-2.76-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"/><path d="M6.5 10.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm11 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM12 2c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5S12.28 2 12 2z"/>',
+];
+
+$_khb_colors = [
+    '#7c3aed', '#6d28d9', '#4f46e5', '#7c3aed',
+    '#5b21b6', '#4338ca', '#6d28d9', '#7c3aed',
+    '#4f46e5', '#5b21b6',
+];
+?>
+
+<?php if (!empty($_khb_items)): ?>
+<section class="khb-section container-fluid">
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-12 col-md-6">
-        <div class="py-5">
-          <h1 class="text-title">Kenapa Harus Bandung?</h1>
-          <p>
-            Lebih dari sekadar <strong>Paris van Java</strong>, Bandung kini berevolusi menjadi pusat gaya hidup modern yang bersinergi dengan alam. Dari destinasi kuliner legendaris hingga ekosistem kreatif kelas dunia, setiap sudutnya menawarkan peluang bisnis sekaligus kenyamanan rekreasi yang tak tertandingi.
-          </p>
-          <a href="<?= PAGES_URL ?>kenapa-harus-bandung" class="btn
-          btn-outline-primary">
-            Baca Selengkapnya <i class="arrow-icon fas fa-arrow-right"></i>
+
+    <div class="khb-header">
+      <div class="khb-header__left">
+        <span class="khb-eyebrow">
+          <span class="khb-eyebrow__dot"></span>
+          Discover Bandung
+        </span>
+        <h2 class="khb-heading">
+          Kenapa Harus<br><em>Bandung?</em>
+        </h2>
+      </div>
+      <div class="khb-header__right">
+        <p class="khb-lead">Bandung 2026: Perpaduan sempurna inovasi digital, kesejukan alam, dan kreativitas kuliner terbaik.</p>
+      </div>
+    </div>
+
+    <div class="khb-grid">
+      <?php foreach ($_khb_items as $i => $_khb_item):
+        $title   = htmlspecialchars($_khb_item['title'] ?? 'Untitled');
+        $excerpt = htmlspecialchars(substr($_khb_item['excerpt'] ?? '', 0, 120));
+        $icon    = $_khb_icons[$title] ?? '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>';
+        $color   = $_khb_colors[$i % count($_khb_colors)];
+        $num     = str_pad(count($_khb_items) - $i, 2, '0', STR_PAD_LEFT);
+        $is_wide = in_array($i, [0, 4, 8]);
+      ?>
+      <div class="khb-card <?= $is_wide ? 'khb-card--wide' : '' ?>">
+        <div class="khb-card__num"><?= $num ?></div>
+        <div class="khb-card__icon" style="--card-color:<?= $color ?>">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <?= $icon ?>
+          </svg>
+        </div>
+        <div class="khb-card__content">
+          <h3 class="khb-card__title"><?= $title ?></h3>
+          <?php if ($excerpt): ?>
+          <p class="khb-card__excerpt"><?= $excerpt ?></p>
+          <?php endif; ?>
+        </div>
+        <div class="khb-card__bar" style="background:<?= $color ?>"></div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+
+    <div class="khb-cta">
+      <div class="khb-cta__inner">
+        <h3 class="khb-cta__heading">Siap Petualangan ke Bandung?</h3>
+        <p class="khb-cta__sub">Jadwal akhir pekan sudah penuh? Booking sekarang sebelum ketinggalan!</p>
+        <div class="khb-cta__btns">
+          <a href="https://google.com/search?q=Tiket+pesawat+ke+bandung" target="_blank" rel="noopener" class="khb-btn khb-btn--outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+            Pesan Tiket
+          </a>
+          <a href="https://google.com/search?q=Booking+hotel+bandung" target="_blank" rel="noopener" class="khb-btn khb-btn--outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+            Cari Hotel
+          </a>
+          <a href="<?= BASE_URL ?>trip/" class="khb-btn khb-btn--primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Mulai Rencanakan
           </a>
         </div>
       </div>
-      <div class="col-12 col-md-6">
-        <div class="kenapa-image-container auto-slide shadow-lg overflow-hidden">
-          <div class="kenapa-image-slide">
-            <img class="kenapa-image object-fit-cover" src="<?= IMG_URL
-            ?>default.jpg" alt="Vibe Bandung 1" style="height: 400px;width:100%">
-            <img class="kenapa-image object-fit-cover" src="<?= IMG_URL ?>default.jpg" alt="Vibe Bandung 2" style="height: 400px;width:100%">
-            <img class="kenapa-image  object-fit-cover" src="<?= IMG_URL ?>default.jpg" alt="Vibe Bandung 3" style="height: 400px;width:100%">
-          </div>
-        </div>
-      </div>
     </div>
+
   </div>
 </section>
-</div>
+
+<style>
+.khb-section {
+  background: #fff;
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.khb-section::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(167,139,250,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.khb-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 4rem;
+}
+@media (max-width: 767px) {
+  .khb-header { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+}
+
+.khb-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #7c3aed;
+  margin-bottom: 1rem;
+}
+.khb-eyebrow__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7c3aed;
+  animation: khbBlink 2s ease-in-out infinite;
+}
+@keyframes khbBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .3; }
+}
+
+.khb-heading {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  color: #1e1b4b;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  margin: 0;
+}
+.khb-heading em {
+  font-style: normal;
+  color: #7c3aed;
+}
+
+.khb-lead {
+  color: #6b7280;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0;
+  padding-bottom: .5rem;
+}
+
+/* Grid */
+.khb-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+@media (max-width: 991px) {
+  .khb-grid { grid-template-columns: repeat(2, 1fr); }
+  .khb-card--wide { grid-column: span 1; }
+}
+@media (max-width: 575px) {
+  .khb-grid { grid-template-columns: 1fr; }
+}
+
+.khb-card--wide {
+  grid-column: span 2;
+}
+@media (max-width: 991px) {
+  .khb-card--wide { grid-column: span 1; }
+}
+
+.khb-card {
+  background: #faf9ff;
+  border: 1px solid #ede9fe;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform .25s, box-shadow .25s, background .25s;
+  cursor: default;
+}
+.khb-card:hover {
+  transform: translateY(-5px);
+  background: #f5f3ff;
+  box-shadow: 0 1rem 2.5rem rgba(124,58,237,.12);
+}
+.khb-card__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 0 2px 2px 0;
+  opacity: .5;
+  transition: opacity .25s, height .25s;
+}
+.khb-card:hover .khb-card__bar { opacity: 1; }
+
+.khb-card__num {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: #c4b5fd;
+  font-family: monospace;
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+}
+
+.khb-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--card-color) 12%, transparent);
+  color: var(--card-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform .25s;
+}
+.khb-card:hover .khb-card__icon { transform: scale(1.1) rotate(-4deg); }
+.khb-card__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.khb-card__content { flex: 1; }
+.khb-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e1b4b;
+  margin-bottom: .4rem;
+  line-height: 1.3;
+}
+.khb-card__excerpt {
+  font-size: .82rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Wide card tweaks */
+.khb-card--wide {
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+}
+.khb-card--wide .khb-card__icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  flex-shrink: 0;
+}
+.khb-card--wide .khb-card__icon svg { width: 28px; height: 28px; }
+.khb-card--wide .khb-card__title { font-size: 1.1rem; }
+@media (max-width: 991px) {
+  .khb-card--wide { flex-direction: column; align-items: flex-start; }
+}
+
+/* CTA */
+.khb-cta {
+  border-top: 1px solid #ede9fe;
+  padding-top: 4rem;
+}
+.khb-cta__inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.khb-cta__heading {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1e1b4b;
+  margin: 0;
+  flex-shrink: 0;
+}
+.khb-cta__sub {
+  color: #6b7280;
+  font-size: .9rem;
+  margin: 0;
+  flex: 1;
+  min-width: 180px;
+}
+.khb-cta__btns {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+@media (max-width: 767px) {
+  .khb-cta__inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .khb-cta__heading { font-size: 1.2rem; }
+}
+
+.khb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .65rem 1.25rem;
+  border-radius: 100px;
+  font-size: .85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.khb-btn--outline {
+  border: 1.5px solid #ede9fe;
+  color: #4c1d95;
+  background: transparent;
+}
+.khb-btn--outline:hover {
+  border-color: #7c3aed;
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+.khb-btn--primary {
+  background: #7c3aed;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(124,58,237,.3);
+}
+.khb-btn--primary:hover {
+  background: #6d28d9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(124,58,237,.4);
+  color: #fff;
+}
+</style>
+<?php endif; ?>

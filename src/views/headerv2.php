@@ -313,8 +313,9 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
           </div>
         </li>
         <li class="nav-desktop-item">
-          <a class="nav-desktop-link <?= isActive('/pages/informasi-terkini') ?>" href="/pages/informasi-terkini">
-            <i class="fa-solid fa-newspaper" aria-hidden="true"></i>Informasi Terkini
+          <a class="nav-desktop-link <?= isActive('/things-to-do') ?>"
+          href="/things-to-do">
+            <i class="fa-solid fa-newspaper" aria-hidden="true"></i>Things To Do
           </a>
         </li>
         <li class="nav-desktop-item">
@@ -405,7 +406,8 @@ fill="var(--strips)" fill-opacity=".4" d="M1638.5 790.3c-10.7 6-10.5 21.1.4 26.7
         <li><a class="dropdown-item <?= isActive('/pages/penginapan') ?>" href="/pages/penginapan"><i class="fa-solid fa-hotel me-2"></i>Penginapan</a></li>
       </ul>
     </li>
-    <li class="nav-item"><a class="nav-link <?= isActive('/pages/informasi-terkini') ?>" href="/pages/informasi-terkini"><i class="fa-solid fa-newspaper"></i>Informasi Terkini</a></li>
+    <li class="nav-item"><a class="nav-link <?= isActive('/things-to-do') ?>"
+    href="/things-to-do"><i class="fa-solid fa-newspaper"></i>Things To Do</a></li>
     <li class="nav-item"><a class="nav-link <?= isActive('/blogs') ?>"
     href="/blogs"><i class="fa-solid fa-book"></i>Blogs</a></li>
     <li class="nav-item"><a class="nav-link <?= isActive('/trip') ?>"

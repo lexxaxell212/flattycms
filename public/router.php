@@ -6,6 +6,7 @@ $routes = [
   // home
     '' => SRC_PATH . 'pages/home.php',
   // pages
+    'things-to-do'              => SRC_PATH . 'pages/index.php',
     'pages/wisata'              => SRC_PATH . 'pages/wisata.php',
     'pages/kuliner'              => SRC_PATH . 'pages/kuliner.php',
     'pages/penginapan'           => SRC_PATH . 'pages/penginapan.php',
@@ -16,7 +17,7 @@ $routes = [
     'pages/privacy-policy'       => SRC_PATH . 'pages/privacy-policy.php',
     'pages/kritik-dan-saran'     => SRC_PATH . 'pages/kritik-dan-saran.php',
     'pages/kenapa-harus-bandung' => SRC_PATH . 'pages/kenapa-harus-bandung.php',
-    'pages/informasi-terkini'    => SRC_PATH . 'pages/informasi-terkini.php',
+  // blogs
     'blogs'                      => SRC_PATH . 'blogs/index.php',
   // user
     'register'=> SRC_PATH . 'user/register.php',

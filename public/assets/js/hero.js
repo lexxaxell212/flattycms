@@ -1,28 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
   const heroSlides = document.querySelectorAll('.hero-item');
   const heroDots   = document.querySelectorAll('.dot');
+  const cardTitle  = document.querySelector('.hero-card-title');
+  const cardDesc   = document.querySelector('.hero-card-desc');
 
   if (!heroSlides.length) return;
 
   let currentIndex = 0;
   let heroInterval;
 
-  // ── Lazy load background slide non-aktif ──────
   function loadBg(el) {
     const slug = el.dataset.slug;
     if (!slug) return;
     const isMobile = window.innerWidth <= 768;
-    const cls      = isMobile ? `hero-slide-${slug}-mobile` : `hero-slide-${slug}`;
-    el.classList.add(cls);
-    delete el.dataset.slug; // prevent double-load
+    el.classList.add(isMobile ? `hero-slide-${slug}-mobile` : `hero-slide-${slug}`);
+    delete el.dataset.slug;
+  }
+
+  function updateCard(title, desc) {
+    cardTitle.classList.add('is-fading');
+    cardDesc.classList.add('is-fading');
+    setTimeout(() => {
+      cardTitle.textContent = title;
+      cardDesc.textContent  = desc;
+      cardTitle.classList.remove('is-fading');
+      cardDesc.classList.remove('is-fading');
+    }, 350);
   }
 
   function showSlide(index) {
+    const slide = heroSlides[index];
     heroSlides.forEach(el => el.classList.remove('active'));
     heroDots.forEach(el => el.classList.remove('active'));
-    heroSlides[index].classList.add('active');
+    slide.classList.add('active');
     heroDots[index].classList.add('active');
-    loadBg(heroSlides[index]); // load bg on demand
+    loadBg(slide);
+    updateCard(slide.dataset.title, slide.dataset.desc);
     currentIndex = index;
   }
 
@@ -34,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     heroInterval = setInterval(nextSlide, 5000);
   }
 
-  // Expose globally untuk onclick di HTML
   window.heroJump = (index) => {
     if (index < 0 || index >= heroSlides.length) return;
     clearInterval(heroInterval);
@@ -42,12 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
     start();
   };
 
-  // Pause saat hover
   const heroSection = document.getElementById('hero-website');
   heroSection?.addEventListener('mouseenter', () => clearInterval(heroInterval));
   heroSection?.addEventListener('mouseleave', () => start());
 
-  // Preload slide berikutnya saat idle
   requestIdleCallback?.(() => {
     heroSlides.forEach((el, i) => { if (i > 0) loadBg(el); });
   });

@@ -232,20 +232,19 @@ h6 {
     padding-top: var(--navbar-height);
 }
 
-/* ============= fast hero ============= */
+/* ============= hero ============= */
 .hero-wrapper {
     height: 85vh;
     background: var(--bg-primary);
 }
+
 .hero-item {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transition:
-        transform 1s var(--ease),
-        opacity 0.5s var(--ease);
+    transition: opacity 1s var(--ease), transform 1.2s var(--ease);
     transform: scale(1.07);
 }
 .hero-item.active {
@@ -253,81 +252,72 @@ h6 {
     transform: scale(1);
     z-index: 1;
 }
-.hero-slide-wisata {
-    background-image: url("../images/wisata.webp");
-}
-.hero-slide-kuliner {
-    background-image: url("../images/kuliner.webp");
-}
-.hero-slide-hotel {
-    background-image: url("../images/hotel.webp");
-}
-.hero-slide-wisata-mobile {
-    background-image: url("../images/wisata-mobile.webp");
-}
-.hero-slide-kuliner-mobile {
-    background-image: url("../images/kuliner-mobile.webp");
-}
-.hero-slide-hotel-mobile {
-    background-image: url("../images/hotel-mobile.webp");
-}
+
+.hero-slide-wisata  { background-image: url("../images/wisata.webp"); }
+.hero-slide-kuliner { background-image: url("../images/kuliner.webp"); }
+.hero-slide-hotel   { background-image: url("../images/hotel.webp"); }
+
 @media (max-width: 768px) {
-    .hero-slide-wisata {
-        background-image: url("../images/wisata-mobile.webp");
-    }
+    .hero-slide-wisata  { background-image: url("../images/wisata-mobile.webp"); }
+    .hero-slide-kuliner { background-image: url("../images/kuliner-mobile.webp"); }
+    .hero-slide-hotel   { background-image: url("../images/hotel-mobile.webp"); }
 }
+
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        90deg,
-        rgba(248, 250, 252, 0.7) 0%,
-        rgba(248, 250, 252, 0.2) 100%
-    );
+    background: linear-gradient(90deg, rgba(248,250,252,.6) 0%, rgba(248,250,252,.1) 100%);
 }
+[data-dark] .hero-overlay {
+    background: linear-gradient(90deg, rgba(15,23,42,.7) 0%, rgba(15,23,42,.2) 100%);
+}
+
+.hero-overlay-global {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.18) 100%);
+}
+
+.hero-card-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+}
+
 .glass-hero-card {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255,255,255,.4);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: var(--glass-border);
     padding: var(--space-12);
     border-radius: var(--radius);
     box-shadow: var(--glass-shadow);
-    animation: fadeInUp var(--duration) var(--ease) forwards;
-}
-[data-dark] .hero-overlay {
-    background: linear-gradient(
-        90deg,
-        rgba(15, 23, 42, 0.7) 0%,
-        rgba(15, 23, 42, 0.3) 100%
-    );
 }
 [data-dark] .glass-hero-card {
-    background: rgba(30, 41, 59, 0.5);
+    background: rgba(30,41,59,.5);
     border: var(--glass-border);
 }
+
+.hero-card-title,
+.hero-card-desc {
+    transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+.hero-card-title.is-fading,
+.hero-card-desc.is-fading {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
-.hero-item.active .glass-hero-card h1 {
-    animation: fadeInUp var(--duration) var(--ease) forwards var(--duration);
-    opacity: 0;
-}
-.hero-item.active .glass-hero-card p {
-    animation: fadeInUp var(--duration) var(--ease) forwards var(--duration);
-    opacity: 0;
-}
-.hero-item.active .glass-hero-card .btn {
-    animation: fadeInUp var(--duration) var(--ease) forwards var(--duration);
-    opacity: 0;
-}
+.glass-hero-card h1 { animation: fadeInUp var(--duration) var(--ease) forwards; }
+.glass-hero-card p  { animation: fadeInUp var(--duration) var(--ease) .1s forwards; }
+.glass-hero-card .btn { animation: fadeInUp var(--duration) var(--ease) .2s forwards; }
+
 .hero-dots {
     position: absolute;
     bottom: 30px;
@@ -341,7 +331,7 @@ h6 {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0,0,0,.2);
     cursor: pointer;
     transition: var(--duration);
 }
@@ -350,9 +340,7 @@ h6 {
     width: 30px;
     border-radius: 10px;
 }
-[data-dark] .dot {
-    background: rgba(255, 255, 255, 0.3);
-}
+[data-dark] .dot { background: rgba(255,255,255,.3); }
 
 /* ============= fast nav ============= */
 .navbar {

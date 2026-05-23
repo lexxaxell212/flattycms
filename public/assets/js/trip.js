@@ -449,8 +449,10 @@
 
   function loadExplorePoi() {
   const wrap = document.getElementById('explorePoiList');
+  const overlay = document.getElementById('exploreOverlay');
   let activeCatExplore = '';
   let searchQuery = '';
+  let showAll = false;
 
   function render() {
     let filtered = POIS.filter(poi => {
@@ -461,10 +463,13 @@
 
     if (!filtered.length) {
       wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-compass"></i><p>Tidak ada hasil.</p></div>`;
+      overlay.style.display = 'none';
       return;
     }
 
-    wrap.innerHTML = filtered.map(poi => `
+    const limited = (!showAll && filtered.length > 10) ? filtered.slice(0, 10) : filtered;
+
+    wrap.innerHTML = limited.map(poi => `
       <div class="card card-glass mb-4">
         ${poi.poi_image
           ? `<img src="${escHtml(poi.poi_image)}" class="card-img-top" onerror="this.src='uploads/poi-placeholder.jpg'">`
@@ -483,9 +488,17 @@
           }
         </div>
       </div>`).join('');
+
+    overlay.style.display = (!showAll && filtered.length > 10) ? 'flex' : 'none';
   }
 
+  document.getElementById('btnShowAllPoi').addEventListener('click', () => {
+    showAll = true;
+    render();
+  });
+
   document.getElementById('exploreSearch').addEventListener('input', function() {
+    showAll = false;
     searchQuery = this.value.toLowerCase().trim();
     render();
   });
@@ -499,12 +512,13 @@
       this.classList.add('active', 'btn-primary');
       this.classList.remove('btn-outline-secondary');
       activeCatExplore = this.dataset.cat;
+      showAll = false;
       render();
     });
   });
 
   render();
-  }
+}
 
   function loadTripku() {
     const wrap = document.getElementById('tripkuList');

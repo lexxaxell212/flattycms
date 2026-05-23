@@ -91,8 +91,15 @@ $cats_json  = json_encode($categories);
       <?php endforeach; ?>
     </div>
   </div>
-  <div id="explorePoiList" class="tp-card-grid"></div>
+  <div style="position:relative">
+    <div id="explorePoiList" class="tp-card-grid"></div>
+    <div id="exploreOverlay" style="display:none;position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to bottom, transparent, #fff);display:flex;align-items:flex-end;justify-content:center;padding-bottom:1rem">
+      <button class="btn btn-primary px-4" id="btnShowAllPoi">
+        <i class="fa-solid fa-grid me-1"></i>Lihat Semua
+      </button>
+    </div>
   </div>
+</div>
 
   <div id="tab-tripku" class="tp-tab-content" style="display:none">
     <?php if ($is_logged): ?>

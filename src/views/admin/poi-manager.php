@@ -46,60 +46,100 @@ $total      = count($pois);
       <?php foreach ($pois as $p): ?>
       <div class="col-12 poi-item" data-category="<?= $p['category_id'] ?>">
         <div class="card border-0 shadow-sm">
-          <div class="card-body px-4 py-3">
-            <div class="d-flex align-items-start justify-content-between gap-3">
+          <div class="card-body px-3 px-md-4 py-3">
+            <div class="d-flex gap-3">
 
               <!-- Thumbnail -->
               <div class="flex-shrink-0">
                 <?php if (!empty($p['poi_image'])): ?>
                 <img src="<?= safe_html(BASE_URL . $p['poi_image']) ?>"
                      alt="<?= safe_html($p['name']) ?>"
-                     style="width:56px;height:56px;object-fit:cover;border-radius:.5rem">
+                     style="width:52px;height:52px;object-fit:cover;border-radius:.5rem">
                 <?php else: ?>
-                <div class="rounded bg-light d-flex align-items-center justify-content-center" style="width:56px;height:56px">
+                <div class="rounded bg-light d-flex align-items-center justify-content-center" style="width:52px;height:52px">
                   <i class="fa-solid <?= safe_html($p['category_icon']) ?> text-muted"></i>
                 </div>
                 <?php endif; ?>
               </div>
 
-              <!-- Info -->
+              <!-- Info + Actions -->
               <div class="flex-grow-1 min-w-0">
-                <div class="fw-semibold"><?= safe_html($p['name']) ?></div>
-                <div class="small text-muted mb-1">
+                <div class="d-flex align-items-start justify-content-between gap-2">
+                  <div class="fw-semibold text-truncate"><?= safe_html($p['name']) ?></div>
+                  <!-- Aksi: desktop inline, mobile dropdown -->
+                  <div class="dropdown flex-shrink-0">
+                    <button class="btn btn-sm btn-outline-secondary d-md-none" data-bs-toggle="dropdown">
+                      <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end d-md-none">
+                      <li>
+                        <button class="dropdown-item small btn-edit-poi"
+                                data-id="<?= $p['id'] ?>"
+                                data-name="<?= safe_html($p['name']) ?>"
+                                data-url="<?= safe_html($p['poi_url'] ?? '') ?>"
+                                data-image="<?= safe_html($p['poi_image'] ?? '') ?>">
+                          <i class="fa-solid fa-pen-to-square me-2 text-primary"></i>Edit
+                        </button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item small btn-toggle-poi"
+                                data-id="<?= $p['id'] ?>" data-name="<?= safe_html($p['name']) ?>">
+                          <i class="fa-solid fa-toggle-on me-2 text-success"></i>
+                          <?= $p['is_active'] ? 'Nonaktifkan' : 'Aktifkan' ?>
+                        </button>
+                      </li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li>
+                        <button class="dropdown-item small text-danger btn-hapus-poi"
+                                data-id="<?= $p['id'] ?>" data-name="<?= safe_html($p['name']) ?>">
+                          <i class="fa-solid fa-trash me-2"></i>Hapus
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- Desktop buttons -->
+                  <div class="d-none d-md-flex align-items-center gap-2 flex-shrink-0">
+                    <button class="btn btn-sm btn-outline-primary btn-edit-poi"
+                            data-id="<?= $p['id'] ?>"
+                            data-name="<?= safe_html($p['name']) ?>"
+                            data-url="<?= safe_html($p['poi_url'] ?? '') ?>"
+                            data-image="<?= safe_html($p['poi_image'] ?? '') ?>">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="btn btn-sm <?= $p['is_active'] ? 'btn-success' : 'btn-outline-secondary' ?> btn-toggle-poi"
+                            data-id="<?= $p['id'] ?>" data-name="<?= safe_html($p['name']) ?>">
+                      <?= $p['is_active'] ? 'Aktif' : 'Nonaktif' ?>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger btn-hapus-poi"
+                            data-id="<?= $p['id'] ?>" data-name="<?= safe_html($p['name']) ?>">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="small text-muted mt-1">
                   <i class="fa-solid fa-tag me-1"></i><?= safe_html($p['category_name']) ?>
-                  <span class="mx-2">·</span>
+                  <span class="mx-1">·</span>
                   <i class="fa-solid fa-location-dot me-1"></i><?= $p['latitude'] ?>, <?= $p['longitude'] ?>
                 </div>
                 <?php if ($p['address']): ?>
-                <div class="small text-muted mb-1"><i class="fa-solid fa-road me-1"></i><?= safe_html($p['address']) ?></div>
-                <?php endif; ?>
-                <?php if (!empty($p['poi_url'])): ?>
-                <div class="small">
-                  <i class="fa-solid fa-link me-1 text-primary"></i>
-                  <a href="<?= safe_html($p['poi_url']) ?>" target="_blank" rel="noopener" class="text-primary text-decoration-none text-truncate d-inline-block" style="max-width:300px">
-                    <?= safe_html($p['poi_url']) ?>
-                  </a>
+                <div class="small text-muted mt-1 text-truncate">
+                  <i class="fa-solid fa-road me-1"></i><?= safe_html($p['address']) ?>
                 </div>
                 <?php endif; ?>
-              </div>
-
-              <!-- Actions -->
-              <div class="d-flex align-items-center gap-2 flex-shrink-0">
-                <button class="btn btn-sm btn-outline-primary btn-edit-poi"
-                        data-id="<?= $p['id'] ?>"
-                        data-name="<?= safe_html($p['name']) ?>"
-                        data-url="<?= safe_html($p['poi_url'] ?? '') ?>"
-                        data-image="<?= safe_html($p['poi_image'] ?? '') ?>">
-                  <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-                <button class="btn btn-sm <?= $p['is_active'] ? 'btn-success' : 'btn-outline-secondary' ?> btn-toggle-poi"
-                        data-id="<?= $p['id'] ?>" data-name="<?= safe_html($p['name']) ?>">
-                  <?= $p['is_active'] ? 'Aktif' : 'Nonaktif' ?>
-                </button>
-                <button class="btn btn-sm btn-outline-danger btn-hapus-poi"
-                        data-id="<?= $p['id'] ?>" data-name="<?= safe_html($p['name']) ?>">
-                  <i class="fa-solid fa-trash"></i>
-                </button>
+                <?php if (!empty($p['poi_url'])): ?>
+                <div class="small mt-1 text-truncate">
+                  <i class="fa-solid fa-link me-1 text-primary"></i>
+                  <a href="<?= safe_html($p['poi_url']) ?>" target="_blank" rel="noopener"
+                     class="text-primary text-decoration-none"><?= safe_html($p['poi_url']) ?></a>
+                </div>
+                <?php endif; ?>
+                <!-- Mobile: status badge -->
+                <div class="d-md-none mt-2">
+                  <span class="badge <?= $p['is_active'] ? 'bg-success' : 'bg-secondary' ?>">
+                    <?= $p['is_active'] ? 'Aktif' : 'Nonaktif' ?>
+                  </span>
+                </div>
               </div>
 
             </div>
@@ -112,7 +152,7 @@ $total      = count($pois);
 
   <!-- Modal Tambah POI -->
   <div class="modal fade" id="modalTambahPoi" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content border-0 shadow">
         <div class="modal-header border-bottom">
           <h6 class="modal-title fw-semibold">
@@ -120,14 +160,14 @@ $total      = count($pois);
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-body p-4">
+        <div class="modal-body p-3 p-md-4">
 
           <div class="mb-4">
             <label class="form-label fw-semibold small">Cari Lokasi</label>
             <div class="input-group">
               <input type="text" id="searchNominatim" class="form-control" placeholder="Contoh: Kawah Putih Bandung...">
               <button class="btn btn-outline-secondary" id="btnCariLokasi" type="button">
-                <i class="fa-solid fa-search me-1"></i> Cari
+                <i class="fa-solid fa-search me-1"></i><span class="d-none d-md-inline">Cari</span>
               </button>
             </div>
             <div id="hasilNominatim" class="list-group mt-2" style="max-height:200px;overflow-y:auto;display:none"></div>
@@ -135,7 +175,7 @@ $total      = count($pois);
 
           <div id="mapPreviewWrap" class="mb-4" style="display:none">
             <label class="form-label fw-semibold small">Preview Lokasi</label>
-            <div id="mapPreview" style="height:200px;border-radius:8px;overflow:hidden;border:1px solid #dee2e6"></div>
+            <div id="mapPreview" style="height:180px;border-radius:8px;overflow:hidden;border:1px solid #dee2e6"></div>
           </div>
 
           <div class="row g-3">
@@ -143,7 +183,7 @@ $total      = count($pois);
               <label class="form-label small fw-semibold">Nama Lokasi <span class="text-danger">*</span></label>
               <input type="text" id="poiName" class="form-control" placeholder="Nama tampilan di peta">
             </div>
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <label class="form-label small fw-semibold">Kategori <span class="text-danger">*</span></label>
               <select id="poiCategory" class="form-select">
                 <option value="">-- Pilih Kategori --</option>
@@ -152,11 +192,11 @@ $total      = count($pois);
                 <?php endforeach; ?>
               </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-6 col-md-3">
               <label class="form-label small fw-semibold">Latitude</label>
               <input type="text" id="poiLat" class="form-control" readonly placeholder="-6.9xxx">
             </div>
-            <div class="col-md-3">
+            <div class="col-6 col-md-3">
               <label class="form-label small fw-semibold">Longitude</label>
               <input type="text" id="poiLng" class="form-control" readonly placeholder="107.6xxx">
             </div>
@@ -180,7 +220,7 @@ $total      = count($pois);
               <input type="file" id="poiImage" class="form-control form-control-sm" accept="image/jpeg,image/png,image/webp">
               <div class="form-text">Maks 5MB · JPG, PNG, WebP</div>
               <div id="poiImagePreview" class="mt-2" style="display:none">
-                <img id="poiPreviewImg" src="" class="img-fluid rounded" style="max-height:160px;object-fit:cover">
+                <img id="poiPreviewImg" src="" class="img-fluid rounded" style="max-height:140px;object-fit:cover">
               </div>
             </div>
             <div class="col-12">
@@ -204,15 +244,15 @@ $total      = count($pois);
 
   <!-- Modal Edit URL & Gambar -->
   <div class="modal fade" id="modalEditPoi" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 shadow">
         <div class="modal-header border-bottom">
           <h6 class="modal-title fw-semibold">
-            <i class="fa-solid fa-pen-to-square me-2 text-primary"></i>Edit <span id="editPoiName"></span>
+            <i class="fa-solid fa-pen-to-square me-2 text-primary"></i>Edit — <span id="editPoiName"></span>
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-body p-4">
+        <div class="modal-body p-3 p-md-4">
           <input type="hidden" id="editPoiId">
           <div class="mb-3">
             <label class="form-label small fw-semibold">URL / Link <span class="text-muted fw-normal">(opsional)</span></label>
@@ -224,14 +264,14 @@ $total      = count($pois);
           <div class="mb-1">
             <label class="form-label small fw-semibold">Ganti Gambar <span class="text-muted fw-normal">(opsional)</span></label>
             <input type="file" id="editPoiImage" class="form-control form-control-sm" accept="image/jpeg,image/png,image/webp">
-            <div class="form-text">Maks 5MB · JPG, PNG, WebP · kosongkan jika tidak ingin mengganti</div>
+            <div class="form-text">Maks 5MB · kosongkan jika tidak ingin mengganti</div>
             <div id="editPoiCurrentImg" class="mt-2" style="display:none">
               <p class="small text-muted mb-1">Gambar saat ini:</p>
-              <img id="editPoiCurrentImgEl" src="" class="img-fluid rounded" style="max-height:140px;object-fit:cover">
+              <img id="editPoiCurrentImgEl" src="" class="img-fluid rounded" style="max-height:130px;object-fit:cover">
             </div>
             <div id="editPoiNewPreview" class="mt-2" style="display:none">
               <p class="small text-muted mb-1">Preview baru:</p>
-              <img id="editPoiNewPreviewImg" src="" class="img-fluid rounded" style="max-height:140px;object-fit:cover">
+              <img id="editPoiNewPreviewImg" src="" class="img-fluid rounded" style="max-height:130px;object-fit:cover">
             </div>
           </div>
         </div>
@@ -306,7 +346,7 @@ $total      = count($pois);
     } catch (e) {
       Swal.fire('Gagal', 'Tidak bisa menghubungi server', 'error');
     } finally {
-      btn.innerHTML = '<i class="fa-solid fa-search me-1"></i> Cari';
+      btn.innerHTML = '<i class="fa-solid fa-search me-1"></i><span class="d-none d-md-inline">Cari</span>';
       btn.disabled  = false;
     }
   }
@@ -336,10 +376,7 @@ $total      = count($pois);
   document.getElementById('poiImage').addEventListener('change', function () {
     const file = this.files[0];
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) {
-      Swal.fire('File terlalu besar', 'Maksimal 5MB', 'warning');
-      this.value = ''; return;
-    }
+    if (file.size > 5 * 1024 * 1024) { Swal.fire('File terlalu besar', 'Maksimal 5MB', 'warning'); this.value = ''; return; }
     const reader = new FileReader();
     reader.onload = e => {
       document.getElementById('poiPreviewImg').src = e.target.result;
@@ -353,10 +390,7 @@ $total      = count($pois);
     const category = document.getElementById('poiCategory').value;
     const lat      = document.getElementById('poiLat').value;
     const lng      = document.getElementById('poiLng').value;
-    if (!name || !category || !lat || !lng) {
-      Swal.fire('Oops!', 'Nama, kategori, dan lokasi wajib diisi', 'warning');
-      return;
-    }
+    if (!name || !category || !lat || !lng) { Swal.fire('Oops!', 'Nama, kategori, dan lokasi wajib diisi', 'warning'); return; }
     const btn = document.getElementById('btnSimpanPoi');
     btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Menyimpan...';
     btn.disabled  = true;
@@ -376,12 +410,8 @@ $total      = count($pois);
     try {
       const res  = await fetch(API, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
       const data = await res.json();
-      if (data.success) {
-        await Swal.fire('Berhasil!', data.message, 'success');
-        location.reload();
-      } else {
-        Swal.fire('Gagal', data.message, 'error');
-      }
+      if (data.success) { await Swal.fire('Berhasil!', data.message, 'success'); location.reload(); }
+      else Swal.fire('Gagal', data.message, 'error');
     } catch (e) {
       Swal.fire('Error', 'Tidak bisa menghubungi server', 'error');
     } finally {
@@ -419,26 +449,21 @@ $total      = count($pois);
       fd.append('action', 'delete'); fd.append('csrf_token', CSRF); fd.append('poi_id', id);
       const res  = await fetch(API, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
       const data = await res.json();
-      if (data.success) {
-        await Swal.fire('Dihapus!', data.message, 'success');
-        location.reload();
-      } else {
-        Swal.fire('Gagal', data.message, 'error');
-      }
+      if (data.success) { await Swal.fire('Dihapus!', data.message, 'success'); location.reload(); }
+      else Swal.fire('Gagal', data.message, 'error');
     });
   });
 
-  const modalEdit   = new bootstrap.Modal(document.getElementById('modalEditPoi'));
   document.querySelectorAll('.btn-edit-poi').forEach(btn => {
     btn.addEventListener('click', function () {
       const id    = this.dataset.id;
       const name  = this.dataset.name;
       const url   = this.dataset.url;
       const image = this.dataset.image;
-      document.getElementById('editPoiId').value    = id;
-      document.getElementById('editPoiName').textContent = name;
-      document.getElementById('editPoiUrl').value   = url;
-      document.getElementById('editPoiImage').value = '';
+      document.getElementById('editPoiId').value          = id;
+      document.getElementById('editPoiName').textContent  = name;
+      document.getElementById('editPoiUrl').value         = url;
+      document.getElementById('editPoiImage').value       = '';
       document.getElementById('editPoiNewPreview').style.display = 'none';
       const curImg = document.getElementById('editPoiCurrentImg');
       if (image) {
@@ -447,17 +472,14 @@ $total      = count($pois);
       } else {
         curImg.style.display = 'none';
       }
-      modalEdit.show();
+      bootstrap.Modal.getOrCreateInstance(document.getElementById('modalEditPoi')).show();
     });
   });
 
   document.getElementById('editPoiImage').addEventListener('change', function () {
     const file = this.files[0];
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) {
-      Swal.fire('File terlalu besar', 'Maksimal 5MB', 'warning');
-      this.value = ''; return;
-    }
+    if (file.size > 5 * 1024 * 1024) { Swal.fire('File terlalu besar', 'Maksimal 5MB', 'warning'); this.value = ''; return; }
     const reader = new FileReader();
     reader.onload = e => {
       document.getElementById('editPoiNewPreviewImg').src = e.target.result;
@@ -482,6 +504,7 @@ $total      = count($pois);
       const res  = await fetch(API, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
       const data = await res.json();
       if (data.success) {
+        bootstrap.Modal.getInstance(document.getElementById('modalEditPoi'))?.hide();
         await Swal.fire('Berhasil!', data.message, 'success');
         location.reload();
       } else {

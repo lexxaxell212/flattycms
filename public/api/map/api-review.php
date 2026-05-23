@@ -1,127 +1,151 @@
 <?php
-require_once dirname(__DIR__, 3) . "/bootstrap.php";
+require_once dirname(__DIR__, 3) . '/bootstrap.php';
 autoload_core();
-
 header('Content-Type: application/json');
-header('X-Content-Type-Options: nosniff');
 
-$method = $_SERVER['REQUEST_METHOD'];
+$pdo     = $GLOBALS['pdo'];
+$method  = $_SERVER['REQUEST_METHOD'];
+$user_id = isset($_SESSION['user']) ? (int)$_SESSION['user']['id'] : null;
 
-// ── GET : ambil daftar review ────────────────────────────────────────────────
+// ── GET — List review publik ─────────────────────────────────
 if ($method === 'GET') {
     verify_ajax_request('GET');
-    $page    = max(1, (int)($_GET['page']    ?? 1));
-    $poi_id  = isset($_GET['poi_id']) ? (int)$_GET['poi_id'] : 0;
-    $limit   = 12;
-    $offset  = ($page - 1) * $limit;
 
-    $where  = $poi_id ? 'WHERE r.poi_id = ?' : '';
-    $params = $poi_id ? [$poi_id] : [];
+    try {
+        $where  = [];
+        $params = [];
+        $limit  = 12;
+        $page   = max(1, (int)($_GET['page'] ?? 1));
+        $offset = ($page - 1) * $limit;
 
-    // total
-    $stmtCount = $pdo->prepare("SELECT COUNT(*) FROM poi_reviews r $where");
-    $stmtCount->execute($params);
-    $total = (int)$stmtCount->fetchColumn();
+        if (!empty($_GET['poi_id'])) {
+            $where[]  = 'r.poi_id = ?';
+            $params[] = (int)$_GET['poi_id'];
+        }
 
-    // data
-    $sql = "
-        SELECT
-            r.id,
-            r.rating,
-            r.judul,
-            r.cerita,
-            r.created_at,
-            u.id   AS user_id,
-            u.name AS user_name,
-            u.avatar,
-            p.id   AS poi_id,
-            p.name AS poi_name
-        FROM poi_reviews r
-        JOIN users u ON u.id = r.user_id
-        JOIN poi   p ON p.id = r.poi_id
-        $where
-        ORDER BY r.created_at DESC
-        LIMIT ? OFFSET ?
-    ";
+        $whereSQL = $where ? 'WHERE ' . implode(' AND ', $where) : '';
 
-    $stmtData = $pdo->prepare($sql);
-    $stmtData->execute([...$params, (int)$limit, (int)$offset]);
-    $rows = $stmtData->fetchAll(PDO::FETCH_ASSOC);
+        $countStmt = $pdo->prepare("SELECT COUNT(*) FROM poi_reviews r {$whereSQL}");
+        $countStmt->execute($params);
+        $total = (int)$countStmt->fetchColumn();
 
-    echo json_encode([
-        'success' => true,
-        'total'   => $total,
-        'page'    => $page,
-        'pages'   => (int)ceil($total / $limit),
-        'data'    => $rows,
-    ]);
+        $stmt = $pdo->prepare("
+            SELECT
+                r.id, r.rating, r.judul, r.cerita, r.created_at,
+                u.id   AS user_id,
+                u.name AS user_name,
+                u.avatar,
+                p.id   AS poi_id,
+                p.name AS poi_name
+            FROM poi_reviews r
+            JOIN users u ON u.id = r.user_id
+            JOIN poi   p ON p.id = r.poi_id
+            {$whereSQL}
+            ORDER BY r.created_at DESC
+            LIMIT {$limit} OFFSET {$offset}
+        ");
+        $stmt->execute($params);
+        $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode([
+            'success' => true,
+            'data'    => $reviews,
+            'total'   => $total,
+            'page'    => $page,
+            'pages'   => ceil($total / $limit),
+        ]);
+
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => 'Database error']);
+    }
     exit;
 }
 
-// ── POST : kirim review ──────────────────────────────────────────────────────
-if ($method === 'POST') {
-    verify_ajax_request('POST');
+// ── POST — Kirim review ──────────────────────────────────────
+if ($method !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+    exit;
+}
 
-    // harus login
-    if (empty($_SESSION['user']['id'])) {
-        http_response_code(401);
-        echo json_encode(['success' => false, 'message' => 'Login dulu ya!']);
-        exit;
-    }
+if (!$user_id) {
+    http_response_code(401);
+    echo json_encode(['success' => false, 'message' => 'Login diperlukan']);
+    exit;
+}
 
-    // CSRF
-    if (empty($_POST['csrf_token']) || $_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
-        http_response_code(403);
-        echo json_encode(['success' => false, 'message' => 'Token tidak valid']);
-        exit;
-    }
+verify_ajax_request('POST');
+validate_csrf();
 
-    $user_id = (int)$_SESSION['user']['id'];
-    $poi_id  = (int)($_POST['poi_id']  ?? 0);
-    $rating  = (int)($_POST['rating']  ?? 0);
-    $judul   = trim($_POST['judul']    ?? '');
-    $cerita  = trim($_POST['cerita']   ?? '');
+$poi_id = (int)($_POST['poi_id'] ?? 0);
+$rating = (int)($_POST['rating'] ?? 0);
+$judul  = trim($_POST['judul']   ?? '');
+$cerita = trim($_POST['cerita']  ?? '');
 
-    // validasi
-    if ($poi_id  < 1)        { echo json_encode(['success'=>false,'message'=>'Lokasi tidak valid']);           exit; }
-    if ($rating  < 1 || $rating > 5) { echo json_encode(['success'=>false,'message'=>'Rating harus 1–5']);    exit; }
-    if (strlen($cerita) < 10){ echo json_encode(['success'=>false,'message'=>'Cerita terlalu singkat']);       exit; }
-    if (strlen($cerita) > 5000){ echo json_encode(['success'=>false,'message'=>'Cerita terlalu panjang']);     exit; }
-    if (strlen($judul)  > 255){ echo json_encode(['success'=>false,'message'=>'Judul terlalu panjang']);       exit; }
+// validasi
+if (!$poi_id) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Lokasi tidak valid']);
+    exit;
+}
 
+if ($rating < 1 || $rating > 5) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Rating harus antara 1–5']);
+    exit;
+}
+
+if (strlen($cerita) < 10) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Cerita terlalu singkat']);
+    exit;
+}
+
+if (strlen($cerita) > 5000) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Cerita terlalu panjang']);
+    exit;
+}
+
+if (strlen($judul) > 255) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Judul terlalu panjang']);
+    exit;
+}
+
+try {
     // cek poi exists
-    $chk = $pdo->prepare('SELECT id FROM poi WHERE id = ?');
-    $chk->execute([$poi_id]);
-    if (!$chk->fetch()) {
+    $stmt = $pdo->prepare("SELECT id FROM poi WHERE id = ? AND is_active = 1");
+    $stmt->execute([$poi_id]);
+    if (!$stmt->fetch()) {
+        http_response_code(404);
         echo json_encode(['success' => false, 'message' => 'Lokasi tidak ditemukan']);
         exit;
     }
 
-    // satu user satu review per poi
-    $dup = $pdo->prepare('SELECT id FROM poi_reviews WHERE poi_id = ? AND user_id = ?');
-    $dup->execute([$poi_id, $user_id]);
-    if ($dup->fetch()) {
+    // 1 user = 1 review per poi
+    $stmt = $pdo->prepare("SELECT id FROM poi_reviews WHERE poi_id = ? AND user_id = ?");
+    $stmt->execute([$poi_id, $user_id]);
+    if ($stmt->fetch()) {
+        http_response_code(409);
         echo json_encode(['success' => false, 'message' => 'Kamu sudah pernah mereview tempat ini']);
         exit;
     }
 
-    // insert
-    $ins = $pdo->prepare('
+    $stmt = $pdo->prepare("
         INSERT INTO poi_reviews (poi_id, user_id, rating, judul, cerita)
         VALUES (?, ?, ?, ?, ?)
-    ');
-    $ins->execute([
-        $poi_id,
-        $user_id,
-        $rating,
-        $judul ?: null,
-        $cerita,
+    ");
+    $stmt->execute([$poi_id, $user_id, $rating, $judul ?: null, $cerita]);
+
+    echo json_encode([
+        'success'   => true,
+        'review_id' => $pdo->lastInsertId(),
+        'message'   => 'Review berhasil dikirim!',
     ]);
 
-    echo json_encode(['success' => true, 'message' => 'Review berhasil dikirim!']);
-    exit;
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Database error']);
 }
-
-// method lain
-http_response_code(405);
-echo json_encode(['error' => 'Method not allowed']);

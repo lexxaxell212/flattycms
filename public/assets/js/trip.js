@@ -457,7 +457,7 @@
       <div class="poi-card">
         <div class="overflow-hidden position-relative">
           ${poi.poi_image 
-            ? `<img src="uploads/${escHtml(poi.poi_image)}" class="w-100"
+            ? `<img src="uploads/poi/${escHtml(poi.poi_image)}" class="w-100"
             onerror="this.src='uploads/poi-placeholder.jpg'">`
             : `<img src="uploads/poi-placeholder.jpg" class="w-100">`
           }

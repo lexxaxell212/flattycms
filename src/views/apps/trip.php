@@ -77,7 +77,21 @@ $cats_json  = json_encode($categories);
   </div>
 
   <div id="tab-explore" class="tp-tab-content">
-    <div id="explorePoiList" class="tp-card-grid"></div>
+  <div class="mb-3">
+    <div class="input-group input-group-sm mb-2">
+      <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
+      <input type="text" id="exploreSearch" class="form-control" placeholder="Cari tempat wisata...">
+    </div>
+    <div class="d-flex gap-2 flex-wrap" id="exploreCatFilter">
+      <button class="btn btn-sm btn-primary explore-cat active" data-cat="">Semua</button>
+      <?php foreach ($categories as $cat): ?>
+      <button class="btn btn-sm btn-outline-secondary explore-cat" data-cat="<?= $cat['id'] ?>">
+        <i class="fa-solid <?= safe_html($cat['icon']) ?> me-1"></i><?= safe_html($cat['name']) ?>
+      </button>
+      <?php endforeach; ?>
+    </div>
+  </div>
+  <div id="explorePoiList" class="tp-card-grid"></div>
   </div>
 
   <div id="tab-tripku" class="tp-tab-content" style="display:none">

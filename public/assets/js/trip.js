@@ -448,31 +448,62 @@
   }
 
   function loadExplorePoi() {
-    const wrap = document.getElementById('explorePoiList');
-    if (!POIS.length) {
-      wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-compass"></i><p>Belum ada POI tersedia.</p></div>`;
+  const wrap = document.getElementById('explorePoiList');
+  let activeCatExplore = '';
+  let searchQuery = '';
+
+  function render() {
+    let filtered = POIS.filter(poi => {
+      const matchCat = !activeCatExplore || poi.category_id == activeCatExplore;
+      const matchQ   = !searchQuery || poi.name.toLowerCase().includes(searchQuery);
+      return matchCat && matchQ;
+    });
+
+    if (!filtered.length) {
+      wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-compass"></i><p>Tidak ada hasil.</p></div>`;
       return;
     }
-    wrap.innerHTML = POIS.map(poi => `
+
+    wrap.innerHTML = filtered.map(poi => `
       <div class="card card-glass mb-4">
-          ${poi.poi_image 
-            ? `<img src="${escHtml(poi.poi_image)}" class="card-img-top"
-            onerror="this.src='uploads/poi-placeholder.jpg'">`
-            : `<img src="uploads/poi-placeholder.jpg" class="card-img-top">`
-          }
+        ${poi.poi_image
+          ? `<img src="${escHtml(poi.poi_image)}" class="card-img-top" onerror="this.src='uploads/poi-placeholder.jpg'">`
+          : `<img src="uploads/poi-placeholder.jpg" class="card-img-top">`
+        }
         <div class="card-body">
           <h5>${escHtml(poi.name)}</h5>
           <p class="text-muted">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
-            ${poi.poi_url
-              ? `<a href="${escHtml(poi.poi_url)}" class="btn btn-primary" target="_blank" rel="noopener">
-                   <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Kunjungi
-                 </a>`
-              : `<span class="btn btn-outline-accent disabled">
-                   <i class="fa-solid fa-link-slash me-1"></i>Belum ada link
-                 </span>`
-            }
+          ${poi.poi_url
+            ? `<a href="${escHtml(poi.poi_url)}" class="btn btn-primary" target="_blank" rel="noopener">
+                <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Kunjungi
+               </a>`
+            : `<span class="btn btn-outline-accent disabled">
+                <i class="fa-solid fa-link-slash me-1"></i>Belum ada link
+               </span>`
+          }
         </div>
       </div>`).join('');
+  }
+
+  document.getElementById('exploreSearch').addEventListener('input', function() {
+    searchQuery = this.value.toLowerCase().trim();
+    render();
+  });
+
+  document.querySelectorAll('.explore-cat').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.explore-cat').forEach(b => {
+        b.classList.remove('active', 'btn-primary');
+        b.classList.add('btn-outline-secondary');
+      });
+      this.classList.add('active', 'btn-primary');
+      this.classList.remove('btn-outline-secondary');
+      activeCatExplore = this.dataset.cat;
+      render();
+    });
+  });
+
+  render();
   }
 
   function loadTripku() {

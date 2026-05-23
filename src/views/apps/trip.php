@@ -57,7 +57,7 @@ $cats_json  = json_encode($categories);
         <div class="email">Belum login</div>
       </div>
       <div class="tp-profile-login ms-auto">
-        <a href="/auth/google" class="btn btn-primary btn-sm">
+        <a href="/login" class="btn btn-primary btn-sm">
           <i class="fa-brands fa-google me-1"></i>Login
         </a>
       </div>
@@ -91,7 +91,7 @@ $cats_json  = json_encode($categories);
       <div class="tp-empty-state">
         <i class="fa-solid fa-lock"></i>
         <p>Login untuk melihat trip tersimpanmu.</p>
-        <a href="/auth/google" class="btn btn-primary btn-sm mt-2">
+        <a href="/login" class="btn btn-primary btn-sm mt-2">
           <i class="fa-brands fa-google me-1"></i>Login dengan Google
         </a>
       </div>

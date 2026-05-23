@@ -462,8 +462,7 @@
           }
         <div class="card-body">
           <h5>${escHtml(poi.name)}</h5>
-          <p class="text-muted">${escHtml(poi.description || 'Deskripsi belum
-          tersedia.')}</p>
+          <p class="text-muted">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
             ${poi.poi_url
               ? `<a href="${escHtml(poi.poi_url)}" class="btn btn-primary" target="_blank" rel="noopener">
                    <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Kunjungi

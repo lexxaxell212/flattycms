@@ -454,25 +454,24 @@
       return;
     }
     wrap.innerHTML = POIS.map(poi => `
-      <div class="poi-card">
+      <div class="card card-glass">
           ${poi.poi_image 
-            ? `<img src="${escHtml(poi.poi_image)}" style="height:70px;width:80px"
+            ? `<img src="${escHtml(poi.poi_image)}" class="card-img-top"
             onerror="this.src='uploads/poi-placeholder.jpg'">`
-            : `<img src="uploads/poi-placeholder.jpg" style="height:70px;width:100%">`
+            : `<img src="uploads/poi-placeholder.jpg" class="card-img-top">`
           }
-        <div class="poi-card-body">
-          <div class="poi-card-title">${escHtml(poi.name)}</div>
-          <div class="poi-card-desc">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</div>
-          <div class="poi-card-actions">
+        <div class="card-body">
+          <h5>${escHtml(poi.name)}</h5>
+          <p class="text-muted">${escHtml(poi.description || 'Deskripsi belum
+          tersedia.')}</p>
             ${poi.poi_url
-              ? `<a href="${escHtml(poi.poi_url)}" class="btn btn-primary btn-sm" target="_blank" rel="noopener">
+              ? `<a href="${escHtml(poi.poi_url)}" class="btn btn-primary" target="_blank" rel="noopener">
                    <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Kunjungi
                  </a>`
-              : `<span class="btn btn-outline-secondary btn-sm disabled">
+              : `<span class="btn btn-outline-accent disabled">
                    <i class="fa-solid fa-link-slash me-1"></i>Belum ada link
                  </span>`
             }
-          </div>
         </div>
       </div>`).join('');
   }

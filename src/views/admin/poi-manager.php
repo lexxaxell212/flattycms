@@ -177,7 +177,8 @@ $total      = count($pois);
               <label class="form-label small fw-semibold">URL / Link <span class="text-muted fw-normal">(opsional)</span></label>
               <div class="input-group input-group-sm">
                 <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
-                <input type="url" id="poiUrl" class="form-control" placeholder="https://...">
+                <input type="url" id="poiUrl" class="form-control"
+                placeholder="/pages/poi/nama-judul" value="/pages/poi/">
               </div>
             </div>
             <div class="col-12">
@@ -252,7 +253,8 @@ $total      = count($pois);
               <label class="form-label small fw-semibold">URL / Link <span class="text-muted fw-normal">(opsional)</span></label>
               <div class="input-group input-group-sm">
                 <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
-                <input type="url" id="editPoiUrl" class="form-control" placeholder="https://...">
+                <input type="url" id="editPoiUrl" class="form-control"
+                placeholder="/pages/poi/nama-judul">
               </div>
             </div>
             <div class="col-12">

@@ -83,10 +83,10 @@ function upload_poi_image($poi_id, $file) {
         return ['success' => false, 'message' => 'Ukuran gambar maksimal 5MB'];
     $ext   = pathinfo($file['name'], PATHINFO_EXTENSION);
     $fname = 'poi_' . $poi_id . '_' . time() . '.' . strtolower($ext);
-    $dir   = PUBLIC_PATH . 'uploads/poi/';
+    $dir   = BASE_UPLOAD_PATH . 'poi/';
     if (!is_dir($dir)) mkdir($dir, 0755, true);
     $dest  = $dir . $fname;
     if (!move_uploaded_file($file['tmp_name'], $dest))
         return ['success' => false, 'message' => 'Gagal menyimpan gambar'];
-    return ['success' => true, 'path' => 'uploads/poi/' . $fname];
+    return ['success' => true, 'path' => 'poi/' . $fname];
 }

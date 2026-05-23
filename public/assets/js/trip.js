@@ -455,6 +455,13 @@
     }
     wrap.innerHTML = POIS.map(poi => `
       <div class="poi-card">
+        <div class="overflow-hidden position-relative">
+          ${poi.poi_image 
+            ? `<img src="uploads/${escHtml(poi.poi_image)}" class="w-100"
+            onerror="this.src='uploads/poi-placeholder.jpg'">`
+            : `<img src="uploads/poi-placeholder.jpg" class="w-100">`
+          }
+        </div>
         <div class="poi-card-body">
           <div class="poi-card-title">${escHtml(poi.name)}</div>
           <div class="poi-card-desc">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</div>

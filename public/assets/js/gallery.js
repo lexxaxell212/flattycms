@@ -5,35 +5,28 @@
   let currentReviewPage = 1;
   let activeTab         = 'gallery';
 
-  // ── UTILS ────────────────────────────────────────────────
   function formatDate(str) {
     return new Date(str).toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' });
   }
-
   function stars(rating) {
     return Array.from({length:5}, (_,i) =>
       `<i class="fa-${i < rating ? 'solid' : 'regular'} fa-star"></i>`
     ).join('');
   }
-
   function poiSearch(inputId, resultsId, hiddenId, nameId, selectedId, onSelect) {
     const input   = document.getElementById(inputId);
     const results = document.getElementById(resultsId);
     if (!input) return;
-
     input.addEventListener('input', function() {
       const q = this.value.toLowerCase();
       results.innerHTML = '';
       if (!q) { results.style.display = 'none'; return; }
-
       const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
       results.style.display = 'block';
-
       if (!matches.length) {
         results.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
         return;
       }
-
       matches.forEach(p => {
         const el       = document.createElement('button');
         el.type        = 'button';
@@ -50,30 +43,23 @@
         results.appendChild(el);
       });
     });
-
     document.addEventListener('click', e => {
       if (!e.target.closest('#' + inputId) && !e.target.closest('#' + resultsId)) {
         results.style.display = 'none';
       }
     });
   }
-
-  // ── GALLERY ──────────────────────────────────────────────
   async function loadGallery(page = 1, poi_id = '') {
     currentPage = page;
     currentPoi  = poi_id;
     const grid  = document.getElementById('galleryGrid');
     grid.innerHTML = '<div class="col-12 text-center py-5 text-muted"><i class="fa-solid fa-spinner fa-spin fa-2x mb-3 d-block"></i>Memuat foto...</div>';
-
     let url = `${API_GAL}?page=${page}`;
     if (poi_id) url += `&poi_id=${poi_id}`;
-
     try {
       const res  = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
       const json = await res.json();
-
       document.getElementById('statTotal').textContent = json.total;
-
       if (!json.data.length) {
         grid.innerHTML = `
           <div class="col-12 text-center py-5 text-muted">
@@ -85,7 +71,6 @@
         renderPagination(0, 0);
         return;
       }
-
       grid.innerHTML = json.data.map(p => `
         <div class="col-6 col-md-4 col-lg-3">
           <div class="card border-0 shadow-sm h-100 overflow-hidden" style="border-radius:.875rem">
@@ -113,13 +98,11 @@
           </div>
         </div>
       `).join('');
-
       renderPagination(json.page, json.pages);
     } catch(e) {
       grid.innerHTML = '<div class="col-12 text-center py-4 text-muted">Gagal memuat foto</div>';
     }
   }
-
   function renderPagination(page, pages) {
     const el = document.getElementById('pagination');
     if (pages <= 1) { el.innerHTML = ''; return; }
@@ -127,24 +110,17 @@
       `<button class="btn btn-sm ${p === page ? 'btn-primary' : 'btn-outline-secondary'}" onclick="loadGallery(${p},'${currentPoi}')">${p}</button>`
     ).join('');
   }
-
   window.loadGallery = loadGallery;
-
-  // ── REVIEWS ──────────────────────────────────────────────
   async function loadReviews(page = 1, poi_id = '') {
     currentReviewPage = page;
     const grid = document.getElementById('reviewGrid');
     grid.innerHTML = '<div class="text-center py-5 text-muted"><i class="fa-solid fa-spinner fa-spin fa-2x mb-3 d-block"></i>Memuat review...</div>';
-
     let url = `${API_REV}?page=${page}`;
     if (poi_id) url += `&poi_id=${poi_id}`;
-
     try {
       const res  = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
       const json = await res.json();
-
       document.getElementById('statReview').textContent = json.total ?? 0;
-
       if (!json.data || !json.data.length) {
         grid.innerHTML = `
           <div class="text-center py-5 text-muted">
@@ -156,7 +132,6 @@
         renderPaginationReview(0, 0);
         return;
       }
-
       grid.innerHTML = json.data.map(r => `
         <div class="gal-review-card">
           <div class="gal-review-card__header">
@@ -177,13 +152,11 @@
           <div class="gal-review-card__body">${r.cerita}</div>
         </div>
       `).join('');
-
       renderPaginationReview(json.page, json.pages);
     } catch(e) {
       grid.innerHTML = '<div class="text-center py-4 text-muted">Gagal memuat review</div>';
     }
   }
-
   function renderPaginationReview(page, pages) {
     const el = document.getElementById('paginationReview');
     if (pages <= 1) { el.innerHTML = ''; return; }
@@ -191,37 +164,28 @@
       `<button class="btn btn-sm ${p === page ? 'btn-primary' : 'btn-outline-secondary'}" onclick="loadReviews(${p},'${currentPoi}')">${p}</button>`
     ).join('');
   }
-
-  // ── TABS ─────────────────────────────────────────────────
   document.querySelectorAll('.gal-tab').forEach(tab => {
     tab.addEventListener('click', function() {
       document.querySelectorAll('.gal-tab').forEach(t => t.classList.remove('active'));
       this.classList.add('active');
       activeTab = this.dataset.tab;
-
       document.getElementById('tab-gallery').style.display = activeTab === 'gallery' ? '' : 'none';
       document.getElementById('tab-review').style.display  = activeTab === 'review'  ? '' : 'none';
-
       if (activeTab === 'review') loadReviews(1, currentPoi);
     });
   });
-
-  // ── SEARCH & RESET ───────────────────────────────────────
+  // ── SEARCH & RESET
   document.getElementById('searchPoiFilter').addEventListener('input', function() {
     const q   = this.value.trim().toLowerCase();
     const box = document.getElementById('searchPoiFilterResults');
     box.innerHTML = '';
-
     if (!q) { box.style.display = 'none'; resetFilter(); return; }
-
     const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
     box.style.display = '';
-
     if (!matches.length) {
       box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
       return;
     }
-
     matches.forEach(p => {
       const el     = document.createElement('button');
       el.type      = 'button';
@@ -238,13 +202,11 @@
       box.appendChild(el);
     });
   });
-
   document.addEventListener('click', e => {
     if (!e.target.closest('#searchPoiFilter') && !e.target.closest('#searchPoiFilterResults')) {
       document.getElementById('searchPoiFilterResults').style.display = 'none';
     }
   });
-
   function resetFilter() {
     currentPoi     = '';
     currentPoiName = '';
@@ -253,10 +215,7 @@
     loadGallery(1, '');
     if (activeTab === 'review') loadReviews(1, '');
   }
-
   document.getElementById('btnResetSearch').addEventListener('click', resetFilter);
-
-  // ── LIGHTBOX ─────────────────────────────────────────────
   window.openLightbox = function(src, poi, uploader, credit, date, photo_id, owner_id) {
     document.getElementById('lightboxImg').src = src;
     document.getElementById('lightboxInfo').innerHTML = `
@@ -274,16 +233,13 @@
       </div>`;
     new bootstrap.Modal(document.getElementById('lightboxModal')).show();
   };
-
   window.deletePhoto = async function(photo_id) {
     const conf = await Swal.fire({ title:'Hapus foto?', icon:'warning', showCancelButton:true, confirmButtonColor:'#dc3545', confirmButtonText:'Hapus', cancelButtonText:'Batal' });
     if (!conf.isConfirmed) return;
-
     const fd = new FormData();
     fd.append('action',     'delete');
     fd.append('csrf_token', CONFIG.csrfToken);
     fd.append('photo_id',   photo_id);
-
     const res  = await fetch(API_GAL, { method:'POST', headers:{'X-Requested-With':'XMLHttpRequest'}, body: fd });
     const data = await res.json();
     if (data.success) {
@@ -294,12 +250,9 @@
       Swal.fire('Gagal', data.message, 'error');
     }
   };
-
-  // ── UPLOAD ───────────────────────────────────────────────
   if (IS_LOGGED) {
     const uploadModal = document.getElementById('uploadModal');
     const reviewModal = document.getElementById('reviewModal');
-
     function openUploadModal(poi_id = '', poi_name = '') {
       document.getElementById('uploadPoiId').value              = poi_id;
       document.getElementById('uploadPoiSearch').value          = poi_name;
@@ -311,7 +264,6 @@
       document.getElementById('uploadCredit').value              = '';
       uploadModal.style.display = 'flex';
     }
-
     function openReviewModal(poi_id = '', poi_name = '') {
       document.getElementById('reviewPoiId').value              = poi_id;
       document.getElementById('reviewPoiSearch').value          = poi_name;
@@ -325,26 +277,20 @@
       document.querySelectorAll('.gal-star').forEach(s => { s.classList.remove('fa-solid'); s.classList.add('fa-regular'); });
       reviewModal.style.display = 'flex';
     }
-
     window.openUploadModal = openUploadModal;
     window.openReviewModal = openReviewModal;
-
     document.getElementById('btnOpenUpload').addEventListener('click', () => openUploadModal(currentPoi, currentPoiName));
     document.getElementById('btnOpenReview').addEventListener('click', () => openReviewModal(currentPoi, currentPoiName));
-
     ['btnBatalUpload','btnBatalUpload2'].forEach(id => {
       document.getElementById(id)?.addEventListener('click', () => { uploadModal.style.display = 'none'; });
     });
     ['btnBatalReview','btnBatalReview2'].forEach(id => {
       document.getElementById(id)?.addEventListener('click', () => { reviewModal.style.display = 'none'; });
     });
-
     uploadModal.addEventListener('click', e => { if (e.target === uploadModal) uploadModal.style.display = 'none'; });
     reviewModal.addEventListener('click', e => { if (e.target === reviewModal) reviewModal.style.display = 'none'; });
-
     poiSearch('uploadPoiSearch', 'uploadPoiResults', 'uploadPoiId', 'uploadPoiName', 'uploadPoiSelected');
     poiSearch('reviewPoiSearch', 'reviewPoiResults', 'reviewPoiId', 'reviewPoiName', 'reviewPoiSelected');
-
     document.getElementById('uploadFile').addEventListener('change', function() {
       const file = this.files[0];
       if (!file) return;
@@ -356,7 +302,6 @@
       };
       reader.readAsDataURL(file);
     });
-
     // Star rating
     document.querySelectorAll('.gal-star').forEach(star => {
       star.addEventListener('click', function() {
@@ -381,23 +326,19 @@
         });
       });
     });
-
     // Submit upload
     document.getElementById('btnKirimUpload').addEventListener('click', async () => {
       const poi_id = document.getElementById('uploadPoiId').value;
       const file   = document.getElementById('uploadFile').files[0];
       if (!poi_id || !file) { Swal.fire('Oops!', 'Pilih lokasi dan foto dulu', 'warning'); return; }
-
       const btn = document.getElementById('btnKirimUpload');
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>Mengupload...';
       btn.disabled  = true;
-
       const fd = new FormData();
       fd.append('csrf_token', CSRF);
       fd.append('poi_id',     poi_id);
       fd.append('photo',      file);
       fd.append('caption',    document.getElementById('uploadCredit').value.trim());
-
       try {
         const res  = await fetch(API_GAL, { method:'POST', headers:{'X-Requested-With':'XMLHttpRequest'}, body: fd });
         const data = await res.json();
@@ -415,28 +356,23 @@
         btn.disabled  = false;
       }
     });
-
     // Submit review
     document.getElementById('btnKirimReview').addEventListener('click', async () => {
       const poi_id = document.getElementById('reviewPoiId').value;
       const rating = document.getElementById('reviewRating').value;
       const cerita = document.getElementById('reviewCerita').value.trim();
-
       if (!poi_id)        { Swal.fire('Oops!', 'Pilih lokasi dulu', 'warning'); return; }
       if (rating < 1)     { Swal.fire('Oops!', 'Kasih rating dulu', 'warning'); return; }
       if (cerita.length < 10) { Swal.fire('Oops!', 'Ceritamu terlalu singkat', 'warning'); return; }
-
       const btn = document.getElementById('btnKirimReview');
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>Mengirim...';
       btn.disabled  = true;
-
       const fd = new FormData();
       fd.append('csrf_token', CSRF);
       fd.append('poi_id',     poi_id);
       fd.append('rating',     rating);
       fd.append('judul',      document.getElementById('reviewJudul').value.trim());
       fd.append('cerita',     cerita);
-
       try {
         const res  = await fetch(API_REV, { method:'POST', headers:{'X-Requested-With':'XMLHttpRequest'}, body: fd });
         const data = await res.json();
@@ -455,8 +391,5 @@
       }
     });
   }
-
-  // ── INIT ─────────────────────────────────────────────────
   loadGallery();
-
 })();

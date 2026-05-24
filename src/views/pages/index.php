@@ -41,6 +41,8 @@ function _tdo_excerpt($html, $limit = 150) {
           <div class="tdo-featured__inner">
             <span class="tdo-badge"><i class="fas fa-bolt me-1"></i>Terbaru</span>
             <div class="tdo-featured__body">
+              <h5 class="text-title"><?=
+              safe_html($featured['event_date']) ?></h5>
               <h3 class="tdo-featured__title"><?= safe_html($featured['title']) ?></h3>
               <p class="tdo-featured__excerpt"><?= safe_html(_tdo_excerpt($featured['html_content'])) ?></p>
               <span class="tdo-featured__date"><i class="far fa-calendar me-1"></i><?= date('d M Y', strtotime($featured['updated_at'])) ?></span>
@@ -59,6 +61,7 @@ function _tdo_excerpt($html, $limit = 150) {
           <a href="/pages/<?= safe_html($p['slug']) ?>/" class="text-decoration-none">
             <div class="tdo-card h-100">
               <div class="tdo-card__body">
+                <h6 class="tdo-card__title"><?= safe_html($p['event_date']) ?></h6>
                 <h6 class="tdo-card__title"><?= safe_html($p['title']) ?></h6>
                 <p class="tdo-card__excerpt"><?= safe_html(_tdo_excerpt($p['html_content'], 80)) ?></p>
               </div>

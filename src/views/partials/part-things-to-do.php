@@ -31,7 +31,7 @@ function _tdo_excerpt($html, $limit = 150) {
             <i class="fas fa-bolt me-1"></i> Terbaru
           </span>
           <div class="tdo-card__body">
-            <h2 class="text-title">"><?= safe_html($_tdo_featured['event_date']) ?></h2>
+            <h2 class="text-title"><?= safe_html($_tdo_featured['event_date']) ?></h2>
             <h3 class="tdo-card__title"><?= safe_html($_tdo_featured['title']) ?></h3>
             <p class="tdo-card__excerpt"><?= safe_html(_tdo_excerpt($_tdo_featured['html_content'])) ?></p>
             <span class="tdo-card__date">
@@ -49,7 +49,7 @@ function _tdo_excerpt($html, $limit = 150) {
         <?php foreach ($_tdo_pages as $_tdo_p): ?>
         <a href="<?= BASE_URL ?>pages/<?= safe_html($_tdo_p['slug']) ?>/" class="text-decoration-none tdo-card tdo-card--sm">
           <div class="tdo-card__inner">
-            <h5 class="text-title">"><?= safe_html($_tdo_p['event_date']) ?></h5>
+            <h5 class="text-title"><?= safe_html($_tdo_p['event_date']) ?></h5>
             <h6 class="tdo-card__title"><?= safe_html($_tdo_p['title']) ?></h6>
             <p class="tdo-card__excerpt tdo-card__excerpt--sm"><?= safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?></p>
             <div class="d-flex align-items-center justify-content-between mt-auto">

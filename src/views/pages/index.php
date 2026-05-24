@@ -1,7 +1,22 @@
 <?php
-$stmt = $GLOBALS['pdo']->query("SELECT id, title, slug, html_content, event_date, updated_at FROM pages ORDER BY updated_at DESC LIMIT 10");
-$pages = $stmt->fetchAll();
-$featured = array_shift($pages);
+$_tdo_next_stmt = $GLOBALS['pdo']->query("
+    SELECT id, title, slug, html_content, event_date
+    FROM pages
+    WHERE event_date >= CURDATE()
+    ORDER BY event_date ASC
+    LIMIT 1
+");
+$_tdo_next = $_tdo_next_stmt->fetch(PDO::FETCH_ASSOC);
+
+$_tdo_stmt = $GLOBALS['pdo']->prepare("
+    SELECT id, title, slug, html_content, event_date
+    FROM pages
+    WHERE id != ?
+    ORDER BY event_date ASC
+    LIMIT 3
+");
+$_tdo_stmt->execute([$_tdo_next['id'] ?? 0]);
+$_tdo_pages = $_tdo_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $kuliner_items = $GLOBALS['pdo']->query("SELECT * FROM admin_items WHERE status = 'active' AND category IN ('kuliner') ORDER BY id DESC")->fetchAll();
 $budaya_items  = $GLOBALS['pdo']->query("SELECT * FROM admin_items WHERE status = 'active' AND category IN ('wisata_budaya') ORDER BY id DESC")->fetchAll();
@@ -23,7 +38,7 @@ function _tdo_excerpt($html, $limit = 150) {
       <p class="tdo-page-sub">Eksplorasi event, kuliner, dan budaya terbaik di Kota Kembang</p>
     </div>
 
-    <?php if ($featured || !empty($pages)): ?>
+    <?php if ($_tdo_next || !empty($_tdo_pages)): ?>
     <div class="tdo-section">
       <div class="tdo-section__header">
         <div class="tdo-section__icon" style="--ic:#7c3aed">
@@ -34,18 +49,16 @@ function _tdo_excerpt($html, $limit = 150) {
           <p class="tdo-section__sub">Update terbaru seputar Bandung</p>
         </div>
       </div>
-
-      <?php if ($featured): ?>
-      <a href="/pages/<?= safe_html($featured['slug']) ?>/" class="text-decoration-none d-block mb-4">
+      <?php if ($_tdo_next): ?>
+      <a href="/pages/<?= safe_html($_tdo_next['slug']) ?>/" class="text-decoration-none d-block mb-4">
         <div class="tdo-featured">
           <div class="tdo-featured__inner">
             <span class="tdo-badge"><i class="fas fa-bolt me-1"></i>Terbaru</span>
             <div class="tdo-featured__body">
-              <h5 class="text-title"><?=
-              safe_html($featured['event_date']) ?></h5>
-              <h3 class="tdo-featured__title"><?= safe_html($featured['title']) ?></h3>
-              <p class="tdo-featured__excerpt"><?= safe_html(_tdo_excerpt($featured['html_content'])) ?></p>
-              <span class="tdo-featured__date"><i class="far fa-calendar me-1"></i><?= date('d M Y', strtotime($featured['updated_at'])) ?></span>
+              <h5 class="text-title"><?= $_tdo_next['event_date'] ? date('d M Y', strtotime($_tdo_next['event_date'])) : '—' ?></h5>
+              <h3 class="tdo-featured__title"><?= safe_html($_tdo_next['title']) ?></h3>
+              <p class="tdo-featured__excerpt"><?= safe_html(_tdo_excerpt($_tdo_next['html_content'])) ?></p>
+              <span class="tdo-featured__date"><i class="far fa-calendar me-1"></i><?= $_tdo_next['event_date'] ? date('d M Y', strtotime($_tdo_next['event_date'])) : '—' ?></span>
             </div>
             <span class="tdo-featured__cta">Lihat Selengkapnya <i class="fas fa-arrow-right ms-1"></i></span>
           </div>
@@ -53,20 +66,19 @@ function _tdo_excerpt($html, $limit = 150) {
         </div>
       </a>
       <?php endif; ?>
-
-      <?php if (!empty($pages)): ?>
+      <?php if (!empty($_tdo_pages)): ?>
       <div class="row g-3">
-        <?php foreach ($pages as $p): ?>
+        <?php foreach ($_tdo_pages as $_tdo_p): ?>
         <div class="col-md-6 col-lg-4">
-          <a href="/pages/<?= safe_html($p['slug']) ?>/" class="text-decoration-none">
+          <a href="/pages/<?= safe_html($_tdo_p['slug']) ?>/" class="text-decoration-none">
             <div class="tdo-card h-100">
               <div class="tdo-card__body">
-                <h6 class="tdo-card__title"><?= safe_html($p['event_date']) ?></h6>
-                <h6 class="tdo-card__title"><?= safe_html($p['title']) ?></h6>
-                <p class="tdo-card__excerpt"><?= safe_html(_tdo_excerpt($p['html_content'], 80)) ?></p>
+                <h6 class="tdo-card__title"><?= $_tdo_p['event_date'] ? date('d M Y', strtotime($_tdo_p['event_date'])) : '—' ?></h6>
+                <h6 class="tdo-card__title"><?= safe_html($_tdo_p['title']) ?></h6>
+                <p class="tdo-card__excerpt"><?= safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?></p>
               </div>
               <div class="tdo-card__footer">
-                <span class="tdo-card__date"><i class="far fa-calendar me-1"></i><?= date('d M Y', strtotime($p['updated_at'])) ?></span>
+                <span class="tdo-card__date"><i class="far fa-calendar me-1"></i><?= $_tdo_p['event_date'] ? date('d M Y', strtotime($_tdo_p['event_date'])) : '—' ?></span>
                 <span class="tdo-card__read">Baca <i class="fas fa-arrow-right ms-1 tdo-card__arrow"></i></span>
               </div>
             </div>

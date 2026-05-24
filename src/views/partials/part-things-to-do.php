@@ -1,7 +1,22 @@
 <?php
-$_tdo_stmt = $GLOBALS['pdo']->query("SELECT id, title, slug, html_content, event_date, updated_at FROM pages ORDER BY updated_at DESC LIMIT 3");
-$_tdo_pages = $_tdo_stmt->fetchAll();
-$_tdo_featured = array_shift($_tdo_pages);
+$_tdo_next_stmt = $GLOBALS['pdo']->query("
+    SELECT id, title, slug, html_content, event_date
+    FROM pages
+    WHERE event_date >= CURDATE()
+    ORDER BY event_date ASC
+    LIMIT 1
+");
+$_tdo_next = $_tdo_next_stmt->fetch(PDO::FETCH_ASSOC);
+
+$_tdo_stmt = $GLOBALS['pdo']->prepare("
+    SELECT id, title, slug, html_content, event_date
+    FROM pages
+    WHERE id != ?
+    ORDER BY event_date ASC
+    LIMIT 3
+");
+$_tdo_stmt->execute([$_tdo_next['id'] ?? 0]);
+$_tdo_pages = $_tdo_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 function _tdo_excerpt($html, $limit = 150) {
     $text = trim(preg_replace('/\s+/', ' ', strip_tags($html)));
@@ -9,7 +24,7 @@ function _tdo_excerpt($html, $limit = 150) {
 }
 ?>
 
-<?php if ($_tdo_featured): ?>
+<?php if ($_tdo_next): ?>
 <section class="container-fluid py-5 tdo-section">
   <div class="container">
 
@@ -25,23 +40,18 @@ function _tdo_excerpt($html, $limit = 150) {
 
     <div class="tdo-bento">
 
-      <a href="<?= BASE_URL ?>pages/<?= safe_html($_tdo_featured['slug']) ?>/" class="text-decoration-none tdo-card tdo-card--featured">
+      <a href="<?= BASE_URL ?>pages/<?= safe_html($_tdo_next['slug']) ?>/" class="text-decoration-none tdo-card tdo-card--featured">
         <div class="tdo-card__inner">
-          <span class="tdo-badge">
-            <i class="fas fa-bolt me-1"></i> Terbaru
-          </span>
+          <span class="tdo-badge"><i class="fas fa-bolt me-1"></i> Terbaru</span>
           <div class="tdo-card__body">
-            <h2 class="text-title"><?= safe_html($_tdo_featured['event_date']) ?></h2>
-            <h3 class="tdo-card__title"><?= safe_html($_tdo_featured['title']) ?></h3>
-            <p class="tdo-card__excerpt"><?= safe_html(_tdo_excerpt($_tdo_featured['html_content'])) ?></p>
+            <h3 class="tdo-card__title"><?= safe_html($_tdo_next['title']) ?></h3>
+            <p class="tdo-card__excerpt"><?= safe_html(_tdo_excerpt($_tdo_next['html_content'])) ?></p>
             <span class="tdo-card__date">
               <i class="far fa-calendar me-1"></i>
-              <?= date('d M Y', strtotime($_tdo_featured['updated_at'])) ?>
+              <?= $_tdo_next['event_date'] ? date('d M Y', strtotime($_tdo_next['event_date'])) : '—' ?>
             </span>
           </div>
-          <span class="tdo-card__cta">
-            Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
-          </span>
+          <span class="tdo-card__cta">Selengkapnya <i class="fas fa-arrow-right ms-1"></i></span>
         </div>
       </a>
 
@@ -49,13 +59,13 @@ function _tdo_excerpt($html, $limit = 150) {
         <?php foreach ($_tdo_pages as $_tdo_p): ?>
         <a href="<?= BASE_URL ?>pages/<?= safe_html($_tdo_p['slug']) ?>/" class="text-decoration-none tdo-card tdo-card--sm">
           <div class="tdo-card__inner">
-            <h5 class="text-title"><?= safe_html($_tdo_p['event_date']) ?></h5>
+            <h5 class="text-title"><?= $_tdo_p['event_date'] ? date('d M Y', strtotime($_tdo_p['event_date'])) : '—' ?></h5>
             <h6 class="tdo-card__title"><?= safe_html($_tdo_p['title']) ?></h6>
             <p class="tdo-card__excerpt tdo-card__excerpt--sm"><?= safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?></p>
             <div class="d-flex align-items-center justify-content-between mt-auto">
               <span class="tdo-card__date">
                 <i class="far fa-calendar me-1"></i>
-                <?= date('d M Y', strtotime($_tdo_p['updated_at'])) ?>
+                <?= $_tdo_p['event_date'] ? date('d M Y', strtotime($_tdo_p['event_date'])) : '—' ?>
               </span>
               <i class="fas fa-arrow-right tdo-card__arrow"></i>
             </div>

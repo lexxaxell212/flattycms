@@ -288,7 +288,6 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
   box-shadow: 0 8px 24px rgba(124,58,237,.1);
   z-index: 100;
   overflow: hidden;
-  display: none;
 }
 .gal-search-results.open { display: block; }
 .gal-search-results .list-group-item {

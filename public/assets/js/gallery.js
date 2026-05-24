@@ -20,9 +20,9 @@
     input.addEventListener('input', function() {
       const q = this.value.toLowerCase();
       results.innerHTML = '';
-      if (!q) { results.style.display = 'none'; return; }
+      if (!q) { results.classList.remove('open'); return; }
       const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
-      results.style.display = 'block';
+      results.classList.add('open');
       if (!matches.length) {
         results.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
         return;
@@ -37,7 +37,7 @@
           document.getElementById(hiddenId).value         = p.id;
           document.getElementById(nameId).textContent     = p.name;
           document.getElementById(selectedId).style.display = '';
-          results.style.display = 'none';
+          results.classList.remove('open');
           onSelect?.(p);
         });
         results.appendChild(el);
@@ -45,10 +45,11 @@
     });
     document.addEventListener('click', e => {
       if (!e.target.closest('#' + inputId) && !e.target.closest('#' + resultsId)) {
-        results.style.display = 'none';
+        results.classList.remove('open');
       }
     });
   }
+
   async function loadGallery(page = 1, poi_id = '') {
     currentPage = page;
     currentPoi  = poi_id;
@@ -174,14 +175,14 @@
       if (activeTab === 'review') loadReviews(1, currentPoi);
     });
   });
-  // ── SEARCH & RESET
+  // SEARCH & RESET
   document.getElementById('searchPoiFilter').addEventListener('input', function() {
     const q   = this.value.trim().toLowerCase();
     const box = document.getElementById('searchPoiFilterResults');
     box.innerHTML = '';
-    if (!q) { box.style.display = 'none'; resetFilter(); return; }
+    if (!q) { box.classList.remove('open'); resetFilter(); return; }
     const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
-    box.style.display = '';
+    box.classList.remove('open');
     if (!matches.length) {
       box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
       return;
@@ -193,7 +194,7 @@
       el.innerHTML = `<i class="fa-solid ${p.category_icon} me-2 text-primary"></i>${p.name}`;
       el.addEventListener('click', () => {
         document.getElementById('searchPoiFilter').value = p.name;
-        box.style.display = 'none';
+        box.classList.remove('open');
         currentPoi     = p.id;
         currentPoiName = p.name;
         loadGallery(1, p.id);
@@ -204,14 +205,14 @@
   });
   document.addEventListener('click', e => {
     if (!e.target.closest('#searchPoiFilter') && !e.target.closest('#searchPoiFilterResults')) {
-      document.getElementById('searchPoiFilterResults').style.display = 'none';
+      document.getElementById('searchPoiFilterResults').classList.remove('open');
     }
   });
   function resetFilter() {
     currentPoi     = '';
     currentPoiName = '';
     document.getElementById('searchPoiFilter').value = '';
-    document.getElementById('searchPoiFilterResults').style.display = 'none';
+    document.getElementById('searchPoiFilterResults').classList.remove('open');
     loadGallery(1, '');
     if (activeTab === 'review') loadReviews(1, '');
   }
@@ -258,7 +259,7 @@
       document.getElementById('uploadPoiSearch').value          = poi_name;
       document.getElementById('uploadPoiName').textContent      = poi_name;
       document.getElementById('uploadPoiSelected').style.display = poi_name ? '' : 'none';
-      document.getElementById('uploadPoiResults').style.display  = 'none';
+      document.getElementById('uploadPoiResults').classList.remove('open');
       document.getElementById('uploadPreview').style.display     = 'none';
       document.getElementById('uploadFile').value                = '';
       document.getElementById('uploadCredit').value              = '';
@@ -269,7 +270,7 @@
       document.getElementById('reviewPoiSearch').value          = poi_name;
       document.getElementById('reviewPoiName').textContent      = poi_name;
       document.getElementById('reviewPoiSelected').style.display = poi_name ? '' : 'none';
-      document.getElementById('reviewPoiResults').style.display  = 'none';
+      document.getElementById('reviewPoiResults').classList.remove('open');
       document.getElementById('reviewRating').value              = '0';
       document.getElementById('reviewJudul').value               = '';
       document.getElementById('reviewCerita').value              = '';

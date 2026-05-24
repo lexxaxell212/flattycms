@@ -290,6 +290,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
   overflow: hidden;
   display: none;
 }
+.gal-search-results.open { display: block; }
 .gal-search-results .list-group-item {
   border: none;
   border-bottom: 1px solid #f5f3ff;

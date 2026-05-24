@@ -49,7 +49,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
 <body>
 <nav class="navbar">
   <div class="container">
-    <a class="navbar-brand" aria-label="Admin Dashboard" href="<?= $admin_url
+    <a class="navbar-brand text-gradient" aria-label="Admin Dashboard" href="<?= $admin_url
     ?>">
       flattyDash
     </a>
@@ -82,13 +82,14 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
-          ?>pages">
-            <i class="fa-solid fa-file" aria-hidden="true"></i>Buat Halaman
+          ?>things-to-do">
+            <i class="fa-solid fa-file" aria-hidden="true"></i>Things to Do
+            Builder
           </a>
         </li>
         <li class="nav-desktop-item">
           <a class="nav-desktop-link" href="<?= $admin_url
-          ?>modal-manager">
+          ?>cmpt-manager">
             <i class="fa-solid fa-layer-group" aria-hidden="true"></i>CMPT
             Manager
           </a>
@@ -189,14 +190,14 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
-          ?>pages">
+          ?>things-to-do">
             <i class="fa-solid fa-file" aria-hidden="true"></i>
-            Buat Halaman
+            Things to Do Builder
             </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $admin_url
-          ?>modal-manager">
+          ?>cmpt-manager">
             <i class="fa-solid fa-layer-group" aria-hidden="true"></i>CMPT
             Manager
           </a>

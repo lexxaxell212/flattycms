@@ -21,6 +21,7 @@ if ($consent_accepted): ?>
 <?php if (!$consent_accepted): ?>
 
 <link rel="stylesheet" href="<?= CSS_URL ?>consent.css">
+
 <script src="<?= JS_URL ?>consent.js" defer></script>
 
 <div id="consentBanner" class="consent-banner show">

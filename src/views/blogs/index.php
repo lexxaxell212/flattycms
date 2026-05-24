@@ -3,14 +3,12 @@ $page_title = "Blogs";
 
 require_once LIB_PATH . "blogs.php";
 
-// Variables
 $id = (int) ($_GET["id"] ?? 0);
 $cat_id = (int) ($_GET["cat"] ?? 0);
 $page = max(1, (int) ($_GET["page"] ?? 1));
 $per_page = 9;
 $offset = ($page - 1) * $per_page;
 
-// Fetch
 $total_pages = 1;
 if ($id > 0) {
   $view_key = "post_view_{$id}";
@@ -24,11 +22,6 @@ if ($id > 0) {
     $post = safe_get_post($pdo, $id);
   }
 
-  if (!$post) {
-    http_response_code(404);
-    include "404.php";
-    exit();
-  }
   $posts = [];
   $total = 0;
   $page_title = htmlspecialchars($post["title"]) . " — Blog";
@@ -84,7 +77,7 @@ $categories = safe_get_categories($pdo);
             </nav>
 
             <!-- Judul -->
-            <h4 class="h4 mb-5">
+            <h4 class="h4 mb-5" style="display:none">
                 <?= htmlspecialchars(
                   $post["title"] ?? "",
                   ENT_QUOTES,
@@ -93,11 +86,11 @@ $categories = safe_get_categories($pdo);
             </h4>
 
             <!-- Meta -->
-            <div class="text-muted small mb-6 d-flex flex-wrap align-items-center gap-2">
+            <div class="text-muted small mb-4 d-flex flex-wrap align-items-center gap-2">
                 <?php if (
                   !empty($post["views"]) &&
                   (int) $post["views"] > 0
-                ): ?>  <!-- $post bukan $p -->
+                ): ?> 
                     <span class="badge text-muted"><i class="fas fa-eye mr-1"></i><?= number_format(
                       (int) $post["views"],
                     ) ?></span>
@@ -227,9 +220,9 @@ $categories = safe_get_categories($pdo);
 
             <?php foreach ($posts as $p): ?>
             
-            <div class="card card-glass shadow-md mb-6">
+            <div class="card card-glass shadow-md mb-4">
              
-                <div class="card-body p-5">
+                <div class="card-body">
                  
                     <a href="/blogs/?id=<?= (int) $p[
                       "id"

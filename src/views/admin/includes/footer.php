@@ -7,6 +7,5 @@
     </div>
   </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 </body>
 </html>

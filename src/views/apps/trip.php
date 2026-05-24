@@ -1,5 +1,6 @@
 <?php
 require_once LIB_PATH . 'poi-actions.php';
+
 $page_title = 'Peta & Trip Planner — ' . SITE_NAME;
 $pois       = get_all_poi(true);
 $categories = get_poi_categories();
@@ -18,6 +19,7 @@ $cats_json  = json_encode($categories);
   const API_TRIP  = BASE + '/api/map/api-trips.php';
   const API_GAL   = BASE + '/api/map/api-gallery.php';
 </script>
+
 <script src="<?= JS_URL ?>trip.js" defer></script>
 
 <main id="content">

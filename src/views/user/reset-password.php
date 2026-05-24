@@ -13,6 +13,11 @@ if ($token) {
 $page_title = 'Reset Password — ' . SITE_NAME;
 ?>
 
+<script src="<?= JS_URL ?>user-helper.js" defer></script>
+
+<main id="content" class="container-fluid">
+<div class="container">
+
 <div class="card border-0 shadow-sm rounded-4 p-4" style="width:100%;max-width:400px;">
     <a href="/login" class="text-muted small text-decoration-none mb-3 d-inline-flex align-items-center gap-1">
         <i class="fa-solid fa-arrow-left fa-xs"></i> Kembali ke login
@@ -62,6 +67,9 @@ $page_title = 'Reset Password — ' . SITE_NAME;
     <?php endif; ?>
 </div>
 
+</div>
+</main>
+
 <script>
     function togglePw(inputId, btnId) {
         document.getElementById(btnId)?.addEventListener('click', () => {
@@ -74,57 +82,4 @@ $page_title = 'Reset Password — ' . SITE_NAME;
     }
     togglePw('rp-pw', 'toggle-pw');
     togglePw('rp-pw-confirm', 'toggle-pw-confirm');
-
-    document.getElementById('btn-rp')?.addEventListener('click', async () => {
-        const password  = document.getElementById('rp-pw').value;
-        const confirm   = document.getElementById('rp-pw-confirm').value;
-        const errorEl   = document.getElementById('rp-error');
-        const successEl = document.getElementById('rp-success');
-
-        errorEl.classList.add('d-none');
-        successEl.classList.add('d-none');
-
-        if (!password || !confirm) {
-            errorEl.textContent = 'Semua field wajib diisi.';
-            errorEl.classList.remove('d-none');
-            return;
-        }
-        if (password.length < 8) {
-            errorEl.textContent = 'Password minimal 8 karakter.';
-            errorEl.classList.remove('d-none');
-            return;
-        }
-        if (password !== confirm) {
-            errorEl.textContent = 'Konfirmasi password tidak cocok.';
-            errorEl.classList.remove('d-none');
-            return;
-        }
-
-        const btn = document.getElementById('btn-rp');
-        btn.disabled    = true;
-        btn.textContent = 'Menyimpan...';
-
-        const res = await fetch('/api/auth/reset-password.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-Token': CONFIG.csrfToken
-            },
-            body: JSON.stringify({ token: '<?= safe_html($token) ?>', password })
-        });
-
-        const data = await res.json();
-        if (data.success) {
-            successEl.textContent = 'Password berhasil diubah! Mengalihkan ke halaman login...';
-            successEl.classList.remove('d-none');
-            btn.classList.add('d-none');
-            setTimeout(() => window.location.href = '/login', 2000);
-        } else {
-            errorEl.textContent = data.message ?? 'Gagal mengubah password.';
-            errorEl.classList.remove('d-none');
-            btn.disabled    = false;
-            btn.textContent = 'Simpan Password';
-        }
-    });
 </script>

@@ -1,5 +1,6 @@
 <?php
 require_once LIB_PATH . 'poi-actions.php';
+
 $categories = get_poi_categories();
 $pois       = get_all_poi();
 $total      = count($pois);

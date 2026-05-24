@@ -1,37 +1,33 @@
 <?php
 $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
-// static
 $routes = [
   // home
     '' => SRC_PATH . 'pages/home.php',
-  // pages
-    'things-to-do'              => SRC_PATH . 'pages/index.php',
-    'pages/wisata'              => SRC_PATH . 'pages/wisata.php',
-    'pages/kuliner'              => SRC_PATH . 'pages/kuliner.php',
-    'pages/penginapan'           => SRC_PATH . 'pages/penginapan.php',
-    'pages/budaya'               => SRC_PATH . 'pages/budaya.php',
+  // app
+    'trip'       => SRC_PATH . 'apps/trip.php',
+    'gallery'    => SRC_PATH . 'apps/gallery.php',
+  // page
+    'things-to-do'               => SRC_PATH . 'pages/index.php',
+  // etc pages
     'pages/sejarah'              => SRC_PATH . 'pages/sejarah.php',
     'pages/tentang'              => SRC_PATH . 'pages/tentang.php',
     'pages/layanan'              => SRC_PATH . 'pages/layanan.php',
     'pages/privacy-policy'       => SRC_PATH . 'pages/privacy-policy.php',
     'pages/kritik-dan-saran'     => SRC_PATH . 'pages/kritik-dan-saran.php',
-    'pages/kenapa-harus-bandung' => SRC_PATH . 'pages/kenapa-harus-bandung.php',
   // blogs
     'blogs'                      => SRC_PATH . 'blogs/index.php',
   // user
-    'register'=> SRC_PATH . 'user/register.php',
-    'login'   => SRC_PATH . 'user/login.php',
+    'register'        => SRC_PATH . 'user/register.php',
+    'login'           => SRC_PATH . 'user/login.php',
+    'logout'          => PUBLIC_PATH . 'api/auth/logout.php',
     'forgot-password' => SRC_PATH . 'user/forgot-password.php',
-    'reset-password' => SRC_PATH . 'user/reset-password.php',
-    'profile'    => SRC_PATH . 'user/user-profile.php',
-    'unsubscribe'          => SRC_PATH . 'user/unsubscribe.php',
-  // app
-    'trip'        => SRC_PATH . 'apps/trip.php',
-    'gallery'    => SRC_PATH . 'apps/gallery.php',
+    'reset-password'  => SRC_PATH . 'user/reset-password.php',
+    'profile'         => SRC_PATH . 'user/user-profile.php',
+    'unsubscribe'     => SRC_PATH . 'user/unsubscribe.php',
 ];
 
-// dynamic
+// dynamic pages
 if (array_key_exists($uri, $routes)) {
     $view_content = $routes[$uri];
 } elseif (str_starts_with($uri, 'pages/')) {

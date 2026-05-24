@@ -1,5 +1,6 @@
 <?php
 require_once LIB_PATH . 'poi-actions.php';
+
 $page_title = 'Peta & Trip Planner — ' . SITE_NAME;
 $pois       = get_all_poi(true);
 $categories = get_poi_categories();

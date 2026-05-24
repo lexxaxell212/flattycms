@@ -17,6 +17,8 @@ try {
 $csrf = generate_csrf_token();
 ?>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+
 <main id="content" class="container-fluid">
 <div class="container">
 

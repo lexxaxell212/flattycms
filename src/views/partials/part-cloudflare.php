@@ -80,7 +80,7 @@
 
 <script>
 (function () {
-  const API_CF = CONFIG.baseUrl + '/api/api-cf-analytics.php'; // sesuaikan path
+  const API_CF = CONFIG.baseUrl + '/api/api-cf-analytics.php';
 
   function fmt(n) {
     return parseInt(n).toLocaleString('id-ID');

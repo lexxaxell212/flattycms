@@ -1,11 +1,16 @@
 <?php
-
 if (!empty($_SESSION['user'])) {
     header('Location: /');
     exit;
 }
 $page_title = 'Daftar — ' . SITE_NAME;
 ?>
+
+<script src="<?= JS_URL ?>user-helper.js" defer></script>
+
+<main id="content" class="container-fluid">
+<div class="container">
+
 <div class="card border-0 shadow-sm rounded-4 p-4" style="width:100%;max-width:420px;">
     <h5 class="fw-semibold mb-1">Buat akun baru</h5>
     <p class="text-muted small mb-4">Isi data di bawah untuk mendaftar</p>
@@ -76,6 +81,10 @@ $page_title = 'Daftar — ' . SITE_NAME;
         Sudah punya akun? <a href="/login" class="text-primary fw-medium text-decoration-none">Masuk</a>
     </div>
 </div>
+
+</div>
+</main>
+
 <script>
     function togglePw(inputId, btnId) {
         document.getElementById(btnId).addEventListener('click', () => {
@@ -88,58 +97,4 @@ $page_title = 'Daftar — ' . SITE_NAME;
     }
     togglePw('reg-pw', 'toggle-pw');
     togglePw('reg-pw-confirm', 'toggle-pw-confirm');
-
-    document.getElementById('btn-register').addEventListener('click', async () => {
-        const name     = document.getElementById('reg-name').value.trim();
-        const username = document.getElementById('reg-username').value.trim();
-        const email    = document.getElementById('reg-email').value.trim();
-        const password = document.getElementById('reg-pw').value;
-        const confirm  = document.getElementById('reg-pw-confirm').value;
-        const errorEl  = document.getElementById('register-error');
-        const successEl = document.getElementById('register-success');
-
-        errorEl.classList.add('d-none');
-        successEl.classList.add('d-none');
-
-        if (!name || !username || !email || !password || !confirm) {
-            errorEl.textContent = 'Semua field wajib diisi.';
-            errorEl.classList.remove('d-none');
-            return;
-        }
-        if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-            errorEl.textContent = 'Username hanya boleh huruf, angka, dan underscore.';
-            errorEl.classList.remove('d-none');
-            return;
-        }
-        if (password.length < 8) {
-            errorEl.textContent = 'Password minimal 8 karakter.';
-            errorEl.classList.remove('d-none');
-            return;
-        }
-        if (password !== confirm) {
-            errorEl.textContent = 'Konfirmasi password tidak cocok.';
-            errorEl.classList.remove('d-none');
-            return;
-        }
-
-        const res = await fetch('/api/auth/register.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-Token': CONFIG.csrfToken
-            },
-            body: JSON.stringify({ name, username, email, password })
-        });
-
-        const data = await res.json();
-        if (data.success) {
-            successEl.textContent = 'Akun berhasil dibuat! Mengalihkan...';
-            successEl.classList.remove('d-none');
-            setTimeout(() => window.location.href = data.redirect, 1500);
-        } else {
-            errorEl.textContent = data.message ?? 'Pendaftaran gagal.';
-            errorEl.classList.remove('d-none');
-        }
-    });
 </script>

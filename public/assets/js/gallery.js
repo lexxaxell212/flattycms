@@ -27,7 +27,7 @@
       if (!q) { results.style.display = 'none'; return; }
 
       const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
-      results.style.display = '';
+      results.style.display = 'block';
 
       if (!matches.length) {
         results.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';

@@ -1,3 +1,7 @@
+<?php
+require_once LIB_PATH . "things-to-do.php";
+?>
+
 <?php if ($_tdo_next): ?>
 <section class="container-fluid py-5 tdo-section">
   <div class="container">

@@ -1,5 +1,5 @@
 <?php
-$_tdo_stmt = $GLOBALS['pdo']->query("SELECT id, title, slug, html_content, updated_at FROM pages ORDER BY updated_at DESC LIMIT 3");
+$_tdo_stmt = $GLOBALS['pdo']->query("SELECT id, title, slug, html_content, event_date, updated_at FROM pages ORDER BY updated_at DESC LIMIT 3");
 $_tdo_pages = $_tdo_stmt->fetchAll();
 $_tdo_featured = array_shift($_tdo_pages);
 

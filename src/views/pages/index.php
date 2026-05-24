@@ -1,5 +1,5 @@
 <?php
-$stmt = $GLOBALS['pdo']->query("SELECT id, title, slug, html_content, updated_at FROM pages ORDER BY updated_at DESC LIMIT 10");
+$stmt = $GLOBALS['pdo']->query("SELECT id, title, slug, html_content, event_date, updated_at FROM pages ORDER BY updated_at DESC LIMIT 10");
 $pages = $stmt->fetchAll();
 $featured = array_shift($pages);
 

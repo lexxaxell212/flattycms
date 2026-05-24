@@ -56,21 +56,21 @@ function safe_html($value): string {
 }
 
 // Safe include
-function safe_include($file_path, $fallback_title = "Konten")
-{
-  if (!file_exists($file_path)) {
-    echo fallback_card($fallback_title);
-    return;
-  }
-  $pdo = $GLOBALS['pdo'] ?? null;
-  ob_start();
-  try {
-    include $file_path;
-    ob_end_flush();
-  } catch (Throwable $e) {
-    ob_end_clean();
-    echo fallback_card($fallback_title);
-  }
+function safe_include($file_path, $fallback_title = "Konten") {
+    if (!file_exists($file_path)) {
+        echo fallback_card($fallback_title);
+        return;
+    }
+    // inject global variables ke function scope
+    extract($GLOBALS);
+    ob_start();
+    try {
+        include $file_path;
+        ob_end_flush();
+    } catch (Throwable $e) {
+        ob_end_clean();
+        echo fallback_card($fallback_title);
+    }
 }
 
 function fallback_card($title = "Konten")

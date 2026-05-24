@@ -182,7 +182,7 @@
     box.innerHTML = '';
     if (!q) { box.classList.remove('open'); resetFilter(); return; }
     const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
-    box.classList.remove('open');
+    box.classList.add('open');
     if (!matches.length) {
       box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
       return;

@@ -209,12 +209,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
   gap: 1rem;
   padding: 2.5rem 0 1.5rem;
 }
-.gal-title {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: #1e1b4b;
-  margin: 0 0 .25rem;
-}
+.gal-title { font-size: 1.4rem; font-weight: 800; color: #1e1b4b; margin: 0 0 .25rem; }
 .gal-sub { color: #6b7280; font-size: .9rem; margin: 0; }
 .gal-header__actions { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
 
@@ -239,10 +234,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 .gal-btn--ghost { background: transparent; color: #6b7280; border: 1.5px solid #e5e7eb; }
 .gal-btn--ghost:hover { background: #f9fafb; }
 
-.gal-search-block {
-  position: relative;
-  margin-bottom: 1.5rem;
-}
+.gal-search-block { position: relative; margin-bottom: 1.5rem; }
 .gal-search-wrap {
   display: flex;
   align-items: center;
@@ -253,19 +245,9 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
   gap: .75rem;
   transition: border-color .2s, box-shadow .2s;
 }
-.gal-search-wrap:focus-within {
-  border-color: #7c3aed;
-  box-shadow: 0 0 0 3px rgba(124,58,237,.1);
-}
+.gal-search-wrap:focus-within { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,.1); }
 .gal-search-icon { color: #a78bfa; font-size: .9rem; flex-shrink: 0; }
-.gal-search-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: .9rem;
-  color: #1e1b4b;
-  background: transparent;
-}
+.gal-search-input { flex: 1; border: none; outline: none; font-size: .9rem; color: #1e1b4b; background: transparent; }
 .gal-search-input::placeholder { color: #9ca3af; }
 .gal-search-reset {
   background: none;
@@ -278,33 +260,38 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
   flex-shrink: 0;
 }
 .gal-search-reset:hover { color: #7c3aed; background: #f5f3ff; }
+
 .gal-search-results {
+  display: none;
   position: absolute;
   top: calc(100% + .5rem);
-  left: 0; right: 0;
+  left: 0;
+  right: 0;
   background: #fff;
   border: 1px solid #ede9fe;
   border-radius: 1rem;
   box-shadow: 0 8px 24px rgba(124,58,237,.1);
-  z-index: 100;
+  z-index: 1300;
   overflow: hidden;
 }
 .gal-search-results.open { display: block; }
+.gal-modal .gal-search-results {
+  position: absolute;
+  top: calc(100% + .25rem);
+  left: 0;
+  right: 0;
+}
 .gal-search-results .list-group-item {
   border: none;
   border-bottom: 1px solid #f5f3ff;
   font-size: .875rem;
   padding: .65rem 1rem;
+  cursor: pointer;
 }
 .gal-search-results .list-group-item:last-child { border-bottom: none; }
 .gal-search-results .list-group-item:hover { background: #f5f3ff; color: #7c3aed; }
 
-.gal-stats {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1.75rem;
-}
+.gal-stats { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.75rem; }
 .gal-stat { display: flex; align-items: baseline; gap: .4rem; }
 .gal-stat__val { font-size: 1.3rem; font-weight: 800; color: #1e1b4b; }
 .gal-stat__label { font-size: .78rem; color: #9ca3af; font-weight: 500; }
@@ -332,11 +319,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 .gal-tab:hover { color: #7c3aed; background: #f5f3ff; }
 .gal-tab.active { color: #7c3aed; border-bottom-color: #7c3aed; }
 
-.gal-review-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+.gal-review-grid { display: flex; flex-direction: column; gap: 1rem; }
 .gal-review-card {
   background: #fff;
   border: 1px solid #ede9fe;
@@ -344,10 +327,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
   padding: 1.5rem;
   transition: box-shadow .2s, transform .2s;
 }
-.gal-review-card:hover {
-  box-shadow: 0 .5rem 1.5rem rgba(124,58,237,.1);
-  transform: translateY(-2px);
-}
+.gal-review-card:hover { box-shadow: 0 .5rem 1.5rem rgba(124,58,237,.1); transform: translateY(-2px); }
 .gal-review-card__header {
   display: flex;
   align-items: center;
@@ -356,18 +336,8 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
   flex-wrap: wrap;
   gap: .5rem;
 }
-.gal-review-card__user {
-  display: flex;
-  align-items: center;
-  gap: .625rem;
-}
-.gal-review-card__avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #ede9fe;
-}
+.gal-review-card__user { display: flex; align-items: center; gap: .625rem; }
+.gal-review-card__avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #ede9fe; }
 .gal-review-card__name { font-weight: 600; font-size: .9rem; color: #1e1b4b; }
 .gal-review-card__poi { font-size: .75rem; color: #a78bfa; }
 .gal-review-card__stars { color: #f59e0b; font-size: .9rem; letter-spacing: .1em; }
@@ -391,7 +361,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
   max-width: 480px;
   margin: 1rem;
   box-shadow: 0 24px 60px rgba(0,0,0,.15);
-  overflow: hidden;
+  overflow: visible;
 }
 .gal-modal__header {
   display: flex;
@@ -402,6 +372,8 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
   font-weight: 700;
   color: #1e1b4b;
   font-size: .95rem;
+  border-radius: 1.25rem 1.25rem 0 0;
+  background: #fff;
 }
 .gal-modal__close {
   background: #f3f4f6;
@@ -417,16 +389,18 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
   transition: background .2s;
 }
 .gal-modal__close:hover { background: #ede9fe; color: #7c3aed; }
-.gal-modal__body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.125rem; }
+.gal-modal__body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.125rem; overflow: visible; }
 .gal-modal__footer {
   padding: 1rem 1.5rem;
   border-top: 1px solid #f3f4f6;
   display: flex;
   justify-content: flex-end;
   gap: .75rem;
+  border-radius: 0 0 1.25rem 1.25rem;
+  background: #fff;
 }
 
-.gal-field { display: flex; flex-direction: column; gap: .4rem; }
+.gal-field { display: flex; flex-direction: column; gap: .4rem; position: relative; }
 .gal-label { font-size: .82rem; font-weight: 600; color: #374151; }
 .gal-optional { font-weight: 400; color: #9ca3af; margin-left: .25rem; }
 .gal-input {
@@ -445,11 +419,9 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 .gal-selected { font-size: .8rem; color: #059669; font-weight: 500; }
 
 .gal-stars { display: flex; gap: .25rem; }
-.gal-star {
-  font-size: 1.4rem;
-  color: #d1d5db;
-  cursor: pointer;
-  transition: color .15s, transform .15s;
-}
+.gal-star { font-size: 1.4rem; color: #d1d5db; cursor: pointer; transition: color .15s, transform .15s; }
 .gal-star:hover, .gal-star.active { color: #f59e0b; transform: scale(1.15); }
+
+.swal2-container { z-index: 9999 !important; }
+
 </style>

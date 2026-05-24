@@ -5,19 +5,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verify_csrf_token($_POST['csrf_toke
     $title        = trim($_POST['title'] ?? '');
     $html_content = $_POST['html_content'] ?? '';
     $edit_slug    = trim($_POST['edit_slug'] ?? '');
+    $event_date   = !empty($_POST['event_date']) ? $_POST['event_date'] : null;
 
     if ($edit_slug) {
         $slug  = $edit_slug;
-        $saved = $pdo->prepare("UPDATE pages SET title=?, html_content=?, updated_at=NOW() WHERE slug=?")
-                     ->execute([$title, $html_content, $slug]);
+        $saved = $pdo->prepare("UPDATE pages SET title=?, html_content=?, event_date=?, updated_at=NOW() WHERE slug=?")
+                     ->execute([$title, $html_content, $event_date, $slug]);
         $stmt  = $pdo->prepare("SELECT id FROM pages WHERE slug = ?");
         $stmt->execute([$slug]);
         $page_id = (int) $stmt->fetchColumn();
     } else {
         $base_slug = strtolower(preg_replace('/[^a-z0-9-]+/', '-', $title));
         $slug      = generateUniqueSlug($pdo, $base_slug);
-        $saved     = $pdo->prepare("INSERT INTO pages (title, slug, html_content) VALUES (?,?,?)")
-                         ->execute([$title, $slug, $html_content]);
+        $saved     = $pdo->prepare("INSERT INTO pages (title, slug, html_content, event_date) VALUES (?,?,?,?)")
+                         ->execute([$title, $slug, $html_content, $event_date]);
         $page_id   = (int) $pdo->lastInsertId();
     }
 

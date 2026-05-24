@@ -101,17 +101,22 @@ if (isset($_GET['edit'])) {
             <div class="card border-0 shadow-sm mb-3">
                 <div class="card-body px-4 py-3">
                     <div class="row g-3 align-items-end">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <label class="form-label fw-medium">Page Title <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="title"
                                    placeholder="Judul halaman"
                                    value="<?= safe_html($page['title'] ?? '') ?>" required>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label class="form-label fw-medium">Slug</label>
                             <input type="text" class="form-control bg-light" id="slug-preview"
                                    value="<?= safe_html($page['slug'] ?? '') ?>"
                                    placeholder="auto-generate..." readonly>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-medium">Tanggal Event <span class="text-muted fw-normal small">opsional</span></label>
+                            <input type="date" class="form-control" name="event_date"
+                                   value="<?= safe_html($page['event_date'] ?? '') ?>">
                         </div>
                     </div>
                 </div>

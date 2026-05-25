@@ -380,7 +380,7 @@ $isPintasanActive = (bool) array_filter(
       </div>
     </div>
   </nav>
-  <div class="menu-overlay" id="menuOverlay">
+  <div class="menu-overlay" id="menuOverlay"></div>
     <div class="navbar-collapse" id="navbarNav-mobile">
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
@@ -452,7 +452,6 @@ $isPintasanActive = (bool) array_filter(
       </div>
   <?php endif; ?>
   
-  </div>
   </div>
   <div id="live-search-wrapper" role="search" aria-label="Pencarian situs">
     <div class="ls-inner container">

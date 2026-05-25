@@ -3,16 +3,12 @@ $page_title = "Sejarah Bandung";
 ?>
 
 <main id="content" class="container-fluid sb-page">
-  <div class="container">
+  <div class="container mx-auto" style="max-width:740px">
 
-    <div class="sb-hero">
-      <span class="sb-eyebrow">
-        <span class="sb-eyebrow__dot"></span>
-        Kota Kembang
-      </span>
+    <section class="text-center">
       <h1 class="sb-heading">Sejarah <em>Bandung</em></h1>
-      <p class="sb-lead">Berawal dari dasar danau purba yang mengering, Bandung berevolusi dari sekadar titik nol di Jalan Raya Pos menjadi 'Paris van Java' yang anggun, hingga kini bertransformasi menjadi pusat kreativitas digital dunia.</p>
-    </div>
+      <p class="lead">Berawal dari dasar danau purba yang mengering, Bandung berevolusi dari sekadar titik nol di Jalan Raya Pos menjadi 'Paris van Java' yang anggun, hingga kini bertransformasi menjadi pusat kreativitas digital dunia.</p>
+    </section>
 
     <div class="sb-timeline">
 

@@ -1,6 +1,5 @@
 <?php
 $page_title = "Layanan Publik Bandung";
-//
 ?>
 <main id="content" class="container-fluid">
 <div class="container">
@@ -29,7 +28,8 @@ $page_title = "Layanan Publik Bandung";
               <a href="https://google.com/search?q=gojek" class="btn btn-primary">Gojek
                   <i class="arrow-icon fas fa-angle-right"></i>
               </a>
-              <a href="https://google.com/search?q=grab" class="btn btn-accent">Grab<i class="arrow-icon fas fa-angle-right"></i>
+              <a href="https://google.com/search?q=grab" class="btn btn-accent
+              text-white">Grab<i class="arrow-icon fas fa-angle-right"></i>
               </a>
             </div>
           </div>
@@ -162,7 +162,7 @@ $page_title = "Layanan Publik Bandung";
       </div>
     </div>
     <div class="col-12 py-5">
-      <div class="alert alert-primary py-3 px-3">
+      <div class="alert alert-primary p-4 mx-auto" style="max-width: 440px">
         <h3>
           Tips Perjalanan Bandung
         </h3>
@@ -173,5 +173,3 @@ $page_title = "Layanan Publik Bandung";
 
 </div>
 </main>
-<?php
-// ?>

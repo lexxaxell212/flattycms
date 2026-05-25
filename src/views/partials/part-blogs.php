@@ -1,4 +1,6 @@
 <?php
+require_once LIB_PATH . "blogs.php";
+
 $cat_id   = (int) ($_GET["cat"]  ?? 0);
 $page     = max(1, (int) ($_GET["page"] ?? 1));
 $per_page = 10;
@@ -42,7 +44,8 @@ $categories = safe_get_categories($pdo);
                   <p class="asl-excerpt">
                     <?= safe_excerpt($p['excerpt'] ?? ($p['content'] ?? ''), 130) ?>
                   </p>
-                  <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="btn btn-primary btn-asl-read">
+                  <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="btn
+                  btn-primary btn-asl-read mb-2">
                     Baca Selengkapnya
                     <i class="fas fa-angle-right ms-1" aria-hidden="true"></i>
                   </a>

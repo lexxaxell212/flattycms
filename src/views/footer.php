@@ -1,5 +1,5 @@
 </div>
-<footer id="footer">
+<footer id="footer" class="container-fluid">
   <div class="container">
     <section id="newsletter-ayokebandung.id" class="footer-newsletter">
       <div class="row justify-content-center">
@@ -8,7 +8,7 @@
             <h2 class="text-gradient">NEWSLETTER</h2>
             <span class="text-muted">Dapatkan event dan update Bandung terkini via email.</span>
           </div>
-          <div class="mx-auto" style="max-width:420px">
+          <div class="mx-auto" style="max-width:440px">
             <form class="newsletter-form" id="newsletterForm">
               <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
               <input type="email" name="email" class="form-control newsletter mb-3"
@@ -59,8 +59,8 @@
     </div>
     <hr class="footer-hr">
     <div class="footer-bottom">
-      <div class="logo-main"></div>
-      <p class="text-uppercase text-muted small mb-0" style="letter-spacing:2px;opacity:.9">
+      <p class="text-uppercase text-muted small mt-4"
+      style="letter-spacing:2px;opacity:.9;">
         <?= date('Y') ?> <?= SITE_NAME ?>
       </p>
     </div>

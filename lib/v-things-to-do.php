@@ -13,7 +13,7 @@ $_tdo_stmt = $GLOBALS['pdo']->prepare("
     FROM pages
     WHERE id != ?
     ORDER BY event_date ASC
-    LIMIT 3
+    LIMIT 6
 ");
 $_tdo_stmt->execute([$_tdo_next['id'] ?? 0]);
 $_tdo_pages = $_tdo_stmt->fetchAll(PDO::FETCH_ASSOC);

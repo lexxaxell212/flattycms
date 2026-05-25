@@ -1,21 +1,17 @@
 <?php
 $page_title = "Kebijakan Privasi";
-//
 ?>
 <main id="content" class="container-fluid">
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-lg-7">
-      <div class="mb-6">
+  <div class="row">
+    <div class="col-lg">
+      <section>
         <h1 class="text-title">Kebijakan Privasi</h1>
         <p class="lead">Kami berkomitmen melindungi data pribadi Anda secara bertanggung jawab.</p>
-        <p class="text-muted small mb-2">
-          Berlaku sejak 30 April 2026 • Diperbarui 30 April 2026
-        </p>
         <hr/>
-      </div>
+      </section>
 
-      <div class="mb-6">
+      <div class="mb-5">
         <h3>1. Informasi yang Kami Kumpulkan</h3>
         <p class="text-muted">Kami mengumpulkan data berikut saat Anda menggunakan layanan kami:</p>
         <ul class="list-unstyled text-muted small">
@@ -27,20 +23,20 @@ $page_title = "Kebijakan Privasi";
         </ul>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-5">
         <h3>2. Penggunaan Data</h3>
         <p class="text-muted">Data digunakan <strong>hanya</strong> untuk:</p>
         <ul class="list-unstyled text-muted small">
           <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Menyediakan dan meningkatkan layanan kami.</li>
           <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Mengirimkan newsletter dan informasi event (dengan persetujuan Anda).</li>
-          <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Analisis pengunjung secara anonim dan agregat.</li>
+          <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Analisis pengunjung secara anonim.</li>
         </ul>
-        <div class="alert alert-danger py-2 small mb-0">
+        <div class="alert alert-danger py-2 small mb-0" style="max-width: 440px">
           <i class="fas fa-ban me-2"></i>Kami <strong>TIDAK</strong> menjual, menyewakan, atau memperdagangkan data pribadi Anda kepada pihak ketiga manapun.
         </div>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-5">
         <h3>3. Berbagi Data</h3>
         <p class="text-muted">Data hanya dibagikan secara terbatas kepada:</p>
         <ul class="list-unstyled text-muted small">
@@ -50,7 +46,7 @@ $page_title = "Kebijakan Privasi";
         </ul>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-5">
         <h3>4. Cookie</h3>
         <p class="text-muted mb-2">Kami menggunakan tiga jenis cookie:</p>
         <ul class="list-unstyled text-muted small">
@@ -58,35 +54,30 @@ $page_title = "Kebijakan Privasi";
           <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Analitik</strong> — membantu kami memahami cara pengunjung menggunakan situs.</li>
           <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Preferensi</strong> — menyimpan pengaturan dan preferensi tampilan Anda.</li>
         </ul>
-        <p class="text-muted small mb-0">Anda dapat menonaktifkan cookie melalui pengaturan browser kapan saja, namun hal ini dapat memengaruhi fungsi situs.</p>
+        <p class="text-muted small mb-0">Anda dapat menonaktifkan cookie melalui pengaturan browser kapan saja.</p>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-5">
         <h3>5. Hak Anda</h3>
         <p class="text-muted">Sebagai pengguna, Anda berhak untuk:</p>
         <ul class="list-unstyled text-muted small">
           <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Akses</strong> — meminta salinan data pribadi yang kami simpan.</li>
-          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Koreksi</strong> — meminta perbaikan data yang tidak akurat.</li>
           <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Penghapusan</strong> — meminta penghapusan data Anda dari sistem kami.</li>
-          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Portabilitas</strong> — menerima data Anda dalam format yang dapat dibaca mesin.</li>
-          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Keberatan</strong> — menolak pemrosesan data untuk tujuan pemasaran langsung.</li>
           <li class="mb-2"><i class="fas fa-circle-dot me-2
           text-primary"></i><strong>Berhenti Berlangganan</strong> — klik <a
           href="/unsubscribe" class="link">Unsubscribe</a> di email kami atau
           hubungi kami langsung.</li>
         </ul>
         <p class="text-muted small mb-0">Permintaan dapat dikirim ke
-        <strong>admin@ayokebandung.id</strong> dan akan direspons dalam <strong>14
-        hari kerja</strong>.</p>
+        <strong>admin@ayokebandung.id</strong></p>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-5">
         <h3>6. Keamanan Data</h3>
         <p class="text-muted mb-2">Langkah perlindungan yang kami terapkan:</p>
         <ul class="list-unstyled text-muted small">
           <li class="mb-2"><i class="fas fa-lock me-2 text-primary"></i><strong>SSL/TLS Encryption</strong> — semua data yang ditransmisikan dienkripsi end-to-end.</li>
           <li class="mb-2"><i class="fas fa-lock me-2 text-primary"></i><strong>Enkripsi Penyimpanan</strong> — data sensitif disimpan dalam bentuk terenkripsi.</li>
-          <li class="mb-2"><i class="fas fa-lock me-2 text-primary"></i><strong>Akses Terbatas</strong> — hanya personel berwenang yang dapat mengakses data pengguna.</li>
           <li class="mb-2"><i class="fas fa-triangle-exclamation me-2
           text-primary"></i><strong>Waspada Phishing</strong> — kami tidak
           pernah meminta kata sandi melalui email.</li>
@@ -95,7 +86,7 @@ $page_title = "Kebijakan Privasi";
         <strong>security@ayokebandung.id</strong>.</p>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-5">
         <h3>7. Retensi Data</h3>
         <p class="text-muted mb-3">Data disimpan hanya selama diperlukan:</p>
         <div class="table-responsive">
@@ -133,7 +124,7 @@ $page_title = "Kebijakan Privasi";
         </div>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-5">
         <h3>8. Notifikasi Pelanggaran Data</h3>
         <p class="text-muted mb-2">Jika terjadi pelanggaran data, kami berkomitmen untuk:</p>
         <ul class="list-unstyled text-muted small">
@@ -143,12 +134,12 @@ $page_title = "Kebijakan Privasi";
         </ul>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-5">
         <h3>9. Perubahan Kebijakan</h3>
         <p class="text-muted mb-0">Kami dapat memperbarui kebijakan ini sewaktu-waktu. Perubahan signifikan akan diinformasikan melalui notifikasi email, banner pengumuman di situs, dan pembaruan tanggal di halaman ini. Penggunaan layanan setelah tanggal berlaku baru dianggap sebagai persetujuan Anda.</p>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-5">
         <h3>10. Hubungi Kami</h3>
         <p class="text-muted mb-2">Pertanyaan atau keluhan terkait privasi dapat disampaikan melalui:</p>
         <ul class="list-unstyled text-muted small">
@@ -162,5 +153,3 @@ $page_title = "Kebijakan Privasi";
 
 </div>
 </main>
-<?php
-// ?>

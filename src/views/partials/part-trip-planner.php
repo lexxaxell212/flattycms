@@ -114,17 +114,6 @@
           <text x="85" y="357" fill="#4c1d95" font-size="9.5" font-family="monospace" font-weight="600">Hotel</text>
         </g>
 
-        <!-- Compass rose -->
-        <g class="tp-compass" transform="translate(370, 55)">
-          <circle cx="0" cy="0" r="18" fill="#1e1b4b" opacity="0.06"/>
-          <circle cx="0" cy="0" r="18" stroke="#7c3aed" stroke-width="1" fill="none" opacity="0.2"/>
-          <path d="M0 -14 L3 -2 L0 2 L-3 -2Z" fill="#7c3aed" opacity="0.8"/>
-          <path d="M0 14 L3 2 L0 -2 L-3 2Z" fill="#7c3aed" opacity="0.3"/>
-          <path d="M-14 0 L-2 -3 L2 0 L-2 3Z" fill="#7c3aed" opacity="0.3"/>
-          <path d="M14 0 L2 -3 L-2 0 L2 3Z" fill="#7c3aed" opacity="0.3"/>
-          <circle cx="0" cy="0" r="3" fill="#7c3aed"/>
-          <text x="0" y="-20" text-anchor="middle" fill="#7c3aed" font-size="8" font-weight="700" font-family="monospace" opacity="0.7">N</text>
-        </g>
 
       </svg>
 
@@ -162,17 +151,25 @@
           <span class="tp-feature-icon">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </span>
-          Peta interaktif real-time
+          Peta interaktif
         </li>
       </ul>
       <div class="tp-overview__cta">
-        <a href="<?= BASE_URL ?>trip/" class="tp-btn-primary">
+        <a href="/trip" class="tp-btn-primary">
           Mulai Rencanakan
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <span class="tp-cta-note">Gratis · Tanpa registrasi</span>
       </div>
     </div>
   </div>
 
 </section>
+<script>
+const tpOverview = document.getElementById('tp-overview');
+const observer = new IntersectionObserver(([entry]) => {
+  if (entry.isIntersecting) {
+    tpOverview.classList.add('visible');
+  }
+});
+observer.observe(tpOverview);
+</script>

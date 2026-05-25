@@ -23,26 +23,25 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 <main id="content" class="container-fluid">
 <div class="container">
 
-  <div class="gal-header">
-    <div>
-      <h4 class="gal-title"><i class="fa-solid fa-images me-2"></i>Galeri Komunitas</h4>
-      <p class="gal-sub">Foto & cerita perjalanan Bandung dari komunitas</p>
-    </div>
+  <section>
+    
+      <h2>Galeri Komunitas</h2>
+      <p class="lead">Foto & cerita perjalanan Bandung dari komunitas</p>
+  </section>
     <div class="gal-header__actions">
       <?php if ($is_logged): ?>
-      <button class="gal-btn gal-btn--outline" id="btnOpenUpload">
+      <button class="mb-2 gal-btn gal-btn--outline" id="btnOpenUpload">
         <i class="fa-solid fa-camera me-1"></i>Upload Foto
       </button>
-      <button class="gal-btn gal-btn--primary" id="btnOpenReview">
+      <button class="mb-2 gal-btn gal-btn--primary" id="btnOpenReview">
         <i class="fa-solid fa-pen-to-square me-1"></i>Tulis Review
       </button>
       <?php else: ?>
-      <a href="/login" class="gal-btn gal-btn--outline">
+      <a href="/login" class="mb-5 gal-btn gal-btn--outline">
         <i class="fa-brands fa-google me-1"></i>Login untuk Berkontribusi
       </a>
       <?php endif; ?>
     </div>
-  </div>
 
   <div class="gal-search-block">
     <div class="gal-search-wrap">

@@ -78,7 +78,7 @@
     --text-white: #fafafa;
     --text-white-hover: #e5e7eb;
     --text-muted: #6e6a7c;
-    --text-nav: #4c1d95;
+    --text-nav: #1e1b4b;
     --text-nav-hover: #6c2bd9;
     --text-dark: #0a0118;
     
@@ -117,6 +117,7 @@
     --bandung: #e8e2ff;
     --dotid: #7e3af2;
     --strips: #6c2bd94d;
+    
 }
 
 /* ================= base ================= */
@@ -150,12 +151,12 @@ body {
 }
 
 a {
-    color: var(--pu-600);
+    color: var(--pu-500);
     text-decoration: none;
 }
 a:hover,
 a:active {
-    color: var(--pu-700);
+    color: var(--pu-800);
 }
 a:focus-visible {
     outline: 2px solid var(--pu-600);
@@ -227,7 +228,7 @@ h6 {
 /* ============= hero ============= */
 .hero-wrapper {
     height: calc(100vh - var(--navbar-height));
-    background: var(--bg-primary);
+    background: var(--bg-light);
 }
 
 .hero-item {
@@ -279,11 +280,11 @@ h6 {
 }
 
 .glass-hero-card {
-    background: rgba(255,255,255,.3);
+    background: rgba(255,255,255,.5);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: var(--glass-border);
-    padding: var(--space-12);
+    padding: 2.5rem 1.5rem;
     border-radius: var(--radius);
     box-shadow: var(--glass-shadow);
 }

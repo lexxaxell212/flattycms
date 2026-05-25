@@ -1,12 +1,11 @@
 <?php
 $page_title = "Kritik dan Saran";
-//
 ?>
 <script src="<?= JS_URL ?>feedback.js" defer></script>
 
 <main id="content" class="container-fluid">
 <div class="container">
-    <section id="Kritik-dan-saran">
+    <section id="Kritik-dan-saran" class="text-center">
         <h1 class="text-title">Kritik & Saran</h1>
         <p class="lead">Bantu kami menjadi lebih baik dengan feedback Anda.</p>
     </section>
@@ -26,7 +25,7 @@ $page_title = "Kritik dan Saran";
             </div>
         </div>
     </div>
-    <div id="feedback-feedbackForm" class="mx-auto py-5" style="max-width:600px">
+    <div id="feedback-feedbackForm" class="mx-auto py-5" style="max-width:440px">
         <div class="bg-gray">
             <div class="card-body">
                 <form id="feedback-feedbackFormMain">
@@ -71,9 +70,9 @@ $page_title = "Kritik dan Saran";
                         </div>
                         <div class="col-12">
                             <label class="form-label fw-medium"><i class="fas fa-lightbulb me-2"></i>Saran Perbaikan</label>
-                            <textarea class="form-control" name="saran" rows="4" placeholder="Fitur apa yang ingin ditambahkan?" required></textarea>
+                            <textarea class="form-control mb-5" name="saran" rows="4" placeholder="Fitur apa yang ingin ditambahkan?" required></textarea>
                         </div>
-                        <div class="p-5">
+                        
                             <button type="submit" class="btn btn-outline-primary">
                                 <i class="fas fa-paper-plane me-2"></i>
                                 <span id="feedback-btnText">Kirim Feedback</span>
@@ -81,7 +80,7 @@ $page_title = "Kritik dan Saran";
                                     <i class="fas fa-spinner fa-spin"></i>
                                 </span>
                             </button>
-                        </div>
+                        
                     </div>
                 </form>
             </div>
@@ -90,5 +89,3 @@ $page_title = "Kritik dan Saran";
 
 </div>
 </main>
-<?php
-// ?>

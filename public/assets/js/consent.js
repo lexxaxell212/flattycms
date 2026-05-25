@@ -16,7 +16,3 @@ function saveConsent(all = true, rejectAll = false) {
     .then(() => location.reload())
     .catch(err => console.error('Consent error:', err));
 }
-
-function openPreferences() {
-    document.getElementById('prefModal').style.display = 'block';
-}

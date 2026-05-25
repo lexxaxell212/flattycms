@@ -56,17 +56,17 @@
     }
     grid.innerHTML = data.photos.map(p => `
       <div class="col-6 col-md-4" id="photo-${p.id}">
-        <div class="card border-0 shadow-sm h-100 overflow-hidden">
+        <div class="bg-light card h-100 overflow-hidden">
           <div class="position-relative" style="padding-top:75%">
             <img src="${BASE}/uploads/${p.photo_path}"
                  class="position-absolute top-0 start-0 w-100 h-100"
                  style="object-fit:cover" loading="lazy">
           </div>
-          <div class="card-body p-2">
+          <div class="card-body">
             <div class="small fw-semibold text-truncate">${p.poi_name}</div>
             ${p.caption ? `<div class="text-muted" style="font-size:.7rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.caption}</div>` : ''}
             <div class="text-muted mt-1" style="font-size:.68rem">${formatDate(p.created_at)}</div>
-            <button class="btn btn-outline-danger btn-sm w-100 mt-2" onclick="deleteContrib('photo', ${p.id})">
+            <button class="btn bg-accent btn-sm w-100 mt-2" onclick="deleteContrib('photo', ${p.id})">
               <i class="fa-solid fa-trash fa-xs me-1"></i>Hapus
             </button>
           </div>
@@ -96,10 +96,10 @@
           <div class="text-muted mt-1" style="font-size:.7rem">${formatDate(t.created_at)}</div>
         </div>
         <div class="d-flex gap-2 flex-shrink-0">
-          <a href="/pages/map" class="btn btn-outline-primary btn-sm">
+          <a href="/trip" class="btn btn-outline-primary btn-sm">
             <i class="fa-solid fa-map me-1"></i>Buka
           </a>
-          <button class="btn btn-outline-danger btn-sm" onclick="deleteContrib('trip', ${t.id})">
+          <button class="btn bg-accent btn-sm" onclick="deleteContrib('trip', ${t.id})">
             <i class="fa-solid fa-trash"></i>
           </button>
         </div>
@@ -121,7 +121,7 @@
     list.innerHTML = data.reactions.map(r => `
       <div class="d-flex align-items-center justify-content-between gap-3 p-3 rounded border mb-2" id="reaction-${r.id}">
         <div class="d-flex align-items-center gap-3">
-          <span class="badge bg-primary bg-opacity-10 text-primary p-2">
+          <span class="badge bg-primary bg-opacity-10 text-white p-2">
             <i class="fa-solid ${typeIcon[r.content_type] ?? 'fa-heart'}"></i>
           </span>
           <div>
@@ -129,7 +129,7 @@
             <div class="text-muted" style="font-size:.7rem">${formatDate(r.created_at)}</div>
           </div>
         </div>
-        <button class="btn btn-outline-danger btn-sm" onclick="deleteContrib('reaction', ${r.id})">
+        <button class="btn bg-accent btn-sm" onclick="deleteContrib('reaction', ${r.id})">
           <i class="fa-solid fa-trash"></i>
         </button>
       </div>

@@ -1,4 +1,6 @@
 <?php
+require_once LIB_PATH . "v-kenapa.php";
+
 $_khb_icons = [
     'Pusat Inovasi Digital'    => '<path d="M12 2a7 7 0 0 1 7 7c0 3.17-2.11 5.84-5 6.71V17h-4v-1.29C7.11 14.84 5 12.17 5 9a7 7 0 0 1 7-7zm0 2a5 5 0 0 0-5 5c0 2.38 1.63 4.41 4 4.9V15h2v-1.1c2.37-.49 4-2.52 4-4.9a5 5 0 0 0-5-5zm-1 13h2v2h-2z"/>',
     'Konektivitas Kilat'        => '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
@@ -30,7 +32,7 @@ $_khb_colors = [
           Discover Bandung
         </span>
         <h2 class="khb-heading">
-          Kenapa Harus<br><em>Bandung?</em>
+          Kenapa Harus<br><em>Bandung ?</em>
         </h2>
       </div>
       <div class="khb-header__right">
@@ -48,7 +50,6 @@ $_khb_colors = [
         $is_wide = in_array($i, [0, 4, 8]);
       ?>
       <div class="khb-card <?= $is_wide ? 'khb-card--wide' : '' ?>">
-        <div class="khb-card__num"><?= $num ?></div>
         <div class="khb-card__icon" style="--card-color:<?= $color ?>">
           <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <?= $icon ?>
@@ -67,10 +68,10 @@ $_khb_colors = [
 
     <div class="khb-cta">
       <div class="khb-cta__inner">
-        <h3 class="khb-cta__heading">Siap Petualangan ke Bandung?</h3>
+        <h3 class="khb-cta__heading">Siap Petualangan ke Bandung ?</h3>
         <p class="khb-cta__sub">Jadwal akhir pekan sudah penuh? Booking sekarang sebelum ketinggalan!</p>
         <div class="khb-cta__btns">
-          <a href="https://google.com/search?q=Tiket+pesawat+ke+bandung" target="_blank" rel="noopener" class="khb-btn khb-btn--outline">
+          <a href="https://google.com/search?q=Tiket+ke+bandung" target="_blank" rel="noopener" class="khb-btn khb-btn--outline">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
             Pesan Tiket
           </a>
@@ -78,7 +79,7 @@ $_khb_colors = [
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
             Cari Hotel
           </a>
-          <a href="<?= BASE_URL ?>trip/" class="khb-btn khb-btn--primary">
+          <a href="/trip" class="khb-btn khb-btn--primary">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             Mulai Rencanakan
           </a>
@@ -88,4 +89,5 @@ $_khb_colors = [
 
   </div>
 </section>
+
 <?php endif; ?>

@@ -1,12 +1,11 @@
 <?php
 $page_title = "Tentang";
-//
 ?>
 <main id="content" class="container-fluid">
 <div class="container">
   <section id="Tentang">
-    <h1 class="text-title">Tentang</h1>
-      <p class="lead">Dokumentasi website</p>
+    <h2>Tentang</h2>
+    <p class="lead">Dokumentasi website</p>
   </section>
   <div class="row g-4">
     <div>
@@ -16,5 +15,3 @@ $page_title = "Tentang";
 
 </div>
 </main>
-<?php
-// ?>

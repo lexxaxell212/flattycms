@@ -1,3 +1,7 @@
+<?php
+require_once LIB_PATH . "v-review.php";
+?>
+
 <?php if (!empty($_rev_items)): ?>
 <section class="rev-section container-fluid">
   <div class="container">
@@ -10,7 +14,7 @@
         </span>
         <h2 class="rev-heading">Cerita dari <em>Komunitas</em></h2>
       </div>
-      <a href="<?= BASE_URL ?>gallery/" class="rev-link-all">
+      <a href="gallery/" class="rev-link-all">
         Lihat Semua <i class="fas fa-arrow-right ms-1"></i>
       </a>
     </div>
@@ -33,9 +37,9 @@
           <?= safe_html(mb_substr($_rev['cerita'], 0, 160) . (mb_strlen($_rev['cerita']) > 160 ? '…' : '')) ?>
         </p>
         <div class="rev-card__author">
-          <img src="<?= !empty($_rev['avatar']) ? safe_html($_rev['avatar']) : BASE_URL . 'assets/img/avatar.png' ?>"
+          <img src="<?= !empty($_rev['avatar']) ? safe_html($_rev['avatar']) : '/uploads/default.jpg' ?>"
                class="rev-card__avatar"
-               onerror="this.src='<?= BASE_URL ?>assets/img/avatar.png'"
+               onerror="this.src='/uploads/default.jpg'"
                alt="<?= safe_html($_rev['user_name']) ?>">
           <div>
             <div class="rev-card__name"><?= safe_html($_rev['user_name']) ?></div>

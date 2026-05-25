@@ -580,3 +580,236 @@ h6 {
 .menu-open .hamburger-icon svg {
     color: var(--text-nav-hover);
 }
+
+.menu-overlay {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(30, 30, 30, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 1072 !important;
+    transition:
+        opacity var(--duration) var(--ease),
+        visibility 0s linear var(--duration);
+}
+.menu-overlay.menu-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transition:
+        opacity var(--duration) var(--ease),
+        visibility 0s linear 0s;
+}
+.navbar-collapse {
+    position: fixed;
+    top: calc(var(--navbar-height) + var(--space-4));
+    right: var(--space-4);
+    width: min(320px, calc(100vw - 32px));
+    overflow-y: visible;
+    max-height: none;
+    z-index: 1074 !important;
+    border-radius: var(--radius);
+    padding: var(--space-2) var(--space-4);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.98);
+    transform-origin: top right;
+    transition:
+        opacity var(--duration) var(--ease),
+        transform var(--duration) var(--ease),
+        visibility 0s linear var(--duration);
+}
+.navbar-collapse.menu-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    transition:
+        opacity var(--duration) var(--ease),
+        transform var(--duration) var(--ease),
+        visibility 0s linear 0s;
+}
+.navbar-collapse .dropdown-menu {
+    position: static !important;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    margin-left: var(--space-3) !important;
+    display: block !important;
+    overflow: hidden;
+    max-height: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+    opacity: 0;
+    transition:
+        max-height var(--duration) var(--ease),
+        opacity var(--duration) var(--ease),
+        transform var(--duration) var(--ease);
+    pointer-events: none;
+}
+.navbar-collapse .dropdown-menu.show {
+    max-height: 90vh;
+    margin-top: -50px !important;
+    margin-bottom: 50px !important;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+    margin-left: var(--space-3) !important;
+    margin-right: 0 !important;
+}
+.navbar-collapse .dropdown-item {
+    padding: var(--space-2);
+    font-size: var(--space-4);
+    border-radius: var(--radius);
+    color: var(--text-nav);
+    background: var(--bg-nav);
+    transition:
+        background var(--duration) var(--ease),
+        color var(--duration) var(--ease),
+        transform var(--duration) var(--ease);
+}
+.navbar-collapse .dropdown-item:hover {
+    background: var(--bg-nav-hover);
+    color: var(--text-nav-hover);
+}
+.navbar-collapse .dropdown-toggle::after {
+    transition: transform var(--duration) var(--ease);
+}
+.navbar-collapse .dropdown-toggle[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+}
+[data-dark] .navbar-collapse {
+    box-shadow: none;
+}
+.navbar-nav {
+    flex-direction: column;
+}
+.nav-link {
+    color: var(--text-nav);
+    padding: var(--space-3) !important;
+    margin-bottom: 6px;
+    border-radius: var(--radius);
+    border: none;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition:
+        background var(--duration) var(--ease),
+        color var(--duration) var(--ease),
+        transform var(--duration) var(--ease);
+}
+.nav-link:hover,
+.nav-link:focus,
+.nav-link.active {
+    background: var(--bg-nav-hover);
+    color: var(--text-nav-hover);
+    transform: translateX(2px);
+}
+.nav-link i {
+    opacity: 0.89;
+    font-size: var(--space-4);
+    margin-right: var(--space-3);
+}
+.dropdown-menu {
+    border: none;
+    background: transparent;
+    transition: all var(--duration) var(--ease);
+}
+.dropdown-item {
+    color: var(--text-nav);
+    background: transparent;
+    padding: var(--space-2) var(--space-3) !important;
+    margin-bottom: 6px;
+    font-size: var(--space-3);
+    border-radius: var(--radius);
+    border: none;
+    display: flex;
+    align-items: center;
+    transition:
+        background var(--duration) var(--ease),
+        color var(--duration) var(--ease),
+        transform var(--duration) var(--ease);
+}
+.dropdown-item i {
+    opacity: 0.85;
+    margin-right: var(--space-3) !important;
+}
+.dropdown-item:hover {
+    background: var(--bg-nav-hover);
+    color: var(--text-nav-hover) !important;
+    transform: translateX(2px);
+}
+.weather {
+    margin-top: var(--space-6);
+    text-align: left;
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+}
+.temp {
+    font-size: var(--space-5);
+    line-height: var(--space-4);
+    margin: 6px 0;
+    font-weight: var(--fw-bold);
+}
+.cond,
+.city {
+    font-size: var(--space-4);
+}
+.weather .icon {
+    display: none;
+}
+.stat {
+    padding: 12px 8px;
+    background: rgb(255 255 255 / 0.1);
+    border-radius: 10px;
+    display: none;
+}
+
+.profile-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px 5px 5px;
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text-nav);
+    font-size: var(--space-4);
+    transition: background var(--duration);
+}
+.profile-pill:hover {
+    background: var(--glass-bg-hover);
+    color: var(--text-nav-hover);
+}
+.avatar-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-full);
+    background: var(--glass-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--space-4);
+    font-weight: var(--fw-bold);
+    color: var(--text-nav);
+}
+.account-name {
+    font-size: var(--space-4);
+    font-weight: var(--fw-bold);
+    display: block;
+}
+.divider-v {
+    width: 1px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.4);
+}

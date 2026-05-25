@@ -77,14 +77,14 @@ require_once SRC_PATH . 'headerv2.php';
       ?>
       <a href="https://wa.me/?text=<?php echo \$_share_title; ?>%20<?php echo \$_share_url; ?>"
          target="_blank" rel="noopener" class="btn btn-outline-primary">
-        <i class="fab fa-whatsapp"></i>
+        <i class="fa-brand fa-whatsapp"></i>
       </a>
       <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo \$_share_url; ?>"
          target="_blank" rel="noopener" class="btn btn-outline-primary">
-        <i class="fab fa-facebook-f"></i>
+        <i class="fa-brand fa-facebook-f"></i>
       </a>
       <button onclick="copyLink()" class="btn btn-outline-primary">
-        <i class="fab fa-instagram"></i>
+        <i class="fa-brand fa-instagram"></i>
       </button>
     </div>
   </div>

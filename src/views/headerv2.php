@@ -149,8 +149,24 @@ $isPintasanActive = (bool) array_filter(
   <?php unset($_SESSION['flash']); ?>
   <?php endif; ?>
   
+  <style>
+    body {
+      visibility: hidden;
+    }
+    #page-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 70%;
+      height: 3px;
+      background: #7c3aed;
+      z-index: 9999;
+      transition: width 0.3s ease, opacity 0.3s ease;
+      }
+  </style>
 </head>
 <body>
+  <div id="page-loader"></div>
   <nav class="navbar">
     <div class="container">
       <a aria-label="Halaman awal" href="<?= BASE_URL ?>">

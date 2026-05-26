@@ -66,5 +66,16 @@
     </div>
   </div>
 </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loader = document.getElementById('page-loader');
+      document.body.style.visibility = 'visible';
+      loader.style.width = '100%';
+      setTimeout(() => {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.remove(), 300);
+      }, 200);
+    });
+  </script>
 </body>
 </html>

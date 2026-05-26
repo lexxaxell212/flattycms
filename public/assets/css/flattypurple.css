@@ -44,8 +44,8 @@
     --radius-sm: 0.75rem;
     --radius: 1rem;
     --radius-lg: 1.25rem;
-    --radius-xl: 1.5rem
-    --radius-full: 9999px;
+    --radius-xl: 1.5rem;
+    --radius-full: 100%;
     
     --navbar-height: 70px;
     
@@ -66,8 +66,8 @@
     --glass-bg-active: rgba(255, 255, 255, 0.8);
     --glass-backdrop: rgba(255, 255, 255, 0.15);
     --glass-blur: blur(20px);
-    --glass-border: 1px solid rgba(0, 0, 0, 0.1);
-    --glass-border-hover: 1px solid rgba(0,0,0,0.2);
+    --glass-border: 1px solid rgba(40, 0, 40, 0.1);
+    --glass-border-hover: 1px solid rgba(40,0,40,0.2);
     --glass-shadow: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
     
     --bg-white: #faf9ff;
@@ -102,8 +102,8 @@
     --glass-bg-active: rgba(17, 24, 39, 1);
     --glass-backdrop: rgba(0, 0, 0, 0.3);
     --glass-blur: none;
-    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
-    --glass-border-hover: 1px solid rgba(255,255,255,0.2);
+    --glass-border: 1px solid rgba(255, 210, 255, 0.1);
+    --glass-border-hover: 1px solid rgba(255,210,255,0.2);
     --glass-shadow: none;
     
     --bg-white: #0f1117;
@@ -132,6 +132,16 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+.btn:focus,
+.btn:focus-visible,
+.btn:active,
+.btn:active:focus {
+    outline: none;
+    box-shadow: none;
+    background: none;
+    border: none;
 }
 
 html {
@@ -627,7 +637,7 @@ h6 {
     max-height: none;
     z-index: 1074 !important;
     border-radius: var(--radius);
-    padding: var(--space-2) var(--space-4);
+    padding: var(--space-6) var(--space-4);
     background: var(--glass-bg);
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
@@ -762,16 +772,15 @@ h6 {
     transform: translateX(2px);
 }
 .weather {
-    margin-top: var(--space-6);
     text-align: left;
     align-items: start;
     display: flex;
     flex-direction: column;
+    gap: 4px;
 }
 .temp {
     font-size: var(--space-5);
     line-height: var(--space-4);
-    margin: 6px 0;
     font-weight: var(--fw-bold);
 }
 .cond,

@@ -203,15 +203,6 @@ table tbody td {
 }
 
 /* ============= /btn-custom ============= */
-.btn:focus,
-.btn:focus-visible,
-.btn:active,
-.btn:active:focus {
-    outline: none;
-    box-shadow: none;
-    background: none;
-    border: none;
-}
 .btn {
     display: inline-flex;
     align-items: center;
@@ -396,17 +387,20 @@ table tbody td {
 
 .close-btn,
 .btn-close {
+    text-align: center;
     width: 40px;
     height: 40px;
+    font-size: 1.5rem;
+    font-weight: 900;
     color: var(--text-white);
-    background: var(--glass-bg);
-    border-radius: var(--radius-full);
+    background: rgba(255,255,255,0.09);
+    border-radius: var(--radius);
     border: none;
 }
 .close-btn:hover,
 .btn-close:hover {
-    color: var(--text-white-hover) !important;
-    background: var(--bg-nav-hover) !important;
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.15);
 }
 
 .submit-btn,
@@ -464,6 +458,31 @@ table tbody td {
 .btn-outline-light:hover {
   background: rgba(255,255,255,.25);
 }
+
+.clear-chat {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--text-white);
+    background: rgba(255,255,255,0.09);
+}
+.clear-chat:hover {
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.15);
+}
+.send-chat {
+  flex-shrink: 0;
+  width: 40px;
+    height: 40px;
+    color: var(--text-muted);
+    font-size: 1.3rem;
+}
+.send-chat:hover {
+  color: var(--text-nav-hover);
+  transform: scale(1.1);
+}
+
 .btn.w-100 {
   justify-content: center;
   width: 100%;
@@ -678,6 +697,7 @@ table tbody td {
     top: var(--navbar-height);
     left: 0;
     right: 0;
+    padding: 1rem 0.4rem;
     z-index: 1068;
     pointer-events: none;
     opacity: 0;
@@ -695,7 +715,7 @@ table tbody td {
     content: "";
     position: fixed;
     inset: 0;
-    background: transparent;
+    background: var(--bg-light);
     z-index: -1;
     opacity: 0;
     transition: opacity var(--duration) var(--ease);
@@ -706,14 +726,13 @@ table tbody td {
     opacity: 1;
 }
 .ls-inner {
-    margin-top: var(--space-4);
-    max-width: 440px;
+    max-width: 740px !important;
 }
 .ls-bar {
     display: flex;
     align-items: center;
     gap: var(--space-4);
-    background: var(--bg-primary);
+    background: var(--bg-white);
     border: var(--glass-border);
     border-radius: var(--radius);
     padding: 0 var(--space-4);
@@ -723,14 +742,14 @@ table tbody td {
         box-shadow var(--duration) var(--ease);
 }
 .ls-bar:focus-within {
-    border: var(--glass-border);
-    box-shadow:
-        var(--glass-shadow),
-        0 0 0 2px rgba(227, 155, 227, 0.05);
+    border-color: var(--pu-700);
+    box-shadow: 0 0 0 0.25rem rgba(124, 58, 237, 0.15);
+    outline: none;
+    background: transparent;
 }
 .ls-icon-search {
     font-size: var(--space-4);
-    color: var(--text-nav-hover);
+    color: var(--text-nav);
     flex-shrink: 0;
     opacity: 1;
 }
@@ -740,7 +759,7 @@ table tbody td {
     border: none;
     background: transparent;
     font-size: var(--space-4);
-    font-weight: var(--fw-medium);
+    font-weight: var(--fw-regular);
     color: var(--text-primary);
     outline: none;
     min-width: 0;
@@ -861,10 +880,10 @@ table tbody td {
     text-overflow: ellipsis;
 }
 #live-search-dropdown mark {
-    background: rgba(127, 127, 127, 0.01);
+    background: transparent;
     color: var(--text-nav-hover);
-    border-radius: 3px;
-    padding: 0 2px;
+    margin: 0;
+    padding:0;
     font-weight: var(--fw-medium);
 }
 .ls-loading,
@@ -1090,8 +1109,10 @@ textarea.form-control {
   overflow: hidden;
 }
 .input-group:focus-within {
-  border-color: var(--bg-purple);
-  box-shadow: 0 0 0 3px rgba(124,58,237,.1);
+  border-color: var(--pu-700);
+    box-shadow: 0 0 0 0.25rem rgba(124, 58, 237, 0.15);
+    outline: none;
+    background: transparent;
 }
 .input-group-text {
   padding: 0 10px;
@@ -1124,32 +1145,45 @@ textarea.form-control {
 
 /* ============= /chatbot ============= */
 .chatbot {
-    position: fixed !important;
-    width: 100% !important;
+    position: fixed;
+    width: 100%;
     height: 85%;
-    top: 15% !important;
+    top: 15%;
     transform: translateY(0);
     opacity: 0;
-    box-shadow: var(--glass-shadow);
     border-radius: 1rem 1rem 0 0;
     overflow: hidden;
-    background: var(--bg-primary);
+    background: var(--bg-white);
     color: var(--text-primary);
     border: none;
     z-index: 1092 !important;
 }
-.offcanvas,
-.offcanvas-backdrop,
-.offcanvas-end {
-    --bs-offcanvas-border-width: 0;
-    border: none !important;
+
+@media (min-width: 992px)  {
+  .chatbot {
+    max-width: 440px;
+    max-height: 60vh;
+    top: auto;
+    bottom: 24px;
+    right: 15px;
+    border-radius: var(--radius);
+    border: var(--glass-border);
+  }
+  .chat-messages {
+    bottom: 15%;
+    max-height: 85%;
+  }
+  .bottom-area {
+    max-height: 15%;
+  }
 }
+
 .chatbot.offcanvas .offcanvas-backdrop {
-    background: rgba(17, 24, 39, 0.1) !important;
+    background: rgba(17, 24, 39, .1) !important;
 }
 .offcanvas-header {
-    height: var(--navbar-height) !important;
-    background: var(--pu-700);
+    height: var(--navbar-height);
+    background: var(--bg-purple);
     color: var(--text-white);
     z-index: 1096;
 }
@@ -1157,23 +1191,8 @@ textarea.form-control {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--pu-700);
-    color: var(--text-white);
-}
-.offcanvas-title {
-    color: var(--text-white);
-    margin: 0;
-}
-.bottom-area {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    min-height: 25%;
-    max-height: 30%;
 }
 .loading {
-    box-shadow: var(--glass-shadow);
     border-radius: var(--radius);
 }
 .chatbot.show {
@@ -1185,13 +1204,21 @@ textarea.form-control {
     flex-direction: column;
     padding: var(--navbar-height) var(--space-4) var(--space-4) var(--space-4);
     position: absolute;
-    bottom: 30%;
+    bottom: 15%;
     width: 94%;
     z-index: 1094;
-    max-height: 70%;
+    max-height: 85%;
     overflow-y: auto;
     gap: var(--space-4);
-    background: var(--bg-primary);
+    background: var(--bg-white);
+}
+.bottom-area {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    min-height: 15%;
+    max-height: 15%;
 }
 .message {
     display: flex !important;
@@ -1218,21 +1245,27 @@ textarea.form-control {
     line-height: 1.5;
 }
 .message.user .bubble {
-    background: var(--pu-200);
-    color: var(--text-muted);
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    color: var(--text-primary);
     border-bottom-right-radius: 1px;
     margin-left: auto;
+    box-shadow: var(--glass-shadow);
 }
 .message.ai .bubble {
-    background: var(--pu-100);
+    background: var(--bg-white);
+    border: var(--glass-border);
     color: var(--text-primary);
     border-bottom-left-radius: 1px;
+    box-shadow: var(--glass-shadow);
 }
 .message.error .bubble {
     background: rgba(197, 20, 24, 0.08);
     color: #b02929;
     border: none;
     border-bottom-left-radius: 1px;
+    box-shadow: var(--glass-shadow);
+    border: var(--glass-border);
 }
 .msg-label {
     font-size: var(--space-4);
@@ -1281,7 +1314,7 @@ textarea.form-control {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: var(--pu-700);
+    background: var(--bg-purple);
     opacity: 0.5;
     animation: typing-bounce 1.2s var(--ease) infinite;
 }
@@ -1308,10 +1341,40 @@ textarea.form-control {
     background: #e8f0fe;
 }
 
-.button-group {
+.chat-input-group {
     display: flex;
-    justify-content: flex-end;
-    padding-top: 10px;
+    align-items: center;
+    gap: var(--space-4);
+    background: var(--bg-white);
+    border: var(--glass-border);
+    border-radius: var(--radius);
+    padding: 0 var(--space-4);
+    box-shadow: var(--glass-shadow);
+    transition:
+        border var(--duration) var(--ease),
+        box-shadow var(--duration) var(--ease);
+}
+.chat-input-group:focus-within {
+    border-color: var(--pu-700);
+    box-shadow: 0 0 0 0.25rem rgba(124, 58, 237, 0.15);
+    outline: none;
+    background: transparent;
+}
+.input-chat {
+    flex: 1;
+    padding: var(--space-4) 0;
+    border: none;
+    background: transparent;
+    font-size: var(--space-4);
+    font-weight: var(--fw-regular);
+    color: var(--text-primary);
+    outline: none;
+    min-width: 0;
+    letter-spacing: -0.01em;
+}
+.input-chat::placeholder {
+    color: var(--text-muted);
+    opacity: 0.8;
 }
 
 /* ======== /unsubcribe ========= */
@@ -3590,7 +3653,6 @@ textarea.form-control {
   opacity: .8;
   margin: 0;
 }
-.tp-hero-content { }
 
 /* ── PROFILE CARD ───────────────────────────────────────────── */
 .tp-profile-card {
@@ -3598,7 +3660,7 @@ textarea.form-control {
   align-items: center;
   gap: 12px;
   background: var(--bg-white);
-  border: 1px solid #f0edf8;
+  border: var(--glass-border);
   border-radius: var(--radius);
   padding: 1rem 1.25rem;
   margin-bottom: 1.25rem;
@@ -3651,7 +3713,7 @@ textarea.form-control {
   display: flex;
   gap: 4px;
   background: var(--bg-white);
-  border: 1px solid var(--bg-primary);
+  border: var(--glass-border);
   border-radius: var(--radius);
   padding: 5px;
   margin-bottom: 1.25rem;
@@ -3759,7 +3821,7 @@ textarea.form-control {
 .tp-map-wrap {
   border-radius: var(--radius);
   overflow: hidden;
-  border: 1.5px solid var(--text-muted);
+  border: var(--glass-border);
   margin-bottom: 1rem;
   box-shadow: 0 1px 4px rgba(0,0,0,.05);
 }
@@ -3781,7 +3843,7 @@ textarea.form-control {
   left: 0;
   right: 0;
   background: var(--bg-white);
-  border: 1.5px solid var(--text-muted);
+  border: var(--glass-border);
   border-radius: var(--radius);
   z-index: 100;
   margin-top: 4px;
@@ -3809,7 +3871,7 @@ textarea.form-control {
   font-size: .78rem;
   color: var(--text-muted);
   background: var(--bg-primary);
-  border: 1px solid #f0edf8;
+  border: var(--glass-border);
   border-radius: 20px;
   padding: 4px 10px;
 }
@@ -3817,14 +3879,14 @@ textarea.form-control {
 /* ── PLANNER PANEL ──────────────────────────────────────────── */
 .tp-planner-panel {
   background: var(--bg-white);
-  border: 1.5px solid var(--text-muted);
+  border: var(--glass-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(0,0,0,.04);
 }
 .tp-planner-header {
   padding: .875rem 1.25rem;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: var(--glass-border);
   background: var(--bg-white);
 }
 .tp-planner-header .title {
@@ -3901,7 +3963,7 @@ textarea.form-control {
 #saveForm {
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid #f3f4f6;
+  border-top: var(--glass-border);
 }
 
 /* ── EMPTY STATE ─────────────────────────────────────────────── */
@@ -3928,7 +3990,7 @@ textarea.form-control {
   box-shadow: 0 8px 32px rgba(0,0,0,.12);
 }
 .modal-header {
-  border-bottom: 1px solid #f3f4f6 !important;
+  border-bottom: var(--glass-border);
   padding: 1rem 1.25rem !important;
 }
 .modal-title {
@@ -3939,14 +4001,8 @@ textarea.form-control {
   padding: 1.25rem !important;
 }
 .modal-footer {
-  border-top: 1px solid #f3f4f6 !important;
+  border-top: var(--glass-border);
   padding: .875rem 1.25rem !important;
-}
-.btn-close {
-  opacity: .4;
-}
-.btn-close:hover {
-  opacity: .7;
 }
 
 /* ── UPLOAD SELECTED ─────────────────────────────────────────── */
@@ -4567,11 +4623,10 @@ textarea.form-control {
         top: var(--space-5) !important;
     }
     /* /navbar */
-    .navbar-toggler,
-    #navbarToggler,
-    .menu-overlay,
-    #navbarNav-mobile,
-    .weather {
+  .navbar-actions .navbar-toggler .hamburger-icon,
+  .menu-overlay,
+  #navbarNav-mobile,
+  .weather {
         display: none;
     }
     .navbar .container {
@@ -4627,15 +4682,15 @@ textarea.form-control {
     }
     .nav-dd-panel {
         position: absolute;
-        top: calc(100% + var(--space-3));
+        top: 40px;
         left: 50%;
-        transform: translateX(-50%) translateY(-6px);
+        transform: translateX(-50%);
         min-width: 220px;
-        background: var(--bg-primary);
+        background: var(--bg-white);
         border: var(--glass-border);
         border-radius: var(--radius);
         box-shadow: var(--glass-shadow);
-        padding: 0 !important;
+        padding: 1rem;
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -4650,7 +4705,7 @@ textarea.form-control {
         opacity: 1;
         visibility: visible;
         pointer-events: all;
-        transform: translateX(-50%) translateY(0);
+        transform: translateX(-50%);
         transition:
             opacity var(--duration) var(--ease),
             transform var(--duration) var(--ease),
@@ -4665,7 +4720,7 @@ textarea.form-control {
         align-items: center;
         gap: var(--space-3);
         padding: var(--space-2) var(--space-4);
-        margin: 2px;
+        margin: 7px;
         border-radius: var(--radius);
         font-size: var(--space-4);
         font-weight: 400;

@@ -398,7 +398,7 @@ $isPintasanActive = (bool) array_filter(
   </nav>
   <div class="menu-overlay" id="menuOverlay"></div>
     <div class="navbar-collapse" id="navbarNav-mobile">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mb-5">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle mb-2 <?= $isPintasanActive ? 'is-current' : '' ?>" href="#" role="button" data-bs-toggle="dropdown">
           <i class="fa-solid fa-grip"></i> Pintasan
@@ -420,7 +420,7 @@ $isPintasanActive = (bool) array_filter(
       <li class="nav-item"><a class="nav-link <?= isActive('/gallery') ?>"
         href="/gallery"><i class="fa-solid
         fa-images"></i>Gallery</a></li>
-      <div class="weather m-4" id="w"><small>Cek cuaca...</small></div>
+      <li class="nav-item weather" id="w"><small>Cek cuaca...</small></li>
     </ul>
   
   <?php if (empty($_SESSION['user'])): ?>
@@ -429,11 +429,11 @@ $isPintasanActive = (bool) array_filter(
           <div id="google-login-btn">
           </div>
           <div class="divider-v"></div>
-          <a href="/login" class="btn btn-glass">
+          <a href="/login" class="btn btn-outline-primary btn-sm">
               <i class="fa-regular fa-user fa-sm"></i>
               Masuk
           </a>
-          <a href="/register" class="btn btn-glass btn-glass-solid">
+          <a href="/register" class="btn btn-outline-primary btn-sm">
               <i class="fa-solid fa-pen fa-sm"></i>
               Daftar
           </a>
@@ -457,7 +457,7 @@ $isPintasanActive = (bool) array_filter(
               </span>
           </a>
           <div class="divider-v"></div>
-          <a href="/logout" class="btn-logout">
+          <a href="/logout" class="btn btn-outline-primary btn-sm">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                   <polyline points="16 17 21 12 16 7"/>
@@ -471,7 +471,7 @@ $isPintasanActive = (bool) array_filter(
   </div>
   <div id="live-search-wrapper" role="search" aria-label="Pencarian situs">
     <div class="ls-inner container">
-      <div class="ls-bar mt-4">
+      <div class="ls-bar">
         <i class="fas fa-search ls-icon-search" aria-hidden="true"></i>
         <input type="text" id="searchInput2"
                placeholder="Cari ..."
@@ -492,22 +492,21 @@ $isPintasanActive = (bool) array_filter(
         <div class="chatbot-header container">
           <span class="offcanvas-title fw-semibold fs-5"><i class="fas fa-solid fa-circle-user
           me-2"></i>Asisten Web</span>
-          <button aria-label="Close chat" class="close-btn" data-bs-dismiss="offcanvas"><i class="fa-solid fa-xmark"></i></button>
+          <div>
+          <button aria-label="Clear chat" class="btn clear-chat me-2" onclick="clearChat()"><i class="fas fa-trash"></i></button>
+          <button aria-label="Close chat" class="btn close-btn" data-bs-dismiss="offcanvas"><i class="fa-solid fa-xmark"></i></button>
+          </div>
         </div>
       </div>
       <div class="offcanvas-body p-3">
         <div class="chat-messages" id="chat-messages"></div>
-        <div class="border-top bottom-area p-2">
-          <div class="input-group">
+        <div class="bottom-area px-4">
+          <div class="chat-input-group">
             <input type="text" id="message-input" class="input-chat" placeholder="Tanyakan sesuatu...">
-          </div>
-          <div class="button-group gap-2 mt-2">
-            <button class="btn btn-primary btn-sm" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-            <button class="btn btn-accent btn-sm" onclick="clearChat()"><i class="fas fa-trash"></i></button>
+              <button aria-label="Send chat" class="btn send-chat" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
           </div>
         </div>
       </div>
     </div>
   <button class="fab fab-chatbot" id="chatbotFabBtn" aria-label="Open Chat"><i class="fas fa-comment-dots"></i></button>
-  <button id="scrollTopBtn" class="fab scroll-top-btn" aria-label="Scroll to top">↑</button>
-<div class="main-content">
+  <button id="scrollTopBtn" class="fab scroll-top-btn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>

@@ -155,13 +155,13 @@ $isPintasanActive = (bool) array_filter(
     }
     #page-loader {
       position: fixed;
-      top: 0;
+      top: 70px;
       left: 0;
-      width: 70%;
-      height: 3px;
+      width: 40%;
+      height: 2px;
       background: #7c3aed;
       z-index: 9999;
-      transition: width 0.3s ease, opacity 0.3s ease;
+      transition: width 0.5s ease, opacity 0.5s ease;
       }
   </style>
 </head>

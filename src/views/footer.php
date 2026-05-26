@@ -74,7 +74,7 @@
       setTimeout(() => {
         loader.style.opacity = '0';
         setTimeout(() => loader.remove(), 300);
-      }, 400);
+      }, 700);
     });
   </script>
 </body>

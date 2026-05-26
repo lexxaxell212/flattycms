@@ -87,6 +87,15 @@
     --bandung: #201b33;
     --dotid: #6c2bd9;
     --strips: #6c2bd933;
+    
+    --tp-purple:       #7c3aed;
+    --tp-purple-dark:  #6d28d9;
+    --tp-purple-light: #ede9fe;
+    --tp-purple-mid:   #8b5cf6;
+    --tp-radius:       10px;
+    --tp-radius-lg:    14px;
+    --tp-radius-xl:    18px;
+    --tp-transition:   .15s ease;
 }
 
 /* ============= flatty dark ============= */

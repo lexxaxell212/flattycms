@@ -18,18 +18,20 @@ $page_title = "Layanan Publik Bandung";
               <h3>Grab/Gojek</h3>
               <p>Layanan door-to-door yang fleksibel, mencakup motor (Bike) dan mobil (Car).</p>
 
-              <ul class="list-unstyled mb-3">
+              <ul class="list-unstyled">
                 <li class="text-muted small mb-1"><strong>Motor :</strong> Jasa minimal sekitar Rp9.200 – Rp11.000 (untuk 4 km pertama), dengan tarif selanjutnya sekitar Rp2.300 – Rp2.750/km.</li>
                 <li class="text-muted small mb-1">
                   <strong>Mobil :</strong> Tarif sangat bergantung pada jam sibuk (surge pricing) dan jarak, biasanya mulai dari Rp15.000 – Rp20.000 untuk jarak pendek.
                 </li>
-                <li class="text-muted small mb-5"><strong>Pelayanan :</strong> Penjemputan sesuai titik GPS, pelacakan real-time, pilihan pembayaran tunai atau dompet digital (OVO/GoPay), dan fitur keamanan (tombol darurat).</li>
+                <li class="text-muted small mb-2"><strong>Pelayanan :</strong> Penjemputan sesuai titik GPS, pelacakan real-time, pilihan pembayaran tunai atau dompet digital (OVO/GoPay), dan fitur keamanan (tombol darurat).</li>
               </ul>
-              <a href="https://google.com/search?q=gojek" class="btn btn-primary">Gojek
+              <a href="https://google.com/search?q=grab" class="btn text-white"
+              style="background:rgba(13,142,0,0.9)" >Grab
                   <i class="arrow-icon fas fa-angle-right"></i>
               </a>
-              <a href="https://google.com/search?q=grab" class="btn btn-accent
-              text-white">Grab<i class="arrow-icon fas fa-angle-right"></i>
+              <a href="https://google.com/search?q=gojek" class="btn text-white"
+              style="background:rgba(23,190,0,0.9)">Gojek<i class="arrow-icon fas
+              fa-angle-right"></i>
               </a>
             </div>
           </div>

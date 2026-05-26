@@ -109,8 +109,6 @@ $categories = safe_get_categories($pdo);
                     </a>
                 <?php endif; ?>
             </div>
-            
-          </section>
 
             <!-- Konten: sanitize XSS + fix image path -->
             <div class="post-content">
@@ -119,6 +117,8 @@ $categories = safe_get_categories($pdo);
                   $post["title"] ?? "",
                 ) ?>
             </div>
+            
+          </section>
 
             <hr class="my-5">
             
@@ -144,18 +144,18 @@ $categories = safe_get_categories($pdo);
                 <a href="https://wa.me/?text=<?= $share_title ?>%20<?= $share_url ?>"
                    target="_blank" rel="noopener"
                    class="btn btn-outline-primary">
-                    <i class="fa-brand fa-whatsapp"></i>
+                    <i class="fa-brands fa-whatsapp"></i>
                 </a>
             
                 <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $share_url ?>"
                    target="_blank" rel="noopener"
                    class="btn btn-outline-primary">
-                    <i class="fa-brand fa-facebook-f"></i>
+                    <i class="fa-brands fa-facebook-f"></i>
                 </a>
             
                 <button onclick="copyLink()"
                    class="btn btn-outline-primary">
-                    <i class="fa-brand fa-instagram"></i>
+                    <i class="fa-brands fa-instagram"></i>
                 </button>
             </div>
             
@@ -173,13 +173,13 @@ $categories = safe_get_categories($pdo);
   else: ?>
 
     <div class="row g-4">
-
+      <section>
         <!-- ── Kiri: daftar post ── -->
         <div class="col-md-8">
-
+          
             <div class="d-flex align-items-center justify-content-between">
-              <section>
-                <h2 class="mb-4">
+              
+                <h2 class="mb-4 text-title">
                     <?php if ($cat_id > 0):
                       $active_cats = array_filter(
                         $categories,
@@ -202,7 +202,6 @@ $categories = safe_get_categories($pdo);
                         Semua Blog
                     </a>
                 <?php endif; ?>
-              </section>
                
             </div>
 
@@ -216,12 +215,10 @@ $categories = safe_get_categories($pdo);
             <?php foreach ($posts as $p): ?>
             
             <div class="card card-glass mb-4">
-             
                 <div class="card-body">
-                 
                     <a href="/blogs/?id=<?= (int) $p[
                       "id"
-                    ] ?>" class="h2 mb-2">
+                    ] ?>" class="h5 mb-3 mt-2">
                         <?= htmlspecialchars(
                           $p["title"] ?? "",
                           ENT_QUOTES,
@@ -229,7 +226,7 @@ $categories = safe_get_categories($pdo);
                         ) ?>
                     </a>
                     
-                    <div class="d-flex align-items-center justify-content-start gap-2 small text-muted">
+                    <div class="d-flex align-items-center justify-content-start gap-2 small text-muted mb-3">
                      <!-- TAMBAH VIEW -->
                      <?php if (!empty($p["views"]) && (int) $p["views"] > 0): ?>
                      <span class="badge text-muted"><i class="fas fa-eye mr-2"></i><?= number_format((int) $p["views"]) ?></span>
@@ -250,7 +247,7 @@ $categories = safe_get_categories($pdo);
                  </div>
 
                     <!-- truncate dulu, baru escape -->
-                    <p class="text-muted small mb-2">
+                    <p class="text-muted small mb-4">
                         <?= safe_excerpt(
                           $p["excerpt"] ?? ($p["content"] ?? ""),
                           160,
@@ -258,7 +255,7 @@ $categories = safe_get_categories($pdo);
                     </p>
                     
                     <a href="/blogs/?id=<?= (int) $p["id"] ?>">
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary mb-2">
                          Baca Selengkapnya
                          <i class="arrow-icon fas fa-angle-right me-1"></i>
                        </button>
@@ -304,7 +301,7 @@ $categories = safe_get_categories($pdo);
                       endif;
                       $prev_printed = false;
                       ?>
-                    <li class="page-item bg-primary text-white <?= $i === $page ? "active" : "" ?>"
+                    <li class="page-item <?= $i === $page ? "active" : "" ?>"
                         <?= $i === $page ? 'aria-current="page"' : "" ?>>
                         <a class="page-link"
                            href="?<?= http_build_query(
@@ -321,7 +318,7 @@ $categories = safe_get_categories($pdo);
                     ?>
 
                     <!-- Next -->
-                    <li class="page-item bg-gray text-nav-hover <?= $page >= $total_pages
+                    <li class="page-item <?= $page >= $total_pages
                       ? "disabled"
                       : "" ?>">
                         <a class="page-link"
@@ -355,7 +352,10 @@ $categories = safe_get_categories($pdo);
                         <?php endif; ?>
                         <?php foreach ($categories as $cat): ?>
                         <a href="/blogs/?cat=<?= (int) ($cat["id"] ?? 0) ?>"
-                           class="d-flex justify-content-between align-items-center py-2 border-bottom <?= (int) ($cat["id"] ?? 0) === $cat_id ? "fw-bold" : "text-body" ?>">
+                           class="d-flex justify-content-between
+                           align-items-center py-2 border-bottom cat-link <?= (int)
+                           ($cat["id"] ?? 0) === $cat_id ? "fw-bold" :
+                           "text-body" ?>">
                             <span><?= htmlspecialchars(
                               $cat["name"] ?? "",
                               ENT_QUOTES,
@@ -370,7 +370,7 @@ $categories = safe_get_categories($pdo);
                 </div>
             </div>
         </div>
-
+      </section>
     </div>
 
 <?php endif; ?>

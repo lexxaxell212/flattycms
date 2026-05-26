@@ -38,7 +38,7 @@ $page_title = "Kritik dan Saran";
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="email" class="form-control" id="feedback-email" name="email" placeholder="Email" required>
+                                <input type="email" class="form-control" id="feedback-email" name="email" placeholder="Email">
                                 <label for="feedback-email"><i class="fas fa-envelope me-2"></i>Email</label>
                             </div>
                         </div>

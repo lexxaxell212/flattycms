@@ -16,10 +16,10 @@ $page_title = "Kebijakan Privasi";
         <p class="text-muted">Kami mengumpulkan data berikut saat Anda menggunakan layanan kami:</p>
         <ul class="list-unstyled text-muted small">
           <li class="mb-2"><i class="fas fa-circle-dot me-2
-          text-primary"></i><strong>Nama & Email</strong> — dikumpulkan saat
+          text-purple"></i><strong>Nama & Email</strong> — dikumpulkan saat
           pendaftaran akun.</li>
-          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Data Kunjungan</strong> — alamat IP, jenis browser, dan halaman yang dikunjungi.</li>
-          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Cookie</strong> — untuk analitik dan preferensi pengguna.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-purple"></i><strong>Data Kunjungan</strong> — alamat IP, jenis browser, dan halaman yang dikunjungi.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-purple"></i><strong>Cookie</strong> — untuk analitik dan preferensi pengguna.</li>
         </ul>
       </div>
 
@@ -40,9 +40,9 @@ $page_title = "Kebijakan Privasi";
         <h3>3. Berbagi Data</h3>
         <p class="text-muted">Data hanya dibagikan secara terbatas kepada:</p>
         <ul class="list-unstyled text-muted small">
-          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Penyedia Layanan</strong> — hosting dan email service yang terikat perjanjian kerahasiaan.</li>
-          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Google Analytics</strong> — data anonim untuk statistik pengunjung.</li>
-          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Otoritas Hukum</strong> — hanya jika diminta secara resmi berdasarkan hukum yang berlaku.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-purple"></i><strong>Penyedia Layanan</strong> — hosting dan email service yang terikat perjanjian kerahasiaan.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-purple"></i><strong>Google Analytics</strong> — data anonim untuk statistik pengunjung.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-purple"></i><strong>Otoritas Hukum</strong> — hanya jika diminta secara resmi berdasarkan hukum yang berlaku.</li>
         </ul>
       </div>
 
@@ -61,10 +61,10 @@ $page_title = "Kebijakan Privasi";
         <h3>5. Hak Anda</h3>
         <p class="text-muted">Sebagai pengguna, Anda berhak untuk:</p>
         <ul class="list-unstyled text-muted small">
-          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Akses</strong> — meminta salinan data pribadi yang kami simpan.</li>
-          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-primary"></i><strong>Penghapusan</strong> — meminta penghapusan data Anda dari sistem kami.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-purple"></i><strong>Akses</strong> — meminta salinan data pribadi yang kami simpan.</li>
+          <li class="mb-2"><i class="fas fa-circle-dot me-2 text-purple"></i><strong>Penghapusan</strong> — meminta penghapusan data Anda dari sistem kami.</li>
           <li class="mb-2"><i class="fas fa-circle-dot me-2
-          text-primary"></i><strong>Berhenti Berlangganan</strong> — klik <a
+          text-purple"></i><strong>Berhenti Berlangganan</strong> — klik <a
           href="/unsubscribe" class="link">Unsubscribe</a> di email kami atau
           hubungi kami langsung.</li>
         </ul>
@@ -76,10 +76,10 @@ $page_title = "Kebijakan Privasi";
         <h3>6. Keamanan Data</h3>
         <p class="text-muted mb-2">Langkah perlindungan yang kami terapkan:</p>
         <ul class="list-unstyled text-muted small">
-          <li class="mb-2"><i class="fas fa-lock me-2 text-primary"></i><strong>SSL/TLS Encryption</strong> — semua data yang ditransmisikan dienkripsi end-to-end.</li>
-          <li class="mb-2"><i class="fas fa-lock me-2 text-primary"></i><strong>Enkripsi Penyimpanan</strong> — data sensitif disimpan dalam bentuk terenkripsi.</li>
+          <li class="mb-2"><i class="fas fa-lock me-2 text-purple"></i><strong>SSL/TLS Encryption</strong> — semua data yang ditransmisikan dienkripsi end-to-end.</li>
+          <li class="mb-2"><i class="fas fa-lock me-2 text-purple"></i><strong>Enkripsi Penyimpanan</strong> — data sensitif disimpan dalam bentuk terenkripsi.</li>
           <li class="mb-2"><i class="fas fa-triangle-exclamation me-2
-          text-primary"></i><strong>Waspada Phishing</strong> — kami tidak
+          text-purple"></i><strong>Waspada Phishing</strong> — kami tidak
           pernah meminta kata sandi melalui email.</li>
         </ul>
         <p class="text-muted small mb-0">Temukan celah keamanan? Laporkan ke
@@ -128,9 +128,9 @@ $page_title = "Kebijakan Privasi";
         <h3>8. Notifikasi Pelanggaran Data</h3>
         <p class="text-muted mb-2">Jika terjadi pelanggaran data, kami berkomitmen untuk:</p>
         <ul class="list-unstyled text-muted small">
-          <li class="mb-2"><i class="fas fa-clock me-2 text-primary"></i>Melaporkan kepada otoritas dalam <strong>72 jam</strong> sejak insiden diketahui.</li>
-          <li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i>Memberitahu pengguna terdampak melalui email sesegera mungkin.</li>
-          <li class="mb-2"><i class="fas fa-file-shield me-2 text-primary"></i>Mendokumentasikan insiden beserta langkah penanggulangan yang diambil.</li>
+          <li class="mb-2"><i class="fas fa-clock me-2 text-purple"></i>Melaporkan kepada otoritas dalam <strong>72 jam</strong> sejak insiden diketahui.</li>
+          <li class="mb-2"><i class="fas fa-envelope me-2 text-purple"></i>Memberitahu pengguna terdampak melalui email sesegera mungkin.</li>
+          <li class="mb-2"><i class="fas fa-file-shield me-2 text-purple"></i>Mendokumentasikan insiden beserta langkah penanggulangan yang diambil.</li>
         </ul>
       </div>
 
@@ -143,7 +143,7 @@ $page_title = "Kebijakan Privasi";
         <h3>10. Hubungi Kami</h3>
         <p class="text-muted mb-2">Pertanyaan atau keluhan terkait privasi dapat disampaikan melalui:</p>
         <ul class="list-unstyled text-muted small">
-          <li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i><a
+          <li class="mb-2"><i class="fas fa-envelope me-2 text-purple"></i><a
           href="mailto:admin@ayokebandung.id" class="link
           text-decoration-none">admin@ayokebandung.id</a></li>
         </ul>

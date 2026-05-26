@@ -103,7 +103,7 @@ $page_title = "Sejarah Bandung";
           <div class="sb-item__line"></div>
         </div>
         <div class="sb-item__card sb-item__card--highlight">
-          <h3 class="sb-item__title">Bandung Lautan Api</h3>
+          <h3 class="sb-item__title sb-title-d">Bandung Lautan Api</h3>
           <p class="sb-item__body">24 Maret — sekitar 200.000 penduduk membakar rumah mereka sendiri dalam tujuh jam untuk mencegah tentara Sekutu dan NICA menjadikan kota ini markas militer. Salah satu aksi heroik terbesar dalam sejarah Indonesia.</p>
         </div>
       </div>

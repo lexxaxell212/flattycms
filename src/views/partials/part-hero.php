@@ -24,13 +24,13 @@ $slides = [
 
   <div class="container h-100 d-flex align-items-center hero-card-wrapper">
     <div class="glass-hero-card col-12 col-md-7 col-lg-5">
-      <h1 class="mb-3 text-gradient">Jelajahi Bandung</h1>
+      <h1 class="mb-3" style="color:var(--dotid);">Jelajahi Bandung</h1>
       <p class="lead">Eksplorasi destinasi, kuliner, dan penginapan terbaik di Kota Kembang.</p>
       <div class="d-flex gap-2">
         <a href="/trip" class="btn btn-primary">
           Mulai Rencanakan <i class="arrow-icon fas fa-arrow-right ms-2"></i>
         </a>
-        <a href="/things-to-do" class="btn btn-outline-accent">
+        <a href="/things-to-do" class="btn btn-glass">
           Lihat Event
         </a>
       </div>

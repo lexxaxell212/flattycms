@@ -20,32 +20,35 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 
 <script src="<?= JS_URL ?>gallery.js" defer></script>
 
-<main id="content" class="container-fluid">
+<main id="content" class="container-fluid gal-page">
 <div class="container">
 
-  <section>
-    
-      <h2>Galeri Komunitas</h2>
-      <p class="lead">Foto & cerita perjalanan Bandung dari komunitas</p>
-  </section>
-    <div class="gal-header__actions">
+  <section class="gal-hero">
+    <div>
+      <span class="gal-eyebrow">Komunitas Bandung</span>
+      <h2 class="gal-title">Galeri & Review</h2>
+      <p class="gal-sub">Foto & cerita perjalanan Bandung dari komunitas</p>
+    </div>
+    <div class="gal-hero__actions">
       <?php if ($is_logged): ?>
-      <button class="mb-2 gal-btn gal-btn--outline" id="btnOpenUpload">
-        <i class="fa-solid fa-camera me-1"></i>Upload Foto
+      <button class="gal-btn gal-btn--outline" id="btnOpenUpload">
+        <i class="fa-solid fa-camera"></i> Upload Foto
       </button>
-      <button class="mb-2 gal-btn gal-btn--primary" id="btnOpenReview">
-        <i class="fa-solid fa-pen-to-square me-1"></i>Tulis Review
+      <button class="gal-btn gal-btn--primary" id="btnOpenReview">
+        <i class="fa-solid fa-pen-to-square"></i> Tulis Review
       </button>
       <?php else: ?>
-      <a href="/login" class="mb-5 gal-btn gal-btn--outline">
-        <i class="fa-brands fa-google me-1"></i>Login untuk Berkontribusi
+      <a href="/login" class="gal-btn gal-btn--outline">
+        <i class="fa-brands fa-google"></i> Login untuk Berkontribusi
       </a>
       <?php endif; ?>
     </div>
+  </section>
 
+  <!-- Search -->
   <div class="gal-search-block">
     <div class="gal-search-wrap">
-      <i class="fa-solid fa-search gal-search-icon"></i>
+      <i class="fa-solid fa-magnifying-glass gal-search-icon"></i>
       <input type="text" id="searchPoiFilter" class="gal-search-input" placeholder="Cari tempat wisata...">
       <button class="gal-search-reset" id="btnResetSearch" title="Reset">
         <i class="fa-solid fa-xmark"></i>
@@ -54,6 +57,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
     <div id="searchPoiFilterResults" class="gal-search-results"></div>
   </div>
 
+  <!-- Stats -->
   <div class="gal-stats">
     <div class="gal-stat">
       <span class="gal-stat__val" id="statTotal">—</span>
@@ -71,31 +75,34 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
     </div>
   </div>
 
+  <!-- Tabs -->
   <div class="gal-tabs">
     <button class="gal-tab active" data-tab="gallery">
-      <i class="fa-solid fa-images me-1"></i>Galeri Foto
+      <i class="fa-solid fa-images"></i> Galeri Foto
     </button>
     <button class="gal-tab" data-tab="review">
-      <i class="fa-solid fa-star me-1"></i>Review
+      <i class="fa-solid fa-star"></i> Review
     </button>
   </div>
 
+  <!-- Tab Gallery -->
   <div id="tab-gallery">
     <div class="row g-3" id="galleryGrid">
-      <div class="col-12 text-center py-5 text-muted" id="galleryLoading">
+      <div class="col-12 text-center py-5 text-muted">
         <i class="fa-solid fa-spinner fa-spin fa-2x mb-3 d-block"></i>Memuat foto...
       </div>
     </div>
-    <div class="d-flex justify-content-center gap-2 mt-4" id="pagination"></div>
+    <div class="gal-pagination" id="pagination"></div>
   </div>
 
+  <!-- Tab Review -->
   <div id="tab-review" style="display:none">
     <div id="reviewGrid" class="gal-review-grid">
       <div class="text-center py-5 text-muted">
         <i class="fa-solid fa-spinner fa-spin fa-2x mb-3 d-block"></i>Memuat review...
       </div>
     </div>
-    <div class="d-flex justify-content-center gap-2 mt-4" id="paginationReview"></div>
+    <div class="gal-pagination" id="paginationReview"></div>
   </div>
 
 </div>
@@ -121,14 +128,17 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 <div id="uploadModal" class="gal-modal-overlay" style="display:none">
   <div class="gal-modal">
     <div class="gal-modal__header">
-      <span><i class="fa-solid fa-camera me-2 text-primary"></i>Upload Foto</span>
+      <span><i class="fa-solid fa-camera me-2"></i>Upload Foto</span>
       <button class="gal-modal__close" id="btnBatalUpload"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="gal-modal__body">
       <div class="gal-field">
         <label class="gal-label">Lokasi <span class="text-danger">*</span></label>
-        <input type="text" id="uploadPoiSearch" class="gal-input" placeholder="Ketik nama tempat...">
-        <div id="uploadPoiResults" class="gal-search-results" style="display:none"></div>
+        <div class="gal-search-field-wrap">
+          <input type="text" id="uploadPoiSearch" class="gal-input" placeholder="Ketik nama tempat...">
+          <!-- FIXED: hapus style display:none, biarkan CSS .gal-search-results handle -->
+          <div id="uploadPoiResults" class="gal-search-results gal-search-results--modal"></div>
+        </div>
         <input type="hidden" id="uploadPoiId">
         <div id="uploadPoiSelected" class="gal-selected" style="display:none">
           <i class="fa-solid fa-check me-1"></i><span id="uploadPoiName"></span>
@@ -136,8 +146,12 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
       </div>
       <div class="gal-field">
         <label class="gal-label">Foto <span class="text-danger">*</span></label>
-        <input type="file" id="uploadFile" class="gal-input" accept="image/jpeg,image/png,image/webp">
-        <div class="gal-hint">Maks 10MB · JPG, PNG, WebP</div>
+        <label class="gal-file-label" id="uploadFileLabel">
+          <input type="file" id="uploadFile" accept="image/jpeg,image/png,image/webp" class="gal-file-input">
+          <i class="fa-solid fa-cloud-arrow-up gal-file-icon"></i>
+          <span class="gal-file-text">Klik untuk pilih foto</span>
+          <span class="gal-file-hint">Maks 10MB · JPG, PNG, WebP</span>
+        </label>
         <div id="uploadPreview" style="display:none" class="mt-2">
           <img id="previewImg" src="" class="img-fluid rounded" style="max-height:180px;object-fit:cover;width:100%">
         </div>
@@ -150,7 +164,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
     <div class="gal-modal__footer">
       <button class="gal-btn gal-btn--ghost" id="btnBatalUpload2">Batalkan</button>
       <button class="gal-btn gal-btn--primary" id="btnKirimUpload">
-        <i class="fa-solid fa-upload me-1"></i>Upload
+        <i class="fa-solid fa-upload"></i> Upload
       </button>
     </div>
   </div>
@@ -160,14 +174,17 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 <div id="reviewModal" class="gal-modal-overlay" style="display:none">
   <div class="gal-modal">
     <div class="gal-modal__header">
-      <span><i class="fa-solid fa-pen-to-square me-2 text-primary"></i>Tulis Review</span>
+      <span><i class="fa-solid fa-pen-to-square me-2"></i>Tulis Review</span>
       <button class="gal-modal__close" id="btnBatalReview"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="gal-modal__body">
       <div class="gal-field">
         <label class="gal-label">Lokasi <span class="text-danger">*</span></label>
-        <input type="text" id="reviewPoiSearch" class="gal-input" placeholder="Ketik nama tempat...">
-        <div id="reviewPoiResults" class="gal-search-results" style="display:none"></div>
+        <div class="gal-search-field-wrap">
+          <input type="text" id="reviewPoiSearch" class="gal-input" placeholder="Ketik nama tempat...">
+          <!-- FIXED: hapus style display:none, biarkan CSS .gal-search-results handle -->
+          <div id="reviewPoiResults" class="gal-search-results gal-search-results--modal"></div>
+        </div>
         <input type="hidden" id="reviewPoiId">
         <div id="reviewPoiSelected" class="gal-selected" style="display:none">
           <i class="fa-solid fa-check me-1"></i><span id="reviewPoiName"></span>
@@ -194,7 +211,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
     <div class="gal-modal__footer">
       <button class="gal-btn gal-btn--ghost" id="btnBatalReview2">Batalkan</button>
       <button class="gal-btn gal-btn--primary" id="btnKirimReview">
-        <i class="fa-solid fa-paper-plane me-1"></i>Kirim Review
+        <i class="fa-solid fa-paper-plane"></i> Kirim Review
       </button>
     </div>
   </div>

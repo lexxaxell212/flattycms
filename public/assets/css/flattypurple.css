@@ -41,8 +41,10 @@
     --space-24: 6rem;
     
     --radius-none: 0;
-    --radius-sm: 0.375rem;
-    --radius: 1.25rem;
+    --radius-sm: 0.75rem;
+    --radius: 1rem;
+    --radius-lg: 1.25rem;
+    --radius-xl: 1.5rem
     --radius-full: 9999px;
     
     --navbar-height: 70px;
@@ -70,6 +72,9 @@
     
     --bg-white: #faf9ff;
     --bg-primary: #faf5ff;
+    --bg-purple: #7c3aed;
+    --bg-purple-light: #ede9fe;
+    --bg-purple-mid: #8b5cf6;
     --bg-hover: #6d28d9;
     --bg-nav: transparent;
     --bg-nav-hover: rgba(138, 43, 217, 0.08);
@@ -87,15 +92,6 @@
     --bandung: #201b33;
     --dotid: #6c2bd9;
     --strips: #6c2bd933;
-    
-    --tp-purple:       #7c3aed;
-    --tp-purple-dark:  #6d28d9;
-    --tp-purple-light: #ede9fe;
-    --tp-purple-mid:   #8b5cf6;
-    --tp-radius:       10px;
-    --tp-radius-lg:    14px;
-    --tp-radius-xl:    18px;
-    --tp-transition:   .15s ease;
 }
 
 /* ============= flatty dark ============= */

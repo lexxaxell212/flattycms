@@ -1,7 +1,7 @@
 <?php
 $page_title = "Kebijakan Privasi";
 ?>
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
   <div class="row">
     <div class="col-lg">

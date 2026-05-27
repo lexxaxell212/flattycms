@@ -11,7 +11,6 @@ $categories = safe_get_categories($pdo);
 
 <script src="<?= JS_URL ?>artikel-slider.js" defer></script>
 
-<div class="container-fluid">
   <div class="container">
     <section id="artikel-terbaru" aria-label="Artikel Terbaru">
 
@@ -73,4 +72,3 @@ $categories = safe_get_categories($pdo);
 
     </section>
   </div>
-</div>

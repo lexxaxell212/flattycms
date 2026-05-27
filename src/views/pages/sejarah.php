@@ -2,7 +2,7 @@
 $page_title = "Sejarah Bandung";
 ?>
 
-<main id="content" class="container-fluid sb-page">
+<main id="content" class="sb-page">
   <div class="container mx-auto" style="max-width:740px">
 
     <section class="text-center">

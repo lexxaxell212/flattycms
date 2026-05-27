@@ -4,7 +4,7 @@ require_once LIB_PATH . "v-things-to-do.php";
 $page_title = 'Things to Do';
 ?>
 
-<main id="content" class="container-fluid tdopage-wrap">
+<main id="content" class="tdopage-wrap">
   <div class="container">
 
     <div class="tdopage-header">

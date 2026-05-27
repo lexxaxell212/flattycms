@@ -45,7 +45,7 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
 .ql-editor   { font-size:1rem; line-height:1.6; }
 </style>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
 
 <?php if ($msg): ?>

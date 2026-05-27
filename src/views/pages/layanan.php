@@ -1,7 +1,7 @@
 <?php
 $page_title = "Layanan Publik Bandung";
 ?>
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
   <section id="Layanan-Publik-Bandung">
     <h1 class="text-title">Transportasi Bandung</h1>

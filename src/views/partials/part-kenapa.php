@@ -22,7 +22,7 @@ $_khb_colors = [
 ?>
 
 <?php if (!empty($_khb_items)): ?>
-<section class="khb-section container-fluid">
+<section class="khb-section">
   <div class="container">
 
     <div class="khb-header">

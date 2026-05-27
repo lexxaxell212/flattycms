@@ -260,16 +260,15 @@ h6 {
     transform: scale(1);
     z-index: 1;
 }
-
+@media (min-width: 768px) {
 .hero-slide-wisata  { background-image: url("../images/wisata.webp"); }
 .hero-slide-kuliner { background-image: url("../images/kuliner.webp"); }
 .hero-slide-hotel   { background-image: url("../images/hotel.webp"); }
-
-@media (max-width: 768px) {
-    .hero-slide-wisata  { background-image: url("../images/wisata-mobile.webp"); }
-    .hero-slide-kuliner { background-image: url("../images/kuliner-mobile.webp"); }
-    .hero-slide-hotel   { background-image: url("../images/hotel-mobile.webp"); }
 }
+
+.hero-slide-wisata  { background-image: url("../images/wisata-mobile.webp"); }
+.hero-slide-kuliner { background-image: url("../images/kuliner-mobile.webp"); }
+.hero-slide-hotel   { background-image: url("../images/hotel-mobile.webp"); }
 
 .hero-overlay {
     position: absolute;
@@ -360,6 +359,9 @@ h6 {
 
 
 /* ============= fast nav ============= */
+.nav-desktop {
+  display: none;
+}
 .navbar {
     position: fixed;
     top: 0;
@@ -558,7 +560,7 @@ h6 {
     border-radius: 50%;
     background: transparent;
     transition: background var(--duration) var(--ease);
-    display: flex !important;
+    display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -776,16 +778,18 @@ h6 {
     align-items: start;
     display: flex;
     flex-direction: column;
-    gap: 4px;
 }
 .temp {
     font-size: var(--space-5);
     line-height: var(--space-4);
     font-weight: var(--fw-bold);
+    padding-block: 1rem;
+    color: var(--text-nav);
 }
 .cond,
 .city {
-    font-size: var(--space-4);
+    font-size: var(--space-3);
+    color: var(--text-nav);
 }
 .weather .icon {
     display: none;

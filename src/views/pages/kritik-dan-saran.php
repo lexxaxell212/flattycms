@@ -3,7 +3,7 @@ $page_title = "Kritik dan Saran";
 ?>
 <script src="<?= JS_URL ?>feedback.js" defer></script>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
     <section id="Kritik-dan-saran" class="text-center">
         <h1 class="text-title">Kritik & Saran</h1>

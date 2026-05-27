@@ -6,7 +6,7 @@ $total     = (int)$pdo->query("SELECT COUNT(*) FROM feedback")->fetchColumn();
 $feedbacks = $pdo->query("SELECT * FROM feedback ORDER BY created_at DESC LIMIT $limit")->fetchAll();
 ?>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
 
 <!-- Header -->

@@ -36,7 +36,7 @@ if ($id > 0) {
 $categories = safe_get_categories($pdo);
 ?>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
 
 <?php if ($post):// ══════════ SINGLE POST VIEW ══════════

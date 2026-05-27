@@ -3,7 +3,7 @@ require_once LIB_PATH . "v-things-to-do.php";
 ?>
 
 <?php if ($_tdo_next): ?>
-<section class="container-fluid py-5 tdop-section">
+<section class="tdop-section">
   <div class="container">
 
     <div class="d-flex align-items-end justify-content-between mb-4">

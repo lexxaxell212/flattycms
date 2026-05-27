@@ -3,7 +3,7 @@ require_once LIB_PATH . "v-review.php";
 ?>
 
 <?php if (!empty($_rev_items)): ?>
-<section class="rev-section container-fluid">
+<section class="rev-section">
   <div class="container">
 
     <div class="rev-header">

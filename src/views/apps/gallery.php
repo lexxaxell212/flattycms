@@ -20,7 +20,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 
 <script src="<?= JS_URL ?>gallery.js" defer></script>
 
-<main id="content" class="container-fluid gal-page">
+<main id="content" class="gal-page">
 <div class="container">
 
   <section class="gal-hero">

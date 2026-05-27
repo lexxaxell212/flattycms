@@ -229,5 +229,5 @@ $current = preg_replace('#^admin/?#', '', $request_path);
         </li>
       </ul>
     </div>
-<button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top">↑</button>
+<button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
 <div class="main-content">

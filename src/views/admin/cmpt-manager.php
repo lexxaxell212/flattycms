@@ -4,7 +4,7 @@ $error_msg   = $error_msg   ?? null;
 $csrf        = generate_csrf_token();
 ?>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
 
 <?php if (isset($_GET['success']) || $success_msg): ?>

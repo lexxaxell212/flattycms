@@ -1,7 +1,7 @@
 <?php
 $page_title = "Tentang";
 ?>
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
   <section id="Tentang">
     <h2>Tentang</h2>

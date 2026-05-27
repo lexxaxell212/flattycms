@@ -6,7 +6,7 @@ $pois       = get_all_poi();
 $total      = count($pois);
 ?>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
 
   <div class="card border-0 shadow-sm mb-4">

@@ -19,7 +19,7 @@ $newsletters = $pdo->query("SELECT * FROM newsletters ORDER BY sent_at DESC LIMI
 $csrf = generate_csrf_token();
 ?>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
 
 <?php if ($msg): ?>

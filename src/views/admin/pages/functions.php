@@ -60,6 +60,9 @@ if (isset(\$_SESSION['user'])) {
 
 require_once SRC_PATH . 'headerv2.php';
 ?>
+            
+<script src="<?= JS_URL ?>reactions.js" defer></script>
+
 <main id="content" class="container-fluid">
   <div class="container">
     {$html_content}

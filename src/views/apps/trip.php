@@ -67,27 +67,28 @@ $cats_json  = json_encode($categories);
 
   <div class="tp-tabs">
     <button class="tp-tab active" data-tab="explore">
-      <i class="fa-solid fa-compass me-1"></i>Explore POI
+      Explore POI
     </button>
     <button class="tp-tab" data-tab="tripku">
-      <i class="fa-solid fa-suitcase me-1"></i>Tripku
+      Tripku
     </button>
     <button class="tp-tab" data-tab="map">
-      <i class="fa-solid fa-map me-1"></i>Map POI
+      Map POI
     </button>
   </div>
 
   <div id="tab-explore" class="tp-tab-content">
   <div class="mb-3">
-    <div class="input-group input-group-sm mb-2">
+    <div class="input-group mb-2">
       <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
       <input type="text" id="exploreSearch" class="form-control" placeholder="Cari tempat wisata...">
     </div>
     <div class="d-flex gap-2 flex-wrap" id="exploreCatFilter">
-      <button class="btn btn-sm btn-primary explore-cat active" data-cat="">Semua</button>
+      <button class="btn btn-primary btn-sm explore-cat active" data-cat="">Semua</button>
       <?php foreach ($categories as $cat): ?>
-      <button class="btn btn-sm btn-outline-secondary explore-cat" data-cat="<?= $cat['id'] ?>">
-        <i class="fa-solid <?= safe_html($cat['icon']) ?> me-1"></i><?= safe_html($cat['name']) ?>
+      <button class="btn btn-outline-primary btn-sm explore-cat" data-cat="<?=
+      $cat['id'] ?>">
+        <?= safe_html($cat['name']) ?>
       </button>
       <?php endforeach; ?>
     </div>
@@ -95,7 +96,7 @@ $cats_json  = json_encode($categories);
   <div style="position:relative">
     <div id="explorePoiList" class="tp-card-grid"></div>
     <div id="exploreOverlay" style="display:none;position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to bottom, transparent, #fff);display:flex;align-items:flex-end;justify-content:center;padding-bottom:1rem">
-      <button class="btn btn-primary px-4" id="btnShowAllPoi">
+      <button class="btn btn-primary btn-sm" id="btnShowAllPoi">
         <i class="fa-solid fa-grid me-1"></i>Lihat Semua
       </button>
     </div>
@@ -113,7 +114,7 @@ $cats_json  = json_encode($categories);
       <div class="tp-empty-state">
         <i class="fa-solid fa-lock"></i>
         <p>Login untuk melihat trip tersimpanmu.</p>
-        <a href="/login" class="btn btn-primary btn-sm mt-2">
+        <a href="/login" class="btn btn-primary mt-2">
           <i class="fa-brands fa-google me-1"></i>Login dengan Google
         </a>
       </div>
@@ -127,8 +128,8 @@ $cats_json  = json_encode($categories);
         <i class="fa-solid fa-layer-group me-1"></i>Semua
       </button>
       <?php foreach ($categories as $cat): ?>
-      <button class="btn btn-outline-secondary btn-sm cat-filter" data-cat="<?= $cat['id'] ?>">
-        <i class="fa-solid <?= safe_html($cat['icon']) ?> me-1"></i><?= safe_html($cat['name']) ?>
+      <button class="btn btn-outline-primary btn-sm cat-filter" data-cat="<?= $cat['id'] ?>">
+        <?= safe_html($cat['name']) ?>
       </button>
       <?php endforeach; ?>
     </div>
@@ -138,11 +139,12 @@ $cats_json  = json_encode($categories);
     </div>
 
     <div class="tp-search-wrap">
-      <div class="input-group input-group-sm">
-        <span class="input-group-text border-end-0">
+      <div class="input-group">
+        <span class="input-group-text">
           <i class="fa-solid fa-search text-muted"></i>
         </span>
-        <input type="text" id="searchPoi" class="form-control border-start-0" placeholder="Cari lokasi di peta...">
+        <input type="text" id="searchPoi" class="form-control" placeholder="Cari
+        lokasi di map...">
       </div>
       <div id="searchPoiResults" class="list-group shadow"></div>
     </div>
@@ -152,7 +154,7 @@ $cats_json  = json_encode($categories);
       <span><i class="fa-solid fa-route text-success"></i>Tambahkan ke Trip Planner</span>
       <?php if (!$is_logged): ?>
       <span><i class="fa-solid fa-lock text-warning"></i>
-        <a href="/auth/google" class="text-warning text-decoration-none">Login</a> untuk simpan trip
+        <a href="/login">Login</a> untuk simpan trip
       </span>
       <?php endif; ?>
     </div>
@@ -169,11 +171,11 @@ $cats_json  = json_encode($categories);
           <div class="tp-section-label">
             <i class="fa-solid fa-location-crosshairs text-danger me-1"></i>Titik Awal
           </div>
-          <div class="input-group input-group-sm">
+          <div class="input-group">
             <input type="text" id="startInput" class="form-control" placeholder="Cari titik awal...">
           </div>
           <div id="startResults" class="list-group mt-1" style="max-height:150px;overflow-y:auto;display:none;position:relative;z-index:100"></div>
-          <div id="startSelected" class="small text-success mt-1" style="display:none">
+          <div id="startSelected" class="text-success mt-1" style="display:none">
             <i class="fa-solid fa-check me-1"></i><span id="startName"></span>
           </div>
         </div>
@@ -204,7 +206,7 @@ $cats_json  = json_encode($categories);
             <i class="fa-solid fa-floppy-disk me-1"></i>Simpan
           </button>
           <?php endif; ?>
-          <button class="btn btn-outline-danger btn-sm btn-icon" id="btnResetTrip" title="Reset">
+          <button class="btn btn-outline-accent btn-sm btn-icon" id="btnResetTrip" title="Reset">
             <i class="fa-solid fa-trash"></i>
           </button>
         </div>
@@ -241,7 +243,7 @@ $cats_json  = json_encode($categories);
       <div class="modal-body p-4">
         <div class="mb-3">
           <label class="form-label small fw-semibold">Lokasi <span class="text-danger">*</span></label>
-          <div class="input-group input-group-sm">
+          <div class="input-group">
             <input type="text" id="uploadPoiSearch" class="form-control" placeholder="Cari nama tempat...">
           </div>
           <div id="uploadPoiResults" class="list-group mt-1" style="max-height:140px;overflow-y:auto;display:none"></div>

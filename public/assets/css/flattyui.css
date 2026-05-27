@@ -278,7 +278,8 @@ table tbody td {
   background: var(--pu-700) !important;
   color: #fff !important;
 }
-.btn-outline-primary:active {
+.btn-outline-primary:active,
+.btn-outline-primary.active {
   background: var(--pu-800) !important;
 }
 .btn-outline-primary:focus-visible {
@@ -1134,7 +1135,7 @@ textarea.form-control {
 .input-group {
   display: flex;
   align-items: center;
-  border: 1px solid var(--text-muted);
+  border: var(--glass-border);
   border-radius: var(--radius);
   background: var(--bg-white);
   transition: border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
@@ -1161,9 +1162,6 @@ textarea.form-control {
   background: transparent;
   flex: 1;
   padding-left: 0;
-}
-.input-group .form-control:focus {
-  box-shadow: none !important;
 }
 
 #feedback-loadingSpinner {
@@ -3483,7 +3481,7 @@ textarea.form-control {
 /* pages */
 .tp-main {
   background: var(--bg-white);
-  background-image: url('public/assets/images/default.jpg');
+  background-image: url('../assets/images/default.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -3634,25 +3632,13 @@ textarea.form-control {
   padding-bottom: 2px;
 }
 .cat-filter {
-  border: 1.5px solid var(--text-muted);
-  border-radius: 20px;
-  padding: 5px 12px;
-  font-size: .78rem;
-  background: var(--bg-white);
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all var(--duration) var(--ease);
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
   white-space: nowrap;
-  line-height: 1;
 }
 .cat-filter.active,
 .cat-filter:hover {
-  background: var(--bg-purple-light);
-  border-color: var(--bg-purple);
-  color: var(--bg-purple);
+  background: var(--pu-700);
+  border-color: 1.5px solid var(--pu-700);
+  color: #fff;
 }
 .cat-filter.active {
   font-weight: 500;
@@ -3660,26 +3646,8 @@ textarea.form-control {
 
 /* explore tab uses same style */
 .explore-cat {
-  border: 1.5px solid var(--text-muted);
-  border-radius: 20px;
-  padding: 5px 12px;
-  font-size: .78rem;
-  background: var(--bg-white);
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all var(--duration) var(--ease);
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
   white-space: nowrap;
 }
-.explore-cat.active,
-.explore-cat:hover {
-  background: var(--bg-purple-light);
-  border-color: var(--bg-purple);
-  color: var(--bg-purple);
-}
-
 /* ── MAP ────────────────────────────────────────────────────── */
 .tp-map-wrap {
   border-radius: var(--radius);

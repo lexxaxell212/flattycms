@@ -40,29 +40,11 @@ function generateStaticPage($slug, $html_content, $page_id, $title) {
 
         $content = <<<PHP
 <?php
-require_once dirname(__DIR__, 3) . '/bootstrap.php';
-autoload_core();
-
 \$_page_id = {$page_id};
-
-\$_r_stmt = \$GLOBALS['pdo']->prepare("SELECT COUNT(*) FROM reactions WHERE content_type='page' AND content_id=?");
-\$_r_stmt->execute([\$_page_id]);
-\$_reaction_count = \$_r_stmt->fetchColumn();
-
-\$_user_liked = false;
-if (isset(\$_SESSION['user'])) {
-    \$_r_stmt = \$GLOBALS['pdo']->prepare("SELECT id FROM reactions WHERE user_id=? AND content_type='page' AND content_id=?");
-    \$_r_stmt->execute([\$_SESSION['user']['id'], \$_page_id]);
-    \$_user_liked = (bool) \$_r_stmt->fetch();
-}
-
+require_once LIB_PATH . 'v-reactions-page.php';
 \$page_title = '{$page_title_val}';
-
-require_once SRC_PATH . 'headerv2.php';
 ?>
-            
 <script src="<?= JS_URL ?>reactions.js" defer></script>
-
 <main id="content">
   <div class="container">
     {$html_content}
@@ -92,9 +74,6 @@ require_once SRC_PATH . 'headerv2.php';
     </div>
   </div>
 </main>
-<?php
-require_once SRC_PATH . 'footer.php';
-?>
 PHP;
 
         $result = file_put_contents($page_dir . 'index.php', $content);

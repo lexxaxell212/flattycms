@@ -16,7 +16,6 @@ $isPintasanActive = (bool) array_filter(
     fn($p) => str_starts_with($currentPath, $p)
 );
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>

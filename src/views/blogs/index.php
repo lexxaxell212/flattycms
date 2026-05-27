@@ -36,6 +36,8 @@ if ($id > 0) {
 $categories = safe_get_categories($pdo);
 ?>
 
+<script src="<?= JS_URL ?>reactions.js" defer></script>
+
 <main id="content">
 <div class="container">
 

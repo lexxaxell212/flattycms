@@ -23,9 +23,7 @@ $isPintasanActive = (bool) array_filter(
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="<?= BASE_URL ?>">
-  
   <?php $s = $GLOBALS['site_settings'] ?? []; ?>
-  
   <title><?= $page_title ?></title>
   <meta name="description" content="<?= safe_html($s['site_description'] ?? 'Eksplorasi Wisata, Kuliner, dan Budaya Bandung Terlengkap.') ?>">
   <meta property="og:description" content="<?= safe_html($s['site_tagline'] ?? '') ?>">
@@ -78,18 +76,15 @@ $isPintasanActive = (bool) array_filter(
       ]
   }
   </script>
-  
   <!-- assets -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= CSS_URL ?>bs533.min.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>flattypurple.css">
-  
   <?php
   $isMobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT']);
   $heroImg = $isMobile ? 'wisata-mobile.webp' : 'wisata.webp'; ?>
-  
   <link rel="preload" as="image" href="<?= IMG_URL . $heroImg ?>" type="image/webp" fetchpriority="high">
   <link rel="preload" as="style" href="<?= CSS_URL ?>flattyui.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>flattyui.css" media="print" onload="this.media='all'">
@@ -99,14 +94,19 @@ $isPintasanActive = (bool) array_filter(
     <link rel="stylesheet" href="<?= CSS_URL ?>flattyui.css">
     <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css">
   </noscript>
-  
   <!-- script -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="<?= JS_URL ?>bs533.bundle.min.js" defer></script>
   <script src="<?= JS_URL ?>swal2.all.min.js" defer></script>
   <script src="<?= JS_URL ?>gsi.js" defer></script>
   <script src="<?= JS_URL ?>main.js" defer></script>
-  
+  <script>
+  const CONFIG = {
+      baseUrl: '<?= BASE_URL ?>',
+      isLoggedIn: <?= !empty($_SESSION['user']) ? 'true' : 'false' ?>,
+      csrfToken: '<?= generate_csrf_token() ?>',
+    };
+  </script>
   <?php if (!empty($_SESSION['flash'])): ?>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -122,7 +122,6 @@ $isPintasanActive = (bool) array_filter(
   </script>
   <?php unset($_SESSION['flash']); ?>
   <?php endif; ?>
-  
   <style>
     body {
       visibility: hidden;

@@ -84,7 +84,7 @@ $cats_json  = json_encode($categories);
       <input type="text" id="exploreSearch" class="form-control" placeholder="Cari tempat wisata...">
     </div>
     <div class="d-flex gap-2 flex-wrap" id="exploreCatFilter">
-      <button class="btn btn-primary btn-sm explore-cat active" data-cat="">Semua</button>
+      <button class="btn btn-outline-primary btn-sm explore-cat active" data-cat="">Semua</button>
       <?php foreach ($categories as $cat): ?>
       <button class="btn btn-outline-primary btn-sm explore-cat" data-cat="<?=
       $cat['id'] ?>">
@@ -114,7 +114,7 @@ $cats_json  = json_encode($categories);
       <div class="tp-empty-state">
         <i class="fa-solid fa-lock"></i>
         <p>Login untuk melihat trip tersimpanmu.</p>
-        <a href="/login" class="btn btn-primary mt-2">
+        <a href="/login" class="btn btn-primary btn-sm mt-2">
           <i class="fa-brands fa-google me-1"></i>Login dengan Google
         </a>
       </div>
@@ -124,8 +124,8 @@ $cats_json  = json_encode($categories);
   <div id="tab-map" class="tp-tab-content" style="display:none">
 
     <div class="cat-filters">
-      <button class="btn btn-primary btn-sm cat-filter active" data-cat="">
-        <i class="fa-solid fa-layer-group me-1"></i>Semua
+      <button class="btn btn-outline-primary btn-sm cat-filter active" data-cat="">
+        Semua
       </button>
       <?php foreach ($categories as $cat): ?>
       <button class="btn btn-outline-primary btn-sm cat-filter" data-cat="<?= $cat['id'] ?>">
@@ -143,8 +143,7 @@ $cats_json  = json_encode($categories);
         <span class="input-group-text">
           <i class="fa-solid fa-search text-muted"></i>
         </span>
-        <input type="text" id="searchPoi" class="form-control" placeholder="Cari
-        lokasi di map...">
+        <input type="text" id="searchPoi" class="form-control" placeholder="Cari lokasi di map...">
       </div>
       <div id="searchPoiResults" class="list-group shadow"></div>
     </div>
@@ -153,7 +152,7 @@ $cats_json  = json_encode($categories);
       <span><i class="fa-solid fa-circle-info text-primary"></i>Klik pin untuk info lokasi</span>
       <span><i class="fa-solid fa-route text-success"></i>Tambahkan ke Trip Planner</span>
       <?php if (!$is_logged): ?>
-      <span><i class="fa-solid fa-lock text-warning"></i>
+      <span><i class="fa-solid fa-lock text-purple"></i>
         <a href="/login">Login</a> untuk simpan trip
       </span>
       <?php endif; ?>
@@ -161,28 +160,31 @@ $cats_json  = json_encode($categories);
 
     <div class="tp-planner-panel mb-3">
       <div class="tp-planner-header">
-        <span class="title">
-          <i class="fa-solid fa-route text-primary me-2"></i>Buat Trip Baru
-        </span>
+        <h2 class="title">
+          <i class="fa-solid fa-route text-purple me-2"></i>Buat Trip Baru
+        </h2>
       </div>
       <div class="tp-planner-body">
 
         <div class="tp-start-section">
           <div class="tp-section-label">
-            <i class="fa-solid fa-location-crosshairs text-danger me-1"></i>Titik Awal
+            <i class="fa-solid fa-location-crosshairs text-purple me-1"></i>Titik Awal
           </div>
           <div class="input-group">
+            <span class="input-group-text">
+              <i class="fa-solid fa-search text-muted"></i>
+            </span>
             <input type="text" id="startInput" class="form-control" placeholder="Cari titik awal...">
           </div>
           <div id="startResults" class="list-group mt-1" style="max-height:150px;overflow-y:auto;display:none;position:relative;z-index:100"></div>
-          <div id="startSelected" class="text-success mt-1" style="display:none">
-            <i class="fa-solid fa-check me-1"></i><span id="startName"></span>
+          <div id="startSelected" class="text-white bg-primary mt-1" style="display:none">
+            <i class="text-white fa-solid fa-check me-1"></i><span class="text-white" id="startName"></span>
           </div>
         </div>
 
         <div class="mb-3">
           <div class="tp-section-label">
-            <i class="fa-solid fa-list-ol text-primary me-1"></i>Rute Perjalanan
+            <i class="fa-solid fa-list-ol text-purple me-1"></i>Rute Perjalanan
           </div>
           <div id="routeList">
             <div class="route-empty" id="routeEmpty">
@@ -248,8 +250,8 @@ $cats_json  = json_encode($categories);
           </div>
           <div id="uploadPoiResults" class="list-group mt-1" style="max-height:140px;overflow-y:auto;display:none"></div>
           <input type="hidden" id="uploadPoiId">
-          <div id="uploadPoiSelected" class="small text-success mt-1" style="display:none">
-            <i class="fa-solid fa-check me-1"></i><span id="uploadPoiName"></span>
+          <div id="uploadPoiSelected" class="bg-primary text-white mt-1" style="display:none">
+            <i class="text-white fa-solid fa-check me-1"></i><span class="text-white" id="uploadPoiName"></span>
           </div>
         </div>
         <div class="mb-3">
@@ -266,7 +268,7 @@ $cats_json  = json_encode($categories);
         </div>
       </div>
       <div class="modal-footer border-top py-3 px-4">
-        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Batalkan</button>
+        <button type="button" class="btn btn-outline-primary btn-sm" data-bs-dismiss="modal">Batalkan</button>
         <button type="button" class="btn btn-primary btn-sm" id="btnKirimUpload">
           <i class="fa-solid fa-upload me-1"></i>Upload
         </button>

@@ -3481,7 +3481,7 @@ textarea.form-control {
 /* pages */
 .tp-main {
   background: var(--bg-white);
-  background-image: url('../assets/images/default.jpg');
+  background-image: url('../images/default.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -3591,12 +3591,12 @@ textarea.form-control {
 }
 .tp-tab.active {
   background: var(--bg-purple);
-  color: var(--bg-white);
+  color: var(--text-white);
   box-shadow: 0 2px 8px rgba(124,58,237,.25);
 }
 .tp-tab:not(.active):hover {
-  background: var(--bg-primary);
-  color: var(--bg-purple);
+  background: var(--bg-purple);
+  color: var(--text-white);
 }
 
 /* ── TAB CONTENT ────────────────────────────────────────────── */

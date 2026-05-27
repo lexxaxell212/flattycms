@@ -3481,29 +3481,37 @@ textarea.form-control {
 
 /* ======= /trip planner ==========*/
 /* pages */
-/* ── HERO ───────────────────────────────────────────────────── */
-.tp-hero {
-  background: var(--bg-purple);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem 1.75rem;
-  margin-bottom: 1.25rem;
-  color: var(--bg-white);
+.tp-main {
+  background: var(--bg-white);
+  background-image: url('public/assets/images/default.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
-.tp-hero h4 {
-  font-size: 1.1rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
+.tp-main-outer {
+  background: rgba(10,0,20,0.65);
+  padding-top: 400px;
 }
-.tp-hero p {
-  font-size: .85rem;
-  opacity: .8;
-  margin: 0;
+.tp-main-outer-content {
+  position: relative;
+  top: -180px;
 }
-
-/* ── PROFILE CARD ───────────────────────────────────────────── */
+.tp-main-inner {
+  border-radius: 2rem 2rem 0 0;
+  background: var(--bg-white);
+  padding: 2rem 0.75rem;
+  box-shadow: 0 0 50px rgba(0,0,0,0.3);
+}
+@media (min-width: 768px) {
+  .tp-main-outer {
+    padding-top: 600px;
+  }
+  .tp-main-outer-content {
+    top: -220px;
+  }
+}
+/* ── PROFILE CARD */
 .tp-profile-card {
   display: flex;
   align-items: center;
@@ -4620,7 +4628,7 @@ textarea.form-control {
 
 @media (min-width: 980px) {
   .container {
-    max-width: clamp(900px, 100vw, 1920px);
+    max-width: clamp(900px, 100vw, 1360px);
     padding-inline: 4rem;
   }
   .khb-grid {

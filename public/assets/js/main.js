@@ -1,15 +1,3 @@
-// global
-
-const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  background: '#f6f5ff',
-  color: '#3b0764',
-  iconColor: '#6c2bd9',
-});
-
 // chat
 
 const API_URL = "/api/api-assistant.php";

@@ -22,6 +22,8 @@ public/uploads
 # Etc
 readme/
 styling.html
+dark-pallete.html
+light-pallete.html
 
 # OS files
 .DS_Store

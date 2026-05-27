@@ -64,47 +64,18 @@ if (isset($_SESSION['user'])) {
             </button>
         </div>
     </div>
-
     <button class="btn btn-outline-primary mb-5" id="btn-login">Masuk</button>
     
     <div class="d-flex justify-content-center mb-3">
         <a href="/forgot-password" class="small">Lupa password?</a>
     </div>
-
     <div class="divider">atau</div>
-
     <div class="d-flex justify-content-center">
-    <script>
-          function handleGSI(response) {
-          fetch('/api/auth/gsi.php', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'X-Requested-With': 'XMLHttpRequest',
-                  'X-CSRF-Token': CONFIG.csrfToken
-              },
-              body: JSON.stringify({ token: response.credential })
-          })
-          .then(r => r.json())
-          .then(data => {
-              if (data.success) window.location.href = data.redirect;
-          });
-          }
-    </script>
-    <script src="https://accounts.google.com/gsi/client" async></script>
-      <div id="g_id_onload"
-          data-client_id="353704633244-8jts0jtja4qlq58vd3b926h60j5psaka.apps.googleusercontent.com"
-          data-callback="handleGSI"
-          data-auto_select="false"
-          data-cancel_on_tap_outside="true">
-      </div>
       <div class="g_id_signin" data-type="standard" data-shape="pill"></div>
     </div>
-
     <p class="text-center text-muted small mt-3">
         Belum punya akun? <a href="/register" class="fw-medium">Daftar sekarang</a>
     </p>
 </div>
-
 </div>
 </main>

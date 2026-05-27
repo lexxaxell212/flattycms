@@ -123,19 +123,7 @@ $isPintasanActive = (bool) array_filter(
   <?php unset($_SESSION['flash']); ?>
   <?php endif; ?>
   <style>
-    body {
-      visibility: hidden;
-    }
-    #page-loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 40%;
-      height: 1px;
-      background: #7c3aed;
-      z-index: 9999;
-      transition: width 0.3s ease, opacity 0.3s ease;
-      }
+    body {visibility: hidden;}#page-loader {position: fixed;top: 0;left: 0;width: 40%;height: 1px;background: #7c3aed;z-index: 9999;transition: width 0.3s ease,opacity 0.3s ease;}
   </style>
 </head>
 <body>
@@ -395,9 +383,7 @@ $isPintasanActive = (bool) array_filter(
         fa-images"></i>Gallery</a></li>
       <li class="nav-item weather" id="w"><small>Cek cuaca...</small></li>
     </ul>
-  
   <?php if (empty($_SESSION['user'])): ?>
-  
       <div class="d-flex align-items-center gap-2">
           <div id="google-login-btn">
           </div>
@@ -411,7 +397,6 @@ $isPintasanActive = (bool) array_filter(
               Daftar
           </a>
       </div>
-  
       <?php else: ?>
       <div class="d-flex align-items-center gap-2">
           <a href="/profile" class="profile-pill">
@@ -440,7 +425,6 @@ $isPintasanActive = (bool) array_filter(
           </a>
       </div>
   <?php endif; ?>
-  
   </div>
   <div id="live-search-wrapper" role="search" aria-label="Pencarian situs">
     <div class="ls-inner container">

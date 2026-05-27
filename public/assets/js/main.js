@@ -2,7 +2,7 @@
 
 const CONFIG = {
   baseUrl: '<?= BASE_URL ?>',
-  isLoggedIn: <?= !empty($_SESSION['user']) ? 'true' : 'false' ?>,
+  isLoggedIn: '<?= !empty($_SESSION['user']) ? 'true' : 'false' ?>',
   csrfToken: '<?= generate_csrf_token() ?>',
 };
 

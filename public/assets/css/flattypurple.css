@@ -684,9 +684,7 @@ h6 {
     z-index: 1074 !important;
     border-radius: var(--radius);
     padding: var(--space-6) var(--space-4);
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
+    background: var(--bg-white);
     border: var(--glass-border);
     box-shadow: var(--glass-shadow);
     opacity: 0;

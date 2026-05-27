@@ -63,7 +63,7 @@ require_once SRC_PATH . 'headerv2.php';
             
 <script src="<?= JS_URL ?>reactions.js" defer></script>
 
-<main id="content" class="container-fluid">
+<main id="content">
   <div class="container">
     {$html_content}
     <hr class="my-4">

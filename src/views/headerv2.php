@@ -104,34 +104,9 @@ $isPintasanActive = (bool) array_filter(
   <!-- script -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="<?= JS_URL ?>bs533.bundle.min.js" defer></script>
-  <script src="<?= JS_URL ?>swal2.all.min.js">//no defer</script>
+  <script src="<?= JS_URL ?>swal2.all.min.js" defer></script>
   <script src="<?= JS_URL ?>gsi.js" defer></script>
-  <script src="<?= JS_URL ?>chat.js" defer></script>
-  <script src="<?= JS_URL ?>live-search.js" defer></script>
-  <script src="<?= JS_URL ?>navbar.js" defer></script>
-  <script src="<?= JS_URL ?>weather.js" defer></script>
-  <script src="<?= JS_URL ?>newsletter-form.js" defer></script>
-  <script src="<?= JS_URL ?>reactions.js" defer></script>
-  
-  <script>
-    const CONFIG = {
-        baseUrl: '<?= BASE_URL ?>',
-        isLoggedIn: <?= !empty($_SESSION['user']) ? 'true' : 'false' ?>,
-        csrfToken: '<?= generate_csrf_token() ?>',
-    };
-  </script>
-  
-   <script>
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      background: '#f6f5ff',
-      color: '#3b0764',
-      iconColor: '#6c2bd9',
-    });
-  </script>
+  <script src="<?= JS_URL ?>main.js" defer></script>
   
   <?php if (!empty($_SESSION['flash'])): ?>
   <script>

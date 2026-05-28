@@ -254,7 +254,7 @@ table tbody td {
   background: var(--bg-primary);
   color: var(--text-primary);
   border-radius: var(--radius-sm);
-  margin: 4px;
+  margin-bottom: 4px;
   transition: transform var(--duration) var(--ease), background var(--duration)
   var(--ease), color var(--duration) var(--ease);
 }
@@ -3751,6 +3751,7 @@ textarea.form-control {
   margin-top: 4px;
   max-height: 200px;
   overflow-y: auto;
+  overflow-x: hidden;
   box-shadow: 0 4px 16px rgba(0,0,0,.08);
 }
 

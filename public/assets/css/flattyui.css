@@ -3562,7 +3562,7 @@ textarea.form-control {
   border-radius: 2rem 2rem 0 0;
   background: var(--bg-white);
   padding: 2rem 0.75rem;
-  max-width: 960px;
+  max-width: 1024px;
   margin: 0 auto;
 }
 @media (min-width: 768px) {
@@ -4663,6 +4663,76 @@ textarea.form-control {
     max-width: clamp(900px, 100vw, 1360px);
     padding-inline: 4rem;
   }
+
+  .container-tp {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .tp-sidebar {
+    position: sticky;
+    top: calc(var(--navbar-height) + 1rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .tp-profile-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    padding: 1.25rem;
+  }
+
+  .tp-profile-avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 1.25rem;
+  }
+
+  .tp-profile-login {
+    margin: 0 !important;
+  }
+
+  .tp-tabs {
+    flex-direction: column;
+    border-bottom: none;
+    gap: 0.25rem;
+    padding: 0.5rem;
+  }
+
+  .tp-tab {
+    text-align: left;
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 1rem;
+    justify-content: flex-start;
+  }
+
+  .tp-content {
+    min-height: 60vh;
+  }
+
+  .tp-tab-content {
+    min-height: 60vh;
+  }
+
+  .tp-card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  .tp-map-planner-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .tp-map-wrap {
+    height: 480px;
+  }
+
   .khb-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

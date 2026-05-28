@@ -141,8 +141,8 @@ $categories = safe_get_categories($pdo);
     </div>
 <?php 
   else: ?>
-      <section class="row g-4">
-        <div class="col-md-8">
+      <section class="row g-4 mx-auto">
+        <div class="col-md-6">
           
             <div class="d-flex align-items-center justify-content-between">
               

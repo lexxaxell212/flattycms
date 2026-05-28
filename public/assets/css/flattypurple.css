@@ -126,7 +126,7 @@
 
   /* Text */
   --text-primary:    oklch(0.820 0.012 264);
-  --text-heading:    oklch(0.898 0.008 264);
+  --text-heading:    oklch(0.94 0.02 295);
   --text-purple:     oklch(0.752 0.121 295);
   --text-muted:      oklch(0.553 0.016 264);
   --text-nav:        oklch(0.930 0.025 295);
@@ -215,7 +215,7 @@ a:focus-visible {
 
 strong,
 b {
-    font-weight: var(--fw-medium);
+    font-weight: var(--fw-semibold);
     color: var(--text-heading);
 }
 
@@ -230,18 +230,25 @@ p:last-child {
     font-weight: var(--fw-medium);
     color: var(--text-nav);
     margin-bottom: var(--space-8);
+    opacity: 0.9;
 }
 
 h1,
 h2,
-h3,
+h3 {
+    font-family: "Inter", sans-serif;
+    color: var(--text-heading);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5em 0;
+    text-transform: uppercase;
+}
 h4,
 h5,
 h6 {
     font-family: "Inter", sans-serif;
     color: var(--text-heading);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    line-height: 1.1;
     margin: 0 0 0.5em 0;
     text-transform: uppercase;
 }

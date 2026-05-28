@@ -27,11 +27,11 @@ $slides = [
       <h1 class="mb-3" style="color:var(--dotid);">Jelajahi Bandung</h1>
       <p class="lead">Eksplorasi destinasi, kuliner, dan penginapan terbaik di Kota Kembang.</p>
       <div class="d-flex gap-2">
+        <a href="/things-to-do" class="btn btn-outline-primary">
+          Lihat Event
+        </a>
         <a href="/trip" class="btn btn-primary">
           Mulai Rencanakan <i class="arrow-icon fas fa-arrow-right ms-2"></i>
-        </a>
-        <a href="/things-to-do" class="btn btn-glass">
-          Lihat Event
         </a>
       </div>
     </div>

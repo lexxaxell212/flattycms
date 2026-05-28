@@ -38,11 +38,23 @@ document.getElementById('btn-login').addEventListener('click', async () => {
 });
 
 //register
+function togglePwReg(inputId, btnId) {
+        document.getElementById(btnId).addEventListener('click', () => {
+            const input = document.getElementById(inputId);
+            const icon = document.querySelector(`#${btnId} i`);
+            input.type = input.type === 'password' ? 'text' : 'password';
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+    }
+togglePwReg('reg-pw-input', 'toggle-pw-reg');
+togglePwReg('reg-pw-confirm', 'toggle-pw-confirm');
+    
 document.getElementById('btn-register').addEventListener('click', async () => {
         const name     = document.getElementById('reg-name').value.trim();
         const username = document.getElementById('reg-username').value.trim();
         const email    = document.getElementById('reg-email').value.trim();
-        const password = document.getElementById('reg-pw').value;
+        const password = document.getElementById('reg-pw-input').value;
         const confirm  = document.getElementById('reg-pw-confirm').value;
         const errorEl  = document.getElementById('register-error');
         const successEl = document.getElementById('register-success');

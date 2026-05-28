@@ -37,8 +37,8 @@ $page_title = 'Daftar — ' . SITE_NAME;
     <div class="mb-3">
         <label class="form-label">Password</label>
         <div class="input-group">
-            <input type="password" id="reg-pw" class="form-control" placeholder="Min. 8 karakter">
-            <button class="btn" type="button" id="toggle-pw">
+            <input type="password" id="reg-pw-input" class="form-control" placeholder="Min. 8 karakter">
+            <button class="btn" type="button" id="toggle-pw-reg">
                 <i class="text-muted fa-regular fa-eye fa-sm"></i>
             </button>
         </div>
@@ -60,16 +60,3 @@ $page_title = 'Daftar — ' . SITE_NAME;
 </section>
 </div>
 </main>
-<script>
-    function togglePw(inputId, btnId) {
-        document.getElementById(btnId).addEventListener('click', () => {
-            const input = document.getElementById(inputId);
-            const icon = document.querySelector(`#${btnId} i`);
-            input.type = input.type === 'password' ? 'text' : 'password';
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
-        });
-    }
-    togglePw('reg-pw', 'toggle-pw');
-    togglePw('reg-pw-confirm', 'toggle-pw-confirm');
-</script>

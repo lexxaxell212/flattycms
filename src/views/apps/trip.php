@@ -233,7 +233,7 @@ $cats_json  = json_encode($categories);
 </div>
 
 <?php if ($is_logged): ?>
-<div class="modal fade" id="uploadModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade card card-flatty" id="uploadModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 shadow-lg" style="border-radius:1rem;overflow:hidden">
       <div class="modal-header border-bottom py-3 px-4">

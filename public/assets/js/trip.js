@@ -56,10 +56,10 @@
   document.querySelectorAll('.cat-filter').forEach(btn => {
     btn.addEventListener('click', function () {
       document.querySelectorAll('.cat-filter').forEach(b => {
-        b.classList.remove('active', 'btn-outline-primary');
+        b.classList.remove('active', 'btn-primary');
         b.classList.add('btn-outline-primary');
       });
-      this.classList.add('active', 'btn-outline-primary');
+      this.classList.add('active', 'btn-primary');
       this.classList.remove('btn-outline-primary');
       activeCat = this.dataset.cat;
       renderMarkers();
@@ -175,9 +175,9 @@
         <div class="flex-grow-1 min-w-0">
           <div class="small fw-semibold text-truncate">${r.name}</div>
           ${r.distance_from_prev ? `<div class="text-muted" style="font-size:.7rem"><i class="fa-solid fa-ruler me-1"></i>${r.distance_from_prev} km dari titik sebelumnya</div>` : ''}
-          ${IS_LOGGED ? `<div class="mt-1"><input type="text" class="form-control form-control-sm note-input" data-idx="${i}" placeholder="Tambah catatan..." value="${r.note}" style="font-size:.75rem"></div>` : ''}
+          ${IS_LOGGED ? `<div class="mt-1"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan..." value="${r.note}" style="font-size:.75rem"></div>` : ''}
         </div>
-        <button class="btn btn-sm btn-outline-danger btn-remove-route" data-idx="${i}">
+        <button class="btn btn-outline-accent btn-sm btn-remove-route" data-idx="${i}">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>`).join('');
@@ -238,7 +238,7 @@
   function updateRouteOnMap(points) {
     if (routeLine) map.removeLayer(routeLine);
     if (!points || points.length < 2) return;
-    routeLine = L.polyline(points, { color: '#6366f1', weight: 4, opacity: .85 }).addTo(map);
+    routeLine = L.polyline(points, { color: '#9061f9', weight: 4, opacity: .85 }).addTo(map);
     map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
   }
 
@@ -478,8 +478,8 @@
           ? `<img src="${escHtml(poi.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
           : `<img src="uploads/poi-placeholder.jpg" class="card-img">`
         }
-          <h5>${escHtml(poi.name)}</h5>
-          <p class="text-muted">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
+          <h6>${escHtml(poi.name)}</h6>
+          <p class="text-muted small">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
           ${poi.poi_url
             ? `<a href="${escHtml(poi.poi_url)}" class="btn btn-primary btn-sm" target="_blank" rel="noopener">
                 <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Lihat
@@ -508,10 +508,10 @@
   document.querySelectorAll('.explore-cat').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.explore-cat').forEach(b => {
-        b.classList.remove('active', 'btn-outline-primary');
+        b.classList.remove('active', 'btn-primary');
         b.classList.add('btn-outline-primary');
       });
-      this.classList.add('active', 'btn-outline-primary');
+      this.classList.add('active', 'btn-primary');
       this.classList.remove('btn-outline-primary');
       activeCatExplore = this.dataset.cat;
       showAll = false;

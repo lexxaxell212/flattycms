@@ -3816,6 +3816,9 @@ textarea.form-control {
 }
 
 /* ── UPLOAD MODAL ────────────────────────────────────────────── */
+.modal {
+  z-index: 9999;
+}
 .modal-content {
   border-radius: var(--radius-lg) !important;
   border: none !important;

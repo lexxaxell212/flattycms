@@ -36,8 +36,10 @@ $categories = safe_get_categories($pdo);
                   alt="<?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                   loading="lazy"
                 >
-                  <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="h6">
-                  <?= htmlspecialchars(mb_substr($p['title'] ?? '', 0, 50), ENT_QUOTES, 'UTF-8') ?>
+                  <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="h6 mb-2">
+                  <?= htmlspecialchars(mb_strlen($p['title'] ?? '') > 60 ?
+                  mb_substr($p['title'], 0, 60) . '…' : ($p['title'] ?? ''),
+                  ENT_QUOTES, 'UTF-8') ?>
                   </a>
                   <p class="asl-excerpt small text-muted">
                     <?= safe_excerpt($p['excerpt'] ?? ($p['content'] ?? ''), 170) ?>

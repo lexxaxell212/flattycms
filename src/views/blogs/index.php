@@ -174,7 +174,7 @@ $categories = safe_get_categories($pdo);
 
   else: ?>
 
-    <div class="row g-4">
+    <div class="row g-4 align-items-start">
       <section>
         <!-- ── Kiri: daftar post ── -->
         <div class="col-md-6">
@@ -219,22 +219,19 @@ $categories = safe_get_categories($pdo);
 
             <?php foreach ($posts as $p): ?>
             
-            <div class="card card-glass mb-4">
+            <div class="card card-flatty mb-4">
                 <div class="card-body">
                     <a href="/blogs/?id=<?= (int) $p[
                       "id"
-                    ] ?>" class="h5 mb-3 mt-2">
-                        <?= htmlspecialchars(
-                          $p["title"] ?? "",
-                          ENT_QUOTES,
-                          "UTF-8",
-                        ) ?>
+                    ] ?>" class="h6 mb-2">
+                      <?= htmlspecialchars(mb_strlen($p['title'] ?? '') > 60 ?
+                                        mb_substr($p['title'], 0, 60) . '…' : ($p['title'] ?? ''),
+                                        ENT_QUOTES, 'UTF-8') ?>
                     </a>
-                    
                     <div class="d-flex align-items-center justify-content-start gap-2 small text-muted mb-3">
                      <!-- TAMBAH VIEW -->
                      <?php if (!empty($p["views"]) && (int) $p["views"] > 0): ?>
-                     <span class="badge text-muted"><i class="fas fa-eye mr-2"></i><?= number_format((int) $p["views"]) ?></span>
+                     <span class="text-muted"><i class="fas fa-eye me-2"></i><?= number_format((int) $p["views"]) ?></span>
                      <span class="small"><?= fmt_date(
                        $p["created_at"] ?? "",
                      ) ?></span>
@@ -250,22 +247,18 @@ $categories = safe_get_categories($pdo);
                      </a>
                      <?php endif; ?>
                  </div>
-
-                    <!-- truncate dulu, baru escape -->
-                    <p class="text-muted small mb-4">
+                    <p class="text-muted small">
                         <?= safe_excerpt(
                           $p["excerpt"] ?? ($p["content"] ?? ""),
                           160,
                         ) ?>
                     </p>
-                    
-                    <a href="/blogs/?id=<?= (int) $p["id"] ?>">
-                        <button class="btn btn-primary mb-2">
+                    <div class="card-footer">
+                      <a href="/blogs/?id=<?= (int) $p["id"] ?>" class="btn btn-primary">
                          Baca Selengkapnya
                          <i class="arrow-icon fas fa-angle-right me-1"></i>
-                       </button>
                     </a>
-
+                    </div>
                 </div>
             </div>
             <?php endforeach; ?>

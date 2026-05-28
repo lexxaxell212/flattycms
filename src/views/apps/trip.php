@@ -148,7 +148,7 @@ $cats_json  = json_encode($categories);
           </span>
           <input type="text" id="searchPoi" class="form-control" placeholder="Cari lokasi di map...">
         </div>
-        <div id="searchPoiResults"></div>
+        <div id="searchPoiResults" class="d-flex flex-column"></div>
       </div>
 
       <div class="tp-info-strip d-flex flex-wrap gap-3 mb-3">
@@ -172,8 +172,10 @@ $cats_json  = json_encode($categories);
           <div class="tp-planner-body">
             <div class="tp-start-section">
               <div class="tp-section-label">
-                <i class="fa-solid fa-location-crosshairs text-purple me-1"></i>
-                <h5>Titik Awal</h5>
+                <h5 class="text-muted">
+                  <i class="fa-solid fa-location-crosshairs text-purple me-1"></i>
+                  Titik Awal
+                  </h5>
               </div>
               <div class="input-group">
                 <span class="input-group-text">
@@ -197,7 +199,10 @@ $cats_json  = json_encode($categories);
 
             <div class="mb-3">
               <div class="tp-section-label">
-                <i class="fa-solid fa-list-ol text-purple me-1"></i>Rute Perjalanan
+                <h5 class="text-muted">
+                <i class="fa-solid fa-list-ol text-purple me-1"></i>
+                Rute Perjalanan
+                </h5>
               </div>
               <div id="routeList">
                 <div class="route-empty" id="routeEmpty">

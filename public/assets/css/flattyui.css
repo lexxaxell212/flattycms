@@ -324,7 +324,7 @@ table tbody td {
 .btn-glass {
   background: var(--glass-bg) !important;
   border: var(--glass-border) !important;
-  color: var(--text-white);
+  color: var(--text-heading);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 .btn-glass:hover {
@@ -4600,9 +4600,6 @@ textarea.form-control {
     padding: 8px 4px;
     gap: 5px;
   }
-  #mainMap {
-    height: 320px;
-  }
   .tp-planner-body {
     padding: 1.25rem;
   }
@@ -4730,6 +4727,9 @@ textarea.form-control {
   }
 
   .tp-map-wrap {
+    height: 480px;
+  }
+  #mainMap {
     height: 480px;
   }
 

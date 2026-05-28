@@ -179,8 +179,14 @@ $cats_json  = json_encode($categories);
           <div id="startResults" class="list-group mt-1" style="max-height:150px;overflow-y:auto;display:none;position:relative;z-index:100"></div>
           <div id="startSelected" class="card card-flatty mt-2" style="display:none">
             <div class="card-body">
+              <div class="small fw-semibold text-truncate mb-2">
+                <span class="text-purple">
+                  Kamu mulai dari
+                </span>
+                <span id="startName2"></span>
+              </div>
               <div id="startImg"></div>
-              <h6>Kamu mulai dari : <span id="startName"></span></h6>
+              <h6 id="startName"></h6>
               <p class="text-muted small" id="startDesc"></p>
             </div>
           </div>
@@ -198,7 +204,7 @@ $cats_json  = json_encode($categories);
           </div>
         </div>
 
-        <div id="distanceInfo" class="alert alert-primary py-2 px-3 small mb-0" style="display:none">
+        <div id="distanceInfo" class="alert alert-primary py-2 px-3 small mb-3" style="display:none">
           <i class="fa-solid fa-ruler me-1"></i>Total jarak: <strong id="totalDist">0</strong> km
           <span class="ms-2 text-muted" id="totalStops"></span>
         </div>
@@ -282,7 +288,6 @@ $cats_json  = json_encode($categories);
 </div>
 <?php endif; ?>
 </main>
-
 <script>
 window.addEventListener('scroll', () => {
   const hero = document.querySelector('.tp-main');

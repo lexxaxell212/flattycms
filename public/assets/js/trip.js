@@ -113,16 +113,17 @@
     matches.forEach(p => {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'btn text-start w-100 px-3 py-2 border-bottom';
+      btn.className = 'text-start w-100 px-3 py-2 border-bottom mt-2';
       btn.innerHTML = `
-        <div class="fw-semibold small text-purple">${p.name}</div>
-        <div class="text-muted" style="font-size:.7rem">${p.category_name || ''}</div>
+        <div class="fw-semibold small text-purple">${p.name} •</div>
+        <div class="text-muted me-2" style="font-size:.7rem">${p.category_name || ''}</div>
       `;
       btn.addEventListener('click', () => {
         startPoint = { name: p.name, lat: parseFloat(p.latitude), lng:
         parseFloat(p.longitude), poi_image: p.poi_image || null,
         description: p.description || '', poi_url: p.poi_url || null };
         document.getElementById('startName').textContent = startPoint.name;
+        document.getElementById('startName2').textContent = startPoint.name;
         document.getElementById('startDesc').textContent = startPoint.description || 'Deskripsi belum tersedia.';
         document.getElementById('startImg').innerHTML = startPoint.poi_image
           ? `<img src="${escHtml(startPoint.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
@@ -254,7 +255,7 @@
     } catch (e) {
       Swal.fire('Error', 'Tidak bisa buat rute', 'error');
     } finally {
-      btn.innerHTML = '<i class="fa-solid fa-route me-1"></i>Buat Rute...';
+      btn.innerHTML = '<i class="fa-solid fa-route me-1"></i>Buat Rute';
       btn.disabled  = false;
     }
   });

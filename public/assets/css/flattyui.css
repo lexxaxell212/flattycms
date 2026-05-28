@@ -258,9 +258,9 @@ table tbody td {
   var(--ease), color var(--duration) var(--ease);
 }
 .btn-popup:hover, .btn-popup:active {
-  color: var(--text-white) !important;
-  background: var(--bg-purple) !important;
-  transform: translateY(2px);
+  color: var(--text-nav-hover) !important;
+  background: var(--bg-nav-hover) !important;
+  transform: translateY(-2px);
 }
 .btn-icon {
   padding: 8px 10px;

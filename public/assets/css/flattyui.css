@@ -3498,16 +3498,8 @@ textarea.form-control {
 
 /* ======= /trip planner ==========*/
 /* pages */
-.tp-mainGG {
-  background-image: url('../images/wisata-mobile.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-@media (min-width: 768px) {
-  .tp-mainGG {
-    background-image: url('../images/wisata.webp');
-  }
+.tp-main {
+  background: transparent;
 }
 .tp-main-outer {
   padding-top: 400px;

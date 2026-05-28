@@ -30,7 +30,7 @@ $slides = [
         <a href="/trip" class="btn btn-primary">
           Mulai Rencanakan <i class="arrow-icon fas fa-arrow-right ms-2"></i>
         </a>
-        <a href="/things-to-do" class="btn btn-outline-primary">
+        <a href="/things-to-do" class="btn btn-outline-primary px-1 py-1">
           Lihat Event
         </a>
       </div>

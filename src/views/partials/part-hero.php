@@ -24,7 +24,7 @@ $slides = [
 
   <div class="container h-100 d-flex align-items-center hero-card-wrapper">
     <div class="glass-hero-card col-12 col-md-7 col-lg-5">
-      <h1 class="mb-3" style="color:var(--dotid);">Jelajahi Bandung</h1>
+      <h1 class="mb-3" style="color:var(--dotid);">Jelajahi <em>Bandung</em></h1>
       <p class="lead">Eksplorasi destinasi, kuliner, dan penginapan terbaik di Kota Kembang.</p>
       <div class="d-flex flex-column align-items-start gap-2">
         <a href="/trip" class="btn btn-primary">

@@ -261,6 +261,10 @@ h6 em {
   font-style: normal;
   color: var(--text-purple);
 }
+.text-hero {
+  font-size: clamp(3rem, 5vw, 4rem);
+  font-weight: var(--fw-black);
+}
 h1 {
     font-size: clamp(2.2rem, 4vw, 3.2rem);
     font-weight: var(--fw-extrabold);

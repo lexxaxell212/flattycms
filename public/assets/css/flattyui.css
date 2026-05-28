@@ -270,28 +270,36 @@ table tbody td {
 .btn-primary {
   background: var(--pu-600) !important;
   box-shadow: 0 4px 16px rgba(124, 58, 237, 0.1);
+  border: 1.5px solid var(--pu-600) !important;
 }
 .btn-primary:hover {
   background: var(--pu-700) !important;
+  border: 1.5px solid var(--pu-700) !important;
 }
 .btn-primary:active {
   background: var(--pu-800) !important;
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.2);
+  border: 1.5px solid var(--pu-800) !important;
 }
 .btn-primary:focus-visible {
-  box-shadow: 0 0 0 3px rgba(108, 43, 217, 0.3);
+  box-shadow: 0 0 0 3px rgba(108, 43, 217, 0.2);
 }
 
 .btn-accent {
   background: var(--or-500) !important;
   color: var(--text-white);
+  border: 1.5px solid var(--or-500) !important;
 }
 .btn-accent:hover {
   background: var(--or-600) !important;
+  color: var(--text-white);
+  border: 1.5px solid var(--or-600) !important;
 }
 .btn-accent:active {
   background: #b45309 !important;
+  color: var(--text-white);
   box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+  border: 1.5px solid #b45309 !important;
 }
 .btn-accent:focus-visible {
   box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
@@ -305,11 +313,13 @@ table tbody td {
 .btn-outline-primary:hover {
   background: var(--pu-700) !important;
   color: #fff !important;
+  border: 1.5px solid var(--pu-700) !important;
 }
 .btn-outline-primary:active,
 .btn-outline-primary.active {
   background: var(--pu-800) !important;
   color: #fff !important;
+  border: 1.5px solid var(--pu-800) !important;
 }
 .btn-outline-primary:focus-visible {
   box-shadow: 0 0 0 3px rgba(108, 43, 217, 0.2);
@@ -323,9 +333,12 @@ table tbody td {
 .btn-outline-accent:hover {
   background: var(--or-600) !important;
   color: #fff !important;
+  border: 1.5px solid var(--or-600) !important;
 }
 .btn-outline-accent:active {
   background: #b45309 !important;
+  color: #fff !important;
+  border: 1.5px solid #b45309 !important;
 }
 .btn-outline-accent:focus-visible {
   box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
@@ -352,7 +365,9 @@ table tbody td {
   border: var(--glass-border)!important;
 }
 .btn-glass-solid:hover {
+  background: var(--bg-nav-hover);
   color: var(--text-nav-hover);
+  border: var(--glass-border)!important;
 }
 .btn-glass-solid:active {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
@@ -419,27 +434,28 @@ table tbody td {
 .btn-success:hover {
   background: #047857;
   border-color: #047857;
+  border: 1.5px solid #059669;
 }
 .btn-success:disabled {
   opacity: .5;
   cursor: not-allowed;
 }
 .btn-outline-secondary {
-  background: transparent;
+  background: transparent !important;
   color: var(--text-muted);
   border: 1.5px solid var(--text-muted);
 }
 .btn-outline-secondary:hover {
-  background: var(--bg-primary);
+  background: var(--bg-primary) !important;
   border-color: #d1d5db;
 }
 .btn-outline-danger {
-  background: transparent;
-  color: var(--text-muted);
-  border: 1.5px solid var(--text-muted);
+  background: #fca5a5 !important;
+  color: #dc2626;
+  border: 1.5px solid #fca5a5;
 }
 .btn-outline-danger:hover {
-  background: #fef2f2;
+  background: #fef2f2 !important;
   border-color: #fca5a5;
   color: #dc2626;
 }

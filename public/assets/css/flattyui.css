@@ -3567,6 +3567,8 @@ textarea.form-control {
 .tp-main-outer-content {
   position: relative;
   top: -160px;
+  will-change: transform;
+  transition: transform 0.1s linear;
 }
 .tp-main-inner {
   border-radius: 2rem 2rem 0 0;

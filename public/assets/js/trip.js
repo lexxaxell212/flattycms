@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const hero = document.querySelector('.tp-main-outer-content');
+  if (hero) {
+    window.addEventListener('scroll', () => {
+      hero.style.transform = `translateY(${window.scrollY * 0.5}px)`;
+    });
+  }
   const style = document.createElement('style');
   style.textContent = `
     body { background: var(--bg-white); }

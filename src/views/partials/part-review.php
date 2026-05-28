@@ -21,7 +21,7 @@ require_once LIB_PATH . "v-review.php";
 
     <div class="rev-grid">
       <?php foreach ($_rev_items as $i => $_rev): ?>
-      <div class="rev-card">
+      <div class="rev-card mb-3">
         <div class="rev-card__top">
           <span class="rev-card__quote">"</span>
           <div class="rev-card__stars">

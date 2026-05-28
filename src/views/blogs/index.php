@@ -1,6 +1,5 @@
 <?php
 $page_title = "Blogs";
-
 require_once LIB_PATH . "blogs.php";
 
 $id = (int) ($_GET["id"] ?? 0);
@@ -8,12 +7,10 @@ $cat_id = (int) ($_GET["cat"] ?? 0);
 $page = max(1, (int) ($_GET["page"] ?? 1));
 $per_page = 9;
 $offset = ($page - 1) * $per_page;
-
 $total_pages = 1;
 if ($id > 0) {
   $view_key = "post_view_{$id}";
   $post = safe_get_post($pdo, $id);
-
   if ($post && !isset($_SESSION[$view_key])) {
     $pdo
       ->prepare("UPDATE allcontent_posts SET views = views + 1 WHERE id = ?")
@@ -21,7 +18,6 @@ if ($id > 0) {
     $_SESSION[$view_key] = true;
     $post = safe_get_post($pdo, $id);
   }
-
   $posts = [];
   $total = 0;
   $page_title = htmlspecialchars($post["title"]) . " — Blog";
@@ -32,23 +28,16 @@ if ($id > 0) {
   $total_pages = (int) ceil($total / $per_page);
   $page_title = $cat_id > 0 ? "Kategori Blog" : "Blog";
 }
-
 $categories = safe_get_categories($pdo);
 ?>
 
 <script src="<?= JS_URL ?>reactions.js" defer></script>
-
 <main id="content">
 <div class="container">
-
-<?php if ($post):// ══════════ SINGLE POST VIEW ══════════
-   ?>
-
+<?php if ($post): ?>
     <div class="row justify-content-center">
         <div class="col-lg">
-
           <section>
-            <!-- Breadcrumb -->
             <nav aria-label="breadcrumb" class="mb-1 text-muted
             text-decoration-none align-items-center">
                 <ol class="breadcrumb small text-muted text-decoration-none
@@ -71,24 +60,20 @@ $categories = safe_get_categories($pdo);
                     <?php endif; ?>
                     <li class="breadcrumb-item active text-muted small" aria-current="page">
                         <?= htmlspecialchars(
-                          mb_substr($post["title"] ?? "", 0, 20),
+                          mb_substr($post["title"] ?? "", 0, 50),
                           ENT_QUOTES,
                           "UTF-8",
                         ) ?>
                     </li>
                 </ol>
             </nav>
-
-            <!-- Judul -->
-            <h4 class="h4 mb-5" style="display:none">
+            <h2 class="mb-5" style="display:none">
                 <?= htmlspecialchars(
                   $post["title"] ?? "",
                   ENT_QUOTES,
                   "UTF-8",
                 ) ?>
-            </h4>
-
-            <!-- Meta -->
+            </h2>
             <div class="text-muted small d-flex flex-wrap align-items-center gap-2">
                 <?php if (
                   !empty($post["views"]) &&
@@ -111,72 +96,52 @@ $categories = safe_get_categories($pdo);
                     </a>
                 <?php endif; ?>
             </div>
-
-            <!-- Konten: sanitize XSS + fix image path -->
             <div class="post-content">
                 <?= sanitize_content(
                   $post["content"] ?? "",
                   $post["title"] ?? "",
                 ) ?>
             </div>
-            
           </section>
-
             <hr class="my-5">
-            
-            <!-- Reaction Button -->
             <?php
             require_once LIB_PATH . "v-reactions.php";
             ?>
             <div class="d-flex align-items-center gap-2 mb-4">
-                <!-- Reaction -->
                 <button 
                     id="btn-reaction"
-                    class="btn btn-sm <?= $user_liked ? 'btn-primary' :
+                    class="btn <?= $user_liked ? 'btn-primary' :
                     'btn-outline-primary' ?>"
                     data-id="<?= $id ?>">
                     <i class="fas fa-heart me-1"></i>
                     <span id="reaction-count"><?= $reaction_count ?></span>
                 </button>
-            
-                <!-- Share -->
                 <?php $share_url = urlencode(BASE_URL . 'blogs/?id=' . $id); ?>
                 <?php $share_title = urlencode($post['title'] ?? ''); ?>
-                
                 <a href="https://wa.me/?text=<?= $share_title ?>%20<?= $share_url ?>"
                    target="_blank" rel="noopener"
                    class="btn btn-outline-primary">
                     <i class="fa-brands fa-whatsapp"></i>
                 </a>
-            
                 <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $share_url ?>"
                    target="_blank" rel="noopener"
                    class="btn btn-outline-primary">
                     <i class="fa-brands fa-facebook-f"></i>
                 </a>
-            
                 <button onclick="copyLink()"
                    class="btn btn-outline-primary">
                     <i class="fa-brands fa-instagram"></i>
                 </button>
             </div>
-            
             <a href="/blogs/<?= $cat_id > 0 ? "?cat=" . $cat_id : "" ?>"
                class="btn btn-primary">
                 <i class="fas fa-angle-left me-1"></i>Kembali
             </a>
-
         </div>
     </div>
-
-<?php // ══════════ BLOG LIST VIEW ══════════
-  // tampilkan nama kategori aktif
-
+<?php 
   else: ?>
-
-    <div class="row g-4 align-items-start">
-      <section>
-        <!-- ── Kiri: daftar post ── -->
+      <section class="row g-4 align-items-start">
         <div class="col-md-6">
           
             <div class="d-flex align-items-center justify-content-between">
@@ -253,12 +218,12 @@ $categories = safe_get_categories($pdo);
                           160,
                         ) ?>
                     </p>
-                    <div class="card-footer">
+                </div>
+                <div class="card-footer">
                       <a href="/blogs/?id=<?= (int) $p["id"] ?>" class="btn btn-primary">
                          Baca Selengkapnya
                          <i class="arrow-icon fas fa-angle-right me-1"></i>
                     </a>
-                    </div>
                 </div>
             </div>
             <?php endforeach; ?>
@@ -338,8 +303,6 @@ $categories = safe_get_categories($pdo);
             <?php endif; ?>
 
         </div>
-
-        <!-- ── Kanan: sidebar kategori ── -->
         <div class="col-md-4">
             <div class="sticky-top" style="top:82px">
                 <div class="card bg-light">
@@ -369,9 +332,6 @@ $categories = safe_get_categories($pdo);
             </div>
         </div>
       </section>
-    </div>
-
 <?php endif; ?>
-
 </div>
 </main>

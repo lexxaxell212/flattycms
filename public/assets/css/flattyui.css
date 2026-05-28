@@ -252,13 +252,15 @@ table tbody td {
   overflow: hidden;
   background: var(--bg-primary);
   color: var(--text-primary);
-  border-radius: var(--radius);
-  transition: transform var(--duration) var(--ease);
+  border-radius: var(--radius-sm);
+  margin-bottom: 3px;
+  transition: transform var(--duration) var(--ease), background var(--duration)
+  var(--ease), color var(--duration) var(--ease);
 }
 .btn-popup:hover, .btn-popup:active {
   color: var(--text-white) !important;
   background: var(--bg-purple) !important;
-  transform: translateX(2px);
+  transform: translateY(2px);
 }
 .btn-icon {
   padding: 8px 10px;

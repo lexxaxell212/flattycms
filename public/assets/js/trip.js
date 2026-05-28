@@ -91,8 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const el = document.createElement('button');
       el.type      = 'button';
       el.className = 'btn-popup';
-      el.innerHTML = `<span
-      class="text-purple">${p.name}</span><span>${p.category_name || ''}</span>`;
+      el.innerHTML = `<span>${p.name}</span> • <span class="text-muted small">${p.category_name || ''}</span>`;
       el.addEventListener('click', () => {
         box.style.display = 'none';
         document.getElementById('searchPoi').value = '';
@@ -126,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.type = 'button';
       btn.className = 'btn-popup';
       btn.innerHTML = `
-        <span class="text-purple">${p.name}</span><span>${p.category_name || ''}</span>
+        <span>${p.name}</span> • <span class="text-muted small">${p.category_name || ''}</span>
       `;
       btn.addEventListener('click', () => {
         startPoint = { name: p.name, lat: parseFloat(p.latitude), lng:

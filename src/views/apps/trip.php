@@ -148,7 +148,7 @@ $cats_json  = json_encode($categories);
           </span>
           <input type="text" id="searchPoi" class="form-control" placeholder="Cari lokasi di map...">
         </div>
-        <div id="searchPoiResults" class="d-flex flex-column"></div>
+        <div id="searchPoiResults" class="d-flex flex-column p-2"></div>
       </div>
 
       <div class="tp-info-strip d-flex flex-wrap gap-3 mb-3">
@@ -183,7 +183,7 @@ $cats_json  = json_encode($categories);
                 </span>
                 <input type="text" id="startInput" class="form-control" placeholder="Cari titik awal...">
               </div>
-              <div id="startResults" class="list-group mt-1" style="max-height:150px;overflow-y:auto;display:none;position:relative;z-index:100"></div>
+              <div id="startResults" class="list-group mt-1 p-2" style="max-height:150px;overflow-y:auto;display:none;position:relative;z-index:100"></div>
               <div id="startSelected" class="card card-flatty mt-2" style="display:none">
                 <div class="card-body">
                   <div class="small fw-semibold text-truncate mb-3">
@@ -268,9 +268,9 @@ $cats_json  = json_encode($categories);
           <div class="input-group">
             <input type="text" id="uploadPoiSearch" class="form-control" placeholder="Cari nama tempat...">
           </div>
-          <div id="uploadPoiResults" class="list-group mt-1" style="max-height:140px;overflow-y:auto;display:none"></div>
+          <div id="uploadPoiResults" class="list-group mt-1 p-2" style="max-height:140px;overflow-y:auto;display:none"></div>
           <input type="hidden" id="uploadPoiId">
-          <div id="uploadPoiSelected" class="bg-gray text-purple mt-1" style="display:none">
+          <div id="uploadPoiSelected" class="bg-gray text-purple mt-1 p-2" style="display:none">
             <i class="text-purple fa-solid fa-check me-1"></i><span class="text-purple" id="uploadPoiName"></span>
           </div>
         </div>

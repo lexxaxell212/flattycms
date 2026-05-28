@@ -56,11 +56,11 @@
   document.querySelectorAll('.cat-filter').forEach(btn => {
     btn.addEventListener('click', function () {
       document.querySelectorAll('.cat-filter').forEach(b => {
-        b.classList.remove('active', 'btn-primary');
-        b.classList.add('btn-outline-secondary');
+        b.classList.remove('active', 'btn-outline-primary');
+        b.classList.add('btn-outline-primary');
       });
-      this.classList.add('active', 'btn-primary');
-      this.classList.remove('btn-outline-secondary');
+      this.classList.add('active', 'btn-outline-primary');
+      this.classList.remove('btn-outline-primary');
       activeCat = this.dataset.cat;
       renderMarkers();
     });
@@ -81,7 +81,7 @@
       const el = document.createElement('button');
       el.type      = 'button';
       el.className = 'list-group-item list-group-item-action small';
-      el.innerHTML = `<i class="fa-solid ${p.category_icon} me-2 text-primary"></i>${p.name}`;
+      el.innerHTML = `<i class="fa-solid ${p.category_icon} me-2 text-purple"></i>${p.name}`;
       el.addEventListener('click', () => {
         box.style.display = 'none';
         document.getElementById('searchPoi').value = '';
@@ -136,7 +136,7 @@
 
   window.addToRoute = function (poi_id) {
     if (!startPoint) {
-      Swal.fire({ toast: true, position: 'top-end', icon: 'warning', title: 'Pilih titik awal dulu!', showConfirmButton: false, timer: 2000 });
+      Swal.fire({ toast: true, position: 'top-end', icon: 'warning', title: 'Pilih titik awal dulu', showConfirmButton: false, timer: 2000 });
       return;
     }
     if (routes.some(r => r.poi_id == poi_id)) {
@@ -210,7 +210,7 @@
     const fd = new FormData();
     fd.append('coordinates', JSON.stringify(points));
     const btn = document.getElementById('btnGenerateRoute');
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>Generating...';
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>Membuat rute...';
     btn.disabled  = true;
     try {
       const res  = await fetch(`${BASE}/api/map/api-route.php`, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
@@ -222,14 +222,15 @@
         document.getElementById('totalDist').textContent = data.distance;
         document.getElementById('totalStops').textContent = `· ${routes.length} lokasi · ~${data.duration} menit`;
         document.getElementById('distanceInfo').style.display = '';
-        Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Rute berhasil digenerate!', showConfirmButton: false, timer: 2000 });
+        Swal.fire({ toast: true, position: 'top-end', icon: 'success', title:
+        'Rute berhasil dibuat!', showConfirmButton: false, timer: 2000 });
       } else {
         Swal.fire('Gagal', data.message, 'error');
       }
     } catch (e) {
-      Swal.fire('Error', 'Tidak bisa generate rute', 'error');
+      Swal.fire('Error', 'Tidak bisa buat rute', 'error');
     } finally {
-      btn.innerHTML = '<i class="fa-solid fa-route me-1"></i>Generate Rute';
+      btn.innerHTML = '<i class="fa-solid fa-route me-1"></i>Buat Rute...';
       btn.disabled  = false;
     }
   });
@@ -243,7 +244,7 @@
 
   document.getElementById('btnResetTrip').addEventListener('click', async () => {
     const conf = await Swal.fire({
-      title: 'Reset trip?', icon: 'warning',
+      title: 'Reset rute?', icon: 'warning',
       showCancelButton: true, confirmButtonText: 'Ya, reset',
       cancelButtonText: 'Batal', confirmButtonColor: '#dc3545'
     });
@@ -286,7 +287,8 @@
         const res  = await fetch(API_TRIP, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
         const data = await res.json();
         if (data.success) {
-          Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Trip disimpan!', showConfirmButton: false, timer: 2000 });
+          Swal.fire({ toast: true, position: 'top-end', icon: 'success', title:
+          'Rute trip disimpan!', showConfirmButton: false, timer: 2000 });
           document.getElementById('saveForm').style.display = 'none';
           if (typeof window.refreshTripku === 'function') window.refreshTripku();
         } else {
@@ -470,20 +472,20 @@
     const limited = (!showAll && filtered.length > 10) ? filtered.slice(0, 10) : filtered;
 
     wrap.innerHTML = limited.map(poi => `
-      <div class="card card-glass mb-4">
+      <div class="card card-flatty mb-4">
+      <div class="card-body">
         ${poi.poi_image
-          ? `<img src="${escHtml(poi.poi_image)}" class="card-img-top" onerror="this.src='uploads/poi-placeholder.jpg'">`
-          : `<img src="uploads/poi-placeholder.jpg" class="card-img-top">`
+          ? `<img src="${escHtml(poi.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
+          : `<img src="uploads/poi-placeholder.jpg" class="card-img">`
         }
-        <div class="card-body">
           <h5>${escHtml(poi.name)}</h5>
           <p class="text-muted">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
           ${poi.poi_url
-            ? `<a href="${escHtml(poi.poi_url)}" class="btn btn-primary" target="_blank" rel="noopener">
-                <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Kunjungi
+            ? `<a href="${escHtml(poi.poi_url)}" class="btn btn-primary btn-sm" target="_blank" rel="noopener">
+                <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Lihat
                </a>`
-            : `<span class="btn btn-outline-accent disabled">
-                <i class="fa-solid fa-link-slash me-1"></i>Belum ada link
+            : `<span class="btn btn-outline-accent btn-sm disabled">
+                <i class="fa-solid fa-link-slash me-1"></i>Link ?
                </span>`
           }
         </div>
@@ -506,11 +508,11 @@
   document.querySelectorAll('.explore-cat').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.explore-cat').forEach(b => {
-        b.classList.remove('active', 'btn-primary');
-        b.classList.add('btn-outline-secondary');
+        b.classList.remove('active', 'btn-outline-primary');
+        b.classList.add('btn-outline-primary');
       });
-      this.classList.add('active', 'btn-primary');
-      this.classList.remove('btn-outline-secondary');
+      this.classList.add('active', 'btn-outline-primary');
+      this.classList.remove('btn-outline-primary');
       activeCatExplore = this.dataset.cat;
       showAll = false;
       render();
@@ -542,7 +544,9 @@
             <div class="trip-saved-body">
               <div class="trip-saved-title">${escHtml(trip.title || 'Trip tanpa nama')}</div>
               <div class="trip-saved-note">
-                ${trip.total_stops ? `<span class="me-2"><i class="fa-solid fa-map-pin me-1 text-primary"></i>${trip.total_stops} stop</span>` : ''}
+                ${trip.total_stops ? `<span class="me-2"><i class="fa-solid
+                fa-map-pin me-1 text-purple"></i>${trip.total_stops} stop</span>` :
+                ''}
                 ${trip.total_distance ? `<span><i class="fa-solid fa-ruler me-1 text-muted"></i>${trip.total_distance} km</span>` : ''}
                 ${(!trip.total_stops && !trip.total_distance) ? escHtml(trip.notes || 'Catatan kosong.') : ''}
               </div>

@@ -108,7 +108,8 @@
     const el = document.getElementById('pagination');
     if (pages <= 1) { el.innerHTML = ''; return; }
     el.innerHTML = Array.from({length:pages}, (_,i) => i+1).map(p =>
-      `<button class="btn btn-sm ${p === page ? 'btn-primary' : 'btn-outline-secondary'}" onclick="loadGallery(${p},'${currentPoi}')">${p}</button>`
+      `<button class="btn btn-sm ${p === page ? 'btn-primary' : 'btn-outline-primary'}"
+      onclick="loadGallery(${p},'${currentPoi}')">${p}</button>`
     ).join('');
   }
   window.loadGallery = loadGallery;
@@ -162,7 +163,8 @@
     const el = document.getElementById('paginationReview');
     if (pages <= 1) { el.innerHTML = ''; return; }
     el.innerHTML = Array.from({length:pages}, (_,i) => i+1).map(p =>
-      `<button class="btn btn-sm ${p === page ? 'btn-primary' : 'btn-outline-secondary'}" onclick="loadReviews(${p},'${currentPoi}')">${p}</button>`
+      `<button class="btn btn-sm ${p === page ? 'btn-primary' : 'btn-outline-primary'}"
+      onclick="loadReviews(${p},'${currentPoi}')">${p}</button>`
     ).join('');
   }
   document.querySelectorAll('.gal-tab').forEach(tab => {
@@ -228,7 +230,7 @@
       </div>
       <div class="d-flex gap-2 justify-content-center mt-2">
         <a href="${src}" target="_blank" class="btn btn-outline-light btn-sm">
-          <i class="fa-solid fa-expand me-1"></i>Lihat HD
+          <i class="fa-solid fa-expand me-1"></i>Lihat FULL
         </a>
         ${owner_id === MY_ID ? `<button class="btn btn-danger btn-sm" onclick="deletePhoto(${photo_id})"><i class="fa-solid fa-trash me-1"></i>Hapus</button>` : ''}
       </div>`;

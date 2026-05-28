@@ -1,3 +1,13 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const style = document.createElement('style');
+  style.textContent = `
+    body { background: var(--bg-white); }
+    body::before { display: none; }
+    footer { z-index: 3 !important; position: relative; background: var(--bg-white); }
+  `;
+  document.head.appendChild(style);
+});
+
 (function () {
   let startPoint    = null;
   let routes        = [];

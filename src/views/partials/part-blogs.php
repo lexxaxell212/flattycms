@@ -10,14 +10,13 @@ $categories = safe_get_categories($pdo);
 ?>
 
 <script src="<?= JS_URL ?>artikel-slider.js" defer></script>
-
   <div class="container">
     <section id="artikel-terbaru" aria-label="Artikel Terbaru">
-
-      <h2 class="mb-4">Artikel Terbaru</h2>
-
+      <h2 class="">Artikel Terbaru</h2>
+      <p class="text-muted mb-4">
+        Cerita, tips, dan rekomendasi terbaik untuk perjalananmu.
+      </p>
       <div id="artikel-slider-wrapper">
-
         <!-- Scrollable viewport -->
         <div class="artikel-slider-viewport">
           <div class="artikel-slider-track" role="list">
@@ -28,23 +27,25 @@ $categories = safe_get_categories($pdo);
               </div>
             <?php else: ?>
               <?php foreach ($posts as $p): ?>
-              <article class="artikel-slide-card" role="listitem">
-                <img
-                  class="asl-img"
+              <article class="artikel-slide-card card card-flatty" role="listitem">
+                <div class="card-body">
+                  <img
+                  class="asl-img card-img"
                   src="<?= BASE_UPLOAD_URL . htmlspecialchars($p['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                   onerror="this.onerror=null;this.src='/uploads/default.jpg'"
                   alt="<?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                   loading="lazy"
                 >
-                <div class="card-body">
                   <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="asl-title">
                     <?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>
                   </a>
-                  <p class="asl-excerpt">
+                  <p class="asl-excerpt text-muted">
                     <?= safe_excerpt($p['excerpt'] ?? ($p['content'] ?? ''), 130) ?>
                   </p>
+                </div>
+                <div class="card-footer">
                   <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="btn
-                  btn-primary btn-asl-read mb-2">
+                  btn-primary btn-sm btn-asl-read">
                     Baca Selengkapnya
                     <i class="fas fa-angle-right ms-1" aria-hidden="true"></i>
                   </a>
@@ -53,11 +54,9 @@ $categories = safe_get_categories($pdo);
               <?php endforeach; ?>
             <?php endif; ?>
           </div>
-        </div><!-- /.artikel-slider-viewport -->
-
+        </div>
         <div class="asl-controls-row">
           <div class="artikel-slider-dots" role="tablist" aria-label="Navigasi slide"></div>
-
           <button class="asl-nav-btn artikel-btn-prev text-primary"
                   aria-label="Artikel sebelumnya" disabled>
             <i class="fas fa-angle-left" aria-hidden="true"></i>
@@ -67,8 +66,6 @@ $categories = safe_get_categories($pdo);
             <i class="fas fa-angle-right" aria-hidden="true"></i>
           </button>
         </div>
-
-      </div><!-- /#artikel-slider-wrapper -->
-
+      </div>
     </section>
   </div>

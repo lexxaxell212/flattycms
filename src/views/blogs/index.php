@@ -177,11 +177,11 @@ $categories = safe_get_categories($pdo);
     <div class="row g-4">
       <section>
         <!-- ── Kiri: daftar post ── -->
-        <div class="col-md-8">
+        <div class="col-md-7">
           
             <div class="d-flex align-items-center justify-content-between">
               
-                <h2 class="mb-4 text-title">
+                <h1>
                     <?php if ($cat_id > 0):
                       $active_cats = array_filter(
                         $categories,
@@ -197,7 +197,7 @@ $categories = safe_get_categories($pdo);
                     else:
                       echo "Daftar Blog";
                     endif; ?>
-                </h2>
+                </h1>
                 
                 <?php if ($cat_id > 0): ?>
                     <a href="/blogs/">
@@ -206,6 +206,9 @@ $categories = safe_get_categories($pdo);
                 <?php endif; ?>
                
             </div>
+            <?php if (!$cat_id): ?>
+            <p class="lead mb-4">Kumpulan artikel pilihan seputar wisata, kuliner, dan inspirasi perjalanan.</p>
+            <?php endif; ?>
 
             <?php if (empty($posts)): ?>
                 <div class="text-center py-5 text-muted">
@@ -344,7 +347,7 @@ $categories = safe_get_categories($pdo);
         </div>
 
         <!-- ── Kanan: sidebar kategori ── -->
-        <div class="col-md-4 mt-4 mt-md-0">
+        <div class="col-md-5">
             <div class="sticky-top" style="top:82px">
                 <div class="card bg-light">
                     <div class="card-body">

@@ -306,7 +306,7 @@ $categories = safe_get_categories($pdo);
         </div>
         <div class="col-md-4">
             <div style="position:sticky;top:0;">
-                <div class="card bg-light">
+                <div class="bg-light">
                     <div class="card-body">
                         <h5 class="fw-bold mb-3">Kategori</h5>
                         <?php if (empty($categories)): ?>

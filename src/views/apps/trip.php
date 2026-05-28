@@ -177,8 +177,12 @@ $cats_json  = json_encode($categories);
             <input type="text" id="startInput" class="form-control" placeholder="Cari titik awal...">
           </div>
           <div id="startResults" class="list-group mt-1" style="max-height:150px;overflow-y:auto;display:none;position:relative;z-index:100"></div>
-          <div id="startSelected" class="text-purple bg-gray mt-1" style="display:none">
-            <i class="text-purple fa-solid fa-check me-1"></i><span class="text-purple" id="startName"></span>
+          <div id="startSelected" class="card card-flatty mt-2" style="display:none">
+            <div class="card-body">
+              <div id="startImg"></div>
+              <h6>Kamu mulai dari : <span id="startName"></span></h6>
+              <p class="text-muted small" id="startDesc"></p>
+            </div>
           </div>
         </div>
 
@@ -201,14 +205,14 @@ $cats_json  = json_encode($categories);
 
         <div class="tp-action-row">
           <button class="btn btn-primary btn-sm" id="btnGenerateRoute" disabled>
-            <i class="fa-solid fa-route me-1"></i>Generate Rute
+            <i class="fa-solid fa-route me-1"></i>Buat Rute
           </button>
           <?php if ($is_logged): ?>
           <button class="btn btn-success btn-sm" id="btnSaveTrip" disabled>
             <i class="fa-solid fa-floppy-disk me-1"></i>Simpan
           </button>
           <?php endif; ?>
-          <button class="btn btn-danger btn-sm btn-icon" id="btnResetTrip" title="Reset">
+          <button class="btn btn-danger btn-sm" style="opacity:0.8" id="btnResetTrip" title="Reset">
             <i class="fa-solid fa-trash"></i>
           </button>
         </div>
@@ -217,7 +221,7 @@ $cats_json  = json_encode($categories);
         <div id="saveForm" style="display:none">
           <input type="text" id="tripTitle" class="form-control mb-2" placeholder="Nama trip (opsional)" value="Trip Bandungku">
           <button class="btn btn-success btn-sm w-100" id="btnConfirmSave">
-            <i class="fa-solid fa-floppy-disk me-1"></i>Simpan Sekarang
+            <i class="fa-solid fa-floppy-disk me-1"></i>Simpan Rute
           </button>
         </div>
         <?php endif; ?>
@@ -278,3 +282,11 @@ $cats_json  = json_encode($categories);
 </div>
 <?php endif; ?>
 </main>
+
+<script>
+window.addEventListener('scroll', () => {
+  const hero = document.querySelector('.tp-main');
+  const offset = window.scrollY * 0.4;
+  hero.style.backgroundPositionY = `calc(50% + ${offset}px)`;
+});
+</script>

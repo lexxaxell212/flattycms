@@ -112,12 +112,21 @@
     }
     matches.forEach(p => {
       const btn = document.createElement('button');
-      btn.type      = 'button';
-      btn.className = 'list-group-item list-group-item-action small';
-      btn.textContent = p.name;
+      btn.type = 'button';
+      btn.className = 'btn text-start w-100 px-3 py-2 border-bottom';
+      btn.innerHTML = `
+        <div class="fw-semibold small text-purple">${p.name}</div>
+        <div class="text-muted" style="font-size:.7rem">${p.category_name || ''}</div>
+      `;
       btn.addEventListener('click', () => {
-        startPoint = { name: p.name, lat: parseFloat(p.latitude), lng: parseFloat(p.longitude) };
+        startPoint = { name: p.name, lat: parseFloat(p.latitude), lng:
+        parseFloat(p.longitude), poi_image: p.poi_image || null,
+        description: p.description || '', poi_url: p.poi_url || null };
         document.getElementById('startName').textContent = startPoint.name;
+        document.getElementById('startDesc').textContent = startPoint.description || 'Deskripsi belum tersedia.';
+        document.getElementById('startImg').innerHTML = startPoint.poi_image
+          ? `<img src="${escHtml(startPoint.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
+          : `<img src="uploads/poi-placeholder.jpg" class="card-img">`;
         document.getElementById('startSelected').style.display = '';
         document.getElementById('startInput').value = '';
         el.style.display = 'none';
@@ -171,16 +180,20 @@
 
     if (empty) empty.style.display = 'none';
     list.innerHTML = routes.map((r, i) => `
-      <div class="d-flex align-items-start gap-2 mb-2 p-2" data-idx="${i}">
-        <span class="badge bg-light rounded-pill mt-1">${i + 1}</span>
+      <div class="d-flex align-items-start gap-2 mb-3 p-2" data-idx="${i}">
         <div class="flex-grow-1 min-w-0">
-          <div class="small fw-semibold text-truncate">${r.name}</div>
-          <button class="btn btn-outline-accent btn-sm btn-remove-route" data-idx="${i}">
+          <div class="small fw-semibold text-truncate mb-2">
+            <span class="text-purple">
+              ${i + 1}
+            </span>
+            • ${r.name}
+          </div>
+          ${r.distance_from_prev ? `<div class="text-muted mb-2" style="font-size:.7rem"><i class="fa-solid fa-ruler me-1"></i>${r.distance_from_prev} km dari titik sebelumnya</div>` : ''}
+          <div class="card card-flatty mb-2">
+          <div class="card-body">
+          <button class="btn badge badge-primary btn-remove-route position-absolute top-0 end-0 m-2" data-idx="${i}">
           <i class="fa-solid fa-xmark"></i>
           </button>
-          ${r.distance_from_prev ? `<div class="text-muted" style="font-size:.7rem"><i class="fa-solid fa-ruler me-1"></i>${r.distance_from_prev} km dari titik sebelumnya</div>` : ''}
-          <div class="card card-flatty mb-4">
-          <div class="card-body">
             ${r.poi_image
               ? `<img src="${escHtml(r.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
               : `<img src="uploads/poi-placeholder.jpg" class="card-img">`
@@ -189,7 +202,7 @@
             <p class="text-muted small">${escHtml(r.description || 'Deskripsi belum tersedia.')}</p>
           </div>
           </div>
-          ${IS_LOGGED ? `<div class="mt-1"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan..." value="${r.note}" style="font-size:.75rem"></div>` : ''}
+          ${IS_LOGGED ? `<div class="mt-1"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan untuk POI ini..." value="${r.note}" style="font-size:.9rem"></div>` : ''}
         </div>
       </div>`).join('');
 

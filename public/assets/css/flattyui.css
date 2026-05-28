@@ -3486,7 +3486,6 @@ textarea.form-control {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 .tp-main-outer {
   background: rgba(10,0,20,0.65);

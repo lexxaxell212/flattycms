@@ -177,7 +177,7 @@ $categories = safe_get_categories($pdo);
     <div class="row g-4">
       <section>
         <!-- ── Kiri: daftar post ── -->
-        <div class="col-md-7">
+        <div class="col-md-6">
           
             <div class="d-flex align-items-center justify-content-between">
               
@@ -347,7 +347,7 @@ $categories = safe_get_categories($pdo);
         </div>
 
         <!-- ── Kanan: sidebar kategori ── -->
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="sticky-top" style="top:82px">
                 <div class="card bg-light">
                     <div class="card-body">

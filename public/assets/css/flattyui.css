@@ -3743,6 +3743,9 @@ textarea.form-control {
   overflow-y: auto;
   box-shadow: 0 4px 16px rgba(0,0,0,.08);
 }
+#searchPoiResults:empty {
+  display: none;
+}
 #startResults {
   position: relative;
   top: auto;

@@ -3752,8 +3752,14 @@ textarea.form-control {
   overflow-y: auto;
   box-shadow: 0 4px 16px rgba(0,0,0,.08);
 }
-#searchPoiResults:empty {
+#searchPoiResults {
   display: none;
+  flex-direction: column;
+}
+
+#searchPoiResults:not(:empty) {
+  display: flex;
+  padding: 0.5rem;
 }
 #startResults {
   position: relative;

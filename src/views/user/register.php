@@ -19,13 +19,15 @@ $page_title = 'Daftar — ' . SITE_NAME;
     <div class="mb-3">
         <label class="form-label">Nama lengkap</label>
         <div class="input-group">
-            <input type="text" id="reg-name" class="form-control" placeholder="Nama">
+            <input type="text" id="reg-name" class="form-control"
+            placeholder="Nama" required>
         </div>
     </div>
     <div class="mb-3">
         <label class="form-label">Username</label>
         <div class="input-group mb-2">
-            <input type="text" id="reg-username" class="form-control" placeholder="username">
+            <input type="text" id="reg-username" class="form-control"
+            placeholder="username" required>
         </div>
         <div class="small text-muted">Hanya huruf, angka, dan underscore.</div>
     </div>
@@ -33,7 +35,7 @@ $page_title = 'Daftar — ' . SITE_NAME;
         <label class="form-label">Email</label>
         <div class="input-group">
             <input type="email" id="reg-email" class="form-control"
-            placeholder="nama@email.com">
+            placeholder="nama@email.com" required>
         </div>
     </div>
     <div class="mb-3">

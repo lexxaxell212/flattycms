@@ -230,7 +230,7 @@ p:last-child {
     font-weight: var(--fw-medium);
     color: var(--text-nav);
     margin-bottom: var(--space-8);
-    opacity: 0.9;
+    opacity: 0.82;
 }
 
 h1,

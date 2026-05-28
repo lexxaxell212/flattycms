@@ -25,7 +25,7 @@ $slides = [
   <div class="container h-100 d-flex align-items-center hero-card-wrapper">
     <div class="glass-hero-card col-12 col-md-7 col-lg-5">
       <span class="text-primary"
-      style="font-weight:var(--fw-extrabold);font-size: clamp(1.4rem, 2.5vw, 1.8rem);opacity:0.89">
+      style="font-weight:var(--fw-extrabold);font-size: clamp(1.4rem, 2.5vw, 1.8rem);opacity:0.85">
         JELAJAHI
       </span>
       <br>

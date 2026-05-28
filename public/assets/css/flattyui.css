@@ -1074,6 +1074,12 @@ textarea.form-control {
   min-height: 46px;
   max-width: 440px;
 }
+.list-group {
+  max-width: 440px;
+}
+.list-group-item {
+  max-width: 440px;
+}
 .input-group:has(.form-control),
 .input-group:has(.password) {
   max-width: 440px;

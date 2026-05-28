@@ -305,7 +305,7 @@ $categories = safe_get_categories($pdo);
 
         </div>
         <div class="col-md-4">
-            <div style="position:sticky;top:0;">
+<div style="position:sticky; top:82px; align-self:flex-start; z-index:10; will-change:transform;">
                 <div class="bg-light">
                     <div class="card-body">
                         <h5 class="fw-bold mb-3">Kategori</h5>

@@ -3512,6 +3512,7 @@ textarea.form-control {
   border-radius: 2rem 2rem 0 0;
   background: var(--bg-white);
   padding: 2rem 0.75rem;
+  max-width: 900px;
 }
 @media (min-width: 768px) {
   .tp-main-outer {

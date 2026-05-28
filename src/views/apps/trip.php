@@ -28,7 +28,7 @@ $cats_json  = json_encode($categories);
 </script>
 <script src="<?= JS_URL ?>trip.js" defer></script>
 <style>
-body {
+body.page-trip {
   background-image: url('../images/wisata.webp');
   background-size: cover;
   background-position: center;

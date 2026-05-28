@@ -172,10 +172,10 @@ $cats_json  = json_encode($categories);
           <div class="tp-planner-body">
             <div class="tp-start-section">
               <div class="tp-section-label">
-                <h5 class="text-muted">
+                <h6 class="text-muted">
                   <i class="fa-solid fa-location-crosshairs text-purple me-1"></i>
                   Titik Awal
-                  </h5>
+                  </h6>
               </div>
               <div class="input-group">
                 <span class="input-group-text">
@@ -192,17 +192,17 @@ $cats_json  = json_encode($categories);
                   </div>
                   <div id="startImg"></div>
                   <h6 id="startName"></h6>
-                  <p class="text-muted small" id="startDesc"></p>
+                  <p class="text-muted" id="startDesc"></p>
                 </div>
               </div>
             </div>
 
             <div class="mb-3">
               <div class="tp-section-label">
-                <h5 class="text-muted">
+                <h6 class="text-muted">
                 <i class="fa-solid fa-list-ol text-purple me-1"></i>
                 Rute Perjalanan
-                </h5>
+                </h6>
               </div>
               <div id="routeList">
                 <div class="route-empty" id="routeEmpty">

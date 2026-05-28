@@ -142,7 +142,7 @@ $categories = safe_get_categories($pdo);
 <?php 
   else: ?>
       <section class="row g-4">
-        <div class="col-md-6">
+        <div class="col-md-8">
           
             <div class="d-flex align-items-center justify-content-between">
               

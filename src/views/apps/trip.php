@@ -148,7 +148,7 @@ $cats_json  = json_encode($categories);
           </span>
           <input type="text" id="searchPoi" class="form-control" placeholder="Cari lokasi di map...">
         </div>
-        <div id="searchPoiResults" class="d-flex flex-column p-2"></div>
+        <div id="searchPoiResults"></div>
       </div>
 
       <div class="tp-info-strip d-flex flex-wrap gap-3 mb-3">

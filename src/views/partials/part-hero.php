@@ -30,7 +30,7 @@ $slides = [
         <a href="/trip" class="btn btn-primary">
           Mulai Rencanakan <i class="arrow-icon fas fa-arrow-right ms-2"></i>
         </a>
-        <a href="/things-to-do" class="btn btn-outline-primary" style="padding-inline: calc(var(--space-5) - 1px);padding-block:calc(var(--space-3) - 1px)">
+        <a href="/things-to-do" class="btn btn-outline-primary" style="padding-block: calc(var(--space-3) - 2px)">
           Lihat Event
         </a>
       </div>

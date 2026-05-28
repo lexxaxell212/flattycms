@@ -80,9 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const q   = this.value.toLowerCase();
     const box = document.getElementById('searchPoiResults');
     box.innerHTML = '';
-    if (!q) { box.style.display = 'none'; return; }
+    if (!q) return;
     const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
-    box.style.display = 'block';
     if (!matches.length) {
       box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>';
       return;
@@ -93,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
       el.className = 'btn-popup';
       el.innerHTML = `<span>${p.name}</span> • <span class="text-muted small">${p.category_name || ''}</span>`;
       el.addEventListener('click', () => {
-        box.style.display = 'none';
+        box.innerHTML = '';
         document.getElementById('searchPoi').value = '';
         const marker = markers[p.id];
         if (marker) {
@@ -107,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('click', e => {
     if (!e.target.closest('#searchPoi') && !e.target.closest('#searchPoiResults'))
-      document.getElementById('searchPoiResults').style.display = 'none';
+      document.getElementById('searchPoiResults').innerHTML = '';
   });
 
   function searchStartPoint(q) {

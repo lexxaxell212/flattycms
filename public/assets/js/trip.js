@@ -145,7 +145,8 @@
     }
     const poi = POIS.find(p => p.id == poi_id);
     if (!poi) return;
-    routes.push({ poi_id: poi.id, name: poi.name, lat: parseFloat(poi.latitude), lng: parseFloat(poi.longitude), note: '' });
+    routes.push({ poi_id: poi.id, name: poi.name, lat: parseFloat(poi.latitude),
+    lng: parseFloat(poi.longitude), note: '', poi_image: poi.poi_image || null, description: poi.description || '', poi_url: poi.poi_url || null });
     map.closePopup();
     updatePlannerUI();
     updateRouteOnMap();
@@ -180,20 +181,13 @@
           ${r.distance_from_prev ? `<div class="text-muted" style="font-size:.7rem"><i class="fa-solid fa-ruler me-1"></i>${r.distance_from_prev} km dari titik sebelumnya</div>` : ''}
           <div class="card card-flatty mb-4">
           <div class="card-body">
-            ${poi.poi_image
-              ? `<img src="${escHtml(poi.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
+            ${r.poi_image
+              ? `<img src="${escHtml(r.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
               : `<img src="uploads/poi-placeholder.jpg" class="card-img">`
             }
-            <h6>${escHtml(poi.name)}</h6>
-            <p class="text-muted small">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
-            ${poi.poi_url
-              ? `<a href="${escHtml(poi.poi_url)}" class="btn btn-primary btn-sm" target="_blank" rel="noopener">
-                  <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Lihat
-                 </a>`
-              : `<span class="btn btn-outline-accent btn-sm disabled">
-                  <i class="fa-solid fa-link-slash me-1"></i>Link ?
-                 </span>`
-            }
+            <h6>${escHtml(r.name)}</h6>
+            <p class="text-muted small">${escHtml(r.description || 'Deskripsi belum tersedia.')}</p>
+          </div>
           </div>
           ${IS_LOGGED ? `<div class="mt-1"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan..." value="${r.note}" style="font-size:.75rem"></div>` : ''}
         </div>

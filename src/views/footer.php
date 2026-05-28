@@ -1,5 +1,5 @@
 </div>
-<footer id="footer" class="bg-white">
+<footer id="footer">
   <div class="container">
     <section id="newsletter-ayokebandung.id" class="footer-newsletter">
       <div class="row justify-content-center">

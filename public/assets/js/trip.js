@@ -1,15 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.classList.add('page-trip');
-  window.addEventListener('scroll', () => {
-    const offset = window.scrollY * 0.4;
-    document.body.style.backgroundPositionY = `calc(50% + ${offset}px)`;
-  });
-});
-
-window.addEventListener('beforeunload', () => {
-  document.body.classList.remove('page-trip');
-});
-
 (function () {
   let startPoint    = null;
   let routes        = [];

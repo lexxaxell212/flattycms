@@ -1,22 +1,22 @@
 /* ============= flatty  ============= */
 :root {
   /* purple */
-  --pu-50: oklch(0.973 0.018 295);
-  --pu-100: oklch(0.944 0.037 295);
-  --pu-200: oklch(0.898 0.066 295);
-  --pu-300: oklch(0.838 0.103 295);
-  --pu-400: oklch(0.750 0.148 295);
-  --pu-500: oklch(0.640 0.193 295);
-  --pu-600: oklch(0.565 0.218 295);
-  --pu-700: oklch(0.490 0.210 295);
-  --pu-800: oklch(0.400 0.185 295);
-  --pu-900: oklch(0.340 0.162 295);
-  --pu-950: oklch(0.220 0.130 295);
+  --pu-50:  oklch(0.977 0.014 295);
+  --pu-100: oklch(0.946 0.029 295);
+  --pu-200: oklch(0.900 0.054 295);
+  --pu-300: oklch(0.840 0.087 295);
+  --pu-400: oklch(0.752 0.121 295);
+  --pu-500: oklch(0.641 0.156 295);
+  --pu-600: oklch(0.558 0.174 295);
+  --pu-700: oklch(0.487 0.167 295);
+  --pu-800: oklch(0.398 0.145 295);
+  --pu-900: oklch(0.338 0.118 295);
+  --pu-950: oklch(0.231 0.089 295);
   /* Orange */
   --or-500: oklch(0.769 0.166 70);
   --or-600: oklch(0.700 0.163 60);
   /* Slate */
-  --sl-50: oklch(0.984 0.003 264);
+  --sl-50:  oklch(0.984 0.003 264);
   --sl-100: oklch(0.967 0.005 264);
   --sl-200: oklch(0.928 0.008 264);
   --sl-300: oklch(0.872 0.010 264);
@@ -27,88 +27,87 @@
   --sl-800: oklch(0.278 0.012 264);
   --sl-900: oklch(0.200 0.010 264);
   --sl-950: oklch(0.090 0.006 264);
-    
-    --font-primary: "Inter", sans-serif;
-    
-    --space-0: 0;
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-5: 1.25rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
-    --space-10: 2.5rem;
-    --space-12: 3rem;
-    --space-16: 4rem;
-    --space-24: 6rem;
-    
-    --radius-none: 0;
-    --radius-sm: 0.75rem;
-    --radius: 1rem;
-    --radius-lg: 1.25rem;
-    --radius-xl: 1.5rem;
-    --radius-full: 100%;
-    
-    --navbar-height: 70px;
-    
-    --ease: cubic-bezier(0.4, 0, 0.2, 1);
-    --duration: 0.4s;
-    
-    --fw-light: 300;
-    --fw-regular: 400;
-    --fw-medium: 500;
-    --fw-semibold: 600;
-    --fw-bold: 700;
-    --fw-extrabold: 800;
-    --fw-black: 900;
 
-    /* === === base === === */
+  --font-primary: "Inter", sans-serif;
+
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  --radius-none: 0;
+  --radius-sm: 0.75rem;
+  --radius: 1rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 100%;
+
+  --navbar-height: 70px;
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: 0.4s;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+  --fw-black: 900;
+
   /* Glass */
   --glass-bg:           oklch(1 0 0 / 0.55);
   --glass-bg-hover:     oklch(1 0 0 / 0.68);
   --glass-bg-active:    oklch(1 0 0 / 0.80);
   --glass-backdrop:     oklch(1 0 0 / 0.15);
   --glass-blur:         blur(20px);
-  --glass-border:       1.5px solid oklch(0.220 0.130 295 / 0.10);
-  --glass-border-hover: 1.5px solid oklch(0.220 0.130 295 / 0.20);
+  --glass-border:       1.5px solid oklch(0.231 0.089 295 / 0.10);
+  --glass-border-hover: 1.5px solid oklch(0.231 0.089 295 / 0.20);
   --glass-shadow:       0 10px 15px -3px oklch(0 0 0 / 0.08),
                         0 4px 6px -2px oklch(0 0 0 / 0.04);
 
   /* Backgrounds */
   --bg-white:        oklch(0.984 0.003 264);
-  --bg-primary:      oklch(0.973 0.018 295);
-  --bg-purple:       oklch(0.490 0.210 295);
-  --bg-purple-light: oklch(0.944 0.037 295);
-  --bg-purple-mid:   oklch(0.565 0.218 295);
-  --bg-hover:        oklch(0.400 0.185 295);
+  --bg-primary:      oklch(0.977 0.014 295);
+  --bg-purple:       oklch(0.487 0.167 295);
+  --bg-purple-light: oklch(0.946 0.029 295);
+  --bg-purple-mid:   oklch(0.558 0.174 295);
+  --bg-hover:        oklch(0.398 0.145 295);
   --bg-nav:          transparent;
-  --bg-nav-hover:    oklch(0.490 0.210 295 / 0.08);
- --bg-backdrop: oklch(0.270 0.040 295 / 0.4);
+  --bg-nav-hover:    oklch(0.487 0.167 295 / 0.08);
+  --bg-backdrop:     oklch(0.270 0.040 295 / 0.4);
 
   /* Text */
-  --text-primary:    oklch(0.270 0.040 295);
-  --text-heading:    oklch(0.210 0.060 295);
-  --text-purple:     oklch(0.490 0.210 295);
-  --text-white:      oklch(0.984 0.003 264);
-  --text-white-hover:oklch(0.928 0.008 264);
-  --text-muted:      oklch(0.500 0.025 295);
-  --text-nav:        oklch(0.210 0.060 295);
-  --text-nav-hover:  oklch(0.490 0.210 295);
-  --text-dark:       oklch(0.110 0.060 295);
+  --text-primary:     oklch(0.270 0.040 295);
+  --text-heading:     oklch(0.210 0.060 295);
+  --text-purple:      oklch(0.487 0.167 295);
+  --text-white:       oklch(0.984 0.003 264);
+  --text-white-hover: oklch(0.928 0.008 264);
+  --text-muted:       oklch(0.500 0.025 295);
+  --text-nav:         oklch(0.210 0.060 295);
+  --text-nav-hover:   oklch(0.487 0.167 295);
+  --text-dark:        oklch(0.110 0.060 295);
 
-    /* logo */
-    --ayoke: oklch(0.340 0.162 295);
-    --bandung: oklch(0.220 0.130 295);
-    --dotid: oklch(0.490 0.210 295);;
-    --strips: #6c2bd933;
+  /* logo */
+  --ayoke:   oklch(0.338 0.118 295);
+  --bandung: oklch(0.231 0.089 295);
+  --dotid:   oklch(0.487 0.167 295);
+  --strips:  #6c2bd933;
 }
 
 /* ============= flatty dark ============= */
 [data-dark] {
 
   /* Glass */
-  --glass-bg: #100d1a;
+  --glass-bg:           #100d1a;
   --glass-bg-hover:     oklch(0.200 0.010 264 / 0.90);
   --glass-bg-active:    oklch(0.200 0.010 264 / 1);
   --glass-backdrop:     oklch(0 0 0 / 0.30);
@@ -120,25 +119,24 @@
   /* Backgrounds */
   --bg-white:        oklch(0.140 0.012 264);
   --bg-primary:      oklch(0.190 0.018 264);
-  --bg-hover:        oklch(0.565 0.218 295);
+  --bg-hover:        oklch(0.558 0.174 295);
   --bg-nav:          transparent;
-  --bg-nav-hover:    oklch(0.750 0.148 295 / 0.10);
-  --bg-backdrop: oklch(0 0 0 / 0.6);
+  --bg-nav-hover:    oklch(0.752 0.121 295 / 0.10);
+  --bg-backdrop:     oklch(0 0 0 / 0.6);
 
   /* Text */
   --text-primary:    oklch(0.820 0.012 264);
   --text-heading:    oklch(0.898 0.008 264);
-  --text-purple:     oklch(0.750 0.148 295);
+  --text-purple:     oklch(0.752 0.121 295);
   --text-muted:      oklch(0.553 0.016 264);
   --text-nav:        oklch(0.930 0.025 295);
-  --text-nav-hover:  oklch(0.750 0.148 295);
-    
-    /* logo dark */
-    --ayoke: oklch(0.944 0.037 295);
-    --bandung: oklch(0.973 0.018 295);
-    --dotid: oklch(0.640 0.193 295);
-    --strips: #6c2bd94d;
-    
+  --text-nav-hover:  oklch(0.752 0.121 295);
+
+  /* logo dark */
+  --ayoke:   oklch(0.946 0.029 295);
+  --bandung: oklch(0.977 0.014 295);
+  --dotid:   oklch(0.641 0.156 295);
+  --strips:  #6c2bd94d;
 }
 
 /* ================= base ================= */

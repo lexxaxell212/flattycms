@@ -84,7 +84,7 @@ $cats_json  = json_encode($categories);
       <input type="text" id="exploreSearch" class="form-control" placeholder="Cari tempat wisata...">
     </div>
     <div class="d-flex gap-2 flex-wrap" id="exploreCatFilter">
-      <button class="btn btn-outline-primary btn-sm explore-cat active" data-cat="">Semua</button>
+      <button class="btn btn-primary btn-sm explore-cat active" data-cat="">Semua</button>
       <?php foreach ($categories as $cat): ?>
       <button class="btn btn-outline-primary btn-sm explore-cat" data-cat="<?=
       $cat['id'] ?>">
@@ -124,7 +124,7 @@ $cats_json  = json_encode($categories);
   <div id="tab-map" class="tp-tab-content" style="display:none">
 
     <div class="cat-filters">
-      <button class="btn btn-outline-primary btn-sm cat-filter active" data-cat="">
+      <button class="btn btn-primary btn-sm cat-filter active" data-cat="">
         Semua
       </button>
       <?php foreach ($categories as $cat): ?>
@@ -145,7 +145,7 @@ $cats_json  = json_encode($categories);
         </span>
         <input type="text" id="searchPoi" class="form-control" placeholder="Cari lokasi di map...">
       </div>
-      <div id="searchPoiResults" class="list-group shadow"></div>
+      <div id="searchPoiResults"></div>
     </div>
 
     <div class="tp-info-strip d-flex flex-wrap gap-3 mb-3">
@@ -160,15 +160,15 @@ $cats_json  = json_encode($categories);
 
     <div class="tp-planner-panel mb-3">
       <div class="tp-planner-header">
-        <h2 class="title">
+        <h4 class="text-title">
           <i class="fa-solid fa-route text-purple me-2"></i>Buat Trip Baru
-        </h2>
+        </h4>
       </div>
       <div class="tp-planner-body">
-
         <div class="tp-start-section">
           <div class="tp-section-label">
-            <i class="fa-solid fa-location-crosshairs text-purple me-1"></i>Titik Awal
+            <i class="fa-solid fa-location-crosshairs text-purple
+            me-1"></i><h5>Titik Awal</h5>
           </div>
           <div class="input-group">
             <span class="input-group-text">
@@ -179,11 +179,11 @@ $cats_json  = json_encode($categories);
           <div id="startResults" class="list-group mt-1" style="max-height:150px;overflow-y:auto;display:none;position:relative;z-index:100"></div>
           <div id="startSelected" class="card card-flatty mt-2" style="display:none">
             <div class="card-body">
-              <div class="small fw-semibold text-truncate mb-2">
-                <span class="text-purple">
+              <div class="small fw-semibold text-truncate mb-3">
+                <span>
                   Kamu mulai dari
                 </span>
-                <span id="startName2"></span>
+                <span id="startName2" class="text-purple"></span>
               </div>
               <div id="startImg"></div>
               <h6 id="startName"></h6>
@@ -218,8 +218,8 @@ $cats_json  = json_encode($categories);
             <i class="fa-solid fa-floppy-disk me-1"></i>Simpan
           </button>
           <?php endif; ?>
-          <button class="btn btn-danger btn-sm" style="opacity:0.8" id="btnResetTrip" title="Reset">
-            <i class="fa-solid fa-trash"></i>
+          <button class="btn btn-accent btn-sm" id="btnResetTrip" title="Reset">
+            <i class="fa-solid fa-trash"></i>Reset
           </button>
         </div>
 

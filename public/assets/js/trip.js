@@ -13,9 +13,9 @@
   }).addTo(map);
   window.mainMap = map;
 
-  const iconColors = { 1: '#6366f1', 2: '#f59e0b', 3: '#10b981' };
+  const iconColors = { 1: 'oklch(0.487 0.167 295)', 2: 'oklch(0.769 0.166 70)', 3: 'oklch(0.558 0.174 295)' };
   function makeIcon(cat_id) {
-    const c = iconColors[cat_id] || '#6366f1';
+    const c = iconColors[cat_id] || 'oklch(0.487 0.167 295)';
     return L.divIcon({
       className: '',
       html: `<div style="width:32px;height:32px;border-radius:50% 50% 50% 0;background:${c};transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35)"></div>`,
@@ -36,19 +36,19 @@
   }
 
   function buildPopup(poi) {
-    const inRoute = routes.some(r => r.poi_id == poi.id);
-    return `
-      <div style="min-width:200px">
-        <div style="font-weight:700;font-size:.9rem;margin-bottom:.2rem">${poi.name}</div>
-        <div style="font-size:.75rem;color:#818cf8;margin-bottom:.3rem">${poi.category_name}</div>
-        ${poi.address ? `<div style="font-size:.72rem;color:#94a3b8;margin-bottom:.6rem"><i class="fa-solid fa-road" style="margin-right:.25rem"></i>${poi.address}</div>` : ''}
-        <div style="display:flex;gap:.4rem;flex-wrap:wrap">
-          <button onclick="addToRoute(${poi.id})" style="flex:1;background:${inRoute ? '#4ade80' : '#6366f1'};color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;font-weight:600;cursor:pointer">
-            ${inRoute ? '<i class="fa-solid fa-check"></i> Ditambahkan' : '<i class="fa-solid fa-plus"></i> Tambah Rute'}
-          </button>
-          ${IS_LOGGED ? `<button onclick="openUpload(${poi.id},'${poi.name.replace(/'/g, "\\'")}\")" style="background:#0ea5e9;color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;cursor:pointer"><i class="fa-solid fa-camera"></i></button>` : ''}
-        </div>
-      </div>`;
+  const inRoute = routes.some(r => r.poi_id == poi.id);
+  return `
+    <div style="min-width:200px">
+      <div style="font-weight:700;font-size:.9rem;margin-bottom:.2rem">${poi.name}</div>
+      <div style="font-size:.75rem;color:oklch(0.641 0.156 295);margin-bottom:.3rem">${poi.category_name}</div>
+      ${poi.address ? `<div style="font-size:.72rem;color:oklch(0.553 0.016 264);margin-bottom:.6rem"><i class="fa-solid fa-road" style="margin-right:.25rem"></i>${poi.address}</div>` : ''}
+      <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+        <button onclick="addToRoute(${poi.id})" style="flex:1;background:${inRoute ? 'oklch(0.527 0.154 155)' : 'oklch(0.487 0.167 295)'};color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;font-weight:600;cursor:pointer">
+          ${inRoute ? '<i class="fa-solid fa-check"></i> Ditambahkan' : '<i class="fa-solid fa-plus"></i> Tambah Rute'}
+        </button>
+        ${IS_LOGGED ? `<button onclick="openUpload(${poi.id},'${poi.name.replace(/'/g, "\\'")}\")" style="background:oklch(0.623 0.214 231);color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;cursor:pointer"><i class="fa-solid fa-camera"></i></button>` : ''}
+      </div>
+    </div>`;
   }
 
   renderMarkers();
@@ -80,8 +80,9 @@
     matches.forEach(p => {
       const el = document.createElement('button');
       el.type      = 'button';
-      el.className = 'list-group-item list-group-item-action small';
-      el.innerHTML = `<i class="fa-solid ${p.category_icon} me-2 text-purple"></i>${p.name}`;
+      el.className = 'btn-popup';
+      el.innerHTML = `<span
+      class="text-purple">${p.name}</span><span>${p.category_name || ''}</span>`;
       el.addEventListener('click', () => {
         box.style.display = 'none';
         document.getElementById('searchPoi').value = '';
@@ -113,10 +114,9 @@
     matches.forEach(p => {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'text-start w-100 px-3 py-2 border-bottom mt-2';
+      btn.className = 'btn-popup';
       btn.innerHTML = `
-        <div class="fw-semibold small text-purple">${p.name} •</div>
-        <div class="text-muted me-2" style="font-size:.7rem">${p.category_name || ''}</div>
+        <span class="text-purple">${p.name}</span><span>${p.category_name || ''}</span>
       `;
       btn.addEventListener('click', () => {
         startPoint = { name: p.name, lat: parseFloat(p.latitude), lng:
@@ -145,6 +145,7 @@
   });
 
   window.addToRoute = function (poi_id) {
+    window.isLoadedTrip = false;
     if (!startPoint) {
       Swal.fire({ toast: true, position: 'top-end', icon: 'warning', title: 'Pilih titik awal dulu', showConfirmButton: false, timer: 2000 });
       return;
@@ -203,7 +204,7 @@
             <p class="text-muted small">${escHtml(r.description || 'Deskripsi belum tersedia.')}</p>
           </div>
           </div>
-          ${IS_LOGGED ? `<div class="mt-1"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan untuk POI ini..." value="${r.note}" style="font-size:.9rem"></div>` : ''}
+          ${IS_LOGGED ? `<div class="mt-1"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan untuk POI ini..." value="${escHtml(r.note)}" style="font-size:.9rem" ${window.isLoadedTrip ? 'disabled' : ''}></div>` : ''}
         </div>
       </div>`).join('');
 
@@ -275,6 +276,7 @@
     });
     if (!conf.isConfirmed) return;
     startPoint = null; routes = []; routePolyline = null; routeDuration = 0;
+    window.isLoadedTrip = false;
     document.getElementById('startSelected').style.display = 'none';
     document.getElementById('startInput').value = '';
     if (routeLine) { map.removeLayer(routeLine); routeLine = null; }
@@ -339,6 +341,7 @@
         lat: parseFloat(item.latitude), lng: parseFloat(item.longitude),
         distance_from_prev: item.distance_from_prev, note: item.note || ''
       }));
+      window.isLoadedTrip = true;
       updatePlannerUI();
       if (trip.route_polyline) {
         routePolyline = JSON.parse(trip.route_polyline);
@@ -406,7 +409,7 @@
       if (!matches.length) { box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>'; return; }
       matches.forEach(p => {
         const el = document.createElement('button');
-        el.type = 'button'; el.className = 'list-group-item list-group-item-action small'; el.textContent = p.name;
+        el.type = 'button'; el.className = 'btn-popup text-purple'; el.textContent = p.name;
         el.addEventListener('click', () => {
           document.getElementById('uploadPoiId').value = p.id;
           document.getElementById('uploadPoiName').textContent = p.name;
@@ -561,30 +564,24 @@
           return;
         }
         wrap.innerHTML = list.map(trip => `
-          <div class="trip-saved-card">
-            <img class="trip-saved-thumb"
-                 src="${trip.thumbnail || BASE + 'uploads/poi-placeholder.jpg'}"
-                 alt="${escHtml(trip.title)}"
-                 onerror="this.src='${BASE}uploads/poi-placeholder.jpg'">
-            <div class="trip-saved-body">
-              <div class="trip-saved-title">${escHtml(trip.title || 'Trip tanpa nama')}</div>
-              <div class="trip-saved-note">
-                ${trip.total_stops ? `<span class="me-2"><i class="fa-solid
-                fa-map-pin me-1 text-purple"></i>${trip.total_stops} stop</span>` :
-                ''}
-                ${trip.total_distance ? `<span><i class="fa-solid fa-ruler me-1 text-muted"></i>${trip.total_distance} km</span>` : ''}
-                ${(!trip.total_stops && !trip.total_distance) ? escHtml(trip.notes || 'Catatan kosong.') : ''}
-              </div>
-              <div class="d-flex gap-2 mt-2 flex-wrap">
-                <button class="btn btn-primary btn-sm" onclick="loadSavedTrip(${trip.id})">
-                  <i class="fa-solid fa-route me-1"></i>Buka di Peta
-                </button>
-                <button class="btn btn-outline-danger btn-sm" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || 'Trip ini')}')">
-                  <i class="fa-solid fa-trash"></i>
-                </button>
-              </div>
-            </div>
-          </div>`).join('');
+        <div class="card card-flatty">
+          <div class="card-body">
+            <h5>${escHtml(trip.title || 'Trip tanpa nama')}</h5>
+            <p class="text-muted small">
+              ${trip.total_stops ? `<span class="me-2"><i class="fa-solid fa-map-pin me-1 text-purple"></i>${trip.total_stops} stop</span>` : ''}
+              ${trip.total_distance ? `<span><i class="fa-solid fa-ruler me-1 text-muted"></i>${trip.total_distance} km</span>` : ''}
+              ${(!trip.total_stops && !trip.total_distance) ? escHtml(trip.notes || 'Catatan kosong.') : ''}
+            </p>
+          </div>
+          <div class="card-footer d-flex gap-2">
+            <button class="btn btn-primary btn-sm" onclick="loadSavedTrip(${trip.id})">
+              <i class="fa-solid fa-route me-1"></i>Buka di Map POI
+            </button>
+            <button class="btn btn-danger btn-sm" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || 'Trip ini')}')">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>`).join('');
       })
       .catch(() => {
         wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-triangle-exclamation"></i><p>Gagal memuat trip. Coba refresh halaman.</p></div>`;

@@ -2,9 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const hero = document.querySelector('.tp-main');
   if (!hero) return;
   window.addEventListener('scroll', () => {
-  const offset = Math.min(window.scrollY * 0.4, 200);
+  const rect = hero.getBoundingClientRect();
+  const offset = (rect.top * -1) * 0.3;
   hero.style.backgroundPositionY = `calc(50% + ${offset}px)`;
-  });
+});
 });
 
 (function () {

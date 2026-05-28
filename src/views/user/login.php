@@ -7,7 +7,7 @@ if (isset($_SESSION['user'])) {
 
 <script src="<?= JS_URL ?>user-helper.js" defer></script>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
 
 <div>
@@ -71,7 +71,7 @@ if (isset($_SESSION['user'])) {
     </div>
     <div class="divider">atau</div>
     <div class="d-flex justify-content-center">
-      <div class="g_id_signin" data-type="standard" data-shape="pill"></div>
+    <div id="google-login-page"></div>
     </div>
     <p class="text-center text-muted small mt-3">
         Belum punya akun? <a href="/register" class="fw-medium">Daftar sekarang</a>

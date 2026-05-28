@@ -6,7 +6,7 @@ require_once LIB_PATH . "subscriber.php";
 require_once LIB_PATH . "v-unsubscribe.php";
 ?>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
   <section id="Unsubscribe">
     <h2 class="text-center">

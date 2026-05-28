@@ -4,7 +4,7 @@ $page_title = 'Lupa Password — ' . SITE_NAME;
 
 <script src="<?= JS_URL ?>user-helper.js" defer></script>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
 
 <div>

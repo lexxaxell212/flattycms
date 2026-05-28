@@ -8,33 +8,27 @@ $page_title = 'Daftar — ' . SITE_NAME;
 
 <script src="<?= JS_URL ?>user-helper.js" defer></script>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
-  
 <section id="daftar-akun">
   <h2 class="text-center">Buat akun baru</h2>
   <p class="text-muted mb-5 text-center">Isi data di bawah untuk mendaftar</p>
-
-<div class="card bg-gray p-4 mx-auto" style="width:100%;max-width:440px;">
-
+<div class="card bg-light p-4 mx-auto" style="width:100%;max-width:440px;">
     <div id="register-error" class="alert alert-danger d-none small py-2"></div>
     <div id="register-success" class="alert alert-success d-none small py-2"></div>
-
     <div class="mb-3">
         <label class="form-label">Nama lengkap</label>
         <div class="input-group">
-            <input type="text" id="reg-name" class="form-control" placeholder="John Doe">
+            <input type="text" id="reg-name" class="form-control" placeholder="Nama">
         </div>
     </div>
-
     <div class="mb-3">
         <label class="form-label">Username</label>
         <div class="input-group mb-2">
-            <input type="text" id="reg-username" class="form-control" placeholder="johndoe">
+            <input type="text" id="reg-username" class="form-control" placeholder="username">
         </div>
         <div class="small text-muted">Hanya huruf, angka, dan underscore.</div>
     </div>
-
     <div class="mb-3">
         <label class="form-label">Email</label>
         <div class="input-group">
@@ -42,40 +36,32 @@ $page_title = 'Daftar — ' . SITE_NAME;
             placeholder="nama@email.com">
         </div>
     </div>
-
     <div class="mb-3">
         <label class="form-label">Password</label>
         <div class="input-group">
             <input type="password" id="reg-pw" class="form-control" placeholder="Min. 8 karakter">
-            <button class="btn btn-outline-secondary border-start-0" type="button" id="toggle-pw">
-                <i class="fa-regular fa-eye fa-sm"></i>
+            <button class="btn" type="button" id="toggle-pw">
+                <i class="text-muted fa-regular fa-eye fa-sm"></i>
             </button>
         </div>
     </div>
-
     <div class="mb-4">
         <label class="form-label">Konfirmasi password</label>
         <div class="input-group">
             <input type="password" id="reg-pw-confirm" class="form-control" placeholder="Ulangi password">
             <button class="btn" type="button" id="toggle-pw-confirm">
-                <i class="fa-regular fa-eye fa-sm"></i>
+                <i class="text-muted fa-regular fa-eye fa-sm"></i>
             </button>
         </div>
     </div>
-
     <button class="btn btn-outline-primary w-100 mb-3" id="btn-register">Daftar</button>
-
     <div class="text-center text-muted small mt-4">
         Sudah punya akun? <a href="/login" class="fw-medium">Masuk</a>
     </div>
 </div>
-
 </section>
-
 </div>
 </main>
-
-
 <script>
     function togglePw(inputId, btnId) {
         document.getElementById(btnId).addEventListener('click', () => {

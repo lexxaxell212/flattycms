@@ -10,7 +10,7 @@ $display    = $user['display_name'] ?? $user['name'];
 
 <script src="<?= JS_URL ?>user-profile.js" defer></script>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
 
   <!-- Profile Header -->

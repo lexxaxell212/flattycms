@@ -26,12 +26,23 @@ window.onGoogleLibraryLoad = function () {
 
         const buttonElement = document.getElementById("google-login-btn");
         if (buttonElement) {
-            google.accounts.id.renderButton(buttonElement, {
-                theme: "outline",
-                size: "medium",
-                type: "icon",
-                shape: "circle"
-            });
+          google.accounts.id.renderButton(buttonElement, {
+            theme: "outline",
+            size: "medium",
+            type: "icon",
+            shape: "circle"
+          });
+        }
+        
+        const loginButton = document.getElementById("google-login-page");
+        if (loginButton) {
+          google.accounts.id.renderButton(loginButton, {
+            theme: "outline",
+            size: "large",
+            type: "standard",
+            shape: "pill",
+            text: "signin_with"
+          });
         }
 
         initGSIScrollObserver();

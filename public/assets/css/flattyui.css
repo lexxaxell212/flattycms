@@ -1074,11 +1074,18 @@ textarea.form-control {
   min-height: 46px;
   max-width: 440px;
 }
-.form-control.password {
-  max-width: 400px;
+.input-group:has(.form-control),
+.input-group:has(.password) {
+  max-width: 440px;
+  background: transparent;
+  color: var(--text-primary);
 }
 
 [data-dark] .form-control {
+  border: 1px solid var(--sl-700);
+  color: var(--text-primary);
+}
+[data-dark] .input-group:has(.password) {
   border: 1px solid var(--sl-700);
   color: var(--text-primary);
 }
@@ -1190,7 +1197,6 @@ textarea.form-control {
   box-shadow: none !important;
   background: transparent;
   flex: 1;
-  padding-left: 0;
 }
 
 #feedback-loadingSpinner {

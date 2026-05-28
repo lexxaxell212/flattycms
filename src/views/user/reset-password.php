@@ -15,7 +15,7 @@ $page_title = 'Reset Password — ' . SITE_NAME;
 
 <script src="<?= JS_URL ?>user-helper.js" defer></script>
 
-<main id="content" class="container-fluid">
+<main id="content">
 <div class="container">
 
 <section>

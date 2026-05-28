@@ -1,8 +1,4 @@
 <?php
-if (!empty($_SESSION['user'])) {
-    header('Location: /');
-    exit;
-}
 $page_title = 'Daftar — ' . SITE_NAME;
 ?>
 

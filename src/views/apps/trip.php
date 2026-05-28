@@ -28,7 +28,7 @@ $cats_json  = json_encode($categories);
 </script>
 <script src="<?= JS_URL ?>trip.js" defer></script>
 <main id="content">
-<div class="tp-main">
+<div class="tp-main-hero"></div>
 <div class="tp-main-outer">
   <div class="tp-main-outer-content text-center">
     <h1 class="text-gradient">Trip Planner</h1>
@@ -242,7 +242,6 @@ $cats_json  = json_encode($categories);
 
   </div>
 
-</div>
 </div>
 </div>
 </div>

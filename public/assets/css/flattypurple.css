@@ -86,8 +86,8 @@
   --bg-backdrop:     oklch(0.270 0.040 295 / 0.4);
 
   /* Text */
-  --text-primary:     oklch(0.270 0.040 295);
-  --text-heading:     oklch(0.210 0.060 295);
+  --text-primary:     oklch(0.210 0.060 295);
+  --text-heading:     oklch(0.270 0.040 295);
   --text-purple:      oklch(0.487 0.167 295);
   --text-white:       oklch(0.984 0.003 264);
   --text-white-hover: oklch(0.928 0.008 264);
@@ -169,7 +169,7 @@ html {
 body {
     font-family: "Inter", sans-serif;
     background: oklch(0.973 0.018 295);
-    color: oklch(0.210 0.060 295);
+    color: var(--text-primary);
     min-height: 100vh;
     font-size: var(--space-4);
     font-weight: var(--fw-regular);

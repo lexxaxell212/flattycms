@@ -178,7 +178,7 @@ table tbody td {
 }
 
 .text-primary {
-  color: var(--text-primary);
+  color: var(--text-nav) !important;
 }
 
 .text-purple {

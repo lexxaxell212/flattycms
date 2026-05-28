@@ -170,16 +170,33 @@
 
     if (empty) empty.style.display = 'none';
     list.innerHTML = routes.map((r, i) => `
-      <div class="d-flex align-items-start gap-2 mb-2 p-2 rounded border" data-idx="${i}">
-        <span class="badge bg-primary rounded-pill mt-1">${i + 1}</span>
+      <div class="d-flex align-items-start gap-2 mb-2 p-2" data-idx="${i}">
+        <span class="badge bg-light rounded-pill mt-1">${i + 1}</span>
         <div class="flex-grow-1 min-w-0">
           <div class="small fw-semibold text-truncate">${r.name}</div>
+          <button class="btn btn-outline-accent btn-sm btn-remove-route" data-idx="${i}">
+          <i class="fa-solid fa-xmark"></i>
+          </button>
           ${r.distance_from_prev ? `<div class="text-muted" style="font-size:.7rem"><i class="fa-solid fa-ruler me-1"></i>${r.distance_from_prev} km dari titik sebelumnya</div>` : ''}
+          <div class="card card-flatty mb-4">
+          <div class="card-body">
+            ${poi.poi_image
+              ? `<img src="${escHtml(poi.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
+              : `<img src="uploads/poi-placeholder.jpg" class="card-img">`
+            }
+            <h6>${escHtml(poi.name)}</h6>
+            <p class="text-muted small">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
+            ${poi.poi_url
+              ? `<a href="${escHtml(poi.poi_url)}" class="btn btn-primary btn-sm" target="_blank" rel="noopener">
+                  <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Lihat
+                 </a>`
+              : `<span class="btn btn-outline-accent btn-sm disabled">
+                  <i class="fa-solid fa-link-slash me-1"></i>Link ?
+                 </span>`
+            }
+          </div>
           ${IS_LOGGED ? `<div class="mt-1"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan..." value="${r.note}" style="font-size:.75rem"></div>` : ''}
         </div>
-        <button class="btn btn-outline-accent btn-sm btn-remove-route" data-idx="${i}">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
       </div>`).join('');
 
     list.querySelectorAll('.note-input').forEach(inp => {

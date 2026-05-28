@@ -95,10 +95,10 @@ $isPintasanActive = (bool) array_filter(
     <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css">
   </noscript>
   <!-- script -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://accounts.google.com/gsi/client"></script>
+  <script src="<?= JS_URL ?>gsi.js"></script>
   <script src="<?= JS_URL ?>bs533.bundle.min.js" defer></script>
-  <script src="<?= JS_URL ?>swal2.all.min.js" defer></script>
-  <script src="<?= JS_URL ?>gsi.js" defer></script>
+  <script src="<?= JS_URL ?>swal2.all.min.js"></script>
   <script src="<?= JS_URL ?>main.js" defer></script>
   <script>
   const CONFIG = {

@@ -220,7 +220,8 @@ $categories = safe_get_categories($pdo);
                     </p>
                 </div>
                 <div class="card-footer">
-                      <a href="/blogs/?id=<?= (int) $p["id"] ?>" class="btn btn-primary">
+                      <a href="/blogs/?id=<?= (int) $p["id"] ?>" class="btn
+                      btn-primary btn-sm">
                          Baca Selengkapnya
                          <i class="arrow-icon fas fa-angle-right me-1"></i>
                     </a>
@@ -304,7 +305,7 @@ $categories = safe_get_categories($pdo);
 
         </div>
         <div class="col-md-4">
-            <div class="sticky-top" style="top:82px">
+            <div style="position:sticky;top:0;">
                 <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="fw-bold mb-3">Kategori</h5>

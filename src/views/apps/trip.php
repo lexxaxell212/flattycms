@@ -3,6 +3,12 @@ require_once LIB_PATH . 'poi-actions.php';
 
 $page_title = 'Peta & Trip Planner — ' . SITE_NAME;
 $pois       = get_all_poi(true);
+$pois = array_map(function($p) {
+    $p['description'] = mb_substr($p['description'] ?? '', 0, 50) .
+    (mb_strlen($p['description'] ?? '') > 50 ? '...' : '');
+    $p['name'] = mb_substr($p['name'] ?? '', 0, 15) . (mb_strlen($p['name'] ?? '') > 15 ? '...' : '');
+    return $p;
+}, $pois);
 $categories = get_poi_categories();
 $is_logged  = isset($_SESSION['user']);
 $pois_json  = json_encode($pois);
@@ -288,10 +294,3 @@ $cats_json  = json_encode($categories);
 </div>
 <?php endif; ?>
 </main>
-<script>
-window.addEventListener('scroll', () => {
-  const hero = document.querySelector('.tp-main');
-  const offset = window.scrollY * 0.4;
-  hero.style.backgroundPositionY = `calc(50% + ${offset}px)`;
-});
-</script>

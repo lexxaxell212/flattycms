@@ -1,3 +1,11 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const hero = document.querySelector('.tp-main');
+  if (!hero) return;
+  window.addEventListener('scroll', () => {
+    hero.style.backgroundPositionY = `calc(50% + ${window.scrollY * 0.4}px)`;
+  });
+});
+
 (function () {
   let startPoint    = null;
   let routes        = [];

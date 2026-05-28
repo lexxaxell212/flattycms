@@ -3499,14 +3499,17 @@ textarea.form-control {
 /* ======= /trip planner ==========*/
 /* pages */
 .tp-main {
-  background: var(--bg-white);
-  background-image: url('../images/default.jpg');
+  background-image: url('../images/wisata-mobile.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+@media (min-width: 768px) {
+  .tp-main {
+    background-image: url('../images/wisata.webp');
+  }
+}
 .tp-main-outer {
-  background: rgba(10,0,20,0.65);
   padding-top: 400px;
 }
 .tp-main-outer-content {
@@ -3517,7 +3520,6 @@ textarea.form-control {
   border-radius: 2rem 2rem 0 0;
   background: var(--bg-white);
   padding: 2rem 0.75rem;
-  box-shadow: 0 0 50px rgba(0,0,0,0.3);
 }
 @media (min-width: 768px) {
   .tp-main-outer {

@@ -27,14 +27,6 @@ $cats_json  = json_encode($categories);
   const API_GAL   = BASE + '/api/map/api-gallery.php';
 </script>
 <script src="<?= JS_URL ?>trip.js" defer></script>
-<style>
-body.page-trip {
-  background-image: url('../images/wisata.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-</style>
 <main id="content">
 <div class="tp-main">
 <div class="tp-main-outer">

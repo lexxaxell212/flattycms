@@ -3498,6 +3498,12 @@ textarea.form-control {
 
 /* ======= /trip planner ==========*/
 /* pages */
+body.page-trip {
+  background-image: url('../images/wisata.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .tp-main {
   background: transparent;
 }

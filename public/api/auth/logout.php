@@ -2,6 +2,11 @@
 require_once dirname(__DIR__, 3) . "/bootstrap.php";
 autoload_core();
 
+if (!isset($_SESSION['user'])) {
+    header('Location: /');
+    exit;
+}
+
 $redirectout = $_SESSION['redirect_after_logout'] ?? '/';
 
 session_unset();

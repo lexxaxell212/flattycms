@@ -42,6 +42,11 @@ if (!password_verify($password, $user['password'])) {
     exit;
 }
 
+if (!$user['email_verified']) {
+    echo json_encode(['success' => false, 'message' => 'Email belum diverifikasi. Cek inbox atau folder spam.']);
+    exit;
+}
+
 $_SESSION['user'] = $user;
 $_SESSION['flash'] = [
     'type'    => 'success',

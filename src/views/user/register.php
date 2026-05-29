@@ -111,9 +111,8 @@ document.getElementById('btn-register').addEventListener('click', async () => {
         });
         const data = await res.json();
         if (data.success) {
-            successEl.textContent = 'Akun berhasil dibuat! Mengalihkan...';
+            successEl.textContent = 'Akun berhasil dibuat! Cek emailmu untuk verifikasi sebelum login.';
             successEl.classList.remove('d-none');
-            setTimeout(() => window.location.href = data.redirect, 1500);
         } else {
             errorEl.textContent = data.message ?? 'Pendaftaran gagal.';
             errorEl.classList.remove('d-none');

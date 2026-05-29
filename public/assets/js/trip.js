@@ -162,11 +162,11 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addToRoute = function (poi_id) {
     window.isLoadedTrip = false;
     if (!startPoint) {
-      Swal.fire({ toast: true, position: 'top-end', icon: 'warning', title: 'Pilih titik awal dulu', showConfirmButton: false, timer: 2000 });
+      flattyToast('warning', 'Pilih titik awal dulu');
       return;
     }
     if (routes.some(r => r.poi_id == poi_id)) {
-      Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: 'Sudah ada di rute', showConfirmButton: false, timer: 1500 });
+      flattyToast('info', 'Sudah ada di rute');
       return;
     }
     const poi = POIS.find(p => p.id == poi_id);
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fd = new FormData();
     fd.append('coordinates', JSON.stringify(points));
     const btn = document.getElementById('btnGenerateRoute');
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>Membuat rute...';
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-1"></i>Membuat rute...';
     btn.disabled  = true;
     try {
       const res  = await fetch(`${BASE}/api/map/api-route.php`, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
@@ -263,13 +263,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('totalDist').textContent = data.distance;
         document.getElementById('totalStops').textContent = `· ${routes.length} lokasi · ~${data.duration} menit`;
         document.getElementById('distanceInfo').style.display = '';
-        Swal.fire({ toast: true, position: 'top-end', icon: 'success', title:
-        'Rute berhasil dibuat!', showConfirmButton: false, timer: 2000 });
+        flattyToast('success', 'Rute berhasil dibuat!');
       } else {
-        Swal.fire('Gagal', data.message, 'error');
+        flattyToast('error', data.message ?? 'Gagal membuat rute.');
       }
     } catch (e) {
-      Swal.fire('Error', 'Tidak bisa buat rute', 'error');
+      flattyToast('error', 'Tidak bisa buat rute.');
     } finally {
       btn.innerHTML = '<i class="fa-solid fa-route me-1"></i>Buat Rute';
       btn.disabled  = false;
@@ -283,20 +282,16 @@ document.addEventListener('DOMContentLoaded', () => {
     map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
   }
 
-  document.getElementById('btnResetTrip').addEventListener('click', async () => {
-    const conf = await Swal.fire({
-      title: 'Reset rute?', icon: 'warning',
-      showCancelButton: true, confirmButtonText: 'Ya, reset',
-      cancelButtonText: 'Batal', confirmButtonColor: '#dc3545'
+  document.getElementById('btnResetTrip').addEventListener('click', () => {
+    flattyConfirm('Reset rute? Semua titik akan dihapus.', () => {
+      startPoint = null; routes = []; routePolyline = null; routeDuration = 0;
+      window.isLoadedTrip = false;
+      document.getElementById('startSelected').style.display = 'none';
+      document.getElementById('startInput').value = '';
+      if (routeLine) { map.removeLayer(routeLine); routeLine = null; }
+      updatePlannerUI();
+      renderMarkers();
     });
-    if (!conf.isConfirmed) return;
-    startPoint = null; routes = []; routePolyline = null; routeDuration = 0;
-    window.isLoadedTrip = false;
-    document.getElementById('startSelected').style.display = 'none';
-    document.getElementById('startInput').value = '';
-    if (routeLine) { map.removeLayer(routeLine); routeLine = null; }
-    updatePlannerUI();
-    renderMarkers();
   });
 
   if (IS_LOGGED) {
@@ -325,19 +320,25 @@ document.addEventListener('DOMContentLoaded', () => {
         poi_id: r.poi_id, order_index: i + 1,
         distance_from_prev: r.distance_from_prev || 0, note: r.note
       }))));
+      const btn     = document.getElementById('btnConfirmSave');
+      const btnOrig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-1"></i>Menyimpan...';
+      btn.disabled  = true;
       try {
         const res  = await fetch(API_TRIP, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
         const data = await res.json();
         if (data.success) {
-          Swal.fire({ toast: true, position: 'top-end', icon: 'success', title:
-          'Rute trip disimpan!', showConfirmButton: false, timer: 2000 });
+          flattyToast('success', 'Rute trip disimpan!');
           document.getElementById('saveForm').style.display = 'none';
           if (typeof window.refreshTripku === 'function') window.refreshTripku();
         } else {
-          Swal.fire('Gagal', data.message, 'error');
+          flattyToast('error', data.message ?? 'Gagal menyimpan trip.');
         }
       } catch (e) {
-        Swal.fire('Error', 'Tidak bisa menyimpan trip', 'error');
+        flattyToast('error', 'Tidak bisa menyimpan trip.');
+      } finally {
+        btn.innerHTML = btnOrig;
+        btn.disabled  = false;
       }
     }
   }
@@ -346,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const res  = await fetch(`${API_TRIP}?id=${id}`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
       const json = await res.json();
-      if (!json.success) { Swal.fire('Gagal', json.message, 'error'); return; }
+      if (!json.success) { flattyToast('error', json.message ?? 'Gagal memuat trip.'); return; }
       const trip = json.data;
       startPoint = { name: trip.start_point_name, lat: parseFloat(trip.start_lat), lng: parseFloat(trip.start_lng) };
       document.getElementById('startName').textContent = startPoint.name;
@@ -373,29 +374,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const mapEl = document.getElementById('mainMap');
         if (mapEl) { mapEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); map.invalidateSize(); }
       }, 150);
-      Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: `Trip "${trip.title}" dimuat!`, showConfirmButton: false, timer: 2000 });
+      flattyToast('success', `Trip "${trip.title}" dimuat!`);
     } catch (e) {
-      Swal.fire('Error', 'Gagal memuat trip', 'error');
+      flattyToast('error', 'Gagal memuat trip.');
     }
   };
 
   window.deleteTripById = async function (id, title) {
-    const conf = await Swal.fire({
-      title: 'Hapus trip?', text: `"${title}" akan dihapus permanen`, icon: 'warning',
-      showCancelButton: true, confirmButtonColor: '#dc3545',
-      confirmButtonText: 'Hapus', cancelButtonText: 'Batal'
+    flattyConfirm(`Hapus trip "${title}"? Tindakan ini permanen.`, async () => {
+      const fd = new FormData();
+      fd.append('action', 'delete'); fd.append('csrf_token', CSRF); fd.append('trip_id', id);
+      const res  = await fetch(API_TRIP, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
+      const data = await res.json();
+      if (data.success) {
+        flattyToast('success', 'Trip dihapus!');
+        if (typeof window.refreshTripku === 'function') window.refreshTripku();
+      } else {
+        flattyToast('error', data.message ?? 'Gagal menghapus trip.');
+      }
     });
-    if (!conf.isConfirmed) return;
-    const fd = new FormData();
-    fd.append('action', 'delete'); fd.append('csrf_token', CSRF); fd.append('trip_id', id);
-    const res  = await fetch(API_TRIP, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
-    const data = await res.json();
-    if (data.success) {
-      Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Trip dihapus!', showConfirmButton: false, timer: 2000 });
-      if (typeof window.refreshTripku === 'function') window.refreshTripku();
-    } else {
-      Swal.fire('Gagal', data.message, 'error');
-    }
   };
 
   if (IS_LOGGED) {
@@ -439,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const file = this.files[0];
       if (!file) return;
       if (file.size > 10 * 1024 * 1024) {
-        Swal.fire('File terlalu besar', 'Maksimal 10MB', 'warning');
+        flattyToast('warning', 'File terlalu besar, maksimal 10MB.');
         this.value = '';
         return;
       }
@@ -454,9 +451,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btnKirimUpload').addEventListener('click', async () => {
       const poi_id = document.getElementById('uploadPoiId').value;
       const file   = document.getElementById('uploadFile').files[0];
-      if (!poi_id || !file) { Swal.fire('Oops!', 'Pilih lokasi dan foto dulu', 'warning'); return; }
+      if (!poi_id || !file) { flattyToast('warning', 'Pilih lokasi dan foto dulu.'); return; }
       const btn = document.getElementById('btnKirimUpload');
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>Mengupload...';
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-1"></i>Mengupload...';
       btn.disabled  = true;
       const fd = new FormData();
       fd.append('csrf_token', CSRF); fd.append('poi_id', poi_id);
@@ -466,12 +463,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await res.json();
         if (data.success) {
           bootstrap.Modal.getInstance(document.getElementById('uploadModal'))?.hide();
-          Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Foto berhasil diupload!', showConfirmButton: false, timer: 2500 });
+          flattyToast('success', 'Foto berhasil diupload!');
         } else {
-          Swal.fire('Gagal', data.message, 'error');
+          flattyToast('error', data.message ?? 'Gagal upload foto.');
         }
       } catch (e) {
-        Swal.fire('Error', 'Gagal upload foto', 'error');
+        flattyToast('error', 'Gagal upload foto.');
       } finally {
         btn.innerHTML = '<i class="fa-solid fa-upload me-1"></i>Upload';
         btn.disabled  = false;

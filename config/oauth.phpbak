@@ -1,5 +1,0 @@
-<?php
-  return [
-    'client_id' => 'CLIENT_GSI_ID',
-    'client_secret' => 'CLIENT_GSI_SECRET', 
-];

@@ -8,28 +8,23 @@ $page_title = 'Daftar — ' . SITE_NAME;
   <h2 class="text-center">Buat akun baru</h2>
   <p class="text-muted mb-5 text-center">Isi data di bawah untuk mendaftar</p>
 <div class="card bg-light p-4 mx-auto" style="width:100%;max-width:440px;">
-    <div id="register-error" class="alert alert-danger d-none small py-2"></div>
-    <div id="register-success" class="alert alert-success d-none small py-2"></div>
     <div class="mb-3">
         <label class="form-label">Nama lengkap</label>
         <div class="input-group">
-            <input type="text" id="reg-name" class="form-control"
-            placeholder="Nama" required>
+            <input type="text" id="reg-name" class="form-control" placeholder="Nama" required>
         </div>
     </div>
     <div class="mb-3">
         <label class="form-label">Username</label>
         <div class="input-group mb-2">
-            <input type="text" id="reg-username" class="form-control"
-            placeholder="username" required>
+            <input type="text" id="reg-username" class="form-control" placeholder="username" required>
         </div>
         <div class="small text-muted">Hanya huruf, angka, dan underscore.</div>
     </div>
     <div class="mb-3">
         <label class="form-label">Email</label>
         <div class="input-group">
-            <input type="email" id="reg-email" class="form-control"
-            placeholder="nama@email.com" required>
+            <input type="email" id="reg-email" class="form-control" placeholder="nama@email.com" required>
         </div>
     </div>
     <div class="mb-3">
@@ -51,8 +46,8 @@ $page_title = 'Daftar — ' . SITE_NAME;
         </div>
     </div>
     <button class="btn btn-outline-primary w-100 mb-3" id="btn-register">
-    <span id="btn-register-text">Daftar</span>
-    <i id="btn-register-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-1"></i>
+        <span id="btn-register-text">Daftar</span>
+        <i id="btn-register-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-1"></i>
     </button>
     <div class="text-center text-muted small mt-4">
         Sudah punya akun? <a href="/login" class="fw-medium">Masuk</a>
@@ -65,8 +60,8 @@ $page_title = 'Daftar — ' . SITE_NAME;
 function togglePwReg(inputId, btnId) {
     document.getElementById(btnId).addEventListener('click', () => {
         const input = document.getElementById(inputId);
-        const icon = document.querySelector(`#${btnId} i`);
-        input.type = input.type === 'password' ? 'text' : 'password';
+        const icon  = document.querySelector(`#${btnId} i`);
+        input.type  = input.type === 'password' ? 'text' : 'password';
         icon.classList.toggle('fa-eye');
         icon.classList.toggle('fa-eye-slash');
     });
@@ -75,38 +70,29 @@ togglePwReg('reg-pw-input', 'toggle-pw-reg');
 togglePwReg('reg-pw-confirm', 'toggle-pw-confirm');
 
 document.getElementById('btn-register').addEventListener('click', async () => {
-    const name      = document.getElementById('reg-name').value.trim();
-    const username  = document.getElementById('reg-username').value.trim();
-    const email     = document.getElementById('reg-email').value.trim();
-    const password  = document.getElementById('reg-pw-input').value;
-    const confirm   = document.getElementById('reg-pw-confirm').value;
-    const errorEl   = document.getElementById('register-error');
-    const successEl = document.getElementById('register-success');
-    const btn       = document.getElementById('btn-register');
-    const btnText   = document.getElementById('btn-register-text');
+    const name       = document.getElementById('reg-name').value.trim();
+    const username   = document.getElementById('reg-username').value.trim();
+    const email      = document.getElementById('reg-email').value.trim();
+    const password   = document.getElementById('reg-pw-input').value;
+    const confirm    = document.getElementById('reg-pw-confirm').value;
+    const btn        = document.getElementById('btn-register');
+    const btnText    = document.getElementById('btn-register-text');
     const btnSpinner = document.getElementById('btn-register-spinner');
 
-    errorEl.classList.add('d-none');
-    successEl.classList.add('d-none');
-
     if (!name || !username || !email || !password || !confirm) {
-        errorEl.textContent = 'Semua field wajib diisi.';
-        errorEl.classList.remove('d-none');
+        flattyToast('error', 'Semua field wajib diisi.');
         return;
     }
     if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-        errorEl.textContent = 'Username hanya boleh huruf, angka, dan underscore.';
-        errorEl.classList.remove('d-none');
+        flattyToast('error', 'Username hanya boleh huruf, angka, dan underscore.');
         return;
     }
     if (password.length < 8) {
-        errorEl.textContent = 'Password minimal 8 karakter.';
-        errorEl.classList.remove('d-none');
+        flattyToast('error', 'Password minimal 8 karakter.');
         return;
     }
     if (password !== confirm) {
-        errorEl.textContent = 'Konfirmasi password tidak cocok.';
-        errorEl.classList.remove('d-none');
+        flattyToast('error', 'Konfirmasi password tidak cocok.');
         return;
     }
 
@@ -131,11 +117,9 @@ document.getElementById('btn-register').addEventListener('click', async () => {
     btnSpinner.classList.add('d-none');
 
     if (data.success) {
-        successEl.textContent = 'Akun berhasil dibuat! Cek emailmu untuk verifikasi sebelum login.';
-        successEl.classList.remove('d-none');
+        flattyToast('success', 'Akun berhasil dibuat! Cek emailmu untuk verifikasi sebelum login.');
     } else {
-        errorEl.textContent = data.message ?? 'Pendaftaran gagal.';
-        errorEl.classList.remove('d-none');
+        flattyToast('error', data.message ?? 'Pendaftaran gagal.');
     }
 });
 </script>

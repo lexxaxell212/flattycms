@@ -47,8 +47,7 @@ $display    = $user['display_name'] ?? $user['name'];
       <!-- Edit name form -->
       <div id="editNameForm" class="mt-3" style="display:none">
         <div class="input-group" style="max-width:440px">
-          <input type="text" id="inputDisplayName" class="form-control text-white"
-                 value="<?= safe_html($display) ?>" maxlength="100"
+          <input type="text" id="inputDisplayName" class="form-control" style="background:var(--bg-white;color:var(--text-primary);" value="<?= safe_html($display) ?>" maxlength="100"
                  placeholder="Nama tampilan...">
           <button class="btn btn-accent" id="btnSaveName">
             <i class="fa-solid fa-check me-1"></i>Simpan

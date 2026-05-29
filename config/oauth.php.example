@@ -1,7 +1,0 @@
-<?php
-
-  return [
-    'client_id' => '',
-    'client_secret' => '', 
-    'redirect_uri' => 'https://ayokebandung.id/api/auth/callback.php',
-];

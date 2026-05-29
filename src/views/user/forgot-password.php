@@ -15,22 +15,9 @@ $page_title = 'Lupa Password — ' . SITE_NAME;
     <p class="text-muted small">Masukkan emailmu dan kami akan kirim link reset password.</p>
   </section>
 
-    <div id="fp-error" class="alert alert-danger d-none small py-2"></div>
-    <div id="fp-success" class="alert alert-success d-none small py-2"></div>
-
     <div class="mb-4">
         <label class="form-label">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1rem"
-            height="1rem"
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="var(--text-heading)"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" stroke="var(--text-heading)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="1" y="3" width="14" height="10" rx="1.5" ry="1.5"/>
             <polyline points="1,3 8,9.5 15,3"/>
           </svg>
@@ -39,52 +26,51 @@ $page_title = 'Lupa Password — ' . SITE_NAME;
         <input type="email" id="fp-email" class="form-control" placeholder="nama@email.com">
     </div>
 
-    <button class="btn btn-outline-primary" id="btn-fp">Kirim Link Reset</button>
+    <button class="btn btn-outline-primary" id="btn-fp">
+        <span id="btn-fp-text">Kirim Link Reset</span>
+        <i id="btn-fp-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-1"></i>
+    </button>
 </div>
 
 </div>
 </main>
 <script>
 document.getElementById('btn-fp').addEventListener('click', async () => {
-        const email   = document.getElementById('fp-email').value.trim();
-        const errorEl = document.getElementById('fp-error');
-        const successEl = document.getElementById('fp-success');
+    const email      = document.getElementById('fp-email').value.trim();
+    const btn        = document.getElementById('btn-fp');
+    const btnText    = document.getElementById('btn-fp-text');
+    const btnSpinner = document.getElementById('btn-fp-spinner');
 
-        errorEl.classList.add('d-none');
-        successEl.classList.add('d-none');
+    if (!email) {
+        flattyToast('error', 'Email wajib diisi.');
+        return;
+    }
 
-        if (!email) {
-            errorEl.textContent = 'Email wajib diisi.';
-            errorEl.classList.remove('d-none');
-            return;
-        }
+    btn.disabled = true;
+    btnText.textContent = 'Mengirim...';
+    btnSpinner.classList.remove('d-none');
 
-        const btn = document.getElementById('btn-fp');
-        btn.disabled = true;
-        btn.textContent = 'Mengirim...';
+    const res = await fetch('/api/auth/forgot-password.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-Token': CONFIG.csrfToken
+        },
+        body: JSON.stringify({ email })
+    });
 
-        const res = await fetch('/api/auth/forgot-password.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-Token': CONFIG.csrfToken
-            },
-            body: JSON.stringify({ email })
-        });
+    const data = await res.json();
 
-        const data = await res.json();
-        if (data.success) {
-            successEl.textContent = 'Link reset password sudah dikirim ke emailmu. Cek inbox atau folder spam.';
-            successEl.classList.remove('d-none');
-            document.getElementById('fp-email').value = '';
-        } else {
-            errorEl.textContent = data.message ?? 'Gagal mengirim email.';
-            errorEl.classList.remove('d-none');
-        }
+    btn.disabled = false;
+    btnText.textContent = 'Kirim Link Reset';
+    btnSpinner.classList.add('d-none');
 
-        btn.disabled = false;
-        btn.textContent = 'Kirim Link Reset';
+    if (data.success) {
+        flattyToast('success', 'Link reset password sudah dikirim. Cek inbox atau folder spam.');
+        document.getElementById('fp-email').value = '';
+    } else {
+        flattyToast('error', data.message ?? 'Gagal mengirim email.');
+    }
 });
-
 </script>

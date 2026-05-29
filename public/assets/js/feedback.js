@@ -8,10 +8,10 @@ let lastSubmit = 0;
 const RATE_LIMIT_MS = 5000;
 
 document.getElementById('feedback-rating').addEventListener('input', function() {
-    const val = parseInt(this.value);
+    const val   = parseInt(this.value);
     const badge = document.getElementById('feedback-ratingValue');
     badge.textContent = val;
-    badge.className = `badge fs-6 px-3 py-2 fw-bold ${val >= 8 ? 'bg-success' : val >= 6 ? 'bg-warning' : 'bg-danger'}`;
+    badge.className   = `badge fs-6 px-3 py-2 fw-bold ${val >= 8 ? 'bg-success' : val >= 6 ? 'bg-warning' : 'bg-danger'}`;
 });
 
 document.getElementById('feedback-feedbackFormMain').addEventListener('submit', async function(e) {
@@ -19,12 +19,12 @@ document.getElementById('feedback-feedbackFormMain').addEventListener('submit', 
 
     if (Date.now() - lastSubmit < RATE_LIMIT_MS) {
         const remaining = Math.ceil((RATE_LIMIT_MS - (Date.now() - lastSubmit)) / 1000);
-        alert(`Tunggu ${remaining} detik sebelum kirim lagi`);
+        flattyToast('warning', `Tunggu ${remaining} detik sebelum kirim lagi.`);
         return;
     }
     lastSubmit = Date.now();
 
-    const form      = document.getElementById('feedback-feedbackForm');
+    const form       = document.getElementById('feedback-feedbackForm');
     const successMsg = document.getElementById('feedback-successMsg');
     const submitBtn  = this.querySelector('button[type="submit"]');
     const btnTextEl  = document.getElementById('feedback-btnText');
@@ -35,9 +35,9 @@ document.getElementById('feedback-feedbackFormMain').addEventListener('submit', 
     spinner.classList.remove('d-none');
 
     try {
-        const formData = new FormData(this);
+        const formData   = new FormData(this);
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000);
+        const timeoutId  = setTimeout(() => controller.abort(), 10000);
 
         const response = await fetch('/api/api-feedback.php', {
             method: 'POST',
@@ -63,11 +63,11 @@ document.getElementById('feedback-feedbackFormMain').addEventListener('submit', 
             throw new Error(data.error || 'Server error');
         }
     } catch (error) {
-        let errorMsg = 'Gagal mengirim feedback';
-        if (error.name === 'AbortError') errorMsg = 'Timeout 10 detik. Cek koneksi internet';
-        else if (error.name === 'TypeError') errorMsg = 'Tidak bisa connect ke server';
-        else errorMsg += ': ' + error.message;
-        alert(errorMsg);
+        let msg = 'Gagal mengirim feedback';
+        if (error.name === 'AbortError')  msg = 'Timeout 10 detik. Cek koneksi internet.';
+        else if (error.name === 'TypeError') msg = 'Tidak bisa connect ke server.';
+        else msg += ': ' + error.message;
+        flattyToast('error', msg);
     } finally {
         submitBtn.disabled = false;
         btnTextEl.textContent = 'Kirim Feedback';

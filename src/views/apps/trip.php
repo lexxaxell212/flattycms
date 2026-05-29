@@ -1,11 +1,11 @@
 <?php
 require_once LIB_PATH . 'poi-actions.php';
 
-$page_title = 'Peta & Trip Planner — ' . SITE_NAME;
+$page_title = 'Trip Planner — ' . SITE_NAME;
 $pois       = get_all_poi(true);
 $pois = array_map(function($p) {
-    $p['description'] = mb_substr($p['description'] ?? '', 0, 100) .
-    (mb_strlen($p['description'] ?? '') > 100 ? '...' : '');
+    $p['description'] = mb_substr($p['description'] ?? '', 0, 150) .
+    (mb_strlen($p['description'] ?? '') > 150 ? '...' : '');
     $p['name'] = mb_substr($p['name'] ?? '', 0, 30) . (mb_strlen($p['name'] ??
     '') > 30 ? '...' : '');
     return $p;

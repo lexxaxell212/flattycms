@@ -2,13 +2,13 @@
 $page_title = "Kritik dan Saran";
 ?>
 <script src="<?= JS_URL ?>feedback.js" defer></script>
-
 <main id="content">
 <div class="container">
     <section id="Kritik-dan-saran" class="text-center">
         <h1 class="text-title">Kritik & Saran</h1>
         <p class="lead">Bantu kami menjadi lebih baik dengan feedback Anda.</p>
     </section>
+
     <div id="feedback-successMsg" class="mx-auto mb-5 d-none" style="max-width:320px">
         <div class="bg-gray py-5 px-5">
             <div class="text-center">
@@ -25,6 +25,7 @@ $page_title = "Kritik dan Saran";
             </div>
         </div>
     </div>
+
     <div id="feedback-feedbackForm" class="mx-auto py-5" style="max-width:440px">
         <div class="bg-gray">
             <div class="card-body">
@@ -51,6 +52,7 @@ $page_title = "Kritik dan Saran";
                             </div>
                             <small class="text-muted">Rating Anda membantu kami prioritas perbaikan</small>
                         </div>
+
                         <div class="col-12 mb-3">
                             <label class="form-label fw-medium"><i class="fas fa-tags me-2"></i>Kategori</label>
                             <select class="form-select" name="kategori" required>
@@ -64,28 +66,26 @@ $page_title = "Kritik dan Saran";
                                 <option value="lainnya">Lainnya</option>
                             </select>
                         </div>
+
                         <div class="col-12 mb-3">
                             <label class="form-label fw-medium"><i class="fas fa-exclamation-triangle me-2"></i>Kritik & Kekurangan</label>
                             <textarea class="form-control" name="kritik" rows="4" placeholder="Apa yang perlu diperbaiki?" required></textarea>
                         </div>
+
                         <div class="col-12">
                             <label class="form-label fw-medium"><i class="fas fa-lightbulb me-2"></i>Saran Perbaikan</label>
                             <textarea class="form-control mb-5" name="saran" rows="4" placeholder="Fitur apa yang ingin ditambahkan?" required></textarea>
                         </div>
-                        
-                            <button type="submit" class="btn btn-outline-primary">
-                                <i class="fas fa-paper-plane me-2"></i>
-                                <span id="feedback-btnText">Kirim Feedback</span>
-                                <span id="feedback-loadingSpinner" class="d-none ms-2">
-                                    <i class="fas fa-spinner fa-spin"></i>
-                                </span>
-                            </button>
-                        
+
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="fas fa-paper-plane me-2"></i>
+                            <span id="feedback-btnText">Kirim Feedback</span>
+                            <i id="feedback-loadingSpinner" class="d-none fas fa-circle-notch fa-spin ms-2"></i>
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 </div>
 </main>

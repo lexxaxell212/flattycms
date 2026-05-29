@@ -52,7 +52,7 @@ $stmt->execute([$name, $username, $email, $hashed, $verify_token, $verify_expire
 
 require_once LIB_PATH . "mailer.php";
 $verify_link  = BASE_URL . "api/auth/verify-email.php?token=" . $verify_token;
-$subject      = 'Verifikasi Email — ' . SITE_NAME;
+$subject      = 'Verifikasi Email - ' . SITE_NAME;
 $message_html = "
 <div style='font-family:sans-serif;max-width:600px;margin:0 auto;padding:20px;border:1px solid #eee;border-radius:10px;'>
     <h2 style='color:#7c3aed;'>Halo, {$name}!</h2>

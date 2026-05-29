@@ -294,6 +294,135 @@ h6 {
     padding-top: var(--navbar-height);
 }
 
+/* ========== flatty notif =========== */
+  #flatty-container-top-end {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+    pointer-events: none;
+  }
+
+  #flatty-container-bottom {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .flatty-toast {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    font-size: 14px;
+    min-width: 260px;
+    max-width: 360px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-16px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  }
+
+  #flatty-container-bottom .flatty-toast {
+    transform: translateY(16px);
+  }
+
+  .flatty-toast--success i { color: #7c3aed; }
+  .flatty-toast--error   i { color: #dc2626; }
+  .flatty-toast--warning i { color: #d97706; }
+  .flatty-toast--info    i { color: #2563eb; }
+
+  .flatty-toast--show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .flatty-toast--hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-16px);
+  }
+
+  #flatty-container-bottom .flatty-toast--hide {
+    transform: translateY(16px);
+  }
+
+  .flatty-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s;
+  }
+
+  .flatty-overlay--show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .flatty-modal {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 24px;
+    max-width: 360px;
+    width: 90%;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    transform: translateY(-16px);
+    transition: transform 0.25s ease;
+  }
+
+  .flatty-overlay--show .flatty-modal {
+    transform: translateY(0);
+  }
+
+  .flatty-modal__message {
+    font-size: 15px;
+    color: #1f2937;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .flatty-modal__actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .flatty-modal__btn {
+    padding: 9px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .flatty-modal__btn:hover    { opacity: 0.85; }
+  .flatty-modal__btn--cancel  { background: #f3f4f6; color: #374151; }
+  .flatty-modal__btn--confirm { background: #7c3aed; color: #fff; }
+
 /* ============= hero ============= */
 .hero-wrapper {
     height: calc(100vh - var(--navbar-height));

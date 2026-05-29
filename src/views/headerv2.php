@@ -98,6 +98,7 @@ $isPintasanActive = (bool) array_filter(
   <script src="https://accounts.google.com/gsi/client"></script>
   <script src="<?= JS_URL ?>gsi.js"></script>
   <script src="<?= JS_URL ?>bs533.bundle.min.js" defer></script>
+  <script src="<?= JS_URL ?>flattynotif.js" defer></script>
   <script src="<?= JS_URL ?>swal2.all.min.js"></script>
   <script src="<?= JS_URL ?>main.js" defer></script>
   <script>
@@ -110,14 +111,7 @@ $isPintasanActive = (bool) array_filter(
   <?php if (!empty($_SESSION['flash'])): ?>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-    Swal.fire({
-      toast: true,
-      position: 'top-end',
-      icon: '<?= $_SESSION['flash']['type'] ?>',
-      title: '<?= addslashes($_SESSION['flash']['message']) ?>',
-      showConfirmButton: false,
-      timer: 3000
-    });
+    flattyToast('<?= $_SESSION['flash']['type'] ?>', '<?= addslashes($_SESSION['flash']['message']) ?>');
   });
   </script>
   <?php unset($_SESSION['flash']); ?>
@@ -128,6 +122,8 @@ $isPintasanActive = (bool) array_filter(
 </head>
 <body>
   <div id="page-loader"></div>
+  <div id="flatty-container-top-end"></div>
+  <div id="flatty-container-bottom"></div>
   <nav class="navbar">
     <div class="container">
       <a aria-label="Halaman awal" href="<?= BASE_URL ?>">

@@ -122,8 +122,6 @@ $isPintasanActive = (bool) array_filter(
 </head>
 <body>
   <div id="page-loader"></div>
-  <div id="flatty-container-top-end"></div>
-  <div id="flatty-container-bottom"></div>
   <nav class="navbar">
     <div class="container">
       <a aria-label="Halaman awal" href="<?= BASE_URL ?>">
@@ -464,3 +462,5 @@ $isPintasanActive = (bool) array_filter(
   <button class="fab fab-chatbot" id="chatbotFabBtn" aria-label="Open Chat"><i class="fas fa-comment-dots"></i></button>
   <button id="scrollTopBtn" class="fab scroll-top-btn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
 <div class="main-content">
+  <div id="flatty-container-top-end"></div>
+  <div id="flatty-container-bottom"></div>

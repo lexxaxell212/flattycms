@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $redirectout = $_SESSION['redirect_after_logout'] ?? '/';
 
 session_unset();

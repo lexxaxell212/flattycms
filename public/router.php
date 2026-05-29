@@ -20,7 +20,6 @@ $routes = [
   // user
     'register'        => SRC_PATH . 'user/register.php',
     'login'           => SRC_PATH . 'user/login.php',
-    'logout'          => PUBLIC_PATH . 'api/auth/logout.php',
     'forgot-password' => SRC_PATH . 'user/forgot-password.php',
     'reset-password'  => SRC_PATH . 'user/reset-password.php',
     'profile'         => SRC_PATH . 'user/user-profile.php',

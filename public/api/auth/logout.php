@@ -1,7 +1,4 @@
 <?php
-require_once dirname(__DIR__, 3) . "/bootstrap.php";
-autoload_core();
-
 $redirectout = $_SESSION['redirect_after_logout'] ?? '/';
 
 session_unset();

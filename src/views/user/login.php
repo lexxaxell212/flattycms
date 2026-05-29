@@ -5,8 +5,6 @@ if (isset($_SESSION['user'])) {
     }
 ?>
 
-<script src="<?= JS_URL ?>user-helper.js" defer></script>
-
 <main id="content">
 <div class="container">
 
@@ -79,3 +77,42 @@ if (isset($_SESSION['user'])) {
 </div>
 </div>
 </main>
+<script>
+document.getElementById('toggle-pw').addEventListener('click', () => {
+        const pw = document.getElementById('login-pw');
+        const icon = document.querySelector('#toggle-pw i');
+        pw.type = pw.type === 'password' ? 'text' : 'password';
+        icon.classList.toggle('fa-eye');
+        icon.classList.toggle('fa-eye-slash');
+});
+
+document.getElementById('btn-login').addEventListener('click', async () => {
+        const identifier = document.getElementById('login-id').value.trim();
+        const password = document.getElementById('login-pw').value;
+        const errorEl = document.getElementById('login-error');
+
+        if (!identifier || !password) {
+            errorEl.textContent = 'Email/username dan password wajib diisi.';
+            errorEl.classList.remove('d-none');
+            return;
+        }
+
+        const res = await fetch('/api/auth/login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-Token': CONFIG.csrfToken
+        },
+        body: JSON.stringify({ identifier, password })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+            window.location.href = data.redirect;
+        } else {
+            errorEl.textContent = data.message ?? 'Email/username atau password salah.';
+            errorEl.classList.remove('d-none');
+        }
+});
+</script>

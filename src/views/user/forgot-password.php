@@ -2,8 +2,6 @@
 $page_title = 'Lupa Password — ' . SITE_NAME;
 ?>
 
-<script src="<?= JS_URL ?>user-helper.js" defer></script>
-
 <main id="content">
 <div class="container">
 
@@ -46,3 +44,47 @@ $page_title = 'Lupa Password — ' . SITE_NAME;
 
 </div>
 </main>
+<script>
+document.getElementById('btn-fp').addEventListener('click', async () => {
+        const email   = document.getElementById('fp-email').value.trim();
+        const errorEl = document.getElementById('fp-error');
+        const successEl = document.getElementById('fp-success');
+
+        errorEl.classList.add('d-none');
+        successEl.classList.add('d-none');
+
+        if (!email) {
+            errorEl.textContent = 'Email wajib diisi.';
+            errorEl.classList.remove('d-none');
+            return;
+        }
+
+        const btn = document.getElementById('btn-fp');
+        btn.disabled = true;
+        btn.textContent = 'Mengirim...';
+
+        const res = await fetch('/api/auth/forgot-password.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-Token': CONFIG.csrfToken
+            },
+            body: JSON.stringify({ email })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+            successEl.textContent = 'Link reset password sudah dikirim ke emailmu. Cek inbox atau folder spam.';
+            successEl.classList.remove('d-none');
+            document.getElementById('fp-email').value = '';
+        } else {
+            errorEl.textContent = data.message ?? 'Gagal mengirim email.';
+            errorEl.classList.remove('d-none');
+        }
+
+        btn.disabled = false;
+        btn.textContent = 'Kirim Link Reset';
+});
+
+</script>

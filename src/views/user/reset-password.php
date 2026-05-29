@@ -13,8 +13,6 @@ if ($token) {
 $page_title = 'Reset Password — ' . SITE_NAME;
 ?>
 
-<script src="<?= JS_URL ?>user-helper.js" defer></script>
-
 <main id="content">
 <div class="container">
 
@@ -81,4 +79,51 @@ $page_title = 'Reset Password — ' . SITE_NAME;
     }
     togglePw('rp-pw', 'toggle-pw');
     togglePw('rp-pw-confirm', 'toggle-pw-confirm');
+  document.getElementById('btn-rp')?.addEventListener('click', async () => {
+        const password  = document.getElementById('rp-pw').value;
+        const confirm   = document.getElementById('rp-pw-confirm').value;
+        const errorEl   = document.getElementById('rp-error');
+        const successEl = document.getElementById('rp-success');
+        errorEl.classList.add('d-none');
+        successEl.classList.add('d-none');
+        if (!password || !confirm) {
+            errorEl.textContent = 'Semua field wajib diisi.';
+            errorEl.classList.remove('d-none');
+            return;
+        }
+        if (password.length < 8) {
+            errorEl.textContent = 'Password minimal 8 karakter.';
+            errorEl.classList.remove('d-none');
+            return;
+        }
+        if (password !== confirm) {
+            errorEl.textContent = 'Konfirmasi password tidak cocok.';
+            errorEl.classList.remove('d-none');
+            return;
+        }
+        const btn = document.getElementById('btn-rp');
+        btn.disabled    = true;
+        btn.textContent = 'Menyimpan...';
+        const res = await fetch('/api/auth/reset-password.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-Token': CONFIG.csrfToken
+            },
+            body: JSON.stringify({ token: '<?= safe_html($token) ?>', password })
+        });
+        const data = await res.json();
+        if (data.success) {
+            successEl.textContent = 'Password berhasil diubah! Mengalihkan ke halaman login...';
+            successEl.classList.remove('d-none');
+            btn.classList.add('d-none');
+            setTimeout(() => window.location.href = '/login', 2000);
+        } else {
+            errorEl.textContent = data.message ?? 'Gagal mengubah password.';
+            errorEl.classList.remove('d-none');
+            btn.disabled    = false;
+            btn.textContent = 'Simpan Password';
+        }
+});
 </script>

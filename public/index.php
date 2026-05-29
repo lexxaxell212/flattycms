@@ -5,7 +5,7 @@ load_site_settings();
 
 require_once PUBLIC_PATH . "router.php";
 
-$protected_routes = ['user/profile'];
+$protected_routes = ['profile'];
 if (in_array($uri, $protected_routes) && !isset($_SESSION['user'])) {
     header('Location: /');
     exit;

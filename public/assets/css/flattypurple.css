@@ -327,7 +327,7 @@ h6 {
     gap: 10px;
     padding: 12px 18px;
     border-radius: 10px;
-    background: #fff;
+    background: var(--sl-100);
     box-shadow: 0 4px 20px rgba(0,0,0,0.12);
     font-size: 14px;
     min-width: 260px;
@@ -337,12 +337,15 @@ h6 {
     transform: translateY(-16px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
   }
+  [data-dark] .flatty-toast {
+    background: var(--sl-700);
+  }
 
   #flatty-container-bottom .flatty-toast {
     transform: translateY(16px);
   }
 
-  .flatty-toast--success i { color: #7c3aed; }
+  .flatty-toast--success i { color: var(--pu-600); }
   .flatty-toast--error   i { color: #dc2626; }
   .flatty-toast--warning i { color: #d97706; }
   .flatty-toast--info    i { color: #2563eb; }
@@ -382,7 +385,7 @@ h6 {
   }
 
   .flatty-modal {
-    background: #fff;
+    background: var(--sl-100);
     border-radius: 14px;
     padding: 28px 24px;
     max-width: 360px;
@@ -391,6 +394,9 @@ h6 {
     transform: translateY(-16px);
     transition: transform 0.25s ease;
   }
+  [data-dark] .flatty-modal {
+    background: var(--sl-700);
+  }
 
   .flatty-overlay--show .flatty-modal {
     transform: translateY(0);
@@ -398,7 +404,7 @@ h6 {
 
   .flatty-modal__message {
     font-size: 15px;
-    color: #1f2937;
+    color: var(--text-primary);
     text-align: center;
     margin-bottom: 20px;
   }
@@ -420,8 +426,8 @@ h6 {
   }
 
   .flatty-modal__btn:hover    { opacity: 0.85; }
-  .flatty-modal__btn--cancel  { background: #f3f4f6; color: #374151; }
-  .flatty-modal__btn--confirm { background: #7c3aed; color: #fff; }
+  .flatty-modal__btn--cancel  { background: var(--bg-white); color: var(--text-muted); }
+  .flatty-modal__btn--confirm { background: var(--bg-nav-hover); color: var(--text-nav-hover); }
 
 /* ============= hero ============= */
 .hero-wrapper {

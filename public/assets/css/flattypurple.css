@@ -297,7 +297,7 @@ h6 {
 /* ========== flatty notif =========== */
   #flatty-container-top-end {
     position: fixed;
-    top: 20px;
+    top: calc(var(--navbar-height) + 12px);
     right: 20px;
     z-index: 9999;
     display: flex;

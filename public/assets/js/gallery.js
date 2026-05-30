@@ -30,8 +30,8 @@
       matches.forEach(p => {
         const el       = document.createElement('button');
         el.type        = 'button';
-        el.className   = 'list-group-item list-group-item-action small';
-        el.innerHTML   = `<i class="fa-solid ${p.category_icon} me-2 text-primary"></i>${p.name}`;
+        el.className   = 'btn-popup';
+        el.innerHTML   = `<span>${p.name}</span> • <span class="text-muted small">${p.category_name || ''}</span>`;
         el.addEventListener('click', () => {
           input.value = p.name;
           document.getElementById(hiddenId).value         = p.id;
@@ -192,8 +192,8 @@
     matches.forEach(p => {
       const el     = document.createElement('button');
       el.type      = 'button';
-      el.className = 'list-group-item list-group-item-action small';
-      el.innerHTML = `<i class="fa-solid ${p.category_icon} me-2 text-primary"></i>${p.name}`;
+      el.className = 'btn-popup';
+      el.innerHTML = `<span>${p.name}</span> • <span class="text-muted small">${p.category_name || ''}</span>`;
       el.addEventListener('click', () => {
         document.getElementById('searchPoiFilter').value = p.name;
         box.classList.remove('open');
@@ -237,21 +237,21 @@
     new bootstrap.Modal(document.getElementById('lightboxModal')).show();
   };
   window.deletePhoto = async function(photo_id) {
-    const conf = await Swal.fire({ title:'Hapus foto?', icon:'warning', showCancelButton:true, confirmButtonColor:'#dc3545', confirmButtonText:'Hapus', cancelButtonText:'Batal' });
-    if (!conf.isConfirmed) return;
-    const fd = new FormData();
-    fd.append('action',     'delete');
-    fd.append('csrf_token', CONFIG.csrfToken);
-    fd.append('photo_id',   photo_id);
-    const res  = await fetch(API_GAL, { method:'POST', headers:{'X-Requested-With':'XMLHttpRequest'}, body: fd });
-    const data = await res.json();
-    if (data.success) {
-      bootstrap.Modal.getInstance(document.getElementById('lightboxModal')).hide();
-      Swal.fire({ toast:true, position:'top-end', icon:'success', title:'Foto dihapus!', showConfirmButton:false, timer:2000 });
-      loadGallery(currentPage, currentPoi);
-    } else {
-      Swal.fire('Gagal', data.message, 'error');
-    }
+    flattyConfirm('Hapus foto ini? Tindakan ini permanen.', async () => {
+      const fd = new FormData();
+      fd.append('action',     'delete');
+      fd.append('csrf_token', CONFIG.csrfToken);
+      fd.append('photo_id',   photo_id);
+      const res  = await fetch(API_GAL, { method:'POST', headers:{'X-Requested-With':'XMLHttpRequest'}, body: fd });
+      const data = await res.json();
+      if (data.success) {
+        bootstrap.Modal.getInstance(document.getElementById('lightboxModal')).hide();
+        flattyToast('success', 'Foto dihapus!');
+        loadGallery(currentPage, currentPoi);
+      } else {
+        flattyToast('error', data.message ?? 'Gagal menghapus foto.');
+      }
+    });
   };
   if (IS_LOGGED) {
     const uploadModal = document.getElementById('uploadModal');
@@ -297,7 +297,11 @@
     document.getElementById('uploadFile').addEventListener('change', function() {
       const file = this.files[0];
       if (!file) return;
-      if (file.size > 10 * 1024 * 1024) { Swal.fire('File terlalu besar', 'Maksimal 10MB', 'warning'); this.value = ''; return; }
+      if (file.size > 10 * 1024 * 1024) {
+        flattyToast('warning', 'File terlalu besar, maksimal 10MB.');
+        this.value = '';
+        return;
+      }
       const reader = new FileReader();
       reader.onload = e => {
         document.getElementById('previewImg').src = e.target.result;
@@ -333,9 +337,9 @@
     document.getElementById('btnKirimUpload').addEventListener('click', async () => {
       const poi_id = document.getElementById('uploadPoiId').value;
       const file   = document.getElementById('uploadFile').files[0];
-      if (!poi_id || !file) { Swal.fire('Oops!', 'Pilih lokasi dan foto dulu', 'warning'); return; }
+      if (!poi_id || !file) { flattyToast('warning', 'Pilih lokasi dan foto dulu.'); return; }
       const btn = document.getElementById('btnKirimUpload');
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>Mengupload...';
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-1"></i>Mengupload...';
       btn.disabled  = true;
       const fd = new FormData();
       fd.append('csrf_token', CSRF);
@@ -347,13 +351,13 @@
         const data = await res.json();
         if (data.success) {
           uploadModal.style.display = 'none';
-          Swal.fire({ toast:true, position:'top-end', icon:'success', title:'Foto berhasil diupload!', showConfirmButton:false, timer:2500 });
+          flattyToast('success', 'Foto berhasil diupload!');
           loadGallery(1, currentPoi);
         } else {
-          Swal.fire('Gagal', data.message, 'error');
+          flattyToast('error', data.message ?? 'Gagal upload foto.');
         }
       } catch(e) {
-        Swal.fire('Error', 'Gagal upload foto', 'error');
+        flattyToast('error', 'Gagal upload foto.');
       } finally {
         btn.innerHTML = '<i class="fa-solid fa-upload me-1"></i>Upload';
         btn.disabled  = false;
@@ -364,11 +368,11 @@
       const poi_id = document.getElementById('reviewPoiId').value;
       const rating = document.getElementById('reviewRating').value;
       const cerita = document.getElementById('reviewCerita').value.trim();
-      if (!poi_id)        { Swal.fire('Oops!', 'Pilih lokasi dulu', 'warning'); return; }
-      if (rating < 1)     { Swal.fire('Oops!', 'Kasih rating dulu', 'warning'); return; }
-      if (cerita.length < 10) { Swal.fire('Oops!', 'Ceritamu terlalu singkat', 'warning'); return; }
+      if (!poi_id)            { flattyToast('warning', 'Pilih lokasi dulu.'); return; }
+      if (rating < 1)         { flattyToast('warning', 'Kasih rating dulu.'); return; }
+      if (cerita.length < 10) { flattyToast('warning', 'Ceritamu terlalu singkat.'); return; }
       const btn = document.getElementById('btnKirimReview');
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>Mengirim...';
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-1"></i>Mengirim...';
       btn.disabled  = true;
       const fd = new FormData();
       fd.append('csrf_token', CSRF);
@@ -381,13 +385,13 @@
         const data = await res.json();
         if (data.success) {
           reviewModal.style.display = 'none';
-          Swal.fire({ toast:true, position:'top-end', icon:'success', title:'Review berhasil dikirim!', showConfirmButton:false, timer:2500 });
+          flattyToast('success', 'Review berhasil dikirim!');
           if (activeTab === 'review') loadReviews(1, currentPoi);
         } else {
-          Swal.fire('Gagal', data.message, 'error');
+          flattyToast('error', data.message ?? 'Gagal kirim review.');
         }
       } catch(e) {
-        Swal.fire('Error', 'Gagal kirim review', 'error');
+        flattyToast('error', 'Gagal kirim review.');
       } finally {
         btn.innerHTML = '<i class="fa-solid fa-paper-plane me-1"></i>Kirim Review';
         btn.disabled  = false;

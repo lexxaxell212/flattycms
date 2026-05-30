@@ -1,24 +1,20 @@
 <?php
 require_once LIB_PATH . "v-review.php";
 ?>
-
 <?php if (!empty($_rev_items)): ?>
 <section class="rev-section">
   <div class="container">
-
     <div class="rev-header">
       <div>
-        <span class="rev-eyebrow">
-          <span class="rev-eyebrow__dot"></span>
+        <span class="text-heading mb-4" style="font-weight:var(--fw-semibold)">
           Dari Traveler
         </span>
-        <h2 class="rev-heading">Cerita dari <em>Komunitas</em></h2>
+        <h2 class="text-sub-hero mt-2">Cerita <em>Komunitas</em></h2>
       </div>
       <a href="gallery/" class="rev-link-all">
         Lihat Semua <i class="fas fa-arrow-right ms-1"></i>
       </a>
     </div>
-
     <div class="rev-grid">
       <?php foreach ($_rev_items as $i => $_rev): ?>
       <div class="rev-card mb-3">
@@ -51,7 +47,6 @@ require_once LIB_PATH . "v-review.php";
       </div>
       <?php endforeach; ?>
     </div>
-
   </div>
 </section>
 <?php endif; ?>

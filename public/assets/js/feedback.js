@@ -7,6 +7,10 @@ function sanitize(str) {
 let lastSubmit = 0;
 const RATE_LIMIT_MS = 5000;
 
+document.getElementById('feedback-anonymous').addEventListener('change', function() {
+    document.getElementById('feedback-submitBtn').disabled = !this.checked;
+});
+
 document.getElementById('feedback-rating').addEventListener('input', function() {
     const val   = parseInt(this.value);
     const badge = document.getElementById('feedback-ratingValue');
@@ -26,7 +30,7 @@ document.getElementById('feedback-feedbackFormMain').addEventListener('submit', 
 
     const form       = document.getElementById('feedback-feedbackForm');
     const successMsg = document.getElementById('feedback-successMsg');
-    const submitBtn  = this.querySelector('button[type="submit"]');
+    const submitBtn  = document.getElementById('feedback-submitBtn');
     const btnTextEl  = document.getElementById('feedback-btnText');
     const spinner    = document.getElementById('feedback-loadingSpinner');
 
@@ -51,7 +55,6 @@ document.getElementById('feedback-feedbackFormMain').addEventListener('submit', 
 
         if (data.success) {
             document.getElementById('feedback-summaryDetail').innerHTML =
-                `Nama: ${sanitize(formData.get('nama'))}<br>` +
                 `Rating: ${sanitize(String(formData.get('rating')))}/10<br>` +
                 `Kategori: ${sanitize(formData.get('kategori'))}<br>` +
                 `Waktu: ${new Date().toLocaleString('id-ID')}`;
@@ -60,11 +63,11 @@ document.getElementById('feedback-feedbackFormMain').addEventListener('submit', 
             successMsg.classList.remove('d-none');
             successMsg.scrollIntoView({ behavior: 'smooth' });
         } else {
-            throw new Error(data.error || 'Server error');
+            throw new Error(data.message || data.error || 'Server error');
         }
     } catch (error) {
         let msg = 'Gagal mengirim feedback';
-        if (error.name === 'AbortError')  msg = 'Timeout 10 detik. Cek koneksi internet.';
+        if (error.name === 'AbortError')     msg = 'Timeout 10 detik. Cek koneksi internet.';
         else if (error.name === 'TypeError') msg = 'Tidak bisa connect ke server.';
         else msg += ': ' + error.message;
         flattyToast('error', msg);

@@ -1,27 +1,22 @@
 <?php
 require_once LIB_PATH . "v-things-to-do.php";
 ?>
-
 <?php if ($_tdo_next): ?>
-<section class="tdop-section">
+<section id="upcoming-event">
   <div class="container">
-
     <div class="d-flex align-items-end justify-content-between mb-4">
       <div>
-        <span class="tdop-label">Things to Do</span>
-        <h2 class="tdop-heading mb-0">Event & Info Terkini</h2>
+        <span class="mb-4 text-heading" style="font-weight:var(--fw-semibold)">Now In Bandung</span>
+        <h2 class="text-sub-hero mt-2">UPCOMING EVENT HIGHLIGHT</h2>
       </div>
       <a href="/things-to-do" class="tdop-link-all">
         Lihat Semua <i class="fas fa-arrow-right ms-1"></i>
       </a>
     </div>
-
     <div class="tdop-bento">
-
-      <!-- Featured card: event terdekat berdasar event_date ASC -->
       <div class="tdop-featured">
         <div class="tdop-featured__inner">
-          <span class="tdop-badge"><i class="fas fa-bolt me-1"></i> Terbaru</span>
+          <span class="tdop-badge"><i class="fas fa-bolt me-1"></i>Akan Datang</span>
           <div class="tdop-featured__body">
             <h3 class="tdop-featured__title"><?= safe_html($_tdo_next['title']) ?></h3>
             <p class="tdop-featured__excerpt"><?= safe_html(_tdo_excerpt($_tdo_next['html_content'])) ?></p>
@@ -35,8 +30,6 @@ require_once LIB_PATH . "v-things-to-do.php";
           </a>
         </div>
       </div>
-
-      <!-- Stack: 6 event lainnya -->
       <div class="tdop-stack">
         <?php foreach ($_tdo_pages as $_tdo_p): ?>
         <a href="<?= BASE_URL ?>pages/<?= safe_html($_tdo_p['slug']) ?>/" class="text-decoration-none tdop-card">
@@ -54,7 +47,6 @@ require_once LIB_PATH . "v-things-to-do.php";
         </a>
         <?php endforeach; ?>
       </div>
-
     </div>
   </div>
 </section>

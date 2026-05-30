@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const hero = document.querySelector('.tp-main-outer-content');
   if (hero) {
     window.addEventListener('scroll', () => {
-      hero.style.transform = `translateY(${window.scrollY * 0.5}px)`;
+      hero.style.transform = `translateY(${window.scrollY * 0.4}px)`;
     });
   }
   const style = document.createElement('style');
@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeCat     = '';
   let routePolyline = null;
   let routeDuration = 0;
+  let routeGenerated = false; // FIX: flag untuk disable simpan sebelum generate
 
   const map = L.map('mainMap').setView([-6.9175, 107.6191], 13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -52,19 +53,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function buildPopup(poi) {
-  const inRoute = routes.some(r => r.poi_id == poi.id);
-  return `
-    <div style="min-width:200px">
-      <div style="font-weight:700;font-size:.9rem;margin-bottom:.2rem">${poi.name}</div>
-      <div style="font-size:.75rem;color:oklch(0.641 0.156 295);margin-bottom:.3rem">${poi.category_name}</div>
-      ${poi.address ? `<div style="font-size:.72rem;color:oklch(0.553 0.016 264);margin-bottom:.6rem"><i class="fa-solid fa-road" style="margin-right:.25rem"></i>${poi.address}</div>` : ''}
-      <div style="display:flex;gap:.4rem;flex-wrap:wrap">
-        <button onclick="addToRoute(${poi.id})" style="flex:1;background:${inRoute ? 'oklch(0.527 0.154 155)' : 'oklch(0.487 0.167 295)'};color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;font-weight:600;cursor:pointer">
-          ${inRoute ? '<i class="fa-solid fa-check"></i> Ditambahkan' : '<i class="fa-solid fa-plus"></i> Tambah Rute'}
-        </button>
-        ${IS_LOGGED ? `<button onclick="openUpload(${poi.id},'${poi.name.replace(/'/g, "\\'")}\")" style="background:oklch(0.623 0.214 231);color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;cursor:pointer"><i class="fa-solid fa-camera"></i></button>` : ''}
-      </div>
-    </div>`;
+    const inRoute = routes.some(r => r.poi_id == poi.id);
+    // FIX: quote syntax diperbaiki, pakai template literal yang konsisten
+    const uploadBtn = IS_LOGGED
+      ? `<button onclick="openUpload(${poi.id}, '${poi.name.replace(/'/g, "&#39;")}')" style="background:oklch(0.623 0.214 231);color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;cursor:pointer"><i class="fa-solid fa-camera"></i></button>`
+      : '';
+    return `
+      <div style="min-width:200px">
+        <div style="font-weight:700;font-size:.9rem;margin-bottom:.2rem">${poi.name}</div>
+        <div style="font-size:.75rem;color:oklch(0.641 0.156 295);margin-bottom:.3rem">${poi.category_name}</div>
+        ${poi.address ? `<div style="font-size:.72rem;color:oklch(0.553 0.016 264);margin-bottom:.6rem"><i class="fa-solid fa-road" style="margin-right:.25rem"></i>${poi.address}</div>` : ''}
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+          <button onclick="addToRoute(${poi.id})" style="flex:1;background:${inRoute ? 'oklch(0.527 0.154 155)' : 'oklch(0.487 0.167 295)'};color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;font-weight:600;cursor:pointer">
+            ${inRoute ? '<i class="fa-solid fa-check"></i> Ditambahkan' : '<i class="fa-solid fa-plus"></i> Tambah Rute'}
+          </button>
+          ${uploadBtn}
+        </div>
+      </div>`;
   }
 
   renderMarkers();
@@ -146,6 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('startSelected').style.display = '';
         document.getElementById('startInput').value = '';
         el.style.display = 'none';
+        // FIX: reset routeGenerated saat ganti titik awal
+        routeGenerated = false;
         updatePlannerUI();
       });
       el.appendChild(btn);
@@ -174,8 +181,12 @@ document.addEventListener('DOMContentLoaded', () => {
     routes.push({ poi_id: poi.id, name: poi.name, lat: parseFloat(poi.latitude),
     lng: parseFloat(poi.longitude), note: '', poi_image: poi.poi_image || null, description: poi.description || '', poi_url: poi.poi_url || null });
     map.closePopup();
+    // FIX: reset routeGenerated saat ada perubahan rute
+    routeGenerated = false;
     updatePlannerUI();
     updateRouteOnMap();
+    // FIX: toast berhasil add route
+    flattyToast('success', `${poi.name} ditambahkan ke rute!`);
   };
 
   function updatePlannerUI() {
@@ -190,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
       list.innerHTML = '';
       if (empty) list.appendChild(empty);
       btnG.disabled = true;
+      // FIX: disable simpan juga reset
       if (btnS) btnS.disabled = true;
       distI.style.display = 'none';
       return;
@@ -229,13 +241,16 @@ document.addEventListener('DOMContentLoaded', () => {
     list.querySelectorAll('.btn-remove-route').forEach(btn => {
       btn.addEventListener('click', function () {
         routes.splice(parseInt(this.dataset.idx), 1);
+        // FIX: reset routeGenerated saat hapus stop
+        routeGenerated = false;
         updatePlannerUI();
         updateRouteOnMap();
       });
     });
 
     btnG.disabled = !(startPoint && routes.length > 0);
-    if (btnS) btnS.disabled = !(startPoint && routes.length > 0);
+    // FIX: btnSaveTrip hanya enabled setelah rute di-generate
+    if (btnS) btnS.disabled = !(routeGenerated && startPoint && routes.length > 0);
 
     const total = routes.reduce((s, r) => s + (parseFloat(r.distance_from_prev) || 0), 0);
     if (total > 0) {
@@ -259,10 +274,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.success) {
         routePolyline = data.polyline;
         routeDuration = data.duration;
+        // FIX: set flag routeGenerated = true setelah berhasil
+        routeGenerated = true;
         updateRouteOnMap(routePolyline);
         document.getElementById('totalDist').textContent = data.distance;
         document.getElementById('totalStops').textContent = `· ${routes.length} lokasi · ~${data.duration} menit`;
         document.getElementById('distanceInfo').style.display = '';
+        // FIX: update btnSaveTrip setelah generate berhasil
+        const btnS = document.getElementById('btnSaveTrip');
+        if (btnS) btnS.disabled = false;
         flattyToast('success', 'Rute berhasil dibuat!');
       } else {
         flattyToast('error', data.message ?? 'Gagal membuat rute.');
@@ -286,6 +306,8 @@ document.addEventListener('DOMContentLoaded', () => {
     flattyConfirm('Reset rute? Semua titik akan dihapus.', () => {
       startPoint = null; routes = []; routePolyline = null; routeDuration = 0;
       window.isLoadedTrip = false;
+      // FIX: reset flag
+      routeGenerated = false;
       document.getElementById('startSelected').style.display = 'none';
       document.getElementById('startInput').value = '';
       if (routeLine) { map.removeLayer(routeLine); routeLine = null; }
@@ -307,6 +329,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function doSaveTrip() {
       const title = document.getElementById('tripTitle').value.trim() || 'Trip Bandungku';
+
+      // FIX: validasi nama trip tidak boleh sama dengan nama POI di rute (cek start_point_name konflik)
+      const existingNames = routes.map(r => r.name.toLowerCase());
+      if (existingNames.includes(startPoint.name.toLowerCase())) {
+        flattyToast('warning', 'Nama titik awal tidak boleh sama dengan salah satu stop di rute.');
+        return;
+      }
+
       const fd    = new FormData();
       fd.append('action',           'save');
       fd.append('csrf_token',       CSRF);
@@ -351,18 +381,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const trip = json.data;
       startPoint = { name: trip.start_point_name, lat: parseFloat(trip.start_lat), lng: parseFloat(trip.start_lng) };
       document.getElementById('startName').textContent = startPoint.name;
+      document.getElementById('startName2').textContent = startPoint.name;
       document.getElementById('startSelected').style.display = '';
       routes = trip.items.map(item => ({
         poi_id: item.poi_id, name: item.poi_name,
         lat: parseFloat(item.latitude), lng: parseFloat(item.longitude),
-        distance_from_prev: item.distance_from_prev, note: item.note || ''
+        distance_from_prev: item.distance_from_prev, note: item.note || '',
+        poi_image: item.poi_image || null, description: item.description || ''
       }));
       window.isLoadedTrip = true;
+      // FIX: set routeGenerated true saat load trip tersimpan (sudah punya rute)
+      routeGenerated = true;
       updatePlannerUI();
       if (trip.route_polyline) {
         routePolyline = JSON.parse(trip.route_polyline);
         routeDuration = trip.duration || 0;
         updateRouteOnMap(routePolyline);
+        // FIX: total_distance dari trip tersimpan langsung ditampilkan
         document.getElementById('totalDist').textContent = trip.total_distance ?? '—';
         document.getElementById('totalStops').textContent = `· ${routes.length} lokasi${trip.duration ? ' · ~' + trip.duration + ' menit' : ''}`;
         document.getElementById('distanceInfo').style.display = '';
@@ -480,6 +515,10 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('uploadPoiId').value = poiId || '';
       document.getElementById('uploadPoiName').textContent = poiName || '';
       document.getElementById('uploadPoiSelected').style.display = (poiId && poiName) ? '' : 'none';
+      document.getElementById('uploadPoiSearch').value = poiName || '';
+      document.getElementById('uploadPreview').style.display = 'none';
+      document.getElementById('uploadFile').value = '';
+      document.getElementById('uploadCredit').value = '';
       _uploadModal.show();
     };
   }
@@ -587,7 +626,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div class="card-footer d-flex gap-2">
             <button class="btn btn-primary btn-sm" onclick="loadSavedTrip(${trip.id})">
-              <i class="fa-solid fa-route me-1"></i>Buka di Map POI
+              <i class="fa-solid fa-route me-1"></i>Buka
             </button>
             <button class="btn btn-danger btn-sm" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || 'Trip ini')}')">
               <i class="fa-solid fa-trash"></i>

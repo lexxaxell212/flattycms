@@ -1,25 +1,16 @@
 (function() {
     const btn = document.getElementById('btn-reaction');
     if (!btn) return;
-    
+
     const isLoggedIn = CONFIG.isLoggedIn;
-    
+
     if (!isLoggedIn) {
         btn.addEventListener('click', function() {
-            Swal.fire({
-                icon: 'info',
-                title: 'Login dulu ya',
-                text: 'Yuk masuk pakai Google buat kasih ❤️',
-                confirmButtonText: 'Masuk',
-                showCancelButton: true,
-                cancelButtonText: 'Nanti dulu',
-            }).then(result => {
-                if (result.isConfirmed) window.location.href = '/api/auth/google.php';
-            });
+            flattyToast('info', 'Login dulu ya buat kasih ❤️');
         });
         return;
     }
-    
+
     btn.addEventListener('click', function() {
         fetch('/api/api-reactions.php', {
             method: 'POST',
@@ -36,7 +27,7 @@
         .then(r => r.json())
         .then(data => {
             if (!data.success) {
-                Swal.fire({ icon: 'error', title: 'Ups!', text: data.message, timer: 2000, showConfirmButton: false });
+                flattyToast('error', data.message);
                 return;
             }
             document.getElementById('reaction-count').textContent = data.count;
@@ -48,12 +39,6 @@
 
 function copyLink() {
     navigator.clipboard.writeText(window.location.href).then(() => {
-        Swal.fire({
-            icon: 'success',
-            title: 'Link disalin!',
-            text: 'Paste di Instagram kamu ya',
-            timer: 2000,
-            showConfirmButton: false
-        });
+        flattyToast('success', 'Link disalin! Paste di Instagram kamu ya');
     });
 }

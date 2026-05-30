@@ -8,16 +8,13 @@ $offset   = ($page - 1) * $per_page;
 $posts      = safe_get_posts($pdo, $per_page, $offset, $cat_id);
 $categories = safe_get_categories($pdo);
 ?>
-
 <script src="<?= JS_URL ?>artikel-slider.js" defer></script>
-  <div class="container">
-    <section id="artikel-terbaru" aria-label="Artikel Terbaru">
-      <h2 class="">Artikel Terbaru</h2>
-      <p class="text-muted mb-4">
+<section class="container" id="artikel-terbaru" aria-label="Artikel Terbaru">
+      <h2 class="text-sub-hero">Artikel Terbaru</h2>
+      <p class="mb-4">
         Cerita, tips, dan rekomendasi terbaik untuk perjalananmu.
       </p>
       <div id="artikel-slider-wrapper">
-        <!-- Scrollable viewport -->
         <div class="artikel-slider-viewport">
           <div class="artikel-slider-track" role="list">
             <?php if (empty($posts)): ?>
@@ -70,4 +67,3 @@ $categories = safe_get_categories($pdo);
         </div>
       </div>
     </section>
-  </div>

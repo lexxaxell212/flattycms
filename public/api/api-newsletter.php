@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST["email"])) {
       kirimEmailAyo($email, $subject, $message_html);
 
       $response["success"] = true;
-      $response["message"] = "Berhasil berlangganan! Cek inbox email Anda.";
+      $response["message"] = "Berhasil berlangganan! Cek inbox email Kamu.";
       $response["type"] = "success";
     } else {
       $response["message"] = "Gagal menyimpan data!";

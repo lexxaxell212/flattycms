@@ -20,23 +20,20 @@ $_khb_colors = [
     '#4f46e5', '#5b21b6',
 ];
 ?>
-
 <?php if (!empty($_khb_items)): ?>
 <section class="khb-section">
   <div class="container">
-
     <div class="khb-header">
       <div class="khb-header__left">
-        <span class="khb-eyebrow">
-          <span class="khb-eyebrow__dot"></span>
+        <span class="mb-4 text-heading" style="font-weight:var(--fw-semibold)">
           Discover Bandung
         </span>
-        <h2 class="khb-heading">
-          Kenapa Harus<br><em>Bandung ?</em>
+        <h2 class="text-sub-hero mt-2">
+          Kenapa Harus<br><em>Bandung?</em>
         </h2>
       </div>
-      <div class="khb-header__right">
-        <p class="khb-lead">Bandung 2026: Perpaduan sempurna inovasi digital, kesejukan alam, dan kreativitas kuliner terbaik.</p>
+      <div>
+        <p>Bandung 2026: Perpaduan sempurna inovasi digital, kesejukan alam, dan kreativitas kuliner terbaik.</p>
       </div>
     </div>
 
@@ -65,29 +62,28 @@ $_khb_colors = [
       </div>
       <?php endforeach; ?>
     </div>
-
     <div class="khb-cta">
       <div class="khb-cta__inner">
-        <h3 class="khb-cta__heading">Siap Petualangan ke Bandung ?</h3>
-        <p class="khb-cta__sub">Jadwal akhir pekan sudah penuh? Booking sekarang sebelum ketinggalan!</p>
+        <h3>Siap Petualangan ke Bandung ?</h3>
+        <p>Jadwal akhir pekan sudah penuh? Booking sekarang sebelum ketinggalan!</p>
         <div class="khb-cta__btns">
-          <a href="https://google.com/search?q=Tiket+ke+bandung" target="_blank" rel="noopener" class="khb-btn khb-btn--outline">
+          <a href="https://google.com/search?q=Tiket+ke+bandung" target="_blank"
+          rel="noopener" class="btn btn-outline-primary">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
             Pesan Tiket
           </a>
-          <a href="https://google.com/search?q=Booking+hotel+bandung" target="_blank" rel="noopener" class="khb-btn khb-btn--outline">
+          <a href="https://google.com/search?q=Booking+hotel+bandung"
+          target="_blank" rel="noopener" class="btn btn-outline-primary">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
             Cari Hotel
           </a>
-          <a href="/trip" class="khb-btn khb-btn--primary">
+          <a href="/trip" class="mt-2 btn btn-primary">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             Mulai Rencanakan
           </a>
         </div>
       </div>
     </div>
-
   </div>
 </section>
-
 <?php endif; ?>

@@ -6,10 +6,10 @@ require_once LIB_PATH . "v-review.php";
   <div class="container">
     <div class="rev-header">
       <div>
-        <span class="text-heading mb-4" style="font-weight:var(--fw-semibold)">
-          Dari Traveler
+        <span class="text-eyebrow">
+          Review
         </span>
-        <h2 class="text-sub-hero mt-2">Cerita <em>Komunitas</em></h2>
+        <h2 class="text-sub-hero">Traveler Story</h2>
       </div>
       <a href="gallery/" class="rev-link-all">
         Lihat Semua <i class="fas fa-arrow-right ms-1"></i>

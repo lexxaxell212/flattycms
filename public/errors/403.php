@@ -9,7 +9,7 @@ http_response_code(403);
     <title>403 - Forbidden Access</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body.errors {
+        .errors {
             font-family: -apple-system, sans-serif;
             background: #0f0f0f;
             color: #fff;

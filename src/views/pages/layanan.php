@@ -4,12 +4,12 @@ $page_title = "Layanan Publik Bandung";
 <main id="content">
 <div class="container">
   <section id="Layanan-Publik-Bandung">
-    <h1 class="text-title">Transportasi Bandung</h1>
+    <h1>Transportasi Bandung</h1>
     <p class="lead">Opsi transportasi tercepat, termurah, dan terpercaya di Kota Kembang.</p>
   </section>
-  <div class="row g-4 py-5">
+  <div class="row g-4">
     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-      <div class="card card-glass">
+      <div class="card card-glass h-100">
         <div class="card-body">
           <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="w-100
           rounded mb-3" alt="default">
@@ -39,7 +39,7 @@ $page_title = "Layanan Publik Bandung";
       </div>
     </div>
     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-      <div class="card card-glass">
+      <div class="card card-glass h-100">
         <div class="card-body">
           <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="w-100
           rounded mb-3" alt="default">
@@ -71,7 +71,7 @@ $page_title = "Layanan Publik Bandung";
       </div>
     </div>
     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-      <div class="card card-glass">
+      <div class="card card-glass h-100">
         <div class="card-body">
           <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="w-100
           rounded mb-3" alt="default">
@@ -101,7 +101,7 @@ $page_title = "Layanan Publik Bandung";
       </div>
     </div>
     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-      <div class="card card-glass">
+      <div class="card card-glass h-100">
         <div class="card-body">
           <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="w-100
           rounded mb-3" alt="default">
@@ -135,7 +135,7 @@ $page_title = "Layanan Publik Bandung";
       </div>
     </div>
     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-      <div class="card card-glass">
+      <div class="card card-glass h-100">
         <div class="card-body">
           <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="w-100
           rounded mb-3" alt="default">

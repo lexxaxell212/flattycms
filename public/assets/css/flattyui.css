@@ -99,7 +99,7 @@ table tbody td {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #bbb;
+  color: var(--text-muted);
   font-size: 12px;
   margin: 1.2rem auto;
 }
@@ -109,7 +109,7 @@ table tbody td {
   content: "";
   flex: 1;
   height: 0.5px;
-  background: #e0e0e0;
+  background: var(--text-muted);
 }
 
 .swal2-container.swal2-top-end {
@@ -167,6 +167,18 @@ table tbody td {
   );
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+.text-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-nav-hover);
+  margin-bottom: 0.3rem;
 }
 
 .text-muted {
@@ -1243,6 +1255,10 @@ textarea.form-control {
   display: block;
 }
 
+input[type="checkbox"] {
+  accent-color: purple;
+}
+
 .form-text {
   font-size: .75rem;
   color: var(--text-muted);
@@ -1275,12 +1291,17 @@ textarea.form-control {
 .input-group {
   display: flex;
   align-items: center;
-  border: var(--glass-border);
+  border: 1px solid var(--sl-300);
   border-radius: var(--radius);
   background: var(--bg-white);
   transition: border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
   overflow: hidden;
 }
+[data-dark] .input-group {
+  border: 1px solid var(--sl-700);
+  color: var(--text-primary);
+}
+
 .input-group:focus-within {
   border-color: var(--pu-700);
   box-shadow: 0 0 0 0.25rem rgba(124, 58, 237, 0.15);
@@ -1301,15 +1322,6 @@ textarea.form-control {
   box-shadow: none !important;
   background: transparent;
   flex: 1;
-}
-
-#feedback-loadingSpinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--text-muted);
-  border-top: 2px solid var(--bg-hover);
-  border-radius: 50%;
-  animation: spin var(--duration) linear infinite;
 }
 
 /* ============= /chatbot ============= */
@@ -1529,9 +1541,11 @@ textarea.form-control {
 .card-unsubscribe {
   max-width: 440px;
   margin: auto;
-  border: none;
-  border-radius: 1rem;
+  border: var(--glass-border);
+  border-radius: var(--radius);
   box-shadow: var(--glass-shadow);
+  background: var(--bg-white);
+  color: var(--text-primary);
 }
 .icon-box {
   width: 80px;
@@ -1541,7 +1555,6 @@ textarea.form-control {
   justify-content: center;
   border-radius: 50%;
   margin: -40px auto 20px;
-  background: #fff;
 }
 
 /* ======== /kenapa harus bdg khb ========== */
@@ -2030,11 +2043,6 @@ textarea.form-control {
   padding-bottom: 5rem;
 }
 
-.tdopage-header {
-  text-align: center;
-  padding: 3rem 0 2.5rem;
-}
-
 .tdopage-label {
   display: block;
   font-size: 0.75rem;
@@ -2389,6 +2397,91 @@ textarea.form-control {
   background: var(--pu-700);
   color: var(--text-white);
   border: 1px solid var(--pu-700) !important;
+}
+
+.up-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+.up-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 80px;
+}
+.up-content {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .up-layout { flex-direction: column; }
+  .up-sidebar { width: 100%; position: static; }
+}
+
+.up-tab-nav {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  margin-top: 1rem;
+}
+.up-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .6rem .9rem;
+  border: none;
+  border-radius: .6rem;
+  background: transparent;
+  color: var(--text-secondary, #6c757d);
+  font-size: .9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  text-align: left;
+  width: 100%;
+}
+.up-tab-btn:hover {
+  background: var(--bg-subtle, oklch(0.97 0.01 295));
+  color: var(--text-primary);
+}
+.up-tab-btn.active {
+  background: oklch(0.95 0.04 295);
+  color: var(--purple-main, oklch(0.487 0.167 295));
+  font-weight: 600;
+}
+.up-tab-btn .up-tab-count {
+  margin-left: auto;
+  font-size: .72rem;
+  background: oklch(0.487 0.167 295);
+  color: #fff;
+  border-radius: 99px;
+  padding: .1rem .45rem;
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .up-tab-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: .4rem;
+    margin-top: .75rem;
+    padding-bottom: .25rem;
+  }
+  .up-tab-btn {
+    flex-shrink: 0;
+    padding: .45rem .8rem;
+    font-size: .82rem;
+    border-radius: 99px;
+    border: 1.5px solid oklch(0.9 0.04 295);
+  }
+  .up-tab-btn.active {
+    border-color: oklch(0.487 0.167 295);
+  }
+  .up-tab-btn .up-tab-count { display: none; }
 }
 
 /* ======== /review section ======== */

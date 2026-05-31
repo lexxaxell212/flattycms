@@ -95,12 +95,12 @@
   </div>
   <div class="tp-overview__right">
     <div class="tp-overview__content">
-      <span class="text-heading mb-4" style="font-weight:var(--fw-semibold)">
+      <span class="text-eyebrow">
         Trip Planner
       </span>
-      <h2 class="text-sub-hero mt-2" style="line-height:1.1">
-        Rencanakan<br>
-        <em>Tripmu</em><br>
+      <h2>
+        Rencanakan Tripmu
+        <br>
         di Bandung
       </h2>
       <p>
@@ -129,7 +129,7 @@
       <div class="tp-overview__cta">
         <a href="/trip" class="btn btn-primary">
           Buat Rute
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <i class="arrow-icon fas fa-angle-right ms-1"></i>
         </a>
       </div>
     </div>

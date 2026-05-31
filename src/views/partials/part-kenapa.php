@@ -25,18 +25,17 @@ $_khb_colors = [
   <div class="container">
     <div class="khb-header">
       <div class="khb-header__left">
-        <span class="mb-4 text-heading" style="font-weight:var(--fw-semibold)">
+        <span class="text-eyebrow">
           Discover Bandung
         </span>
-        <h2 class="text-sub-hero mt-2">
-          Kenapa Harus<br><em>Bandung?</em>
+        <h2 class="text-sub-hero">
+          Kenapa Harus Bandung?
         </h2>
       </div>
       <div>
         <p>Bandung 2026: Perpaduan sempurna inovasi digital, kesejukan alam, dan kreativitas kuliner terbaik.</p>
       </div>
     </div>
-
     <div class="khb-grid">
       <?php foreach ($_khb_items as $i => $_khb_item):
         $title   = htmlspecialchars($_khb_item['title'] ?? 'Untitled');

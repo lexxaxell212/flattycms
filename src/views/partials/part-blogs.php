@@ -10,13 +10,14 @@ $categories = safe_get_categories($pdo);
 ?>
 <script src="<?= JS_URL ?>artikel-slider.js" defer></script>
 <section class="container" id="artikel-terbaru" aria-label="Artikel Terbaru">
-      <h2 class="text-sub-hero">Artikel Terbaru</h2>
-      <p class="mb-4">
-        Cerita, tips, dan rekomendasi terbaik untuk perjalananmu.
-      </p>
-      <div id="artikel-slider-wrapper">
-        <div class="artikel-slider-viewport">
-          <div class="artikel-slider-track" role="list">
+    <span class="text-eyebrow">ARTIKEL</span>
+    <h2>Blog Terbaru</h2>
+    <p class="mb-4">
+      Cerita, tips, dan rekomendasi terbaik untuk perjalananmu.
+    </p>
+    <div id="artikel-slider-wrapper">
+      <div class="artikel-slider-viewport">
+        <div class="artikel-slider-track" role="list">
             <?php if (empty($posts)): ?>
               <div class="text-center text-muted py-5 w-100">
                 <i class="fas fa-newspaper fs-1 d-block mb-3 opacity-50" aria-hidden="true"></i>
@@ -33,7 +34,7 @@ $categories = safe_get_categories($pdo);
                   alt="<?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                   loading="lazy"
                 >
-                  <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="h6 mb-2">
+                  <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="h5 mb-2">
                   <?= htmlspecialchars(mb_strlen($p['title'] ?? '') > 60 ?
                   mb_substr($p['title'], 0, 60) . '…' : ($p['title'] ?? ''),
                   ENT_QUOTES, 'UTF-8') ?>
@@ -46,7 +47,7 @@ $categories = safe_get_categories($pdo);
                   <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="btn
                   btn-primary btn-sm btn-asl-read">
                     Baca Selengkapnya
-                    <i class="fas fa-angle-right ms-1" aria-hidden="true"></i>
+                    <i class="arrow-icon fas fa-angle-right ms-1" aria-hidden="true"></i>
                   </a>
                 </div>
               </article>
@@ -64,6 +65,6 @@ $categories = safe_get_categories($pdo);
                   aria-label="Artikel selanjutnya">
             <i class="fas fa-angle-right" aria-hidden="true"></i>
           </button>
-        </div>
       </div>
-    </section>
+    </div>
+</section>

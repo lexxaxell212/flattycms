@@ -1,37 +1,28 @@
 <?php
 $page_title = 'Lupa Password — ' . SITE_NAME;
 ?>
-
 <main id="content">
 <div class="container">
-
 <div>
   <section id="lupa-password">
-    <a href="/login" class="text-muted small text-decoration-none mb-3 d-inline-flex align-items-center gap-1">
+    <a href="/login" class="small mb-3 d-inline-flex align-items-center gap-1">
         <i class="fa-solid fa-arrow-left fa-xs"></i> Kembali ke login
     </a>
-
     <h2>Lupa password?</h2>
-    <p class="text-muted small">Masukkan emailmu dan kami akan kirim link reset password.</p>
+    <p class="text-muted">Masukkan emailmu dan kami akan kirim link reset password.</p>
   </section>
-
     <div class="mb-4">
-        <label class="form-label">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" stroke="var(--text-heading)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="1" y="3" width="14" height="10" rx="1.5" ry="1.5"/>
-            <polyline points="1,3 8,9.5 15,3"/>
-          </svg>
+        <label class="form-label mb-2">
+          <i class="fas fa-envelope me-1"></i>
           Email
         </label>
         <input type="email" id="fp-email" class="form-control" placeholder="nama@email.com">
     </div>
-
     <button class="btn btn-outline-primary" id="btn-fp">
         <span id="btn-fp-text">Kirim Link Reset</span>
         <i id="btn-fp-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-1"></i>
     </button>
 </div>
-
 </div>
 </main>
 <script>
@@ -40,16 +31,13 @@ document.getElementById('btn-fp').addEventListener('click', async () => {
     const btn        = document.getElementById('btn-fp');
     const btnText    = document.getElementById('btn-fp-text');
     const btnSpinner = document.getElementById('btn-fp-spinner');
-
     if (!email) {
         flattyToast('error', 'Email wajib diisi.');
         return;
     }
-
     btn.disabled = true;
     btnText.textContent = 'Mengirim...';
     btnSpinner.classList.remove('d-none');
-
     const res = await fetch('/api/auth/forgot-password.php', {
         method: 'POST',
         headers: {
@@ -59,13 +47,10 @@ document.getElementById('btn-fp').addEventListener('click', async () => {
         },
         body: JSON.stringify({ email })
     });
-
     const data = await res.json();
-
     btn.disabled = false;
     btnText.textContent = 'Kirim Link Reset';
     btnSpinner.classList.add('d-none');
-
     if (data.success) {
         flattyToast('success', 'Link reset password sudah dikirim. Cek inbox atau folder spam.');
         document.getElementById('fp-email').value = '';

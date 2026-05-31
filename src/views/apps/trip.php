@@ -90,7 +90,8 @@ $cats_json  = json_encode($categories);
       <div class="mb-3">
         <div class="input-group mb-4">
           <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
-          <input type="text" id="exploreSearch" class="form-control" placeholder="Cari tempat wisata...">
+          <input type="text" id="exploreSearch" class="form-control"
+          placeholder="Cari...">
         </div>
         <div class="d-flex gap-2 flex-wrap" id="exploreCatFilter">
           <button class="btn btn-primary btn-sm explore-cat active" data-cat="">Semua</button>
@@ -172,10 +173,10 @@ $cats_json  = json_encode($categories);
           <div class="tp-planner-body">
             <div class="tp-start-section">
               <div class="tp-section-label">
-                <h6 class="text-muted">
+                <h5 class="text-muted">
                   <i class="fa-solid fa-location-crosshairs text-purple me-1"></i>
                   Titik Awal
-                  </h6>
+                  </h5>
               </div>
               <div class="input-group">
                 <span class="input-group-text">
@@ -186,7 +187,7 @@ $cats_json  = json_encode($categories);
               <div id="startResults" class="list-group mt-1 p-2" style="max-height:150px;overflow-y:auto;display:none;position:relative;z-index:100"></div>
               <div id="startSelected" class="card card-flatty mt-2" style="display:none">
                 <div class="card-body">
-                  <div class="small fw-semibold text-truncate mb-3">
+                  <div class="fw-semibold text-truncate mb-3">
                     <span>Kamu mulai dari</span>
                     <span id="startName2" class="text-purple"></span>
                   </div>
@@ -199,10 +200,10 @@ $cats_json  = json_encode($categories);
 
             <div class="mb-3">
               <div class="tp-section-label">
-                <h6 class="text-muted">
+                <h5 class="text-muted">
                 <i class="fa-solid fa-list-ol text-purple me-1"></i>
                 Rute Perjalanan
-                </h6>
+                </h5>
               </div>
               <div id="routeList">
                 <div class="route-empty" id="routeEmpty">

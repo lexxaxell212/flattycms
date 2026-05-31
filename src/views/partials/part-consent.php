@@ -17,24 +17,19 @@ if ($consent_accepted): ?>
         </script>
     <?php endif; ?>
 <?php endif; ?>
-
 <?php if (!$consent_accepted): ?>
-
 <script src="<?= JS_URL ?>consent.js" defer></script>
-
 <div id="consentBanner" class="mx-auto consent-banner show">
     <h4>Kami Menghargai Privasi Anda</h4>
-    <p class="small text-muted mb-3">
-        Kami menggunakan cookie untuk meningkatkan pengalaman browsing anda, 
-        menampilkan konten yang relevan, dan menganalisis traffic situs. 
-        Dengan mengklik <strong>Terima Semua</strong>, anda menyetujui 
+    <p class="small text-muted mb-4">
+        Kami menggunakan cookie untuk meningkatkan pengalaman browsing anda.
+        Dengan mengklik <strong>Terima</strong>, anda menyetujui 
         penggunaan cookie sesuai <a href="/privacy-policy">Kebijakan Privasi</a> kami.
-        anda dapat mengatur preferensi kapan saja.
     </p>
     <div class="d-flex gap-2 flex-wrap">
-        <button class="btn btn-primary" onclick="saveConsent(true)">Terima Semua</button>
-        <button class="btn btn-outline-primary" onclick="saveConsent(false, true)">Tolak Semua</button>
+        <button class="btn btn-primary btn-sm" onclick="saveConsent(true)">Terima</button>
+        <button class="btn btn-outline-primary btn-sm" onclick="saveConsent(false, true)">
+          Tolak</button>
     </div>
 </div>
 <?php endif; ?>
-  

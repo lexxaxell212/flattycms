@@ -1,17 +1,16 @@
 <?php
 $page_title = "Sejarah Bandung";
 ?>
-
 <main id="content" class="sb-page">
   <div class="container mx-auto" style="max-width:740px">
-
     <section class="text-center">
-      <h1 class="sb-heading">Sejarah <em>Bandung</em></h1>
-      <p class="lead">Berawal dari dasar danau purba yang mengering, Bandung berevolusi dari sekadar titik nol di Jalan Raya Pos menjadi 'Paris van Java' yang anggun, hingga kini bertransformasi menjadi pusat kreativitas digital dunia.</p>
+      <h1>Sejarah Bandung</h1>
+      <p class="lead">Berawal dari dasar danau purba yang mengering, Bandung
+      berevolusi dari sekadar titik nol di Jalan Raya Pos menjadi "<strong>Paris van
+      Java</strong>" yang anggun, hingga kini bertransformasi menjadi pusat kreativitas
+      digital dunia.</p>
     </section>
-
     <div class="sb-timeline">
-
       <div class="sb-item">
         <div class="sb-item__left">
           <div class="sb-item__year">Prasejarah</div>
@@ -27,7 +26,6 @@ $page_title = "Sejarah Bandung";
           <p class="sb-item__body">Wilayah Bandung awalnya adalah dasar danau raksasa yang terbentuk akibat letusan Gunung Sunda purba. Sisa-sisa geologisnya kini membentuk dataran tinggi yang kita kenal sebagai cekungan Bandung.</p>
         </div>
       </div>
-
       <div class="sb-item">
         <div class="sb-item__left">
           <div class="sb-item__year">Abad ke-15</div>
@@ -43,7 +41,6 @@ $page_title = "Sejarah Bandung";
           <p class="sb-item__body">Wilayah Bandung masuk dalam kekuasaan Kerajaan Pajajaran. Nama "Bandung" mulai muncul, merujuk pada kendaraan air yang digunakan untuk membendung sungai.</p>
         </div>
       </div>
-
       <div class="sb-item">
         <div class="sb-item__left">
           <div class="sb-item__year">1810</div>
@@ -59,7 +56,6 @@ $page_title = "Sejarah Bandung";
           <p class="sb-item__body">Gubernur Jenderal Daendels memerintahkan pemindahan ibu kota agar lebih dekat dengan Jalan Raya Pos. Tanggal 25 September ditetapkan sebagai hari jadi Kota Bandung.</p>
         </div>
       </div>
-
       <div class="sb-item">
         <div class="sb-item__left">
           <div class="sb-item__year">1884</div>
@@ -75,7 +71,6 @@ $page_title = "Sejarah Bandung";
           <p class="sb-item__body">Pembukaan jalur kereta api Batavia–Bandung mengubah kota ini menjadi pusat distribusi hasil perkebunan teh dan kopi. Bandung mulai berkembang menjadi kota modern bergaya Eropa.</p>
         </div>
       </div>
-
       <div class="sb-item">
         <div class="sb-item__left">
           <div class="sb-item__year">1920-an</div>
@@ -91,7 +86,6 @@ $page_title = "Sejarah Bandung";
           <p class="sb-item__body">Berkat keindahan alam dan menjamurnya bangunan Art Deco serta pusat mode di Jalan Braga, Bandung mendapat julukan "Paris van Java" dan hampir menjadi ibu kota Hindia Belanda.</p>
         </div>
       </div>
-
       <div class="sb-item">
         <div class="sb-item__left">
           <div class="sb-item__year">1946</div>
@@ -107,7 +101,6 @@ $page_title = "Sejarah Bandung";
           <p class="sb-item__body">24 Maret — sekitar 200.000 penduduk membakar rumah mereka sendiri dalam tujuh jam untuk mencegah tentara Sekutu dan NICA menjadikan kota ini markas militer. Salah satu aksi heroik terbesar dalam sejarah Indonesia.</p>
         </div>
       </div>
-
       <div class="sb-item">
         <div class="sb-item__left">
           <div class="sb-item__year">1955</div>
@@ -123,7 +116,6 @@ $page_title = "Sejarah Bandung";
           <p class="sb-item__body">Bandung menjadi tuan rumah KAA yang dihadiri pemimpin dari 29 negara di Gedung Merdeka. Melahirkan Dasa Sila Bandung yang membangkitkan semangat kemerdekaan bangsa-bangsa Asia dan Afrika.</p>
         </div>
       </div>
-
       <div class="sb-item sb-item--last">
         <div class="sb-item__left">
           <div class="sb-item__year sb-item__year--now">Kini</div>
@@ -139,7 +131,6 @@ $page_title = "Sejarah Bandung";
           <p class="sb-item__body">Resmi ditetapkan sebagai bagian dari UNESCO Creative Cities Network dalam bidang desain. Bandung kini menjadi pusat inovasi teknologi, industri kreatif, fashion, dan pendidikan tinggi di Indonesia.</p>
         </div>
       </div>
-
     </div>
   </div>
 </main>

@@ -182,7 +182,6 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
         <label class="gal-label">Lokasi <span class="text-danger">*</span></label>
         <div class="gal-search-field-wrap">
           <input type="text" id="reviewPoiSearch" class="gal-input" placeholder="Ketik nama tempat...">
-          <!-- FIXED: hapus style display:none, biarkan CSS .gal-search-results handle -->
           <div id="reviewPoiResults" class="gal-search-results gal-search-results--modal"></div>
         </div>
         <input type="hidden" id="reviewPoiId">

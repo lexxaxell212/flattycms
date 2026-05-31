@@ -6,9 +6,8 @@ $page_title = "Kebijakan Privasi";
   <div class="row">
     <div class="col-lg">
       <section>
-        <h1 class="text-title">Kebijakan Privasi</h1>
+        <h1>Kebijakan Privasi</h1>
         <p class="lead">Kami berkomitmen melindungi data pribadi Anda secara bertanggung jawab.</p>
-        <hr/>
       </section>
 
       <div class="mb-5">
@@ -31,7 +30,7 @@ $page_title = "Kebijakan Privasi";
           <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Mengirimkan newsletter dan informasi event (dengan persetujuan Anda).</li>
           <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Analisis pengunjung secara anonim.</li>
         </ul>
-        <div class="alert alert-danger py-2 small mb-0" style="max-width: 440px">
+        <div class="alert alert-danger py-3 small mb-0" style="max-width: 440px">
           <i class="fas fa-ban me-2"></i>Kami <strong>TIDAK</strong> menjual, menyewakan, atau memperdagangkan data pribadi Anda kepada pihak ketiga manapun.
         </div>
       </div>

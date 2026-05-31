@@ -30,7 +30,6 @@ if ($id > 0) {
 }
 $categories = safe_get_categories($pdo);
 ?>
-
 <script src="<?= JS_URL ?>reactions.js" defer></script>
 <main id="content">
 <div class="container">
@@ -107,31 +106,45 @@ $categories = safe_get_categories($pdo);
             <?php
             require_once LIB_PATH . "v-reactions.php";
             ?>
-            <div class="d-flex align-items-center gap-2 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="justify-content-center">
+                <div class="mb-2 text-center">
+                  <span class="text-muted">Beri like</span>
+                </div>
+              <div class="align-items-center">
                 <button 
                     id="btn-reaction"
-                    class="btn <?= $user_liked ? 'btn-primary' :
-                    'btn-outline-primary' ?>"
+                    class="btn <?= $user_liked ? 'btn-primary btn-sm' :
+                    'btn-outline-primary btn-sm' ?>"
                     data-id="<?= $id ?>">
                     <i class="fas fa-heart me-1"></i>
                     <span id="reaction-count"><?= $reaction_count ?></span>
                 </button>
-                <?php $share_url = urlencode(BASE_URL . 'blogs/?id=' . $id); ?>
+                </div>
+            </div>
+              <div class="justify-content-center">
+                <div class="mb-2 text-center">
+                  <span class="text-muted">Bagikan artikel ini</span>
+                </div>
+              <div class="gap-2 align-items-center">
+              <?php $share_url = urlencode(BASE_URL . 'blogs/?id=' . $id); ?>
                 <?php $share_title = urlencode($post['title'] ?? ''); ?>
                 <a href="https://wa.me/?text=<?= $share_title ?>%20<?= $share_url ?>"
                    target="_blank" rel="noopener"
-                   class="btn btn-outline-primary">
+                   class="btn btn-outline-primary btn-sm">
                     <i class="fa-brands fa-whatsapp"></i>
                 </a>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $share_url ?>"
                    target="_blank" rel="noopener"
-                   class="btn btn-outline-primary">
+                   class="btn btn-outline-primary btn-sm">
                     <i class="fa-brands fa-facebook-f"></i>
                 </a>
                 <button onclick="copyLink()"
-                   class="btn btn-outline-primary">
+                   class="btn btn-outline-primary btn-sm">
                     <i class="fa-brands fa-instagram"></i>
                 </button>
+                </div>
+              </div>
             </div>
             <a href="/blogs/<?= $cat_id > 0 ? "?cat=" . $cat_id : "" ?>"
                class="btn btn-primary">
@@ -141,8 +154,8 @@ $categories = safe_get_categories($pdo);
     </div>
 <?php 
   else: ?>
-      <section class="row g-4 mx-auto">
-        <div class="col-md-6">
+      <section class="row g-4">
+        <div class="col-md-7">
           
             <div class="d-flex align-items-center justify-content-between">
               
@@ -304,7 +317,7 @@ $categories = safe_get_categories($pdo);
             <?php endif; ?>
 
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
           <div style="position:sticky !important; top:82px; align-self:flex-start;">
                 <div class="bg-light">
                     <div class="card-body">

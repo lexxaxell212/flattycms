@@ -6,8 +6,8 @@ require_once LIB_PATH . "v-things-to-do.php";
   <div class="container">
     <div class="d-flex align-items-end justify-content-between mb-4">
       <div>
-        <span class="mb-4 text-heading" style="font-weight:var(--fw-semibold)">Now In Bandung</span>
-        <h2 class="text-sub-hero mt-2">UPCOMING EVENT HIGHLIGHT</h2>
+        <span class="text-eyebrow">Highlight</span>
+        <h2>Upcoming events</h2>
       </div>
       <a href="/things-to-do" class="tdop-link-all">
         Lihat Semua <i class="fas fa-arrow-right ms-1"></i>
@@ -26,7 +26,7 @@ require_once LIB_PATH . "v-things-to-do.php";
             </span>
           </div>
           <a href="/pages/<?= safe_html($_tdo_next['slug']) ?>/" class="tdop-featured__cta">
-            Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
+            Selengkapnya <i class="fas fa-angle-right ms-1"></i>
           </a>
         </div>
       </div>

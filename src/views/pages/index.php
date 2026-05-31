@@ -6,12 +6,10 @@ $page_title = 'Things to Do';
 
 <main id="content" class="tdopage-wrap">
   <div class="container">
-
-    <div class="tdopage-header">
-      <span class="tdopage-label">Bandung</span>
-      <h1 class="tdopage-heading">Things to Do</h1>
-      <p class="tdopage-sub">Eksplorasi event, kuliner, dan budaya terbaik di Kota Kembang</p>
-    </div>
+    <section id="page-things-to-do">
+      <h1 class="uppercase">Things to Do</h1>
+      <p class="lead">Eksplorasi event, kuliner, dan budaya terbaik di Kota Kembang</p>
+    </section>
 
     <!-- ── Event & Info Terkini ── -->
     <?php if ($_tdo_next || !empty($_tdo_pages)): ?>
@@ -30,7 +28,8 @@ $page_title = 'Things to Do';
       <div class="mb-4">
         <div class="tdopage-featured">
           <div class="tdopage-featured__inner">
-            <span class="tdopage-badge"><i class="fas fa-bolt me-1"></i>Terbaru</span>
+            <span class="tdopage-badge"><i class="fas fa-bolt me-1"></i>Akan
+            Datang</span>
             <div class="tdopage-featured__body">
               <h5 class="tdopage-featured__date-label">
                 <?= $_tdo_next['event_date'] ? date('d M Y', strtotime($_tdo_next['event_date'])) : '—' ?>
@@ -43,7 +42,7 @@ $page_title = 'Things to Do';
               </span>
             </div>
             <a href="/pages/<?= safe_html($_tdo_next['slug']) ?>/" class="tdopage-featured__cta">
-              Lihat Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
+              Selengkapnya <i class="fas fa-angle-right ms-1"></i>
             </a>
           </div>
         </div>
@@ -168,3 +167,4 @@ $page_title = 'Things to Do';
 
   </div>
 </main>
+

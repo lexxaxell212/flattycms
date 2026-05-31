@@ -9,61 +9,56 @@ if ($token) {
     $reset = $stmt->fetch();
     if ($reset) $invalid = false;
 }
-
-$page_title = 'Reset Password — ' . SITE_NAME;
+$page_title = 'Reset Password - ' . SITE_NAME;
 ?>
-
 <main id="content">
 <div class="container">
-
-<section>
-<div class="mx-auto" style="max-width:440px;">
-    <a href="/login" class="text-muted small mb-3 d-inline-flex align-items-center gap-1">
-        <i class="fa-solid fa-arrow-left fa-xs"></i> Kembali ke login
-    </a>
-
-    <?php if ($invalid): ?>
-        <div class="text-center py-3">
-            <i class="fa-solid fa-circle-xmark fa-3x text-danger mb-3"></i>
-            <h2 class="fw-semibold">Link tidak valid</h2>
-            <p class="text-muted small">Link reset password sudah kadaluarsa atau tidak valid.</p>
-            <a href="/forgot-password" class="btn btn-outline-primary w-100">Minta link baru</a>
-        </div>
-    <?php else: ?>
-        <h2 class="fw-semibold mb-1">Buat password baru</h2>
-        <p class="text-muted small mb-4">Masukkan password baru untuk akunmu.</p>
-
-        <div class="mb-3">
-            <label class="form-label">Password baru</label>
-            <div class="input-group">
-                <input type="password" id="rp-pw" class="form-control password" placeholder="Min. 8 karakter">
-                <button class="btn" type="button" id="toggle-pw">
-                    <i class="fa-regular fa-eye fa-sm"></i>
-                </button>
-            </div>
-        </div>
-
-        <div class="mb-4">
-            <label class="form-label">Konfirmasi password</label>
-            <div class="input-group">
-                <input type="password" id="rp-pw-confirm" class="form-control password" placeholder="Ulangi password">
-                <button class="btn" type="button" id="toggle-pw-confirm">
-                    <i class="fa-regular fa-eye fa-sm"></i>
-                </button>
-            </div>
-        </div>
-
-        <button class="btn btn-outline-primary w-100" id="btn-rp">
-            <span id="btn-rp-text">Simpan Password</span>
-            <i id="btn-rp-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-1"></i>
-        </button>
-    <?php endif; ?>
-</div>
+<section id="reset-pw-form">
+  <a href="/login" class="small mb-4 d-inline-flex align-items-center gap-1">
+    <i class="fa-solid fa-arrow-left fa-xs"></i> Kembali ke login
+  </a>
+  <?php if ($invalid): ?>
+    <div class="text-center py-3">
+      <i class="fa-solid fa-circle-xmark fa-3x text-danger mb-4"></i>
+      <h2>Link tidak valid</h2>
+      <p class="text-muted small mb-4">Link reset password sudah kadaluarsa atau tidak valid.</p>
+      <a href="/forgot-password" class="btn btn-outline-primary">Minta link baru</a>
+    </div>
+  <?php else: ?>
+    <h2>Buat password baru</h2>
+    <p>Masukkan password baru untuk akunmu.</p>
 </section>
-
+<div class="mb-4">
+    <label class="form-label mb-2">
+      <i class="fas fa-lock me-1"></i>
+      Password baru
+    </label>
+    <div class="input-group">
+      <input type="password" id="rp-pw" class="form-control password" placeholder="Min. 8 karakter">
+      <button class="btn" type="button" id="toggle-pw">
+        <i class="fas fa-eye fa-sm"></i>
+      </button>
+    </div>
+</div>
+<div class="mb-4">
+    <label class="form-label mb-2">
+      <i class="fas fa-lock me-1"></i>
+      Konfirmasi password
+    </label>
+    <div class="input-group">
+      <input type="password" id="rp-pw-confirm" class="form-control password" placeholder="Ulangi password">
+      <button class="btn" type="button" id="toggle-pw-confirm">
+        <i class="fas fa-eye fa-sm"></i>
+      </button>
+    </div>
+</div>
+<button class="btn btn-outline-primary" id="btn-rp">
+    <span id="btn-rp-text">Simpan Password</span>
+    <i id="btn-rp-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-1"></i>
+</button>
+  <?php endif; ?>
 </div>
 </main>
-
 <script>
 function togglePw(inputId, btnId) {
     document.getElementById(btnId)?.addEventListener('click', () => {
@@ -96,11 +91,9 @@ document.getElementById('btn-rp')?.addEventListener('click', async () => {
         flattyToast('error', 'Konfirmasi password tidak cocok.');
         return;
     }
-
     btn.disabled = true;
     btnText.textContent = 'Menyimpan...';
     btnSpinner.classList.remove('d-none');
-
     const res = await fetch('/api/auth/reset-password.php', {
         method: 'POST',
         headers: {
@@ -110,9 +103,7 @@ document.getElementById('btn-rp')?.addEventListener('click', async () => {
         },
         body: JSON.stringify({ token: '<?= safe_html($token) ?>', password })
     });
-
     const data = await res.json();
-
     if (data.success) {
         flattyToast('success', 'Password berhasil diubah! Mengalihkan ke login...');
         btn.classList.add('d-none');

@@ -197,13 +197,13 @@ html {
   scroll-behavior: smooth;
   font-size: 14px;
   height: 100%;
-  background: oklch(0.973 0.004 295);
+  background: oklch(0.97 0 0);
   overflow-x: hidden;
 }
 
 body {
   font-family: "Inter", sans-serif;
-  background: oklch(0.973 0.004 295);
+  background: oklch(0.97 0 0);
   color: oklch(0.372 0.014 264);
   min-height: 100vh;
   font-size: var(--space-4);

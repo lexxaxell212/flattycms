@@ -574,49 +574,46 @@ h6 {
   transform: scale(1);
   z-index: 1;
 }
+
 @media (min-width: 768px) {
-  .hero-slide-wisata {
-    background-image: url("../images/wisata.webp");
-  }
-  .hero-slide-kuliner {
-    background-image: url("../images/kuliner.webp");
-  }
-  .hero-slide-hotel {
-    background-image: url("../images/hotel.webp");
-  }
+  .hero-slide-wisata  { background-image: url("../images/wisata.webp"); }
+  .hero-slide-kuliner { background-image: url("../images/kuliner.webp"); }
+  .hero-slide-hotel   { background-image: url("../images/hotel.webp"); }
 }
+.hero-slide-wisata  { background-image: url("../images/wisata-mobile.webp"); }
+.hero-slide-kuliner { background-image: url("../images/kuliner-mobile.webp"); }
+.hero-slide-hotel   { background-image: url("../images/hotel-mobile.webp"); }
 
-.hero-slide-wisata {
-  background-image: url("../images/wisata-mobile.webp");
-}
-.hero-slide-kuliner {
-  background-image: url("../images/kuliner-mobile.webp");
-}
-.hero-slide-hotel {
-  background-image: url("../images/hotel-mobile.webp");
-}
-
+/* overlay gelap dari bawah — kunci readability */
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(255,255,255,.15) 0%,
-  rgba(255,255,255,.08) 100%);
-}
-[data-dark] .hero-overlay {
-  background: linear-gradient(90deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.1) 100%);
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.35) 40%,
+    transparent 100%
+  );
 }
 
+/* subtle vignette atas */
 .hero-overlay-global {
   position: absolute;
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(255,255,255,0.15) 50%,
-  rgba(255,255,255,.08) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25) 0%,
+    transparent 30%
+  );
 }
-[data-dark] .hero-overlay-global {
-  background: linear-gradient(90deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.08) 100%);
-}
+
+/* dark mode sama aja, overlay udah gelap */
+[data-dark] .hero-overlay,
+[data-dark] .hero-overlay-global { filter: none; }
 
 .hero-card-wrapper {
   position: absolute;
@@ -624,53 +621,60 @@ h6 {
   z-index: 3;
 }
 
-.glass-hero-card {
-  background: rgba(255,255,255,.55);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: var(--glass-border);
-  padding: 2rem 1.5rem;
-  border-radius: var(--radius);
-  box-shadow:
-  0 8px 32px rgba(0, 0, 0, 0.25),
-  0 2px 8px rgba(0, 0, 0, 0.15),
-  inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-[data-dark] .glass-hero-card {
-  background: rgba(30,41,59,.55);
-  border: var(--glass-border);
+/* text overlay content */
+.hero-content {
+  color: #fff;
 }
 
-.hero-card-title,
-.hero-card-desc {
-  transition: opacity .35s var(--ease), transform .35s var(--ease);
-}
-.hero-card-title.is-fading,
-.hero-card-desc.is-fading {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.glass-hero-card h1 {
+.hero-eyebrow {
+  display: block;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-primary-300, #c4b5fd);
+  margin-bottom: 0.25rem;
   animation: fadeInUp var(--duration) var(--ease) forwards;
 }
-.glass-hero-card p {
+
+.hero-title {
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  animation: fadeInUp var(--duration) var(--ease) .05s forwards;
+}
+
+.hero-lead {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.5rem;
   animation: fadeInUp var(--duration) var(--ease) .1s forwards;
 }
-.glass-hero-card .btn {
+
+.hero-content .btn {
   animation: fadeInUp var(--duration) var(--ease) .2s forwards;
 }
 
+/* btn-outline di atas foto gelap — putih */
+.hero-content .btn-outline-primary {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.hero-content .btn-outline-primary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+  color: #fff;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* dots */
 .hero-dots {
   position: absolute;
   bottom: 30px;
@@ -684,17 +688,14 @@ h6 {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(0,0,0,.2);
+  background: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: var(--duration);
 }
 .dot.active {
-  background: var(--bg-primary);
+  background: #fff;
   width: 30px;
   border-radius: 10px;
-}
-[data-dark] .dot {
-  background: rgba(255,255,255,.3);
 }
 
 /* ============= fast nav ============= */

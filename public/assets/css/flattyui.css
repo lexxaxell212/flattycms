@@ -4590,7 +4590,7 @@ input[type="checkbox"] {
 .container {
   width: 100%;
   margin-inline: auto;
-  padding-inline: 1rem;
+  padding-inline: 2rem;
 }
 
 /* ======================================= */
@@ -4598,7 +4598,7 @@ input[type="checkbox"] {
 @media (min-width: 768px) {
   .container {
     max-width: clamp(720px, 100vw, 899px);
-    padding-inline: 2rem;
+    padding-inline: 4rem;
   }
   .artikel-slide-card {
     flex: 0 0 calc((100% - 1rem) / 2);
@@ -4802,7 +4802,7 @@ input[type="checkbox"] {
 @media (min-width: 980px) {
   .container {
     max-width: clamp(900px, 100vw, 1360px);
-    padding-inline: 4rem;
+    padding-inline: 6rem;
   }
 
   .container-tp {

@@ -584,7 +584,6 @@ h6 {
 .hero-slide-kuliner { background-image: url("../images/kuliner-mobile.webp"); }
 .hero-slide-hotel   { background-image: url("../images/hotel-mobile.webp"); }
 
-/* overlay gelap dari bawah — kunci readability */
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -598,7 +597,6 @@ h6 {
   );
 }
 
-/* subtle vignette atas */
 .hero-overlay-global {
   position: absolute;
   inset: 0;
@@ -611,7 +609,6 @@ h6 {
   );
 }
 
-/* dark mode sama aja, overlay udah gelap */
 [data-dark] .hero-overlay,
 [data-dark] .hero-overlay-global { filter: none; }
 
@@ -621,7 +618,6 @@ h6 {
   z-index: 3;
 }
 
-/* text overlay content */
 .hero-content {
   color: #fff;
   padding-bottom: 8rem;
@@ -659,7 +655,6 @@ h6 {
   animation: fadeInUp var(--duration) var(--ease) .2s forwards;
 }
 
-/* btn-outline di atas foto gelap — putih */
 .hero-content .btn-outline-primary {
   color: #fff;
   border-color: rgba(255, 255, 255, 0.6);
@@ -675,7 +670,6 @@ h6 {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* dots */
 .hero-dots {
   position: absolute;
   bottom: 30px;

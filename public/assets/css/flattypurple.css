@@ -624,7 +624,7 @@ h6 {
 /* text overlay content */
 .hero-content {
   color: #fff;
-  padding-bottom: clamp(4rem, 8vh, 6rem);
+  padding-bottom: 8rem;
 }
 
 .hero-eyebrow {

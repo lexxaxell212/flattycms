@@ -24,15 +24,12 @@ $current = preg_replace('#^admin/?#', '', $request_path);
 
   <link rel="stylesheet" href="<?= CSS_URL ?>bs533.min.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>flattypurple.css">
-  
-  <link rel="preload" as="style" href="<?= CSS_URL ?>flattyui.css">
-  <link rel="stylesheet" href="<?= CSS_URL ?>flattyui.css" media="print" onload="this.media='all'">
+
   
   <link rel="preload" as="style" href="<?= CSS_URL ?>fa651.all.min.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css" media="print" onload="this.media='all'">
   
   <noscript>
-    <link rel="stylesheet" href="<?= CSS_URL ?>flattyui.css">
     <link rel="stylesheet" href="<?= CSS_URL ?>fa651.all.min.css">
   </noscript>
 
@@ -49,7 +46,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
 <body>
 <nav class="navbar">
   <div class="container">
-    <a class="navbar-brand text-gradient" aria-label="Admin Dashboard" href="<?= $admin_url
+    <a class="h2 navbar-brand text-gradient" aria-label="Admin Dashboard" href="<?= $admin_url
     ?>">
       flattyDash
     </a>

@@ -145,29 +145,12 @@ $_khb_icons = [
 .khb-icon-wrap {
   width: 64px;
   height: 64px;
-  margin-bottom: 1.5rem;
-  color: var(--color-primary, #7c3aed);
-  position: relative;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.khb-item:hover .khb-icon-wrap {
-  transform: translateY(-4px);
 }
 
 .khb-icon-wrap svg {
-  width: 64px;
-  height: 64px;
-  overflow: visible;
-}
-
-/* Animated stroke on hover */
-.khb-item .khb-icon-g {
-  transition: opacity 0.3s ease;
-}
-
-.khb-item:hover .khb-icon-g {
-  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-primary, #7c3aed) 50%, transparent));
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 /* Title */

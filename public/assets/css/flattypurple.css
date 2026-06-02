@@ -672,16 +672,6 @@ h6, .h6 {
   animation: fadeInUp var(--duration) var(--ease) .2s forwards;
 }
 
-.hero-content .btn-outline-primary {
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.6);
-}
-.hero-content .btn-outline-primary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: #fff;
-  color: #fff;
-}
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -1519,14 +1509,14 @@ table tbody td {
 }
 
 .btn-accent {
-  background: var(--btn-or-500) !important;
-  color: var(--btn-sl-900);
-  border-color: var(--btn-or-500) !important;
-}
-.btn-accent:hover {
   background: var(--btn-or-600) !important;
   color: var(--btn-sl-50);
   border-color: var(--btn-or-600) !important;
+}
+.btn-accent:hover {
+  background: var(--btn-or-700) !important;
+  color: var(--btn-sl-50);
+  border-color: var(--btn-or-700) !important;
 }
 .btn-accent:active {
   background: var(--btn-or-700) !important;
@@ -1575,6 +1565,16 @@ table tbody td {
 }
 .btn-outline-accent:focus-visible {
   box-shadow: 0 0 0 3px oklch(from var(--btn-or-500) l c h / 0.3);
+}
+
+.btn-outline-white {
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+}
+.btn-outline-white:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #fff !important;
+  color: #fff;
 }
 
 .btn-glass {

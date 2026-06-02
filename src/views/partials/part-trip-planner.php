@@ -98,7 +98,7 @@
       <span class="text-eyebrow">
         Trip Planner
       </span>
-      <h2>
+      <h2 class="text-sub-hero">
         Rencanakan Tripmu
         <br>
         di Bandung

@@ -6,8 +6,8 @@ require_once LIB_PATH . "v-things-to-do.php";
   <div class="container">
     <div class="d-flex align-items-end justify-content-between mb-4">
       <div>
-        <span class="text-eyebrow">Highlight</span>
-        <h2>Upcoming events</h2>
+        <span class="text-eyebrow">Highlights</span>
+        <h2 class="text-sub-hero">Upcoming Events</h2>
       </div>
       <a href="/things-to-do" class="tdop-link-all">
         Lihat Semua <i class="fas fa-arrow-right ms-1"></i>

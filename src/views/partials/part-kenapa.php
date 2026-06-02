@@ -39,7 +39,7 @@ $_khb_colors = [
     <div class="khb-grid">
       <?php foreach ($_khb_items as $i => $_khb_item):
         $title   = htmlspecialchars($_khb_item['title'] ?? 'Untitled');
-        $excerpt = htmlspecialchars(substr($_khb_item['excerpt'] ?? '', 0, 120));
+        $excerpt = htmlspecialchars(substr($_khb_item['excerpt'] ?? '', 0, 300));
         $icon    = $_khb_icons[$title] ?? '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>';
         $color   = $_khb_colors[$i % count($_khb_colors)];
         $num     = str_pad(count($_khb_items) - $i, 2, '0', STR_PAD_LEFT);
@@ -57,31 +57,8 @@ $_khb_colors = [
           <p class="khb-card__excerpt"><?= $excerpt ?></p>
           <?php endif; ?>
         </div>
-        <div class="khb-card__bar" style="background:<?= $color ?>"></div>
       </div>
       <?php endforeach; ?>
-    </div>
-    <div class="khb-cta">
-      <div class="khb-cta__inner">
-        <h3>Siap Petualangan ke Bandung ?</h3>
-        <p>Jadwal akhir pekan sudah penuh? Booking sekarang sebelum ketinggalan!</p>
-        <div class="khb-cta__btns">
-          <a href="https://google.com/search?q=Tiket+ke+bandung" target="_blank"
-          rel="noopener" class="btn btn-outline-primary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
-            Pesan Tiket
-          </a>
-          <a href="https://google.com/search?q=Booking+hotel+bandung"
-          target="_blank" rel="noopener" class="btn btn-outline-primary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
-            Cari Hotel
-          </a>
-          <a href="/trip" class="mt-2 btn btn-primary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            Mulai Rencanakan
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 </section>

@@ -25,7 +25,7 @@ $slides = [
       <a href="/trip" class="btn btn-primary mb-2">
         TRIP PLANNER <i class="arrow-icon fas fa-angle-right ms-2"></i>
       </a>
-      <a href="/things-to-do" class="btn btn-outline-primary" style="padding-block: calc(var(--space-3) - 2px)">
+      <a href="/things-to-do" class="btn btn-outline-white" style="padding-block: calc(var(--space-3) - 2px)">
         THINGS TO DO <i class="arrow-icon fas fa-angle-right ms-2"></i>
       </a>
     </div>

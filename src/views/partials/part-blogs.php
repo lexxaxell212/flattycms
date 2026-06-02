@@ -11,7 +11,7 @@ $categories = safe_get_categories($pdo);
 <script src="<?= JS_URL ?>artikel-slider.js" defer></script>
 <section class="container" id="artikel-terbaru" aria-label="Artikel Terbaru">
     <span class="text-eyebrow">ARTIKEL</span>
-    <h2>Blog Terbaru</h2>
+    <h2 class="text-sub-hero">Blog Terbaru</h2>
     <p class="mb-4">
       Cerita, tips, dan rekomendasi terbaik untuk perjalananmu.
     </p>

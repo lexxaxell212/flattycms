@@ -5712,7 +5712,7 @@ input[type="checkbox"] {
 .container {
   width: 100%;
   margin-inline: auto;
-  padding-inline: 2rem;
+  padding-inline: 1.5rem;
 }
 
 /* ======================================= */

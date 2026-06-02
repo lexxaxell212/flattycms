@@ -8,6 +8,11 @@ require_once LIB_PATH . "v-poi-wisata.php";
 }
 
 /* ============= MOBILE STYLE ============= */
+.wisata-wrapper {
+    margin: 1.5rem -1.5rem;
+    position: relative;
+}
+
 .wisata-list {
     display: flex;
     gap: 1rem;
@@ -20,8 +25,8 @@ require_once LIB_PATH . "v-poi-wisata.php";
 
 .wisata-card {
     flex: 0 0 calc(100% - 2rem);
-    height: 320px;
-    border-radius: 16px;
+    height: 360px;
+    border-radius: var(--radius);
     background-size: cover;
     background-position: center;
     position: relative;
@@ -39,6 +44,7 @@ require_once LIB_PATH . "v-poi-wisata.php";
     background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
     color: #fff;
 }
+
 
 .wisata-name {
     font-size: 1.25rem;

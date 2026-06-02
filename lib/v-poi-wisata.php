@@ -14,4 +14,4 @@ function get_wisata_poi($limit = 6) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-$wisata_poi = get_wisata_poi(6);
+$GLOBALS['wisata_poi'] = get_wisata_poi(6);

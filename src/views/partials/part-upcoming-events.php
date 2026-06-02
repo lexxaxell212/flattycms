@@ -1,5 +1,5 @@
 <?php
-require_once LIB_PATH . "v-things-to-do.php";
+require_once LIB_PATH . "v-upcoming-events.php";
 ?>
 <?php if ($_tdo_next): ?>
 <section id="upcoming-event">
@@ -9,7 +9,7 @@ require_once LIB_PATH . "v-things-to-do.php";
         <span class="text-eyebrow">Highlights</span>
         <h2 class="text-sub-hero">Upcoming Events</h2>
       </div>
-      <a href="/things-to-do" class="tdop-link-all">
+      <a href="/upcoming-events" class="tdop-link-all">
         Lihat Semua <i class="fas fa-arrow-right ms-1"></i>
       </a>
     </div>

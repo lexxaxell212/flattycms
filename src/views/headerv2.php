@@ -6,15 +6,6 @@ function isActive(string $path): string {
     global $currentPath;
     return str_starts_with($currentPath, $path) ? 'is-current' : '';
 }
-// Dropdown
-$pintasanPaths = [
-    '/pages/sejarah',
-    '/pages/layanan'
-];
-$isPintasanActive = (bool) array_filter(
-    $pintasanPaths, 
-    fn($p) => str_starts_with($currentPath, $p)
-);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -266,16 +257,10 @@ $isPintasanActive = (bool) array_filter(
       </a>
       <div class="nav-desktop" id="navbarNav">
         <ul class="nav-desktop-list">
-          <li class="nav-desktop-item nav-desktop-dropdown">
-            <button class="nav-desktop-link nav-dd-trigger <?= $isPintasanActive ? 'is-current' : '' ?>" aria-expanded="false">
-              <i class="fa-solid fa-grip" aria-hidden="true"></i>
-              Pintasan
-              <i class="fa-solid fa-chevron-down nav-dd-chevron" aria-hidden="true"></i>
-            </button>
-            <div class="nav-dd-panel">
-              <a class="nav-dd-item <?= isActive('/pages/sejarah') ?>" href="/pages/sejarah"><i class="fa-solid fa-landmark"></i>Sejarah</a>
-              <a class="nav-dd-item <?= isActive('/pages/layanan') ?>" href="/pages/layanan"><i class="fa-solid fa-bus"></i>Layanan</a>
-            </div>
+          <li class="nav-desktop-item">
+            <a class="nav-desktop-link <?= isActive('/upcoming-events') ?>" href="/upcoming-events"><i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              Upcoming Events
+            </a>
           </li>
           <li class="nav-desktop-item">
             <a class="nav-desktop-link <?= isActive('/things-to-do') ?>" href="/things-to-do"><i class="fa-solid fa-newspaper" aria-hidden="true"></i>
@@ -351,19 +336,16 @@ $isPintasanActive = (bool) array_filter(
   <div class="menu-overlay" id="menuOverlay"></div>
     <div class="navbar-collapse" id="navbarNav-mobile">
     <ul class="navbar-nav mb-5">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle mb-2 <?= $isPintasanActive ? 'is-current' : '' ?>" href="#" role="button" data-bs-toggle="dropdown">
-          <i class="fa-solid fa-grip"></i> Pintasan
+      <li class="nav-item">
+        <a class="nav-link <?= isActive('/upcoming-events') ?>"
+        href="/upcoming-events"><i class="fa-solid fa-calendar"></i>
+        Upcoming Events
         </a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item <?= isActive('/pages/sejarah') ?>"
-          href="/pages/sejarah"><i class="fa-solid fa-landmark me-2"></i>Sejarah Bandung</a></li>
-          <li><a class="dropdown-item <?= isActive('/pages/layanan') ?>"
-          href="/pages/layanan"><i class="fa-solid fa-bus me-2"></i>Layanan di Bandung</a></li>
-        </ul>
       </li>
-      <li class="nav-item"><a class="nav-link <?= isActive('/things-to-do') ?>"
-      href="/things-to-do"><i class="fa-solid fa-newspaper"></i>Things to Do</a></li>
+      <li class="nav-item">
+        <a class="nav-link <?= isActive('/things-to-do') ?>"
+      href="/things-to-do"><i class="fa-solid fa-newspaper"></i>Things to Do</a>
+      </li>
       <li class="nav-item"><a class="nav-link <?= isActive('/blogs') ?>"
       href="/blogs"><i class="fa-solid fa-book"></i>Blogs</a></li>
       <li class="nav-item"><a class="nav-link <?= isActive('/trip') ?>"

@@ -8,7 +8,8 @@ $routes = [
     'trip'       => SRC_PATH . 'apps/trip.php',
     'gallery'    => SRC_PATH . 'apps/gallery.php',
   // page
-    'things-to-do'               => SRC_PATH . 'pages/index.php',
+    'things-to-do'               => SRC_PATH . 'pages/things-to-do.php',
+    'upcoming-events'           => SRC_PATH . 'pages/upcoming-events.php',
   // etc pages
     'pages/sejarah'              => SRC_PATH . 'pages/sejarah.php',
     'pages/tentang'              => SRC_PATH . 'pages/tentang.php',
@@ -26,7 +27,7 @@ $routes = [
     'unsubscribe'     => SRC_PATH . 'user/unsubscribe.php',
 ];
 
-// dynamic pages
+// dynamic pages for pages builder
 if (array_key_exists($uri, $routes)) {
     $view_content = $routes[$uri];
 } elseif (str_starts_with($uri, 'pages/')) {

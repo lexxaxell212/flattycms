@@ -1,65 +1,321 @@
 <?php
-require_once LIB_PATH . "v-kenapa.php";
+$_khb_stmt  = $pdo->query("SELECT * FROM admin_items WHERE status = 'active' AND category IN ('trending') ORDER BY id DESC");
+$_khb_items = $_khb_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $_khb_icons = [
-    'Pusat Inovasi Digital'    => '<path d="M12 2a7 7 0 0 1 7 7c0 3.17-2.11 5.84-5 6.71V17h-4v-1.29C7.11 14.84 5 12.17 5 9a7 7 0 0 1 7-7zm0 2a5 5 0 0 0-5 5c0 2.38 1.63 4.41 4 4.9V15h2v-1.1c2.37-.49 4-2.52 4-4.9a5 5 0 0 0-5-5zm-1 13h2v2h-2z"/>',
-    'Konektivitas Kilat'        => '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
-    'Ikon Kuliner Global'       => '<path d="M3 2v7c0 2.76 2.24 5 5 5h1v6h2v-6h1c2.76 0 5-2.24 5-5V2h-2v5h-2V2h-2v5H9V2H3zm15 0h-2v9h2V2z"/>',
-    'Wisata Alam Estetik'       => '<path d="M14 6l-1-2H5v17h2v-7h5l1 2h7V6h-6zm4 8h-4l-1-2H7V6h5l1 2h5v6z"/><path d="M8.5 11.5l1.5-2 1.5 2 2.5-3.5L17 13H7l1.5-2.5z"/>',
-    'Kiblat Fashion Lokal'      => '<path d="M12 3C9.24 3 7 5.24 7 8c0 1.85 1.01 3.45 2.5 4.33V21h5v-8.67C15.99 11.45 17 9.85 17 8c0-2.76-2.24-5-5-5zm0 2c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3zm-1.5 8.5h3V19h-3v-5.5z"/>',
-    'Arsitektur Bersejarah'     => '<path d="M12 3L2 9v1h2v9h3v-6h6v6h3V10h2V9L12 3zm0 2.31L19 9.5V10h-1v9h-1v-6H7v6H6V10H5v-.5L12 5.31z"/><path d="M10 14h4v5h-4z" opacity=".3"/>',
-    'Kultur Ngopi yang Kuat'    => '<path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/>',
-    'Ruang Publik Inklusif'     => '<path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>',
-    'Event Seni Internasional'  => '<path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v3H8v2h3v3h2v-3h3v-2h-3V8z"/><circle cx="12" cy="12" r="2" opacity=".5"/>',
-    'Udara Sejuk Menenangkan'   => '<path d="M12 4C9.24 4 7 6.24 7 9c0 2.85 2.22 5.19 5 5.46V18H9v2h6v-2h-3v-3.54c2.78-.27 5-2.61 5-5.46 0-2.76-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"/><path d="M6.5 10.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm11 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM12 2c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5S12.28 2 12 2z"/>',
-];
 
-$_khb_colors = [
-    '#7c3aed', '#6d28d9', '#4f46e5', '#7c3aed',
-    '#5b21b6', '#4338ca', '#6d28d9', '#7c3aed',
-    '#4f46e5', '#5b21b6',
+'Udara Sejuk Menenangkan' => '
+  <g class="khb-icon-g">
+    <circle cx="32" cy="22" r="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M18 34 C14 34 8 30 8 24 C8 18 13 14 19 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M46 34 C50 34 56 30 56 24 C56 18 51 14 45 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M20 42 Q32 36 44 42" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path d="M24 50 Q32 45 40 50" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".6"/>
+    <path d="M28 57 Q32 54 36 57" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
+    <circle cx="32" cy="22" r="5" fill="currentColor" opacity=".15"/>
+    <path d="M32 10 L32 7M32 37 L32 34M44 22 L47 22M20 22 L17 22M40.5 13.5 L42.6 11.4M23.5 13.5 L21.4 11.4M40.5 30.5 L42.6 32.6M23.5 30.5 L21.4 32.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".5"/>
+  </g>',
+
+'Event Seni Internasional' => '
+  <g class="khb-icon-g">
+    <rect x="8" y="20" width="48" height="36" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M8 28 L56 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".4"/>
+    <circle cx="20" cy="14" r="4" fill="none" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="44" cy="14" r="4" fill="none" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M20 18 L20 28M44 18 L44 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+    <path d="M26 38 L30 42 L38 34" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M18 48 L30 48M18 48" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".4"/>
+    <path d="M36 48 L46 48" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".4"/>
+    <circle cx="48" cy="38" r="6" fill="currentColor" opacity=".1" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M45 38 L51 38M48 35 L48 41" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".6"/>
+  </g>',
+
+'Ruang Publik Inklusif' => '
+  <g class="khb-icon-g">
+    <circle cx="22" cy="16" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="42" cy="16" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M10 44 C10 34 16 28 22 28 C28 28 30 32 32 32 C34 32 36 28 42 28 C48 28 54 34 54 44" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M22 44 L22 56M42 44 L42 56" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+    <path d="M16 56 L28 56M36 56 L48 56" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+    <path d="M28 44 Q32 40 36 44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".4"/>
+    <circle cx="32" cy="10" r="3" fill="currentColor" opacity=".2"/>
+    <path d="M32 7 L32 4M29.5 8.5 L27 6M34.5 8.5 L37 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
+  </g>',
+
+'Kultur Ngopi yang Kuat' => '
+  <g class="khb-icon-g">
+    <path d="M14 26 L42 26 L38 54 Q37 58 32 58 Q27 58 26 54 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M42 32 L48 32 Q54 32 54 38 Q54 44 48 44 L40 44" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M12 62 L52 62" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".4"/>
+    <path d="M22 20 Q22 14 26 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".5"/>
+    <path d="M28 20 Q28 12 32 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".5"/>
+    <path d="M34 20 Q34 14 38 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".5"/>
+    <circle cx="32" cy="42" r="7" fill="currentColor" opacity=".08" stroke="currentColor" stroke-width="1.5" opacity=".3"/>
+    <path d="M29 42 Q32 38 35 42 Q32 46 29 42Z" fill="currentColor" opacity=".25"/>
+  </g>',
+
+'Arsitektur Bersejarah' => '
+  <g class="khb-icon-g">
+    <path d="M8 56 L8 32 L32 10 L56 32 L56 56 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M8 32 L56 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
+    <rect x="24" y="38" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+    <rect x="14" y="36" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8" opacity=".7"/>
+    <rect x="40" y="36" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8" opacity=".7"/>
+    <path d="M32 10 L32 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="32" cy="5" r="2.5" fill="currentColor" opacity=".4"/>
+    <path d="M24 32 L24 56M40 32 L40 56" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".2"/>
+    <path d="M16 56 L16 44M48 56 L48 44" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
+  </g>',
+
+'Kiblat Fashion Lokal' => '
+  <g class="khb-icon-g">
+    <path d="M20 8 L12 24 L8 24 L8 40 L20 40 L20 60 L44 60 L44 40 L56 40 L56 24 L52 24 L44 8 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M20 8 Q26 16 32 14 Q38 12 44 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+    <path d="M12 24 L20 24M44 24 L52 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
+    <path d="M20 40 L44 40" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
+    <circle cx="32" cy="34" r="6" fill="none" stroke="currentColor" stroke-width="1.8" opacity=".5"/>
+    <path d="M29 34 L31 36 L35 30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/>
+    <path d="M26 52 L38 52" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".4"/>
+  </g>',
+
+'Wisata Alam Estetik' => '
+  <g class="khb-icon-g">
+    <path d="M4 52 L20 20 L36 52 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M24 52 L42 14 L60 52 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M4 52 L60 52" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".35"/>
+    <circle cx="48" cy="22" r="7" fill="none" stroke="currentColor" stroke-width="2" opacity=".6"/>
+    <path d="M48 18 L48 15M48 29 L48 32M44 22 L41 22M52 22 L55 22M45.5 19.5 L43.4 17.4M50.5 24.5 L52.6 26.6M50.5 19.5 L52.6 17.4M45.5 24.5 L43.4 26.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
+    <path d="M14 40 Q20 36 26 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".3"/>
+    <path d="M32 44 Q42 38 52 44" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".3"/>
+  </g>',
+
+'Ikon Kuliner Global' => '
+  <g class="khb-icon-g">
+    <path d="M10 28 Q10 14 22 14 Q28 14 30 20 Q32 14 38 14 Q50 14 50 28 Q50 40 32 50 Q14 40 10 28 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M30 20 Q30 28 32 50" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".3"/>
+    <path d="M14 26 Q22 24 30 26M30 26 Q38 24 50 26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
+    <path d="M16 34 Q24 32 30 34M30 34 Q38 32 48 34" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".25"/>
+    <path d="M24 52 L28 62M40 52 L36 62" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+    <path d="M22 62 L42 62" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".4"/>
+    <circle cx="32" cy="28" r="5" fill="currentColor" opacity=".1"/>
+  </g>',
+
+'Konektivitas Kilat' => '
+  <g class="khb-icon-g">
+    <path d="M10 8 L56 8 Q58 8 58 10 L58 30 Q58 32 56 32 L38 32 L32 42 L26 32 L8 32 Q6 32 6 30 L6 10 Q6 8 8 8 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M20 50 Q32 44 44 50M24 56 Q32 52 40 56M28 62 Q32 60 36 62" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".4"/>
+    <path d="M34 14 L26 22 L31 22 L28 30 L38 20 L33 20 Z" fill="currentColor" opacity=".7" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+    <circle cx="14" cy="20" r="2.5" fill="currentColor" opacity=".3"/>
+    <circle cx="50" cy="20" r="2.5" fill="currentColor" opacity=".3"/>
+    <path d="M14 14 L14 26M50 14 L50 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".2"/>
+  </g>',
+
+'Pusat Inovasi Digital' => '
+  <g class="khb-icon-g">
+    <rect x="18" y="18" width="28" height="28" rx="6" fill="none" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="32" cy="32" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="32" cy="32" r="2.5" fill="currentColor" opacity=".5"/>
+    <path d="M32 10 L32 18M32 46 L32 54M10 32 L18 32M46 32 L54 32" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M14.7 14.7 L20.5 20.5M43.5 43.5 L49.3 49.3M49.3 14.7 L43.5 20.5M20.5 43.5 L14.7 49.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".5"/>
+    <circle cx="32" cy="10" r="3" fill="currentColor" opacity=".35"/>
+    <circle cx="32" cy="54" r="3" fill="currentColor" opacity=".35"/>
+    <circle cx="10" cy="32" r="3" fill="currentColor" opacity=".35"/>
+    <circle cx="54" cy="32" r="3" fill="currentColor" opacity=".35"/>
+    <circle cx="14.7" cy="14.7" r="2.5" fill="currentColor" opacity=".2"/>
+    <circle cx="49.3" cy="14.7" r="2.5" fill="currentColor" opacity=".2"/>
+    <circle cx="14.7" cy="49.3" r="2.5" fill="currentColor" opacity=".2"/>
+    <circle cx="49.3" cy="49.3" r="2.5" fill="currentColor" opacity=".2"/>
+  </g>',
 ];
 ?>
+
+<style>
+.khb-section {
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0 6rem;
+}
+
+.khb-section::before {
+  content: "";
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(167,139,250,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.khb-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.khb-header__left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/* Grid */
+.khb-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+}
+
+@media (max-width: 640px) {
+  .khb-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Item */
+.khb-item {
+  padding: 2.25rem 2rem 2.5rem;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 8%, transparent);
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.khb-item:nth-child(odd) {
+  border-right: 1px solid color-mix(in srgb, currentColor 8%, transparent);
+}
+
+@media (max-width: 640px) {
+  .khb-item:nth-child(odd) {
+    border-right: none;
+  }
+  .khb-item {
+    padding: 2rem 0.25rem;
+  }
+}
+
+/* Last row — no bottom border */
+.khb-item:nth-last-child(-n+2):not(.khb-item:nth-child(odd):last-child) {
+  border-bottom: none;
+}
+.khb-item:last-child {
+  border-bottom: none;
+}
+@media (max-width: 640px) {
+  .khb-item:nth-last-child(-n+2) {
+    border-bottom: 1px solid color-mix(in srgb, currentColor 8%, transparent);
+  }
+  .khb-item:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Hover bg */
+.khb-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--color-primary, #7c3aed) 4%, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.khb-item:hover::after {
+  opacity: 1;
+}
+
+/* Icon */
+.khb-icon-wrap {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1.5rem;
+  color: var(--color-primary, #7c3aed);
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.khb-item:hover .khb-icon-wrap {
+  transform: translateY(-4px);
+}
+
+.khb-icon-wrap svg {
+  width: 64px;
+  height: 64px;
+  overflow: visible;
+}
+
+/* Animated stroke on hover */
+.khb-item .khb-icon-g {
+  transition: opacity 0.3s ease;
+}
+
+.khb-item:hover .khb-icon-g {
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-primary, #7c3aed) 50%, transparent));
+}
+
+/* Title */
+.khb-item__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin: 0 0 0.6rem;
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+
+.khb-item:hover .khb-item__title {
+  color: var(--color-primary, #7c3aed);
+}
+
+/* Excerpt */
+.khb-item__excerpt {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+</style>
+
 <?php if (!empty($_khb_items)): ?>
 <section class="khb-section">
   <div class="container">
+
     <div class="khb-header">
       <div class="khb-header__left">
-        <span class="text-eyebrow">
-          Discover Bandung
-        </span>
-        <h2 class="text-sub-hero">
-          Kenapa Harus Bandung?
-        </h2>
+        <span class="text-eyebrow">Discover Bandung</span>
+        <h2 class="text-sub-hero">Kenapa Harus Bandung?</h2>
       </div>
       <div>
-        <p>Bandung 2026: Perpaduan sempurna inovasi digital, kesejukan alam, dan kreativitas kuliner terbaik.</p>
+        <p class="khb-lead">Bandung 2026: Perpaduan sempurna inovasi digital,<br>kesejukan alam, dan kreativitas kuliner terbaik.</p>
       </div>
     </div>
+
     <div class="khb-grid">
       <?php foreach ($_khb_items as $i => $_khb_item):
         $title   = htmlspecialchars($_khb_item['title'] ?? 'Untitled');
-        $excerpt = htmlspecialchars(substr($_khb_item['excerpt'] ?? '', 0, 300));
-        $icon    = $_khb_icons[$title] ?? '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>';
-        $color   = $_khb_colors[$i % count($_khb_colors)];
-        $num     = str_pad(count($_khb_items) - $i, 2, '0', STR_PAD_LEFT);
-        $is_wide = in_array($i, [0, 4, 8]);
+        $excerpt = htmlspecialchars($_khb_item['excerpt'] ?? '');
+        $icon    = $_khb_icons[$title] ?? '
+          <g class="khb-icon-g">
+            <circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="2.2"/>
+            <circle cx="32" cy="32" r="8" fill="currentColor" opacity=".2"/>
+          </g>';
       ?>
-      <div class="khb-card <?= $is_wide ? 'khb-card--wide' : '' ?>">
-        <div class="khb-card__icon" style="--card-color:<?= $color ?>">
-          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <div class="khb-item">
+        <div class="khb-icon-wrap">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
             <?= $icon ?>
           </svg>
         </div>
-        <div class="khb-card__content">
-          <h3 class="khb-card__title"><?= $title ?></h3>
-          <?php if ($excerpt): ?>
-          <p class="khb-card__excerpt"><?= $excerpt ?></p>
-          <?php endif; ?>
-        </div>
+        <h3 class="khb-item__title"><?= $title ?></h3>
+        <?php if ($excerpt): ?>
+          <p class="khb-item__excerpt"><?= $excerpt ?></p>
+        <?php endif; ?>
       </div>
       <?php endforeach; ?>
     </div>
+
   </div>
 </section>
 <?php endif; ?>

@@ -19,7 +19,7 @@ $action_handlers = [
     'newsletter'   => LIB_PATH . 'newsletter-actions.php',
     'setting'      => LIB_PATH . 'setting-actions.php',
     'cmpt'       => LIB_PATH . 'cmpt-actions.php',
-    'things-to-do'   => LIB_PATH . 'things-to-do-actions.php',
+    'pages-builder'   => LIB_PATH . 'pages-builder-actions.php',
     // 'maps' => LIB_PATH . 'maps-actions.php',
     // 'newsletter'  => LIB_PATH . 'newsletter-actions.php',
 ];

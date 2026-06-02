@@ -6,7 +6,7 @@ error_log("ADMIN REQUEST: [" . $request . "]");
 $routes = [
     ''                 => ADMIN_VIEW_PATH . 'dashboard.php',
     'blog-manager'     => ADMIN_VIEW_PATH . 'blog-manager.php',
-    'things-to-do'            => ADMIN_VIEW_PATH . 'pages/index.php',
+    'pages-builder'            => ADMIN_VIEW_PATH . 'pages/index.php',
     'cmpt'    => ADMIN_VIEW_PATH . 'cmpt-manager.php',
     'setting'          => ADMIN_VIEW_PATH . 'setting.php',
     'newsletter'       => ADMIN_VIEW_PATH . 'newsletter.php',

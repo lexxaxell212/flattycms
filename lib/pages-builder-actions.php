@@ -23,9 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verify_csrf_token($_POST['csrf_toke
     }
 
     if ($saved && generateStaticPage($slug, $html_content, $page_id, $title)) {
-        header("Location: /admin/pages?edit=" . urlencode($slug) . "&saved=1");
+        header("Location: /admin/pages-builder?edit=" . urlencode($slug) . "&saved=1");
     } else {
-        header("Location: /admin/pages?error=1");
+        header("Location: /admin/pages-builder?error=1");
     }
     exit;
 }
@@ -40,6 +40,6 @@ if (isset($_GET['delete']) && verify_csrf_token($_GET['csrf_delete'] ?? '')) {
         $pdo->prepare("DELETE FROM pages WHERE slug = ?")->execute([$_GET['delete']]);
     }
 
-    header('Location: /admin/pages?deleted=1');
+    header('Location: /admin/pages-builder?deleted=1');
     exit;
 }

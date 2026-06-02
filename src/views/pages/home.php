@@ -1,6 +1,7 @@
 <?php
 safe_include(SRC_PATH . "partials/part-hero.php", "Hero Section");
 safe_include(SRC_PATH . "partials/part-upcoming-events.php", "Upcoming Events");
+safe_include(SRC_PATH . "partials/part-gallery.php", "Gallery");
 safe_include(SRC_PATH . "partials/part-poi-wisata.php", "POI Wisata Section");
 safe_include(SRC_PATH . "partials/part-kenapa.php", "Kenapa Harus Bandung");
 safe_include(SRC_PATH . "partials/part-poi-hotel.php", "POI Hotel Section");

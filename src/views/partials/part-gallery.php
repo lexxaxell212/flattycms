@@ -1,4 +1,4 @@
-<section class="poi-gallery-section container">
+<section class="container">
   <div class="poi-gallery-header">
     <div class="poi-gallery-title-wrap">
       <span class="poi-gallery-eyebrow">Dari Komunitas</span>
@@ -20,9 +20,6 @@
 </section>
 
 <style>
-.poi-gallery-section {
-  padding: 4rem 0 5rem;
-}
 
 .poi-gallery-header {
   display: flex;

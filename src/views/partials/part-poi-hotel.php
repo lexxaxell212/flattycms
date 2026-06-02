@@ -3,183 +3,189 @@ require_once LIB_PATH . "v-poi-hotel.php";
 ?>
 
 <style>
-.hotel-wrapper {
-    position: relative;
-}
-
-/* MOBILE */
-.hotel-list {
+.poi-hotel-grid {
     display: flex;
     gap: 1rem;
     overflow-x: auto;
-    padding: 0 1rem 1rem;
+    padding-bottom: 1.25rem;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 
-.hotel-card {
-    flex: 0 0 calc(100% - 2rem);
-    height: 360px;
-    border-radius: var(--radius);
-    background-size: cover;
-    background-position: center;
+.poi-hotel-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.poi-hotel-card {
     position: relative;
+    flex: 0 0 100%;
+    height: 380px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     scroll-snap-align: start;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-size: cover;
+    background-position: center top;
+    background-color: oklch(20% 0.02 270);
+    cursor: pointer;
 }
 
-.hotel-overlay {
+.poi-hotel-card:hover .poi-hotel-name {
+    font-size: 1.5rem;
+}
+.poi-hotel-card:hover .poi-hotel-desc {
+    font-size: 1rem;
+}
+
+.poi-hotel-overlay {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 4rem 1.2rem 1.2rem;
-    background: linear-gradient(to top, rgba(0,0,0.9), transparent);
-    color: #fff;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        oklch(8% 0.02 270 / 0.92) 0%,
+        oklch(8% 0.02 270 / 0.55) 45%,
+        oklch(8% 0.02 270 / 0.0) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.25rem;
+    transition: background 0.3s ease;
 }
 
-.hotel-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0 0 0.4rem;
+.poi-hotel-card:hover .poi-hotel-overlay {
+    background: linear-gradient(
+        to top,
+        oklch(8% 0.02 270 / 0.96) 0%,
+        oklch(8% 0.02 270 / 0.65) 50%,
+        oklch(8% 0.02 270 / 0.1) 100%
+    );
 }
 
-.hotel-desc {
-    font-size: 0.9rem;
-    margin: 0 0 0.8rem;
+.poi-hotel-name {
+    color: oklch(98% 0.005 270);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    transition: font-size 0.3s ease;
+}
+
+.poi-hotel-desc {
+    color: oklch(85% 0.01 270);
+    font-size: 0.89rem;
+    margin: 0 0 0.9rem;
+    line-height: 1.5;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    opacity: 0.92;
-    line-height: 1.4;
+    transition: font-size 0.3s ease;
 }
 
-.hotel-btn {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background: #fff;
-    color: #222;
-    border-radius: 8px;
+.poi-hotel-btn {
+    padding: 0.45rem 1rem;
     font-size: 0.85rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.2s ease;
+    width: fit-content;
 }
 
-.hotel-btn:hover {
-    background: #f8f8f8;
-    transform: translateY(-1px);
+.poi-hotel-empty {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: oklch(55% 0.02 270);
+    width: 100%;
+    font-size: 0.9rem;
 }
 
-/* Tombol geser */
-.hotel-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #fff;
-    border: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    color: #333;
-    z-index: 10;
-    cursor: pointer;
-}
-
-.hotel-nav.prev { left: 0.3rem; }
-.hotel-nav.next { right: 0.3rem; }
-
-/* TABLET KE ATAS - BENTO */
 @media (min-width: 768px) {
-    .hotel-wrapper {
-        margin: 1rem 0;
-    }
-
-    .hotel-list {
+    .poi-hotel-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: auto auto;
+        grid-template-rows: 220px 200px;
         gap: 1rem;
         padding: 0;
         overflow: visible;
     }
 
-    .hotel-card:nth-child(1) {
-        grid-column: span 2;
-        grid-row: span 2;
-        height: 320px;
-    }
-    .hotel-card:nth-child(2) {
-        grid-column: span 2;
-        height: 155px;
-    }
-    .hotel-card:nth-child(3) {
-        grid-column: span 1;
-        grid-row: span 2;
-        height: 320px;
-    }
-    .hotel-card:nth-child(4) {
-        grid-column: span 1;
-        height: 155px;
-    }
-    .hotel-card:nth-child(5) {
-        grid-column: span 2;
-        height: 155px;
-    }
-    .hotel-card:nth-child(6) {
-        grid-column: span 1;
-        height: 155px;
+    .poi-hotel-card {
+        flex: none;
+        height: auto;
     }
 
-    .hotel-nav {
+    .poi-hotel-card:nth-child(1),
+    .poi-hotel-card:nth-child(2) {
+        grid-column: span 2;
+        grid-row: 1;
+    }
+
+    .poi-hotel-card:nth-child(3),
+    .poi-hotel-card:nth-child(4),
+    .poi-hotel-card:nth-child(5),
+    .poi-hotel-card:nth-child(6) {
+        grid-column: span 1;
+        grid-row: 2;
+    }
+
+    .poi-hotel-card:nth-child(n+3) .poi-hotel-desc {
         display: none;
+    }
+
+    .poi-hotel-card:nth-child(n+3) .poi-hotel-name {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .poi-hotel-card:nth-child(n+3) .poi-hotel-overlay {
+        padding: 1rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .poi-hotel-grid {
+        grid-template-rows: 260px 220px;
     }
 }
 </style>
 
-<section id="hotel-recomendations">
-    <div class="hotel-wrapper">
-        <button class="hotel-nav prev" id="hotelPrev">←</button>
-        <button class="hotel-nav next" id="hotelNext">→</button>
-
-        <div class="hotel-list" id="hotelList">
-            <?php if (!empty($hotel_poi)): ?>
-                <?php foreach ($hotel_poi as $item): ?>
-                    <div class="hotel-card" 
-                         style="background-image: url('<?= htmlspecialchars($item['poi_image'] ?? 'assets/images/default-hotel.jpg') ?>')">
-                         
-                        <div class="hotel-overlay">
-                            <h3 class="hotel-name"><?= htmlspecialchars($item['name']) ?></h3>
-                            <p class="hotel-desc"><?= htmlspecialchars(mb_substr($item['description'] ?? '', 0, 80) . (mb_strlen($item['description'] ?? '') > 80 ? '...' : '')) ?></p>
-                            <?php if (!empty($item['poi_url'])): ?>
-                                <a href="<?= htmlspecialchars($item['poi_url']) ?>" class="hotel-btn" target="_blank" rel="noopener noreferrer">Lihat Detail</a>
-                            <?php endif; ?>
-                        </div>
+<section id="hotel-recommendations" class="container">
+  <span class="text-eyebrow">
+    Recommendations
+  </span>
+  <h2 class="text-sub-hero mb-4">
+    Hotel Favorit
+  </h2>
+    <div class="poi-hotel-grid" id="poiHotelGrid">
+        <?php if (!empty($hotel_poi)): ?>
+            <?php foreach ($hotel_poi as $item): ?>
+                <?php
+                    $img   = htmlspecialchars($item['poi_image'] ?? 'assets/images/default.jpg');
+                    $name  = htmlspecialchars($item['name'] ?? '');
+                    $desc  = htmlspecialchars(mb_substr($item['description'] ?? '', 0, 90));
+                    $desc .= mb_strlen($item['description'] ?? '') > 90 ? '...' : '';
+                    $url   = htmlspecialchars($item['poi_url'] ?? '');
+                ?>
+                <div class="poi-hotel-card"
+                     style="background-image: url('<?= $img ?>')">
+                    <div class="poi-hotel-overlay">
+                        <h3 class="poi-hotel-name"><?= $name ?>Tes title</h3>
+                        <p class="poi-hotel-desc"><?= $desc ?>Tes desc</p>
+                        <?php if (!empty($url)): ?>
+                            <a href="<?= $url ?>"
+                               class="btn btn-outline-white poi-hotel-btn"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Lihat detail <?= $name ?>">
+                                Lihat Detail
+                                <i class="arrow-icon fas fa-angle-right"></i>
+                            </a>
+                        <?php endif; ?>
                     </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p style="padding: 2rem; color: #666; text-align:center; width:100%;">Belum ada data penginapan tersedia.</p>
-            <?php endif; ?>
-        </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p class="poi-hotel-empty">Belum ada data tersedia.</p>
+        <?php endif; ?>
     </div>
 </section>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const list = document.getElementById('hotelList');
-    document.getElementById('hotelPrev').addEventListener('click', () => {
-        list.scrollBy({ left: -window.innerWidth * 0.85, behavior: 'smooth' });
-    });
-    document.getElementById('hotelNext').addEventListener('click', () => {
-        list.scrollBy({ left: window.innerWidth * 0.85, behavior: 'smooth' });
-    });
-});
-</script>

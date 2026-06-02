@@ -8,7 +8,7 @@ $routes = [
     'trip'       => SRC_PATH . 'apps/trip.php',
     'gallery'    => SRC_PATH . 'apps/gallery.php',
   // page
-    'things-to-do'               => SRC_PATH . 'pages/things-to-do.php',
+    'things-to-do'              => SRC_PATH . 'pages/things-to-do.php',
     'upcoming-events'           => SRC_PATH . 'pages/upcoming-events.php',
   // etc pages
     'pages/sejarah'              => SRC_PATH . 'pages/sejarah.php',

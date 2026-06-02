@@ -303,11 +303,9 @@ h6 em {
 }
 .text-hero {
   font-size: clamp(3rem, 5vw, 4rem);
-  font-weight: var(--fw-black);
 }
 .text-sub-hero {
   font-size: clamp(2.3rem, 4.5vw, 3.6rem);
-  font-weight: var(--fw-black);
 }
 h1, .h1 {
   font-size: clamp(2.2rem, 4vw, 3.2rem);

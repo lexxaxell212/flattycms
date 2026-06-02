@@ -1,4 +1,5 @@
 <?php
+require_once LIB_PATH . 'poi-actions.php';
 require_once . LIB_PATH "v-poi-wisata.php";
 ?>
 

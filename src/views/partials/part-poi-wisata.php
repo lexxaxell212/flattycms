@@ -1,5 +1,5 @@
 <?php
-require_once . LIB_PATH "v-poi-wisata.php";
+require_once LIB_PATH "v-poi-wisata.php";
 ?>
 
 <style>

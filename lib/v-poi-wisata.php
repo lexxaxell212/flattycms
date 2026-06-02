@@ -1,6 +1,6 @@
 <?php
 $pdo = $GLOBALS['pdo'];
- $stmt = $pdo->prepare("
+$stmt = $pdo->prepare("
      SELECT p.id, p.name, p.slug, p.description, p.poi_image, p.poi_url,
             c.id AS category_id, c.name AS category_name, c.slug AS category_slug
      FROM poi p

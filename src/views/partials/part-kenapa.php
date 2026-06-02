@@ -143,8 +143,8 @@ $_khb_icons = [
 
 /* Icon */
 .khb-icon-wrap {
-  width: 64px;
-  height: 64px;
+  width: 128px;
+  height: 128px;
 }
 
 .khb-icon-wrap svg {

@@ -1,7 +1,7 @@
 <?php
 require_once LIB_PATH . "v-poi-wisata.php";
+echo '<pre>'; print_r($wisata_poi); echo '</pre>';
 ?>
-
 <style>
 .wisata-wrapper {
     margin: 1rem 0;

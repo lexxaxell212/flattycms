@@ -34,9 +34,6 @@ require_once LIB_PATH . "v-poi-wisata.php";
 .poi-wisata-card:hover .poi-wisata-name {
     font-size: 1.5rem;
 }
-.poi-wisata-card:hover .poi-wisata-desc {
-    font-size: 1rem;
-}
 
 .poi-wisata-overlay {
     position: absolute;
@@ -52,15 +49,6 @@ require_once LIB_PATH . "v-poi-wisata.php";
     justify-content: flex-end;
     padding: 1.25rem;
     transition: background 0.3s ease;
-}
-
-.poi-wisata-card:hover .poi-wisata-overlay {
-    background: linear-gradient(
-        to top,
-        oklch(8% 0.02 270 / 0.96) 0%,
-        oklch(8% 0.02 270 / 0.65) 50%,
-        oklch(8% 0.02 270 / 0.1) 100%
-    );
 }
 
 .poi-wisata-name {
@@ -169,8 +157,8 @@ require_once LIB_PATH . "v-poi-wisata.php";
                 <div class="poi-wisata-card"
                      style="background-image: url('<?= $img ?>')">
                     <div class="poi-wisata-overlay">
-                        <h3 class="poi-wisata-name"><?= $name ?>Tes title</h3>
-                        <p class="poi-wisata-desc"><?= $desc ?>Tes desc</p>
+                        <h3 class="poi-wisata-name"><?= $name ?></h3>
+                        <p class="poi-wisata-desc"><?= $desc ?></p>
                         <?php if (!empty($url)): ?>
                             <a href="<?= $url ?>"
                                class="btn btn-outline-white poi-wisata-btn"

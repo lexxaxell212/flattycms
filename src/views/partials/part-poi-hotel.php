@@ -34,9 +34,6 @@ require_once LIB_PATH . "v-poi-hotel.php";
 .poi-hotel-card:hover .poi-hotel-name {
     font-size: 1.5rem;
 }
-.poi-hotel-card:hover .poi-hotel-desc {
-    font-size: 1rem;
-}
 
 .poi-hotel-overlay {
     position: absolute;
@@ -52,15 +49,6 @@ require_once LIB_PATH . "v-poi-hotel.php";
     justify-content: flex-end;
     padding: 1.25rem;
     transition: background 0.3s ease;
-}
-
-.poi-hotel-card:hover .poi-hotel-overlay {
-    background: linear-gradient(
-        to top,
-        oklch(8% 0.02 270 / 0.96) 0%,
-        oklch(8% 0.02 270 / 0.65) 50%,
-        oklch(8% 0.02 270 / 0.1) 100%
-    );
 }
 
 .poi-hotel-name {
@@ -169,8 +157,8 @@ require_once LIB_PATH . "v-poi-hotel.php";
                 <div class="poi-hotel-card"
                      style="background-image: url('<?= $img ?>')">
                     <div class="poi-hotel-overlay">
-                        <h3 class="poi-hotel-name"><?= $name ?>Tes title</h3>
-                        <p class="poi-hotel-desc"><?= $desc ?>Tes desc</p>
+                        <h3 class="poi-hotel-name"><?= $name ?></h3>
+                        <p class="poi-hotel-desc"><?= $desc ?></p>
                         <?php if (!empty($url)): ?>
                             <a href="<?= $url ?>"
                                class="btn btn-outline-white poi-hotel-btn"

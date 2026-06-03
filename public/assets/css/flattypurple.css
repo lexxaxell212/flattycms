@@ -377,7 +377,6 @@ h6, .h6 {
   gap: 10px;
   padding: 12px 18px;
   border-radius: var(--radius-sm);
-  
   box-shadow: var(--shadow);
   font-size: var(--space-4);
   min-width: 260px;
@@ -1223,16 +1222,6 @@ table tbody td {
 }
 
 /* ============= /utility ============= */
-.icon-tabler {
-  width: 24px;
-  height: 24px;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill: none;
-}
-
 .rounded-sm {
   border-radius: var(--radius-sm) !important;
 }

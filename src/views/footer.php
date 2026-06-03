@@ -5,7 +5,7 @@
       <div class="row justify-content-center">
         <div class="col text-center">
           <div class="mb-4">
-            <h2 class="text-gradient">NEWSLETTER</h2>
+            <h2 class="text-title">NEWSLETTER</h2>
             <span class="text-muted">Dapatkan event dan update Bandung terkini via email.</span>
           </div>
           <div class="mx-auto" style="max-width:440px">

@@ -1,8 +1,8 @@
 <section class="container">
-  <div class="poi-gallery-header">
+  <div class="poi-gallery-header mb-4">
     <div class="poi-gallery-title-wrap">
-      <span class="poi-gallery-eyebrow">Dari Komunitas</span>
-      <h2 class="poi-gallery-title">Galeri Foto</h2>
+      <span class="text-eyebrow">Dari Komunitas</span>
+      <h2 class="text-sub-hero">Galeri Foto</h2>
     </div>
     <a href="<?= BASE_URL ?>/gallery" class="poi-gallery-see-all">
       Lihat Semua
@@ -25,7 +25,6 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 2rem;
   gap: 1rem;
 }
 
@@ -129,17 +128,11 @@
     rgba(15, 10, 40, 0.3) 50%,
     transparent 100%
   );
-  opacity: 0;
-  transition: opacity 0.35s ease;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 1rem;
   gap: 0.35rem;
-}
-
-.poi-gallery-card:hover .poi-gallery-overlay {
-  opacity: 1;
 }
 
 .poi-gallery-card:hover img {

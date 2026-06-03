@@ -5,7 +5,7 @@ $page_title = 'Daftar - ' . SITE_NAME;
 <div class="container">
 <section id="daftar-akun">
   <h2>Buat akun baru</h2>
-  <p class="text-muted">Isi data di bawah untuk mendaftar</p>
+  <p>Isi data di bawah untuk mendaftar</p>
 </section>
 <div class="mb-4">
     <label class="form-label mb-2">

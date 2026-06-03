@@ -20,7 +20,7 @@ if ($consent_accepted): ?>
 <?php if (!$consent_accepted): ?>
 <script src="<?= JS_URL ?>consent.js" defer></script>
 <div id="consentBanner" class="mx-auto consent-banner show">
-    <h4>Kami Menghargai Privasi Anda</h4>
+    <h5>Kami Menghargai Privasi Anda</h5>
     <p class="small text-muted mb-4">
         Kami menggunakan cookie untuk meningkatkan pengalaman browsing anda.
         Dengan mengklik <strong>Terima</strong>, anda menyetujui 

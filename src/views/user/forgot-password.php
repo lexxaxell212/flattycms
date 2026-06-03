@@ -9,7 +9,7 @@ $page_title = 'Lupa Password — ' . SITE_NAME;
         <i class="fa-solid fa-arrow-left fa-xs"></i> Kembali ke login
     </a>
     <h2>Lupa password?</h2>
-    <p class="text-muted">Masukkan emailmu dan kami akan kirim link reset password.</p>
+    <p>Masukkan emailmu dan kami akan kirim link reset password.</p>
   </section>
     <div class="mb-4">
         <label class="form-label mb-2">

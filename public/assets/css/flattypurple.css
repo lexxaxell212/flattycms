@@ -111,7 +111,7 @@
   --border-modal: 1px solid oklch(0.231 0.089 295 / 0.10);
   --border-modal-hover: 1px solid oklch(0.231 0.089 295 / 0.20);
   --border-wrapper: 1px solid oklch(0.231 0.089 295 / 0.08);
-  --border-surface: 1px solid rgba(0,0,0,0.07);
+  --border-surface: 1px solid rgba(0,0,0,0.15);
   --border-primary-subtle: 1px solid oklch(0.558 0.174 295 / 0.25);
   --border-accent-subtle: 1px solid oklch(0.700 0.163 60 / 0.30);
   --border-red-subtle: 1px solid oklch(0.577 0.212 27 / 0.25);
@@ -135,10 +135,10 @@
   --text-muted: oklch(0.553 0.016 264);
   --text-white: oklch(0.984 0.003 264);
   /* logo */
-  --ayoke: oklch(0.553 0.016 264);
+  --ayoke: oklch(0.372 0.014 264);
   --bandung: oklch(0.231 0.089 295);
   --dotid: oklch(0.487 0.167 295);
-  --strips: oklch(0.94 0.020 295);
+  --strips: oklch(0.558 0.174 295 / 0.25);
 }
 /* ============= flatty dark ============= */
 [data-dark] {
@@ -175,7 +175,7 @@
   --border-modal: 1px solid oklch(1 0 0 / 0.08);
   --border-modal-hover: 1px solid oklch(1 0 0 / 0.16);
   --border-wrapper: 1px solid oklch(1 0 0 / 0.06);
-  --border-surface: 1px solid oklch(1 0 0 / 0.07);
+  --border-surface: 1px solid oklch(1 0 0 / 0.15);
   --border-primary-subtle: 1px solid oklch(0.600 0.174 295 / 0.35);
   --border-accent-subtle: 1px solid oklch(0.720 0.163 60 / 0.35);
   --border-red-subtle: 1px solid oklch(0.610 0.212 27 / 0.35);
@@ -203,7 +203,7 @@
   --ayoke: oklch(0.820 0.010 264);
   --bandung: oklch(0.977 0.014 295);
   --dotid: oklch(0.720 0.160 295);
-  --strips: oklch(0.280 0.040 295);
+  --strips: oklch(0.600 0.174 295 / 0.35);
 }
 
 /* ================= base ================= */
@@ -377,8 +377,7 @@ h6, .h6 {
   gap: 10px;
   padding: 12px 18px;
   border-radius: var(--radius-sm);
-  background: var(--bg-primary-subtle);
-  border: var(--border-primary-subtle);
+  
   box-shadow: var(--shadow);
   font-size: var(--space-4);
   min-width: 260px;
@@ -395,19 +394,19 @@ h6, .h6 {
 
 .flatty-toast--success {
   background: var(--bg-green-subtle);
-  border-color: var(--border-green-subtle);
+  border: var(--border-green-subtle);
 }
 .flatty-toast--error {
   background: var(--bg-red-subtle);
-  border-color: var(--border-red-subtle);
+  border: var(--border-red-subtle);
 }
 .flatty-toast--warning {
   background: var(--bg-yellow-subtle);
-  border-color: var(--border-yellow-subtle);
+  border: var(--border-yellow-subtle);
 }
 .flatty-toast--info {
   background: var(--bg-blue-subtle);
-  border-color: var(--border-blue-subtle);
+  border: var(--border-blue-subtle);
 }
 
 .flatty-toast--success i {
@@ -591,7 +590,7 @@ h6, .h6 {
 
 .hero-content {
   color: var(--text-white);
-  padding-bottom: 4rem;
+  padding-bottom: 6rem;
 }
 
 .hero-eyebrow {
@@ -704,7 +703,7 @@ h6, .h6 {
   height: 40px;
   border: none;
   background: transparent;
-  color: var(--text-modal);
+  color: var(--text-heading);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -719,7 +718,7 @@ h6, .h6 {
   color: var(--text-primary);
 }
 .dm-icon {
-  color: var(--text-modal);
+  color: var(--text-heading);
   width: 20px;
   height: 20px;
   position: relative;
@@ -734,14 +733,14 @@ h6, .h6 {
   position: absolute;
   top: 0;
   left: 0;
-  color: var(--text-modal);
+  color: var(--text-heading);
 }
 .sun-core {
   transform-origin: 10px 10px;
   transition:
   r var(--duration) var(--ease),
   opacity var(--duration) var(--ease);
-  color: var(--text-modal);
+  color: var(--text-heading);
 }
 .sun-ray {
   transform-origin: 10px 10px;
@@ -749,7 +748,7 @@ h6, .h6 {
   opacity var(--duration) var(--ease),
   transform var(--duration) var(--ease);
   stroke-linecap: round;
-  color: var(--text-modal);
+  color: var(--text-heading);
 }
 .moon-path {
   transition:
@@ -758,7 +757,7 @@ h6, .h6 {
   transform-origin: 10px 10px;
   opacity: 0;
   transform: scale(0.6) rotate(-30deg);
-  color: var(--text-modal);
+  color: var(--text-heading);
 }
 .star {
   transition:
@@ -767,7 +766,7 @@ h6, .h6 {
   opacity: 0;
   transform: scale(0);
   transform-origin: center;
-  color: var(--text-modal);
+  color: var(--text-heading);
 }
 .dm-btn.dark .sun-core {
   r: 0;
@@ -798,7 +797,7 @@ h6, .h6 {
 }
 
 .dm-btn.dark .dm-svg {
-  color: var(--text-modal);
+  color: var(--text-heading);
 }
 .dm-btn.dark:hover {
   background: rgba(188, 163, 184, 0.1);
@@ -885,7 +884,7 @@ h6, .h6 {
 .hamburger-icon svg {
   width: 20px;
   height: 20px;
-  color: var(--text-modal);
+  color: var(--text-heading);
 }
 .h-top,
 .h-mid,
@@ -944,7 +943,7 @@ h6, .h6 {
   padding: var(--space-6) var(--space-4);
   background: var(--bg-white);
   border: var(--border-white-subtle);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-lg);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px) scale(0.98);
@@ -995,7 +994,7 @@ h6, .h6 {
   padding: var(--space-2);
   font-size: var(--space-4);
   border-radius: var(--radius);
-  color: var(--text-modal);
+  color: var(--text-heading);
   background: var(--bg-transparent);
   transition:
   background var(--duration) var(--ease),
@@ -1016,7 +1015,7 @@ h6, .h6 {
   flex-direction: column;
 }
 .nav-link {
-  color: var(--text-modal);
+  color: var(--text-heading);
   padding: var(--space-3) !important;
   margin-bottom: 6px;
   border-radius: var(--radius);
@@ -1047,7 +1046,7 @@ h6, .h6 {
   transition: all var(--duration) var(--ease);
 }
 .dropdown-item {
-  color: var(--text-modal);
+  color: var(--text-heading);
   background: transparent;
   padding: var(--space-2) !important;
   margin-bottom: 6px;
@@ -1086,8 +1085,8 @@ h6, .h6 {
 }
 .cond,
 .city {
-  font-size: var(--space-4);
-  color: var(--text-modal);
+  font-size: 0.89;
+  color: var(--text-heading);
 }
 .weather .icon {
   display: none;
@@ -2346,16 +2345,18 @@ textarea.form-control:focus {
   box-shadow: 0 0 0 0.25rem rgba(124, 58, 237, 0.15);
   outline: none;
   background: transparent;
+  color: var(--text-body);
 }
 .form-select:focus {
   border-color: var(--purple-700);
   box-shadow: 0 0 0 0.25rem rgba(124, 58, 237, 0.15);
   outline: none;
   background: transparent;
+  color: var(--text-body);
 }
 
 .form-control::placeholder {
-  color: #9ca3af;
+  color: var(--text-muted);
   font-size: .92rem;
 }
 

@@ -16,9 +16,9 @@ require_once LIB_PATH . "v-unsubscribe.php";
         <?php elseif ($status == "error" && !$show_form): ?>
           <i class="fa-solid fa-circle-xmark fa-3x text-danger mb-2"></i>
         <?php else: ?>
-          <h3 class="text-center">
+          <h2 class="text-center">
             Unsubscribe Newsletter
-          </h3>
+          </h2>
         <?php endif; ?>
       </div>
       <?php if ($message): ?>

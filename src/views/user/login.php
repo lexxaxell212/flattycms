@@ -9,7 +9,7 @@ if (isset($_SESSION['user'])) {
 <div>
   <section id="masuk-akun">
     <h2>Selamat datang</h2>
-    <p class="text-muted">Masuk ke akun kamu</p>
+    <p>Masuk ke akun kamu</p>
   </section>
     <div class="mb-4">
         <label class="form-label mb-2">

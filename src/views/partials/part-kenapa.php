@@ -4,12 +4,10 @@ $_khb_items = $_khb_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $_khb_icons = [
 'Udara Sejuk Menenangkan' => '
-<div class="khb-icon-wrap green">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--bg-green)" class="icon icon-tabler icons-tabler-filled icon-tabler-leaf">
 	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 	<path d="M3.055 14.328l-.018 -.168l-.004 -.043a11 11 0 0 1 -.047 -1.12c.018 -6.29 4.29 -9.997 13 -9.997h4.014a1 1 0 0 1 1 1l-.002 2.057c-.498 8.701 -4.74 12.943 -11.998 12.943h-2.631a16 16 0 0 0 -.375 2.11a1 1 0 1 1 -1.988 -.22q .174 -1.568 .58 -2.947l-.118 -.146l-.208 -.28l-.157 -.229l-.182 -.293l-.098 -.171l-.065 -.122a6 6 0 0 1 -.397 -.941l-.072 -.237l-.085 -.327l-.057 -.268l-.043 -.242zm8.539 -4.242c-2.845 1.265 -4.854 3.13 -6.108 5.583q .098 .2 .218 .4l.185 .281l.07 .097q .12 .164 .258 .329l.197 .224h.649c1.037 -2.271 2.777 -3.946 5.343 -5.086a1 1 0 0 0 -.812 -1.828" />
-</svg>
-</div>',
+</svg>',
 
 'Event Seni Internasional' => '
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -328,15 +326,11 @@ $_khb_icons = [
 }
 
 /* Icon */
-.khb-icon-wrap svg {
+.khb-icon-wrap {
   border-radius: 100%;
   padding: 7px;
   width: 64px;
   height: 64px;
-  margin: 0 auto;
-}
-.green svg {
-  background: var(--bg-green-subtle);
 }
 
 .khb-icon-wrap svg {
@@ -389,7 +383,9 @@ $_khb_icons = [
         $icon = $_khb_icons[$title] ?? '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="22" stroke="currentColor" stroke-width="2.2"/></svg>';
       ?>
       <div class="khb-item">
-        <?= $icon ?>
+        <div class="khb-icon-wrap">
+          <?= $icon ?>
+        </div>
         <h3 class="khb-item__title"><?= $title ?></h3>
         <?php if ($excerpt): ?>
           <p class="khb-item__excerpt"><?= $excerpt ?></p>

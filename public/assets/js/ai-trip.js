@@ -99,11 +99,10 @@
     }
   }
 
-  function initAiTrip() {
+  window.initAiTrip = function() {
     const btn   = document.getElementById('btnGenerateAI');
     const input = document.getElementById('aiPromptInput');
     if (!btn || !input) return;
-
     btn.addEventListener('click', generateItinerary);
     input.addEventListener('keydown', e => {
       if (e.key === 'Enter' && e.shiftKey) {
@@ -111,8 +110,6 @@
         generateItinerary();
       }
     });
-
-    // chip filter
     document.querySelectorAll('.ai-chip').forEach(chip => {
       chip.addEventListener('click', function () {
         this.classList.toggle('active');
@@ -130,14 +127,30 @@
   const aiTab = document.querySelector('[data-tab="ai"]');
   if (aiTab) {
     aiTab.addEventListener('click', function () {
-      setTimeout(initAiTrip, 50);
+      setTimeout(window.initAiTrip, 50);
     });
   }
 
   // fallback kalau langsung landing di tab ai
   if (document.getElementById('tab-ai') &&
       document.getElementById('tab-ai').style.display !== 'none') {
-    initAiTrip();
+    window.initAiTrip();
+  }
+
+  // auto trigger dari home
+  const urlParams  = new URLSearchParams(window.location.search);
+  const autoPrompt = urlParams.get('ai_prompt');
+  if (autoPrompt) {
+    setTimeout(() => {
+      const inputEl = document.getElementById('aiPromptInput');
+      const tabAi   = document.querySelector('[data-tab="ai"]');
+      if (inputEl && tabAi) {
+        inputEl.value = autoPrompt;
+        tabAi.click();
+        window.initAiTrip();
+        setTimeout(generateItinerary, 200);
+      }
+    }, 500);
   }
 
 })();

@@ -219,10 +219,8 @@
 .btn:focus-visible,
 .btn:active,
 .btn:active:focus {
-  outline: none;
-  box-shadow: none;
-  background: none;
-  border: none;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 html {

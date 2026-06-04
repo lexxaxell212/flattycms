@@ -4,14 +4,12 @@ require_once LIB_PATH . "v-review.php";
 <?php if (!empty($_rev_items)): ?>
 <section class="rev-section">
   <div class="container">
-    <div class="rev-header">
+    <div class="d-flex align-items-end justify-content-between mb-4">
       <div>
-        <span class="text-eyebrow">
-          Review
-        </span>
+        <span class="text-eyebrow">REVIEW</span>
         <h2 class="text-sub-hero">Traveler Story</h2>
       </div>
-      <a href="gallery/" class="rev-link-all">
+      <a href="/gallery" class="link-all">
         Lihat Semua <i class="fas fa-arrow-right ms-1"></i>
       </a>
     </div>

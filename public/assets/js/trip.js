@@ -2,14 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const hero = document.querySelector('.tp-main-outer-content');
   if (hero) {
     window.addEventListener('scroll', () => {
-      hero.style.transform = `translateY(${window.scrollY * 0.4}px)`;
+      hero.style.transform = `translateY(${window.scrollY * 0.25}px)`;
     });
   }
   const style = document.createElement('style');
   style.textContent = `
     body { background: var(--bg-white); }
     body::before { display: none; }
-    footer { z-index: 3 !important; position: relative; background: var(--bg-white); }
+    footer { z-index: 3 !important; position: relative; background: var(--bg-body); }
   `;
   document.head.appendChild(style);
 });

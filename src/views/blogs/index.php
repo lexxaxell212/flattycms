@@ -86,7 +86,7 @@ $categories = safe_get_categories($pdo);
                 <?php if (!empty($post["cat_name"])): ?>
                     <a href="/blogs/?cat=<?= (int) ($post["category_id"] ??
                       0) ?>"
-                       class="me-4 badge bg-gray text-decoration-none">
+                       class="badge bg-gray text-decoration-none">
                         <?= htmlspecialchars(
                           $post["cat_name"],
                           ENT_QUOTES,
@@ -159,7 +159,7 @@ $categories = safe_get_categories($pdo);
           
             <div class="d-flex align-items-center justify-content-between">
               
-                <h1>
+                <h2>
                     <?php if ($cat_id > 0):
                       $active_cats = array_filter(
                         $categories,
@@ -175,7 +175,7 @@ $categories = safe_get_categories($pdo);
                     else:
                       echo "Daftar Blog";
                     endif; ?>
-                </h1>
+                </h2>
                 
                 <?php if ($cat_id > 0): ?>
                     <a href="/blogs/">
@@ -201,7 +201,7 @@ $categories = safe_get_categories($pdo);
                 <div class="card-body">
                     <a href="/blogs/?id=<?= (int) $p[
                       "id"
-                    ] ?>" class="h6 mb-2">
+                    ] ?>" class="h5 mb-2">
                       <?= htmlspecialchars(mb_strlen($p['title'] ?? '') > 60 ?
                                         mb_substr($p['title'], 0, 60) . '…' : ($p['title'] ?? ''),
                                         ENT_QUOTES, 'UTF-8') ?>
@@ -319,9 +319,9 @@ $categories = safe_get_categories($pdo);
         </div>
         <div class="col-md-5">
           <div style="position:sticky !important; top:82px; align-self:flex-start;">
-                <div class="bg-light">
+                <div class="bg-card">
                     <div class="card-body">
-                        <h5 class="fw-bold mb-3">Kategori</h5>
+                        <h5 class="mb-3">Kategori</h5>
                         <?php if (empty($categories)): ?>
                             <p class="text-muted small mb-0">Belum ada kategori.</p>
                         <?php endif; ?>

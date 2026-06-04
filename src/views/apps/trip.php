@@ -31,7 +31,7 @@ $cats_json  = json_encode($categories);
 <div class="tp-main-hero"></div>
 <div class="tp-main-outer">
   <div class="tp-main-outer-content text-center">
-    <h1 class="text-gradient text-hero">Trip Planner</h1>
+    <h1 class="text-white text-hero">Trip Planner</h1>
     <p class="text-white">Explore Bandung, rencanakan perjalananmu</p>
   </div>
 <div class="tp-main-inner">

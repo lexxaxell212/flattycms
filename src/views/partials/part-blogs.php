@@ -27,6 +27,13 @@ $categories = safe_get_categories($pdo);
               <?php foreach ($posts as $p): ?>
               <article class="artikel-slide-card card card-flatty" style="box-shadow:none;" role="listitem">
                 <div class="card-body">
+                  <span class="badge bg-gray top-end m-3">
+                        <?= htmlspecialchars(
+                          $p["cat_name"],
+                          ENT_QUOTES,
+                          "UTF-8",
+                        ) ?>
+                  </span>
                   <img
                   class="asl-img card-img"
                   src="<?= BASE_UPLOAD_URL . htmlspecialchars($p['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>"

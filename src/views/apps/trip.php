@@ -130,9 +130,9 @@ $cats_json  = json_encode($categories);
 
     <div id="tab-map" class="tp-tab-content" style="display:none">
       <div class="cat-filters">
-        <button class="btn btn-primary btn-sm cat-filter active" data-cat="">Semua</button>
+        <button class="btn btn-primary cat-filter active btn-sm" data-cat="">Semua</button>
         <?php foreach ($categories as $cat): ?>
-        <button class="btn btn-outline-primary btn-sm cat-filter" data-cat="<?= $cat['id'] ?>">
+        <button class="btn btn-outline-primary cat-filter btn-sm" data-cat="<?= $cat['id'] ?>">
           <?= safe_html($cat['name']) ?>
         </button>
         <?php endforeach; ?>

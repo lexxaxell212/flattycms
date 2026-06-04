@@ -554,9 +554,9 @@ document.addEventListener('DOMContentLoaded', () => {
           ${poi.poi_url
             ? `<a href="${escHtml(poi.poi_url)}" class="small" target="_blank" rel="noopener">
                 Lihat
-                <i class="fas fa-angle-right me-1"></i>
+                <i class="arrow-icon fas fa-angle-right me-1"></i>
                </a>`
-            : `<span class="text-muted">
+            : `<span class="text-muted small">
                 Belum ada link
                </span>`
           }

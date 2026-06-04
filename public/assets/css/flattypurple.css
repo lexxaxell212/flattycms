@@ -2766,6 +2766,16 @@ input[type="checkbox"] {
   font-size: 0.875rem;
 }
 
+.chat-link {
+  color: var(--purple-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+.chat-link:hover {
+  opacity: 0.8;
+}
+
 .error-text {
   font-size: 0.875rem;
   line-height: 1.5;

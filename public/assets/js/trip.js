@@ -5,13 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
       hero.style.transform = `translateY(${window.scrollY * 0.25}px)`;
     });
   }
-  const style = document.createElement('style');
-  style.textContent = `
-    body { background: var(--bg-white); }
-    body::before { display: none; }
-    footer { z-index: 3 !important; position: relative; background: var(--bg-body); }
-  `;
-  document.head.appendChild(style);
 });
 
 (function () {

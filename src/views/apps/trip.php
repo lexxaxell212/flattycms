@@ -2,7 +2,8 @@
 require_once LIB_PATH . 'poi-actions.php';
 
 $page_title = 'Trip Planner — ' . SITE_NAME;
-$pois       = get_all_poi(true);
+
+$pois = get_all_poi(true);
 $pois = array_map(function($p) {
     $p['description'] = mb_substr($p['description'] ?? '', 0, 150) .
     (mb_strlen($p['description'] ?? '') > 150 ? '...' : '');
@@ -10,10 +11,23 @@ $pois = array_map(function($p) {
     '') > 30 ? '...' : '');
     return $p;
 }, $pois);
+
+$pois_full = array_map(function($p) {
+    return [
+        'id'            => $p['id'],
+        'name'          => $p['name'],
+        'description'   => $p['description'],
+        'slug'          => $p['slug'],
+        'category_name' => $p['category_name'],
+        'address'       => $p['address'],
+    ];
+}, get_all_poi(true));
+
 $categories = get_poi_categories();
 $is_logged  = isset($_SESSION['user']);
-$pois_json  = json_encode($pois);
-$cats_json  = json_encode($categories);
+$pois_json      = json_encode($pois);
+$pois_full_json = json_encode($pois_full);
+$cats_json      = json_encode($categories);
 ?>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -23,10 +37,12 @@ $cats_json  = json_encode($categories);
   const BASE      = CONFIG.baseUrl;
   const IS_LOGGED = <?= $is_logged ? 'true' : 'false' ?>;
   const POIS      = <?= $pois_json ?>;
+  const POIS_FULL = <?= $pois_full_json ?>;
   const API_TRIP  = BASE + '/api/map/api-trips.php';
   const API_GAL   = BASE + '/api/map/api-gallery.php';
 </script>
 <script src="<?= JS_URL ?>trip.js" defer></script>
+<script src="<?= JS_URL ?>ai-trip.js" defer></script>
 <main id="content">
 <div class="tp-main-hero"></div>
 <div class="tp-main-outer">
@@ -80,6 +96,9 @@ $cats_json  = json_encode($categories);
       </button>
       <button class="tp-tab" data-tab="map">
         <i class="fa-solid fa-map me-2"></i>Map POI
+      </button>
+      <button class="tp-tab" data-tab="ai">
+        <i class="fa-solid fa-wand-magic-sparkles me-2"></i>Surpress Me
       </button>
     </div>
   </div>
@@ -241,6 +260,34 @@ $cats_json  = json_encode($categories);
         </div>
 
       </div>
+    </div>
+    
+    <div id="tab-ai" class="tp-tab-content" style="display:none">
+      <div class="mb-4">
+        <h4 class="text-heading mb-1">
+          <i class="fa-solid fa-wand-magic-sparkles text-purple me-2"></i>AI Itinerary
+        </h4>
+        <p class="text-muted small">Ceritain rencanamu, biar AI yang susunin itinerary-nya</p>
+      </div>
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <span class="ai-chip badge badge-accent" data-val="Kuliner">🍜 Kuliner</span>
+        <span class="ai-chip badge badge-accent" data-val="Alam">🌿 Alam</span>
+        <span class="ai-chip badge badge-accent" data-val="Belanja">🛍 Belanja</span>
+        <span class="ai-chip badge badge-accent" data-val="Sejarah">🏛 Sejarah</span>
+        <span class="ai-chip badge badge-accent" data-val="Budget">💰 Budget</span>
+        <span class="ai-chip badge badge-accent" data-val="Premium">✨ Premium</span>
+      </div>
+      <div class="input-group mb-3">
+        <input type="text" id="aiPromptInput" class="form-control"
+          placeholder="Contoh: trip Bandung 2 hari, suka kuliner dan alam...">
+        <button class="btn btn-primary" id="btnGenerateAI">
+          <i class="fa-solid fa-wand-magic-sparkles me-1"></i>Generate
+        </button>
+      </div>
+      <div id="aiLoader" class="text-center py-3 text-muted small" style="display:none">
+        <i class="fa-solid fa-circle-notch fa-spin me-1"></i>AI lagi nyusun itinerary...
+      </div>
+      <div id="aiItineraryResult"></div>
     </div>
 
   </div>

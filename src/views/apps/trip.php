@@ -65,7 +65,7 @@ $cats_json  = json_encode($categories);
         </div>
         <div class="tp-profile-login ms-auto">
           <a href="/login" class="btn btn-primary btn-sm">
-            <i class="fa-brands fa-google me-1"></i>Login
+            Login
           </a>
         </div>
       <?php endif; ?>
@@ -153,10 +153,10 @@ $cats_json  = json_encode($categories);
       </div>
 
       <div class="tp-info-strip d-flex flex-wrap gap-3 mb-3">
-        <span><i class="fa-solid fa-circle-info text-primary"></i> Klik pin untuk info lokasi</span>
-        <span><i class="fa-solid fa-route text-success"></i> Tambahkan ke Trip Planner</span>
+        <span><i class="fa-solid fa-circle-info text-accent"></i> Klik pin untuk info lokasi</span>
+        <span><i class="fa-solid fa-route text-accent"></i> Tambahkan ke Trip Planner</span>
         <?php if (!$is_logged): ?>
-        <span><i class="fa-solid fa-lock text-purple"></i>
+        <span><i class="fa-solid fa-lock text-accent"></i>
           <a href="/login">Login</a> untuk simpan trip
         </span>
         <?php endif; ?>
@@ -166,21 +166,21 @@ $cats_json  = json_encode($categories);
 
         <div class="tp-planner-panel">
           <div class="tp-planner-header">
-            <h4 class="text-title">
-              <i class="fa-solid fa-route text-purple me-2"></i>Buat Trip Baru
+            <h4 class="text-heading">
+              <i class="fa-solid fa-route text-heading me-2"></i>Buat Trip Baru
             </h4>
           </div>
           <div class="tp-planner-body">
             <div class="tp-start-section">
               <div class="tp-section-label">
-                <h5 class="text-muted">
-                  <i class="fa-solid fa-location-crosshairs text-purple me-1"></i>
+                <h5 class="text-heading">
+                  <i class="fa-solid fa-location-crosshairs text-heading ms-1"></i>
                   Titik Awal
                   </h5>
               </div>
               <div class="input-group">
                 <span class="input-group-text">
-                  <i class="fa-solid fa-search text-muted"></i>
+                  <i class="fa-solid fa-search text-muted ms-1"></i>
                 </span>
                 <input type="text" id="startInput" class="form-control" placeholder="Cari titik awal...">
               </div>
@@ -200,14 +200,14 @@ $cats_json  = json_encode($categories);
 
             <div class="mb-3">
               <div class="tp-section-label">
-                <h5 class="text-muted">
-                <i class="fa-solid fa-list-ol text-purple me-1"></i>
+                <h5 class="text-heading">
+                <i class="fa-solid fa-list-ol text-heading me-1"></i>
                 Rute Perjalanan
                 </h5>
               </div>
               <div id="routeList">
                 <div class="route-empty" id="routeEmpty">
-                  <i class="fa-solid fa-map-pin"></i>
+                  <i class="fa-solid fa-map-pin text-accent"></i>
                   <span>Klik pin di peta untuk tambah lokasi</span>
                 </div>
               </div>
@@ -227,7 +227,7 @@ $cats_json  = json_encode($categories);
                 <i class="fa-solid fa-floppy-disk me-1"></i>Simpan
               </button>
               <?php endif; ?>
-              <button class="btn btn-accent btn-sm" id="btnResetTrip" title="Reset">
+              <button class="btn btn-outline-danger btn-sm" id="btnResetTrip" title="Reset">
                 <i class="fa-solid fa-trash"></i>Reset
               </button>
             </div>

@@ -1663,17 +1663,17 @@ table tbody td {
 .btn-outline-danger:hover {
   background: oklch(from var(--red-400) l c h / 0.25) !important;
   border: 1.5px solid oklch(from var(--red-600) l c h / 0.65) !important;
-  color: var(--red-700);
+  color: var(--red-700) !important;
 }
 [data-dark] .btn-outline-danger {
   background: oklch(from var(--red-800) l c h / 0.4) !important;
-  color: var(--red-500);
+  color: var(--red-500) !important;
   border: 1.5px solid oklch(from var(--red-600) l c h / 0.5) !important;
 }
 [data-dark] .btn-outline-danger:hover {
   background: oklch(from var(--red-800) l c h / 0.65) !important;
   border: 1.5px solid oklch(from var(--red-600) l c h / 0.7) !important;
-  color: var(--red-400);
+  color: var(--red-400) !important;
 }
 
 .btn-outline-light {
@@ -2282,6 +2282,7 @@ table tbody td {
   background: var(--bg-primary-subtle);
   color: var(--text-primary);
   border: var(--border-primary-subtle);
+  animation: shimmer 2s ease-in-out infinite;
 }
 .fab-chatbot:hover,
 .fab-chatbot:active {
@@ -5116,25 +5117,20 @@ input[type="checkbox"] {
 }
 
 /* ── CATEGORY FILTER BUTTONS ────────────────────────────────── */
-.cat-filters {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-  overflow-x: auto;
-  padding-bottom: 2px;
-}
-.cat-filter {
-  white-space: nowrap;
-}
 .cat-filter.active,
-.cat-filter:hover {
-  background: var(--purple-700);
-  border-color: 1.5px solid var(--purple-700);
-  color: #fff;
+.cat-filter.btn-primary {
+  background: var(--bg-primary) !important;
+  border-color: var(--bg-primary) !important;
+  color: var(--text-white);
 }
 .cat-filter.active {
   font-weight: 500;
+}
+.cat-filter.btn-outline-primary:hover {
+  background: var(--bg-primary-subtle) !important;
+  border-color: var(--border-primary-subtle) !important;
+  color: var(--text-primary) !important;
+  filter: none !important;
 }
 
 /* explore tab uses same style */
@@ -5195,25 +5191,24 @@ input[type="checkbox"] {
   align-items: center;
   gap: 5px;
   font-size: .78rem;
-  color: var(--text-muted);
-  background: var(--bg-white);
-  border: var(--border-surface);
-  border-radius: 20px;
+  color: var(--text-blue);
+  background: var(--bg-blue-subtle);
+  border-radius: var(--radius-sm);
   padding: 4px 10px;
 }
 
 /* ── PLANNER PANEL ──────────────────────────────────────────── */
 .tp-planner-panel {
-  background: var(--bg-white);
+  background: var(--bg-surface);
   border: var(--border-surface);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  margin-top: 1.5rem;
 }
 .tp-planner-header {
   padding: .875rem 1.25rem;
+  align-items: center;
   border-bottom: var(--border-surface);
-  background: var(--bg-white);
 }
 .tp-planner-header .title {
   font-size: .9rem;
@@ -5701,6 +5696,8 @@ footer {
   z-index: 2;
   padding-top: 4rem;
   padding-bottom: 2rem;
+  background: var(--bg-body);
+  color: var(--text-body);
 }
 .footer-newsletter {
   padding-bottom: 4rem;
@@ -5774,6 +5771,12 @@ footer {
   100% {
     background-position: 0% 50%;
   }
+}
+
+@keyframes shimmer {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.6) drop-shadow(0 0 4px currentColor); }
+  100% { filter: brightness(1); }
 }
 
 @keyframes fabSlideIn {

@@ -553,11 +553,12 @@ document.addEventListener('DOMContentLoaded', () => {
           <h6>${escHtml(poi.name)}</h6>
           <p class="text-muted small">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
           ${poi.poi_url
-            ? `<a href="${escHtml(poi.poi_url)}" class="btn btn-primary btn-sm" target="_blank" rel="noopener">
-                <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Lihat
+            ? `<a href="${escHtml(poi.poi_url)}" class="small" target="_blank" rel="noopener">
+                Lihat
+                <i class="fas fa-angle-right me-1"></i>
                </a>`
-            : `<span class="btn btn-outline-accent btn-sm disabled">
-                <i class="fa-solid fa-link-slash me-1"></i>Link ?
+            : `<span class="text-muted">
+                Belum ada link
                </span>`
           }
         </div>

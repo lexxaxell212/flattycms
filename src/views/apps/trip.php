@@ -153,10 +153,10 @@ $cats_json  = json_encode($categories);
       </div>
 
       <div class="tp-info-strip d-flex flex-wrap gap-3 mb-3">
-        <span><i class="fa-solid fa-circle-info text-accent"></i> Klik pin untuk info lokasi</span>
-        <span><i class="fa-solid fa-route text-accent"></i> Tambahkan ke Trip Planner</span>
+        <span><i class="fa-solid fa-circle-info"></i> Klik pin untuk info lokasi</span>
+        <span><i class="fa-solid fa-route"></i> Tambahkan ke Trip Planner</span>
         <?php if (!$is_logged): ?>
-        <span><i class="fa-solid fa-lock text-accent"></i>
+        <span><i class="fa-solid fa-lock"></i>
           <a href="/login">Login</a> untuk simpan trip
         </span>
         <?php endif; ?>

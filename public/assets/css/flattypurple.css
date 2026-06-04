@@ -79,13 +79,12 @@
   --duration: 0.3s;
 
   /* Backgrounds */
-  --bg-body:        oklch(0.910 0 0);
-  --bg-wrapper:     oklch(0.940 0 0);
-  --bg-surface:     oklch(0.970 0 0);
-  --bg-card:        oklch(1 0 0);
-  --bg-card-hover:  oklch(0.990 0 0);
-  --bg-modal:       oklch(1 0 0);
-  --bg-modal-hover: oklch(0.990 0 0);
+  --bg-body:     oklch(0.964 0.001 295);
+  --bg-surface:     oklch(0.984 0.001 295);
+  --bg-card:        oklch(1 0.001 295);
+  --bg-card-hover:  oklch(0.995 0.001 295);
+  --bg-modal:       oklch(0.995 0.001 295);
+  --bg-modal-hover: oklch(0.990 0.001 295);
   --bg-backdrop: oklch(0.270 0.040 295 / 0.4);
   --bg-transparent: transparent;
   --bg-glass: oklch(1 0 0 / 0.55);
@@ -100,8 +99,8 @@
   --bg-green-subtle: oklch(0.95 0.025 149);
   --bg-yellow: oklch(0.780 0.160 85);
   --bg-yellow-subtle: oklch(0.97 0.030 85);
-  --bg-white: oklch(0.984 0.003 264);
-  --bg-white-subtle: oklch(0.977 0.014 295);
+  --bg-white: oklch(0.990 0 0);
+  --bg-white-subtle: oklch(0.960 0 0);
   --bg-blue: oklch(0.580 0.180 240);
   --bg-blue-subtle: oklch(0.94 0.025 240);
 
@@ -143,13 +142,12 @@
 /* ============= flatty dark ============= */
 [data-dark] {
   /* Backgrounds */
-  --bg-body:        oklch(0.120 0 0);
-  --bg-wrapper:     oklch(0.150 0 0);
+  --bg-body:     oklch(0.160 0.001 295);
   --bg-surface:     oklch(0.180 0 0);
-  --bg-card:        oklch(0.210 0 0);
-  --bg-card-hover:  oklch(0.200 0 0);
-  --bg-modal:       oklch(0.210 0 0);
-  --bg-modal-hover: oklch(0.200 0 0);
+  --bg-card:        oklch(0.200 0 0);
+  --bg-card-hover:  oklch(0.195 0 0);
+  --bg-modal:       oklch(0.195 0 0);
+  --bg-modal-hover: oklch(0.190 0 0);
   --bg-backdrop: oklch(0.050 0.020 295 / 0.6);
   --bg-transparent: transparent;
   --bg-glass: oklch(0.210 0.025 295 / 0.60);
@@ -164,8 +162,8 @@
   --bg-green-subtle: oklch(0.230 0.035 149);
   --bg-yellow: oklch(0.800 0.160 85);
   --bg-yellow-subtle: oklch(0.240 0.035 85);
-  --bg-white: oklch(0.210 0.025 295);
-  --bg-white-subtle: oklch(0.240 0.020 295);
+  --bg-white: oklch(0.190 0 0);
+  --bg-white-subtle: oklch(0.210 0 0);
   --bg-blue: oklch(0.610 0.180 240);
   --bg-blue-subtle: oklch(0.230 0.035 240);
 
@@ -1931,6 +1929,10 @@ a:hover i.arrow-icon {
   padding: var(--space-2) var(--space-3);
   text-decoration: none;
   margin: var(--space-2);
+  transition: filter 0.2s ease;
+}
+.badge:hover {
+  filter: var(--hover-state);
 }
 
 .badge-primary {
@@ -2286,7 +2288,7 @@ a:hover i.arrow-icon {
   border: var(--border-primary-subtle);
 }
 .fab-chatbot svg {
-  animation: shimmer 2s ease-in-out infinite;
+  animation: shimmer 10s ease-in-out infinite;
 }
 .fab-chatbot:hover,
 .fab-chatbot:active {
@@ -4987,7 +4989,7 @@ input[type="checkbox"] {
 }
 .tp-main-inner {
   border-radius: 1rem 1rem 0 0;
-  background: var(--bg-wrapper);
+  background: var(--bg-surface);
   padding-block: 1rem;
   margin: 0 auto;
 }
@@ -5001,8 +5003,8 @@ input[type="checkbox"] {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: var(--bg-surface);
-  border: var(--border-surface);
+  background: var(--bg-card);
+  border: var(--border-card);
   border-radius: var(--radius);
   padding: 1rem 1.25rem;
   margin-bottom: 1.25rem;
@@ -5053,10 +5055,10 @@ input[type="checkbox"] {
 .tp-tabs {
   display: flex;
   gap: 3px;
-  background: var(--bg-surface);
-  border: var(--border-surface);
+  background: var(--bg-card);
+  border: var(--border-card);
   border-radius: var(--radius);
-  padding: 5px;
+  padding: 0.5rem;
   margin-bottom: 1.25rem;
 }
 .tp-tab {
@@ -5119,12 +5121,6 @@ input[type="checkbox"] {
   margin-bottom: 0.5rem;
 }
 
-.btn.btn-outline-primary.cat-filter:not(.active):hover {
-  background: var(--bg-primary-subtle) !important;
-  color: var(--text-primary) !important;
-  border: 1.5px solid transparent !important;
-}
-
 /* explore tab uses same style */
 .explore-cat {
   white-space: nowrap;
@@ -5133,8 +5129,8 @@ input[type="checkbox"] {
 .tp-map-wrap {
   border-radius: var(--radius);
   overflow: hidden;
-  background: var(--bg-surface);
-  border: var(--border-surface);
+  background: var(--bg-card);
+  border: var(--border-card);
   margin-bottom: 1rem;
 }
 #mainMap {
@@ -5148,7 +5144,10 @@ input[type="checkbox"] {
   margin-bottom: 1rem;
 }
 .tp-search-wrap .input-group {
-  background: var(--bg-surface);
+  background: var(--bg-card);
+}
+.tp-tab-content .input-group {
+  background: var(--bg-card);
 }
 #searchPoiResults,
 #startResults,
@@ -5193,8 +5192,8 @@ input[type="checkbox"] {
 
 /* ── PLANNER PANEL ──────────────────────────────────────────── */
 .tp-planner-panel {
-  background: var(--bg-surface);
-  border: var(--border-surface);
+  background: var(--bg-card);
+  border: var(--border-card);
   border-radius: var(--radius-lg);
   overflow: hidden;
   margin-top: 1.5rem;
@@ -5209,15 +5208,12 @@ input[type="checkbox"] {
   color: var(--text-modal);
   display: flex;
   align-items: center;
+  margin-top: 0.75rem;
 }
 .tp-planner-body {
-  padding: 1rem;
+  padding: .875rem 1.25rem;
 }
 
-/* ── START SECTION ──────────────────────────────────────────── */
-.tp-start-section {
-  margin-bottom: 1.25rem;
-}
 .tp-section-label {
   font-size: .78rem;
   font-weight: 500;
@@ -5765,9 +5761,9 @@ footer {
 }
 
 @keyframes shimmer {
-  0% { filter: brightness(0.9); }
-  50% { filter: brightness(1.6) drop-shadow(0 0 4px currentColor); }
-  100% { filter: brightness(0.9); }
+  0% { filter: brightness(0.96); }
+  50% { filter: brightness(1.04) drop-shadow(0 0 4px currentColor); }
+  100% { filter: brightness(0.96); }
 }
 
 @keyframes fabSlideIn {

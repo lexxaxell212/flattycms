@@ -87,7 +87,6 @@ $cats_json  = json_encode($categories);
   <div class="tp-content">
 
     <div id="tab-explore" class="tp-tab-content">
-      <div class="mb-3">
         <div class="input-group mb-4">
           <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
           <input type="text" id="exploreSearch" class="form-control"
@@ -101,7 +100,7 @@ $cats_json  = json_encode($categories);
           </button>
           <?php endforeach; ?>
         </div>
-      </div>
+      
       <div style="position:relative">
         <div id="explorePoiList" class="tp-card-grid"></div>
         <div id="exploreOverlay" style="display:none;position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to bottom, transparent, #fff);display:flex;align-items:flex-end;justify-content:center;padding-bottom:1rem">
@@ -171,10 +170,10 @@ $cats_json  = json_encode($categories);
             </h4>
           </div>
           <div class="tp-planner-body">
-            <div class="tp-start-section">
+            <div class="tp-start-section mb-3">
               <div class="tp-section-label">
                 <h4 class="text-heading">
-                  <i class="fa-solid fa-location-crosshairs text-heading ms-1"></i>
+                  <i class="fa-solid fa-location-crosshairs text-heading me-2"></i>
                   Titik Awal
                   </h4>
               </div>
@@ -185,39 +184,36 @@ $cats_json  = json_encode($categories);
                 <input type="text" id="startInput" class="form-control" placeholder="Cari titik awal...">
               </div>
               <div id="startResults" class="list-group mt-1 p-2" style="max-height:150px;overflow-y:auto;display:none;position:relative;z-index:100"></div>
-              <div id="startSelected" class="card card-flatty mt-2" style="display:none">
-                <div class="card-body">
-                  <div class="text-truncate mb-3">
+              <div id="startSelected" class="mt-4" style="display:none">
+                <div class="text-truncate mb-2">
                     <span>Kamu mulai dari</span>
                     <span id="startName2" class="text-primary"></span>
-                  </div>
+                </div>
+                <div class="card card-flatty">
+                <div class="card-body">
                   <div id="startImg"></div>
-                  <h6 id="startName"></h6>
+                  <h5 id="startName" class="mb-2"></h5>
                   <p class="text-muted" id="startDesc"></p>
+                </div>
                 </div>
               </div>
             </div>
-
-            <div class="mb-3">
               <div class="tp-section-label">
                 <h4 class="text-heading">
-                <i class="fa-solid fa-list-ol text-heading me-1"></i>
+                <i class="fa-solid fa-list-ol text-heading me-2"></i>
                 Rute Perjalanan
                 </h4>
               </div>
               <div id="routeList">
-                <div class="route-empty" id="routeEmpty" style="display:block">
+                <div class="route-empty" id="routeEmpty" style="display:flex">
                   <i class="fa-solid fa-map-pin text-accent"></i>
                   <span>Klik pin di map untuk tambah lokasi</span>
                 </div>
               </div>
-            </div>
-
-            <div id="distanceInfo" class="alert alert-primary py-2 px-3 small mb-3" style="display:none">
+              <div id="distanceInfo" class="alert alert-primary py-2 px-3 small mb-3" style="display:none">
               <i class="fa-solid fa-ruler me-1"></i>Total jarak: <strong id="totalDist">0</strong> km
               <span class="ms-2 text-muted" id="totalStops"></span>
             </div>
-
             <div class="tp-action-row">
               <button class="btn btn-primary btn-sm" id="btnGenerateRoute" disabled>
                 <i class="fa-solid fa-route me-1"></i>Buat Rute

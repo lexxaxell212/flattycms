@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const distI = document.getElementById('distanceInfo');
 
     if (routes.length === 0) {
-      if (empty) empty.style.display = '';
+      if (empty) empty.style.display = 'flex';
       list.innerHTML = '';
       if (empty) list.appendChild(empty);
       btnG.disabled = true;
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (empty) empty.style.display = 'none';
     list.innerHTML = routes.map((r, i) => `
-      <div class="d-flex align-items-start gap-2 mb-3 p-2" data-idx="${i}">
+      <div class="d-flex align-items-start gap-2 mb-2" data-idx="${i}">
         <div class="flex-grow-1 min-w-0">
           <div class="small fw-semibold text-truncate mb-2">
             <span class="text-purple">
@@ -212,7 +212,8 @@ document.addEventListener('DOMContentLoaded', () => {
           ${r.distance_from_prev ? `<div class="text-muted mb-2" style="font-size:.7rem"><i class="fa-solid fa-ruler me-1"></i>${r.distance_from_prev} km dari titik sebelumnya</div>` : ''}
           <div class="card card-flatty mb-2">
           <div class="card-body">
-          <button class="badge badge-accent btn-remove-route position-absolute top-0 end-0 m-3" data-idx="${i}">
+          <button class="badge badge-accent btn-remove-route position-absolute
+          top-0 end-0 m-4" data-idx="${i}">
           <i class="fa-solid fa-xmark"></i>
           </button>
             ${r.poi_image

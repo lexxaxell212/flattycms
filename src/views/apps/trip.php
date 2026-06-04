@@ -278,9 +278,8 @@ $cats_json      = json_encode($categories);
         <span class="ai-chip badge badge-accent" data-val="Premium">✨ Premium</span>
       </div>
       <div class="input-group mb-3">
-        <input type="text" id="aiPromptInput" class="form-control"
-          placeholder="Contoh: trip Bandung 2 hari, suka kuliner dan alam...">
-        <button class="btn btn-primary" id="btnGenerateAI">
+        <textarea id="aiPromptInput" class="form-control mb-2" rows="3" placeholder="Contoh: trip Bandung 2 hari, suka kuliner dan alam..." style="resize:none"></textarea>
+        <button class="btn btn-primary w-100" id="btnGenerateAI">
           <i class="fa-solid fa-wand-magic-sparkles me-1"></i>Generate
         </button>
       </div>

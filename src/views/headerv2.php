@@ -419,7 +419,7 @@ function isActive(string $path): string {
   </div>
   <div class="chatbot offcanvas" id="chatbot">
     <div class="offcanvas-header">
-      <div class="chatbot-header container">
+      <div class="chatbot-header container p-0">
         <div class="bot-info">
           <div class="bot-avatar">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-sparkles-2">

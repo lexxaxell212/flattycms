@@ -1379,9 +1379,11 @@ table tbody td {
 }
 .btn:hover {
   filter: var(--hover-state);
+  border: 1.5px solid transparent;
 }
 .btn:active {
   filter: var(--active-state);
+  border: 1.5px solid transparent;
 }
 .btn:focus-visible {
   outline: var(--border-primary-subtle);

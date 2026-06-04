@@ -73,8 +73,8 @@
   --shadow-sm: 0 1px 3px 0px oklch(0 0 0 / 0.06), 0 1px 2px 0px oklch(0 0 0 / 0.04);
   --shadow: 0 10px 15px -3px oklch(0 0 0 / 0.08), 0 4px 6px -2px oklch(0 0 0 / 0.04);
   --shadow-lg: 0 20px 25px -5px oklch(0 0 0 / 0.10), 0 8px 10px -6px oklch(0 0 0 / 0.06);
-  --hover-state: brightness(1.08);
-  --active-state: brightness(0.93);
+  --hover-state: 0.95;
+  --active-state: 0.9;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --duration: 0.3s;
 
@@ -238,9 +238,7 @@ body {
   font-weight: var(--fw-regular);
   line-height: 1.6;
   position: relative;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizeSpeed;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -284,6 +282,7 @@ h3 {
   margin: 0 0 0.5em 0;
   text-transform: capitalize;
   line-height: 1.25;
+  text-rendering: optimizeLegibility;
 }
 h4,
 h5,
@@ -1371,14 +1370,14 @@ table tbody td {
   -moz-user-select: none;
   position: relative;
   overflow: hidden;
-  transition: filter var(--duration) var(--ease), background var(--duration) var(--ease), color var(--duration) var(--ease), border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
+  transition: background var(--duration) var(--ease), color var(--duration) var(--ease), border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
 }
 .btn:hover {
-  filter: var(--hover-state);
+  opacity: var(--hover-state);
   border: 1.5px solid transparent;
 }
 .btn:active {
-  filter: var(--active-state);
+  opacity: var(--active-state);
   border: 1.5px solid transparent;
 }
 .btn:focus-visible {
@@ -1412,13 +1411,13 @@ table tbody td {
   color: var(--text-body);
   border-radius: var(--radius-sm);
   margin-bottom: 4px;
-  transition: filter var(--duration) var(--ease), transform var(--duration) var(--ease), background var(--duration) var(--ease), color var(--duration) var(--ease);
+  transition: transform var(--duration) var(--ease), background var(--duration) var(--ease), color var(--duration) var(--ease);
 }
 .btn-popup:hover,
 .btn-popup:active {
   background: var(--bg-primary) !important;
   color: var(--text-white) !important;
-  filter: var(--hover-state);
+  opacity: var(--hover-state);
 }
 .btn-popup:hover span,
 .btn-popup:active span {
@@ -1472,13 +1471,13 @@ table tbody td {
 .btn-accent:hover,
 .btn-outline-primary:hover,
 .btn-outline-accent:hover {
-  filter: var(--hover-state);
+  opacity: var(--hover-state);
 }
 .btn-primary:active,
 .btn-accent:active,
 .btn-outline-primary:active,
 .btn-outline-accent:active {
-  filter: var(--active-state);
+  opacity: var(--active-state);
 }
 
 .btn-outline-white {
@@ -1929,10 +1928,10 @@ a:hover i.arrow-icon {
   padding: var(--space-2) var(--space-3);
   text-decoration: none;
   margin: var(--space-2);
-  transition: filter 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 .badge:hover {
-  filter: var(--hover-state);
+  opacity: var(--hover-state);
 }
 
 .badge-primary {
@@ -2266,8 +2265,7 @@ a:hover i.arrow-icon {
   transition:
   background var(--duration) var(--ease),
   transform var(--duration) var(--ease),
-  opacity var(--duration) var(--ease),
-  filter var(--duration) var(--ease);
+  opacity var(--duration) var(--ease)
 }
 .scroll-top-btn {
   bottom: 100px;
@@ -2277,7 +2275,7 @@ a:hover i.arrow-icon {
   border: var(--border-primary-subtle);
 }
 .scroll-top-btn:hover {
-  filter: var(--hover-state);
+  opacity: var(--hover-state);
 }
 
 .fab-chatbot {
@@ -2292,7 +2290,7 @@ a:hover i.arrow-icon {
 }
 .fab-chatbot:hover,
 .fab-chatbot:active {
-  filter: var(--hover-state);
+  opacity: var(--hover-state);
 }
 
 /* ============= /form-control ============= */
@@ -5761,9 +5759,9 @@ footer {
 }
 
 @keyframes shimmer {
-  0% { filter: brightness(0.96); }
-  50% { filter: brightness(1.04) drop-shadow(0 0 4px currentColor); }
-  100% { filter: brightness(0.96); }
+  0% { opacity: 0.95; }
+  50% { opacity: 1; }
+  100% { opacity: 0.95; }
 }
 
 @keyframes fabSlideIn {

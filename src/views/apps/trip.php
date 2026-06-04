@@ -98,7 +98,7 @@ $cats_json      = json_encode($categories);
         <i class="fa-solid fa-map me-2"></i>Map POI
       </button>
       <button class="tp-tab" data-tab="ai">
-        <i class="fa-solid fa-wand-magic-sparkles me-2"></i>Surpress Me
+        <i class="fa-solid fa-wand-magic-sparkles me-2"></i>Surprise Me
       </button>
     </div>
   </div>
@@ -280,7 +280,7 @@ $cats_json      = json_encode($categories);
       <div class="input-group mb-3">
         <textarea id="aiPromptInput" class="form-control mb-2" rows="3" placeholder="Contoh: trip Bandung 2 hari, suka kuliner dan alam..." style="resize:none"></textarea>
         <button class="btn btn-primary w-100" id="btnGenerateAI">
-          <i class="fa-solid fa-wand-magic-sparkles me-1"></i>Generate
+          <i class="fa-solid fa-wand-magic-sparkles me-1"></i>Buat Itinerary
         </button>
       </div>
       <div id="aiLoader" class="text-center py-3 text-muted small" style="display:none">

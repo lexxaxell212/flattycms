@@ -26,6 +26,8 @@ $poi_list = implode("\n", array_map(function($p) {
 $system_prompt = <<<PROMPT
 Kamu adalah asisten wisata Bandung. Berdasarkan permintaan user dan daftar POI yang tersedia, buatkan itinerary perjalanan.
 
+Jika user tidak menyebutkan jumlah hari, defaultkan menjadi 2 hari.
+
 Daftar POI tersedia:
 {$poi_list}
 
@@ -87,6 +89,22 @@ if ($err) {
 }
 
 $data = json_decode($response, true);
+
+if (isset($data['error'])) {
+    $errType = $data['error']['code'] ?? '';
+    if ($errType === 'rate_limit_exceeded') {
+        http_response_code(429);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Batas request AI tercapai, coba lagi dalam 1 menit.'
+        ]);
+        exit;
+    }
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Gagal menghubungi AI']);
+    exit;
+}
+
 $text = $data['choices'][0]['message']['content'] ?? '';
 
 // strip markdown jika ada

@@ -94,7 +94,7 @@
       flattyToast('error', 'Tidak bisa menghubungi AI. Coba lagi.');
     } finally {
       btn.disabled  = false;
-      btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles me-1"></i>Generate';
+      btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles me-1"></i>Buat Itinerary';
       loader.style.display = 'none';
     }
   }
@@ -106,7 +106,7 @@
 
     btn.addEventListener('click', generateItinerary);
     input.addEventListener('keydown', e => {
-      if (e.key === 'Enter' && e.ctrlKey) {
+      if (e.key === 'Enter' && e.shiftKey) {
         e.preventDefault();
         generateItinerary();
       }

@@ -4,7 +4,7 @@ autoload_core();
 verify_ajax_request('POST');
 
 const GROQ_ENDPOINT      = 'https://api.groq.com/openai/v1/chat/completions';
-const GROQ_MODEL         = 'llama-3.1-8b-instant';
+const GROQ_MODEL         = 'llama-3.3-70b-versatile';
 const MAX_TOKENS         = 500;
 const TEMPERATURE        = 0.7;
 const CURL_TIMEOUT       = 15;

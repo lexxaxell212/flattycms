@@ -2733,7 +2733,7 @@ input[type="checkbox"] {
   text-transform: uppercase;
 }
 .message.user .msg-label {
-  display: none;
+  display: block;
 }
 
 .msg-text {
@@ -2753,6 +2753,19 @@ input[type="checkbox"] {
 .message.user .msg-time {
   color: rgba(255,255,255,0.7);
 }
+
+.msg-text ul {
+  margin: 6px 0 2px 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.msg-text li {
+  line-height: 1.5;
+  font-size: 0.875rem;
+}
+
 .error-text {
   font-size: 0.875rem;
   line-height: 1.5;

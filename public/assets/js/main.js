@@ -25,7 +25,12 @@ function escapeHTML(str) {
 }
 
 function formatText(text) {
-  return escapeHTML(text).replace(/\n/g, "<br>");
+  let out = escapeHTML(text);
+  out = out.replace(/\*\*(.+?)\*\*/g, '$1');
+  out = out.replace(/^- (.+)/gm, '<li>$1</li>');
+  out = out.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
+  out = out.replace(/\n/g, '<br>');
+  return out;
 }
 
 function currentTime() {

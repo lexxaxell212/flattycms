@@ -79,14 +79,14 @@
   --duration: 0.3s;
 
   /* Backgrounds */
-  --bg-body: oklch(0.97 0 0);
-  --bg-card: oklch(1 0 0);
-  --bg-card-hover: oklch(0.96 0.004 295);
-  --bg-modal: oklch(1 0 0);
-  --bg-modal-hover: oklch(0.97 0.004 295);
+  --bg-body:        oklch(0.975 0 0);
+  --bg-wrapper:     oklch(0.960 0 0);
+  --bg-surface:     oklch(0.945 0 0);
+  --bg-card:        oklch(1 0 0);
+  --bg-card-hover:  oklch(0.968 0 0);
+  --bg-modal:       oklch(1 0 0);
+  --bg-modal-hover: oklch(0.968 0 0);
   --bg-backdrop: oklch(0.270 0.040 295 / 0.4);
-  --bg-wrapper: oklch(0.95 0.006 295);
-  --bg-surface: oklch(0.93 0.008 295);
   --bg-transparent: transparent;
   --bg-glass: oklch(1 0 0 / 0.55);
   --bg-glass-hover: oklch(1 0 0 / 0.68);
@@ -106,12 +106,12 @@
   --bg-blue-subtle: oklch(0.94 0.025 240);
 
   /* border */
+  --border-wrapper: 1px solid oklch(0.231 0.089 295 / 0.08);
+  --border-surface: 1px solid rgba(0,0,0,0.15);
   --border-card: 1px solid oklch(0.231 0.089 295 / 0.08);
   --border-card-hover: 1px solid oklch(0.231 0.089 295 / 0.18);
   --border-modal: 1px solid oklch(0.231 0.089 295 / 0.10);
   --border-modal-hover: 1px solid oklch(0.231 0.089 295 / 0.20);
-  --border-wrapper: 1px solid oklch(0.231 0.089 295 / 0.08);
-  --border-surface: 1px solid rgba(0,0,0,0.15);
   --border-primary-subtle: 1px solid oklch(0.558 0.174 295 / 0.25);
   --border-accent-subtle: 1px solid oklch(0.700 0.163 60 / 0.30);
   --border-red-subtle: 1px solid oklch(0.577 0.212 27 / 0.25);
@@ -123,9 +123,9 @@
   /* text */
   --text-body: oklch(0.372 0.014 264);
   --text-heading: oklch(0.231 0.089 295);
+  --text-surface: oklch(0.398 0.145 295);
   --text-card: oklch(0.372 0.014 264);
   --text-modal: oklch(0.372 0.014 264);
-  --text-surface: oklch(0.398 0.145 295);
   --text-primary: oklch(0.487 0.167 295);
   --text-accent: oklch(0.700 0.163 60);
   --text-red: oklch(0.577 0.212 27);
@@ -143,14 +143,14 @@
 /* ============= flatty dark ============= */
 [data-dark] {
   /* Backgrounds */
-  --bg-body: oklch(0.170 0.020 295);
-  --bg-card: oklch(0.210 0.025 295);
-  --bg-card-hover: oklch(0.240 0.030 295);
-  --bg-modal: oklch(0.220 0.025 295);
-  --bg-modal-hover: oklch(0.250 0.030 295);
+  --bg-body:        oklch(0.140 0 0);
+  --bg-wrapper:     oklch(0.165 0 0);
+  --bg-surface:     oklch(0.185 0 0);
+  --bg-card:        oklch(0.205 0 0);
+  --bg-card-hover:  oklch(0.225 0 0);
+  --bg-modal:       oklch(0.210 0 0);
+  --bg-modal-hover: oklch(0.230 0 0);
   --bg-backdrop: oklch(0.050 0.020 295 / 0.6);
-  --bg-wrapper: oklch(0.190 0.022 295);
-  --bg-surface: oklch(0.250 0.030 295);
   --bg-transparent: transparent;
   --bg-glass: oklch(0.210 0.025 295 / 0.60);
   --bg-glass-hover: oklch(0.240 0.030 295 / 0.75);
@@ -170,12 +170,12 @@
   --bg-blue-subtle: oklch(0.230 0.035 240);
 
   /* border */
+  --border-wrapper: 1px solid oklch(1 0 0 / 0.06);
+  --border-surface: 1px solid oklch(1 0 0 / 0.15);
   --border-card: 1px solid oklch(1 0 0 / 0.07);
   --border-card-hover: 1px solid oklch(1 0 0 / 0.14);
   --border-modal: 1px solid oklch(1 0 0 / 0.08);
   --border-modal-hover: 1px solid oklch(1 0 0 / 0.16);
-  --border-wrapper: 1px solid oklch(1 0 0 / 0.06);
-  --border-surface: 1px solid oklch(1 0 0 / 0.15);
   --border-primary-subtle: 1px solid oklch(0.600 0.174 295 / 0.35);
   --border-accent-subtle: 1px solid oklch(0.720 0.163 60 / 0.35);
   --border-red-subtle: 1px solid oklch(0.610 0.212 27 / 0.35);
@@ -187,9 +187,9 @@
   /* text */
   --text-body: oklch(0.820 0.010 264);
   --text-heading: oklch(0.977 0.014 295);
+  --text-surface: oklch(0.870 0.020 295);
   --text-card: oklch(0.820 0.010 264);
   --text-modal: oklch(0.820 0.010 264);
-  --text-surface: oklch(0.870 0.020 295);
   --text-primary: oklch(0.720 0.160 295);
   --text-accent: oklch(0.750 0.163 60);
   --text-red: oklch(0.680 0.200 27);
@@ -5774,9 +5774,9 @@ footer {
 }
 
 @keyframes shimmer {
-  0% { filter: brightness(1); }
+  0% { filter: brightness(0.9); }
   50% { filter: brightness(1.6) drop-shadow(0 0 4px currentColor); }
-  100% { filter: brightness(1); }
+  100% { filter: brightness(0.9); }
 }
 
 @keyframes fabSlideIn {

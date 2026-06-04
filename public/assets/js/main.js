@@ -1,8 +1,16 @@
 // chat
-
 const API_URL = "/api/api-assistant.php";
 const TOPIC = "bandung";
 const TIMEOUT = 20000;
+
+const SUGGEST_PROMPTS = [
+  "🍽️ Kuliner enak di Bandung",
+  "🏔️ Wisata alam sekitar",
+  "🎡 Weekend seru di Bandung",
+  "🕌 Tempat bersejarah",
+  "🛍️ Rekomendasi belanja",
+  "🌙 Tempat nongkrong malam",
+];
 
 let conversationHistory = [];
 let isLoading = false;
@@ -21,10 +29,7 @@ function formatText(text) {
 }
 
 function currentTime() {
-  return new Date().toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit"
-  });
+  return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
 
 function scrollToBottom() {
@@ -34,6 +39,29 @@ function scrollToBottom() {
 
 function removeLoadingBubble(id) {
   document.getElementById(id)?.remove();
+}
+
+function removeSuggests() {
+  document.querySelectorAll(".suggest-row").forEach(el => el.remove());
+}
+
+function addSuggests(prompts) {
+  const messages = document.getElementById("chat-messages");
+  const row = document.createElement("div");
+  row.className = "suggest-row";
+  prompts.forEach(text => {
+    const chip = document.createElement("button");
+    chip.className = "suggest-chip";
+    chip.textContent = text;
+    chip.onclick = () => {
+      document.getElementById("message-input").value = text.replace(/^[\p{Emoji}\s]+/u, "").trim();
+      removeSuggests();
+      sendMessage();
+    };
+    row.appendChild(chip);
+  });
+  messages.appendChild(row);
+  scrollToBottom();
 }
 
 function addMessage(text, type = "loading") {
@@ -47,10 +75,7 @@ function addMessage(text, type = "loading") {
   bubble.className = "bubble";
 
   if (type === "loading") {
-    bubble.innerHTML = `
-      <div class="typing-indicator">
-        <span></span><span></span><span></span>
-      </div>`;
+    bubble.innerHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`;
   } else if (type === "error") {
     bubble.innerHTML = `<span class="error-text">⚠️ ${escapeHTML(text)}</span>`;
   } else {
@@ -64,7 +89,6 @@ function addMessage(text, type = "loading") {
   wrap.appendChild(bubble);
   messages.appendChild(wrap);
   scrollToBottom();
-
   return wrap.id;
 }
 
@@ -73,9 +97,9 @@ async function sendMessage() {
 
   const input = document.getElementById("message-input");
   const message = input.value.trim();
-
   if (!message) return;
 
+  removeSuggests();
   addMessage(message, "user");
   input.value = "";
   input.style.height = "auto";
@@ -96,11 +120,7 @@ async function sendMessage() {
         "Content-Type": "application/json",
         "X-Requested-With": "XMLHttpRequest"
       },
-      body: JSON.stringify({
-        message,
-        topic: TOPIC,
-        history: conversationHistory
-      }),
+      body: JSON.stringify({ message, topic: TOPIC, history: conversationHistory }),
       signal: controller.signal
     });
 
@@ -111,16 +131,19 @@ async function sendMessage() {
     if (data.success) {
       addMessage(data.reply, "ai");
       conversationHistory.push({ role: "assistant", content: data.reply });
+      // Show suggest chips after first AI reply if history is short
+      if (conversationHistory.length <= 2) {
+        addSuggests(SUGGEST_PROMPTS.slice(0, 4));
+      }
     } else {
       addMessage(data.error ?? "Terjadi kesalahan.", "error");
       conversationHistory.pop();
     }
   } catch (err) {
     removeLoadingBubble(loadingId);
-    const msg =
-      err.name === "AbortError"
-        ? "Request timeout."
-        : "Koneksi bermasalah. Periksa jaringanmu.";
+    const msg = err.name === "AbortError"
+      ? "Request timeout."
+      : "Koneksi bermasalah. Periksa jaringanmu.";
     addMessage(msg, "error");
     conversationHistory.pop();
   } finally {
@@ -132,11 +155,12 @@ function clearChat() {
   document.getElementById("chat-messages").innerHTML = "";
   conversationHistory = [];
   addMessage("Chat dibersihkan. Ada yang bisa Yara bantu lagi? 😊", "ai");
+  addSuggests(SUGGEST_PROMPTS);
 }
 
 function autoResize(el) {
   el.style.height = "auto";
-  el.style.height = Math.min(el.scrollHeight, 120) + "px"; // max 120px
+  el.style.height = Math.min(el.scrollHeight, 120) + "px";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -151,10 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   input.addEventListener("input", () => autoResize(input));
 
-  addMessage(
-    "Wilujeng sumping! 👋 Yara siap bantu eksplor Bandung. Mau tanya apa nih..?",
-    "ai"
-  );
+  addMessage("Wilujeng sumping! 👋 Yara siap bantu eksplor Bandung. Mau tanya apa nih..?", "ai");
+  addSuggests(SUGGEST_PROMPTS);
   input.focus();
 });
 

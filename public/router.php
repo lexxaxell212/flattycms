@@ -6,6 +6,7 @@ $routes = [
     '' => SRC_PATH . 'pages/home.php',
   // app
     'trip'       => SRC_PATH . 'apps/trip.php',
+    'trips'       => SRC_PATH . 'apps/trip.php',
     'gallery'    => SRC_PATH . 'apps/gallery.php',
   // page
     'things-to-do'              => SRC_PATH . 'pages/things-to-do.php',

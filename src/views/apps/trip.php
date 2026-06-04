@@ -145,7 +145,7 @@ $cats_json  = json_encode($categories);
       <div class="tp-search-wrap">
         <div class="input-group">
           <span class="input-group-text">
-            <i class="fa-solid fa-search text-muted"></i>
+            <i class="fa-solid fa-search text-muted ms-1"></i>
           </span>
           <input type="text" id="searchPoi" class="form-control" placeholder="Cari lokasi di map...">
         </div>
@@ -173,10 +173,10 @@ $cats_json  = json_encode($categories);
           <div class="tp-planner-body">
             <div class="tp-start-section">
               <div class="tp-section-label">
-                <h5 class="text-heading">
+                <h4 class="text-heading">
                   <i class="fa-solid fa-location-crosshairs text-heading ms-1"></i>
                   Titik Awal
-                  </h5>
+                  </h4>
               </div>
               <div class="input-group">
                 <span class="input-group-text">
@@ -187,9 +187,9 @@ $cats_json  = json_encode($categories);
               <div id="startResults" class="list-group mt-1 p-2" style="max-height:150px;overflow-y:auto;display:none;position:relative;z-index:100"></div>
               <div id="startSelected" class="card card-flatty mt-2" style="display:none">
                 <div class="card-body">
-                  <div class="fw-semibold text-truncate mb-3">
+                  <div class="text-truncate mb-3">
                     <span>Kamu mulai dari</span>
-                    <span id="startName2" class="text-purple"></span>
+                    <span id="startName2" class="text-primary"></span>
                   </div>
                   <div id="startImg"></div>
                   <h6 id="startName"></h6>
@@ -200,15 +200,15 @@ $cats_json  = json_encode($categories);
 
             <div class="mb-3">
               <div class="tp-section-label">
-                <h5 class="text-heading">
+                <h4 class="text-heading">
                 <i class="fa-solid fa-list-ol text-heading me-1"></i>
                 Rute Perjalanan
-                </h5>
+                </h4>
               </div>
               <div id="routeList">
-                <div class="route-empty" id="routeEmpty">
+                <div class="route-empty" id="routeEmpty" style="display:block">
                   <i class="fa-solid fa-map-pin text-accent"></i>
-                  <span>Klik pin di peta untuk tambah lokasi</span>
+                  <span>Klik pin di map untuk tambah lokasi</span>
                 </div>
               </div>
             </div>
@@ -227,7 +227,7 @@ $cats_json  = json_encode($categories);
                 <i class="fa-solid fa-floppy-disk me-1"></i>Simpan
               </button>
               <?php endif; ?>
-              <button class="btn btn-outline-danger btn-sm" id="btnResetTrip" title="Reset">
+              <button class="btn btn-danger btn-sm" id="btnResetTrip" title="Reset">
                 <i class="fa-solid fa-trash"></i>Reset
               </button>
             </div>
@@ -271,8 +271,8 @@ $cats_json  = json_encode($categories);
           </div>
           <div id="uploadPoiResults" class="list-group mt-1 p-2" style="max-height:140px;overflow-y:auto;display:none"></div>
           <input type="hidden" id="uploadPoiId">
-          <div id="uploadPoiSelected" class="bg-gray text-purple mt-1 p-2" style="display:none">
-            <i class="text-purple fa-solid fa-check me-1"></i><span class="text-purple" id="uploadPoiName"></span>
+          <div id="uploadPoiSelected" class="mt-1" style="display:none">
+            <i class="fa-solid fa-check me-1"></i><span id="uploadPoiName"></span>
           </div>
         </div>
         <div class="mb-3">
@@ -285,7 +285,8 @@ $cats_json  = json_encode($categories);
         </div>
         <div class="mb-1">
           <label class="form-label small fw-semibold">Kredit <span class="text-muted fw-normal">(opsional)</span></label>
-          <input type="text" id="uploadCredit" class="form-control" placeholder="Nama, Instagram, link...">
+          <input type="text" id="uploadCredit" class="form-control"
+          placeholder="Nama / Instagram / link...">
         </div>
       </div>
       <div class="modal-footer border-top py-3 px-4">

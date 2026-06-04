@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function buildPopup(poi) {
     const inRoute = routes.some(r => r.poi_id == poi.id);
-    // FIX: quote syntax diperbaiki, pakai template literal yang konsisten
     const uploadBtn = IS_LOGGED
       ? `<button onclick="openUpload(${poi.id}, '${poi.name.replace(/'/g, "&#39;")}')" style="background:oklch(0.623 0.214 231);color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;cursor:pointer"><i class="fa-solid fa-camera"></i></button>`
       : '';
@@ -213,18 +212,18 @@ document.addEventListener('DOMContentLoaded', () => {
           ${r.distance_from_prev ? `<div class="text-muted mb-2" style="font-size:.7rem"><i class="fa-solid fa-ruler me-1"></i>${r.distance_from_prev} km dari titik sebelumnya</div>` : ''}
           <div class="card card-flatty mb-2">
           <div class="card-body">
-          <button class="btn badge badge-primary btn-remove-route position-absolute top-0 end-0 m-2" data-idx="${i}">
+          <button class="badge badge-accent btn-remove-route position-absolute top-0 end-0 m-3" data-idx="${i}">
           <i class="fa-solid fa-xmark"></i>
           </button>
             ${r.poi_image
               ? `<img src="${escHtml(r.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
               : `<img src="uploads/poi-placeholder.jpg" class="card-img">`
             }
-            <h6>${escHtml(r.name)}</h6>
+            <h5 class="mb-2">${escHtml(r.name)}</h5>
             <p class="text-muted small">${escHtml(r.description || 'Deskripsi belum tersedia.')}</p>
           </div>
           </div>
-          ${IS_LOGGED ? `<div class="mt-1"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan untuk POI ini..." value="${escHtml(r.note)}" style="font-size:.9rem" ${window.isLoadedTrip ? 'disabled' : ''}></div>` : ''}
+          ${IS_LOGGED ? `<div class="mt-2"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan untuk POI ini..." value="${escHtml(r.note)}" style="font-size:.9rem" ${window.isLoadedTrip ? 'disabled' : ''}></div>` : ''}
         </div>
       </div>`).join('');
 
@@ -449,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!matches.length) { box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>'; return; }
       matches.forEach(p => {
         const el = document.createElement('button');
-        el.type = 'button'; el.className = 'btn-popup text-purple'; el.textContent = p.name;
+        el.type = 'button'; el.className = 'btn-popup'; el.textContent = p.name;
         el.addEventListener('click', () => {
           document.getElementById('uploadPoiId').value = p.id;
           document.getElementById('uploadPoiName').textContent = p.name;
@@ -550,7 +549,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ? `<img src="${escHtml(poi.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
           : `<img src="uploads/poi-placeholder.jpg" class="card-img">`
         }
-          <h6>${escHtml(poi.name)}</h6>
+          <h5 class="mb-2">${escHtml(poi.name)}</h5>
           <p class="text-muted small">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
           ${poi.poi_url
             ? `<a href="${escHtml(poi.poi_url)}" class="small" target="_blank" rel="noopener">
@@ -611,7 +610,7 @@ document.addEventListener('DOMContentLoaded', () => {
         wrap.innerHTML = list.map(trip => `
         <div class="card card-flatty">
           <div class="card-body">
-            <h5>${escHtml(trip.title || 'Trip tanpa nama')}</h5>
+            <h5 class="mb-2">${escHtml(trip.title || 'Trip tanpa nama')}</h5>
             <p class="text-muted small">
               ${trip.total_stops ? `<span class="me-2"><i class="fa-solid fa-map-pin me-1 text-purple"></i>${trip.total_stops} stop</span>` : ''}
               ${trip.total_distance ? `<span><i class="fa-solid fa-ruler me-1 text-muted"></i>${trip.total_distance} km</span>` : ''}

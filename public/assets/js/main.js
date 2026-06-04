@@ -27,8 +27,13 @@ function escapeHTML(str) {
 function formatText(text) {
   let out = escapeHTML(text);
   out = out.replace(/\*\*(.+?)\*\*/g, '$1');
+  // parse markdown link → <a>
+  out = out.replace(
+    /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,
+    '<a href="$2" target="_blank" rel="noopener noreferrer" class="chat-link">$1</a>'
+  );
   out = out.replace(/^- (.+)/gm, '<li>$1</li>');
-  out = out.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
+  out = out.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
   out = out.replace(/\n/g, '<br>');
   return out;
 }

@@ -3,8 +3,8 @@
     <div class="col-lg-8">
 
       <div class="text-center mb-4">
-        <p class="eyebrow text-muted mb-2">AI-Powered</p>
-        <h2>Rencanakan Tripmu dengan AI</h2>
+        <span class="text-eyebrow">Itenerary</span>
+        <h2 class="text-sub-hero">Rencanakan Tripmu dengan AI</h2>
         <p class="text-muted">Ceritain mau ngapain di Bandung, biar AI yang susunin itinerary-nya</p>
       </div>
 

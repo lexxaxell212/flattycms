@@ -19,10 +19,10 @@
                 'X-Requested-With': 'XMLHttpRequest'
             },
             body: new URLSearchParams({
-                content_type: 'blog',
-                content_id: btn.dataset.id,
-                csrf_token: CONFIG.csrfToken
-            })
+              content_type: btn.dataset.type,
+              content_id: btn.dataset.id,
+              csrf_token: CONFIG.csrfToken
+          })
         })
         .then(r => r.json())
         .then(data => {

@@ -72,7 +72,7 @@
             ${p.caption ? `<div class="text-muted text-truncate" style="font-size:.72rem">${p.caption}</div>` : ''}
             <div class="text-muted mt-1 mb-2" style="font-size:.68rem">${formatDate(p.created_at)}</div>
             <button class="btn btn-danger btn-sm w-100" onclick="deleteContrib('photo', ${p.id})">
-              <i class="fa-solid fa-trash fa-xs me-1"></i>Hapus
+              Hapus<i class="fa-solid fa-trash fa-xs ms-2"></i>
             </button>
           </div>
         </div>
@@ -100,8 +100,8 @@
           </div>
           <div class="text-muted mb-3" style="font-size:.7rem">${formatDate(t.created_at)}</div>
           <div class="d-flex gap-2">
-            <a href="/trip" class="btn btn-primary btn-sm">
-              <i class="fa-solid fa-map me-1"></i>Buka di Map
+            <a href="/trip" class="btn btn-primary btn-sm"> Buka di Map <i
+            class="fa-solid fa-map ms-2"></i>
             </a>
             <button class="btn btn-danger btn-sm" onclick="deleteContrib('trip', ${t.id})">
               <i class="fa-solid fa-trash"></i>
@@ -190,7 +190,7 @@
     if (!name) { flattyToast('warning', 'Nama tidak boleh kosong.'); return; }
 
     const btn = document.getElementById('btnSaveName');
-    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
+    btn.innerHTML = 'Menyimpan...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
     btn.disabled  = true;
 
     const fd = new FormData();
@@ -213,7 +213,7 @@
     } catch(e) {
       flattyToast('error', 'Tidak bisa menyimpan nama.');
     } finally {
-      btn.innerHTML = '<i class="fa-solid fa-check me-1"></i>Simpan';
+      btn.innerHTML = 'Simpan<i class="fa-solid fa-check ms-2"></i>';
       btn.disabled  = false;
     }
   });

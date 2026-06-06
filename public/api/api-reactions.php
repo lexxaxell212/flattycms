@@ -7,7 +7,7 @@ validate_csrf();
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['user'])) {
-    echo json_encode(['success' => false, 'message' => 'Login dulu ya~']);
+    echo json_encode(['success' => false, 'message' => 'Login dulu ya']);
     exit;
 }
 

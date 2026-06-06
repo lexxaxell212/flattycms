@@ -66,7 +66,7 @@
           <div class="col-12 text-center py-5 text-muted">
             <i class="fa-solid fa-image fa-2x mb-3 d-block opacity-25"></i>
             Belum ada foto${poi_id ? ' untuk lokasi ini' : ''}
-            ${IS_LOGGED ? '<br><button class="gal-btn gal-btn--primary mt-3" id="btnEmptyUpload"><i class="fa-solid fa-camera me-1"></i>Upload pertama!</button>' : ''}
+            ${IS_LOGGED ? '<br><button class="gal-btn gal-btn--primary mt-3" id="btnEmptyUpload"><i class="fa-solid fa-camera me-"></i>Upload pertama!</button>' : ''}
           </div>`;
         if (IS_LOGGED) document.getElementById('btnEmptyUpload')?.addEventListener('click', () => openUploadModal());
         renderPagination(0, 0);
@@ -74,7 +74,7 @@
       }
       grid.innerHTML = json.data.map(p => `
         <div class="col-6 col-md-4 col-lg-3">
-          <div class="card border-0 shadow-sm h-100 overflow-hidden" style="border-radius:.875rem">
+          <div class="card card-flatty h-100 overflow-hidden" style="border-radius:.875rem">
             <div class="position-relative" style="padding-top:75%;cursor:pointer"
               onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${p.poi_name}','${p.uploader_name}','${p.caption||''}','${p.created_at}',${p.id},${p.user_id})">
               <img src="${BASE}/uploads/${p.photo_path}"
@@ -83,7 +83,7 @@
                    loading="lazy"
                    onerror="this.src='${BASE}/assets/img/placeholder.jpg'">
               <div class="position-absolute top-0 end-0 m-2">
-                <span class="badge bg-dark bg-opacity-75 small">${p.poi_name}</span>
+                <span class="badge badge-dark small">${p.poi_name}</span>
               </div>
             </div>
             <div class="card-body p-2">
@@ -339,7 +339,7 @@
       const file   = document.getElementById('uploadFile').files[0];
       if (!poi_id || !file) { flattyToast('warning', 'Pilih lokasi dan foto dulu.'); return; }
       const btn = document.getElementById('btnKirimUpload');
-      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-1"></i>Mengupload...';
+      btn.innerHTML = 'Mengupload...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
       btn.disabled  = true;
       const fd = new FormData();
       fd.append('csrf_token', CSRF);
@@ -359,7 +359,7 @@
       } catch(e) {
         flattyToast('error', 'Gagal upload foto.');
       } finally {
-        btn.innerHTML = '<i class="fa-solid fa-upload me-1"></i>Upload';
+        btn.innerHTML = 'Upload<i class="fa-solid fa-upload ms-2"></i>';
         btn.disabled  = false;
       }
     });
@@ -370,9 +370,9 @@
       const cerita = document.getElementById('reviewCerita').value.trim();
       if (!poi_id)            { flattyToast('warning', 'Pilih lokasi dulu.'); return; }
       if (rating < 1)         { flattyToast('warning', 'Kasih rating dulu.'); return; }
-      if (cerita.length < 10) { flattyToast('warning', 'Ceritamu terlalu singkat.'); return; }
+      if (cerita.length < 3) { flattyToast('warning', 'Ceritamu terlalu singkat.'); return; }
       const btn = document.getElementById('btnKirimReview');
-      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-1"></i>Mengirim...';
+      btn.innerHTML = 'Mengirim...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
       btn.disabled  = true;
       const fd = new FormData();
       fd.append('csrf_token', CSRF);
@@ -393,7 +393,7 @@
       } catch(e) {
         flattyToast('error', 'Gagal kirim review.');
       } finally {
-        btn.innerHTML = '<i class="fa-solid fa-paper-plane me-1"></i>Kirim Review';
+        btn.innerHTML = 'Kirim Review<i class="fa-solid fa-paper-plane ms-2"></i>';
         btn.disabled  = false;
       }
     });

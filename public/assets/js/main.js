@@ -153,7 +153,7 @@ async function sendMessage() {
     removeLoadingBubble(loadingId);
     const msg = err.name === "AbortError"
       ? "Request timeout."
-      : "Koneksi bermasalah. Periksa jaringanmu.";
+      : "Koneksi bermasalah.";
     addMessage(msg, "error");
     conversationHistory.pop();
   } finally {
@@ -848,7 +848,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         btn.disabled      = true;
         btn.style.opacity = '0.7';
-        btn.innerHTML     = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
+        btn.innerHTML     = 'MENGIRIM <i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
         const formData = new FormData(form);
         fetch(CONFIG.baseUrl + '/api/api-newsletter.php', {
             method: 'POST',
@@ -870,7 +870,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .finally(() => {
             btn.disabled      = false;
             btn.style.opacity = '1';
-            btn.innerHTML     = 'BERLANGGANAN <i class="fa-solid fa-paper-plane"></i>';
+            btn.innerHTML     = 'BERLANGGANAN <i class="fa-solid fa-paper-plane ms-2"></i>';
         });
     });
 });

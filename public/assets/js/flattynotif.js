@@ -62,24 +62,20 @@ function flattyClose(overlay) {
   setTimeout(() => overlay.remove(), 250);
 }
 
-//usage
-//flattyToast('success', 'Data berhasil disimpan!');
-//flattyToast('error', 'Email sudah digunakan.');
-//flattyToast('warning', 'Sesi akan segera berakhir.');
-//flattyToast('info', 'Update tersedia.');
-
-//flattyToast('success', 'Berhasil!', 'bottom');
-//flattyToast('error', 'Gagal upload.', 'bottom');
-
-//flattyConfirm('Yakin mau hapus ini?', () => {
-    // action kalau confirm
-//});
-
-//flattyConfirm('Yakin mau hapus ini?', 
-//   () => flattyToast('success', 'Dihapus!'),
-//  () => flattyToast('info', 'Dibatalkan.')
-//);
-
-//flattyConfirm('Yakin logout?', () => {
-//    window.location.href = '/api/auth/logout.php';
-//});
+/** usage
+flattyToast('success', 'Data berhasil disimpan!');
+flattyToast('error', 'Email sudah digunakan.');
+flattyToast('warning', 'Sesi akan segera berakhir.');
+flattyToast('info', 'Update tersedia.');
+flattyToast('success', 'Berhasil!', 'bottom');
+flattyToast('error', 'Gagal upload.', 'bottom');
+flattyConfirm('Yakin mau hapus ini?', () => {
+action kalau confirm});
+flattyConfirm('Yakin mau hapus ini?', 
+   () => flattyToast('success', 'Dihapus!'),
+  () => flattyToast('info', 'Dibatalkan.')
+  );
+flattyConfirm('Yakin logout?', () => {
+   window.location.href = '/api/auth/logout.php';
+  });
+**/

@@ -63,7 +63,7 @@
   async function generateItinerary() {
     const input = document.getElementById('aiPromptInput').value.trim();
     if (!input) {
-      flattyToast('warning', 'Tulis dulu rencanamu~');
+      flattyToast('warning', 'Tulis dulu rencanamu');
       return;
     }
 
@@ -72,7 +72,7 @@
     const loader = document.getElementById('aiLoader');
 
     btn.disabled    = true;
-    btn.innerHTML   = '<i class="fa-solid fa-circle-notch fa-spin me-1"></i>AI lagi mikir...';
+    btn.innerHTML   = 'MEMBUAT <i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
     loader.style.display  = '';
     result.innerHTML      = '';
 
@@ -94,7 +94,7 @@
       flattyToast('error', 'Tidak bisa menghubungi AI. Coba lagi.');
     } finally {
       btn.disabled  = false;
-      btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles me-1"></i>Buat Itinerary';
+      btn.innerHTML = 'BUAT ITINERARY<i class="fa-solid fa-wand-magic-sparkles ms-2"></i>';
       loader.style.display = 'none';
     }
   }

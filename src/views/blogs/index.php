@@ -31,7 +31,6 @@ if ($id > 0) {
 $categories = safe_get_categories($pdo);
 ?>
 <script src="<?= JS_URL ?>reactions.js" defer></script>
-<main id="content">
 <div class="container">
 <?php if ($post): ?>
     <div class="row justify-content-center">
@@ -115,8 +114,7 @@ $categories = safe_get_categories($pdo);
                 <button 
                     id="btn-reaction"
                     class="btn <?= $user_liked ? 'btn-primary btn-sm' :
-                    'btn-outline-primary btn-sm' ?>"
-                    data-id="<?= $id ?>">
+                    'btn-outline-primary btn-sm' ?>" data-id="<?= $id ?>" data-type="blog">
                     <i class="fas fa-heart me-1"></i>
                     <span id="reaction-count"><?= $reaction_count ?></span>
                 </button>
@@ -348,4 +346,3 @@ $categories = safe_get_categories($pdo);
       </section>
 <?php endif; ?>
 </div>
-</main>

@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fd = new FormData();
     fd.append('coordinates', JSON.stringify(points));
     const btn = document.getElementById('btnGenerateRoute');
-    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-1"></i>Membuat rute...';
+    btn.innerHTML = 'Membuat Rute...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
     btn.disabled  = true;
     try {
       const res  = await fetch(`${BASE}/api/map/api-route.php`, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
       flattyToast('error', 'Tidak bisa buat rute.');
     } finally {
-      btn.innerHTML = '<i class="fa-solid fa-route me-1"></i>Buat Rute';
+      btn.innerHTML = 'Buat Rute<i class="fa-solid fa-route ms-2"></i>';
       btn.disabled  = false;
     }
   });
@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }))));
       const btn     = document.getElementById('btnConfirmSave');
       const btnOrig = btn.innerHTML;
-      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-1"></i>Menyimpan...';
+      btn.innerHTML = 'Menyimpan...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
       btn.disabled  = true;
       try {
         const res  = await fetch(API_TRIP, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
@@ -481,7 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const file   = document.getElementById('uploadFile').files[0];
       if (!poi_id || !file) { flattyToast('warning', 'Pilih lokasi dan foto dulu.'); return; }
       const btn = document.getElementById('btnKirimUpload');
-      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-1"></i>Mengupload...';
+      btn.innerHTML = 'Mengupload...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
       btn.disabled  = true;
       const fd = new FormData();
       fd.append('csrf_token', CSRF); fd.append('poi_id', poi_id);
@@ -498,7 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (e) {
         flattyToast('error', 'Gagal upload foto.');
       } finally {
-        btn.innerHTML = '<i class="fa-solid fa-upload me-1"></i>Upload';
+        btn.innerHTML = 'Upload<i class="fa-solid fa-upload ms-2"></i>';
         btn.disabled  = false;
       }
     });
@@ -555,9 +555,9 @@ document.addEventListener('DOMContentLoaded', () => {
           ${poi.poi_url
             ? `<a href="${escHtml(poi.poi_url)}" class="small" target="_blank" rel="noopener">
                 Lihat
-                <i class="arrow-icon fas fa-angle-right me-1"></i>
+                <i class="arrow-icon fas fa-angle-right ms-2"></i>
                </a>`
-            : `<span class="text-muted small">
+            : `<span class="text-red small">
                 Belum ada link
                </span>`
           }
@@ -620,10 +620,10 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div class="card-footer d-flex gap-2">
             <button class="btn btn-primary btn-sm" onclick="loadSavedTrip(${trip.id})">
-              <i class="fa-solid fa-route me-1"></i>Buka
+              Buka<i class="fa-solid fa-route ms-2"></i>
             </button>
             <button class="btn btn-danger btn-sm" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || 'Trip ini')}')">
-              <i class="fa-solid fa-trash"></i>
+              Hapus<i class="fa-solid fa-trash ms-2"></i>
             </button>
           </div>
         </div>`).join('');

@@ -1,34 +1,34 @@
-<section id="ai-surprise-me" class="container">
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
-
-      <div class="text-center mb-4">
-        <span class="text-eyebrow">Itenerary</span>
-        <h2 class="text-sub-hero">Rencanakan Tripmu dengan AI</h2>
-        <p class="text-muted">Ceritain mau ngapain di Bandung, biar AI yang susunin itinerary-nya</p>
-      </div>
-
-      <div class="d-flex flex-wrap gap-2 mb-3 justify-content-center" id="homeAiChips">
-        <span class="ai-chip badge badge-accent" data-val="Kuliner">🍜 Kuliner</span>
-        <span class="ai-chip badge badge-accent" data-val="Alam">🌿 Alam</span>
-        <span class="ai-chip badge badge-accent" data-val="Belanja">🛍 Belanja</span>
-        <span class="ai-chip badge badge-accent" data-val="Sejarah">🏛 Sejarah</span>
-        <span class="ai-chip badge badge-accent" data-val="Budget">💰 Budget</span>
-        <span class="ai-chip badge badge-accent" data-val="Premium">✨ Premium</span>
-      </div>
-
-      <textarea id="homeAiPrompt" class="form-control mb-2" rows="3"
-        placeholder="Contoh: trip Bandung 2 hari, suka kuliner dan alam..."
-        style="resize:none"></textarea>
-
-      <a id="btnHomeGenerate" class="btn btn-primary w-100">
-        <i class="fa-solid fa-wand-magic-sparkles me-1"></i>Buat Itinerary
-      </a>
-
+<div class="container">
+  <section id="surprise-me" class="surprise-me-section mx-auto"  style="max-width:740px">
+    <div class="text-center mb-4">
+      <span class="text-eyebrow">Itinerary</span>
+      <h2 class="text-hero">Surprise Me<em><i>!</i></em></h2>
+      <p class="p-desc">Ceritain mau ngapain di Bandung, biar AI yang susunin itinerary-nya</p>
     </div>
-  </div>
-</section>
-
+    <div class="surprise-me-panel">
+      <p class="fw-semibold small text-muted mb-1 text-center">Quick Picks</p>
+      <div class="d-flex flex-wrap gap-0 mb-3 justify-content-center" id="homeAiChips">
+        <span class="ai-chip badge badge-red sparkle-origin" data-val="Kuliner"><i class="fas fa-utensils me-1"></i> Kuliner</span>
+        <span class="ai-chip badge badge-green sparkle-origin" data-val="Alam"><i class="fas fa-leaf me-1"></i> Alam</span>
+        <span class="ai-chip badge badge-accent sparkle-origin" data-val="Belanja"><i class="fas fa-bag-shopping me-1"></i> Belanja</span>
+        <span class="ai-chip badge badge-white sparkle-origin" data-val="Sejarah"><i class="fas fa-landmark me-1"></i> Sejarah</span>
+        <span class="ai-chip badge badge-blue sparkle-origin" data-val="Budget"><i class="fas fa-wallet me-1"></i> Budget</span>
+        <span class="ai-chip badge badge-primary sparkle-origin" data-val="Premium"><i class="fas fa-star me-1"></i> Premium</span>
+      </div>
+      <div class="d-flex justify-content-center flex-column">
+        <div class="textarea-wrap">
+          <textarea id="homeAiPrompt" class="form-control mb-4 mx-auto" rows="3" placeholder=" " style="resize:none;"></textarea>
+          <div class="ticker-text">
+            <span data-ticker="Buat itinerary kuliner Bandung 2hari..|Rute
+            wisata alam Lembang seharian..|Itinerary belanja factory outlet
+            Bandung..">Buat itinerary kuliner Bandung 2hari</span>
+          </div>
+        </div>
+        <a id="btnHomeGenerate" class="btn btn-primary mx-auto">Buat Itinerary<i class="fa-solid fa-wand-magic-sparkles ms-1"></i></a>
+      </div>
+    </div>
+  </section>
+</div>
 <script>
 (function () {
   document.querySelectorAll('#homeAiChips .ai-chip').forEach(chip => {
@@ -41,7 +41,6 @@
       if (active) ta.value += (ta.value ? ' ' : '') + `(${active})`;
     });
   });
-
   document.getElementById('btnHomeGenerate').addEventListener('click', () => {
     const prompt = document.getElementById('homeAiPrompt').value.trim();
     if (!prompt) {

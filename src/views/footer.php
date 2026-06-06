@@ -1,28 +1,23 @@
 </div>
 <footer id="footer">
   <div class="container">
-    <section id="newsletter-ayokebandung.id" class="footer-newsletter">
-      <div class="row justify-content-center">
-        <div class="col text-center">
-          <div class="mb-4">
-            <h2 class="text-title">NEWSLETTER</h2>
-            <span class="text-muted">Dapatkan event dan update Bandung terkini via email.</span>
-          </div>
-          <div class="mx-auto" style="max-width:440px">
-            <form class="newsletter-form" id="newsletterForm">
+    <section class="d-flex justify-content-center">
+      <div class="flex-column text-center">
+        <div class="mb-4">
+            <h3>NEWSLETTER</h3>
+            <p class="small">Dapatkan event dan update Bandung terkini via email.</p>
+        </div>
+        <form class="newsletter-form" id="newsletterForm">
               <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
-              <input type="email" name="email" class="form-control newsletter mb-3"
-                id="emailInput" placeholder="nama@email.com" required>
+              <input type="email" name="email" class="form-control mb-4" id="emailInput" placeholder="nama@email.com" required>
               <button type="submit" class="btn btn-primary" id="submitBtn">
                 Berlangganan
                 <i class="arrow-icon fas fa-paper-plane"></i>
               </button>
-            </form>
-          </div>
+          </form>
         </div>
-      </div>
     </section>
-    <div class="footer-nav">
+    <section class="footer-nav">
       <div class="footer-nav__col">
         <span class="footer-nav__label">Halaman</span>
         <ul>
@@ -56,13 +51,11 @@
           <a class="logo-social" href="#" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
         </div>
       </div>
-    </div>
-    <hr class="footer-hr">
+    </section>
     <div class="footer-bottom">
-      <p class="text-uppercase text-muted small mt-4"
-      style="letter-spacing:2px;opacity:.9;">
+      <span class="text-uppercase text-muted small" style="letter-spacing:2px;opacity:.9;">
         <?= date('Y') ?> <?= SITE_NAME ?>
-      </p>
+      </span>
     </div>
   </div>
 </footer>

@@ -1,17 +1,15 @@
-<section class="container">
-  <div class="khb-section">
-    <div class="khb-header">
-      <div class="khb-header__left">
+<div class="container">
+  <section id="kenapa-harus-bandung">
+    <div class="mb-4">
         <span class="text-eyebrow">Discover Bandung</span>
         <h2 class="text-sub-hero">Kenapa Harus Bandung?</h2>
-        <p class="mb-2">Bandung 2026: Perpaduan sempurna inovasi digital, kesejukan alam, dan kreativitas kuliner terbaik.</p>
-      </div>
+        <p class="p-desc">Bandung 2026: Perpaduan sempurna inovasi digital, kesejukan alam, dan kreativitas kuliner terbaik.</p>
     </div>
     <div class="khb-grid">
       <div class="khb-item">
-        <div class="khb-icon-wrap mx-auto primary">
+        <div class="khb-icon-wrap red">
          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-         stroke="var(--bg-primary)" stroke-width="2" stroke-linecap="round"
+         stroke="var(--bg-red)" stroke-width="2" stroke-linecap="round"
          stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline
          icon-tabler-coffee">
           	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -22,15 +20,15 @@
           	<path d="M16.746 16.726a3 3 0 1 0 .252 -5.555" />
           </svg>
         </div>
-        <h3 class="khb-item__title">
+        <h5>
           Surga Kuliner & Kafe Estetik
-        </h3>
-        <p class="text-muted">
-          Bandung adalah pusatnya inovasi makanan. Dari jajanan legendaris kaki lima hingga kafe aesthetic bernuansa alam di dataran tinggi, kota ini selalu punya tren kuliner baru yang memanjakan lidah para petualang rasa.
+        </h5>
+        <p class="small">
+          Dari kaki lima legendaris hingga kafe aesthetic di dataran tinggi, Bandung selalu punya tren kuliner baru yang bikin ketagihan.
         </p>
       </div>
       <div class="khb-item">
-        <div class="khb-icon-wrap mx-auto green">
+        <div class="khb-icon-wrap green">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24
           24" fill="none" stroke="var(--bg-green)" stroke-width="2" stroke-linecap="round"
           stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline
@@ -40,15 +38,15 @@
           	<path d="M14 17v3a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-3" />
           </svg>
         </div>
-        <h3 class="khb-item__title green-t">
+        <h5>
           Pesona Alam & Udara Sejuk
-        </h3>
-        <p class="text-muted">
-          Dikelilingi pegunungan asri seperti Lembang dan Ciwidey, Bandung menawarkan pelarian sempurna dari penatnya kota. Hamparan kebun teh, hutan pinus berkabut, dan udara yang sejuk menjadikannya tempat terbaik untuk healing.
+        </h5>
+        <p class="small">
+          Dikelilingi Lembang dan Ciwidey - kebun teh, hutan pinus berkabut, dan udara sejuk yang sempurna untuk healing.
         </p>
       </div>
       <div class="khb-item">
-        <div class="khb-icon-wrap mx-auto accent">
+        <div class="khb-icon-wrap accent">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24
           24" fill="none" stroke="var(--bg-accent)" stroke-width="2" stroke-linecap="round"
           stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline
@@ -59,15 +57,15 @@
           	<path d="M18 22l3.35 -3.284a2.143 2.143 0 0 0 .005 -3.071a2.242 2.242 0 0 0 -3.129 -.006l-.224 .22l-.223 -.22a2.242 2.242 0 0 0 -3.128 -.006a2.143 2.143 0 0 0 -.006 3.071l3.355 3.296" />
           </svg>
         </div>
-        <h3 class="khb-item__title accent-t">
+        <h5>
           Kiblat Fashion & Kreativitas
-        </h3>
-        <p class="text-muted">
-          Dijuluki Paris van Java, Bandung adalah magnet belanja dan tren mode. Mulai dari factory outlet hingga rilisan brand lokal kreatif, semua menawarkan produk berkualitas tinggi dengan harga yang tetap ramah di kantong.
+        </h5>
+        <p class="small">
+          Dari factory outlet hingga brand lokal kreatif, Bandung adalah kiblat fashion dengan harga yang tetap ramah di kantong.
         </p>
       </div>
       <div class="khb-item">
-        <div class="khb-icon-wrap mx-auto blue">
+        <div class="khb-icon-wrap blue">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24
           24" fill="none" stroke="var(--bg-blue)" stroke-width="2" stroke-linecap="round"
           stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline
@@ -86,13 +84,13 @@
           	<path d="M17 16v.01" />
           </svg>
         </div>
-        <h3 class="khb-item__title blue-t">
+        <h5>
           Romantisme Kota & Akses Cepat
-        </h3>
-        <p class="text-muted">
-          Perpaduan arsitektur Art Deco klasik di sepanjang Jalan Braga dengan kemudahan akses Kereta Cepat Whoosh membuat liburan ke Bandung terasa sangat romantis, praktis, dan instan untuk melepas penat akhir pekan.
+        </h5>
+        <p class="small">
+          Arsitektur Art Deco klasik di Braga, dipadu kemudahan akses Kereta Cepat Whoosh - liburan akhir pekan yang praktis dan romantis.
         </p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>

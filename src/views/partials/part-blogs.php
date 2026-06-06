@@ -3,18 +3,21 @@ require_once LIB_PATH . "blogs.php";
 
 $cat_id   = (int) ($_GET["cat"]  ?? 0);
 $page     = max(1, (int) ($_GET["page"] ?? 1));
-$per_page = 10;
+$per_page = 6;
 $offset   = ($page - 1) * $per_page;
 $posts      = safe_get_posts($pdo, $per_page, $offset, $cat_id);
 $categories = safe_get_categories($pdo);
 ?>
 <script src="<?= JS_URL ?>artikel-slider.js" defer></script>
-<section class="container" id="artikel-terbaru" aria-label="Artikel Terbaru">
-    <span class="text-eyebrow">ARTIKEL</span>
-    <h2 class="text-sub-hero">Blog Terbaru</h2>
-    <p class="mb-4">
-      Cerita, tips, dan rekomendasi terbaik untuk perjalananmu.
-    </p>
+<div class="container">
+  <section id="artikel-terbaru" aria-label="Artikel Terbaru">
+    <div class="mb-4">
+      <span class="text-eyebrow">BLOGS</span>
+      <h2>Artikel</h2>
+      <p>
+        Cerita, tips, dan rekomendasi terbaik untuk perjalananmu.
+      </p>
+    </div>
     <div id="artikel-slider-wrapper">
       <div class="artikel-slider-viewport">
         <div class="artikel-slider-track" role="list">
@@ -26,7 +29,7 @@ $categories = safe_get_categories($pdo);
             <?php else: ?>
               <?php foreach ($posts as $p): ?>
               <article class="artikel-slide-card card card-flatty" style="box-shadow:none;" role="listitem">
-                <span class="badge bg-gray top-0 end-0 position-absolute m-4">
+                <span class="badge badge-dark top-0 end-0 position-absolute m-4">
                         <?= htmlspecialchars(
                           $p["cat_name"],
                           ENT_QUOTES,
@@ -54,7 +57,7 @@ $categories = safe_get_categories($pdo);
                   <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="btn
                   btn-primary btn-sm btn-asl-read">
                     Baca Selengkapnya
-                    <i class="arrow-icon fas fa-angle-right ms-1" aria-hidden="true"></i>
+                    <i class="arrow-icon fas fa-angle-right ms-2" aria-hidden="true"></i>
                   </a>
                 </div>
               </article>
@@ -64,14 +67,13 @@ $categories = safe_get_categories($pdo);
         </div>
         <div class="asl-controls-row">
           <div class="artikel-slider-dots" role="tablist" aria-label="Navigasi slide"></div>
-          <button class="asl-nav-btn artikel-btn-prev text-primary"
-                  aria-label="Artikel sebelumnya" disabled>
+          <button class="asl-nav-btn artikel-btn-prev" aria-label="Artikel sebelumnya" disabled>
             <i class="fas fa-angle-left" aria-hidden="true"></i>
           </button>
-          <button class="asl-nav-btn artikel-btn-next text-primary"
-                  aria-label="Artikel selanjutnya">
+          <button class="asl-nav-btn artikel-btn-next" aria-label="Artikel selanjutnya">
             <i class="fas fa-angle-right" aria-hidden="true"></i>
           </button>
       </div>
     </div>
-</section>
+  </section>
+</div>

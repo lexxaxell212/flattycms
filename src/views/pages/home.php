@@ -8,6 +8,6 @@ safe_include(SRC_PATH . "partials/part-gallery.php", "Gallery");
 safe_include(SRC_PATH . "partials/part-poi-hotel.php", "POI Hotel");
 safe_include(SRC_PATH . "partials/part-cta-hotel.php", "CTA Hotel");
 safe_include(SRC_PATH . "partials/part-trip-planner.php", "Trip Planner");
-safe_include(SRC_PATH . "partials/part-blogs.php", "Artikel Terbaru");
 safe_include(SRC_PATH . "partials/part-review.php", "Cerita Komunitas");
+safe_include(SRC_PATH . "partials/part-blogs.php", "Artikel Terbaru");
 ?>

@@ -874,3 +874,106 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// sparkles
+function spawnSparkle(el) {
+  const colors = [
+  "#7c3aed",
+  "#9d5cf6",
+  "#5b21b6",
+  "#c084fc",
+  "#a78bfa",
+  "#e879f9",
+  "#f0abfc",
+  ];
+  const count = 8;
+
+  for (let i = 0; i < count; i++) {
+    const dot = document.createElement("span");
+    dot.classList.add("sparkle-particle");
+
+    const angle = (360 / count) * i;
+    const dist = 20 + Math.random() * 20;
+    const rad = (angle * Math.PI) / 180;
+    const tx = Math.cos(rad) * dist;
+    const ty = Math.sin(rad) * dist;
+
+    dot.style.setProperty("--tx", `${tx}px`);
+    dot.style.setProperty("--ty", `${ty}px`);
+    dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+    dot.style.left = "50%";
+    dot.style.top = "50%";
+    dot.style.marginLeft = "-3px";
+    dot.style.marginTop = "-3px";
+    dot.style.animationDelay = `${Math.random() * 80}ms`;
+
+    el.appendChild(dot);
+    dot.addEventListener("animationend", () => dot.remove());
+  }
+}
+
+document.querySelectorAll(".sparkle-origin").forEach((el) => {
+  el.addEventListener("click", () => spawnSparkle(el));
+});
+
+// textRotator
+function initTextRotator(el) {
+  const texts = el.dataset.rotate.split("|");
+  let index = 0;
+
+  setInterval(() => {
+    el.style.opacity = "0";
+    setTimeout(() => {
+      index = (index + 1) % texts.length;
+      el.textContent = texts[index];
+      el.style.opacity = "1";
+    }, 400);
+  }, 5000);
+}
+
+document.querySelectorAll("[data-rotate]").forEach(initTextRotator);
+
+// ticker text
+function initTicker(el) {
+  const texts = el.dataset.ticker.split("|");
+  let index = 0;
+
+  setInterval(() => {
+    el.style.transform = "translateY(-30%)";
+    el.style.opacity = "0";
+    setTimeout(() => {
+      index = (index + 1) % texts.length;
+      el.textContent = texts[index];
+      el.style.transition = "none";
+      el.style.transform = "translateY(30%)";
+      el.style.opacity = "0";
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          el.style.transition = "transform 400ms cubic-bezier(0.16, 1, 0.3, 1), opacity 400ms ease";
+          el.style.transform = "translateY(0)";
+          el.style.opacity = "1";
+        });
+      });
+    }, 400);
+  }, 5000);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-ticker]").forEach(initTicker);
+});
+
+// reveal
+document.addEventListener('DOMContentLoaded', () => {
+  const sections = document.querySelectorAll('section');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  sections.forEach(el => observer.observe(el));
+});

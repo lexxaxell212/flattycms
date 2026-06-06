@@ -2,15 +2,15 @@
 require_once LIB_PATH . "v-review.php";
 ?>
 <?php if (!empty($_rev_items)): ?>
-<section class="rev-section">
-  <div class="container">
+<div class="container">
+  <section class="rev-section">
     <div class="d-flex align-items-end justify-content-between mb-4">
       <div>
         <span class="text-eyebrow">REVIEW</span>
-        <h2 class="text-sub-hero">Traveler Story</h2>
+        <h2 class="text-sub-hero">Traveler <em class="styled">Sto</em>ry</h2>
       </div>
       <a href="/gallery" class="link-all">
-        Lihat Semua <i class="fas fa-arrow-right ms-1"></i>
+        Lihat Semua <i class="fas fa-arrow-right ms-2"></i>
       </a>
     </div>
     <div class="rev-grid">
@@ -28,7 +28,8 @@ require_once LIB_PATH . "v-review.php";
         <div class="rev-card__title"><?= safe_html($_rev['judul']) ?></div>
         <?php endif; ?>
         <p class="rev-card__text">
-          <?= safe_html(mb_substr($_rev['cerita'], 0, 160) . (mb_strlen($_rev['cerita']) > 160 ? '…' : '')) ?>
+          <?= safe_html(mb_substr($_rev['cerita'], 0, 160) .
+          (mb_strlen($_rev['cerita']) > 160 ? '…' : '')) ?>
         </p>
         <div class="rev-card__author">
           <img src="<?= !empty($_rev['avatar']) ? safe_html($_rev['avatar']) : '/uploads/default.jpg' ?>"
@@ -38,13 +39,14 @@ require_once LIB_PATH . "v-review.php";
           <div>
             <div class="rev-card__name"><?= safe_html($_rev['user_name']) ?></div>
             <div class="rev-card__poi">
-              <i class="fas fa-location-dot me-1"></i><?= safe_html($_rev['poi_name']) ?>
+              <i class="fas fa-location-dot me-1"></i><?=
+              safe_html($_rev['poi_name']) ?>
             </div>
           </div>
         </div>
       </div>
       <?php endforeach; ?>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 <?php endif; ?>

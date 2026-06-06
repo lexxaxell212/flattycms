@@ -21,11 +21,11 @@ $slides = [
     <span class="hero-eyebrow">Explore</span>
     <h1 class="hero-title">BANDUNG</h1>
     <p class="hero-lead">Mulai dari mana? Mau kemana? Ngapain aja?</p>
-    <div class="d-flex flex-column align-items-start gap-2">
-      <a href="/trip" class="btn btn-primary mb-2">
+    <div class="d-flex flex-column align-items-start gap-3">
+      <a href="/trip" class="btn btn-hero">
         TRIP PLANNER <i class="arrow-icon fas fa-angle-right ms-2"></i>
       </a>
-      <a href="/things-to-do" class="btn btn-outline-white" style="padding-block: calc(var(--space-3) - 2px)">
+      <a href="/things-to-do" class="btn btn-outline-white">
         THINGS TO DO <i class="arrow-icon fas fa-angle-right ms-2"></i>
       </a>
     </div>

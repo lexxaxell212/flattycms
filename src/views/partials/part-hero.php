@@ -9,7 +9,7 @@ $slides = [
 .main-content { padding-top: var(--navbar-height) !important; }
 </style>
 <script src="<?= JS_URL ?>hero.js" defer></script>
-<section id="hero-website" class="hero-wrapper position-relative overflow-hidden">
+<div id="hero-website" class="hero-wrapper position-relative overflow-hidden">
   <?php foreach ($slides as $i => $s): ?>
   <div class="hero-item <?= $i === 0 ? 'active hero-slide-' . $s['slug'] : '' ?>"
        <?= $i > 0 ? 'data-slug="' . $s['slug'] . '"' : '' ?>></div>
@@ -36,4 +36,4 @@ $slides = [
       <span class="dot <?= $i === 0 ? 'active' : '' ?>" onclick="heroJump(<?= $i ?>)"></span>
     <?php endforeach; ?>
   </div>
-</section>
+</div>

@@ -4,7 +4,7 @@ $page_title = 'Things to Do';
 ?>
 <main class="main-content">
   <div class="container">
-  <section class="">
+  <section id="things-to-do-bandung">
     <h1 class="text-center">What Can You Do in <em>Bandung?</em></h1>
     <p class="lead text-center">Banyak. Banget.</p>
     <div class="page-header-svg-bdg">
@@ -457,77 +457,115 @@ $page_title = 'Things to Do';
       </svg>
       </div>
     </div>
+    <p class="text-muted small text-center mt-2 mb-4">Klik area untuk explore, atau <span style="cursor:pointer;" class="badge badge-accent" onclick="showLatest()"><i class="fas fa-fire me-1"></i>lihat terbaru</span></p>
+    <style>
+    .accordion-item {
+        margin-bottom: .75rem;
+        border-radius: var(--radius-lg) !important;
+        background: var(--bg-card);
+        color: var(--text-card);
+        border: var(--border-card);
+        box-shadow: var(--shadow-card);
+        overflow: hidden;
+    }
     
-
-<style>
-.accordion-body {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    overflow: hidden;
-}
-.accordion-body.open {
-    grid-template-rows: 1fr;
-}
-.accordion-body > div {
-    overflow: hidden;
-}
-.accordion-icon {
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.accordion-header.open .accordion-icon {
-    transform: rotate(180deg);
-}
-</style>
-<button id="btn-latest" class="zona-btn active" onclick="showLatest()">
-    <i class="fas fa-star"></i> Latest
-</button>
-
-<div id="panel-latest" class="zona-panel">
-    <?php if (empty($latest_items)): ?>
-    <p>Belum ada konten terbaru.</p>
-    <?php else: ?>
-    <?php foreach ($latest_items as $item): ?>
-    <div class="accordion-item">
-        <div class="accordion-header" onclick="toggleAccordion(this)">
-            <?= htmlspecialchars($item['title']) ?>
-            <i class="fas fa-star"></i>
-            <small><?= htmlspecialchars($item['category']) ?></small>
-            <i class="fas fa-chevron-down accordion-icon"></i>
-        </div>
-        <div class="accordion-body">
-            <div>
-                <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
-                <p><?= htmlspecialchars($item['desc']) ?></p>
+    .accordion-item .accordion-header {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        cursor: pointer;
+        padding: .75rem 1rem;
+        user-select: none;
+    }
+    .accordion-header .accordion-icon {
+        margin-left: auto;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .accordion-header.open .accordion-icon {
+        transform: rotate(180deg);
+    }
+    .accordion-body {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
+    }
+    .accordion-body.open {
+        grid-template-rows: 1fr;
+    }
+    .accordion-body > div {
+        overflow: hidden;
+        padding: 0 1rem 0;
+    }
+    
+    .accordion-body.open > div {
+        padding: 0 1rem 1rem;
+    }
+    .accordion-body img {
+        width: 100%;
+        border-radius: .5rem;
+        margin-bottom: .75rem;
+        object-fit: cover;
+        aspect-ratio: 3/4;
+    }
+    .zona-panel {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: .5rem;
+    }
+    @media (min-width: 768px) {
+        .zona-panel {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    </style>
+    <div id="panel-latest" class="zona-panel">
+        <?php if (empty($latest_items)): ?>
+        <p class="text-center text-muted">Belum ada konten terbaru.</p>
+        <?php else: ?>
+        <?php foreach ($latest_items as $item): ?>
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <i class="fas fa-fire text-accent"></i>
+                <h2 class="h4 mb-0">
+                <?= htmlspecialchars($item['title']) ?>
+                </h2>
+                <small class="text-muted"><?= ucwords(str_replace('_', ' ', $item['category'])) ?></small>
+                <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-body">
+                <div>
+                    <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
+                    <p><?= htmlspecialchars($item['desc']) ?></p>
+                </div>
             </div>
         </div>
+        <?php endforeach ?>
+        <?php endif ?>
     </div>
-    <?php endforeach ?>
-    <?php endif ?>
-</div>
-
-<?php foreach ($zona_map as $category => $items): ?>
-<div class="zona-panel" data-panel="<?= $category ?>" hidden>
-    <?php foreach ($items as $item): ?>
-    <div class="accordion-item">
-        <div class="accordion-header" onclick="toggleAccordion(this)">
-            <?= htmlspecialchars($item['title']) ?>
-            <?php if ($item['is_new']): ?><i class="fas fa-star"></i><?php endif ?>
-            <i class="fas fa-chevron-down accordion-icon"></i>
-        </div>
-        <div class="accordion-body">
-            <div>
-                <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
-                <p><?= htmlspecialchars($item['desc']) ?></p>
+    <?php foreach ($zona_map as $category => $items): ?>
+    <div class="zona-panel" data-panel="<?= $category ?>" hidden>
+        <?php foreach ($items as $item): ?>
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <?php if ($item['is_new']): ?>
+                <i class="fas fa-fire text-accent"></i>
+                <?php endif ?>
+                <h2 class="h4 mb-0">
+                <?= htmlspecialchars($item['title']) ?>
+                </h2>
+                <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-body">
+                <div>
+                    <img src="<?= htmlspecialchars($item['image']) ?>" alt='<?= htmlspecialchars($item['title']) ?>'>
+                    <p><?= htmlspecialchars($item['desc']) ?></p>
+                </div>
             </div>
         </div>
+        <?php endforeach ?>
     </div>
     <?php endforeach ?>
-</div>
-<?php endforeach ?>
-
-
-
   </section>
   </div>
 </main>
@@ -540,6 +578,8 @@ function toggleAccordion(header) {
     body.classList.toggle('open');
     header.classList.toggle('open');
 }
+const firstAccordion = latestPanel.querySelector('.accordion-header');
+if (firstAccordion) toggleAccordion(firstAccordion);
 
 function resetPanels() {
     panels.forEach(p => p.hidden = true);

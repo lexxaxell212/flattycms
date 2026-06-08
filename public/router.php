@@ -37,7 +37,11 @@ if (array_key_exists($uri, $routes)) {
     $view_content = file_exists($page_file) ? $page_file : null;
 } elseif (str_starts_with($uri, 'poi/')) {
     $slug      = substr($uri, 4);
-    $view_content = SRC_PATH . 'pages/poi/index.php';
+    require_once LIB_PATH . 'poi-actions.php';
+    $poi_check = get_poi_by_slug($slug);
+    $view_content = $poi_check 
+        ? SRC_PATH . 'pages/poi/index.php'
+        : null;
 } else {
     $view_content = null;
 }

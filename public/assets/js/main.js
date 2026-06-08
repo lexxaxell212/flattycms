@@ -216,6 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
         allcontent_posts: "/blogs/?id={id}",
         poi: "/poi/{slug}"
     }
+  };
 
   let debounceTimer = null;
   let currentRequest = null;

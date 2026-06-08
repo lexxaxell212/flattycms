@@ -460,12 +460,11 @@ $page_title = 'Things to Do';
     <p class="text-muted small text-center mt-2 mb-4">Klik area untuk explore, atau <span style="cursor:pointer;" class="badge badge-accent" onclick="showLatest()"><i class="fas fa-fire me-1"></i>lihat terbaru</span></p>
     <style>
     .accordion-item {
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.5rem;
         border-radius: var(--radius-lg) !important;
         background: var(--bg-card);
         color: var(--text-card);
         border: var(--border-card);
-        box-shadow: var(--shadow-card);
         overflow: hidden;
         padding: 0.5rem 0;
     }
@@ -473,10 +472,22 @@ $page_title = 'Things to Do';
     .accordion-item .accordion-header {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         gap: 1rem;
         cursor: pointer;
         padding: 1rem 1.5rem;
         user-select: none;
+    }
+    .accord-trunc {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 767px;
+    }
+    @media (min-width: 768px) {
+      .accord-trunc {
+        max-width: 768px;
+      }
     }
     .accordion-header .accordion-icon {
         margin-left: auto;
@@ -507,9 +518,15 @@ $page_title = 'Things to Do';
         width: 100%;
         margin-inline: auto;
         border-radius: .5rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         object-fit: cover;
-        max-width: 768px;
+        max-width: 600px;
+    }
+    .accordion-body .badge {
+        display: block;
+        margin-inline: auto;
+        margin-bottom: 1rem;
+        width: fit-content;
     }
     .zona-panel {
         display: grid;
@@ -526,16 +543,16 @@ $page_title = 'Things to Do';
         <?php foreach ($latest_items as $item): ?>
         <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
-                <i class="fas fa-fire text-accent"></i>
-                <h2 class="h5 mb-0">
+                <h2 class="h5 mb-0 accord-trunc">
+                <i class="fas fa-fire text-accent me-1"></i>
                 <?= htmlspecialchars($item['title']) ?>
                 </h2>
-                <small class="text-muted"><?= ucwords(str_replace('_', ' ', $item['category'])) ?></small>
                 <i class="fas fa-chevron-down accordion-icon"></i>
             </div>
             <div class="accordion-body">
                 <div>
                     <img src="<?= htmlspecialchars($item['image']) ?>" alt='<?= htmlspecialchars($item['title']) ?>'>
+                    <div class="badge badge-primary"><?= ucwords(str_replace('_', ' ', $item['category'])) ?></div>
                     <h3><?= htmlspecialchars($item['title']) ?></h3>
                     <p><?= htmlspecialchars($item['desc']) ?></p>
                 </div>
@@ -549,10 +566,10 @@ $page_title = 'Things to Do';
         <?php foreach ($items as $item): ?>
         <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
-                <?php if ($item['is_new']): ?>
-                <i class="fas fa-fire text-accent"></i>
+                <h2 class="h5 mb-0 accord-trunc">
+                <?php if ($item['is_new']): ?> 
+                  <i class="fas fa-fire text-accent me-1"></i>
                 <?php endif ?>
-                <h2 class="h5 mb-0">
                 <?= htmlspecialchars($item['title']) ?>
                 </h2>
                 <i class="fas fa-chevron-down accordion-icon"></i>
@@ -560,6 +577,7 @@ $page_title = 'Things to Do';
             <div class="accordion-body">
                 <div>
                     <img src="<?= htmlspecialchars($item['image']) ?>" alt='<?= htmlspecialchars($item['title']) ?>'>
+                    <div class="badge badge-primary"><?= ucwords(str_replace('_', ' ', $item['category'])) ?>Kategori</div>
                     <h3><?= htmlspecialchars($item['title']) ?></h3>
                     <p><?= htmlspecialchars($item['desc']) ?></p>
                 </div>
@@ -568,8 +586,6 @@ $page_title = 'Things to Do';
         <?php endforeach ?>
     </div>
     <?php endforeach ?>
-  </section>
-  </div>
 </main>
 <script>
 const panels = document.querySelectorAll('.zona-panel');

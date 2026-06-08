@@ -88,5 +88,5 @@ function upload_poi_image($poi_id, $file) {
     $dest  = $dir . $fname;
     if (!move_uploaded_file($file['tmp_name'], $dest))
         return ['success' => false, 'message' => 'Gagal menyimpan gambar'];
-    return ['success' => true, 'path' => 'poi/' . $fname];
+    return ['success' => true, 'path' => BASE_UPLOAD_URL . 'poi/' . $fname];
 }

@@ -53,7 +53,7 @@ $total      = count($pois);
             <!-- Thumbnail -->
             <div class="flex-shrink-0">
               <?php if (!empty($p['poi_image'])): ?>
-              <img src="<?= safe_html(BASE_URL . $p['poi_image']) ?>"
+              <img src="<?= safe_html($p['poi_image']) ?>"
                    alt="<?= safe_html($p['name']) ?>"
                    style="width:52px;height:52px;object-fit:cover;border-radius:.5rem">
               <?php else: ?>
@@ -166,7 +166,7 @@ $total      = count($pois);
               <textarea id="poiDesc" class="form-control" rows="3" placeholder="Opsional"></textarea>
             </div>
             <div class="col-12">
-              <label class="form-label small fw-semibold">Gambar POI <span class="text-muted fw-normal">(opsional)</span></label>
+              <label class="form-label small fw-semibold">Gambar POI</label>
               <input type="file" id="poiImage" class="form-control form-control-sm" accept="image/jpeg,image/png,image/webp">
               <div class="form-text">Maks 5MB · JPG, PNG, WebP</div>
               <div id="poiImagePreview" class="mt-2" style="display:none">
@@ -438,7 +438,7 @@ $total      = count($pois);
       document.getElementById('editPoiNewPreview').style.display = 'none';
       const curImg = document.getElementById('editPoiCurrentImg');
       if (this.dataset.image) {
-        document.getElementById('editPoiCurrentImgEl').src = BASE + this.dataset.image;
+        document.getElementById('editPoiCurrentImgEl').src = this.dataset.image;
         curImg.style.display = '';
       } else {
         curImg.style.display = 'none';

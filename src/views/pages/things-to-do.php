@@ -458,15 +458,34 @@ $page_title = 'Things to Do';
       </div>
     </div>
     
-<div id="zona-empty">
-    <p>Klik area pada peta untuk melihat informasi zona.</p>
+<button id="btn-latest" class="zona-btn active" onclick="showLatest()">✨ Latest</button>
+<div id="panel-latest" class="zona-panel">
+    <?php foreach ($latest_items as $item): ?>
+    <details>
+        <summary>
+            <?= htmlspecialchars($item['title']) ?>
+            <?= icon('sparkles') ?>
+            <small><?= htmlspecialchars($item['category']) ?></small>
+        </summary>
+        <div class="card-body">
+            <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
+            <p><?= htmlspecialchars($item['desc']) ?></p>
+        </div>
+    </details>
+    <?php endforeach ?>
+    <?php if (empty($latest_items)): ?>
+    <p>Belum ada konten terbaru.</p>
+    <?php endif ?>
 </div>
 
 <?php foreach ($zona_map as $category => $items): ?>
 <div class="zona-panel" data-panel="<?= $category ?>" hidden>
     <?php foreach ($items as $item): ?>
     <details>
-        <summary><?= htmlspecialchars($item['title']) ?></summary>
+        <summary>
+            <?= htmlspecialchars($item['title']) ?>
+            <?php if ($item['is_new']): ?><?= icon('sparkles') ?><?php endif ?>
+        </summary>
         <div class="card-body">
             <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
             <p><?= htmlspecialchars($item['desc']) ?></p>
@@ -481,15 +500,24 @@ $page_title = 'Things to Do';
 </main>
 <script>
 const panels = document.querySelectorAll('.zona-panel');
+const latestPanel = document.getElementById('panel-latest');
+
+function resetPanels() {
+    panels.forEach(p => p.hidden = true);
+    document.querySelectorAll('.zone').forEach(p => p.classList.remove('active'));
+}
+
+function showLatest() {
+    resetPanels();
+    latestPanel.hidden = false;
+    document.querySelectorAll('.zona-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('btn-latest').classList.add('active');
+}
 
 document.querySelectorAll('.zone').forEach(path => {
     path.addEventListener('click', () => {
         const key = path.dataset.zone.replaceAll('-', '_');
-
-        panels.forEach(p => p.hidden = true);
-        document.getElementById('zona-empty').hidden = true;
-        document.querySelectorAll('.zone').forEach(p => p.classList.remove('active'));
-
+        resetPanels();
         const target = document.querySelector(`.zona-panel[data-panel="${key}"]`);
         if (target) target.hidden = false;
         path.classList.add('active');

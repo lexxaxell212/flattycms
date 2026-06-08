@@ -6041,7 +6041,7 @@ input[type="range"]::-moz-range-track {
 footer {
   position: relative;
   z-index: 2;
-  margin-top: var(--space-24) !important;
+  padding-top: var(--space-24) !important;
   background: var(--bg-body);
   color: var(--text-body);
 }
@@ -6353,7 +6353,7 @@ a.logo-social i {
   }
   .footer-bottom {
     flex-direction: row;
-    align-items: unset;
+    align-items: center;
   }
   .swal2-container.swal2-top-end {
     top: var(--space-5) !important;

@@ -687,10 +687,10 @@ h6, .h6 {
 
 /* ============= hero ============= */
 .hero-wrapper {
-  height: calc(100vh - var(--navbar-height));
+  height: 100vh;
   margin-bottom: 4rem;
   border-radius: 0 !important;
-  padding-top: var(--navbar-height);
+  padding-top: var(--navbar-height) !important;
 }
 
 .hero-item {
@@ -2014,6 +2014,7 @@ a:hover i.arrow-icon {
 .card-body h5,
 .card-body h6 {
   margin-top: var(--space-2);
+  text-decoration: none;
 }
 
 .card-glass {

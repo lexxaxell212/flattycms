@@ -32,7 +32,7 @@ require_once LIB_PATH . "v-poi-hotel.php";
 }
 
 .poi-hotel-card:hover .poi-hotel-name {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
 }
 
 .poi-hotel-overlay {

@@ -458,45 +458,75 @@ $page_title = 'Things to Do';
       </div>
     </div>
     
-<button id="btn-latest" class="zona-btn active" onclick="showLatest()">✨ Latest</button>
+
+<style>
+.accordion-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+.accordion-body.open {
+    grid-template-rows: 1fr;
+}
+.accordion-body > div {
+    overflow: hidden;
+}
+.accordion-icon {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.accordion-header.open .accordion-icon {
+    transform: rotate(180deg);
+}
+</style>
+<button id="btn-latest" class="zona-btn active" onclick="showLatest()">
+    <i class="fas fa-star"></i> Latest
+</button>
+
 <div id="panel-latest" class="zona-panel">
-    <?php foreach ($latest_items as $item): ?>
-    <details>
-<summary>
-    <?= htmlspecialchars($item['title']) ?>
-    <?php if ($item['is_new']): ?>
-    <i class="fas fa-star"></i>
-    <?php endif ?>
-</summary>
-        <div class="card-body">
-            <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
-            <p><?= htmlspecialchars($item['desc']) ?></p>
-        </div>
-    </details>
-    <?php endforeach ?>
     <?php if (empty($latest_items)): ?>
     <p>Belum ada konten terbaru.</p>
+    <?php else: ?>
+    <?php foreach ($latest_items as $item): ?>
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <?= htmlspecialchars($item['title']) ?>
+            <i class="fas fa-star"></i>
+            <small><?= htmlspecialchars($item['category']) ?></small>
+            <i class="fas fa-chevron-down accordion-icon"></i>
+        </div>
+        <div class="accordion-body">
+            <div>
+                <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
+                <p><?= htmlspecialchars($item['desc']) ?></p>
+            </div>
+        </div>
+    </div>
+    <?php endforeach ?>
     <?php endif ?>
 </div>
 
 <?php foreach ($zona_map as $category => $items): ?>
 <div class="zona-panel" data-panel="<?= $category ?>" hidden>
     <?php foreach ($items as $item): ?>
-    <details>
-<summary>
-    <?= htmlspecialchars($item['title']) ?>
-    <?php if ($item['is_new']): ?>
-    <i class="fas fa-star"></i>
-    <?php endif ?>
-</summary>
-        <div class="card-body">
-            <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
-            <p><?= htmlspecialchars($item['desc']) ?></p>
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <?= htmlspecialchars($item['title']) ?>
+            <?php if ($item['is_new']): ?><i class="fas fa-star"></i><?php endif ?>
+            <i class="fas fa-chevron-down accordion-icon"></i>
         </div>
-    </details>
+        <div class="accordion-body">
+            <div>
+                <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
+                <p><?= htmlspecialchars($item['desc']) ?></p>
+            </div>
+        </div>
+    </div>
     <?php endforeach ?>
 </div>
 <?php endforeach ?>
+
+
 
   </section>
   </div>
@@ -505,15 +535,21 @@ $page_title = 'Things to Do';
 const panels = document.querySelectorAll('.zona-panel');
 const latestPanel = document.getElementById('panel-latest');
 
+function toggleAccordion(header) {
+    const body = header.nextElementSibling;
+    body.classList.toggle('open');
+    header.classList.toggle('open');
+}
+
 function resetPanels() {
     panels.forEach(p => p.hidden = true);
     document.querySelectorAll('.zone').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.zona-btn').forEach(b => b.classList.remove('active'));
 }
 
 function showLatest() {
     resetPanels();
     latestPanel.hidden = false;
-    document.querySelectorAll('.zona-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('btn-latest').classList.add('active');
 }
 

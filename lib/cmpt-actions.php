@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $title = trim($_POST['title'] ?? '');
             if (empty($title)) throw new Exception('Judul wajib diisi!');
 
-            $pdo->prepare("INSERT INTO cmpt (title, image, desc, button_link, type, category, status) VALUES (?,?,?,?,?,'active')")
+            $pdo->prepare("INSERT INTO cmpt (title, image, `desc`, button_link, type, category, status) VALUES (?,?,?,?,?,?,'active')")
                 ->execute([
                     $title,
                     $_POST['image']       ?? 'default.jpg',
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $id = (int)$_POST['id'];
             if ($id <= 0) throw new Exception('ID tidak valid!');
 
-            $pdo->prepare("UPDATE cmpt SET title=?, image=?, desc=?, button_link=?, type=?, category=?, status=? WHERE id=?")
+            $pdo->prepare("UPDATE cmpt SET title=?, image=?, `desc`=?, button_link=?, type=?, category=?, status=? WHERE id=?")
                 ->execute([
                     trim($_POST['title']       ?? ''),
                     $_POST['image']            ?? 'default.jpg',

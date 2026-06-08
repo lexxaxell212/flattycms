@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
     URLS: {
         cmpt: "{button_link}",
         allcontent_posts: "/blogs/?id={id}",
-        poi: "/poi/{slug}/"
+        poi: "/poi/{slug}"
     }
 
   let debounceTimer = null;

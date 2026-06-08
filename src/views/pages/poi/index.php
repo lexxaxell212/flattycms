@@ -23,9 +23,9 @@ var_dump($poi_url)
           </div>
           <div class="align-items-center">
             <button id="btn-reaction"
-              class="btn <?php echo \$_user_liked ? 'btn-primary btn-sm' : 'btn-outline-primary btn-sm'; ?>" data-id="<?php echo \$_page_id; ?>" data-type="page">
+              class="btn <?php echo $_user_liked ? 'btn-primary btn-sm' : 'btn-outline-primary btn-sm'; ?>" data-id="<?php echo $_page_id; ?>" data-type="page">
               <i class="fas fa-heart me-1"></i>
-              <span id="reaction-count"><?php echo \$_reaction_count; ?></span>
+              <span id="reaction-count"><?php echo $_reaction_count; ?></span>
             </button>
           </div>
         </div>
@@ -35,15 +35,15 @@ var_dump($poi_url)
           </div>
           <div class="gap-2 align-items-center">
             <?php
-            \$_share_url   = urlencode(BASE_URL . 'pages/{$slug}/');
-            \$_share_title = urlencode('{$slug}');
+            $_share_url   = urlencode(BASE_URL . 'pages/{$slug}/');
+            $_share_title = urlencode('{$slug}');
             ?>
-            <a href="https://wa.me/?text=<?php echo \$_share_title; ?>%20<?php echo \$_share_url; ?>"
+            <a href="https://wa.me/?text=<?php echo $_share_title; ?>%20<?php echo $_share_url; ?>"
                target="_blank" rel="noopener"
                class="btn btn-outline-primary btn-sm">
               <i class="fa-brands fa-whatsapp"></i>
             </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo \$_share_url; ?>"
+            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_share_url; ?>"
                target="_blank" rel="noopener"
                class="btn btn-outline-primary btn-sm">
               <i class="fa-brands fa-facebook-f"></i>

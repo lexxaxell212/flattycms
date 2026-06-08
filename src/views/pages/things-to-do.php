@@ -465,11 +465,13 @@ $page_title = 'Things to Do';
 <?php foreach ($zona_map as $category => $items): ?>
 <div class="zona-panel" data-panel="<?= $category ?>" hidden>
     <?php foreach ($items as $item): ?>
-    <div class="card">
-        <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
-        <h3><?= htmlspecialchars($item['title']) ?></h3>
-        <p><?= htmlspecialchars($item['desc']) ?></p>
-    </div>
+    <details>
+        <summary><?= htmlspecialchars($item['title']) ?></summary>
+        <div class="card-body">
+            <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
+            <p><?= htmlspecialchars($item['desc']) ?></p>
+        </div>
+    </details>
     <?php endforeach ?>
 </div>
 <?php endforeach ?>

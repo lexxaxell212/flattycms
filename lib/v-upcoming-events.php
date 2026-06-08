@@ -2,7 +2,8 @@
 $_tdo_next_stmt = $GLOBALS['pdo']->query("
     SELECT id, title, slug, html_content, event_date
     FROM pages
-    WHERE event_date >= CURDATE()
+    WHERE event_date IS NOT NULL
+    AND event_date >= CURDATE()
     ORDER BY event_date ASC
     LIMIT 1
 ");
@@ -11,7 +12,8 @@ $_tdo_next = $_tdo_next_stmt->fetch(PDO::FETCH_ASSOC);
 $_tdo_stmt = $GLOBALS['pdo']->prepare("
     SELECT id, title, slug, html_content, event_date
     FROM pages
-    WHERE id != ?
+    WHERE event_date IS NOT NULL
+    And id != ?
     ORDER BY event_date ASC
     LIMIT 6
 ");

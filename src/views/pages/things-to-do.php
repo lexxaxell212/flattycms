@@ -466,7 +466,6 @@ $page_title = 'Things to Do';
         color: var(--text-card);
         border: var(--border-card);
         overflow: hidden;
-        padding: 0.5rem 0;
     }
     
     .accordion-item .accordion-header {
@@ -475,7 +474,7 @@ $page_title = 'Things to Do';
         justify-content: space-between;
         gap: 1rem;
         cursor: pointer;
-        padding: 1rem 1.5rem;
+        padding: 0.75rem 1rem;
         user-select: none;
     }
     .accord-trunc {
@@ -577,7 +576,7 @@ $page_title = 'Things to Do';
             <div class="accordion-body">
                 <div>
                     <img src="<?= htmlspecialchars($item['image']) ?>" alt='<?= htmlspecialchars($item['title']) ?>'>
-                    <div class="badge badge-primary"><?= ucwords(str_replace('_', ' ', $item['category'])) ?>Kategori</div>
+                    <div class="badge badge-primary"><?= ucwords(str_replace('_', ' ', $item['category'])) ?></div>
                     <h3><?= htmlspecialchars($item['title']) ?></h3>
                     <p><?= htmlspecialchars($item['desc']) ?></p>
                 </div>

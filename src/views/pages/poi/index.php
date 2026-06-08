@@ -4,13 +4,8 @@ require_once LIB_PATH . 'v-reactions-page.php';
 
 $poi = get_poi_by_url($poi_url);
 
-if (!$poi) {
-    http_response_code(404);
-    require_once PUBLIC_PATH . 'errors/404.php';
-    exit;
-}
-
 $page_title = $poi['name'] . ' - ' . SITE_NAME;
+var_dump($poi_url)
 ?>
 <script src="<?= JS_URL ?>reactions.js" defer></script>
 <main class="main-content">

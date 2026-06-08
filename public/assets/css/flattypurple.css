@@ -2300,9 +2300,9 @@ max-width: var(--max-width-form) !important;
   opacity var(--duration) var(--ease);
 }
 #live-search-dropdown.open {
-  max-height: 100%;
-  opacity: 1;
-  overflow-y: auto;
+    max-height: 61vh;
+    opacity: 1;
+    overflow-y: auto;
 }
 #live-search-dropdown::-webkit-scrollbar {
   width: 2px;

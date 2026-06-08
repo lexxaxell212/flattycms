@@ -590,10 +590,9 @@ $page_title = 'Things to Do';
 const panels = document.querySelectorAll('.zona-panel');
 const latestPanel = document.getElementById('panel-latest');
 
-function toggleAccordion(header) {
-    const body = header.nextElementSibling;
-    body.classList.toggle('open');
-    header.classList.toggle('open');
+const header = target.querySelector('.accordion-header');
+if (header) {
+    header.click(); 
 }
 const firstAccordion = latestPanel.querySelector('.accordion-header');
 if (firstAccordion) toggleAccordion(firstAccordion);
@@ -642,7 +641,7 @@ if (hash) {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             const header = target.querySelector('.accordion-header');
             if (header) toggleAccordion(header);
-        }, 100);
+        }, 300);
     }
 }
 </script>

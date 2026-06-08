@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
 
         regenerate_csrf_token();
-        header('Location: /admin/modal-manager?success=1');
+        header('Location: /admin/cmpt-manager?success=1');
         exit;
 
     } catch (Exception $e) {

@@ -35,6 +35,9 @@ if (array_key_exists($uri, $routes)) {
     $slug         = substr($uri, 6);
     $page_file    = PUBLIC_PATH . 'pages/' . $slug . '/index.php';
     $view_content = file_exists($page_file) ? $page_file : null;
+} elseif (str_starts_with($uri, 'poi/')) {
+    $poi_url      = substr($uri, 4);
+    $view_content = SRC_PATH . 'pages/poi/index.php';
 } else {
     $view_content = null;
 }

@@ -140,3 +140,15 @@ function toggle_poi_status($id) {
     $stmt->execute([(int)$id]);
     return $stmt->rowCount() > 0;
 }
+
+function get_poi_by_url($poi_url) {
+    $pdo  = $GLOBALS['pdo'];
+    $stmt = $pdo->prepare("
+        SELECT p.*, c.name AS category_name, c.slug AS category_slug, c.icon AS category_icon
+        FROM poi p
+        JOIN poi_categories c ON c.id = p.category_id
+        WHERE p.poi_url = ? AND p.is_active = 1
+    ");
+    $stmt->execute([$poi_url]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}

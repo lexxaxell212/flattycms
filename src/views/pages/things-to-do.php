@@ -460,21 +460,22 @@ $page_title = 'Things to Do';
     <p class="text-muted small text-center mt-2 mb-4">Klik area untuk explore, atau <span style="cursor:pointer;" class="badge badge-accent" onclick="showLatest()"><i class="fas fa-fire me-1"></i>lihat terbaru</span></p>
     <style>
     .accordion-item {
-        margin-bottom: .75rem;
+        margin-bottom: 1.5rem;
         border-radius: var(--radius-lg) !important;
         background: var(--bg-card);
         color: var(--text-card);
         border: var(--border-card);
         box-shadow: var(--shadow-card);
         overflow: hidden;
+        padding: 0.5rem 0;
     }
     
     .accordion-item .accordion-header {
         display: flex;
         align-items: center;
-        gap: .5rem;
+        gap: 1rem;
         cursor: pointer;
-        padding: .75rem 1rem;
+        padding: 1rem 1.5rem;
         user-select: none;
     }
     .accordion-header .accordion-icon {
@@ -499,24 +500,23 @@ $page_title = 'Things to Do';
     }
     
     .accordion-body.open > div {
-        padding: 0 1rem 1rem;
+        padding: 0 1.5rem 1.5rem;
     }
     .accordion-body img {
+        display: block;
         width: 100%;
+        margin-inline: auto;
         border-radius: .5rem;
-        margin-bottom: .75rem;
+        margin-bottom: 1.5rem;
         object-fit: cover;
-        aspect-ratio: 3/4;
+        max-width: 768px;
     }
     .zona-panel {
         display: grid;
         grid-template-columns: 1fr;
         gap: .5rem;
-    }
-    @media (min-width: 768px) {
-        .zona-panel {
-            grid-template-columns: 1fr 1fr;
-        }
+        max-width: 900px;
+        margin-inline: auto;
     }
     </style>
     <div id="panel-latest" class="zona-panel">
@@ -527,7 +527,7 @@ $page_title = 'Things to Do';
         <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <i class="fas fa-fire text-accent"></i>
-                <h2 class="h4 mb-0">
+                <h2 class="h5 mb-0">
                 <?= htmlspecialchars($item['title']) ?>
                 </h2>
                 <small class="text-muted"><?= ucwords(str_replace('_', ' ', $item['category'])) ?></small>
@@ -535,7 +535,8 @@ $page_title = 'Things to Do';
             </div>
             <div class="accordion-body">
                 <div>
-                    <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
+                    <img src="<?= htmlspecialchars($item['image']) ?>" alt='<?= htmlspecialchars($item['title']) ?>'>
+                    <h3><?= htmlspecialchars($item['title']) ?></h3>
                     <p><?= htmlspecialchars($item['desc']) ?></p>
                 </div>
             </div>
@@ -551,7 +552,7 @@ $page_title = 'Things to Do';
                 <?php if ($item['is_new']): ?>
                 <i class="fas fa-fire text-accent"></i>
                 <?php endif ?>
-                <h2 class="h4 mb-0">
+                <h2 class="h5 mb-0">
                 <?= htmlspecialchars($item['title']) ?>
                 </h2>
                 <i class="fas fa-chevron-down accordion-icon"></i>
@@ -559,6 +560,7 @@ $page_title = 'Things to Do';
             <div class="accordion-body">
                 <div>
                     <img src="<?= htmlspecialchars($item['image']) ?>" alt='<?= htmlspecialchars($item['title']) ?>'>
+                    <h3><?= htmlspecialchars($item['title']) ?></h3>
                     <p><?= htmlspecialchars($item['desc']) ?></p>
                 </div>
             </div>

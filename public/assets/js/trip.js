@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.addEventListener('click', () => {
         startPoint = { name: p.name, lat: parseFloat(p.latitude), lng:
         parseFloat(p.longitude), poi_image: p.poi_image || null,
-        description: p.description || '', poi_url: p.poi_url || null };
+        description: p.description || '', slug: p.slug || null };
         document.getElementById('startName').textContent = startPoint.name;
         document.getElementById('startName2').textContent = startPoint.name;
         document.getElementById('startDesc').textContent = startPoint.description || 'Deskripsi belum tersedia.';
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const poi = POIS.find(p => p.id == poi_id);
     if (!poi) return;
     routes.push({ poi_id: poi.id, name: poi.name, lat: parseFloat(poi.latitude),
-    lng: parseFloat(poi.longitude), note: '', poi_image: poi.poi_image || null, description: poi.description || '', poi_url: poi.poi_url || null });
+    lng: parseFloat(poi.longitude), note: '', poi_image: poi.poi_image || null, description: poi.description || '', slug: poi.slug || null });
     map.closePopup();
     // FIX: reset routeGenerated saat ada perubahan rute
     routeGenerated = false;
@@ -552,8 +552,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
           <h5 class="mb-2">${escHtml(poi.name)}</h5>
           <p class="text-muted small">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
-          ${poi.poi_url
-            ? `<a href="${escHtml(poi.poi_url)}" class="small" target="_blank" rel="noopener">
+          ${poi.slug
+            ? `<a href="/poi/${escHtml(poi.slug)}" class="small" target="_blank" rel="noopener">
                 Lihat
                 <i class="arrow-icon fas fa-angle-right ms-2"></i>
                </a>`

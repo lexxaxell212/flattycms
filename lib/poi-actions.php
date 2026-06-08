@@ -72,8 +72,8 @@ function add_poi($data) {
     if (!$name || !$cat || !$lat || !$lng) return false;
     $slug = generate_poi_slug($name);
     $stmt = $pdo->prepare("
-        INSERT INTO poi (category_id, name, slug, description, address, latitude, longitude, is_active, poi_url, poi_image)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO poi (category_id, name, slug, description, address, latitude, longitude, is_active, poi_image)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
     $stmt->execute([
         $cat, $name, $slug,
@@ -81,7 +81,6 @@ function add_poi($data) {
         trim($data['address'] ?? '') ?: null,
         $lat, $lng,
         isset($data['is_active']) ? (int)$data['is_active'] : 1,
-        trim($data['poi_url'] ?? '') ?: null,
         trim($data['poi_image'] ?? '') ?: null,
     ]);
     return (int)$pdo->lastInsertId();
@@ -98,7 +97,7 @@ function update_poi($id, $data) {
     $stmt = $pdo->prepare("
         UPDATE poi SET
             category_id = ?, name = ?, slug = ?, description = ?,
-            address = ?, latitude = ?, longitude = ?, poi_url = ?, is_active = ?
+            address = ?, latitude = ?, longitude = ?, is_active = ?
         WHERE id = ?
     ");
     $stmt->execute([
@@ -106,7 +105,6 @@ function update_poi($id, $data) {
         trim($data['description'] ?? '') ?: null,
         trim($data['address'] ?? '') ?: null,
         $lat, $lng,
-        trim($data['poi_url'] ?? '') ?: null,
         isset($data['is_active']) ? (int)$data['is_active'] : 1,
         $id,
     ]);
@@ -118,12 +116,7 @@ function update_poi_image($id, $image_path) {
     $stmt->execute([$image_path, (int)$id]);
     return $stmt->rowCount() > 0;
 }
-function update_poi_url($id, $url) {
-    $pdo  = $GLOBALS['pdo'];
-    $stmt = $pdo->prepare("UPDATE poi SET poi_url = ? WHERE id = ?");
-    $stmt->execute([trim($url) ?: null, (int)$id]);
-    return $stmt->rowCount() > 0;
-}
+
 function delete_poi($id) {
     $pdo  = $GLOBALS['pdo'];
     $id   = (int)$id;
@@ -139,16 +132,4 @@ function toggle_poi_status($id) {
     $stmt = $pdo->prepare("UPDATE poi SET is_active = NOT is_active WHERE id = ?");
     $stmt->execute([(int)$id]);
     return $stmt->rowCount() > 0;
-}
-
-function get_poi_by_url($poi_url) {
-    $pdo  = $GLOBALS['pdo'];
-    $stmt = $pdo->prepare("
-        SELECT p.*, c.name AS category_name, c.slug AS category_slug, c.icon AS category_icon
-        FROM poi p
-        JOIN poi_categories c ON c.id = p.category_id
-        WHERE p.poi_url = ? AND p.is_active = 1
-    ");
-    $stmt->execute([$poi_url]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
 }

@@ -16,14 +16,14 @@ require_once LIB_PATH . "v-poi-wisata.php";
             $name  = htmlspecialchars($item['name'] ?? '');
             $desc  = htmlspecialchars(mb_substr($item['description'] ?? '', 0, 90));
             $desc .= mb_strlen($item['description'] ?? '') > 90 ? '...' : '';
-            $url   = htmlspecialchars($item['poi_url'] ?? '');
+            $url   = htmlspecialchars($item['slug'] ?? '');
           ?>
           <div class="poi-wisata-card" style="--card-bg: url('<?= $img ?>')">
             <div class="poi-wisata-overlay">
               <h3 class="poi-wisata-name"><?= $name ?></h3>
               <p class="poi-wisata-desc"><?= $desc ?></p>
               <?php if (!empty($url)): ?>
-                <a href="<?= $url ?>"
+                <a href="/poi/<?= $url ?>"
                    class="poi-wisata-btn"
                    target="_blank"
                    rel="noopener noreferrer"

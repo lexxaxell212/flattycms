@@ -76,14 +76,6 @@ $total      = count($pois);
                 <i class="fa-solid fa-road me-1"></i><?= safe_html($p['address']) ?>
               </div>
               <?php endif; ?>
-              <?php if (!empty($p['poi_url'])): ?>
-              <div class="small mt-1">
-                <i class="fa-solid fa-link me-1 text-primary"></i>
-                <a href="<?= safe_html($p['poi_url']) ?>" target="_blank" rel="noopener"
-                   class="text-primary text-decoration-none"
-                   style="word-break:break-all"><?= safe_html($p['poi_url']) ?></a>
-              </div>
-              <?php endif; ?>
 
               <!-- Aksi — selalu di bawah info, wrap kalau perlu -->
               <div class="d-flex flex-wrap gap-2 mt-2">
@@ -95,7 +87,6 @@ $total      = count($pois);
                         data-lng="<?= $p['longitude'] ?>"
                         data-address="<?= safe_html($p['address'] ?? '') ?>"
                         data-desc="<?= safe_html($p['description'] ?? '') ?>"
-                        data-url="<?= safe_html($p['poi_url'] ?? '') ?>"
                         data-image="<?= safe_html($p['poi_image'] ?? '') ?>"
                         data-active="<?= $p['is_active'] ?>">
                   <i class="fa-solid fa-pen-to-square me-1"></i>Edit
@@ -175,14 +166,6 @@ $total      = count($pois);
               <textarea id="poiDesc" class="form-control" rows="3" placeholder="Opsional"></textarea>
             </div>
             <div class="col-12">
-              <label class="form-label small fw-semibold">URL / Link <span class="text-muted fw-normal">(opsional)</span></label>
-              <div class="input-group input-group-sm">
-                <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
-                <input type="url" id="poiUrl" class="form-control"
-                placeholder="nama-judul">
-              </div>
-            </div>
-            <div class="col-12">
               <label class="form-label small fw-semibold">Gambar POI <span class="text-muted fw-normal">(opsional)</span></label>
               <input type="file" id="poiImage" class="form-control form-control-sm" accept="image/jpeg,image/png,image/webp">
               <div class="form-text">Maks 5MB · JPG, PNG, WebP</div>
@@ -249,14 +232,6 @@ $total      = count($pois);
             <div class="col-12">
               <label class="form-label small fw-semibold">Deskripsi</label>
               <textarea id="editPoiDesc" class="form-control" rows="3" placeholder="Opsional"></textarea>
-            </div>
-            <div class="col-12">
-              <label class="form-label small fw-semibold">URL / Link <span class="text-muted fw-normal">(opsional)</span></label>
-              <div class="input-group input-group-sm">
-                <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
-                <input type="url" id="editPoiUrl" class="form-control"
-                placeholder="nama-judul">
-              </div>
             </div>
             <div class="col-12">
               <label class="form-label small fw-semibold">Ganti Gambar <span class="text-muted fw-normal">(opsional)</span></label>
@@ -401,7 +376,6 @@ $total      = count($pois);
     fd.append('latitude', lat); fd.append('longitude', lng);
     fd.append('address', document.getElementById('poiAddress').value.trim());
     fd.append('description', document.getElementById('poiDesc').value.trim());
-    fd.append('poi_url', document.getElementById('poiUrl').value.trim());
     fd.append('is_active', document.getElementById('poiActive').checked ? 1 : 0);
     const imgFile = document.getElementById('poiImage').files[0];
     if (imgFile) fd.append('poi_image', imgFile);
@@ -459,7 +433,6 @@ $total      = count($pois);
       document.getElementById('editPoiLng').value      = this.dataset.lng;
       document.getElementById('editPoiAddress').value  = this.dataset.address;
       document.getElementById('editPoiDesc').value     = this.dataset.desc;
-      document.getElementById('editPoiUrl').value      = this.dataset.url;
       document.getElementById('editPoiActive').checked = this.dataset.active === '1';
       document.getElementById('editPoiImage').value    = '';
       document.getElementById('editPoiNewPreview').style.display = 'none';
@@ -499,7 +472,6 @@ $total      = count($pois);
     fd.append('latitude', lat); fd.append('longitude', lng);
     fd.append('address', document.getElementById('editPoiAddress').value.trim());
     fd.append('description', document.getElementById('editPoiDesc').value.trim());
-    fd.append('poi_url', document.getElementById('editPoiUrl').value.trim());
     fd.append('is_active', document.getElementById('editPoiActive').checked ? 1 : 0);
     const imgFile = document.getElementById('editPoiImage').files[0];
     if (imgFile) fd.append('poi_image', imgFile);

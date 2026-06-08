@@ -458,16 +458,39 @@ $page_title = 'Things to Do';
       </div>
     </div>
     
-     <h1><?= htmlspecialchars($zona_bandung['title']) ?></h1>
-      
-      
-    
-    
-    
-    
-    
-  
-    
+<div id="zona-empty">
+    <p>Klik area pada peta untuk melihat informasi zona.</p>
+</div>
+
+<?php foreach ($zona_map as $category => $items): ?>
+<div class="zona-panel" data-panel="<?= $category ?>" hidden>
+    <?php foreach ($items as $item): ?>
+    <div class="card">
+        <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
+        <h3><?= htmlspecialchars($item['title']) ?></h3>
+        <p><?= htmlspecialchars($item['desc']) ?></p>
+    </div>
+    <?php endforeach ?>
+</div>
+<?php endforeach ?>
+
   </section>
   </div>
 </main>
+<script>
+const panels = document.querySelectorAll('.zona-panel');
+
+document.querySelectorAll('.zone').forEach(path => {
+    path.addEventListener('click', () => {
+        const key = path.dataset.zone.replaceAll('-', '_');
+
+        panels.forEach(p => p.hidden = true);
+        document.getElementById('zona-empty').hidden = true;
+        document.querySelectorAll('.zone').forEach(p => p.classList.remove('active'));
+
+        const target = document.querySelector(`.zona-panel[data-panel="${key}"]`);
+        if (target) target.hidden = false;
+        path.classList.add('active');
+    });
+});
+</script>

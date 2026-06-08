@@ -179,7 +179,7 @@ $total      = count($pois);
               <div class="input-group input-group-sm">
                 <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                 <input type="url" id="poiUrl" class="form-control"
-                placeholder="/pages/poi/nama-judul" value="/pages/poi/">
+                placeholder="nama-judul">
               </div>
             </div>
             <div class="col-12">
@@ -255,7 +255,7 @@ $total      = count($pois);
               <div class="input-group input-group-sm">
                 <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                 <input type="url" id="editPoiUrl" class="form-control"
-                placeholder="/pages/poi/nama-judul">
+                placeholder="nama-judul">
               </div>
             </div>
             <div class="col-12">

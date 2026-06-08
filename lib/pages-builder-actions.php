@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verify_csrf_token($_POST['csrf_toke
         $stmt->execute([$slug]);
         $page_id = (int) $stmt->fetchColumn();
     } else {
-        $base_slug = strtolower(preg_replace('/[^a-z0-9-]+/', '-', $title));
+        $base_slug = preg_replace('/[^a-z0-9-]+/', '-', strtolower($title));
         $slug      = generateUniqueSlug($pdo, $base_slug);
         $saved     = $pdo->prepare("INSERT INTO pages (title, slug, html_content, event_date) VALUES (?,?,?,?)")
                          ->execute([$title, $slug, $html_content, $event_date]);

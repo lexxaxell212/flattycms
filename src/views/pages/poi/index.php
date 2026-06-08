@@ -3,7 +3,7 @@ require_once LIB_PATH . 'poi-actions.php';
 //require_once LIB_PATH . 'v-reactions-page.php';
 var_dump($slug);
 $poi = get_poi_by_slug($slug);
-var_dump($slug);
+var_dump($poi);
 $page_title = $poi['name'] . ' - ' . SITE_NAME;
 
 if (!$poi) {

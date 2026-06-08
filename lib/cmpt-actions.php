@@ -1,14 +1,22 @@
 <?php
 $categories = [
-    'alam' => 'Wisata Alam', 'wisata_kuliner' => 'Wisata Kuliner',
-    'fashion' => 'Wisata Fashion', 'wisata_budaya' => 'Wisata Budaya',
-    'family' => 'Wisata Family', 'kuliner' => 'Kuliner',
-    'page' => 'Artikel', 'trending' => 'Informasi',
-    'blog' => 'Blog', 'event' => 'Event',
-    'layanan' => 'Layanan', 'maps' => 'Maps', 'hotel' => 'Penginapan/hotel',
-    'pusat_kota' => 'Pusat Kota', 'bandung_utara' => 'Bandung Utara',
-    'riau' => 'Riau', 'dago' => 'Dago', 'pasteur' => 'Pasteur',
-    'cihampelas' => 'Cihampelas', 'consent' => 'Consent', 'notifikasi' => 'Notifikasi'
+  // card type
+    'ads' => 'Iklan', 
+    'cta' => 'CTA',
+    'promo' => 'Promo', 
+    'form' => 'Form',
+    'media' => 'Media', 
+  //activity type
+    'bandung_pusat' => 'Bandung Pusat', 
+    'bandung_utara' => 'Bandung Utara',
+    'bandung_selatan' => 'Bandung Selatan', 
+    'bandung_timur' => 'Bandung Timur', 
+    'bandung_barat' => 'Bandung Barat',
+    'lain_nya' => 'Lain - Lain', 
+  // pop up type
+    'consent' => 'Consent', 
+  // toast type
+    'notifikasi' => 'Notifikasi'
 ];
 
 $upload_dir = BASE_UPLOAD_PATH;
@@ -48,11 +56,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $title = trim($_POST['title'] ?? '');
             if (empty($title)) throw new Exception('Judul wajib diisi!');
 
-            $pdo->prepare("INSERT INTO admin_items (title, image, excerpt, button_link, type, category, status) VALUES (?,?,?,?,?,?,'active')")
+            $pdo->prepare("INSERT INTO cmpt (title, image, desc, button_link, type, category, status) VALUES (?,?,?,?,?,?,'active')")
                 ->execute([
                     $title,
                     $_POST['image']       ?? 'default.jpg',
-                    trim($_POST['excerpt']      ?? ''),
+                    trim($_POST['desc']      ?? ''),
                     trim($_POST['button_link']  ?? '#'),
                     $_POST['type']        ?? 'card',
                     $_POST['category']    ?? 'general',
@@ -63,11 +71,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $id = (int)$_POST['id'];
             if ($id <= 0) throw new Exception('ID tidak valid!');
 
-            $pdo->prepare("UPDATE admin_items SET title=?, image=?, excerpt=?, button_link=?, type=?, category=?, status=? WHERE id=?")
+            $pdo->prepare("UPDATE cmpt SET title=?, image=?, desc=?, button_link=?, type=?, category=?, status=? WHERE id=?")
                 ->execute([
                     trim($_POST['title']       ?? ''),
                     $_POST['image']            ?? 'default.jpg',
-                    trim($_POST['excerpt']     ?? ''),
+                    trim($_POST['desc']     ?? ''),
                     trim($_POST['button_link'] ?? '#'),
                     $_POST['type']             ?? 'card',
                     $_POST['category']         ?? 'general',
@@ -80,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $id = (int)$_POST['id'];
             if ($id <= 0) throw new Exception('ID tidak valid!');
 
-            $pdo->prepare("UPDATE admin_items SET status='inactive' WHERE id=?")->execute([$id]);
+            $pdo->prepare("UPDATE cmpt SET status='inactive' WHERE id=?")->execute([$id]);
             $success_msg = 'Berhasil diarsipkan!';
         }
 
@@ -94,11 +102,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 }
 
 // LOAD DATA
-$items = $pdo->query("SELECT * FROM admin_items WHERE status = 'active' ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
+$items = $pdo->query("SELECT * FROM cmpt WHERE status = 'active' ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
 $items = array_map(fn($i) => array_merge([
     'title'       => 'Tanpa Judul',
     'image'       => 'default.jpg',
-    'excerpt'     => '',
+    'desc'     => '',
     'button_link' => '#',
     'type'        => 'card',
     'category'    => 'general',

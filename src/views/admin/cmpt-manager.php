@@ -27,7 +27,7 @@ $csrf        = generate_csrf_token();
         <span class="bg-primary bg-opacity-10 text-primary rounded p-2 lh-1">
             <i class="fa-solid fa-layer-group fa-sm"></i>
         </span>
-        <span class="fw-semibold fs-5">CMPT Manager</span>
+        <h1 class="text-title">CMPT Manager</h1>
     </div>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#itemModal" onclick="resetForm()">
         <i class="fa-solid fa-plus me-1"></i> Buat Baru
@@ -69,7 +69,7 @@ $csrf        = generate_csrf_token();
 <div class="card border-0 shadow-sm">
     <div class="card-body text-center py-5 text-muted">
         <i class="fa-solid fa-box fa-2x mb-3 d-block opacity-50"></i>
-        <div>Belum ada cards aktif</div>
+        <div>Belum ada CMPT aktif</div>
         <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#itemModal" onclick="resetForm()">
             Buat yang pertama
         </button>
@@ -104,11 +104,11 @@ $csrf        = generate_csrf_token();
 
             <div class="card-body pt-4 pb-4">
                 <h6 class="card-title fw-semibold"><?= safe_html(mb_substr($item['title'], 0, 40)) ?></h6>
-                <p class="card-text text-muted small"><?= safe_html(mb_substr($item['excerpt'], 0, 60)) ?></p>
+                <p class="card-text text-muted small"><?= safe_html(mb_substr($item['desc'], 0, 60)) ?></p>
                 <div class="d-flex gap-1 mt-2">
                     <button class="btn btn-outline-primary btn-sm flex-fill"
                             data-bs-toggle="modal" data-bs-target="#itemModal"
-                            onclick="editItem(<?= $item['id'] ?>,'<?= addslashes($item['title']) ?>','<?= addslashes($item['image']) ?>','<?= addslashes($item['excerpt']) ?>','<?= addslashes($item['button_link']) ?>','<?= addslashes($item['type']) ?>','<?= addslashes($item['status']) ?>','<?= addslashes($item['category']) ?>')">
+                            onclick="editItem(<?= $item['id'] ?>,'<?= addslashes($item['title']) ?>','<?= addslashes($item['image']) ?>','<?= addslashes($item['desc']) ?>','<?= addslashes($item['button_link']) ?>','<?= addslashes($item['type']) ?>','<?= addslashes($item['status']) ?>','<?= addslashes($item['category']) ?>')">
                         <i class="fa-solid fa-pencil"></i>
                     </button>
                     <form method="POST" class="flex-fill" onsubmit="return
@@ -133,7 +133,7 @@ $csrf        = generate_csrf_token();
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content border-0 shadow">
             <div class="modal-header border-bottom">
-                <h5 class="modal-title fw-semibold" id="modalTitle">Buat Card</h5>
+                <h5 class="modal-title fw-semibold" id="modalTitle">Buat CMPT</h5>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form method="POST" id="cardForm" enctype="multipart/form-data">
@@ -166,17 +166,20 @@ $csrf        = generate_csrf_token();
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label fw-medium">Deskripsi</label>
-                            <textarea name="excerpt" id="modalExcerpt" class="form-control" rows="2" maxlength="500"></textarea>
+                            <textarea name="desc" id="modalDesc"
+                            class="form-control" rows="10"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label fw-medium">Link</label>
-                            <input type="url" name="button_link" id="modalButtonLink" class="form-control" placeholder="https://example.com">
+                            <input type="text" name="button_link"
+                            id="modalButtonLink" class="form-control"
+                            placeholder="/">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-medium">Tipe</label>
                             <select name="type" id="modalType" class="form-select" onchange="filterCategoryByType()">
                                 <option value="card">Card</option>
-                                <option value="modal">Modal</option>
+                                <option value="activity">Activity</option>
                                 <option value="toast">Toast</option>
                                 <option value="popup">Popup</option>
                             </select>
@@ -219,10 +222,10 @@ const categories = <?= json_encode($categories) ?>;
 const BASE_UPLOAD_URL = '<?= BASE_UPLOAD_URL ?>';
 
 const typeCategories = {
-    'card': ['alam','wisata_kuliner','fashion','wisata_budaya','family','kuliner','page','trending','blog','event','layanan','maps','hotel'],
-    'modal': ['pusat_kota','bandung_utara','riau','dago','pasteur','cihampelas'],
-    'toast': ['consent'],
-    'popup': ['notifikasi']
+    'card': ['ads','cta','promo','form','media'],
+    'activity': ['bandung_pusat','bandung_utara','bandung_selatan','bandung_timur','bandung_barat','lain_nya'],
+    'popup': ['consent'],
+    'toast': ['notifikasi']
 };
 
 document.getElementById('uploadZone').addEventListener('click', () => document.getElementById('imageInput').click());
@@ -279,13 +282,13 @@ function clearImage() {
     document.getElementById('previewContainer').classList.add('d-none');
 }
 
-function editItem(id, title, image, excerpt, link, type, status, category) {
+function editItem(id, title, image, desc, link, type, status, category) {
     document.getElementById('modalTitle').textContent = 'Edit Card #' + id;
     document.getElementById('modalAction').value = 'update';
     document.getElementById('modalId').value = id;
     document.getElementById('modalTitleField').value = title;
     document.getElementById('modalImage').value = image;
-    document.getElementById('modalExcerpt').value = excerpt;
+    document.getElementById('modalDesc').value = desc;
     document.getElementById('modalButtonLink').value = link;
     document.getElementById('modalType').value = type;
     document.getElementById('modalStatus').value = status;
@@ -325,7 +328,7 @@ function filterCategoryByType() {
 }
 
 function resetForm() {
-    document.getElementById('modalTitle').textContent = 'Buat Card Baru';
+    document.getElementById('modalTitle').textContent = 'Buat Baru';
     document.getElementById('modalAction').value = 'create';
     document.getElementById('cardForm').reset();
     document.getElementById('modalImage').value = '/uploads/default.jpg';
@@ -333,6 +336,7 @@ function resetForm() {
     document.getElementById('modalType').value = 'card';
     document.getElementById('modalStatus').value = 'active';
     clearImage();
+    document.getElementById('modalButtonLink').value = '';
     document.getElementById('modalTitleField').focus();
     filterCategoryByType();
 }

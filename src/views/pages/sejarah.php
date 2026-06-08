@@ -1,15 +1,22 @@
 <?php
 $page_title = "Sejarah Bandung";
 ?>
-<main id="content" class="sb-page">
-  <div class="container mx-auto" style="max-width:740px">
-    <section class="text-center">
-      <h1>Sejarah Bandung</h1>
+<main class="main-content">
+  <div class="container">
+  <section id="sejarah-bandung" class="text-center">
+      <h1 class="h2 mb-4"><i class="text-danger fas fa-fire me-2"></i>Sejarah Bandung</h1>
       <p class="lead">Berawal dari dasar danau purba yang mengering, Bandung
       berevolusi dari sekadar titik nol di Jalan Raya Pos menjadi "<strong>Paris van
       Java</strong>" yang anggun, hingga kini bertransformasi menjadi pusat kreativitas
       digital dunia.</p>
-    </section>
+  </section>
+  <section>
+    <div id="video-by-ayokebandung.id">
+    <div class="video-playback p-0 mb-4">
+        <video controls  class="rounded d-block mx-auto" width="100%" height="240">
+        <source src="video.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="sb-timeline">
       <div class="sb-item">
         <div class="sb-item__left">
@@ -132,5 +139,7 @@ $page_title = "Sejarah Bandung";
         </div>
       </div>
     </div>
+  </div>
+  </section>
   </div>
 </main>

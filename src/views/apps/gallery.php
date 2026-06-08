@@ -20,92 +20,94 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 
 <script src="<?= JS_URL ?>gallery.js" defer></script>
 
-<main id="content" class="gal-page">
-<div class="container">
-
-  <section class="gal-hero">
-    <div>
-      <span class="gal-eyebrow">Komunitas Bandung</span>
-      <h2 class="gal-title">Galeri & Review</h2>
-      <p class="gal-sub">Foto & cerita perjalanan Bandung dari komunitas</p>
-    </div>
-    <div class="gal-hero__actions">
-      <?php if ($is_logged): ?>
-      <button class="gal-btn gal-btn--outline" id="btnOpenUpload">
-        <i class="fa-solid fa-camera"></i> Upload Foto
-      </button>
-      <button class="gal-btn gal-btn--primary" id="btnOpenReview">
-        <i class="fa-solid fa-pen-to-square"></i> Tulis Review
-      </button>
-      <?php else: ?>
-      <a href="/login" class="gal-btn gal-btn--outline">
-        <i class="fa-brands fa-google"></i> Login untuk Berkontribusi
-      </a>
-      <?php endif; ?>
-    </div>
-  </section>
-
-  <!-- Search -->
-  <div class="gal-search-block">
-    <div class="gal-search-wrap">
-      <i class="fa-solid fa-magnifying-glass gal-search-icon"></i>
-      <input type="text" id="searchPoiFilter" class="gal-search-input" placeholder="Cari tempat wisata...">
-      <button class="gal-search-reset" id="btnResetSearch" title="Reset">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-    <div id="searchPoiFilterResults" class="gal-search-results"></div>
-  </div>
-
-  <!-- Stats -->
-  <div class="gal-stats">
-    <div class="gal-stat">
-      <span class="gal-stat__val" id="statTotal">—</span>
-      <span class="gal-stat__label">Foto</span>
-    </div>
-    <div class="gal-stat__divider"></div>
-    <div class="gal-stat">
-      <span class="gal-stat__val" id="statReview">—</span>
-      <span class="gal-stat__label">Review</span>
-    </div>
-    <div class="gal-stat__divider"></div>
-    <div class="gal-stat">
-      <span class="gal-stat__val"><?= count($pois) ?></span>
-      <span class="gal-stat__label">Lokasi</span>
-    </div>
-  </div>
-
-  <!-- Tabs -->
-  <div class="gal-tabs">
-    <button class="gal-tab active" data-tab="gallery">
-      <i class="fa-solid fa-images"></i> Galeri Foto
-    </button>
-    <button class="gal-tab" data-tab="review">
-      <i class="fa-solid fa-star"></i> Review
-    </button>
-  </div>
-
-  <!-- Tab Gallery -->
-  <div id="tab-gallery">
-    <div class="row g-3" id="galleryGrid">
-      <div class="col-12 text-center py-5 text-muted">
-        <i class="fa-solid fa-spinner fa-spin fa-2x mb-3 d-block"></i>Memuat foto...
+<main class="main-content">
+  <div class="gal-page">
+    <div class="container">
+    
+      <section class="gal-hero">
+        <div>
+          <span class="gal-eyebrow">Komunitas Bandung</span>
+          <h2 class="gal-title">Galeri & Review</h2>
+          <p class="gal-sub">Foto & cerita perjalanan Bandung dari komunitas</p>
+        </div>
+        <div class="gal-hero__actions">
+          <?php if ($is_logged): ?>
+          <button class="gal-btn gal-btn--outline" id="btnOpenUpload">
+            <i class="fa-solid fa-camera"></i> Upload Foto
+          </button>
+          <button class="gal-btn gal-btn--primary" id="btnOpenReview">
+            <i class="fa-solid fa-pen-to-square"></i> Tulis Review
+          </button>
+          <?php else: ?>
+          <a href="/login" class="gal-btn gal-btn--outline">
+            <i class="fa-brands fa-google"></i> Login untuk Berkontribusi
+          </a>
+          <?php endif; ?>
+        </div>
+      </section>
+    
+      <!-- Search -->
+      <div class="gal-search-block">
+        <div class="gal-search-wrap">
+          <i class="fa-solid fa-magnifying-glass gal-search-icon"></i>
+          <input type="text" id="searchPoiFilter" class="gal-search-input" placeholder="Cari tempat wisata...">
+          <button class="gal-search-reset" id="btnResetSearch" title="Reset">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div id="searchPoiFilterResults" class="gal-search-results"></div>
       </div>
-    </div>
-    <div class="gal-pagination" id="pagination"></div>
-  </div>
-
-  <!-- Tab Review -->
-  <div id="tab-review" style="display:none">
-    <div id="reviewGrid" class="gal-review-grid">
-      <div class="text-center py-5 text-muted">
-        <i class="fa-solid fa-spinner fa-spin fa-2x mb-3 d-block"></i>Memuat review...
+    
+      <!-- Stats -->
+      <div class="gal-stats">
+        <div class="gal-stat">
+          <span class="gal-stat__val" id="statTotal">—</span>
+          <span class="gal-stat__label">Foto</span>
+        </div>
+        <div class="gal-stat__divider"></div>
+        <div class="gal-stat">
+          <span class="gal-stat__val" id="statReview">—</span>
+          <span class="gal-stat__label">Review</span>
+        </div>
+        <div class="gal-stat__divider"></div>
+        <div class="gal-stat">
+          <span class="gal-stat__val"><?= count($pois) ?></span>
+          <span class="gal-stat__label">Lokasi</span>
+        </div>
       </div>
+    
+      <!-- Tabs -->
+      <div class="gal-tabs">
+        <button class="gal-tab active" data-tab="gallery">
+          <i class="fa-solid fa-images"></i> Galeri Foto
+        </button>
+        <button class="gal-tab" data-tab="review">
+          <i class="fa-solid fa-star"></i> Review
+        </button>
+      </div>
+    
+      <!-- Tab Gallery -->
+      <div id="tab-gallery">
+        <div class="row g-3" id="galleryGrid">
+          <div class="col-12 text-center py-5 text-muted">
+            <i class="fa-solid fa-spinner fa-spin fa-2x mb-3 d-block"></i>Memuat foto...
+          </div>
+        </div>
+        <div class="gal-pagination" id="pagination"></div>
+      </div>
+    
+      <!-- Tab Review -->
+      <div id="tab-review" style="display:none">
+        <div id="reviewGrid" class="gal-review-grid">
+          <div class="text-center py-5 text-muted">
+            <i class="fa-solid fa-spinner fa-spin fa-2x mb-3 d-block"></i>Memuat review...
+          </div>
+        </div>
+        <div class="gal-pagination" id="paginationReview"></div>
+      </div>
+    
     </div>
-    <div class="gal-pagination" id="paginationReview"></div>
   </div>
-
-</div>
 </main>
 
 <!-- LIGHTBOX -->

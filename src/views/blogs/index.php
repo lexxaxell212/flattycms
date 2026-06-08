@@ -31,6 +31,7 @@ if ($id > 0) {
 $categories = safe_get_categories($pdo);
 ?>
 <script src="<?= JS_URL ?>reactions.js" defer></script>
+<main class="main-content">
 <div class="container">
 <?php if ($post): ?>
     <div class="row justify-content-center">
@@ -94,13 +95,12 @@ $categories = safe_get_categories($pdo);
                     </a>
                 <?php endif; ?>
             </div>
-            <div class="post-content">
+            <article class="post-content">
                 <?= sanitize_content(
                   $post["content"] ?? "",
                   $post["title"] ?? "",
                 ) ?>
-            </div>
-          </section>
+            </article>
             <hr class="my-5">
             <?php
             require_once LIB_PATH . "v-reactions.php";
@@ -148,6 +148,7 @@ $categories = safe_get_categories($pdo);
                class="btn btn-primary">
                 <i class="fas fa-angle-left me-1"></i>Kembali
             </a>
+          </section>
         </div>
     </div>
 <?php 
@@ -195,7 +196,7 @@ $categories = safe_get_categories($pdo);
 
             <?php foreach ($posts as $p): ?>
             
-            <div class="card card-flatty mb-4">
+            <article class="card card-flatty mb-4">
                 <div class="card-body">
                     <a href="/blogs/?id=<?= (int) $p[
                       "id"
@@ -237,7 +238,7 @@ $categories = safe_get_categories($pdo);
                          <i class="arrow-icon fas fa-angle-right me-1"></i>
                     </a>
                 </div>
-            </div>
+            </article>
             <?php endforeach; ?>
 
             <!-- PAGINATION -->
@@ -317,8 +318,7 @@ $categories = safe_get_categories($pdo);
         </div>
         <div class="col-md-5">
           <div style="position:sticky !important; top:82px; align-self:flex-start;">
-                <div class="bg-card">
-                    <div class="card-body">
+                <div class="cat-panel">
                         <h5 class="mb-3">Kategori</h5>
                         <?php if (empty($categories)): ?>
                             <p class="text-muted small mb-0">Belum ada kategori.</p>
@@ -340,9 +340,9 @@ $categories = safe_get_categories($pdo);
                         </a>
                         <?php endforeach; ?>
                     </div>
-                </div>
             </div>
         </div>
       </section>
 <?php endif; ?>
 </div>
+</main>

@@ -35,7 +35,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
 
   <script src="<?= JS_URL ?>bs533.bundle.min.js" defer></script>
   <script src="<?= JS_URL ?>swal2.all.min.js" defer></script>
-  <script src="<?= JS_URL ?>navbar.js" defer></script>
+  <script src="<?= JS_URL ?>admin.js" defer></script>
   <script>
     const CONFIG = {
         baseUrl: '<?= BASE_URL ?>',

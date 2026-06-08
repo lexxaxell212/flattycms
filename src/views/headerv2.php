@@ -463,6 +463,5 @@ function isActive(string $path): string {
   </svg>
   </button>
   <button id="scrollTopBtn" class="fab scroll-top-btn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
-<div class="main-content">
   <div id="flatty-container-top-end"></div>
   <div id="flatty-container-bottom"></div>

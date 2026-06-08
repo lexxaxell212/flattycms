@@ -77,3 +77,4 @@ $categories = safe_get_categories($pdo);
     </div>
   </section>
 </div>
+</main>

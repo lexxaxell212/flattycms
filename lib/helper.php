@@ -76,21 +76,19 @@ function safe_include($file_path, $fallback_title = "Konten") {
 function fallback_card($title = "Konten")
 {
   return '
-    <div class="container py-5">
-      <div class="row mx-auto">
-        <div class="col-12">
-            <div class="card card-glass">
+    <section>
+      <div class="container">
+            <div class="card card-flatty">
                 <div class="card-body text-center">
-                    <i class="fas fa-circle-notch fa-spin fa-1x text-muted mb-3"></i>
-                    <h2 class="text-muted mb-1">' .
+                    <i class="fas fa-circle-notch fa-spin fa-2x text-muted mb-2"></i>
+                    <span class="h5 text-muted mb-1">' .
     htmlspecialchars($title) .
-    '</h2>
-                    <p class="text-muted small mb-0">Segera hadir.</p>
+    '</span>
+                    <p class="text-muted small">Will come soon.</p>
                 </div>
             </div>
-        </div>
       </div>
-    </div>';
+    </section>';
 }
 
 // image upload

@@ -1,19 +1,22 @@
-</div>
 <footer id="footer">
   <div class="container">
-    <section class="d-flex justify-content-center">
-      <div class="flex-column text-center">
-        <div class="mb-4">
+    <section>
+      <div class="text-center">
+        <div class="mb-5">
             <h3>NEWSLETTER</h3>
             <p class="small">Dapatkan event dan update Bandung terkini via email.</p>
         </div>
-        <form class="newsletter-form" id="newsletterForm">
+        <form id="newsletterForm" class="row mx-auto align-items-center g-3">
+          <div class="col-md-8">
               <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
-              <input type="email" name="email" class="form-control mb-4" id="emailInput" placeholder="nama@email.com" required>
+              <input type="email" name="email" class="form-control" id="emailInput" placeholder="nama@email.com" required>
+          </div>
+          <div class="col-md-4">
               <button type="submit" class="btn btn-primary" id="submitBtn">
                 Berlangganan
                 <i class="arrow-icon fas fa-paper-plane"></i>
               </button>
+            </div>
           </form>
         </div>
     </section>

@@ -680,5 +680,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }).catch(() => {});
     }
   })();
+  
+  // auto trigger layanan publik filter explore  dari hash URL
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    const [tab, filter] = hash.split(':');
+    const tabEl = document.querySelector(`[data-tab="${tab}"]`);
+    if (tabEl) tabEl.click();
+    if (filter) {
+      setTimeout(() => {
+        const catBtn = document.querySelector(`.explore-cat[data-cat="${filter}"]`);
+        if (catBtn) catBtn.click();
+      }, 100);
+    }
+  }
 
 })();

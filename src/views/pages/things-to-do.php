@@ -462,11 +462,12 @@ $page_title = 'Things to Do';
 <div id="panel-latest" class="zona-panel">
     <?php foreach ($latest_items as $item): ?>
     <details>
-        <summary>
-            <?= htmlspecialchars($item['title']) ?>
-            <?= icon('sparkles') ?>
-            <small><?= htmlspecialchars($item['category']) ?></small>
-        </summary>
+<summary>
+    <?= htmlspecialchars($item['title']) ?>
+    <?php if ($item['is_new']): ?>
+    <i class="fas fa-star"></i>
+    <?php endif ?>
+</summary>
         <div class="card-body">
             <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
             <p><?= htmlspecialchars($item['desc']) ?></p>
@@ -482,10 +483,12 @@ $page_title = 'Things to Do';
 <div class="zona-panel" data-panel="<?= $category ?>" hidden>
     <?php foreach ($items as $item): ?>
     <details>
-        <summary>
-            <?= htmlspecialchars($item['title']) ?>
-            <?php if ($item['is_new']): ?><?= icon('sparkles') ?><?php endif ?>
-        </summary>
+<summary>
+    <?= htmlspecialchars($item['title']) ?>
+    <?php if ($item['is_new']): ?>
+    <i class="fas fa-star"></i>
+    <?php endif ?>
+</summary>
         <div class="card-body">
             <img src="<?= htmlspecialchars($item['image']) ?>" alt="">
             <p><?= htmlspecialchars($item['desc']) ?></p>

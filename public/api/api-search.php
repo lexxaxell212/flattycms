@@ -26,13 +26,15 @@ $results = [];
 
 $stmt = $pdo->prepare("
     SELECT
-        id,
-        title,
-        excerpt    AS description,
-        'admin_items' AS source
-    FROM admin_items
-    WHERE title LIKE :q
-       OR excerpt LIKE :q2
+      id,
+      title,
+      `desc`       AS description,
+      button_link,
+      'cmpt'       AS source
+    FROM cmpt
+    WHERE status = 'active'
+    AND category IN ('bandung_pusat','bandung_utara','bandung_selatan','bandung_timur','bandung_barat')
+    AND (title LIKE :q OR `desc` LIKE :q2)
     ORDER BY title ASC
     LIMIT 10
 ");
@@ -57,14 +59,14 @@ $results = array_merge($results, $stmt->fetchAll());
 $stmt = $pdo->prepare("
     SELECT
         id,
-        title,
+        name       AS title,
+        description AS description,
         slug,
-        slug       AS description,
-        'pages'    AS source
-    FROM pages
-    WHERE title LIKE :q
-    OR slug LIKE :q2
-    ORDER BY title ASC
+        'poi'      AS source
+    FROM poi
+    WHERE is_active = 1
+    AND (name LIKE :q OR description LIKE :q2)
+    ORDER BY name ASC
     LIMIT 10
 ");
 $stmt->execute([':q' => $keyword, ':q2' => $keyword]);

@@ -10,7 +10,7 @@ $page_title = 'Upcoming Events';
         <p class="lead">Events di Bandung</p>
       </section>
   
-      <!-- ── Event & Info Terkini ── -->
+      <!-- ── Event akan datang  ── -->
       <?php if ($_tdo_next || !empty($_tdo_pages)): ?>
       <div class="tdopage-section">
         <div class="tdopage-section__header">
@@ -73,9 +73,45 @@ $page_title = 'Upcoming Events';
         <?php endif; ?>
       </div>
       <?php endif; ?>
+      
+      <!-- ── Event berlalu ── -->
+      <?php if (!empty($_tdo_past)): ?>
+      <div class="tdopage-section">
+        <div class="tdopage-section__header">
+          <div class="tdopage-section__icon" style="--ic:#9ca3af">
+            <i class="fas fa-history"></i>
+          </div>
+          <div>
+            <h2 class="tdopage-section__title">Event Berlalu</h2>
+            <p class="tdopage-section__sub">Event yang sudah selesai</p>
+          </div>
+        </div>
+        <div class="row g-3">
+          <?php foreach ($_tdo_past as $_tdo_p): ?>
+          <div class="col-md-6 col-lg-4">
+            <a href="/pages/<?= safe_html($_tdo_p['slug']) ?>/" class="text-decoration-none h-100 d-block">
+              <div class="tdopage-card h-100">
+                <div class="tdopage-card__body">
+                  <h5 class="tdopage-card__title"><?= safe_html($_tdo_p['title']) ?></h5>
+                  <p class="tdopage-card__excerpt"><?= safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?></p>
+                </div>
+                <div class="tdopage-card__footer">
+                  <span class="tdopage-card__date">
+                    <i class="far fa-calendar me-1"></i>
+                    <?= date('d M Y', strtotime($_tdo_p['event_date'])) ?>
+                  </span>
+                  <span class="tdopage-card__read">Baca <i class="fas fa-arrow-right ms-1 tdopage-card__arrow"></i></span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+      <?php endif; ?>
   
       <!-- ── Empty state ── -->
-      <?php if (!$_tdo_next && empty($_tdo_pages)): ?>
+       <?php if (!$_tdo_next && empty($_tdo_pages) && empty($_tdo_past)): ?>
       <div class="text-center py-5 text-muted">
         <i class="fas fa-file fa-3x mb-3 opacity-50 d-block"></i>
         Belum ada konten tersedia.

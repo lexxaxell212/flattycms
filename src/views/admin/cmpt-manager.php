@@ -170,6 +170,7 @@ $csrf        = generate_csrf_token();
                         <div class="col-md-6">
                             <label class="form-label fw-medium">Link</label>
                             <input type="text" name="button_link" id="modalButtonLink" class="form-control" placeholder="/">
+                            <span class="form-text">Untuk type activity isi urlnya /things-to-do/#nama-title-nya-gini</span>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-medium">Tipe</label>

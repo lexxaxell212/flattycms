@@ -207,17 +207,15 @@ document.addEventListener("DOMContentLoaded", () => {
     CLOSE: "#ls-close-btn",
 
     LABELS: {
-      admin_items: "Pages",
-      allcontent_posts: "Blogs",
-      pages: "Pages"
+        cmpt: "Things To Do",
+        allcontent_posts: "Blogs",
+        poi: "POI Bandung"
     },
-
     URLS: {
-      admin_items: "/pages/?id={id}",
-      allcontent_posts: "/blogs/?id={id}",
-      pages: "/pages/{slug}/"
+        cmpt: "{button_link}",
+        allcontent_posts: "/blogs/?id={id}",
+        poi: "/poi/{slug}/"
     }
-  };
 
   let debounceTimer = null;
   let currentRequest = null;
@@ -344,6 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let href = CONFIG.URLS[source] || "#";
         href = href.replace("{id}", item.id);
         if (item.slug) href = href.replace("{slug}", item.slug);
+        if (item.button_link) href = href.replace("{button_link}", item.button_link);
 
         const a = document.createElement("a");
         a.className = "ls-item";

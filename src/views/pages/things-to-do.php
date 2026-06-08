@@ -540,7 +540,7 @@ $page_title = 'Things to Do';
         <p class="text-center text-muted">Belum ada konten terbaru.</p>
         <?php else: ?>
         <?php foreach ($latest_items as $item): ?>
-        <div class="accordion-item">
+        <div class="accordion-item" id="<?= htmlspecialchars(strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', $item['title']))) ?>">
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2 class="h5 mb-0 accord-trunc">
                 <i class="fas fa-fire text-accent me-1"></i>
@@ -563,7 +563,7 @@ $page_title = 'Things to Do';
     <?php foreach ($zona_map as $category => $items): ?>
     <div class="zona-panel" data-panel="<?= $category ?>" hidden>
         <?php foreach ($items as $item): ?>
-        <div class="accordion-item">
+        <div class="accordion-item" id="<?= htmlspecialchars(strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', $item['title']))) ?>">
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2 class="h5 mb-0 accord-trunc">
                 <?php if ($item['is_new']): ?> 
@@ -619,4 +619,30 @@ document.querySelectorAll('.zone').forEach(path => {
         path.classList.add('active');
     });
 });
+
+const hash = window.location.hash.replace('#', '');
+if (hash) {
+    const target = document.getElementById(hash);
+    if (target) {
+        // cari parent panel zona nya
+        const panel = target.closest('.zona-panel');
+        if (panel) {
+            // reset dulu semua panel
+            resetPanels();
+            // unhide panel yang relevan
+            panel.hidden = false;
+            // aktifin zona di SVG kalau ada
+            const panelKey = panel.dataset.panel;
+            if (panelKey) {
+                const zone = document.querySelector(`.zone[data-zone="${panelKey.replaceAll('_', '-')}"]`);
+                if (zone) zone.classList.add('active');
+            }
+        }
+        setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const header = target.querySelector('.accordion-header');
+            if (header) toggleAccordion(header);
+        }, 100);
+    }
+}
 </script>

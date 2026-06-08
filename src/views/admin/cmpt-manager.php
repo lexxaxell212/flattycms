@@ -93,7 +93,7 @@ $csrf        = generate_csrf_token();
             </span>
 
             <?php if (!empty($item['image']) && $item['image'] !== '/uploads/default.jpg'): ?>
-            <img src="<?= BASE_UPLOAD_URL . safe_html($item['image']) ?>"
+            <img src="<?= safe_html($item['image']) ?>"
                  class="card-img-top" alt="<?= safe_html($item['title']) ?>"
                  onerror="this.onerror=null;this.src='/uploads/default.jpg'">
             <?php else: ?>
@@ -111,8 +111,7 @@ $csrf        = generate_csrf_token();
                             onclick="editItem(<?= $item['id'] ?>,'<?= addslashes($item['title']) ?>','<?= addslashes($item['image']) ?>','<?= addslashes($item['desc']) ?>','<?= addslashes($item['button_link']) ?>','<?= addslashes($item['type']) ?>','<?= addslashes($item['status']) ?>','<?= addslashes($item['category']) ?>')">
                         <i class="fa-solid fa-pencil"></i>
                     </button>
-                    <form method="POST" class="flex-fill" onsubmit="return
-                    confirm('Hapus card ini?')">
+                    <form method="POST" class="flex-fill" onsubmit="return confirm('Hapus card ini?')">
                         <input type="hidden" name="csrf_token" value="<?= $csrf ?>">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="id" value="<?= (int)$item['id'] ?>">
@@ -166,14 +165,11 @@ $csrf        = generate_csrf_token();
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label fw-medium">Deskripsi</label>
-                            <textarea name="desc" id="modalDesc"
-                            class="form-control" rows="10"></textarea>
+                            <textarea name="desc" id="modalDesc" class="form-control" rows="10"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label fw-medium">Link</label>
-                            <input type="text" name="button_link"
-                            id="modalButtonLink" class="form-control"
-                            placeholder="/">
+                            <input type="text" name="button_link" id="modalButtonLink" class="form-control" placeholder="/">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-medium">Tipe</label>
@@ -258,7 +254,7 @@ function uploadFile(file) {
         .then(data => {
             if (data.success) {
                 document.getElementById('modalImage').value = data.path;
-                document.getElementById('imagePreview').src = BASE_UPLOAD_URL + data.path + '?t=' + Date.now();
+                document.getElementById('imagePreview').src = data.path + '?t=' + Date.now();
                 document.getElementById('previewContainer').classList.remove('d-none');
                 showStatus('Upload berhasil!', 'success');
             } else {
@@ -278,7 +274,7 @@ function showStatus(message, type) {
 
 function clearImage() {
     document.getElementById('imageInput').value = '';
-    document.getElementById('modalImage').value = 'default.jpg';
+    document.getElementById('modalImage').value = BASE_UPLOAD_URL + 'default.jpg';
     document.getElementById('previewContainer').classList.add('d-none');
 }
 
@@ -293,8 +289,8 @@ function editItem(id, title, image, desc, link, type, status, category) {
     document.getElementById('modalType').value = type;
     document.getElementById('modalStatus').value = status;
     document.getElementById('modalCategory').value = category;
-    if (image && image !== '/uploads/default.jpg') {
-        document.getElementById('imagePreview').src = BASE_UPLOAD_URL + image + '?t=' + Date.now();
+    if (image && image !== BASE_UPLOAD_URL + 'default.jpg') {
+        document.getElementById('imagePreview').src = image + '?t=' + Date.now();
         document.getElementById('previewContainer').classList.remove('d-none');
     }
     filterCategoryByType();
@@ -331,7 +327,7 @@ function resetForm() {
     document.getElementById('modalTitle').textContent = 'Buat Baru';
     document.getElementById('modalAction').value = 'create';
     document.getElementById('cardForm').reset();
-    document.getElementById('modalImage').value = '/uploads/default.jpg';
+    document.getElementById('modalImage').value = BASE_UPLOAD_URL + 'default.jpg';
     document.getElementById('modalCategory').value = 'general';
     document.getElementById('modalType').value = 'card';
     document.getElementById('modalStatus').value = 'active';

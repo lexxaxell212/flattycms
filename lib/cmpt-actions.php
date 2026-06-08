@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image']) && empty($_
     $target_file = $upload_dir . $filename;
 
     if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-        echo json_encode(['success' => true, 'path' => $filename]);
+        echo json_encode(['success' => true, 'path' => BASE_UPLOAD_URL . $filename]);
     } else {
         echo json_encode(['success' => false, 'error' => 'Upload gagal']);
     }
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $pdo->prepare("INSERT INTO cmpt (title, image, `desc`, button_link, type, category, status) VALUES (?,?,?,?,?,?,'active')")
                 ->execute([
                     $title,
-                    $_POST['image']       ?? 'default.jpg',
+                    $_POST['image']       ?? BASE_UPLOAD_URL . 'default.jpg',
                     trim($_POST['desc']      ?? ''),
                     trim($_POST['button_link']  ?? '#'),
                     $_POST['type']        ?? 'card',
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $pdo->prepare("UPDATE cmpt SET title=?, image=?, `desc`=?, button_link=?, type=?, category=?, status=? WHERE id=?")
                 ->execute([
                     trim($_POST['title']       ?? ''),
-                    $_POST['image']            ?? 'default.jpg',
+                    $_POST['image']            ?? BASE_UPLOAD_URL . 'default.jpg',
                     trim($_POST['desc']     ?? ''),
                     trim($_POST['button_link'] ?? '#'),
                     $_POST['type']             ?? 'card',
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 $items = $pdo->query("SELECT * FROM cmpt WHERE status = 'active' ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
 $items = array_map(fn($i) => array_merge([
     'title'       => 'Tanpa Judul',
-    'image'       => 'default.jpg',
+    'image'       => BASE_UPLOAD_URL . 'default.jpg',
     'desc'     => '',
     'button_link' => '#',
     'type'        => 'card',

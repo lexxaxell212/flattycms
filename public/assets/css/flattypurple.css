@@ -5140,7 +5140,7 @@ input[type="range"]::-moz-range-track {
   margin-top: 0.25rem;
 }
 
-.poi-gallery-avatar {
+.poi-gallery-card img.poi-gallery-avatar {
   width: 20px;
   height: 20px;
   border-radius: 50%;

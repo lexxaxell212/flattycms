@@ -690,7 +690,7 @@ h6, .h6 {
   height: 100vh;
   margin-bottom: 4rem;
   border-radius: 0 !important;
-  padding-top: var(--navbar-height) !important;
+  top: var(--navbar-height);
 }
 
 .hero-item {

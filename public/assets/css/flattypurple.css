@@ -708,7 +708,7 @@ h6, .h6 {
   z-index: 1;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .hero-slide-wisata {
     background-image: url("../images/wisata.webp");
   }
@@ -847,7 +847,7 @@ h6, .h6 {
 }
 .auth-dekstop {display: none;}
 .auth-mobile {display: flex;}
-@media (min-width: 980px) {.auth-mobile {display: none;} .auth-dekstop {display:flex;}}
+@media (min-width: 1200px) {.auth-mobile {display: none;} .auth-dekstop {display:flex;}}
 .navbar {
   position: fixed;
   top: 0;

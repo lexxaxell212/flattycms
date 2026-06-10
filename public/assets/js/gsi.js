@@ -24,7 +24,7 @@ window.onGoogleLibraryLoad = function () {
             cancel_on_tap_outside: true
         });
 
-        const buttonElement = document.getElementById("google-login-btn");
+        const buttonElement = document.getElementById("google-login-btn-dekstop");
         if (buttonElement) {
           google.accounts.id.renderButton(buttonElement, {
             theme: "outline",
@@ -32,6 +32,16 @@ window.onGoogleLibraryLoad = function () {
             type: "icon",
             shape: "circle"
           });
+        }
+        
+        const buttonMobile = document.getElementById("google-login-btn-mobile");
+        if (buttonMobile) {
+            google.accounts.id.renderButton(buttonMobile, {
+                theme: "outline",
+                size: "medium",
+                type: "icon",
+                shape: "circle"
+            });
         }
         
         const loginButton = document.getElementById("google-login-page");

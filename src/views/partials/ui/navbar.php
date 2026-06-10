@@ -206,6 +206,9 @@ $nav_items = [
           </svg>
         </span>
       </button>
+      <div class="auth-dekstop">
+        <?php $google_btn_id = 'google-login-btn-desktop'; include SRC_PATH . 'auth.php'; ?>
+      </div>
     </div>
   </div>
 </nav>
@@ -222,46 +225,7 @@ $nav_items = [
     <?php endforeach; ?>
     <li class="nav-item weather" id="w"><small>Cek cuaca...</small></li>
   </ul>
-  <?php if (empty($_SESSION['user'])): ?>
-  <div class="d-flex align-items-center gap-2">
-    <div id="google-login-btn">
-    </div>
-    <div class="divider-v"></div>
-    <a href="/login" class="btn btn-outline-primary btn-sm">
-      <i class="fa-regular fa-user fa-sm"></i>
-      Masuk
-    </a>
-    <a href="/register" class="btn btn-outline-primary btn-sm">
-      <i class="fa-solid fa-pen fa-sm"></i>
-      Daftar
-    </a>
+  <div class="auth-mobile">
+    <?php $google_btn_id = 'google-login-btn-mobile'; include SRC_PATH . 'auth.php'; ?>
   </div>
-  <?php else : ?>
-  <div class="d-flex align-items-center gap-2">
-    <a href="/profile" class="profile-pill">
-      <?php if (!empty($_SESSION['user']['avatar'])): ?>
-      <img src="<?= safe_html($_SESSION['user']['avatar']) ?>"
-      class="rounded-circle"
-      width="30" height="30"
-      style="object-fit:cover;flex-shrink:0;">
-      <?php else : ?>
-      <div class="avatar-circle">
-        <?= strtoupper(substr($_SESSION['user']['name'] ?? 'U', 0, 1)) ?>
-      </div>
-      <?php endif; ?>
-      <span class="account-name text-truncate" style="max-width:120px;">
-        <?= safe_html($_SESSION['user']['display_name'] ?? $_SESSION['user']['name']) ?>
-      </span>
-    </a>
-    <div class="divider-v"></div>
-    <a href="/api/auth/logout.php" class="btn btn-outline-primary btn-sm">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-        <polyline points="16 17 21 12 16 7" />
-        <line x1="21" y1="12" x2="9" y2="12" />
-      </svg>
-      Logout
-    </a>
-  </div>
-  <?php endif; ?>
 </div>

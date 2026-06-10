@@ -845,7 +845,9 @@ h6, .h6 {
 .nav-desktop {
   display: none;
 }
-
+.auth-dekstop {display: none;}
+.auth-mobile {display: flex;}
+@media (min-width: 768px) {.auth-mobile {display: none;} .auth-dekstop {display:flex;}}
 .navbar {
   position: fixed;
   top: 0;

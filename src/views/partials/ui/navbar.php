@@ -206,7 +206,9 @@ $nav_items = [
           </svg>
         </span>
       </button>
-      <?php $google_btn_id = 'google-login-btn-desktop'; include SRC_PATH . 'partials/ui/auth.php'; ?>
+      <div class="auth-dekstop">
+        <?php $google_btn_id = 'google-login-btn-desktop'; include SRC_PATH . 'partials/ui/auth.php'; ?>
+      </div>
     </div>
   </div>
 </nav>
@@ -223,5 +225,7 @@ $nav_items = [
     <?php endforeach; ?>
     <li class="nav-item weather" id="w"><small>Cek cuaca...</small></li>
   </ul>
-  <?php $google_btn_id = 'google-login-btn-mobile'; include SRC_PATH . 'partials/ui/auth.php'; ?>
+  <div class="auth-mobile">
+    <?php $google_btn_id = 'google-login-btn-mobile'; include SRC_PATH . 'partials/ui/auth.php'; ?>
+  </div>
 </div>

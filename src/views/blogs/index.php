@@ -1,4 +1,5 @@
 <?php
+$page_title = "Blog";
 require_once LIB_PATH . "blogs.php";
 
 $id = (int) ($_GET["id"] ?? 0);

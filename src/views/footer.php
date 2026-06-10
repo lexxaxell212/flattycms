@@ -3,7 +3,7 @@
     <section>
       <div class="text-center">
         <div class="mb-5">
-            <h3>NEWSLETTER</h3>
+            <h2 class="h3">NEWSLETTER</h2>
             <p class="small">Dapatkan event dan update Bandung terkini via email.</p>
         </div>
         <form id="newsletterForm" class="row mx-auto align-items-center g-3">

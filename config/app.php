@@ -14,8 +14,8 @@ if (!defined("BASE_URL")) define("BASE_URL", $base_url);
 if (!defined("ROOT_PATH")) define("ROOT_PATH", dirname(__DIR__) . "/");
 
 // Site name
-define("SITE_NAME", "AYOKEBANDUNG.ID");
-define("APP_NAME", "FLATTY-CMS");
+define("SITE_NAME", "Ayokebandung.id");
+define("APP_NAME", "Flatty-CMS");
 
 // Assets
 define("ASSETS_URL", BASE_URL . "assets/");

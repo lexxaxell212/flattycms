@@ -1,6 +1,27 @@
 <?php
 $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
+$titles = [
+  '' => 'Beranda',
+  'trip' => 'Trip',
+  'trips' => 'Trip',
+  'gallery' => 'Gallery',
+  'things-to-do' => 'Things To Do',
+  'upcoming-events' => 'Upcoming Events',
+  'pages/tentang' => 'Tentang',
+  'pages/sejarah' => 'Sejarah',
+  'pages/layanan' => 'Layanan',
+  'pages/privacy-policy' => 'Kebijakan Privasi',
+  'pages/kritik-dan-saran' => 'Kritik dan Saran',
+  'blogs' => 'Blog',
+  'register' => 'Daftar',
+  'login' => 'Masuk',
+  'forgot-password' => 'Lupa Password',
+  'reset-password' => 'Ganti Password',
+  'profile' => 'Profil',
+  'unsubscribe' => 'Unsubscribe'
+];
+
 $routes = [
   // home
     '' => SRC_PATH . 'pages/home.php',
@@ -35,13 +56,12 @@ if (array_key_exists($uri, $routes)) {
     $slug         = substr($uri, 6);
     $page_file    = PUBLIC_PATH . 'pages/' . $slug . '/index.php';
     $view_content = file_exists($page_file) ? $page_file : null;
+    $page_title   = ucwords(str_replace('-', ' ', $slug));
+
 } elseif (str_starts_with($uri, 'poi/')) {
     $slug      = substr($uri, 4);
     require_once LIB_PATH . 'poi-actions.php';
     $poi_check = get_poi_by_slug($slug);
-    $view_content = $poi_check 
-        ? SRC_PATH . 'pages/poi/index.php'
-        : null;
-} else {
-    $view_content = null;
+    $view_content = $poi_check ? SRC_PATH . 'pages/poi/index.php' : null;
+    $page_title   = $poi_check ? $poi_check['name'] : null;
 }

@@ -13,7 +13,9 @@ if (in_array($uri, $protected_routes) && !isset($_SESSION['user'])) {
 
 require_once ROOT_PATH . "maintenance.php";
 
-$page_title = $page_title ?? SITE_NAME;
+$this_title = $titles[$uri] ?? $page_title ?? $_POST['title'] ?? SITE_NAME;
+$this_title = htmlspecialchars($this_title, ENT_QUOTES, 'UTF-8');
+$show_title = ($this_title !== SITE_NAME) ? $this_title.' - '.SITE_NAME : SITE_NAME;
 
 if (isset($view_content) && file_exists($view_content)) {
     require_once SRC_PATH . "headerv2.php";

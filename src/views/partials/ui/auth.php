@@ -1,6 +1,6 @@
 <?php if (empty($_SESSION['user'])): ?>
 <div class="d-flex align-items-center gap-2">
-  <div id="<?= $google_btn_id ?? 'google-login-btn' ?>"></div>
+  <div id="<?= $google_btn_id ?>"></div>
   <div class="divider-v"></div>
   <a href="/login" class="btn btn-outline-primary btn-sm">
     <i class="fa-solid fa-user fa-sm"></i>

@@ -6369,9 +6369,9 @@ a.logo-social i {
 
 /* ======================================= */
 
-@media (min-width: 980px) {
+@media (min-width: 1200px) {
   .container {
-    max-width: clamp(900px, 100%, 1360px);
+    max-width: clamp(900px, 100%, 1400px);
   }
 
   .container-tp {

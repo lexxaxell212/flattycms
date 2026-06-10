@@ -1,5 +1,4 @@
 <?php
-// Blogs 
 function getBlogPosts($pdo, $limit = 12, $category = null, $search = null)
 {
   $where = ['p.status="active"'];
@@ -47,9 +46,8 @@ function getPost($pdo, $id)
   $stmt->execute([$id]);
   $post = $stmt->fetch();
   if ($post) {
-    $pdo
-      ->prepare("UPDATE allcontent_posts SET views = views + 1 WHERE id = ?")
-      ->execute([$id]);
+    $pdo->prepare("UPDATE allcontent_posts SET views = views + 1 WHERE id = ?")
+        ->execute([$id]);
   }
   return $post;
 }
@@ -76,35 +74,31 @@ function safe_get_post(PDO $pdo, int $id): array|false
   $stmt->execute([(int) $id, "active"]);
   return $stmt->fetch();
 }
-function safe_get_posts(
-  PDO $pdo,
-  int $limit,
-  int $offset,
-  int $cat_id = 0,
-): array {
-  $limit = max(1, (int) $limit);
+function safe_get_posts(PDO $pdo, int $limit, int $offset, int $cat_id = 0): array
+{
+  $limit  = max(1, (int) $limit);
   $offset = max(0, (int) $offset);
   $cat_id = (int) $cat_id;
   if ($cat_id > 0) {
     $sql = "
-            SELECT p.id, p.title, p.excerpt, p.content, p.created_at, p.views,
-            p.category_id, p.image_url AS image, c.name AS cat_name 
-            FROM allcontent_posts p
-            LEFT JOIN allcontent_categories c ON p.category_id = c.id
-            WHERE p.status = 'active' AND p.category_id = $cat_id
-            ORDER BY p.created_at DESC 
-            LIMIT $limit OFFSET $offset
-        ";
+      SELECT p.id, p.title, p.slug, p.excerpt, p.content, p.created_at, p.views,
+      p.category_id, p.image_url AS image, c.name AS cat_name 
+      FROM allcontent_posts p
+      LEFT JOIN allcontent_categories c ON p.category_id = c.id
+      WHERE p.status = 'active' AND p.category_id = $cat_id
+      ORDER BY p.created_at DESC 
+      LIMIT $limit OFFSET $offset
+    ";
   } else {
     $sql = "
-            SELECT p.id, p.title, p.excerpt, p.content, p.created_at, p.views,
-            p.category_id, p.image_url AS image, c.name AS cat_name 
-            FROM allcontent_posts p
-            LEFT JOIN allcontent_categories c ON p.category_id = c.id
-            WHERE p.status = 'active'
-            ORDER BY p.created_at DESC 
-            LIMIT $limit OFFSET $offset
-        ";
+      SELECT p.id, p.title, p.slug, p.excerpt, p.content, p.created_at, p.views,
+      p.category_id, p.image_url AS image, c.name AS cat_name 
+      FROM allcontent_posts p
+      LEFT JOIN allcontent_categories c ON p.category_id = c.id
+      WHERE p.status = 'active'
+      ORDER BY p.created_at DESC 
+      LIMIT $limit OFFSET $offset
+    ";
   }
   $stmt = $pdo->prepare($sql);
   $stmt->execute();
@@ -113,14 +107,10 @@ function safe_get_posts(
 function safe_count_posts(PDO $pdo, int $cat_id = 0): int
 {
   if ($cat_id > 0) {
-    $stmt = $pdo->prepare(
-      "SELECT COUNT(*) FROM allcontent_posts WHERE status = ? AND category_id = ?",
-    );
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM allcontent_posts WHERE status = ? AND category_id = ?");
     $stmt->execute(["active", $cat_id]);
   } else {
-    $stmt = $pdo->prepare(
-      "SELECT COUNT(*) FROM allcontent_posts WHERE status = ?",
-    );
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM allcontent_posts WHERE status = ?");
     $stmt->execute(["active"]);
   }
   return (int) $stmt->fetchColumn();
@@ -136,14 +126,14 @@ function safe_get_categories(PDO $pdo): array
   $stmt->execute(["active"]);
   return $stmt->fetchAll();
 }
-
-function get_post_by_slug(PDO $pdo, string $slug): array|false {
-    $stmt = $pdo->prepare('
+function get_post_by_slug(PDO $pdo, string $slug): array|false
+{
+  $stmt = $pdo->prepare('
         SELECT p.*, c.name AS cat_name, p.image_url AS image
         FROM allcontent_posts p
         LEFT JOIN allcontent_categories c ON p.category_id = c.id
         WHERE p.slug = ? AND p.status = "active"
     ');
-    $stmt->execute([$slug]);
-    return $stmt->fetch();
+  $stmt->execute([$slug]);
+  return $stmt->fetch();
 }

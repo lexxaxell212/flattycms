@@ -44,7 +44,7 @@ $categories = safe_get_categories($pdo);
                   alt="<?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                   loading="lazy"
                 >
-                  <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="h5 mb-3">
+                  <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="h5 mb-3">
                   <?= htmlspecialchars(mb_strlen($p['title'] ?? '') > 60 ?
                   mb_substr($p['title'], 0, 60) . '…' : ($p['title'] ?? ''),
                   ENT_QUOTES, 'UTF-8') ?>
@@ -54,7 +54,7 @@ $categories = safe_get_categories($pdo);
                   </p>
                 </div>
                 <div class="card-footer">
-                  <a href="/blogs/?id=<?= (int) $p['id'] ?>" class="btn
+                  <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="btn
                   btn-primary btn-sm btn-asl-read">
                     Baca Selengkapnya
                     <i class="arrow-icon fas fa-angle-right ms-2" aria-hidden="true"></i>

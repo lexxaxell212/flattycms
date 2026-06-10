@@ -136,3 +136,14 @@ function safe_get_categories(PDO $pdo): array
   $stmt->execute(["active"]);
   return $stmt->fetchAll();
 }
+
+function get_post_by_slug(PDO $pdo, string $slug): array|false {
+    $stmt = $pdo->prepare('
+        SELECT p.*, c.name AS cat_name, p.image_url AS image
+        FROM allcontent_posts p
+        LEFT JOIN allcontent_categories c ON p.category_id = c.id
+        WHERE p.slug = ? AND p.status = "active"
+    ');
+    $stmt->execute([$slug]);
+    return $stmt->fetch();
+}

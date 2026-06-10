@@ -324,7 +324,7 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </form>
-                            <a href="/blogs/?id=<?= (int)$p['id'] ?>" target="_blank" class="btn btn-outline-secondary" title="Lihat">
+                            <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" target="_blank" class="btn btn-outline-secondary" title="Lihat">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
                         </div>

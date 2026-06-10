@@ -45,7 +45,8 @@ $stmt = $pdo->prepare("
     SELECT
         id,
         title,
-        excerpt    AS description,
+        excerpt AS description,
+        slug,
         'allcontent_posts' AS source
     FROM allcontent_posts
     WHERE title LIKE :q

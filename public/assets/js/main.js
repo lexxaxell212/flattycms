@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     URLS: {
         cmpt: "{button_link}",
-        allcontent_posts: "/blogs/?id={id}",
+        allcontent_posts: "/blogs/?slug={slug}",
         poi: "/poi/{slug}"
     }
   };

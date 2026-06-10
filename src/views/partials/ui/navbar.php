@@ -207,7 +207,7 @@ $nav_items = [
         </span>
       </button>
       <div class="auth-dekstop">
-        <?php $google_btn_id = 'google-login-btn-desktop'; include SRC_PATH . 'auth.php'; ?>
+        <?php $google_btn_id = 'google-login-btn-desktop'; include SRC_PATH . 'partials/ui/auth.php'; ?>
       </div>
     </div>
   </div>
@@ -226,6 +226,6 @@ $nav_items = [
     <li class="nav-item weather" id="w"><small>Cek cuaca...</small></li>
   </ul>
   <div class="auth-mobile">
-    <?php $google_btn_id = 'google-login-btn-mobile'; include SRC_PATH . 'auth.php'; ?>
+    <?php $google_btn_id = 'google-login-btn-mobile'; include SRC_PATH . 'partials/ui/auth.php'; ?>
   </div>
 </div>

@@ -54,16 +54,14 @@ $categories = safe_get_categories($pdo);
     <div class="row justify-content-center">
         <div class="col-lg">
           <section>
-            <nav aria-label="breadcrumb" class="mb-1 text-muted
-            text-decoration-none align-items-center">
-                <ol class="breadcrumb small text-muted text-decoration-none
-                align-items-center">
+           <nav aria-label="breadcrumb" class="mb-1 text-muted text-decoration-none align-items-center">
+                <ol class="breadcrumb small text-muted text-decoration-none align-items-center">
                     <li class="breadcrumb-item text-muted small">
-                    class="text-decoration-none"
-                    href="/blogs/">Blogs</a></li>
+                        <a class="text-decoration-none" href="/blogs/">Blogs</a>
+                    </li>
                     <?php if (!empty($post["cat_name"])): ?>
                     <li class="breadcrumb-item text-muted small">
-                        <a class="text-decoration-none" href="/blogs/?cat=<?= (int) ($post["category_id"] ?? 0) ?>">
+                        <a class="text-decoration-none" href="/blogs/?cat=<?= (int)($post["category_id"] ?? 0) ?>">
                             <?= htmlspecialchars($post["cat_name"], ENT_QUOTES, "UTF-8") ?>
                         </a>
                     </li>

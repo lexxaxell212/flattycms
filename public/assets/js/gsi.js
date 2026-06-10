@@ -24,7 +24,7 @@ window.onGoogleLibraryLoad = function () {
             cancel_on_tap_outside: true
         });
 
-        const buttonElement = document.getElementById("google-login-btn-dekstop");
+        const buttonElement = document.getElementById("google-login-btn-desktop");
         if (buttonElement) {
           google.accounts.id.renderButton(buttonElement, {
             theme: "outline",

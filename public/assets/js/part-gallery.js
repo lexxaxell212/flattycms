@@ -13,7 +13,7 @@
   function avatarEl(photo) {
     if (photo.uploader_avatar) {
       const img = document.createElement('img');
-      img.src       = (typeof BASE !== 'undefined' ? BASE : '') + '/uploads/' + photo.uploader_avatar;
+      img.src       = photo.uploader_avatar;
       img.alt       = photo.uploader_name;
       img.className = 'poi-gallery-avatar';
       img.onerror   = function () {

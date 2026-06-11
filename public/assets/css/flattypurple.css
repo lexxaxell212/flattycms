@@ -76,7 +76,7 @@
   --duration: 0.3s;
   --hover-state: 0.9;
   --active-state: 0.8;
-  
+
   /* sizing */
   --navbar-height: 70px;
   --max-width-form: clamp(440px, 60vw, 740px);
@@ -84,9 +84,9 @@
 
   /* shadows  */
   --shadow-sm: 0 2px 8px oklch(0.231 0.089 295 / 0.07),
-    0 1px 3px oklch(0.231 0.089 295 / 0.04);
+  0 1px 3px oklch(0.231 0.089 295 / 0.04);
   --shadow: 0 6px 20px oklch(0.231 0.089 295 / 0.09),
-    0 2px 8px oklch(0.231 0.089 295 / 0.05);
+  0 2px 8px oklch(0.231 0.089 295 / 0.05);
   --shadow-lg: 0 12px 28px oklch(0.231 0.089 295 / 0.08),
   0 4px 10px  oklch(0.231 0.089 295 / 0.06);
   --shadow-card: 0 2px 8px  oklch(0.231 0.089 295 / 0.08);
@@ -161,7 +161,7 @@
   /* medium purple  */
   --text-card: oklch(0.350 0.030 295);
   --text-modal: oklch(0.350 0.030 295);
-  --text-muted: oklch(0.500 0.018 295); 
+  --text-muted: oklch(0.500 0.018 295);
   --text-primary: oklch(0.487 0.167 295);
   --text-accent: oklch(0.650 0.163 60);
   --text-red: oklch(0.520 0.200 27);
@@ -182,7 +182,7 @@
   --bandung: oklch(0.231 0.089 295);
   --dotid: oklch(0.487 0.167 295);
   --strips: oklch(0.558 0.174 295 / 0.25);
-  
+
   /* icon svg */
   --icon-1: oklch(0.35 0.06 295);
   --icon-2: oklch(0.45 0.05 295);
@@ -210,11 +210,11 @@
 [data-dark] {
   /* shadows dark — lebih subtle */
   --shadow-sm: 0 2px 8px oklch(0 0 0 / 0.25),
-    0 1px 3px oklch(0 0 0 / 0.15);
+  0 1px 3px oklch(0 0 0 / 0.15);
   --shadow: 0 6px 20px oklch(0 0 0 / 0.30),
-    0 2px 8px oklch(0 0 0 / 0.18);
+  0 2px 8px oklch(0 0 0 / 0.18);
   --shadow-lg: 0 12px 28px oklch(0 0 0 / 0.28),
-    0 4px 10px oklch(0 0 0 / 0.16);
+  0 4px 10px oklch(0 0 0 / 0.16);
   --shadow-card: 0 2px 8px  oklch(0 0 0 / 0.28);
   --shadow-card-hover: 0 6px 20px oklch(0 0 0 / 0.40),
   0 2px 6px  oklch(0 0 0 / 0.22);
@@ -302,16 +302,16 @@
   --bandung: oklch(0.977 0.014 295);
   --dotid: oklch(0.600 0.174 295);
   --strips: oklch(0.600 0.174 295 / 0.35);
-  
-    /* icon svg */
+
+  /* icon svg */
   --icon-1: oklch(0.92 0.04 295);
   --icon-2: oklch(0.83 0.10 295);
   --icon-3: oklch(0.74 0.15 295);
   --icon-4: oklch(0.65 0.19 295);
   --icon-5: oklch(0.55 0.22 295);
-  --fill-1:       oklch(0.35 0 0);
-  --fill-hover:   oklch(0.35 0.14 295);
-  --stroke:       oklch(0.45 0 0);
+  --fill-1: oklch(0.35 0 0);
+  --fill-hover: oklch(0.35 0.14 295);
+  --stroke: oklch(0.45 0 0);
   --stroke-hover: oklch(0.35 0.14 295);
 
   --bs-body-bg: var(--bg-body);
@@ -845,9 +845,20 @@ h6, .h6 {
 .nav-desktop {
   display: none;
 }
-.auth-dekstop {display: none;}
-.auth-mobile {display: flex;}
-@media (min-width: 1200px) {.auth-mobile {display: none;} .auth-dekstop {display:flex;}}
+.auth-dekstop {
+  display: none;
+}
+.auth-mobile {
+  display: flex;
+}
+@media (min-width: 1200px) {
+  .auth-mobile {
+    display: none;
+  }
+
+  .auth-dekstop {
+    display: flex;
+  }}
 .navbar {
   position: fixed;
   top: 0;
@@ -1328,10 +1339,10 @@ div, h1, h2, h3, h4, h5, h6, p, a, span, footer, section,
 .navbar-collapse, .nav-desktop-link, .nav-dd-panel, .dropdown-menu,
 .navbar, .card, .glass, .btn, .btn-close, .close-btn {
   transition:
-    background var(--duration) var(--ease),
-    color var(--duration) var(--ease),
-    border-color var(--duration) var(--ease),
-    box-shadow var(--duration) var(--ease);
+  background var(--duration) var(--ease),
+  color var(--duration) var(--ease),
+  border-color var(--duration) var(--ease),
+  box-shadow var(--duration) var(--ease);
 }
 
 html,
@@ -2224,7 +2235,7 @@ a:hover i.arrow-icon {
   opacity: 1;
 }
 .ls-inner {
-max-width: var(--max-width-form) !important;
+  max-width: var(--max-width-form) !important;
 }
 .ls-bar {
   display: flex;
@@ -2303,9 +2314,9 @@ max-width: var(--max-width-form) !important;
   opacity var(--duration) var(--ease);
 }
 #live-search-dropdown.open {
-    max-height: 61vh;
-    opacity: 1;
-    overflow-y: auto;
+  max-height: 61vh;
+  opacity: 1;
+  overflow-y: auto;
 }
 #live-search-dropdown::-webkit-scrollbar {
   width: 2px;
@@ -4919,10 +4930,10 @@ input[type="range"]::-moz-range-track {
   inset: 0;
   z-index: 1;
   background: linear-gradient(
-    to top,
-    oklch(8% 0.02 270 / 0.92) 0%,
-    oklch(8% 0.02 270 / 0.55) 45%,
-    oklch(8% 0.02 270 / 0.0) 100%
+  to top,
+  oklch(8% 0.02 270 / 0.92) 0%,
+  oklch(8% 0.02 270 / 0.55) 45%,
+  oklch(8% 0.02 270 / 0.0) 100%
   );
   display: flex;
   flex-direction: column;
@@ -6323,7 +6334,7 @@ a.logo-social i {
   .tp-overview {
     flex-direction: row;
     align-items: center;
-    
+
   }
 
   .tp-overview__left {

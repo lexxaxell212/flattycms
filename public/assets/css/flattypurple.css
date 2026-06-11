@@ -687,7 +687,7 @@ h6, .h6 {
 
 /* ============= hero ============= */
 .hero-wrapper {
-  height: 100vh;
+  height: calc(100vh - var(--navbar-height));
   margin-bottom: 4rem;
   border-radius: 0 !important;
   top: var(--navbar-height);

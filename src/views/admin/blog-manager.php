@@ -133,7 +133,7 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-medium">Judulnya diisi yang<span class="text-danger">*</span></label>
+                <label class="form-label fw-medium">Judul<span class="text-danger">*</span></label>
                 <input type="text" name="title" class="form-control" maxlength="255" value="<?= safe_html($edit_post['title']) ?>" required>
             </div>
 
@@ -143,19 +143,19 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-medium">Uda makan belom? <span class="text-danger">*</span></label>
+                <label class="form-label fw-medium">Content<span class="text-danger">*</span></label>
                 <div id="quill-editor"></div>
                 <input type="hidden" name="content" id="quill-content">
                 <div id="edit-content-data" data-content="<?= safe_html($edit_post['content']) ?>" style="display:none"></div>
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-medium">Gambar Utama</label>
+                <label class="form-label fw-medium">Gambar Thumbnail</label>
                 <input type="file" name="image" class="form-control" accept="image/jpeg,image/png,image/gif,image/webp">
                 <input type="hidden" name="image_url" id="edit-image-url" value="<?= safe_html($edit_post['image_url'] ?? '') ?>">
                 <?php if ($edit_post['image_url']): ?>
                 <div class="mt-2">
-                    <img src="<?= safe_html($edit_post['image_url']) ?>" style="max-height:120px;border-radius:6px" class="img-thumbnail">
+                    <img src="<?= BASE_UPLOAD_URL .  safe_html($edit_post['image_url']) ?>" style="max-height:120px;border-radius:6px" class="img-thumbnail">
                     <small class="text-muted d-block mt-1">Gambar saat ini</small>
                 </div>
                 <?php endif; ?>
@@ -308,11 +308,11 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
                     <td><small class="text-muted"><?= fmt_date($p['created_at'] ?? '') ?></small></td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                            <a href="?edit=<?= (int)$p['id'] ?>" class="btn btn-outline-primary" title="Edit">
+                            <a href="?edit=<?= (int)$p['id'] ?>" class="btn btn-outline-primary btn-sm" title="Edit">
                                 <i class="fa-solid fa-pencil"></i>
                             </a>
                             <a href="?action=toggle&id=<?= (int)$p['id'] ?>&tok=<?= $toggle_tok ?>"
-                               class="btn <?= $is_active ? 'btn-outline-warning' : 'btn-outline-success' ?>"
+                               class="btn <?= $is_active ? 'btn-outline-warning' : 'btn-outline-success' ?> btn-sm"
                                onclick="return confirm('<?= $is_active ? 'Nonaktifkan' : 'Aktifkan' ?> post ini?')"
                                title="Toggle">
                                 <i class="fa-solid fa-power-off"></i>
@@ -320,11 +320,11 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
                             <form method="POST" style="display:inline" onsubmit="return confirm('Hapus permanen?')">
                                 <input type="hidden" name="csrf_token" value="<?= safe_html($_SESSION['csrf_token']) ?>">
                                 <input type="hidden" name="id" value="<?= (int)$p['id'] ?>">
-                                <button name="delete" class="btn btn-outline-danger" title="Hapus">
+                                <button name="delete" class="btn btn-outline-danger btn-sm" title="Hapus">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </form>
-                            <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" target="_blank" class="btn btn-outline-secondary" title="Lihat">
+                            <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" target="_blank" class="btn btn-outline-secondary btn-sm" title="Lihat">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
                         </div>

@@ -66,7 +66,7 @@ $categories = safe_get_categories($pdo);
                         </a>
                     </li>
                     <?php endif; ?>
-                    <li class="breadcrumb-item active text-muted small" aria-current="page">
+                    <li class="breadcrumb-item active text-muted small text-truncate" aria-current="page">
                         <?= htmlspecialchars(mb_substr($post["title"] ?? "", 0, 70), ENT_QUOTES, "UTF-8") ?>
                     </li>
                 </ol>

@@ -1,30 +1,30 @@
 <?php
 register_shutdown_function(function() {
-    $error = error_get_last();
-    if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
-        http_response_code(500);
-        if (defined('APP_ENV') && APP_ENV === 'development') {
-            echo "<pre style='background:rgba(29,78,216,0.08);color:rgba(29,78,216,0.5);padding:20px;border-left:4px solid rgba(29,78,216,0.5);'>";
-            echo "Fatal Error: " . $error['message'] . "\n";
-            echo "File: " . $error['file'] . "\n";
-            echo "<span style='color:#fff;'>Line: " . $error['line'] . "</span>";
-            echo "</pre>";
-        } else {
-            include __DIR__ . '/public/errors/500.php';
-        }
-        exit;
+  $error = error_get_last();
+  if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+    http_response_code(500);
+    if (defined('APP_ENV') && APP_ENV === 'development') {
+      echo "<pre style='background:rgba(29,78,216,0.08);color:rgba(29,78,216,0.5);padding:20px;border-left:4px solid rgba(29,78,216,0.5);'>";
+      echo "Fatal Error: " . $error['message'] . "\n";
+      echo "File: " . $error['file'] . "\n";
+      echo "<span style='color:#fff;'>Line: " . $error['line'] . "</span>";
+      echo "</pre>";
+    } else {
+      include __DIR__ . '/public/errors/500.php';
     }
+    exit;
+  }
 });
 
 if (!function_exists("autoload_core")) {
   function autoload_core() {
-    $dir    = __DIR__;
+    $dir = __DIR__;
     // load constants
-    $app    = $dir . "/config/app.php";
+    $app = $dir . "/config/app.php";
     // load key
-    $key     = $dir . "/config/key.php";
+    $key = $dir . "/config/key.php";
     // load pdo
-    $db    = $dir . "/config/db.php";
+    $db = $dir . "/config/db.php";
     // load helper global
     $helper = $dir . "/lib/helper.php";
 
@@ -37,17 +37,17 @@ if (!function_exists("autoload_core")) {
 
 function verify_ajax_request(string $method = 'POST'): void
 {
-    // Cek AJAX header
-    if (($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') !== 'XMLHttpRequest') {
-        http_response_code(403);
-        echo json_encode(['error' => 'Forbidden']);
-        exit;
-    }
+  // Cek AJAX header
+  if (($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') !== 'XMLHttpRequest') {
+    http_response_code(403);
+    echo json_encode(['error' => 'Forbidden']);
+    exit;
+  }
 
-    // Cek method
-    if ($_SERVER['REQUEST_METHOD'] !== strtoupper($method)) {
-        http_response_code(405);
-        echo json_encode(['error' => 'Method not allowed']);
-        exit;
-    }
+  // Cek method
+  if ($_SERVER['REQUEST_METHOD'] !== strtoupper($method)) {
+    http_response_code(405);
+    echo json_encode(['error' => 'Method not allowed']);
+    exit;
+  }
 }

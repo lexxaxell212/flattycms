@@ -3,121 +3,117 @@ require_once LIB_PATH . "v-upcoming-events.php";
 $page_title = 'Upcoming Events';
 ?>
 <main class="main-content">
-  <div class="tdopage-wrap">
-    <div class="container">
-      <section id="upcoming-events-pages">
-        <h1 class="uppercase">Upcoming Events</h1>
-        <p class="lead">Events di Bandung</p>
-      </section>
-  
-      <!-- ── Event akan datang  ── -->
-      <?php if ($_tdo_next || !empty($_tdo_pages)): ?>
-      <div class="tdopage-section">
-        <div class="tdopage-section__header">
-          <div class="tdopage-section__icon" style="--ic:#7c3aed">
-            <i class="fas fa-bolt"></i>
-          </div>
-          <div>
-            <h2 class="tdopage-section__title">Event & Info Terkini</h2>
-            <p class="tdopage-section__sub">Update terbaru seputar Bandung</p>
-          </div>
-        </div>
-  
-        <?php if ($_tdo_next): ?>
-        <div class="mb-4">
-          <div class="tdopage-featured">
-            <div class="tdopage-featured__inner">
-              <span class="tdopage-badge"><i class="fas fa-bolt me-1"></i>Akan
-              Datang</span>
-              <div class="tdopage-featured__body">
-                <h5 class="tdopage-featured__date-label">
-                  <?= $_tdo_next['event_date'] ? date('d M Y', strtotime($_tdo_next['event_date'])) : '—' ?>
-                </h5>
-                <h3 class="tdopage-featured__title"><?= safe_html($_tdo_next['title']) ?></h3>
-                <p class="tdopage-featured__excerpt"><?= safe_html(_tdo_excerpt($_tdo_next['html_content'])) ?></p>
-                <span class="tdopage-featured__date">
-                  <i class="far fa-calendar me-1"></i>
-                  <?= $_tdo_next['event_date'] ? date('d M Y', strtotime($_tdo_next['event_date'])) : '—' ?>
-                </span>
+  <div class="container">
+    <?php if ($_tdo_next || !empty($_tdo_pages)): ?>
+    <div class="page-header">
+      <?php if ($_tdo_next): ?>
+      <div class="col-12">
+        <div class="tdop-featured rounded-lg mx-auto" style="max-width:900px">
+          <div class="tdop-featured__inner">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+              <span class="badge badge-accent position-absolute top-0 end-0 m-4 fw-bold">
+                <i class="far fa-calendar-check me-1"></i>
+                <?= $_tdo_next['event_date'] ? date('d M Y', strtotime($_tdo_next['event_date'])) : '—' ?>
+              </span>
+              <span class="badge badge-accent position-absolute top-0 start-0 m-4 fw-bold">
+                <i class="fas fa-bolt me-1"></i>
+                Featured
+              </span>
+            </div>
+            <div class="tdop-featured__body">
+              <div class="tdop-featured__content">
+                <h1 class="text-white text-center mb-4">
+                  <?= safe_html($_tdo_next['title']) ?>
+                </h1>
+                <?= safe_html($_tdo_next['html_content']) ?>
               </div>
-              <a href="/pages/<?= safe_html($_tdo_next['slug']) ?>/" class="tdopage-featured__cta">
-                Selengkapnya <i class="fas fa-angle-right ms-1"></i>
-              </a>
             </div>
           </div>
         </div>
-        <?php endif; ?>
-  
-        <?php if (!empty($_tdo_pages)): ?>
-        <div class="row g-3">
-          <?php foreach ($_tdo_pages as $_tdo_p): ?>
-          <div class="col-md-6 col-lg-4">
-            <a href="/pages/<?= safe_html($_tdo_p['slug']) ?>/" class="text-decoration-none h-100 d-block">
-              <div class="tdopage-card h-100">
-                <div class="tdopage-card__body">
-                  <h5 class="tdopage-card__title"><?= safe_html($_tdo_p['title']) ?></h5>
-                  <p class="tdopage-card__excerpt"><?= safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?></p>
-                </div>
-                <div class="tdopage-card__footer">
-                  <span class="tdopage-card__date">
-                    <i class="far fa-calendar me-1"></i>
-                    <?= $_tdo_p['event_date'] ? date('d M Y', strtotime($_tdo_p['event_date'])) : '—' ?>
-                  </span>
-                  <span class="tdopage-card__read">Baca <i class="fas fa-arrow-right ms-1 tdopage-card__arrow"></i></span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <?php endforeach; ?>
-        </div>
-        <?php endif; ?>
       </div>
       <?php endif; ?>
-      
-      <!-- ── Event berlalu ── -->
-      <?php if (!empty($_tdo_past)): ?>
-      <div class="tdopage-section">
-        <div class="tdopage-section__header">
-          <div class="tdopage-section__icon" style="--ic:#9ca3af">
-            <i class="fas fa-history"></i>
-          </div>
-          <div>
-            <h2 class="tdopage-section__title">Event Berlalu</h2>
-            <p class="tdopage-section__sub">Event yang sudah selesai</p>
-          </div>
-        </div>
-        <div class="row g-3">
-          <?php foreach ($_tdo_past as $_tdo_p): ?>
-          <div class="col-md-6 col-lg-4">
-            <a href="/pages/<?= safe_html($_tdo_p['slug']) ?>/" class="text-decoration-none h-100 d-block">
-              <div class="tdopage-card h-100">
-                <div class="tdopage-card__body">
-                  <h5 class="tdopage-card__title"><?= safe_html($_tdo_p['title']) ?></h5>
-                  <p class="tdopage-card__excerpt"><?= safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?></p>
-                </div>
-                <div class="tdopage-card__footer">
-                  <span class="tdopage-card__date">
-                    <i class="far fa-calendar me-1"></i>
-                    <?= date('d M Y', strtotime($_tdo_p['event_date'])) ?>
-                  </span>
-                  <span class="tdopage-card__read">Baca <i class="fas fa-arrow-right ms-1 tdopage-card__arrow"></i></span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <?php endforeach; ?>
-        </div>
-      </div>
-      <?php endif; ?>
-  
-      <!-- ── Empty state ── -->
-       <?php if (!$_tdo_next && empty($_tdo_pages) && empty($_tdo_past)): ?>
-      <div class="text-center py-5 text-muted">
-        <i class="fas fa-file fa-3x mb-3 opacity-50 d-block"></i>
-        Belum ada konten tersedia.
-      </div>
-      <?php endif; ?>
-  
     </div>
+    <section>
+      <div class="mb-4">
+        <h2>What’s On <em>Next?</em></h2>
+        <p class="p-desc">
+          Jangan sampai kelewat! Intip deretan event seru dan festival hits yang bakal hadir dalam waktu dekat. <strong>Save the date!</strong>
+        </p>
+      </div>
+      <div class="row g-4">
+        <?php if (!empty($_tdo_pages)): ?>
+        <?php foreach ($_tdo_pages as $_tdo_p): ?>
+        <div class="col-12 col-md-6">
+          <div class="card card-flatty shadow-none">
+            <div class="card-body">
+              <h4 class="mb-2">
+                <?= safe_html($_tdo_p['title']) ?>
+              </h4>
+              <p class="text-muted small">
+                <?= safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?>
+              </p>
+              <div class="d-flex align-items-center justify-content-between mt-auto">
+                <span class="tdop-card__date">
+                  <i class="far fa-calendar me-2"></i>
+                  <?= $_tdo_p['event_date'] ? date('d M Y', strtotime($_tdo_p['event_date'])) : '-' ?>
+                </span>
+                <a class="btn btn-primary btn-sm" href="<?= BASE_URL ?>pages/<?= safe_html($_tdo_p['slug']) ?>/">
+                  Selengkapnya
+                  <i class="fas fa-angle-right ms-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
+      <?php endif; ?>
+    </section>
+    <?php if (!empty($_tdo_past)): ?>
+    <section>
+      <div class="tdopage-section__header">
+        <div class="tdopage-section__icon">
+          <i class="fas fa-history"></i>
+        </div>
+        <div>
+          <h2 class="tdopage-section__title">Ended</h2>
+          <p class="tdopage-section__sub">
+            Event yang telah berlalu
+          </p>
+        </div>
+      </div>
+      <div class="row g-3">
+        <?php foreach ($_tdo_past as $_tdo_p): ?>
+        <div class="col-md-6 col-lg-4">
+          <div class="tdop-card">
+            <div class="tdop-card__inner">
+              <h4 class="mb-1"><?= safe_html($_tdo_p['title']) ?></h4>
+              <p class="text-muted small">
+                <?= safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?>
+              </p>
+              <div class="d-flex align-items-center justify-content-between mt-auto">
+                <span class="tdop-card__date">
+                  <i class="far fa-calendar me-2"></i>
+                  <?= date('d M Y', strtotime($_tdo_p['event_date'])) ?>
+                </span>
+                <a href="/pages/<?= safe_html($_tdo_p['slug']) ?>/">
+                  Selengkapnya
+                  <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </section>
+    <?php endif; ?>
+    <?php if (!$_tdo_next && empty($_tdo_pages) && empty($_tdo_past)): ?>
+    <div class="text-center py-5 text-muted">
+      <i class="fas fa-file fa-3x mb-3 opacity-50 d-block"></i>
+      Belum ada konten tersedia.
+    </div>
+    <?php endif; ?>
   </div>
 </main>

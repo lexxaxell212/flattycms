@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const heroSlides = document.querySelectorAll('.hero-item');
-  const heroDots   = document.querySelectorAll('.dot');
+  const heroDots = document.querySelectorAll('.dot');
 
   if (!heroSlides.length) return;
 
@@ -40,7 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
   heroSection?.addEventListener('mouseenter', () => clearInterval(heroInterval));
   heroSection?.addEventListener('mouseleave', () => start());
 
-  heroSlides.forEach((el, i) => { if (i > 0) loadBg(el); });
+  heroSlides.forEach((el, i) => {
+    if (i > 0) loadBg(el);
+  });
 
   start();
 });

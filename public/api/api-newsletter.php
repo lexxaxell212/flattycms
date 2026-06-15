@@ -20,26 +20,26 @@ $response = [
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST["email"])) {
   $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-  
+
   if (!isValidEmailDomain($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $response["message"] = "Email tidak valid atau domain tidak didukung!";
     $response["email_value"] = $_POST["email"];
   } else {
     $stmt = $pdo->prepare("
-            INSERT INTO subscribers (email, status, subscribed_at) 
+            INSERT INTO subscribers (email, status, subscribed_at)
             VALUES (?, 'active', NOW())
-            ON DUPLICATE KEY UPDATE 
-                status = 'active', 
-                subscribed_at = NOW(), 
+            ON DUPLICATE KEY UPDATE
+                status = 'active',
+                subscribed_at = NOW(),
                 unsubscribe_token = NULL
         ");
 
     if ($stmt->execute([$email])) {
       $subscriber_id = $pdo->lastInsertId();
       if (!$subscriber_id) {
-          $stmt_getId = $pdo->prepare("SELECT id FROM subscribers WHERE email = ?");
-          $stmt_getId->execute([$email]);
-          $subscriber_id = $stmt_getId->fetchColumn();
+        $stmt_getId = $pdo->prepare("SELECT id FROM subscribers WHERE email = ?");
+        $stmt_getId->execute([$email]);
+        $subscriber_id = $stmt_getId->fetchColumn();
       }
 
       $token = generateUnsubscribeToken($subscriber_id);
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST["email"])) {
             <p>Anda akan mendapatkan update seputar kuliner, wisata, dan budaya Bandung secara berkala.</p>
             <hr style='border: 0; border-top: 1px solid #eee; margin: 20px 0;'>
             <p style='font-size: 12px; color: #999;'>
-                Jika Anda merasa tidak melakukan pendaftaran ini, silakan 
+                Jika Anda merasa tidak melakukan pendaftaran ini, silakan
                 <a href='$unsub_link' style='color: #ef4444;'>Berhenti Berlangganan</a>.
             </p>
         </div>";
@@ -72,7 +72,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST["email"])) {
 echo json_encode($response);
 
 function isValidEmailDomain($email) {
-  $allowed_domains = ["gmail.com", "googlemail.com", "yahoo.com", "ymail.com", "rocketmail.com", "outlook.com", "hotmail.com", "live.com", "icloud.com", "me.com", "protonmail.com", "proton.me"];
+  $allowed_domains = ["gmail.com",
+    "googlemail.com",
+    "yahoo.com",
+    "ymail.com",
+    "rocketmail.com",
+    "outlook.com",
+    "hotmail.com",
+    "live.com",
+    "icloud.com",
+    "me.com",
+    "protonmail.com",
+    "proton.me"];
   $domain = strtolower(substr(strrchr($email, "@"), 1));
   return in_array($domain, $allowed_domains);
 }

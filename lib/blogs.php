@@ -1,6 +1,5 @@
 <?php
-function getBlogPosts($pdo, $limit = 12, $category = null, $search = null)
-{
+function getBlogPosts($pdo, $limit = 12, $category = null, $search = null) {
   $where = ['p.status="active"'];
   $params = [];
   if ($category) {
@@ -13,51 +12,48 @@ function getBlogPosts($pdo, $limit = 12, $category = null, $search = null)
     $params[] = "%" . $search . "%";
   }
   $where_sql = $where ? "WHERE " . implode(" AND ", $where) : "";
-  $sql = "SELECT p.*, c.name cat_name, c.slug cat_slug 
-            FROM allcontent_posts p 
-            LEFT JOIN allcontent_categories c ON p.category_id = c.id 
-            $where_sql 
-            ORDER BY p.created_at DESC 
+  $sql = "SELECT p.*, c.name cat_name, c.slug cat_slug
+            FROM allcontent_posts p
+            LEFT JOIN allcontent_categories c ON p.category_id = c.id
+            $where_sql
+            ORDER BY p.created_at DESC
             LIMIT ?";
   $stmt = $pdo->prepare($sql);
   $params[] = $limit;
   $stmt->execute($params);
   return $stmt->fetchAll();
 }
-function getCategories($pdo)
-{
+function getCategories($pdo) {
   $stmt = $pdo->prepare("
-        SELECT c.*, COUNT(p.id) post_count 
-        FROM allcontent_categories c 
-        LEFT JOIN allcontent_posts p ON c.id=p.category_id AND p.status='active' 
+        SELECT c.*, COUNT(p.id) post_count
+        FROM allcontent_categories c
+        LEFT JOIN allcontent_posts p ON c.id=p.category_id AND p.status='active'
         GROUP BY c.id ORDER BY c.name
     ");
   $stmt->execute();
   return $stmt->fetchAll();
 }
-function getPost($pdo, $id)
-{
+function getPost($pdo, $id) {
   $stmt = $pdo->prepare('
-        SELECT p.*, c.name cat_name, c.slug cat_slug 
-        FROM allcontent_posts p 
-        LEFT JOIN allcontent_categories c ON p.category_id = c.id 
+        SELECT p.*, c.name cat_name, c.slug cat_slug
+        FROM allcontent_posts p
+        LEFT JOIN allcontent_categories c ON p.category_id = c.id
         WHERE p.id = ? AND p.status = "active"
     ');
   $stmt->execute([$id]);
   $post = $stmt->fetch();
   if ($post) {
     $pdo->prepare("UPDATE allcontent_posts SET views = views + 1 WHERE id = ?")
-        ->execute([$id]);
+    ->execute([$id]);
   }
   return $post;
 }
-function getRecentPosts($pdo, $limit = 5)
-{
+function getRecentPosts($pdo, $limit = 5) {
   $stmt = $pdo->prepare('
-        SELECT id, title, excerpt, created_at, views 
-        FROM allcontent_posts 
-        WHERE status = "active" 
-        ORDER BY created_at DESC 
+        SELECT id, title, excerpt, created_at, views
+        FROM allcontent_posts
+        WHERE status = "active"
+        ORDER BY created_at DESC
         LIMIT ?
     ');
   $stmt->execute([$limit]);
@@ -76,27 +72,27 @@ function safe_get_post(PDO $pdo, int $id): array|false
 }
 function safe_get_posts(PDO $pdo, int $limit, int $offset, int $cat_id = 0): array
 {
-  $limit  = max(1, (int) $limit);
+  $limit = max(1, (int) $limit);
   $offset = max(0, (int) $offset);
   $cat_id = (int) $cat_id;
   if ($cat_id > 0) {
     $sql = "
       SELECT p.id, p.title, p.slug, p.excerpt, p.content, p.created_at, p.views,
-      p.category_id, p.image_url AS image, c.name AS cat_name 
+      p.category_id, p.image_url AS image, c.name AS cat_name
       FROM allcontent_posts p
       LEFT JOIN allcontent_categories c ON p.category_id = c.id
       WHERE p.status = 'active' AND p.category_id = $cat_id
-      ORDER BY p.created_at DESC 
+      ORDER BY p.created_at DESC
       LIMIT $limit OFFSET $offset
     ";
   } else {
     $sql = "
       SELECT p.id, p.title, p.slug, p.excerpt, p.content, p.created_at, p.views,
-      p.category_id, p.image_url AS image, c.name AS cat_name 
+      p.category_id, p.image_url AS image, c.name AS cat_name
       FROM allcontent_posts p
       LEFT JOIN allcontent_categories c ON p.category_id = c.id
       WHERE p.status = 'active'
-      ORDER BY p.created_at DESC 
+      ORDER BY p.created_at DESC
       LIMIT $limit OFFSET $offset
     ";
   }

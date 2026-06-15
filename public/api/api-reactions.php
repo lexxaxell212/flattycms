@@ -7,17 +7,17 @@ validate_csrf();
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['user'])) {
-    echo json_encode(['success' => false, 'message' => 'Login dulu ya']);
-    exit;
+  echo json_encode(['success' => false, 'message' => 'Login dulu ya']);
+  exit;
 }
 
-$user_id      = $_SESSION['user']['id'];
+$user_id = $_SESSION['user']['id'];
 $content_type = $_POST['content_type'] ?? '';
-$content_id   = (int)($_POST['content_id'] ?? 0);
+$content_id = (int)($_POST['content_id'] ?? 0);
 
 if (!$content_type || !$content_id) {
-    echo json_encode(['success' => false, 'message' => 'Data tidak valid']);
-    exit;
+  echo json_encode(['success' => false, 'message' => 'Data tidak valid']);
+  exit;
 }
 
 $pdo = $GLOBALS['pdo'];
@@ -27,11 +27,11 @@ $stmt->execute([$user_id, $content_type, $content_id]);
 $existing = $stmt->fetch();
 
 if ($existing) {
-    $pdo->prepare("DELETE FROM reactions WHERE id=?")->execute([$existing['id']]);
-    $liked = false;
+  $pdo->prepare("DELETE FROM reactions WHERE id=?")->execute([$existing['id']]);
+  $liked = false;
 } else {
-    $pdo->prepare("INSERT INTO reactions (user_id, content_type, content_id) VALUES (?,?,?)")->execute([$user_id, $content_type, $content_id]);
-    $liked = true;
+  $pdo->prepare("INSERT INTO reactions (user_id, content_type, content_id) VALUES (?,?,?)")->execute([$user_id, $content_type, $content_id]);
+  $liked = true;
 }
 
 $stmt = $pdo->prepare("SELECT COUNT(*) FROM reactions WHERE content_type=? AND content_id=?");

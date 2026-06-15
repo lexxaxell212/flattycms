@@ -1,44 +1,44 @@
 <?php
 function generateUniqueSlug($pdo, $base_slug) {
-    $slug    = rtrim($base_slug, '-');
-    $counter = 1;
-    while (true) {
-        $check = $counter === 1 ? $slug : $slug . '-' . $counter;
-        $stmt  = $pdo->prepare("SELECT id FROM pages WHERE slug = ?");
-        $stmt->execute([$check]);
-        if (!$stmt->fetch()) return $check;
-        $counter++;
-    }
+  $slug = rtrim($base_slug, '-');
+  $counter = 1;
+  while (true) {
+    $check = $counter === 1 ? $slug : $slug . '-' . $counter;
+    $stmt = $pdo->prepare("SELECT id FROM pages WHERE slug = ?");
+    $stmt->execute([$check]);
+    if (!$stmt->fetch()) return $check;
+    $counter++;
+  }
 }
 
 function sanitizeSlug($slug) {
-    return preg_replace('/[^a-z0-9\-]/', '', strtolower(trim($slug)));
+  return preg_replace('/[^a-z0-9\-]/', '', strtolower(trim($slug)));
 }
 
 function sanitizeTitle($title) {
-    return str_replace(["'", "\\", "\n", "\r", "\0"], ["\\'", "\\\\", '', '', ''], trim($title));
+  return str_replace(["'", "\\", "\n", "\r", "\0"], ["\\'", "\\\\", '', '', ''], trim($title));
 }
 
 function sanitizeHtml($html) {
-    $html = preg_replace('/<\?(?:php|=)?[\s\S]*?\?>/i', '', $html);
-    $html = preg_replace('/<script\b[^>]*>[\s\S]*?<\/script>/i', '', $html);
-    $html = preg_replace('/(<[^>]+?)\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i', '$1', $html);
-    $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i', '', $html);
-    return $html;
+  $html = preg_replace('/<\?(?:php|=)?[\s\S]*?\?>/i', '', $html);
+  $html = preg_replace('/<script\b[^>]*>[\s\S]*?<\/script>/i', '', $html);
+  $html = preg_replace('/(<[^>]+?)\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i', '$1', $html);
+  $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i', '', $html);
+  return $html;
 }
 
 function generateStaticPage($slug, $html_content, $page_id, $title) {
-    $slug           = sanitizeSlug($slug);
-    $page_title_val = sanitizeTitle($title);
-    $html_content   = sanitizeHtml($html_content);
+  $slug = sanitizeSlug($slug);
+  $page_title_val = sanitizeTitle($title);
+  $html_content = sanitizeHtml($html_content);
 
-    $pages_dir = PUBLIC_PATH . 'pages/';
-    $page_dir  = $pages_dir . $slug . '/';
+  $pages_dir = PUBLIC_PATH . 'pages/';
+  $page_dir = $pages_dir . $slug . '/';
 
-    try {
-        if (!is_dir($page_dir)) mkdir($page_dir, 0755, true);
+  try {
+    if (!is_dir($page_dir)) mkdir($page_dir, 0755, true);
 
-        $content = <<<PHP
+    $content = <<<PHP
 <?php
 \$_page_id = {$page_id};
 require_once LIB_PATH . 'v-reactions-page.php';
@@ -47,7 +47,6 @@ require_once LIB_PATH . 'v-reactions-page.php';
 <script src="<?= JS_URL ?>reactions.js" defer></script>
 <main class="main-content">
   <div class="container">
-    <section>
       {$html_content}
       <hr class="my-5">
       <div class="d-flex justify-content-between align-items-center mb-4">
@@ -89,38 +88,37 @@ require_once LIB_PATH . 'v-reactions-page.php';
           </div>
         </div>
       </div>
-    </section>
   </div>
 </main>
-PHP;
+    PHP;
 
-        $result = file_put_contents($page_dir . 'index.php', $content);
-        if ($result === false) return false;
+    $result = file_put_contents($page_dir . 'index.php', $content);
+    if ($result === false) return false;
 
-        file_put_contents($page_dir . '.htaccess', "DirectoryIndex index.php\n");
+    file_put_contents($page_dir . '.htaccess', "DirectoryIndex index.php\n");
 
-        chmod($page_dir . 'index.php', 0644);
-        chmod($page_dir, 0755);
+    chmod($page_dir . 'index.php', 0644);
+    chmod($page_dir, 0755);
 
-        return true;
-    } catch (Exception $e) {
-        error_log("generateStaticPage error: " . $e->getMessage());
-        return false;
-    }
+    return true;
+  } catch (Exception $e) {
+    error_log("generateStaticPage error: " . $e->getMessage());
+    return false;
+  }
 }
 
 function deletePageFiles($slug) {
-    $slug = sanitizeSlug($slug);
-    $dir  = realpath(PUBLIC_PATH . 'pages/' . $slug);
-    if (!$dir || !is_dir($dir)) return true;
-    return deleteDirectory($dir);
+  $slug = sanitizeSlug($slug);
+  $dir = realpath(PUBLIC_PATH . 'pages/' . $slug);
+  if (!$dir || !is_dir($dir)) return true;
+  return deleteDirectory($dir);
 }
 
 function deleteDirectory($dir) {
-    if (!is_dir($dir)) return true;
-    foreach (array_diff(scandir($dir), ['.', '..']) as $file) {
-        $path = $dir . '/' . $file;
-        is_dir($path) ? deleteDirectory($path) : unlink($path);
-    }
-    return rmdir($dir);
+  if (!is_dir($dir)) return true;
+  foreach (array_diff(scandir($dir), ['.', '..']) as $file) {
+    $path = $dir . '/' . $file;
+    is_dir($path) ? deleteDirectory($path) : unlink($path);
+  }
+  return rmdir($dir);
 }

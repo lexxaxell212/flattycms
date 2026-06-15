@@ -19,15 +19,15 @@ define("APP_NAME", "Flatty-CMS");
 
 // Assets
 define("ASSETS_URL", BASE_URL . "assets/");
-define("CSS_URL",    ASSETS_URL . "css/");
-define("JS_URL",     ASSETS_URL . "js/");
-define("IMG_URL",    ASSETS_URL . "images/");
-define("FONTS_URL",  ASSETS_URL . "fonts/");
+define("CSS_URL", ASSETS_URL . "css/");
+define("JS_URL", ASSETS_URL . "js/");
+define("IMG_URL", ASSETS_URL . "images/");
+define("FONTS_URL", ASSETS_URL . "fonts/");
 define("BASE_UPLOAD_URL", BASE_URL . "uploads/");
 
 // Pages
 define("PAGES_URL", BASE_URL . "pages/");
-define("BLOGS_URL",  BASE_URL . "blogs/");
+define("BLOGS_URL", BASE_URL . "blogs/");
 
 // Admin dashboard
 define("ADMIN_URL", BASE_URL . "admin/");
@@ -35,13 +35,13 @@ define("ADMIN_URL", BASE_URL . "admin/");
 // Core
 define("ADMIN_PATH", ROOT_PATH . "public/admin/");
 define("PUBLIC_PATH", ROOT_PATH . "public/");
-define("LOGS_PATH",   ROOT_PATH . "errors/");
-define("LIB_PATH",    ROOT_PATH . "lib/");
-define("API_PATH",    ROOT_PATH . "api/");
+define("LOGS_PATH", ROOT_PATH . "errors/");
+define("LIB_PATH", ROOT_PATH . "lib/");
+define("API_PATH", ROOT_PATH . "api/");
 define("CONFIG_PATH", ROOT_PATH . "config/");
-define("SRC_PATH",    ROOT_PATH . "src/views/");
+define("SRC_PATH", ROOT_PATH . "src/views/");
 define("ADMIN_VIEW_PATH", SRC_PATH . "admin/");
-define("CACHE_PATH",  ROOT_PATH . "cache/");
+define("CACHE_PATH", ROOT_PATH . "cache/");
 define("BASE_UPLOAD_PATH", ROOT_PATH . "public/uploads/");
 
 // Etc

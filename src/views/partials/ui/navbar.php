@@ -1,10 +1,10 @@
 <?php
 $nav_items = [
-  ['label' => 'Upcoming Events', 'href' => '/upcoming-events', 'icon' => 'fa-solid fa-calendar'],
-  ['label' => 'Things to Do',    'href' => '/things-to-do',    'icon' => 'fa-solid fa-newspaper'],
-  ['label' => 'Blogs',           'href' => '/blogs',           'icon' => 'fa-solid fa-book'],
-  ['label' => 'Trip Planner',    'href' => '/trip',            'icon' => 'fa-solid fa-suitcase-rolling'],
-  ['label' => 'Gallery',         'href' => '/gallery',         'icon' => 'fa-solid fa-images'],
+  ['label' => 'Upcoming Events', 'href' => '/upcoming-events', 'icon' => 'fas fa-bullhorn'],
+  ['label' => 'Things to Do', 'href' => '/things-to-do', 'icon' => 'fas fa-map-location-dot'],
+  ['label' => 'Trip Planner', 'href' => '/trip', 'icon' => 'fas fa-route'],
+  ['label' => 'Gallery & Review', 'href' => '/gallery', 'icon' => 'fas fa-image'],
+  ['label' => 'Blogs', 'href' => '/blogs', 'icon' => 'fas fa-newspaper'],
 ];
 ?>
 <nav class="navbar">
@@ -214,7 +214,7 @@ $nav_items = [
 </nav>
 <div class="menu-overlay" id="menuOverlay"></div>
 <div class="navbar-collapse" id="navbarNav-mobile">
-  <ul class="navbar-nav mb-5">
+  <ul class="navbar-nav">
     <?php foreach ($nav_items as $item): ?>
     <li class="nav-item">
       <a class="nav-link <?= isActive($item['href']) ?>" href="<?= $item['href'] ?>">
@@ -223,9 +223,13 @@ $nav_items = [
       </a>
     </li>
     <?php endforeach; ?>
-    <li class="nav-item weather" id="w"><small>Cek cuaca...</small></li>
+    <div class="auth-mobile">
+      <?php $google_btn_id = 'google-login-btn-mobile'; include SRC_PATH . 'partials/ui/auth.php'; ?>
+    </div>
   </ul>
-  <div class="auth-mobile">
-    <?php $google_btn_id = 'google-login-btn-mobile'; include SRC_PATH . 'partials/ui/auth.php'; ?>
+  <div class="weather align-items-center gap-4 overflow-hidden justify-content-center" id="w">
+    <span class="small">Mengambil data cuaca
+      <i class="fas fa-circle-notch fa-spin ms-2"></i>
+    </span>
   </div>
 </div>

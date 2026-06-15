@@ -6,12 +6,14 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
 ?>
 <main class="main-content">
   <div class="container">
-      <img src="<?= htmlspecialchars($poi['poi_image'] ?? '') ?>" 
-     alt="<?= htmlspecialchars($poi['name']) ?>" 
-     class="img-fluid w-100 mb-4">
-     <h1><?= htmlspecialchars($poi['name']) ?></h1>
-     <section>
-      <p><?= nl2br(htmlspecialchars($poi['description'] ?? '')) ?></p>
+    <div class="page-header">
+      <img src="<?= htmlspecialchars($poi['poi_image'] ?? '') ?>" alt="<?= htmlspecialchars($poi['name']) ?>" class="w-100 d-block mb-4 rounded-lg mx-auto" style="max-width:600px">
+      <h1><?= htmlspecialchars($poi['name']) ?></h1>
+    </div>
+    <section>
+      <p>
+        <?= nl2br(htmlspecialchars($poi['description'] ?? '')) ?>
+      </p>
     </section>
   </div>
 </main>

@@ -6,16 +6,18 @@ verify_ajax_request();
 
 $csrf = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
 if (!verify_csrf_token($csrf)) {
-    http_response_code(403);
-    echo json_encode(['success' => false, 'message' => 'Invalid request.']);
-    exit;
+  http_response_code(403);
+  echo json_encode(['success' => false, 'message' => 'Invalid request.']);
+  exit;
 }
 
 $config = require_once dirname(__DIR__, 3) . "/config/oauth.php";
 
 $input = json_decode(file_get_contents('php://input'), true);
 $token = $input['token'] ?? '';
-if (!$token) { echo json_encode(['success' => false]); exit; }
+if (!$token) {
+  echo json_encode(['success' => false]); exit;
+}
 
 // Verifikasi JWT token dari Google
 $response = file_get_contents(
@@ -47,13 +49,13 @@ if (!$user) {
 
 $_SESSION['user'] = $user;
 $_SESSION['flash'] = [
-  'type'    => 'success',
+  'type' => 'success',
   'message' => 'Berhasil login sebagai ' . ($user['display_name'] ?? $user['name'])
 ];
 session_write_close();
 
 echo json_encode([
-  'success'  => true,
+  'success' => true,
   'redirect' => $_SESSION['redirect_after_login'] ?? '/'
 ]);
 exit;

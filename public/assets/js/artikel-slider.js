@@ -6,21 +6,21 @@
   function getVisible() {
     const w = window.innerWidth;
     if (w >= 1200) return 4;
-    if (w >= 768)  return 2;
+    if (w >= 768) return 2;
     return 1;
   }
 
   function initArtikelSlider(wrapperId) {
-    const wrapper  = document.getElementById(wrapperId);
+    const wrapper = document.getElementById(wrapperId);
     if (!wrapper) return;
 
     const viewport = wrapper.querySelector(".artikel-slider-viewport");
-    const track    = wrapper.querySelector(".artikel-slider-track");
-    const cards    = Array.from(track.querySelectorAll(".artikel-slide-card"));
+    const track = wrapper.querySelector(".artikel-slider-track");
+    const cards = Array.from(track.querySelectorAll(".artikel-slide-card"));
     const dotsWrap = wrapper.querySelector(".artikel-slider-dots");
-    const btnPrev  = wrapper.querySelector(".artikel-btn-prev");
-    const btnNext  = wrapper.querySelector(".artikel-btn-next");
-    const total    = cards.length;
+    const btnPrev = wrapper.querySelector(".artikel-btn-prev");
+    const btnNext = wrapper.querySelector(".artikel-btn-next");
+    const total = cards.length;
 
     if (total === 0) return;
 
@@ -41,11 +41,11 @@
     }
 
     function updateUI() {
-      const dots     = dotsWrap.querySelectorAll(".artikel-dot");
+      const dots = dotsWrap.querySelectorAll(".artikel-dot");
       const activeIdx = Math.floor(current / getVisible());
       dots.forEach((d, i) => {
         d.classList.toggle("is-active", i === activeIdx);
-        d.setAttribute("aria-current", i === activeIdx ? "true" : "false");
+        d.setAttribute("aria-current", i === activeIdx ? "true": "false");
       });
       if (btnPrev) btnPrev.disabled = current === 0;
       if (btnNext) btnNext.disabled = current >= maxIndex();
@@ -53,7 +53,7 @@
 
     function buildDots() {
       dotsWrap.innerHTML = "";
-      const vis      = getVisible();
+      const vis = getVisible();
       const dotCount = Math.ceil(total / vis);
       for (let i = 0; i < dotCount; i++) {
         const dot = document.createElement("button");

@@ -17,11 +17,11 @@ let isLoading = false;
 
 function escapeHTML(str) {
   return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+  .replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;")
+  .replace(/"/g, "&quot;")
+  .replace(/'/g, "&#039;");
 }
 
 function formatText(text) {
@@ -39,7 +39,9 @@ function formatText(text) {
 }
 
 function currentTime() {
-  return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  return new Date().toLocaleTimeString([], {
+    hour: "2-digit", minute: "2-digit"
+  });
 }
 
 function scrollToBottom() {
@@ -89,11 +91,11 @@ function addMessage(text, type = "loading") {
   } else if (type === "error") {
     bubble.innerHTML = `<span class="error-text">⚠️ ${escapeHTML(text)}</span>`;
   } else {
-    const label = type === "user" ? "You" : "Yara";
+    const label = type === "user" ? "You": "Yara";
     bubble.innerHTML = `
-      <div class="msg-label">${label}</div>
-      <div class="msg-text">${formatText(text)}</div>
-      <div class="msg-time">${currentTime()}</div>`;
+    <div class="msg-label">${label}</div>
+    <div class="msg-text">${formatText(text)}</div>
+    <div class="msg-time">${currentTime()}</div>`;
   }
 
   wrap.appendChild(bubble);
@@ -115,7 +117,9 @@ async function sendMessage() {
   input.style.height = "auto";
   input.focus();
 
-  conversationHistory.push({ role: "user", content: message });
+  conversationHistory.push({
+    role: "user", content: message
+  });
 
   const loadingId = addMessage("", "loading");
   isLoading = true;
@@ -130,7 +134,9 @@ async function sendMessage() {
         "Content-Type": "application/json",
         "X-Requested-With": "XMLHttpRequest"
       },
-      body: JSON.stringify({ message, topic: TOPIC, history: conversationHistory }),
+      body: JSON.stringify({
+        message, topic: TOPIC, history: conversationHistory
+      }),
       signal: controller.signal
     });
 
@@ -140,7 +146,9 @@ async function sendMessage() {
 
     if (data.success) {
       addMessage(data.reply, "ai");
-      conversationHistory.push({ role: "assistant", content: data.reply });
+      conversationHistory.push({
+        role: "assistant", content: data.reply
+      });
       // Show suggest chips after first AI reply if history is short
       if (conversationHistory.length <= 2) {
         addSuggests(SUGGEST_PROMPTS.slice(0, 4));
@@ -152,8 +160,7 @@ async function sendMessage() {
   } catch (err) {
     removeLoadingBubble(loadingId);
     const msg = err.name === "AbortError"
-      ? "Request timeout."
-      : "Koneksi bermasalah.";
+    ? "Request timeout.": "Koneksi bermasalah.";
     addMessage(msg, "error");
     conversationHistory.pop();
   } finally {
@@ -183,9 +190,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  input.addEventListener("input", () => autoResize(input));
+  input.addEventListener("input",
+    () => autoResize(input));
 
-  addMessage("Wilujeng sumping! 👋 Yara siap bantu eksplor Bandung. Mau tanya apa nih..?", "ai");
+  addMessage("Wilujeng sumping! 👋 Yara siap bantu eksplor Bandung. Mau tanya apa nih..?",
+    "ai");
   addSuggests(SUGGEST_PROMPTS);
   input.focus();
 });
@@ -207,14 +216,14 @@ document.addEventListener("DOMContentLoaded", () => {
     CLOSE: "#ls-close-btn",
 
     LABELS: {
-        cmpt: "Things To Do",
-        allcontent_posts: "Blogs",
-        poi: "POI Bandung"
+      cmpt: "Things To Do",
+      allcontent_posts: "Blogs",
+      poi: "POI Bandung"
     },
     URLS: {
-        cmpt: "{button_link}",
-        allcontent_posts: "/blogs/?slug={slug}",
-        poi: "/poi/{slug}"
+      cmpt: "{button_link}",
+      allcontent_posts: "/blogs/?slug={slug}",
+      poi: "/poi/{slug}"
     }
   };
 
@@ -249,9 +258,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeWrapper();
-    });
+    document.addEventListener("keydown",
+      (e) => {
+        if (e.key === "Escape") closeWrapper();
+      });
   }
 
   function openWrapper() {
@@ -298,28 +308,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetch(CONFIG.SEARCH_URL + "?q=" + encodeURIComponent(q), {
       signal: currentRequest.signal,
-      headers: { "X-Requested-With": "XMLHttpRequest" }
+      headers: {
+        "X-Requested-With": "XMLHttpRequest"
+      }
     })
-      .then((res) => {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.json();
-      })
-      .then((data) => renderResults(data, q))
-      .catch((err) => {
-        if (err.name === "AbortError") return;
-        showError();
-        console.error("[live-search]", err);
-      });
+    .then((res) => {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    })
+    .then((data) => renderResults(data, q))
+    .catch((err) => {
+      if (err.name === "AbortError") return;
+      showError();
+      console.error("[live-search]", err);
+    });
   }
 
-  function renderResults(data, q) {
+  function renderResults(data,
+    q) {
     dropdown.innerHTML = "";
 
     if (!data.results || data.results.length === 0) {
       dropdown.innerHTML =
-        '<div class="ls-empty">Tidak ada hasil untuk <strong>' +
-        esc(q) +
-        "</strong></div>";
+      '<div class="ls-empty">Tidak ada hasil untuk <strong>' +
+      esc(q) +
+      "</strong></div>";
       dropdown.classList.add("open");
       return;
     }
@@ -352,14 +365,13 @@ document.addEventListener("DOMContentLoaded", () => {
         a.style.animationDelay = itemIndex * 40 + "ms";
 
         a.innerHTML =
-          '<div class="ls-title">' +
-          hilite(item.title, q) +
-          "</div>" +
-          (item.description
-            ? '<div class="ls-desc">' +
-              hilite(trunc(item.description, 90), q) +
-              "</div>"
-            : "");
+        '<div class="ls-title">' +
+        hilite(item.title, q) +
+        "</div>" +
+        (item.description
+          ? '<div class="ls-desc">' +
+          hilite(trunc(item.description, 90), q) +
+          "</div>": "");
 
         dropdown.appendChild(a);
         itemIndex++;
@@ -387,10 +399,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      moveFocus(items, idx + 1 < items.length ? idx + 1 : 0);
+      moveFocus(items, idx + 1 < items.length ? idx + 1: 0);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      moveFocus(items, idx - 1 >= 0 ? idx - 1 : items.length - 1);
+      moveFocus(items, idx - 1 >= 0 ? idx - 1: items.length - 1);
     } else if (e.key === "Enter" && focused) {
       e.preventDefault();
       focused.click();
@@ -401,7 +413,9 @@ document.addEventListener("DOMContentLoaded", () => {
     items.forEach((el) => el.classList.remove("focused"));
     if (items[idx]) {
       items[idx].classList.add("focused");
-      items[idx].scrollIntoView({ block: "nearest" });
+      items[idx].scrollIntoView({
+        block: "nearest"
+      });
     }
   }
 
@@ -412,13 +426,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showLoading() {
     dropdown.innerHTML =
-      '<div class="ls-loading"><span class="ls-spinner"></span> Mencari...</div>';
+    '<div class="ls-loading"><span class="ls-spinner"></span> Mencari...</div>';
     dropdown.classList.add("open");
   }
 
   function showError() {
     dropdown.innerHTML =
-      '<div class="ls-error">Terjadi kesalahan, coba lagi.</div>';
+    '<div class="ls-error">Terjadi kesalahan, coba lagi.</div>';
     dropdown.classList.add("open");
   }
 
@@ -432,7 +446,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function trunc(str, len) {
-    return str && str.length > len ? str.slice(0, len) + "…" : str;
+    return str && str.length > len ? str.slice(0, len) + "…": str;
   }
 
   function esc(str) {
@@ -466,7 +480,8 @@ const ScrollLock = {
   },
 
   unlock(skipIfPending = false) {
-    this._count = Math.max(0, this._count - 1);
+    this._count = Math.max(0,
+      this._count - 1);
     if (this._count === 0) {
       if (skipIfPending && this._pendingOpen) return;
       document.body.style.overflow = "";
@@ -536,7 +551,8 @@ document.addEventListener("keydown", (e) => {
 });
 
 class SmartFab {
-  constructor(fabId = "chatbotFabBtn", scrollThreshold = 200) {
+  constructor(fabId = "chatbotFabBtn",
+    scrollThreshold = 200) {
     this.fab = document.getElementById(fabId);
     this.threshold = scrollThreshold;
     this.isVisible = false;
@@ -547,7 +563,9 @@ class SmartFab {
     if (!this.fab) return;
     this.updateVisibility();
     this._scrollHandler = this.throttle(this.handleScroll.bind(this), 16);
-    window.addEventListener("scroll", this._scrollHandler, { passive: true });
+    window.addEventListener("scroll", this._scrollHandler, {
+      passive: true
+    });
     window.addEventListener("beforeunload", () => this.destroy());
     this.fab.addEventListener("click", this.onFabClick);
   }
@@ -567,11 +585,11 @@ class SmartFab {
     if (chatbotElement && window.bootstrap && window.bootstrap.Offcanvas) {
       const existing = window.bootstrap.Offcanvas.getInstance(chatbotElement);
       const modal =
-        existing ??
-        new window.bootstrap.Offcanvas(chatbotElement, {
-          scroll: true,
-          backdrop: false
-        });
+      existing ??
+      new window.bootstrap.Offcanvas(chatbotElement, {
+        scroll: true,
+        backdrop: false
+      });
       modal.toggle();
     }
   }
@@ -600,10 +618,12 @@ class SmartFab {
     this.isVisible = false;
     setTimeout(() => {
       if (!this.isVisible) this.fab.style.visibility = "hidden";
-    }, 300);
+    },
+      300);
   }
 
-  throttle(func, limit) {
+  throttle(func,
+    limit) {
     let inThrottle;
     return function () {
       if (!inThrottle) {
@@ -632,7 +652,9 @@ class SmartScrollTop {
     this._scrollHandler = this.throttle(this.handleScroll.bind(this), 16);
     this._resizeHandler = this.throttle(this.handleResize.bind(this), 250);
     this.updateVisibility();
-    window.addEventListener("scroll", this._scrollHandler, { passive: true });
+    window.addEventListener("scroll", this._scrollHandler, {
+      passive: true
+    });
     window.addEventListener("resize", this._resizeHandler);
     this.btn.addEventListener("click", this.scrollToTop.bind(this));
   }
@@ -663,7 +685,9 @@ class SmartScrollTop {
   }
 
   scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0, behavior: "smooth"
+    });
   }
 
   show() {
@@ -680,10 +704,12 @@ class SmartScrollTop {
     this.isVisible = false;
     setTimeout(() => {
       if (!this.isVisible) this.btn.style.visibility = "hidden";
-    }, 300);
+    },
+      300);
   }
 
-  throttle(func, limit) {
+  throttle(func,
+    limit) {
     let inThrottle;
     return function () {
       if (!inThrottle) {
@@ -769,45 +795,39 @@ const statLabels = {
 
 async function u() {
   try {
-    const r = await fetch("/api/api-weather.php?city=Bandung", {
-      headers: { "X-Requested-With": "XMLHttpRequest" }
-    });
+    const r = await fetch("/api/api-weather.php?city=Bandung",
+      {
+        headers: {
+          "X-Requested-With": "XMLHttpRequest"
+        }
+      });
     d = await r.json();
     if (d.error) throw new Error(d.error);
 
     // Terjemahkan deskripsi cuaca
     const rawDesc = d.weather[0].description.toLowerCase();
     let weatherDesc =
-      weatherTranslations[rawDesc] ||
-      rawDesc.charAt(0).toUpperCase() + rawDesc.slice(1);
+    weatherTranslations[rawDesc] ||
+    rawDesc.charAt(0).toUpperCase() + rawDesc.slice(1);
 
     document.getElementById("w").innerHTML = `
-      <div class="icon">${g(d.weather[0].main)}</div>
-      <div class="city">
-        <i class="fa-solid fa-location-dot city-icon"></i>
-        ${d.name}
-      </div>
-      <div class="temp">${Math.round(d.main.temp)}°C</div>
-      <div class="cond">${weatherDesc}</div>
-      <div class="stats">
-        <div class="stat">
-          ${d.main.humidity}%<br>
-          <small>${statLabels.humidity}</small>
-        </div>
-        <div class="stat">
-          ${Math.round(d.wind.speed * 3.6)}km/j<br>
-          <small>${statLabels.wind}</small>
-        </div>
-        <div class="stat">
-          ${d.main.pressure}hPa<br>
-          <small>${statLabels.pressure}</small>
-        </div>
-      </div>
+    <div class="icon">
+    ${g(d.weather[0].main)}
+    </div>
+    <div>
+    <div class="temp">${Math.round(d.main.temp)}<sup>°C</sup></div>
+    <div class="cond">${weatherDesc}</div>
+    </div>
+    <div class="sep"></div>
+    <div class="d-flex align-items-center gap-1 city">
+    <i class="fa-solid fa-location-dot me-1"></i>
+    ${d.name}
+    </div>
     `;
   } catch (error) {
     console.error("Error fetching weather data:", error);
     document.getElementById("w").innerHTML =
-      '<div class="error">Gagal memuat cuaca</div>';
+    '<div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>Gagal memuat cuaca</div>';
   }
 }
 
@@ -832,59 +852,61 @@ setInterval(u, 15 * 60 * 1000); // 15 menit
 // newsletter
 
 document.addEventListener('DOMContentLoaded', function() {
-    const allowed = ['gmail.com', 'googlemail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'proton.me'];
-    const form  = document.getElementById('newsletterForm');
-    const input = document.getElementById('emailInput');
-    const btn   = document.getElementById('submitBtn');
-    if (!form) return;
+  const allowed = ['gmail.com', 'googlemail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'proton.me'];
+  const form = document.getElementById('newsletterForm');
+  const input = document.getElementById('emailInput');
+  const btn = document.getElementById('submitBtn');
+  if (!form) return;
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email  = input.value.trim();
-        const domain = email.split('@')[1];
-        if (!allowed.includes(domain)) {
-            flattyToast('warning', 'Gunakan email umum ya (Gmail/Yahoo/Outlook)');
-            return;
-        }
-        btn.disabled      = true;
-        btn.style.opacity = '0.7';
-        btn.innerHTML     = 'MENGIRIM <i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
-        const formData = new FormData(form);
-        fetch(CONFIG.baseUrl + '/api/api-newsletter.php', {
-            method: 'POST',
-            headers: { 'X-Requested-With': 'XMLHttpRequest' },
-            body: new URLSearchParams(formData)
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                flattyToast('success', data.message);
-                input.value = '';
-            } else {
-                flattyToast('error', data.message);
-            }
-        })
-        .catch(() => {
-            flattyToast('error', 'Koneksi lagi bermasalah nih..');
-        })
-        .finally(() => {
-            btn.disabled      = false;
-            btn.style.opacity = '1';
-            btn.innerHTML     = 'BERLANGGANAN <i class="fa-solid fa-paper-plane ms-2"></i>';
-        });
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = input.value.trim();
+    const domain = email.split('@')[1];
+    if (!allowed.includes(domain)) {
+      flattyToast('warning', 'Gunakan email umum ya (Gmail/Yahoo/Outlook)');
+      return;
+    }
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    btn.innerHTML = 'MENGIRIM <i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
+    const formData = new FormData(form);
+    fetch(CONFIG.baseUrl + '/api/api-newsletter.php', {
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: new URLSearchParams(formData)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        flattyToast('success', data.message);
+        input.value = '';
+      } else {
+        flattyToast('error', data.message);
+      }
+    })
+    .catch(() => {
+      flattyToast('error', 'Koneksi lagi bermasalah nih..');
+    })
+    .finally(() => {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.innerHTML = 'BERLANGGANAN <i class="fa-solid fa-paper-plane ms-2"></i>';
     });
+  });
 });
 
 // sparkles
 function spawnSparkle(el) {
   const colors = [
-  "#7c3aed",
-  "#9d5cf6",
-  "#5b21b6",
-  "#c084fc",
-  "#a78bfa",
-  "#e879f9",
-  "#f0abfc",
+    "#7c3aed",
+    "#9d5cf6",
+    "#5b21b6",
+    "#c084fc",
+    "#a78bfa",
+    "#e879f9",
+    "#f0abfc",
   ];
   const count = 8;
 
@@ -973,7 +995,9 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2 });
+  }, {
+    threshold: 0.2
+  });
 
   sections.forEach(el => observer.observe(el));
 });

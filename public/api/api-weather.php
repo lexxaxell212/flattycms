@@ -19,17 +19,17 @@ $result = curl_exec($ch);
 curl_close($ch);
 
 if (!$result) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Gagal menghubungi server cuaca']);
-    exit;
+  http_response_code(500);
+  echo json_encode(['error' => 'Gagal menghubungi server cuaca']);
+  exit;
 }
 
 $data = json_decode($result, true);
 
 if (!$data || (int)$data['cod'] !== 200) {
-    http_response_code(502);
-    echo json_encode(['error' => 'Gagal ambil data cuaca', 'detail' => $data['message'] ?? '']);
-    exit;
+  http_response_code(502);
+  echo json_encode(['error' => 'Gagal ambil data cuaca', 'detail' => $data['message'] ?? '']);
+  exit;
 }
 
 echo json_encode($data);

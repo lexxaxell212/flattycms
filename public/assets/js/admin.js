@@ -83,7 +83,8 @@ document.addEventListener("keydown", (e) => {
 });
 
 class SmartFab {
-  constructor(fabId = "chatbotFabBtn", scrollThreshold = 200) {
+  constructor(fabId = "chatbotFabBtn",
+    scrollThreshold = 200) {
     this.fab = document.getElementById(fabId);
     this.threshold = scrollThreshold;
     this.isVisible = false;
@@ -94,7 +95,9 @@ class SmartFab {
     if (!this.fab) return;
     this.updateVisibility();
     this._scrollHandler = this.throttle(this.handleScroll.bind(this), 16);
-    window.addEventListener("scroll", this._scrollHandler, { passive: true });
+    window.addEventListener("scroll", this._scrollHandler, {
+      passive: true
+    });
     window.addEventListener("beforeunload", () => this.destroy());
     this.fab.addEventListener("click", this.onFabClick);
   }
@@ -114,11 +117,11 @@ class SmartFab {
     if (chatbotElement && window.bootstrap && window.bootstrap.Offcanvas) {
       const existing = window.bootstrap.Offcanvas.getInstance(chatbotElement);
       const modal =
-        existing ??
-        new window.bootstrap.Offcanvas(chatbotElement, {
-          scroll: true,
-          backdrop: false
-        });
+      existing ??
+      new window.bootstrap.Offcanvas(chatbotElement, {
+        scroll: true,
+        backdrop: false
+      });
       modal.toggle();
     }
   }
@@ -147,10 +150,12 @@ class SmartFab {
     this.isVisible = false;
     setTimeout(() => {
       if (!this.isVisible) this.fab.style.visibility = "hidden";
-    }, 300);
+    },
+      300);
   }
 
-  throttle(func, limit) {
+  throttle(func,
+    limit) {
     let inThrottle;
     return function () {
       if (!inThrottle) {
@@ -179,7 +184,9 @@ class SmartScrollTop {
     this._scrollHandler = this.throttle(this.handleScroll.bind(this), 16);
     this._resizeHandler = this.throttle(this.handleResize.bind(this), 250);
     this.updateVisibility();
-    window.addEventListener("scroll", this._scrollHandler, { passive: true });
+    window.addEventListener("scroll", this._scrollHandler, {
+      passive: true
+    });
     window.addEventListener("resize", this._resizeHandler);
     this.btn.addEventListener("click", this.scrollToTop.bind(this));
   }
@@ -210,7 +217,9 @@ class SmartScrollTop {
   }
 
   scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0, behavior: "smooth"
+    });
   }
 
   show() {
@@ -227,10 +236,12 @@ class SmartScrollTop {
     this.isVisible = false;
     setTimeout(() => {
       if (!this.isVisible) this.btn.style.visibility = "hidden";
-    }, 300);
+    },
+      300);
   }
 
-  throttle(func, limit) {
+  throttle(func,
+    limit) {
     let inThrottle;
     return function () {
       if (!inThrottle) {
@@ -289,7 +300,9 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2 });
+  }, {
+    threshold: 0.2
+  });
 
   sections.forEach(el => observer.observe(el));
 });

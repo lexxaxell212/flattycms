@@ -8,6 +8,6 @@ $_rev_stmt = $GLOBALS['pdo']->query("
     JOIN poi   p ON p.id = r.poi_id
     ORDER BY r.rating DESC, r.created_at DESC
     LIMIT 6
-");
+  ");
 $_rev_items = $_rev_stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>

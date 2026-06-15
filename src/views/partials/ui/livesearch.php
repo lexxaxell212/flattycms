@@ -1,6 +1,3 @@
-<button id="scrollTopBtn" class="fab scroll-top-btn" aria-label="Scroll to top">
-  <i class="fas fa-arrow-up"></i>
-</button>
 <div id="live-search-wrapper" role="search" aria-label="Pencarian situs">
   <div class="ls-inner container">
     <div class="ls-bar">

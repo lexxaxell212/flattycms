@@ -5,43 +5,47 @@ require_once LIB_PATH . "mailer.php";
 require_once LIB_PATH . "subscriber.php";
 require_once LIB_PATH . "v-unsubscribe.php";
 ?>
-<main id="content">
-<div class="container">
-  <section id="Unsubscribe">
-  <div class="card card-unsubscribe p-4">
-    <div class="card-body text-center">
-      <div class="p-2">
+<main class="main-content">
+  <div class="container">
+    <div class="my-5">
+      <div class="p-3 text-center">
         <?php if ($status == "success"): ?>
-          <i class="fa-solid fa-circle-check fa-3x text-success mb-2"></i>
+        <i class="fa-solid fa-circle-check fa-3x text-success mb-2"></i>
         <?php elseif ($status == "error" && !$show_form): ?>
-          <i class="fa-solid fa-circle-xmark fa-3x text-danger mb-2"></i>
-        <?php else: ?>
-          <h2 class="text-center">
-            Unsubscribe Newsletter
-          </h2>
+        <i class="fa-solid fa-circle-xmark fa-3x text-danger mb-2"></i>
+        <?php else : ?>
+        <h1 class="h3 text-center">
+          Unsubscribe Newsletter
+        </h1>
         <?php endif; ?>
       </div>
       <?php if ($message): ?>
-        <div class="alert <?= $status == 'success' ? 'alert-success' : 'alert-danger' ?> border-0 small">
+      <div class="text-center">
+        <div class="badge <?= $status == 'success' ? 'badge-green' : 'badge-red' ?> small" style="max-width:740px">
           <?= $message ?>
         </div>
+      </div>
       <?php endif; ?>
       <?php if ($show_form): ?>
-        <p class="text-start mb-4">Masukkan email Anda untuk berhenti berlangganan.</p>
-        <form action="" method="POST">
-          <div class="mb-4">
-            <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
-            <input type="email" name="email" class="form-control" placeholder="nama@email.com" required>
-          </div>
-          <button type="submit" class="btn btn-outline-primary w-100">
+      <form action="" method="POST" class="mx-auto row g-4 bg-surface">
+        <div class="col-12">
+          <p>
+            Masukkan email Anda untuk berhenti berlangganan.
+          </p>
+        </div>
+        <div class="col-12">
+          <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+          <input type="email" name="email" class="form-control" placeholder="nama@email.com" required>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-outline-primary mt-2">
             Berhenti Berlangganan
           </button>
-        </form>
+        </div>
+      </form>
       <?php endif; ?>
       <?php if ($status == "success" || ($status == "error" && !$show_form)): ?>
       <?php endif; ?>
     </div>
   </div>
-  </section>
-</div>
 </main>

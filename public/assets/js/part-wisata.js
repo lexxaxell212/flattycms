@@ -23,5 +23,9 @@
     dots.forEach((d, i) => d.classList.toggle("active", i === index));
   }
 
-  grid.addEventListener("scroll", updateDots, { passive: true });
+  grid.addEventListener("scroll",
+    updateDots,
+    {
+      passive: true
+    });
 }());

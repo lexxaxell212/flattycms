@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 (function () {
-  let startPoint    = null;
-  let routes        = [];
-  let routeLine     = null;
-  let markers       = {};
-  let activeCat     = '';
+  let startPoint = null;
+  let routes = [];
+  let routeLine = null;
+  let markers = {};
+  let activeCat = '';
   let routePolyline = null;
   let routeDuration = 0;
   let routeGenerated = false; // FIX: flag untuk disable simpan sebelum generate
@@ -23,7 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }).addTo(map);
   window.mainMap = map;
 
-  const iconColors = { 1: 'oklch(0.487 0.167 295)', 2: 'oklch(0.769 0.166 70)', 3: 'oklch(0.558 0.174 295)' };
+  const iconColors = {
+    1: 'oklch(0.487 0.127 295)',
+    2: 'oklch(0.769 0.136 295)',
+    3: 'oklch(0.558 0.144 295)'
+  };
   function makeIcon(cat_id) {
     const c = iconColors[cat_id] || 'oklch(0.487 0.167 295)';
     return L.divIcon({
@@ -38,9 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
     markers = {};
     POIS.forEach(poi => {
       if (activeCat && poi.category_id != activeCat) return;
-      const m = L.marker([poi.latitude, poi.longitude], { icon: makeIcon(poi.category_id) })
-        .addTo(map)
-        .bindPopup(buildPopup(poi), { maxWidth: 240 });
+      const m = L.marker([poi.latitude, poi.longitude], {
+        icon: makeIcon(poi.category_id)
+      })
+      .addTo(map)
+      .bindPopup(buildPopup(poi), {
+        maxWidth: 240
+      });
       markers[poi.id] = m;
     });
   }
@@ -48,20 +56,20 @@ document.addEventListener('DOMContentLoaded', () => {
   function buildPopup(poi) {
     const inRoute = routes.some(r => r.poi_id == poi.id);
     const uploadBtn = IS_LOGGED
-      ? `<button onclick="openUpload(${poi.id}, '${poi.name.replace(/'/g, "&#39;")}')" style="background:oklch(0.623 0.214 231);color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;cursor:pointer"><i class="fa-solid fa-camera"></i></button>`
-      : '';
+    ? `<button onclick="openUpload(${poi.id}, '${poi.name.replace(/'/g,
+      "&#39;")}')" style="background:oklch(0.623 0.214 231);color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;cursor:pointer"><i class="fa-solid fa-camera"></i></button>`: '';
     return `
-      <div style="min-width:200px">
-        <div style="font-weight:700;font-size:.9rem;margin-bottom:.2rem">${poi.name}</div>
-        <div style="font-size:.75rem;color:oklch(0.641 0.156 295);margin-bottom:.3rem">${poi.category_name}</div>
-        ${poi.address ? `<div style="font-size:.72rem;color:oklch(0.553 0.016 264);margin-bottom:.6rem"><i class="fa-solid fa-road" style="margin-right:.25rem"></i>${poi.address}</div>` : ''}
-        <div style="display:flex;gap:.4rem;flex-wrap:wrap">
-          <button onclick="addToRoute(${poi.id})" style="flex:1;background:${inRoute ? 'oklch(0.527 0.154 155)' : 'oklch(0.487 0.167 295)'};color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;font-weight:600;cursor:pointer">
-            ${inRoute ? '<i class="fa-solid fa-check"></i> Ditambahkan' : '<i class="fa-solid fa-plus"></i> Tambah Rute'}
-          </button>
-          ${uploadBtn}
-        </div>
-      </div>`;
+    <div style="min-width:200px">
+    <div style="font-weight:700;font-size:.9rem;margin-bottom:.2rem">${poi.name}</div>
+    <div style="font-size:.75rem;color:oklch(0.641 0.156 295);margin-bottom:.3rem">${poi.category_name}</div>
+    ${poi.address ? `<div style="font-size:.72rem;color:oklch(0.553 0.016 264);margin-bottom:.6rem"><i class="fa-solid fa-road" style="margin-right:.25rem"></i>${poi.address}</div>`: ''}
+    <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+    <button onclick="addToRoute(${poi.id})" style="flex:1;background:${inRoute ? 'oklch(0.527 0.154 155)': 'oklch(0.487 0.167 295)'};color:#fff;border:none;border-radius:.4rem;padding:.3rem .6rem;font-size:.75rem;font-weight:600;cursor:pointer">
+    ${inRoute ? '<i class="fa-solid fa-check"></i> Ditambahkan': '<i class="fa-solid fa-plus"></i> Tambah Rute'}
+    </button>
+    ${uploadBtn}
+    </div>
+    </div>`;
   }
 
   renderMarkers();
@@ -79,11 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  document.getElementById('searchPoi').addEventListener('input', function () {
-      const q   = this.value.toLowerCase();
+  document.getElementById('searchPoi').addEventListener('input',
+    function () {
+      const q = this.value.toLowerCase();
       const box = document.getElementById('searchPoiResults');
       box.innerHTML = '';
-      if (!q) { box.style.display = 'none'; return; }
+      if (!q) {
+        box.style.display = 'none'; return;
+      }
       const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
       box.style.display = 'block';
       if (!matches.length) {
@@ -92,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       matches.forEach(p => {
         const el = document.createElement('button');
-        el.type      = 'button';
+        el.type = 'button';
         el.className = 'btn-popup';
         el.innerHTML = `<span>${p.name}</span> • <span class="text-muted small">${p.category_name || ''}</span>`;
         el.addEventListener('click', () => {
@@ -100,7 +111,9 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('searchPoi').value = '';
           const marker = markers[p.id];
           if (marker) {
-            map.flyTo([p.latitude, p.longitude], 16, { duration: 1 });
+            map.flyTo([p.latitude, p.longitude], 16, {
+              duration: 1
+            });
             setTimeout(() => marker.openPopup(), 1000);
           }
         });
@@ -115,7 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function searchStartPoint(q) {
     const el = document.getElementById('startResults');
-    if (!q) { el.style.display = 'none'; return; }
+    if (!q) {
+      el.style.display = 'none'; return;
+    }
     const matches = POIS.filter(p => p.name.toLowerCase().includes(q.toLowerCase())).slice(0, 6);
     el.innerHTML = '';
     el.style.display = '';
@@ -128,18 +143,19 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.type = 'button';
       btn.className = 'btn-popup';
       btn.innerHTML = `
-        <span>${p.name}</span> • <span class="text-muted small">${p.category_name || ''}</span>
+      <span>${p.name}</span> • <span class="text-muted small">${p.category_name || ''}</span>
       `;
       btn.addEventListener('click', () => {
-        startPoint = { name: p.name, lat: parseFloat(p.latitude), lng:
-        parseFloat(p.longitude), poi_image: p.poi_image || null,
-        description: p.description || '', slug: p.slug || null };
+        startPoint = {
+          name: p.name, lat: parseFloat(p.latitude), lng:
+          parseFloat(p.longitude), poi_image: p.poi_image || null,
+          description: p.description || '', slug: p.slug || null
+        };
         document.getElementById('startName').textContent = startPoint.name;
         document.getElementById('startName2').textContent = startPoint.name;
         document.getElementById('startDesc').textContent = startPoint.description || 'Deskripsi belum tersedia.';
         document.getElementById('startImg').innerHTML = startPoint.poi_image
-          ? `<img src="${escHtml(startPoint.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
-          : `<img src="uploads/poi-placeholder.jpg" class="card-img">`;
+        ? `<img src="${escHtml(startPoint.poi_image)}" class="card-img" onerror="this.src='/uploads/poi-placeholder.jpg'">`: `<img src="/uploads/poi-placeholder.jpg" class="card-img">`;
         document.getElementById('startSelected').style.display = '';
         document.getElementById('startInput').value = '';
         el.style.display = 'none';
@@ -170,8 +186,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const poi = POIS.find(p => p.id == poi_id);
     if (!poi) return;
-    routes.push({ poi_id: poi.id, name: poi.name, lat: parseFloat(poi.latitude),
-    lng: parseFloat(poi.longitude), note: '', poi_image: poi.poi_image || null, description: poi.description || '', slug: poi.slug || null });
+    routes.push({
+      poi_id: poi.id, name: poi.name, lat: parseFloat(poi.latitude),
+      lng: parseFloat(poi.longitude), note: '', poi_image: poi.poi_image || null, description: poi.description || '', slug: poi.slug || null
+    });
     map.closePopup();
     // FIX: reset routeGenerated saat ada perubahan rute
     routeGenerated = false;
@@ -182,10 +200,10 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function updatePlannerUI() {
-    const list  = document.getElementById('routeList');
+    const list = document.getElementById('routeList');
     const empty = document.getElementById('routeEmpty');
-    const btnG  = document.getElementById('btnGenerateRoute');
-    const btnS  = document.getElementById('btnSaveTrip');
+    const btnG = document.getElementById('btnGenerateRoute');
+    const btnS = document.getElementById('btnSaveTrip');
     const distI = document.getElementById('distanceInfo');
 
     if (routes.length === 0) {
@@ -202,34 +220,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (empty) empty.style.display = 'none';
     list.innerHTML = routes.map((r, i) => `
       <div class="d-flex align-items-start gap-2 mb-2" data-idx="${i}">
-        <div class="flex-grow-1 min-w-0">
-          <div class="small fw-semibold text-truncate mb-2">
-            <span class="text-purple">
-              ${i + 1}
-            </span>
-            • ${r.name}
-          </div>
-          ${r.distance_from_prev ? `<div class="text-muted mb-2" style="font-size:.7rem"><i class="fa-solid fa-ruler me-1"></i>${r.distance_from_prev} km dari titik sebelumnya</div>` : ''}
-          <div class="card card-flatty mb-2">
-          <div class="card-body">
-          <button class="badge badge-accent btn-remove-route position-absolute
-          top-0 end-0 m-4" data-idx="${i}">
-          <i class="fa-solid fa-xmark"></i>
-          </button>
-            ${r.poi_image
-              ? `<img src="${escHtml(r.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
-              : `<img src="uploads/poi-placeholder.jpg" class="card-img">`
-            }
-            <h5 class="mb-2">${escHtml(r.name)}</h5>
-            <p class="text-muted small">${escHtml(r.description || 'Deskripsi belum tersedia.')}</p>
-          </div>
-          </div>
-          ${IS_LOGGED ? `<div class="mt-2"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan untuk POI ini..." value="${escHtml(r.note)}" style="font-size:.9rem" ${window.isLoadedTrip ? 'disabled' : ''}></div>` : ''}
-        </div>
+      <div class="flex-grow-1 min-w-0">
+      <div class="small fw-semibold text-truncate mb-2">
+      <span class="text-purple">
+      ${i + 1}
+      </span>
+      • ${r.name}
+      </div>
+      ${r.distance_from_prev ? `<div class="text-muted mb-2" style="font-size:.7rem"><i class="fa-solid fa-ruler me-1"></i>${r.distance_from_prev} km dari titik sebelumnya</div>`: ''}
+      <div class="card card-flatty mb-2">
+      <div class="card-body">
+      <button class="badge badge-accent btn-remove-route position-absolute
+      top-0 end-0 m-4" data-idx="${i}">
+      <i class="fa-solid fa-xmark"></i>
+      </button>
+      ${r.poi_image
+      ? `<img src="${escHtml(r.poi_image)}" class="card-img" onerror="this.src='/uploads/poi-placeholder.jpg'">`: `<img src="/uploads/poi-placeholder.jpg" class="card-img">`
+      }
+      <h5 class="mb-2">${escHtml(r.name)}</h5>
+      <p class="text-muted small">${escHtml(r.description || 'Deskripsi belum tersedia.')}</p>
+      </div>
+      </div>
+      ${IS_LOGGED ? `<div class="mt-2"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan untuk POI ini..." value="${escHtml(r.note)}" style="font-size:.9rem" ${window.isLoadedTrip ? 'disabled': ''}></div>`: ''}
+      </div>
       </div>`).join('');
 
     list.querySelectorAll('.note-input').forEach(inp => {
-      inp.addEventListener('input', function () { routes[this.dataset.idx].note = this.value; });
+      inp.addEventListener('input', function () {
+        routes[this.dataset.idx].note = this.value;
+      });
     });
     list.querySelectorAll('.btn-remove-route').forEach(btn => {
       btn.addEventListener('click', function () {
@@ -255,14 +274,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('btnGenerateRoute').addEventListener('click', async () => {
     if (!startPoint || routes.length === 0) return;
-    const points = [[startPoint.lat, startPoint.lng], ...routes.map(r => [r.lat, r.lng])];
+    const points = [[startPoint.lat,
+      startPoint.lng],
+      ...routes.map(r => [r.lat, r.lng])];
     const fd = new FormData();
     fd.append('coordinates', JSON.stringify(points));
     const btn = document.getElementById('btnGenerateRoute');
     btn.innerHTML = 'Membuat Rute...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
-    btn.disabled  = true;
+    btn.disabled = true;
     try {
-      const res  = await fetch(`${BASE}/api/map/api-route.php`, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
+      const res = await fetch(`${BASE}/api/map/api-route.php`, {
+        method: 'POST', headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }, body: fd
+      });
       const data = await res.json();
       if (data.success) {
         routePolyline = data.polyline;
@@ -284,15 +309,19 @@ document.addEventListener('DOMContentLoaded', () => {
       flattyToast('error', 'Tidak bisa buat rute.');
     } finally {
       btn.innerHTML = 'Buat Rute<i class="fa-solid fa-route ms-2"></i>';
-      btn.disabled  = false;
+      btn.disabled = false;
     }
   });
 
   function updateRouteOnMap(points) {
     if (routeLine) map.removeLayer(routeLine);
     if (!points || points.length < 2) return;
-    routeLine = L.polyline(points, { color: '#9061f9', weight: 4, opacity: .85 }).addTo(map);
-    map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
+    routeLine = L.polyline(points, {
+      color: '#9061f9', weight: 4, opacity: .85
+    }).addTo(map);
+    map.fitBounds(routeLine.getBounds(), {
+      padding: [40, 40]
+    });
   }
 
   document.getElementById('btnResetTrip').addEventListener('click', () => {
@@ -303,7 +332,9 @@ document.addEventListener('DOMContentLoaded', () => {
       routeGenerated = false;
       document.getElementById('startSelected').style.display = 'none';
       document.getElementById('startInput').value = '';
-      if (routeLine) { map.removeLayer(routeLine); routeLine = null; }
+      if (routeLine) {
+        map.removeLayer(routeLine); routeLine = null;
+      }
       updatePlannerUI();
       renderMarkers();
     });
@@ -312,13 +343,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (IS_LOGGED) {
     document.getElementById('btnSaveTrip').addEventListener('click', () => {
       const sf = document.getElementById('saveForm');
-      sf.style.display = sf.style.display === 'none' ? '' : 'none';
+      sf.style.display = sf.style.display === 'none' ? '': 'none';
     });
 
     document.getElementById('tripTitle').addEventListener('keydown', async e => {
       if (e.key === 'Enter') await doSaveTrip();
     });
-    document.getElementById('btnConfirmSave').addEventListener('click', doSaveTrip);
+    document.getElementById('btnConfirmSave').addEventListener('click',
+      doSaveTrip);
 
     async function doSaveTrip() {
       const title = document.getElementById('tripTitle').value.trim() || 'Trip Bandungku';
@@ -330,25 +362,29 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const fd    = new FormData();
-      fd.append('action',           'save');
-      fd.append('csrf_token',       CSRF);
-      fd.append('title',            title);
+      const fd = new FormData();
+      fd.append('action', 'save');
+      fd.append('csrf_token', CSRF);
+      fd.append('title', title);
       fd.append('start_point_name', startPoint.name);
-      fd.append('start_lat',        startPoint.lat);
-      fd.append('start_lng',        startPoint.lng);
-      fd.append('route_polyline',   routePolyline ? JSON.stringify(routePolyline) : '');
-      fd.append('duration',         routeDuration ?? 0);
+      fd.append('start_lat', startPoint.lat);
+      fd.append('start_lng', startPoint.lng);
+      fd.append('route_polyline', routePolyline ? JSON.stringify(routePolyline): '');
+      fd.append('duration', routeDuration ?? 0);
       fd.append('items', JSON.stringify(routes.map((r, i) => ({
         poi_id: r.poi_id, order_index: i + 1,
         distance_from_prev: r.distance_from_prev || 0, note: r.note
       }))));
-      const btn     = document.getElementById('btnConfirmSave');
+      const btn = document.getElementById('btnConfirmSave');
       const btnOrig = btn.innerHTML;
       btn.innerHTML = 'Menyimpan...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
-      btn.disabled  = true;
+      btn.disabled = true;
       try {
-        const res  = await fetch(API_TRIP, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
+        const res = await fetch(API_TRIP, {
+          method: 'POST', headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }, body: fd
+        });
         const data = await res.json();
         if (data.success) {
           flattyToast('success', 'Rute trip disimpan!');
@@ -361,18 +397,28 @@ document.addEventListener('DOMContentLoaded', () => {
         flattyToast('error', 'Tidak bisa menyimpan trip.');
       } finally {
         btn.innerHTML = btnOrig;
-        btn.disabled  = false;
+        btn.disabled = false;
       }
     }
   }
 
   window.loadTripById = async function (id) {
     try {
-      const res  = await fetch(`${API_TRIP}?id=${id}`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+      const res = await fetch(`${API_TRIP}?id=${id}`, {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      });
       const json = await res.json();
-      if (!json.success) { flattyToast('error', json.message ?? 'Gagal memuat trip.'); return; }
+      if (!json.success) {
+        flattyToast('error', json.message ?? 'Gagal memuat trip.'); return;
+      }
       const trip = json.data;
-      startPoint = { name: trip.start_point_name, lat: parseFloat(trip.start_lat), lng: parseFloat(trip.start_lng) };
+      startPoint = {
+        name: trip.start_point_name,
+        lat: parseFloat(trip.start_lat),
+        lng: parseFloat(trip.start_lng)
+      };
       document.getElementById('startName').textContent = startPoint.name;
       document.getElementById('startName2').textContent = startPoint.name;
       document.getElementById('startSelected').style.display = '';
@@ -392,7 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateRouteOnMap(routePolyline);
         // FIX: total_distance dari trip tersimpan langsung ditampilkan
         document.getElementById('totalDist').textContent = trip.total_distance ?? '—';
-        document.getElementById('totalStops').textContent = `· ${routes.length} lokasi${trip.duration ? ' · ~' + trip.duration + ' menit' : ''}`;
+        document.getElementById('totalStops').textContent = `· ${routes.length} lokasi${trip.duration ? ' · ~' + trip.duration + ' menit': ''}`;
         document.getElementById('distanceInfo').style.display = '';
       } else {
         routePolyline = null;
@@ -400,27 +446,40 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       setTimeout(() => {
         const mapEl = document.getElementById('mainMap');
-        if (mapEl) { mapEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); map.invalidateSize(); }
-      }, 150);
-      flattyToast('success', `Trip "${trip.title}" dimuat!`);
+        if (mapEl) {
+          mapEl.scrollIntoView({
+            behavior: 'smooth', block: 'start'
+          }); map.invalidateSize();
+        }
+      },
+        150);
+      flattyToast('success',
+        `Trip "${trip.title}" dimuat!`);
     } catch (e) {
-      flattyToast('error', 'Gagal memuat trip.');
+      flattyToast('error',
+        'Gagal memuat trip.');
     }
   };
 
-  window.deleteTripById = async function (id, title) {
-    flattyConfirm(`Hapus trip "${title}"? Tindakan ini permanen.`, async () => {
-      const fd = new FormData();
-      fd.append('action', 'delete'); fd.append('csrf_token', CSRF); fd.append('trip_id', id);
-      const res  = await fetch(API_TRIP, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
-      const data = await res.json();
-      if (data.success) {
-        flattyToast('success', 'Trip dihapus!');
-        if (typeof window.refreshTripku === 'function') window.refreshTripku();
-      } else {
-        flattyToast('error', data.message ?? 'Gagal menghapus trip.');
-      }
-    });
+  window.deleteTripById = async function (id,
+    title) {
+    flattyConfirm(`Hapus trip "${title}"? Tindakan ini permanen.`,
+      async () => {
+        const fd = new FormData();
+        fd.append('action', 'delete'); fd.append('csrf_token', CSRF); fd.append('trip_id', id);
+        const res = await fetch(API_TRIP, {
+          method: 'POST', headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }, body: fd
+        });
+        const data = await res.json();
+        if (data.success) {
+          flattyToast('success', 'Trip dihapus!');
+          if (typeof window.refreshTripku === 'function') window.refreshTripku();
+        } else {
+          flattyToast('error', data.message ?? 'Gagal menghapus trip.');
+        }
+      });
   };
 
   if (IS_LOGGED) {
@@ -440,13 +499,17 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     document.getElementById('uploadPoiSearch').addEventListener('input', function () {
-      const q   = this.value.toLowerCase();
+      const q = this.value.toLowerCase();
       const box = document.getElementById('uploadPoiResults');
       box.innerHTML = '';
-      if (!q) { box.style.display = 'none'; return; }
+      if (!q) {
+        box.style.display = 'none'; return;
+      }
       box.style.display = '';
       const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
-      if (!matches.length) { box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>'; return; }
+      if (!matches.length) {
+        box.innerHTML = '<div class="list-group-item small text-muted">Tidak ditemukan</div>'; return;
+      }
       matches.forEach(p => {
         const el = document.createElement('button');
         el.type = 'button'; el.className = 'btn-popup'; el.textContent = p.name;
@@ -460,54 +523,63 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    document.getElementById('uploadFile').addEventListener('change', function () {
-      const file = this.files[0];
-      if (!file) return;
-      if (file.size > 10 * 1024 * 1024) {
-        flattyToast('warning', 'File terlalu besar, maksimal 10MB.');
-        this.value = '';
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = e => {
-        document.getElementById('previewImg').src = e.target.result;
-        document.getElementById('uploadPreview').style.display = '';
-      };
-      reader.readAsDataURL(file);
-    });
-
-    document.getElementById('btnKirimUpload').addEventListener('click', async () => {
-      const poi_id = document.getElementById('uploadPoiId').value;
-      const file   = document.getElementById('uploadFile').files[0];
-      if (!poi_id || !file) { flattyToast('warning', 'Pilih lokasi dan foto dulu.'); return; }
-      const btn = document.getElementById('btnKirimUpload');
-      btn.innerHTML = 'Mengupload...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
-      btn.disabled  = true;
-      const fd = new FormData();
-      fd.append('csrf_token', CSRF); fd.append('poi_id', poi_id);
-      fd.append('photo', file); fd.append('caption', document.getElementById('uploadCredit').value.trim());
-      try {
-        const res  = await fetch(API_GAL, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
-        const data = await res.json();
-        if (data.success) {
-          bootstrap.Modal.getInstance(document.getElementById('uploadModal'))?.hide();
-          flattyToast('success', 'Foto berhasil diupload!');
-        } else {
-          flattyToast('error', data.message ?? 'Gagal upload foto.');
+    document.getElementById('uploadFile').addEventListener('change',
+      function () {
+        const file = this.files[0];
+        if (!file) return;
+        if (file.size > 10 * 1024 * 1024) {
+          flattyToast('warning', 'File terlalu besar, maksimal 10MB.');
+          this.value = '';
+          return;
         }
-      } catch (e) {
-        flattyToast('error', 'Gagal upload foto.');
-      } finally {
-        btn.innerHTML = 'Upload<i class="fa-solid fa-upload ms-2"></i>';
-        btn.disabled  = false;
-      }
-    });
+        const reader = new FileReader();
+        reader.onload = e => {
+          document.getElementById('previewImg').src = e.target.result;
+          document.getElementById('uploadPreview').style.display = '';
+        };
+        reader.readAsDataURL(file);
+      });
+
+    document.getElementById('btnKirimUpload').addEventListener('click',
+      async () => {
+        const poi_id = document.getElementById('uploadPoiId').value;
+        const file = document.getElementById('uploadFile').files[0];
+        if (!poi_id || !file) {
+          flattyToast('warning', 'Pilih lokasi dan foto dulu.'); return;
+        }
+        const btn = document.getElementById('btnKirimUpload');
+        btn.innerHTML = 'Mengupload...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
+        btn.disabled = true;
+        const fd = new FormData();
+        fd.append('csrf_token', CSRF); fd.append('poi_id', poi_id);
+        fd.append('photo', file); fd.append('caption', document.getElementById('uploadCredit').value.trim());
+        try {
+          const res = await fetch(API_GAL, {
+            method: 'POST', headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+            }, body: fd
+          });
+          const data = await res.json();
+          if (data.success) {
+            bootstrap.Modal.getInstance(document.getElementById('uploadModal'))?.hide();
+            flattyToast('success', 'Foto berhasil diupload!');
+          } else {
+            flattyToast('error', data.message ?? 'Gagal upload foto.');
+          }
+        } catch (e) {
+          flattyToast('error', 'Gagal upload foto.');
+        } finally {
+          btn.innerHTML = 'Upload<i class="fa-solid fa-upload ms-2"></i>';
+          btn.disabled = false;
+        }
+      });
 
     const _uploadModal = new bootstrap.Modal(document.getElementById('uploadModal'));
-    window.openUploadModal = function (poiId, poiName) {
+    window.openUploadModal = function (poiId,
+      poiName) {
       document.getElementById('uploadPoiId').value = poiId || '';
       document.getElementById('uploadPoiName').textContent = poiName || '';
-      document.getElementById('uploadPoiSelected').style.display = (poiId && poiName) ? '' : 'none';
+      document.getElementById('uploadPoiSelected').style.display = (poiId && poiName) ? '': 'none';
       document.getElementById('uploadPoiSearch').value = poiName || '';
       document.getElementById('uploadPreview').style.display = 'none';
       document.getElementById('uploadFile').value = '';
@@ -518,119 +590,122 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function escHtml(str) {
     if (!str) return '';
-    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
   function loadExplorePoi() {
-  const wrap = document.getElementById('explorePoiList');
-  const overlay = document.getElementById('exploreOverlay');
-  let activeCatExplore = '';
-  let searchQuery = '';
-  let showAll = false;
+    const wrap = document.getElementById('explorePoiList');
+    const overlay = document.getElementById('exploreOverlay');
+    let activeCatExplore = '';
+    let searchQuery = '';
+    let showAll = false;
 
-  function render() {
-    let filtered = POIS.filter(poi => {
-      const matchCat = !activeCatExplore || poi.category_id == activeCatExplore;
-      const matchQ   = !searchQuery || poi.name.toLowerCase().includes(searchQuery);
-      return matchCat && matchQ;
-    });
+    function render() {
+      let filtered = POIS.filter(poi => {
+        const matchCat = !activeCatExplore || poi.category_id == activeCatExplore;
+        const matchQ = !searchQuery || poi.name.toLowerCase().includes(searchQuery);
+        return matchCat && matchQ;
+      });
 
-    if (!filtered.length) {
-      wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-compass"></i><p>Tidak ada hasil.</p></div>`;
-      overlay.style.display = 'none';
-      return;
+      if (!filtered.length) {
+        wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fas fa-location-dot"></i><p>Tidak ada hasil.</p></div>`;
+        overlay.style.display = 'none';
+        return;
+      }
+
+      const limited = (!showAll && filtered.length > 10) ? filtered.slice(0, 10): filtered;
+
+      wrap.innerHTML = limited.map(poi => `
+        <div class="card card-flatty">
+        <div class="card-body">
+        ${poi.poi_image
+        ? `<img src="${escHtml(poi.poi_image)}" class="card-img" onerror="this.src='/uploads/poi-placeholder.jpg'">`: `<img src="/uploads/poi-placeholder.jpg" class="card-img">`
+        }
+        <h3 class="h5 mb-2">${escHtml(poi.name)}</h3>
+        <p class="text-muted mb-2">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
+        </div>
+        <div class="card-footer">
+        ${poi.slug
+        ? `<a href="/poi/${escHtml(poi.slug)}" class="btn btn-outline-primary btn-sm fw-bold" target="_blank" rel="noopener">
+        Selengkapnya
+        <i class="arrow-icon fas fa-angle-right ms-1"></i>
+        </a>`: `<span class="text-red small">
+        Belum ada link
+        </span>`
+        }
+        </div>
+        </div>
+        `).join('');
+
+      overlay.style.display = (!showAll && filtered.length > 10) ? 'flex': 'none';
     }
 
-    const limited = (!showAll && filtered.length > 10) ? filtered.slice(0, 10) : filtered;
-
-    wrap.innerHTML = limited.map(poi => `
-      <div class="card card-flatty mb-4">
-      <div class="card-body">
-        ${poi.poi_image
-          ? `<img src="${escHtml(poi.poi_image)}" class="card-img" onerror="this.src='uploads/poi-placeholder.jpg'">`
-          : `<img src="uploads/poi-placeholder.jpg" class="card-img">`
-        }
-          <h5 class="mb-2">${escHtml(poi.name)}</h5>
-          <p class="text-muted small">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
-          ${poi.slug
-            ? `<a href="/poi/${escHtml(poi.slug)}" class="small" target="_blank" rel="noopener">
-                Lihat
-                <i class="arrow-icon fas fa-angle-right ms-2"></i>
-               </a>`
-            : `<span class="text-red small">
-                Belum ada link
-               </span>`
-          }
-        </div>
-      </div>`).join('');
-
-    overlay.style.display = (!showAll && filtered.length > 10) ? 'flex' : 'none';
-  }
-
-  document.getElementById('btnShowAllPoi').addEventListener('click', () => {
-    showAll = true;
-    render();
-  });
-
-  document.getElementById('exploreSearch').addEventListener('input', function() {
-    showAll = false;
-    searchQuery = this.value.toLowerCase().trim();
-    render();
-  });
-
-  document.querySelectorAll('.explore-cat').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.explore-cat').forEach(b => {
-        b.classList.remove('active', 'btn-primary');
-        b.classList.add('btn-outline-primary');
-      });
-      this.classList.add('active', 'btn-primary');
-      this.classList.remove('btn-outline-primary');
-      activeCatExplore = this.dataset.cat;
-      showAll = false;
+    document.getElementById('btnShowAllPoi').addEventListener('click', () => {
+      showAll = true;
       render();
     });
-  });
 
-  render();
-}
+    document.getElementById('exploreSearch').addEventListener('input', function() {
+      showAll = false;
+      searchQuery = this.value.toLowerCase().trim();
+      render();
+    });
+
+    document.querySelectorAll('.explore-cat').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.explore-cat').forEach(b => {
+          b.classList.remove('active', 'btn-primary');
+          b.classList.add('btn-outline-primary');
+        });
+        this.classList.add('active', 'btn-primary');
+        this.classList.remove('btn-outline-primary');
+        activeCatExplore = this.dataset.cat;
+        showAll = false;
+        render();
+      });
+    });
+
+    render();
+  }
 
   function loadTripku() {
     const wrap = document.getElementById('tripkuList');
-    wrap.innerHTML = `<div class="text-center py-4 text-muted small" style="grid-column:1/-1"><i class="fa-solid fa-spinner fa-spin me-1"></i>Memuat trip tersimpan...</div>`;
+    wrap.innerHTML = `<div class="text-center py-4 text-muted" style="grid-column:1/-1"><i class="fas fa-circle-notch fa-spin me-1"></i>Memuat...</div>`;
     fetch(API_TRIP + '?action=list')
-      .then(r => r.json())
-      .then(data => {
-        const list    = Array.isArray(data) ? data : (data.data || []);
-        const countEl = document.getElementById('profileTripCount');
-        if (countEl) countEl.textContent = list.length;
-        if (!list.length) {
-          wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-suitcase"></i><p>Belum ada trip tersimpan.<br>Buat trip pertamamu di tab Map POI!</p></div>`;
-          return;
-        }
-        wrap.innerHTML = list.map(trip => `
+    .then(r => r.json())
+    .then(data => {
+      const list = Array.isArray(data) ? data: (data.data || []);
+      const countEl = document.getElementById('profileTripCount');
+      if (countEl) countEl.textContent = list.length;
+      if (!list.length) {
+        wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fas fa-bookmark"></i><p>Belum ada trip tersimpan.</p></div>`;
+        return;
+      }
+      wrap.innerHTML = list.map(trip => `
         <div class="card card-flatty">
-          <div class="card-body">
-            <h5 class="mb-2">${escHtml(trip.title || 'Trip tanpa nama')}</h5>
-            <p class="text-muted small">
-              ${trip.total_stops ? `<span class="me-2"><i class="fa-solid fa-map-pin me-1 text-purple"></i>${trip.total_stops} stop</span>` : ''}
-              ${trip.total_distance ? `<span><i class="fa-solid fa-ruler me-1 text-muted"></i>${trip.total_distance} km</span>` : ''}
-              ${(!trip.total_stops && !trip.total_distance) ? escHtml(trip.notes || 'Catatan kosong.') : ''}
-            </p>
-          </div>
-          <div class="card-footer d-flex gap-2">
-            <button class="btn btn-primary btn-sm" onclick="loadSavedTrip(${trip.id})">
-              Buka<i class="fa-solid fa-route ms-2"></i>
-            </button>
-            <button class="btn btn-danger btn-sm" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || 'Trip ini')}')">
-              Hapus<i class="fa-solid fa-trash ms-2"></i>
-            </button>
-          </div>
+        <div class="card-body">
+        <h3 class="h4 text-truncate">${escHtml(trip.title || 'Trip tanpa nama')}</h3>
+        <div class="row g-2">
+        <span class="small p-2 rounded-sm badge-blue"><i class="fa-solid fa-map-pin me-2"></i><strong>${trip.total_stops}</strong> lokasi</span>
+        ${trip.total_distance ? `<span class="small p-2 rounded-sm badge-blue"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${trip.total_distance}</strong> km</span>`: ''}
+        ${(!trip.total_stops && !trip.total_distance) ? escHtml(trip.notes || 'Catatan kosong.'): ''}
+        </div>
+        </div>
+        <div class="card-footer d-flex gap-2">
+        <button class="btn btn-primary btn-sm" onclick="loadSavedTrip(${trip.id})">
+        Buka
+        <i class="fa-solid fa-route ms-1"></i>
+        </button>
+        <button class="btn btn-danger btn-sm" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || 'Trip ini')}')">
+        Hapus
+        <i class="fa-solid fa-trash ms-1"></i>
+        </button>
+        </div>
         </div>`).join('');
-      })
-      .catch(() => {
-        wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-triangle-exclamation"></i><p>Gagal memuat trip. Coba refresh halaman.</p></div>`;
-      });
+    })
+    .catch(() => {
+      wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-triangle-exclamation"></i><p>Gagal memuat trip. Coba refresh halaman.</p></div>`;
+    });
   }
 
   window.refreshTripku = loadTripku;
@@ -645,9 +720,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   (function initTabs() {
-    const tabs     = document.querySelectorAll('.tp-tab');
+    const tabs = document.querySelectorAll('.tp-tab');
     const contents = document.querySelectorAll('.tp-tab-content');
-    let tripkuLoaded   = false;
+    let tripkuLoaded = false;
     let mapInitialized = false;
 
     tabs.forEach(tab => {
@@ -663,7 +738,10 @@ document.addEventListener('DOMContentLoaded', () => {
           tripkuLoaded = true;
         }
         if (target === 'map' && !mapInitialized) {
-          setTimeout(() => { if (window.mainMap) window.mainMap.invalidateSize(); }, 50);
+          setTimeout(() => {
+            if (window.mainMap) window.mainMap.invalidateSize();
+          },
+            50);
           mapInitialized = true;
         }
       });
@@ -673,25 +751,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (IS_LOGGED) {
       fetch(API_TRIP + '?action=count')
-        .then(r => r.json())
-        .then(d => {
-          const el = document.getElementById('profileTripCount');
-          if (el && d.count !== undefined) el.textContent = d.count;
-        }).catch(() => {});
+      .then(r => r.json())
+      .then(d => {
+        const el = document.getElementById('profileTripCount');
+        if (el && d.count !== undefined) el.textContent = d.count;
+      }).catch(() => {});
     }
   })();
-  
+
   // auto trigger layanan publik filter explore  dari hash URL
   const hash = window.location.hash.replace('#', '');
   if (hash) {
-    const [tab, filter] = hash.split(':');
+    const [tab,
+      filter] = hash.split(':');
     const tabEl = document.querySelector(`[data-tab="${tab}"]`);
     if (tabEl) tabEl.click();
     if (filter) {
       setTimeout(() => {
         const catBtn = document.querySelector(`.explore-cat[data-cat="${filter}"]`);
         if (catBtn) catBtn.click();
-      }, 100);
+      },
+        100);
     }
   }
 

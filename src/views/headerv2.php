@@ -70,7 +70,7 @@ function isActive(string $path): string {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= CSS_URL ?>bs533.min.css">
-  <link rel="stylesheet" href="<?= CSS_URL ?>flattypurple.css">
+  <link rel="stylesheet" href="<?= CSS_URL ?>flatty1-1.css">
   <?php
   $isMobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT']);
   $heroImg = $isMobile ? 'wisata-mobile.webp' : 'wisata.webp'; ?>
@@ -108,6 +108,9 @@ function isActive(string $path): string {
 <div id="page-loader"></div>
 <div id="flatty-container-top-end"></div>
 <div id="flatty-container-bottom"></div>
+<button id="scrollTopBtn" class="fab scroll-top-btn" aria-label="Scroll to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
 <?php
 require_once SRC_PATH . "partials/ui/navbar.php";
 require_once SRC_PATH . "partials/ui/livesearch.php";

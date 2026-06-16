@@ -1119,7 +1119,7 @@ h6, .h6 {
   position: fixed;
   top: calc(var(--navbar-height) + var(--space-4));
   right: var(--space-4);
-  width: min(320px, calc(100vw - 32px));
+  width: min(300px, calc(100vw - 32px));
   overflow-y: visible;
   max-height: none;
   z-index: 1074 !important;
@@ -1204,7 +1204,7 @@ h6, .h6 {
   padding: var(--space-3) !important;
   font-size: 0.9rem;
   margin-bottom: 6px;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   border: none;
   display: flex;
   align-items: center;
@@ -1325,8 +1325,9 @@ h6, .h6 {
 @media (min-width:1200px) {
   .auth-btn-group {
     margin-top: auto;
-    margin-left: 2.5rem;
+    margin-left: 1.5rem;
     background: transparent;
+    border: none;
   }
 }
 
@@ -1378,6 +1379,7 @@ h6, .h6 {
     gap: .1rem;
   }
   .lang-btn {
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1386,8 +1388,8 @@ h6, .h6 {
     border-radius: 100px;
     border: none;
     background: transparent;
-    font-size: .75rem;
-    font-weight: 700;
+    font-size: .8rem;
+    font-weight: 500;
     color: var(--text-heading);
     cursor: pointer;
     transition: all .2s;
@@ -1395,6 +1397,7 @@ h6, .h6 {
   .lang-btn.active {
     background: var(--btn-bg-primary);
     color: var(--btn-text-primary);
+    font-weight: 700;
   }
   .lang-btn:not(.active):hover {
     color: var(--text-primary);
@@ -1403,6 +1406,7 @@ h6, .h6 {
   @media (min-width:1200px) {
     .lang-wrapper {
       margin-left: 2rem;
+      justify-content: center;
     }
     .lang-toggle {
     display: inline-flex;
@@ -1412,12 +1416,13 @@ h6, .h6 {
     box-shadow: none;
     }
     .lang-btn {
-      font-size: 1rem;
       padding: .5rem;
+      font-weight: 500;
     }
     .lang-btn.active {
       background: none;
       color: var(--text-primary);
+      font-weight: 700;
     }
     .lang-btn:not(.active):hover {
       opacity: 0.8;
@@ -6735,6 +6740,7 @@ a.logo-social i {
     justify-content: space-between;
   }
   .nav-desktop {
+    align-items: center;
     display: flex;
     flex: 1;
     justify-content: center;
@@ -6750,13 +6756,13 @@ a.logo-social i {
   .nav-desktop-link {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius);
+    gap: 5px;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
     border: none;
     background: transparent;
-    font-size: var(--space-4);
-    font-weight: 400;
+    font-size: 0.85;
+    font-weight: 500;
     color: var(--text-modal);
     text-decoration: none;
     cursor: pointer;

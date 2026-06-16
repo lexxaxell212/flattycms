@@ -25,7 +25,7 @@ $page_title = 'Reset Password - ' . SITE_NAME;
       </div>
     </div>
     <?php else : ?>
-    <form class="bg-surface mx-auto my-5 row g-2">
+    <div class="form mx-auto my-5 row g-2">
       <div class="col-12">
         <h1 class="h3">Buat password baru</h1>
         <p class="text-muted">
@@ -57,12 +57,12 @@ $page_title = 'Reset Password - ' . SITE_NAME;
         </div>
       </div>
       <div class="col-12 py-4">
-        <button class="btn btn-outline-primary" id="btn-rp">
+        <button type="button" class="btn btn-outline-primary" id="btn-rp">
           <span id="btn-rp-text">Simpan Password</span>
           <i id="btn-rp-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-1"></i>
         </button>
       </div>
-    </form>
+    </div>
     <?php endif; ?>
   </div>
 </main>
@@ -99,8 +99,9 @@ $page_title = 'Reset Password - ' . SITE_NAME;
       return;
     }
     btn.disabled = true;
-    btnText.textContent = 'Menyimpan...';
+    btnText.textContent = 'Menyimpan';
     btnSpinner.classList.remove('d-none');
+    await new Promise(r => setTimeout(r, 500));
     const res = await fetch('/api/auth/reset-password.php', {
       method: 'POST',
       headers: {

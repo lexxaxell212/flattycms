@@ -3,7 +3,7 @@ $page_title = 'Lupa Password - ' . SITE_NAME;
 ?>
 <main class="main-content">
   <div class="container">
-    <form class="bg-surface mx-auto my-5 row g-2">
+    <div class="form mx-auto my-5 row g-2">
     <div class="col-12">
       <h1 class="h3">Lupa password?</h1>
       <p class="text-muted">
@@ -18,12 +18,12 @@ $page_title = 'Lupa Password - ' . SITE_NAME;
       <input type="email" id="fp-email" class="form-control mb-4" placeholder="nama@email.com">
     </div>
     <div class="col-12 py-4">
-      <button class="btn btn-outline-primary" id="btn-fp">
+      <button type="button" class="btn btn-outline-primary" id="btn-fp">
         <span id="btn-fp-text">Kirim Link Reset</span>
         <i id="btn-fp-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-2"></i>
       </button>
     </div>
-    </form>
+    </div>
   </div>
 </main>
 <script>
@@ -37,8 +37,9 @@ $page_title = 'Lupa Password - ' . SITE_NAME;
       return;
     }
     btn.disabled = true;
-    btnText.textContent = 'Mengirim...';
+    btnText.textContent = 'Mengirim';
     btnSpinner.classList.remove('d-none');
+    await new Promise(r => setTimeout(r, 500));
     const res = await fetch('/api/auth/forgot-password.php', {
       method: 'POST',
       headers: {

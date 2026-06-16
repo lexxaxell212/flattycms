@@ -27,7 +27,7 @@ require_once LIB_PATH . "v-unsubscribe.php";
       </div>
       <?php endif; ?>
       <?php if ($show_form): ?>
-      <form action="" method="POST" class="mx-auto row g-4 bg-surface">
+      <form action="" method="POST" class="mx-auto row g-4 form">
         <div class="col-12">
           <p>
             Masukkan email Anda untuk berhenti berlangganan.

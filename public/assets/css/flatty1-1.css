@@ -1202,6 +1202,7 @@ h6, .h6 {
 .nav-link {
   color: var(--text-heading);
   padding: var(--space-3) !important;
+  font-size: 0.9rem;
   margin-bottom: 6px;
   border-radius: var(--radius);
   border: none;
@@ -1222,7 +1223,7 @@ h6, .h6 {
 }
 .nav-link i {
   opacity: 0.89;
-  font-size: var(--space-4);
+  font-size: 0.9rem;
   margin-right: var(--space-3);
 }
 .dropdown-menu {
@@ -1269,7 +1270,7 @@ h6, .h6 {
 }
 
 .icon {
-  font-size: 3rem;
+  font-size: 2rem;
   line-height: 1;
 }
 .temp {
@@ -1404,7 +1405,7 @@ footer,
 .nav-dd-item.is-current,
 .nav-dd-trigger.is-current {
   color: var(--text-primary) !important;
-  font-weight: var(--bold) !important;
+  font-weight: 700 !important;
 }
 
 input,
@@ -2550,7 +2551,8 @@ textarea.form-control {
   min-height: 46px;
   max-width: var(--max-width-form);
 }
-form, .form {
+form,
+.form {
   max-width: var(--max-width-form);
   margin-inline: auto;
   padding: clamp(1.5rem, 4vw, 2.5rem);

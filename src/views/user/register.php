@@ -3,7 +3,7 @@ $page_title = 'Daftar - ' . SITE_NAME;
 ?>
 <main class="main-content">
   <div class="container">
-    <form class="bg-surface mx-auto my-5 row g-2">
+    <div class="form mx-auto my-5 row g-2">
       <div class="col-12">
         <h1 class="h3">Buat akun baru</h1>
         <p class="text-muted">
@@ -64,12 +64,12 @@ $page_title = 'Daftar - ' . SITE_NAME;
         </div>
       </div>
       <div class="col-12 py-4">
-        <button class="btn btn-outline-primary" id="btn-register">
+        <button type="button" class="btn btn-outline-primary" id="btn-register">
           <span id="btn-register-text">Daftar</span>
           <i id="btn-register-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-1"></i>
         </button>
       </div>
-    </form>
+    </div>
     <div class="text-center text-muted small">
       Sudah punya akun? <a href="/login">Masuk</a>
     </div>
@@ -115,8 +115,9 @@ $page_title = 'Daftar - ' . SITE_NAME;
       return;
     }
     btn.disabled = true;
-    btnText.textContent = 'Mendaftar...';
+    btnText.textContent = 'Mendaftar';
     btnSpinner.classList.remove('d-none');
+    await new Promise(r => setTimeout(r, 500));
     const res = await fetch('/api/auth/register.php', {
       method: 'POST',
       headers: {

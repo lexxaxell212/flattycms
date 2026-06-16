@@ -2550,7 +2550,7 @@ textarea.form-control {
   min-height: 46px;
   max-width: var(--max-width-form);
 }
-form {
+form, .form {
   max-width: var(--max-width-form);
   margin-inline: auto;
   padding: clamp(1.5rem, 4vw, 2.5rem);

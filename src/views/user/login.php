@@ -6,7 +6,7 @@ if (isset($_SESSION['user'])) {
 ?>
 <main class="main-content">
   <div class="container">
-    <form class="bg-surface mx-auto my-5 row g-2">
+    <div class="form mx-auto my-5 row g-2">
       <div class="col-12">
         <h1 class="h3">Selamat datang</h1>
         <p class="text-muted">
@@ -33,12 +33,12 @@ if (isset($_SESSION['user'])) {
         </div>
       </div>
       <div class="col-12 py-4">
-        <button class="btn btn-outline-primary" id="btn-login">
+        <button type="button" class="btn btn-outline-primary" id="btn-login">
           <span id="btn-login-text">Masuk</span>
           <i id="btn-login-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-1"></i>
         </button>
       </div>
-    </form>
+    </div>
     <div class="d-flex justify-content-center mb-4">
       <a href="/forgot-password" class="small">Lupa password?</a>
     </div>

@@ -19,20 +19,47 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 <script src="<?= JS_URL ?>gallery.js" defer></script>
 <main class="main-content">
   <div class="container">
+    <div class="page-header mx-auto" style="max-width:800px;">
+      <div class="gallery-rand-wrapper">
+        <div class="gallery-rand-track">
+          <?php
+          $gallery = get_gallery_rand(3);
+          $items = array_merge($gallery);
+          foreach ($items as $photo):
+          $src = htmlspecialchars(BASE_UPLOAD_URL . $photo['photo_path'], ENT_QUOTES, 'UTF-8');
+          $alt = htmlspecialchars($photo['poi_name'], ENT_QUOTES, 'UTF-8');
+          $useruploader = htmlspecialchars($photo['uploader_name'], ENT_QUOTES, 'UTF-8');
+          ?>
+          <div class="gallery-rand-item">
+            <div class="gallery-rand-skeleton"></div>
+            <img
+            src="<?= $src ?>"
+            alt="<?= $alt ?>"
+            onerror="this.onerror=null;this.src='/uploads/default.jpg';this.classList.add('loaded');this.previousElementSibling.classList.add('hidden')"
+            onload="this.classList.add('loaded');this.previousElementSibling.classList.add('hidden')"
+            >
+            <div class="gallery-rand-meta w-100 text-center">
+              <span class="gallery-rand-uploader">Foto dari <?= $useruploader ?></span>
+            </div>
+          </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    </div>
     <div class="gal-hero">
       <div class="text-center">
         <h1 class="text-hero">Share Your <em class="styled">Moments</em></h1>
         <div class="gal-stats">
           <div class="gal-stat">
-            <span class="gal-stat__val" id="statTotal">54</span>
+            <span class="gal-stat__val" id="statTotal">-</span>
             <span class="gal-stat__label">Foto</span>
           </div>
           <div class="gal-stat">
-            <span class="gal-stat__val" id="statReview">107</span>
+            <span class="gal-stat__val" id="statReview">-</span>
             <span class="gal-stat__label">Review</span>
           </div>
           <div class="gal-stat">
-            <span class="gal-stat__val"><?= count($pois) ?>85</span>
+            <span class="gal-stat__val"><?= count($pois) ?>-</span>
             <span class="gal-stat__label">POI</span>
           </div>
         </div>

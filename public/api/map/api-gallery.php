@@ -56,6 +56,20 @@ if ($method === 'GET') {
   exit;
 }
 
+function get_gallery_rand($limit = 6) {
+  $pdo = $GLOBALS['pdo'];
+  $limit = (int)$limit;
+  return $pdo->query("
+    SELECT ph.photo_path, u.name AS uploader_name
+    FROM poi_photos ph
+    JOIN users u ON u.id = ph.user_id
+    JOIN poi p ON p.id = ph.poi_id
+    WHERE p.is_active = 1
+    ORDER BY RAND()
+    LIMIT {$limit}
+  ")->fetchAll(PDO::FETCH_ASSOC);
+}
+
 // ── POST — semua write action ────────────────────────────────
 if ($method !== 'POST') {
   http_response_code(405);

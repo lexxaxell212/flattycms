@@ -2038,6 +2038,11 @@ a:hover i.arrow-icon {
 .card a {
   text-decoration: none !important;
 }
+.card img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
 .card-header,
 .card-footer {
   background: rgba(0,0,0,0.01);

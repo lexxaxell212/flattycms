@@ -73,8 +73,9 @@ if (isset($_SESSION['user'])) {
       return;
     }
     btn.disabled = true;
-    btnText.textContent = 'Masuk...';
+    btnText.textContent = 'Masuk';
     btnSpinner.classList.remove('d-none');
+    await new Promise(r => setTimeout(r, 500));
     const res = await fetch('/api/auth/login.php', {
       method: 'POST',
       headers: {

@@ -1,5 +1,5 @@
 <?php if (empty($_SESSION['user'])): ?>
-<div class="d-flex align-items-center">
+<div class="d-flex align-items-center mx-auto">
   <div class="auth-btn-group">
   <div id="<?= $google_btn_id ?>" class="avatar-circle"></div>
   <div class="divider-v"></div>
@@ -12,7 +12,7 @@
   </div>
 </div>
 <?php else : ?>
-<div class="d-flex align-items-center">
+<div class="d-flex align-items-center mx-auto">
   <div class="auth-btn-group">
   <a href="/profile" class="profile-pill">
     <?php if (!empty($_SESSION['user']['avatar'])): ?>

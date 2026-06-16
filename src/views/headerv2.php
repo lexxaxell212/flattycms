@@ -85,7 +85,6 @@ function isActive(string $path): string {
   <script src="<?= JS_URL ?>gsi.js"></script>
   <script src="<?= JS_URL ?>bs533.bundle.min.js" defer></script>
   <script src="<?= JS_URL ?>flattynotif.js" defer></script>
-  <script src="<?= JS_URL ?>swal2.all.min.js"></script>
   <script src="<?= JS_URL ?>main.js" defer></script>
   <script>
   const CONFIG = {

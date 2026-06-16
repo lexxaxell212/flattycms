@@ -1194,8 +1194,8 @@ h6, .h6 {
   flex-direction: column;
   border-radius: var(--radius);
   padding: var(--space-6) var(--space-4);
-  background: var(--bg-white);
-  border: var(--border-white-subtle);
+  background: var(--bg-surface);
+  border: var(--border-surface);
   box-shadow: var(--shadow-lg);
   margin-bottom: 1rem;
 }
@@ -1259,9 +1259,10 @@ h6, .h6 {
   display: flex;
   border-radius: var(--radius);
   padding: var(--space-3) var(--space-4);
-  background: var(--bg-white);
-  border: var(--border-white-subtle);
+  background: var(--bg-surface);
+  border: var(--border-surface);
   box-shadow: var(--shadow-lg);
+  margin-bottom: 1rem;
 }
 .sep {
   width: 1px;
@@ -1360,6 +1361,68 @@ h6, .h6 {
   font-weight: var(--fw-bold);
   display: block;
 }
+
+.lang-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0
+}
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    background: var(--bg-surface);
+    border: var(--border-surface);
+    box-shadow: var(--shadow-lg);
+    border-radius: 100px;
+    padding: .2rem;
+    gap: .1rem;
+  }
+  .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: .3rem .65rem;
+    border-radius: 100px;
+    border: none;
+    background: transparent;
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .lang-btn.active {
+    background: var(--btn-bg-primary);
+    color: var(--btn-text-primary);
+  }
+  .lang-btn:not(.active):hover {
+    color: var(--text-primary);
+  }
+  
+  @media (min-width:1200px) {
+    .lang-wrapper {
+      margin-left: 2rem;
+    }
+    .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    background: none;
+    border: none;
+    box-shadow: none;
+    }
+    .lang-btn {
+      font-size: 1rem;
+      padding: .5rem;
+    }
+    .lang-btn.active {
+      background: none;
+      color: var(--text-primary);
+    }
+    .lang-btn:not(.active):hover {
+      opacity: 0.8;
+    }
+  }
 
 /* ============= /global ============= */
 div, h1, h2, h3, h4, h5, h6, p, a, span, footer, section,

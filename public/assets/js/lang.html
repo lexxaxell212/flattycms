@@ -10,160 +10,94 @@
   </button>
 </div>
 
-<style>
-.lang-toggle {
-  display: inline-flex;
-  align-items: center;
-  background: var(--glass-bg, rgba(255,255,255,.1));
-  border: 1px solid rgba(124,58,237,.2);
-  border-radius: 100px;
-  padding: .2rem;
-  gap: .1rem;
-}
-.lang-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: .3rem;
-  padding: .3rem .65rem;
-  border-radius: 100px;
-  border: none;
-  background: transparent;
-  font-size: .75rem;
-  font-weight: 600;
-  color: #6b7280;
-  cursor: pointer;
-  transition: all .2s;
-}
-.lang-btn.active {
-  background: #7c3aed;
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(124,58,237,.3);
-}
-.lang-btn:not(.active):hover { color: #7c3aed; }
-.lang-flag { font-size: .85rem; }
-.lang-divider { width: 1px; height: 14px; background: rgba(124,58,237,.2); }
+<h1 data-bhs="home">Beranda</h1>
 
-[data-dark] .lang-toggle {
-  border-color: rgba(167,139,250,.2);
-}
-[data-dark] .lang-btn:not(.active) { color: #9ca3af; }
+<style>
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    background: var(--glass-bg, rgba(255,255,255,.1));
+    border: 1px solid rgba(124,58,237,.2);
+    border-radius: 100px;
+    padding: .2rem;
+    gap: .1rem;
+  }
+  .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .3rem .65rem;
+    border-radius: 100px;
+    border: none;
+    background: transparent;
+    font-size: .75rem;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .lang-btn.active {
+    background: #7c3aed;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(124,58,237,.3);
+  }
+  .lang-btn:not(.active):hover {
+    color: #7c3aed;
+  }
+  .lang-flag {
+    font-size: .85rem;
+  }
+  .lang-divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(124,58,237,.2);
+  }
+
+  [data-dark] .lang-toggle {
+    border-color: rgba(167,139,250,.2);
+  }
+  [data-dark] .lang-btn:not(.active) {
+    color: #9ca3af;
+  }
 </style>
 
 <script>
-(function() {
-  const translations = {
-    id: {
-      'nav.home'        : 'Beranda',
-      'nav.trip'        : 'Trip Planner',
-      'nav.gallery'     : 'Galeri',
-      'nav.blog'        : 'Blog',
-      'nav.pages'       : 'Things to Do',
-      'nav.login'       : 'Masuk',
-      'nav.logout'      : 'Keluar',
-      'nav.profile'     : 'Profil',
-      'hero.btn.plan'   : 'Mulai Rencanakan',
-      'hero.btn.event'  : 'Lihat Event',
-      'tdo.eyebrow'     : 'Things to Do',
-      'tdo.heading'     : 'Event & Info Terkini',
-      'tdo.all'         : 'Lihat Semua',
-      'tdo.badge'       : 'Terbaru',
-      'tdo.cta'         : 'Selengkapnya',
-      'khb.eyebrow'     : 'Discover Bandung',
-      'khb.heading'     : 'Kenapa Harus Bandung?',
-      'tp.eyebrow'      : 'Trip Planner',
-      'tp.heading.1'    : 'Rencanakan',
-      'tp.heading.2'    : 'Tripmu',
-      'tp.heading.3'    : 'di Bandung',
-      'tp.lead'         : 'Explore ratusan destinasi, susun rute perjalanan, dan simpan tripmu — semua dalam satu tempat.',
-      'tp.feat.1'       : 'Explore ratusan POI Bandung',
-      'tp.feat.2'       : 'Buat & simpan rute perjalanan',
-      'tp.feat.3'       : 'Peta interaktif real-time',
-      'tp.btn'          : 'Mulai Rencanakan',
-      'tp.note'         : 'Gratis · Tanpa registrasi',
-      'rev.eyebrow'     : 'Dari Traveler',
-      'rev.heading'     : 'Cerita Nyata dari Komunitas',
-      'rev.all'         : 'Lihat Semua',
-      'footer.explore'  : 'Jelajahi',
-      'footer.feature'  : 'Fitur',
-      'footer.info'     : 'Info',
-      'footer.follow'   : 'Ikuti Kami',
-      'footer.about'    : 'Tentang',
-      'footer.privacy'  : 'Privasi',
-      'footer.contact'  : 'Kontak',
-      'newsletter.title': 'NEWSLETTER',
-      'newsletter.sub'  : 'Dapatkan event dan update Bandung terkini via email.',
-      'newsletter.btn'  : 'Berlangganan',
-      'newsletter.input': 'nama@email.com',
-    },
-    en: {
-      'nav.home'        : 'Home',
-      'nav.trip'        : 'Trip Planner',
-      'nav.gallery'     : 'Gallery',
-      'nav.blog'        : 'Blog',
-      'nav.pages'       : 'Things to Do',
-      'nav.login'       : 'Sign In',
-      'nav.logout'      : 'Sign Out',
-      'nav.profile'     : 'Profile',
-      'hero.btn.plan'   : 'Start Planning',
-      'hero.btn.event'  : 'View Events',
-      'tdo.eyebrow'     : 'Things to Do',
-      'tdo.heading'     : 'Latest Events & Info',
-      'tdo.all'         : 'View All',
-      'tdo.badge'       : 'Latest',
-      'tdo.cta'         : 'Read More',
-      'khb.eyebrow'     : 'Discover Bandung',
-      'khb.heading'     : 'Why Bandung?',
-      'tp.eyebrow'      : 'Trip Planner',
-      'tp.heading.1'    : 'Plan Your',
-      'tp.heading.2'    : 'Trip',
-      'tp.heading.3'    : 'to Bandung',
-      'tp.lead'         : 'Explore hundreds of destinations, plan your route, and save your trip — all in one place.',
-      'tp.feat.1'       : 'Explore hundreds of POIs in Bandung',
-      'tp.feat.2'       : 'Create & save travel routes',
-      'tp.feat.3'       : 'Real-time interactive map',
-      'tp.btn'          : 'Start Planning',
-      'tp.note'         : 'Free · No registration',
-      'rev.eyebrow'     : 'From Travelers',
-      'rev.heading'     : 'Real Stories from the Community',
-      'rev.all'         : 'View All',
-      'footer.explore'  : 'Explore',
-      'footer.feature'  : 'Features',
-      'footer.info'     : 'Info',
-      'footer.follow'   : 'Follow Us',
-      'footer.about'    : 'About',
-      'footer.privacy'  : 'Privacy',
-      'footer.contact'  : 'Contact',
-      'newsletter.title': 'NEWSLETTER',
-      'newsletter.sub'  : 'Get the latest Bandung events and updates via email.',
-      'newsletter.btn'  : 'Subscribe',
-      'newsletter.input': 'name@email.com',
-    }
-  };
-
-  const savedLang = localStorage.getItem('lang') || 'id';
-
-  function applyLang(lang) {
-    const t = translations[lang];
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.dataset.i18n;
-      if (!t[key]) return;
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.placeholder = t[key];
-      } else {
-        el.textContent = t[key];
+  (function() {
+    const translations = {
+      id: {
+        'home': 'Beranda',
+        'newsletter.input': 'nama@email.com',
+      },
+      en: {
+        'home': 'Home',
+        'newsletter.input': 'name@email.com',
       }
-    });
+    };
+
+    const savedLang = localStorage.getItem('lang') || 'id';
+    function applyLang(lang) {
+      const t = translations[lang];
+      document.querySelectorAll('[data-bhs]').forEach(el => {
+        const key = el.dataset.bhs;
+        if (!t[key]) return;
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = t[key];
+        } else {
+          el.textContent = t[key];
+        }
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      localStorage.setItem('lang',
+        lang);
+      document.documentElement.lang = lang;
+    }
+
     document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.lang === lang);
+      btn.addEventListener('click', () => applyLang(btn.dataset.lang));
     });
-    localStorage.setItem('lang', lang);
-    document.documentElement.lang = lang;
-  }
 
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
-  });
-
-  applyLang(savedLang);
-})();
+    applyLang(savedLang);
+  })();
 </script>

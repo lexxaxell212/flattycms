@@ -207,6 +207,16 @@ $nav_items = [
         </span>
       </button>
       <div class="auth-dekstop">
+        <div class="lang-wrapper">
+          <div class="lang-toggle" id="langToggle">
+            <button class="lang-btn active" data-lang="id">
+              <span class="lang-text">ID</span>
+            </button>
+            <button class="lang-btn" data-lang="en">
+              <span class="lang-text">EN</span>
+            </button>
+          </div>
+        </div>
         <?php $google_btn_id = 'google-login-btn-desktop'; include SRC_PATH . 'partials/ui/auth.php'; ?>
       </div>
     </div>
@@ -231,5 +241,15 @@ $nav_items = [
     <span class="small">Mengambil data cuaca
       <i class="fas fa-circle-notch fa-spin ms-2"></i>
     </span>
+  </div>
+  <div class="lang-wrapper">
+    <div class="lang-toggle" id="langToggle">
+      <button class="lang-btn active" data-lang="id">
+        <span class="lang-text">ID</span>
+      </button>
+      <button class="lang-btn" data-lang="en">
+        <span class="lang-text">EN</span>
+      </button>
+    </div>
   </div>
 </div>

@@ -1001,3 +1001,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
   sections.forEach(el => observer.observe(el));
 });
+
+//lang
+(function() {
+  const translations = {
+    id: {
+      'home': 'Beranda',
+      'newsletter.input': 'nama@email.com',
+    },
+    en: {
+      'home': 'Home',
+      'newsletter.input': 'name@email.com',
+    }
+  };
+
+  const savedLang = localStorage.getItem('lang') || 'id';
+  function applyLang(lang) {
+    const t = translations[lang];
+    document.querySelectorAll('[data-bhs]').forEach(el => {
+      const key = el.dataset.bhs;
+      if (!t[key]) return;
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = t[key];
+      } else {
+        el.textContent = t[key];
+      }
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    localStorage.setItem('lang',
+      lang);
+    document.documentElement.lang = lang;
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+  });
+
+  applyLang(savedLang);
+})();

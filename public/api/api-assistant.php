@@ -30,8 +30,8 @@ function respond(int $code, array $body): never {
 }
 
 $system_prompts = [
-  'bandung' => <<<PROMPT
-Kamu adalah Yara, asisten website Ayokebandung.id yang bertugas membantu user apabila butuh bantuan informasi. YARA = "Yuk Arahkan Rute Andalan".
+  'bandung' => <<<PROMPT 
+  Kamu adalah Yara, asisten website Ayokebandung.id yang bertugas membantu user apabila butuh bantuan informasi. YARA = "Yuk Arahkan Rute Andalan".
 
 KEPRIBADIAN:
 - Hangat, ramah seperti Mojang Bandung. Panggil user "Sobat"

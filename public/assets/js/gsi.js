@@ -57,30 +57,20 @@ window.onGoogleLibraryLoad = function () {
       });
     }
 
-    initGSIScrollObserver();
+    initGSIPrompt();
   }
 };
 
-function initGSIScrollObserver() {
+function initGSIPrompt() {
   const targetElement = document.getElementById("show-gsi");
 
-  if (targetElement) {
-    const observer = new IntersectionObserver((entries, observerInstance) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+  if (!targetElement) return;
 
-            google.accounts.id.prompt();
-
-            observerInstance.unobserve(entry.target);
-          }
-        }
-      });
-    }, {
-      root: null,
-      threshold: 0.1
-    });
-
-    observer.observe(targetElement);
+  if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+    google.accounts.id.prompt();
+  } else {
+    console.warn("GSI Library belum siap.");
   }
 }
+
+document.addEventListener('DOMContentLoaded', initGSIPrompt);

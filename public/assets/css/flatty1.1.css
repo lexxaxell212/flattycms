@@ -6336,7 +6336,7 @@ footer {
   font-weight: var(--fw-bold);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-primary);
+  color: var(--text-heading);
   display: block;
   margin-bottom: 0.875rem;
 }

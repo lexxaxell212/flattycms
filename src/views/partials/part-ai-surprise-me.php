@@ -23,9 +23,7 @@
         <div class="textarea-wrap">
           <textarea id="homeAiPrompt" class="form-control mb-4 mx-auto" rows="3" placeholder=" " style="resize:none;"></textarea>
           <div class="ticker-text">
-            <span data-ticker="Buat itinerary kuliner Bandung 2 hari..|Rute
-              wisata alam Lembang seharian..|Itinerary belanja factory outlet
-              Bandung..">Buat itinerary kuliner Bandung 2 hari</span>
+            <span data-ticker="Buat itinerary kuliner Bandung 2 hari..|Rute wisata alam Lembang seharian..|Itinerary belanja factory outlet Bandung..">Buat itinerary kuliner Bandung 2 hari</span>
           </div>
         </div>
         <a id="btnHomeGenerate" class="btn btn-primary mx-auto">Buat Itinerary<i class="fas fa-wand-magic-sparkles ms-1"></i></a>

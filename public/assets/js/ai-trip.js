@@ -119,15 +119,14 @@
         generateItinerary();
       }
     });
-    document.querySelectorAll('.ai-chip').forEach(chip => {
+    document.querySelectorAll('#homeAiChips .ai-chip').forEach(chip => {
       chip.addEventListener('click', function () {
         this.classList.toggle('active');
-        const active = [...document.querySelectorAll('.ai-chip.active')]
+        const active = [...document.querySelectorAll('#homeAiChips .ai-chip.active')]
         .map(c => c.dataset.val).join(', ');
-        if (active) {
-          input.value = input.value.replace(/\(.*?\)/g, '').trim();
-          input.value += ` (${active})`;
-        }
+        const ta = document.getElementById('aiPromptInput');
+        ta.value = ta.value.replace(/\s*\(.*?\)/g, '').trim();
+        if (active) ta.value += (ta.value ? ' ': '') + `(${active})`;
       });
     });
   }

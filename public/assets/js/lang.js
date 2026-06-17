@@ -207,7 +207,7 @@
     }
   };
 
-  const savedLang = translations[localStorage.getItem('lang')] ? localStorage.getItem('lang') : 'id';
+  const savedLang = translations[localStorage.getItem('lang')] ? localStorage.getItem('lang'): 'id';
 
   function applyLang(lang) {
     const t = translations[lang] || translations.id;
@@ -218,15 +218,12 @@
 
       if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
         el.placeholder = t[key];
-      } 
-      else if (el.hasAttribute('data-ticker')) {
+      } else if (el.hasAttribute('data-ticker')) {
         el.setAttribute('data-ticker', t[key]);
         el.textContent = t[key].split('|')[0].trim();
-      } 
-      else if (el.querySelector('span[data-bhs]')) {
-        return; 
-      } 
-      else if (el.hasAttribute('data-bhs-val')) {
+      } else if (el.querySelector('span[data-bhs]')) {
+        return;
+      } else if (el.hasAttribute('data-bhs-val')) {
         const valKey = el.getAttribute('data-bhs-val');
         if (t[valKey]) {
           el.setAttribute('data-val', t[valKey]);
@@ -234,9 +231,15 @@
         if (el.children.length === 0) {
           el.textContent = t[key];
         }
-      } 
-      else {
+      } else {
         el.textContent = t[key];
+      }
+    });
+
+    document.querySelectorAll('[data-bhs-val]').forEach(el => {
+      const valKey = el.getAttribute('data-bhs-val');
+      if (t[valKey]) {
+        el.setAttribute('data-val', t[valKey]);
       }
     });
 
@@ -244,7 +247,8 @@
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
 
-    localStorage.setItem('lang', lang);
+    localStorage.setItem('lang',
+      lang);
     document.documentElement.lang = lang;
   }
 
@@ -253,5 +257,5 @@
   });
 
   applyLang(savedLang);
-  
+
 })();

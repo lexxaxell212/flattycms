@@ -476,6 +476,7 @@ const ScrollLock = {
     this._count++;
     if (this._count === 1) {
       const scrollbarWidth = this._getScrollbarWidth();
+      document.documentElement.style.setProperty("--scrollbar-width", scrollbarWidth + "px");
       document.documentElement.style.overflowY = "hidden";
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = scrollbarWidth + "px";
@@ -485,6 +486,7 @@ const ScrollLock = {
   unlock() {
     this._count = Math.max(0, this._count - 1);
     if (this._count === 0) {
+      document.documentElement.style.removeProperty("--scrollbar-width");
       document.documentElement.style.overflowY = "";
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
@@ -493,6 +495,7 @@ const ScrollLock = {
 
   reset() {
     this._count = 0;
+    document.documentElement.style.removeProperty("--scrollbar-width");
     document.documentElement.style.overflowY = "";
     document.body.style.overflow = "";
     document.body.style.paddingRight = "";

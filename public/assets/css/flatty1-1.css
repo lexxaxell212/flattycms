@@ -851,6 +851,7 @@ h6, .h6 {
   position: fixed;
   top: 0;
   width: 100%;
+  padding-right: var(--scrollbar-width, 0px);
   z-index: 1070 !important;
   height: var(--navbar-height);
   display: flex;
@@ -865,7 +866,7 @@ h6, .h6 {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   min-width: 100px;
   justify-content: flex-end;
 }
@@ -5593,6 +5594,7 @@ input[type="range"]::-moz-range-track {
   height: 100%;
   max-height: 600px;
   width: 100%;
+  padding-right: var(--scrollbar-width, 0px);
 }
 .tp-main-hero::before {
   content: '';
@@ -6522,23 +6524,6 @@ a.logo-social i {
   .sb-hero {
     padding: 4rem 0 4rem;
   }
-  .gal-hero {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 5rem 0;
-    width: 80%;
-    margin-inline: auto;
-  }
-
-  .gal-hero__actions {
-    width: auto;
-  }
-
-  .gal-hero__actions .gal-btn {
-    flex: unset;
-    justify-content: center;
-  }
 
   .gal-search-block {
     max-width: 480px;
@@ -6636,6 +6621,24 @@ a.logo-social i {
 @media (min-width: 1200px) {
   .container {
     max-width: clamp(900px, 100%, 1400px);
+  }
+  
+  .gal-hero {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0;
+    width: 80%;
+    margin-inline: auto;
+  }
+
+  .gal-hero__actions {
+    width: auto;
+  }
+
+  .gal-hero__actions .gal-btn {
+    flex: unset;
+    justify-content: center;
   }
 
   .container-tp {

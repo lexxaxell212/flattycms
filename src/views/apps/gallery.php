@@ -59,7 +59,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
             <span class="gal-stat__label">Review</span>
           </div>
           <div class="gal-stat">
-            <span class="gal-stat__val"><?= count($pois) ?>-</span>
+            <span class="gal-stat__val"><?= count($pois) ?></span>
             <span class="gal-stat__label">POI</span>
           </div>
         </div>

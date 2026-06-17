@@ -22,15 +22,15 @@
       'nav.ttd': 'Aktifitas',
       'nav.tp': 'Perencana Perjalanan',
       'nav.gr': 'Galeri & Ulasan',
-      'nav.b': 'Blog',
+      'nav.b': 'Artikel',
       //hero
       'hero.eyebrow': 'Jelajahi',
-      'hero.title': 'Bandung',
+      'hero.title': 'BANDUNG',
       'hero.excerpt': 'Mulai dari mana? Mau kemana? Ngapain aja?',
       //part.ue
       'ue.eyebrow': 'Hightlight',
       'ue.title': 'Event Mendatang',
-      'ue.rotate': 'Cek Sekarang | Event Terdekat | Segera Hadir',
+      'ue.rotate': 'Cek Sekarang|Event Terdekat|Segera Hadir',
       //part.khb
       'khb.eyebrow': 'Discover',
       'khb.title': 'Kenapa Harus Bandung?',
@@ -107,7 +107,7 @@
     },
     en: {
       //btn
-      'btn.tp': 'Plan',
+      'btn.tp': 'Trip Planner',
       'btn.tp.2': 'Start Building Route',
       'btn.ttd': 'Things To Do',
       'btn.all': 'View All',
@@ -129,12 +129,12 @@
       'nav.b': 'Blogs',
       //hero
       'hero.eyebrow': 'Explore',
-      'hero.title': 'Bandung',
+      'hero.title': 'BANDUNG',
       'hero.excerpt': 'Where to start? Where to go? What to do?',
       //part.ue
       'ue.eyebrow': 'Highlight',
       'ue.title': 'Upcoming Events',
-      'ue.rotate': 'Check Now | Nearest Event | Coming Soon',
+      'ue.rotate': 'Check Now|Nearest Event|Coming Soon',
       //part.khb
       'khb.eyebrow': 'Discover',
       'khb.title': 'Why Bandung?',

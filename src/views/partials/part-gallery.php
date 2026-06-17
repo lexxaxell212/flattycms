@@ -3,7 +3,7 @@
   <section id="poi-gallery-part">
     <div class="d-flex align-items-end justify-content-between mb-4">
       <div>
-        <span class="text-eyebrow" data-bhs="gal.title">GALLERY</span>
+        <span class="text-eyebrow" data-bhs="gal.eyebrow">GALLERY</span>
         <h2 class="text-sub-hero">Traveler <em class="styled">Mom</em>ents</h2>
       </div>
       <a href="/gallery" class="link-all">

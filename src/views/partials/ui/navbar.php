@@ -227,9 +227,9 @@ $nav_items = [
   <ul class="navbar-nav">
     <?php foreach ($nav_items as $item): ?>
     <li class="nav-item">
-      <a data-bhs="<?= $item['data-bhs'] ?>" class="nav-link <?= isActive($item['href']) ?>" href="<?= $item['href'] ?>">
+      <a class="nav-link <?= isActive($item['href']) ?>" href="<?= $item['href'] ?>">
         <i class="<?= $item['icon'] ?>"></i>
-        <?= $item['label'] ?>
+        <span data-bhs="<?= $item['data-bhs'] ?>"><?= $item['label'] ?></span>
       </a>
     </li>
     <?php endforeach; ?>

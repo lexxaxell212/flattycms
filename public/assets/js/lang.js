@@ -112,7 +112,7 @@
       'nav.ttd': 'Activities',
       'nav.tp': 'Trip Planner',
       'nav.gr': 'Gallery & Reviews',
-      'nav.b': 'Blog',
+      'nav.b': 'Blogs',
       //hero
       'hero.eyebrow': 'Explore',
       'hero.title': 'Bandung',

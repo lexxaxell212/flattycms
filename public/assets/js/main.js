@@ -262,30 +262,40 @@ document.addEventListener("DOMContentLoaded", () => {
       (e) => {
         if (e.key === "Escape") closeWrapper();
       });
+
+    window.OverlayManager?.register("search",
+      {
+        close: () => closeWrapper( {
+          silent: true
+        })
+      });
   }
 
   function openWrapper() {
-    if (
-      document.getElementById("menuOverlay")?.classList.contains("menu-open")
-    ) {
-      window.toggleMenu?.(); // close menu
-    }
+    window.OverlayManager?.openExclusive("search");
+
     wrapper.classList.add("active");
     trigger.classList.add("is-active");
-    document.body.style.overflow = "hidden";
-    setTimeout(() => input.focus(), 50);
+    window.ScrollLock?.lock();
+    setTimeout(() => input.focus(),
+      50);
     clearDropdown();
   }
 
-  function closeWrapper() {
+  function closeWrapper(opts = {}) {
+    const wasActive = wrapper.classList.contains("active");
     wrapper.classList.remove("active");
     trigger.classList.remove("is-active");
     dropdown.classList.remove("open");
-    document.body.style.overflow = "";
+    if (wasActive) window.ScrollLock?.unlock();
     input.value = "";
     clearDropdown();
+
+    if (!opts.silent) {
+      window.OverlayManager?.notifyClosed("search");
+    }
   }
-  window.closeSearch = closeWrapper; // expose global
+  window.closeSearch = closeWrapper;
 
   function onInput() {
     const q = input.value.trim();
@@ -462,40 +472,30 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })();
 
-// navbar
 
-const toggler = document.getElementById("navbarToggler");
-const menuOverlay = document.getElementById("menuOverlay");
-const navbarCollapse = document.getElementById("navbarNav-mobile");
+// ScrollLock
 
 const ScrollLock = {
   _count: 0,
-  _pendingOpen: false,
 
   lock() {
-    this._pendingOpen = false;
     this._count++;
-    document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = this._getScrollbarWidth() + "px";
+    if (this._count === 1) {
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = this._getScrollbarWidth() + "px";
+    }
   },
 
-  unlock(skipIfPending = false) {
-    this._count = Math.max(0,
-      this._count - 1);
+  unlock() {
+    this._count = Math.max(0, this._count - 1);
     if (this._count === 0) {
-      if (skipIfPending && this._pendingOpen) return;
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
     }
   },
 
-  flagPendingOpen() {
-    this._pendingOpen = true;
-  },
-
   reset() {
     this._count = 0;
-    this._pendingOpen = false;
     document.body.style.overflow = "";
     document.body.style.paddingRight = "";
   },
@@ -504,42 +504,85 @@ const ScrollLock = {
     return window.innerWidth - document.documentElement.clientWidth;
   }
 };
+window.ScrollLock = ScrollLock;
 
-function closeOffcanvas() {
-  const activeOffcanvas = document.querySelector(".offcanvas.show");
-  if (activeOffcanvas && window.bootstrap && window.bootstrap.Offcanvas) {
-    const instance = window.bootstrap.Offcanvas.getInstance(activeOffcanvas);
-    if (instance) instance.hide();
+// OverlayManager
+
+const OverlayManager = {
+  _overlays: {},
+  _active: null,
+
+  register(name, handlers) {
+    this._overlays[name] = handlers;
+  },
+
+  async openExclusive(name) {
+    if (this._active && this._active !== name) {
+      await this._closeByName(this._active);
+    }
+    this._active = name;
+  },
+
+  notifyClosed(name) {
+    if (this._active === name) {
+      this._active = null;
+    }
+  },
+
+  async _closeByName(name) {
+    const handler = this._overlays[name];
+    if (!handler) return;
+    try {
+      await handler.close();
+    } catch (err) {
+      console.warn("[OverlayManager] gagal menutup overlay:", name, err);
+    }
+    if (this._active === name) this._active = null;
+  }
+};
+window.OverlayManager = OverlayManager;
+
+// Navbar mobile menu
+
+const toggler = document.getElementById("navbarToggler");
+const menuOverlay = document.getElementById("menuOverlay");
+const navbarCollapse = document.getElementById("navbarNav-mobile");
+
+function openMenu() {
+  menuOverlay.classList.add("menu-open");
+  navbarCollapse.classList.add("menu-open");
+  toggler.classList.add("menu-open");
+  ScrollLock.lock();
+}
+
+function closeMenu(opts = {}) {
+  const wasOpen = menuOverlay.classList.contains("menu-open");
+  menuOverlay.classList.remove("menu-open");
+  navbarCollapse.classList.remove("menu-open");
+  toggler.classList.remove("menu-open");
+  if (wasOpen) ScrollLock.unlock();
+
+  if (!opts.silent) {
+    OverlayManager.notifyClosed("menu");
   }
 }
 
-function toggleMenu() {
+async function toggleMenu() {
   const isOpen = menuOverlay.classList.contains("menu-open");
 
   if (isOpen) {
-    menuOverlay.classList.remove("menu-open");
-    navbarCollapse.classList.remove("menu-open");
-    toggler.classList.remove("menu-open");
-    ScrollLock.unlock();
+    closeMenu();
   } else {
-    window.closeSearch?.(); // close live search
-    if (document.querySelector(".offcanvas.show")) {
-      ScrollLock.flagPendingOpen();
-      closeOffcanvas();
-      setTimeout(() => {
-        menuOverlay.classList.add("menu-open");
-        navbarCollapse.classList.add("menu-open");
-        toggler.classList.add("menu-open");
-        ScrollLock.lock();
-      }, 50);
-    } else {
-      menuOverlay.classList.add("menu-open");
-      navbarCollapse.classList.add("menu-open");
-      toggler.classList.add("menu-open");
-      ScrollLock.lock();
-    }
+    await OverlayManager.openExclusive("menu");
+    openMenu();
   }
 }
+
+OverlayManager.register("menu", {
+  close: () => closeMenu( {
+    silent: true
+  })
+});
 
 if (toggler) toggler.addEventListener("click", toggleMenu);
 if (menuOverlay) menuOverlay.addEventListener("click", toggleMenu);
@@ -550,6 +593,81 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+// Chatbot (Bootstrap Offcanvas) — didaftarkan ke OverlayManager
+function setupChatbotOverlay() {
+  const chatbotElement = document.getElementById("chatbot");
+  if (!chatbotElement || !window.bootstrap || !window.bootstrap.Offcanvas) return;
+
+  const instance =
+  window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
+  new window.bootstrap.Offcanvas(chatbotElement, {
+    scroll: true,
+    backdrop: false
+  });
+
+  chatbotElement.addEventListener("show.bs.offcanvas", () => {
+    ScrollLock.lock();
+  });
+
+  chatbotElement.addEventListener("hidden.bs.offcanvas", () => {
+    ScrollLock.unlock();
+    OverlayManager.notifyClosed("chatbot");
+  });
+
+  OverlayManager.register("chatbot", {
+    close: () => {
+      if (!chatbotElement.classList.contains("show")) {
+        return Promise.resolve();
+      }
+      return new Promise((resolve) => {
+        chatbotElement.addEventListener(
+          "hidden.bs.offcanvas",
+          () => resolve(),
+          {
+            once: true
+          }
+        );
+        instance.hide();
+      });
+    }
+  });
+
+  return instance;
+}
+
+async function openChatbot() {
+  const chatbotElement = document.getElementById("chatbot");
+  if (!chatbotElement || !window.bootstrap || !window.bootstrap.Offcanvas) return;
+
+  await OverlayManager.openExclusive("chatbot");
+
+  const instance =
+  window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
+  new window.bootstrap.Offcanvas(chatbotElement, {
+    scroll: true, backdrop: false
+  });
+  instance.show();
+}
+
+function closeChatbot() {
+  const chatbotElement = document.getElementById("chatbot");
+  if (!chatbotElement || !window.bootstrap || !window.bootstrap.Offcanvas) return;
+  const instance = window.bootstrap.Offcanvas.getInstance(chatbotElement);
+  instance?.hide();
+}
+
+async function toggleChatbotGlobal() {
+  const chatbotElement = document.getElementById("chatbot");
+  if (!chatbotElement) return;
+  const isOpen = chatbotElement.classList.contains("show");
+  if (isOpen) {
+    closeChatbot();
+  } else {
+    await openChatbot();
+  }
+}
+
+// SmartFab (tombol chat floating)
 class SmartFab {
   constructor(fabId = "chatbotFabBtn",
     scrollThreshold = 200) {
@@ -571,28 +689,8 @@ class SmartFab {
   }
 
   onFabClick = () => {
-    const isMenuOpen = menuOverlay?.classList.contains("menu-open");
-    if (isMenuOpen) {
-      toggleMenu();
-      setTimeout(() => this.toggleChatbot(), 50);
-    } else {
-      this.toggleChatbot();
-    }
+    toggleChatbotGlobal();
   };
-
-  toggleChatbot() {
-    const chatbotElement = document.getElementById("chatbot");
-    if (chatbotElement && window.bootstrap && window.bootstrap.Offcanvas) {
-      const existing = window.bootstrap.Offcanvas.getInstance(chatbotElement);
-      const modal =
-      existing ??
-      new window.bootstrap.Offcanvas(chatbotElement, {
-        scroll: true,
-        backdrop: false
-      });
-      modal.toggle();
-    }
-  }
 
   handleScroll() {
     this.updateVisibility();
@@ -734,28 +832,14 @@ document.addEventListener("DOMContentLoaded", () => {
   new SmartFab("chatbotFabBtn", 200);
   new SmartScrollTop("scrollTopBtn");
 
-  const chatbotElement = document.getElementById("chatbot");
-
-  if (chatbotElement && window.bootstrap && window.bootstrap.Offcanvas) {
-    new window.bootstrap.Offcanvas(chatbotElement, {
-      scroll: true,
-      backdrop: false
-    });
-
-    chatbotElement.addEventListener("show.bs.offcanvas", () => {
-      ScrollLock.lock();
-    });
-
-    chatbotElement.addEventListener("hidden.bs.offcanvas", () => {
-      ScrollLock.unlock(true);
-    });
-  }
+  setupChatbotOverlay();
 
   if (localStorage.getItem("dark") === "true") {
     document.documentElement.setAttribute("data-dark", "");
     document.getElementById("dmToggle")?.classList.add("dark");
   }
 });
+
 
 // weather
 

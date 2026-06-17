@@ -263,9 +263,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.key === "Escape") closeWrapper();
       });
 
-    window.OverlayManager?.register("search", {
-      close: () => closeWrapper({ silent: true })
-    });
+    window.OverlayManager?.register("search",
+      {
+        close: () => closeWrapper( {
+          silent: true
+        })
+      });
   }
 
   function openWrapper() {
@@ -274,7 +277,8 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.classList.add("active");
     trigger.classList.add("is-active");
     window.ScrollLock?.lock();
-    setTimeout(() => input.focus(), 50);
+    setTimeout(() => input.focus(),
+      50);
     clearDropdown();
   }
 
@@ -580,7 +584,9 @@ async function toggleMenu() {
 }
 
 OverlayManager.register("menu", {
-  close: () => closeMenu({ silent: true })
+  close: () => closeMenu( {
+    silent: true
+  })
 });
 
 if (toggler) toggler.addEventListener("click", toggleMenu);
@@ -601,40 +607,44 @@ function setupChatbotOverlay() {
   let lockedThisOpen = false;
 
   const instance =
-    window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
-    new window.bootstrap.Offcanvas(chatbotElement, {
-      scroll: true,
-      backdrop: false
-    });
+  window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
+  new window.bootstrap.Offcanvas(chatbotElement, {
+    scroll: true,
+    backdrop: false
+  });
 
   chatbotElement.addEventListener("show.bs.offcanvas", () => {
     lockedThisOpen = isMobileChatbot();
     if (lockedThisOpen) ScrollLock.lock();
   });
 
-  chatbotElement.addEventListener("hidden.bs.offcanvas", () => {
-    if (lockedThisOpen) {
-      ScrollLock.unlock();
-      lockedThisOpen = false;
-    }
-    OverlayManager.notifyClosed("chatbot");
-  });
-
-  OverlayManager.register("chatbot", {
-    close: () => {
-      if (!chatbotElement.classList.contains("show")) {
-        return Promise.resolve();
+  chatbotElement.addEventListener("hidden.bs.offcanvas",
+    () => {
+      if (lockedThisOpen) {
+        ScrollLock.unlock();
+        lockedThisOpen = false;
       }
-      return new Promise((resolve) => {
-        chatbotElement.addEventListener(
-          "hidden.bs.offcanvas",
-          () => resolve(),
-          { once: true }
-        );
-        instance.hide();
-      });
-    }
-  });
+      OverlayManager.notifyClosed("chatbot");
+    });
+
+  OverlayManager.register("chatbot",
+    {
+      close: () => {
+        if (!chatbotElement.classList.contains("show")) {
+          return Promise.resolve();
+        }
+        return new Promise((resolve) => {
+          chatbotElement.addEventListener(
+            "hidden.bs.offcanvas",
+            () => resolve(),
+            {
+              once: true
+            }
+          );
+          instance.hide();
+        });
+      }
+    });
 
   return instance;
 }
@@ -646,8 +656,10 @@ async function openChatbot() {
   await OverlayManager.openExclusive("chatbot");
 
   const instance =
-    window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
-    new window.bootstrap.Offcanvas(chatbotElement, { scroll: true, backdrop: false });
+  window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
+  new window.bootstrap.Offcanvas(chatbotElement, {
+    scroll: true, backdrop: false
+  });
   instance.show();
 }
 
@@ -844,7 +856,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // weather
 
-// WEATHER TRANSLATIONS
 const weatherTranslations = {
   "cerah": "Cerah",
   "cerah berawan": "Cerah Berawan",
@@ -878,8 +889,17 @@ const weatherTranslations = {
   "awan bergerak cepat": "Berawan"
 };
 
+let isRefreshing = false;
+
 async function u() {
+  if (isRefreshing) return;
+  isRefreshing = true;
+
+  const refreshIcon = document.querySelector("#w .fa-refresh");
+  refreshIcon?.classList.add("fa-spin");
+
   try {
+    await new Promise(r => setTimeout(r, 500));
     const r = await fetch("/api/api-weather.php?city=Bandung",
       {
         headers: {
@@ -889,14 +909,16 @@ async function u() {
     const d = await r.json();
     if (d.error) throw new Error(d.error);
 
-    // Terjemahkan deskripsi cuaca
     const rawDesc = d.weather[0].description.toLowerCase();
     let weatherDesc =
     weatherTranslations[rawDesc] ||
     rawDesc.charAt(0).toUpperCase() + rawDesc.slice(1);
 
     document.getElementById("w").innerHTML = `
-    <div class="icon">
+    <button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="u()" aria-label="Refresh cuaca" title="Refresh cuaca">
+    <i class="fas fa-refresh"></i>
+    </button>
+    <div class="icon-w">
     ${g(d.weather[0].main)}
     </div>
     <div>
@@ -911,8 +933,10 @@ async function u() {
     `;
   } catch (error) {
     console.error("Error fetching weather data:", error);
-    document.getElementById("w").innerHTML =
-    '<div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>Gagal memuat cuaca</div>';
+    document.getElementById("w").innerHTML = 
+    '<button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="u()" aria-label="Refresh cuaca" title="Refresh cuaca"><i class="fas fa-refresh"></i></button><div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>Gagal memuat cuaca</div>';
+  } finally {
+    isRefreshing = false;
   }
 }
 
@@ -930,9 +954,9 @@ function g(c) {
   );
 }
 
-// Start & Auto refresh
 u();
-setInterval(u, 15 * 60 * 1000); // 15 menit
+setInterval(u, 15 * 60 * 1000);
+
 
 // newsletter
 

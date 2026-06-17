@@ -23,7 +23,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="<?= CSS_URL ?>bs533.min.css">
-  <link rel="stylesheet" href="<?= CSS_URL ?>flatty1-1.css">
+  <link rel="stylesheet" href="<?= CSS_URL ?>flatty1.1.css">
 
 
   <link rel="preload" as="style" href="<?= CSS_URL ?>fa651.all.min.css">

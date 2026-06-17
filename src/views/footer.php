@@ -1,6 +1,6 @@
 <footer id="footer">
   <div class="container">
-    <div class="bg-surface">
+    <div class="bg-surface border-0">
       <div class="text-center">
         <div class="mb-5">
             <h2 class="h3">NEWSLETTER</h2>

@@ -15,7 +15,7 @@
       'btn.subs': 'Berlangganan',
       //nav
       'nav.home': 'Beranda',
-      'nav.ue' : 'Event Mendatang',
+      'nav.ue': 'Event Mendatang',
       'nav.ttd': 'Aktifitas',
       'nav.tp': 'Perencana Perjalanan',
       'nav.gr': 'Galeri & Ulasan',
@@ -95,10 +95,99 @@
       'f.follow.title': 'Ikuti Kami',
     },
     en: {
-      'home': 'Home',
-      'newsletter.input': 'name@email.com',
-      
+      //btn
+      'btn.tp': 'Plan',
+      'btn.tp.2': 'Start Building Route',
+      'btn.ttd': 'Activities',
+      'btn.all': 'View All',
+      'btn.more': 'More Details',
+      'btn.read.more': 'Read More',
+      'btn.it': 'Create Itinerary',
+      'btn.detail': 'View Details',
+      "btn.check": "Let's Check it",
+      'btn.subs': 'Subscribe',
+      //nav
+      'nav.home': 'Home',
+      'nav.ue': 'Upcoming Events',
+      'nav.ttd': 'Activities',
+      'nav.tp': 'Trip Planner',
+      'nav.gr': 'Gallery & Reviews',
+      'nav.b': 'Blog',
+      //hero
+      'hero.eyebrow': 'Explore',
+      'hero.title': 'Bandung',
+      'hero.excerpt': 'Where to start? Where to go? What to do?',
+      //part.ue
+      'ue.eyebrow': 'Highlight',
+      'ue.title': 'Upcoming Events',
+      'ue.rotate': 'Check Now | Nearest Event | Coming Soon',
+      //part.khb
+      'khb.eyebrow': 'Discover',
+      'khb.title': 'Why Bandung?',
+      'khb.excerpt': 'Bandung 2026: A perfect blend of digital innovation, cool nature, and the best culinary creativity.',
+      'khb.1.title': 'Culinary Paradise & Aesthetic Cafes',
+      'khb.1.excerpt': 'From legendary street food to aesthetic cafes in the highlands, Bandung always has new culinary trends that are addictive.',
+      'khb.2.title': 'Natural Charm & Cool Air',
+      'khb.2.excerpt': 'Surrounded by Lembang and Ciwidey - tea plantations, misty pine forests, and cool air perfect for healing.',
+      'khb.3.title': 'Fashion & Creativity Hub',
+      'khb.3.excerpt': 'From factory outlets to creative local brands, Bandung is a fashion hub with wallet-friendly prices.',
+      'khb.4.title': 'City Romance & Fast Access',
+      'khb.4.excerpt': 'Classic Art Deco architecture in Braga, combined with the ease of Whoosh High-Speed Rail - a practical and romantic weekend getaway.',
+      //part.itinerary
+      'it.eyebrow': 'Itinerary',
+      'it.title': 'Make It For Me',
+      'it.excerpt': 'Tell us what you want to do in Bandung, and let AI arrange your itinerary.',
+      'it.qp': 'Quick Pick',
+      'it.qp.1': 'Culinary',
+      'it.qp.2': 'Nature',
+      'it.qp.3': 'Shopping',
+      'it.qp.4': 'History',
+      'it.qp.5': 'Budget',
+      'it.qp.6': 'Premium',
+      'it.ticker': 'All-day Lembang nature tour... | Bandung factory outlet shopping itinerary... | Create a 2-day Bandung culinary itinerary...',
+      //part.wisata
+      'w.eyebrow': 'Recommendations',
+      'w.title': 'Favorite Attractions',
+      //part.tp
+      'tp.eyebrow': 'Trip Planner',
+      'tp.title': 'Plan Your Holiday in Bandung',
+      'tp.excerpt': 'From legendary culinary spots to hidden natural gems, easily organize your best holiday agenda in Bandung.',
+      'tp.li.1': 'Explore hundreds of trending spots in Bandung',
+      'tp.li.2': 'Arrange & save your routes as you like',
+      'tp.li.3': 'Bandung POI Map',
+      //part.gallery
+      'gal.eyebrow': 'Gallery',
+      'gal.title': 'Traveler Moments',
+      //part.hotel
+      'h.eyebrow': 'Recommendations',
+      'h.title': 'Favorite Hotels',
+      //part.cta.1
+      'cta.1.title': 'Bandung Awaits You!',
+      'cta.1.excerpt': 'Prepare starting today, find hotels or plan your favorite destinations.',
+      //part.blogs
+      'b.eyebrow': 'Blogs',
+      'b.title': 'Articles',
+      'b.excerpt': 'Stories, tips, and best recommendations for your journey.',
+      //footer
+      'f.newsletter.title': 'Newsletter',
+      'f.newsletter.excerpt': 'Get the latest Bandung events and updates via email.',
+      'f.newsletter.placeholder': 'name@email.com',
+      'f.pages.title': 'Pages',
+      'f.pages.1': 'Home',
+      'f.pages.2': 'Blog',
+      'f.pages.3': 'History of Bandung',
+      'f.pages.4': 'Services in Bandung',
+      'f.info.title': 'Information',
+      'f.info.1': 'About',
+      'f.info.2': 'Privacy',
+      'f.info.3': 'Feedback & Suggestions',
+      'f.user.title': 'For Visitors',
+      'f.user.1': 'Activities',
+      'f.user.2': 'Trip Planner',
+      'f.user.3': 'Gallery & Reviews',
+      'f.follow.title': 'Follow Us',
     }
+
   };
 
   const savedLang = localStorage.getItem('lang') || 'id';

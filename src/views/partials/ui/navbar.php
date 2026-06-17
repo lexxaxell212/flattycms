@@ -1,10 +1,10 @@
 <?php
 $nav_items = [
-  ['label' => 'Upcoming Events', 'href' => '/upcoming-events', 'icon' => 'fas fa-bullhorn'],
-  ['label' => 'Things to Do', 'href' => '/things-to-do', 'icon' => 'fas fa-map-location-dot'],
-  ['label' => 'Trip Planner', 'href' => '/trip', 'icon' => 'fas fa-route'],
-  ['label' => 'Gallery & Review', 'href' => '/gallery', 'icon' => 'fas fa-image'],
-  ['label' => 'Blogs', 'href' => '/blogs', 'icon' => 'fas fa-newspaper'],
+  ['label' => 'Event Mendatang', 'href' => '/upcoming-events', 'icon' => 'fas fa-bullhorn', 'data-bhs' => 'nav.ue'],
+  ['label' => 'Aktifitas', 'href' => '/things-to-do', 'icon' => 'fas fa-map-location-dot', 'data-bhs' => 'nav.ttd'],
+  ['label' => 'Perencana Perjalanan', 'href' => '/trip', 'icon' => 'fas fa-route', 'data-bhs' => 'nav.tp'],
+  ['label' => 'Galeri & Ulasan', 'href' => '/gallery', 'icon' => 'fas fa-image', 'data-bhs' => 'nav.gr'],
+  ['label' => 'Blog', 'href' => '/blogs', 'icon' => 'fas fa-newspaper', 'data-bhs' => 'nav.b'],
 ];
 ?>
 <nav class="navbar">
@@ -155,7 +155,7 @@ $nav_items = [
     <!-- Desktop -->
     <div class="nav-desktop" id="navbarNav">
       <?php foreach ($nav_items as $item): ?>
-      <a class="nav-link <?= isActive($item['href']) ?>" href="<?= $item['href'] ?>">
+      <a data-bhs="<?= $item['data-bhs'] ?>" class="nav-link <?= isActive($item['href']) ?>" href="<?= $item['href'] ?>">
         <?= $item['label'] ?>
       </a>
       <?php endforeach; ?>
@@ -227,7 +227,7 @@ $nav_items = [
   <ul class="navbar-nav">
     <?php foreach ($nav_items as $item): ?>
     <li class="nav-item">
-      <a class="nav-link <?= isActive($item['href']) ?>" href="<?= $item['href'] ?>">
+      <a data-bhs="<?= $item['data-bhs'] ?>" class="nav-link <?= isActive($item['href']) ?>" href="<?= $item['href'] ?>">
         <i class="<?= $item['icon'] ?>"></i>
         <?= $item['label'] ?>
       </a>

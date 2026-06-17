@@ -5,8 +5,8 @@ require_once LIB_PATH . "v-poi-wisata.php";
 <div class="container">
   <section id="wisata-recommendations">
     <div class="mb-4">
-      <span class="text-eyebrow">Recommendations</span>
-      <h2 class="text-sub-hero mb-4">Wisata Favorit</h2>
+      <span class="text-eyebrow" data-bhs="w.eyebrow">Recommendations</span>
+      <h2 class="text-sub-hero mb-4" data-bhs="w.title">Wisata Favorit</h2>
     </div>
     <div class="poi-wisata-grid" id="poiwisataGrid">
       <?php if (!empty($wisata_poi)): ?>
@@ -30,7 +30,7 @@ require_once LIB_PATH . "v-poi-wisata.php";
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Lihat detail <?= $name ?>">
-            Lihat Detail
+            <span data-bhs="btn.detail">Lihat Detail</span>
             <i class="arrow-icon fas fa-angle-right ms-2"></i>
           </a>
           <?php endif; ?>

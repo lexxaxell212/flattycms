@@ -80,6 +80,8 @@
       //part.cta.1
       'cta.1.title': 'Bandung Menantimu!',
       'cta.1.excerpt': 'Persiapkan mulai hari ini, cari hotel atau rencanakan destinasi favoritmu.',
+      //part.review 
+      'r.eyebrow': 'Ulasan',
       //part.blogs
       'b.eyebrow': 'Blogs',
       'b.title': 'Artikel',
@@ -182,6 +184,8 @@
       //part.cta.1
       'cta.1.title': 'Bandung Awaits You!',
       'cta.1.excerpt': 'Prepare starting today, find hotels or plan your favorite destinations.',
+      //part.review 
+      'r.eyebrow': 'Review',
       //part.blogs
       'b.eyebrow': 'Blogs',
       'b.title': 'Articles',

@@ -5,14 +5,32 @@ const flattyIcons = {
   info: 'fa-circle-info'
 };
 
+const flattyMessages = {
+  'toast.fill.first': { id: 'Tulis dulu rencanamu', en: 'Write your plan first' },
+  'toast.login.required': { id: 'Silakan masuk dulu', en: 'Please login first' },
+  'toast.save.success': { id: 'Berhasil disimpan', en: 'Saved successfully' },
+  'toast.delete.confirm': { id: 'Item berhasil dihapus', en: 'Item deleted successfully' },
+  'confirm.btn.cancel': { id: 'Batal', en: 'Cancel' },
+  'confirm.btn.confirm': { id: 'Konfirmasi', en: 'Confirm' }
+};
+
+function flattyText(key) {
+  const lang = localStorage.getItem('lang') || 'id';
+  const entry = flattyMessages[key];
+  if (!entry) return key;
+  return entry[lang] || entry.id;
+}
+
 function flattyToast(type, message, position = 'top-end') {
   const container = document.getElementById(
     position === 'bottom' ? 'flatty-container-bottom': 'flatty-container-top-end'
   );
 
+  const resolvedMessage = flattyMessages[message] ? flattyText(message) : message;
+
   const toast = document.createElement('div');
   toast.className = `flatty-toast flatty-toast--${type}`;
-  toast.innerHTML = `<i class="fa-solid ${flattyIcons[type] ?? 'fa-bell'}"></i><span>${message}</span>`;
+  toast.innerHTML = `<i class="fa-solid ${flattyIcons[type] ?? 'fa-bell'}"></i><span>${resolvedMessage}</span>`;
 
   container.prepend(toast);
 
@@ -28,14 +46,16 @@ function flattyToast(type, message, position = 'top-end') {
 }
 
 function flattyConfirm(message, onConfirm, onCancel = null) {
+  const resolvedMessage = flattyMessages[message] ? flattyText(message) : message;
+
   const overlay = document.createElement('div');
   overlay.className = 'flatty-overlay';
   overlay.innerHTML = `
   <div class="flatty-modal">
-  <p class="flatty-modal__message">${message}</p>
+  <p class="flatty-modal__message">${resolvedMessage}</p>
   <div class="flatty-modal__actions">
-  <button class="flatty-modal__btn flatty-modal__btn--cancel">Batal</button>
-  <button class="flatty-modal__btn flatty-modal__btn--confirm">Konfirmasi</button>
+  <button class="flatty-modal__btn flatty-modal__btn--cancel">${flattyText('confirm.btn.cancel')}</button>
+  <button class="flatty-modal__btn flatty-modal__btn--confirm">${flattyText('confirm.btn.confirm')}</button>
   </div>
   </div>
   `;

@@ -47,7 +47,7 @@
       const prompt = document.getElementById('homeAiPrompt').value.trim();
       if (!prompt) {
         if (typeof flattyToast === 'function') {
-          flattyToast('warning', 'Tulis dulu rencanamu');
+          flattyToast('warning', 'toast.fill.first');
         } else {
           alert('Tulis dulu rencanamu');
         }

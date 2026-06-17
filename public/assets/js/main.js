@@ -1054,10 +1054,10 @@ document.querySelectorAll(".sparkle-origin").forEach((el) => {
 
 // textRotator
 function initTextRotator(el) {
-  const texts = el.dataset.rotate.split("|");
   let index = 0;
 
   setInterval(() => {
+    const texts = el.dataset.rotate.split("|");
     el.style.opacity = "0";
     setTimeout(() => {
       index = (index + 1) % texts.length;

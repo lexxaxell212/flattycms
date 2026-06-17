@@ -3,10 +3,10 @@ require_once LIB_PATH . "v-poi-hotel.php";
 ?>
 <div class="container">
   <section id="hotel-recommendations">
-    <span class="text-eyebrow">
+    <span class="text-eyebrow" data-bhs="h.eyebrow">
       Recommendations
     </span>
-    <h2 class="text-sub-hero mb-4">
+    <h2 class="text-sub-hero mb-4" data-bhs="h.title">
       Hotel Favorit
     </h2>
     <div class="poi-hotel-grid" id="poiHotelGrid">
@@ -32,7 +32,7 @@ require_once LIB_PATH . "v-poi-hotel.php";
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Lihat detail <?= $name ?>">
-            Lihat Detail
+            <span data-bhs="btn.detail">Lihat Detail</span>
             <i class="arrow-icon fas fa-angle-right ms-2"></i>
           </a>
           <?php endif; ?>

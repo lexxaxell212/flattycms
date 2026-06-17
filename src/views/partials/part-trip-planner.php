@@ -96,13 +96,13 @@
     </div>
     <div class="tp-overview__right">
       <div class="tp-overview__content">
-        <span class="text-eyebrow">
+        <span class="text-eyebrow" data-bhs="tp.eyebrow">
           Trip Planner
         </span>
-        <h2>
+        <h2 data-bhs="tp.title">
           Bikin Rencana Liburanmu di Bandung
         </h2>
-        <p>
+        <p data-bhs="tp.excerpt">
           Dari kuliner legendaris hingga wisata alam tersembunyi, susun agenda liburan terbaikmu di Bandung dengan mudah.
         </p>
         <ul class="tp-feature-list">
@@ -110,24 +110,24 @@
             <span class="tp-feature-icon">
               <i class="fas fa-location-dot"></i>
             </span>
-            Jelajahi ratusan tempat hits di Bandung
+            <span data-bhs="tp.li.1">Jelajahi ratusan tempat hits di Bandung</span>
           </li>
           <li class="text-muted">
             <span class="tp-feature-icon">
               <i class="fas fa-route"></i>
             </span>
-            Atur & simpan rute sesukamu
+            <span data-bhs="tp.li.2">Atur & simpan rute sesukamu</span>
           </li>
           <li class="text-muted">
             <span class="tp-feature-icon">
               <i class="fas fa-map"></i>
             </span>
-            Peta POI Bandung
+            <span data-bhs="tp.li.3">Peta POI Bandung</span>
           </li>
         </ul>
         <div class="tp-overview__cta">
           <a href="/trip" class="btn btn-primary">
-            Mulai Bikin Rute
+            <span data-bhs="btn.tp.2">Mulai Bikin Rute</span>
             <i class="arrow-icon fas fa-angle-right ms-1"></i>
           </a>
         </div>

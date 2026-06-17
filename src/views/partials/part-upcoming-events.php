@@ -6,11 +6,11 @@ require_once LIB_PATH . "v-upcoming-events.php";
   <section id="upcoming-event">
     <div class="d-flex align-items-end justify-content-between mb-4">
       <div>
-        <span class="text-eyebrow">Highlight</span>
-        <h2 class="text-sub-hero">Upcoming Events</h2>
+        <span class="text-eyebrow" data-bhs="ue.eyebrow">Highlight</span>
+        <h2 class="text-sub-hero" data-bhs="ue.title">Upcoming Events</h2>
       </div>
       <a href="/upcoming-events" class="link-all">
-        Lihat Semua <i class="fas fa-arrow-right ms-2"></i>
+        <span data-bhs="btn.all">Lihat Semua</span> <i class="fas fa-arrow-right ms-2"></i>
       </a>
     </div>
     <div class="tdop-bento">
@@ -18,7 +18,7 @@ require_once LIB_PATH . "v-upcoming-events.php";
         <div class="tdop-featured__inner">
           <div class="tdop-badge">
             <i class="fas fa-bolt me-2"></i>
-            <span data-rotate="Event Terdekat|Segera Hadir|Cek Sekarang">Event Terdekat</span>
+            <span data-bhs="ue.rotate" data-rotate="Cek Sekarang|Event Terdekat|Segera Hadir">Cek Sekarang</span>
           </div>
           <div class="tdop-featured__body">
             <h3 class="tdop-featured__title"><?= safe_html($_tdo_next['title'])
@@ -31,7 +31,7 @@ require_once LIB_PATH . "v-upcoming-events.php";
             </span>
           </div>
           <a href="/pages/<?= safe_html($_tdo_next['slug']) ?>/" class="tdop-featured__cta">
-            Selengkapnya <i class="fas fa-angle-right ms-2"></i>
+            <span data-bhs="btn.more">Selengkapnya</span> <i class="fas fa-angle-right ms-2"></i>
           </a>
         </div>
       </div>
@@ -49,7 +49,7 @@ require_once LIB_PATH . "v-upcoming-events.php";
                 strtotime($_tdo_p['event_date'])) : '—' ?>
               </span>
               <a href="<?= BASE_URL ?>pages/<?= safe_html($_tdo_p['slug']) ?>/">
-              Selengkapnya
+              <span data-bhs="btn.more">Selengkapnya</span>
               <i class="fas fa-arrow-right ms-2"></i>
               </a>
             </div>

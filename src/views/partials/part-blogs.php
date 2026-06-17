@@ -12,9 +12,9 @@ $categories = safe_get_categories($pdo);
 <div class="container">
   <section id="artikel-terbaru" aria-label="Artikel Terbaru">
     <div class="mb-4">
-      <span class="text-eyebrow">BLOGS</span>
-      <h2>Artikel</h2>
-      <p>
+      <span class="text-eyebrow" data-bhs="b.eyebrow">BLOGS</span>
+      <h2 data-bhs="b.title">Artikel</h2>
+      <p data-bhs="b.excerpt">
         Cerita, tips, dan rekomendasi terbaik untuk perjalananmu.
       </p>
     </div>
@@ -58,7 +58,7 @@ $categories = safe_get_categories($pdo);
             <div class="card-footer">
               <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="btn
                 btn-primary btn-asl-read">
-                Baca Selengkapnya
+                <span data-bhs="btn.read.more">Baca Selengkapnya</span>
                 <i class="arrow-icon fas fa-angle-right ms-2" aria-hidden="true"></i>
               </a>
             </div>

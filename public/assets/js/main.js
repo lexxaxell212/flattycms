@@ -969,11 +969,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
+    const email = input.value.trim();
     if (email === '') {
       flattyToast('warning', 'Email-nya diisi dulu ya!');
       return;
     }
-    const email = input.value.trim();
     const domain = email.split('@')[1];
     if (!allowed.includes(domain)) {
       flattyToast('warning', 'Gunakan email umum ya (Gmail/Yahoo/Outlook)');

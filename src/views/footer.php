@@ -1,6 +1,6 @@
 <footer id="footer">
   <div class="container">
-    <section>
+    <div class="bg-surface">
       <div class="text-center">
         <div class="mb-5">
             <h2 class="h3">NEWSLETTER</h2>
@@ -19,7 +19,7 @@
             </div>
           </form>
         </div>
-    </section>
+    </div>
     <section class="footer-nav">
       <div class="footer-nav__col">
         <span class="footer-nav__label">Halaman</span>

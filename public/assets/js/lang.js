@@ -109,7 +109,7 @@
       //nav
       'nav.home': 'Home',
       'nav.ue': 'Upcoming Events',
-      'nav.ttd': 'Activities',
+      'nav.ttd': 'Things To Do',
       'nav.tp': 'Trip Planner',
       'nav.gr': 'Gallery & Reviews',
       'nav.b': 'Blogs',

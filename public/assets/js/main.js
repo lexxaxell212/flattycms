@@ -761,36 +761,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // WEATHER TRANSLATIONS
 const weatherTranslations = {
-  cerah: "Cerah",
-  "sedikit berawan": "Berawan",
-  berawan: "Berawan",
-  "berawan tebal": "Mendung",
+  "cerah": "Cerah",
+  "cerah berawan": "Cerah Berawan",
+  "sedikit berawan": "Sedikit Berawan",
+  "berawan": "Berawan",
+  "mendung": "Mendung",
   "hujan ringan": "Hujan Ringan",
-  "hujan gerimis": "Gerimis",
-  hujan: "Hujan",
   "hujan sedang": "Hujan Sedang",
   "hujan lebat": "Hujan Lebat",
-  "hujan badai": "Hujan Badai",
-  "hujan badai petir": "Badai Petir",
-  "hujan badai salju": "Badai Salju",
+  "hujan sangat lebat": "Hujan Lebat",
+  "hujan ekstrem": "Hujan Ekstrem",
+  "gerimis ringan": "Gerimis",
+  "gerimis": "Gerimis",
+  "gerimis lebat": "Gerimis Lebat",
+  "badai petir": "Badai Petir",
+  "badai petir dengan hujan ringan": "Badai Petir",
+  "badai petir dengan hujan lebat": "Badai Petir Lebat",
+  "hujan salju ringan": "Hujan Salju",
   "hujan salju": "Hujan Salju",
-  salju: "Salju",
+  "salju lebat": "Salju Lebat",
   "hujan es": "Hujan Es",
-  kabut: "Kabut",
-  berembun: "Berembun",
-  asap: "Asap",
-  "kabut tebal": "Kabut Tebal",
-  pasir: "Pasir",
-  debu: "Debu",
-  "awan bergerak": "Berawan",
-  "awan pecah": "Berawan"
-};
-
-// Label Stats Indonesia
-const statLabels = {
-  humidity: "Kelembaban",
-  wind: "Angin",
-  pressure: "Tekanan"
+  "kabut": "Kabut",
+  "kabut tipis": "Kabut Tipis",
+  "asap": "Asap",
+  "debu": "Debu",
+  "pasir": "Pasir",
+  "abu": "Abu",
+  "angin puyuh": "Angin Puyuh",
+  "tornado": "Tornado",
+  "awan pecah": "Berawan",
+  "awan bergerak cepat": "Berawan"
 };
 
 async function u() {
@@ -801,7 +801,7 @@ async function u() {
           "X-Requested-With": "XMLHttpRequest"
         }
       });
-    d = await r.json();
+    const d = await r.json();
     if (d.error) throw new Error(d.error);
 
     // Terjemahkan deskripsi cuaca

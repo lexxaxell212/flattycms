@@ -1258,8 +1258,9 @@ h6, .h6 {
 .weather {
   display: flex;
   border-radius: var(--radius);
-  padding: var(--space-3) var(--space-4);
+  padding: 0.6rem 0;
   background: var(--bg-surface);
+  color: var(--text-card);
   border: var(--border-surface);
   box-shadow: var(--shadow-lg);
   margin-bottom: 1rem;
@@ -1267,32 +1268,32 @@ h6, .h6 {
 .sep {
   width: 1px;
   height: 42px;
-  background: rgba(127,127,127,0.2);
+  background: rgba(137,137,197,0.1);
 }
 
 .icon {
-  font-size: 2rem;
-  line-height: 1;
+  font-size: 16px;
+  background: var(--bg-primary-subtle);
+  border-radius: var(--radius-lg);
 }
 .temp {
-  font-size: 2rem;
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: -1px;
 }
 .temp sup {
   margin-left: 2px;
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  font-size: 10px;
 }
 .cond {
-  opacity: 0.9;
-  font-size: 0.7rem;
+  font-size: 11px;
   font-weight: 500;
   margin-top: -4px;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 .city {
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 30px;
 }
 
 .nav-desktop {

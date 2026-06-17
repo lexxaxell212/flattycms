@@ -127,7 +127,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
         <button type="button" class="btn-close rounded-circle" data-bs-dismiss="modal"><i class="fas fa-xmark text-heading"></i></button>
       </div>
       <div class="modal-body text-center p-3">
-        <img id="lightboxImg" src="public/uploads/default.jpg" class="img-fluid rounded mb-4" style="width:100%;max-height:75vh;object-fit:contain">
+        <img id="lightboxImg" src="" class="img-fluid rounded mb-4" style="width:100%;max-height:75vh;object-fit:contain">
         <div id="lightboxInfo"></div>
       </div>
     </div>

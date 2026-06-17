@@ -1071,10 +1071,10 @@ document.querySelectorAll("[data-rotate]").forEach(initTextRotator);
 
 // ticker text
 function initTicker(el) {
-  const texts = el.dataset.ticker.split("|");
   let index = 0;
 
   setInterval(() => {
+    const texts = el.dataset.ticker.split("|");
     el.style.transform = "translateY(-30%)";
     el.style.opacity = "0";
     setTimeout(() => {

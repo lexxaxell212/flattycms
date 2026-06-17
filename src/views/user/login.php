@@ -4,7 +4,7 @@ if (isset($_SESSION['user'])) {
   exit;
 }
 ?>
-<main class="main-content">
+<main class="main-content" id="show-gsi">
   <div class="container">
     <div class="form mx-auto my-5 row g-2">
       <div class="col-12">

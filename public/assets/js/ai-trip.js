@@ -81,6 +81,7 @@
     result.innerHTML = '';
 
     try {
+      await new Promise(r => setTimeout(r, 500));
       const res = await fetch(API_GROQ, {
         method: 'POST',
         headers: {

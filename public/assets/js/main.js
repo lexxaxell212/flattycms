@@ -933,7 +933,7 @@ async function u() {
     `;
   } catch (error) {
     console.error("Error fetching weather data:", error);
-    document.getElementById("w").innerHTML = 
+    document.getElementById("w").innerHTML =
     '<button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="u()" aria-label="Refresh cuaca" title="Refresh cuaca"><i class="fas fa-refresh"></i></button><div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>Gagal memuat cuaca</div>';
   } finally {
     isRefreshing = false;
@@ -967,8 +967,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const btn = document.getElementById('submitBtn');
   if (!form) return;
 
-  form.addEventListener('submit', function(e) {
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
+    if (email === '') {
+      flattyToast('warning', 'Email-nya diisi dulu ya!');
+      return;
+    }
     const email = input.value.trim();
     const domain = email.split('@')[1];
     if (!allowed.includes(domain)) {
@@ -978,6 +982,7 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.disabled = true;
     btn.style.opacity = '0.7';
     btn.innerHTML = 'MENGIRIM <i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
+    await new Promise(r => setTimeout(r, 500));
     const formData = new FormData(form);
     fetch(CONFIG.baseUrl + '/api/api-newsletter.php', {
       method: 'POST',

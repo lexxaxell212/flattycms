@@ -9,6 +9,7 @@
   // ── LOAD DATA ────────────────────────────────────────────
   async function loadProfile() {
     try {
+      await new Promise(r => setTimeout(r, 500));
       const res = await fetch(API, {
         headers: {
           'X-Requested-With': 'XMLHttpRequest'
@@ -219,6 +220,7 @@
       fd.append('display_name', name);
 
       try {
+        await new Promise(r => setTimeout(r, 500));
         const res = await fetch(API, {
           method: 'POST', headers: {
             'X-Requested-With': 'XMLHttpRequest'

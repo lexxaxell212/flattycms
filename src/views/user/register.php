@@ -1,7 +1,7 @@
 <?php
 $page_title = 'Daftar - ' . SITE_NAME;
 ?>
-<main class="main-content">
+<main class="main-content" id="show-gsi">
   <div class="container">
     <div class="form mx-auto my-5 row g-2">
       <div class="col-12">

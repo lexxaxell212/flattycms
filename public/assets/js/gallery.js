@@ -66,6 +66,7 @@
     let url = `${API_GAL}?page=${page}`;
     if (poi_id) url += `&poi_id=${poi_id}`;
     try {
+      await new Promise(r => setTimeout(r, 500));
       const res = await fetch(url, {
         headers: {
           'X-Requested-With': 'XMLHttpRequest'
@@ -131,6 +132,7 @@
     let url = `${API_REV}?page=${page}`;
     if (poi_id) url += `&poi_id=${poi_id}`;
     try {
+      await new Promise(r => setTimeout(r, 500));
       const res = await fetch(url, {
         headers: {
           'X-Requested-With': 'XMLHttpRequest'
@@ -396,6 +398,7 @@
         fd.append('photo', file);
         fd.append('caption', document.getElementById('uploadCredit').value.trim());
         try {
+          await new Promise(r => setTimeout(r, 500));
           const res = await fetch(API_GAL, {
             method: 'POST', headers: {
               'X-Requested-With': 'XMLHttpRequest'
@@ -441,6 +444,7 @@
         fd.append('judul', document.getElementById('reviewJudul').value.trim());
         fd.append('cerita', cerita);
         try {
+          await new Promise(r => setTimeout(r, 500));
           const res = await fetch(API_REV, {
             method: 'POST', headers: {
               'X-Requested-With': 'XMLHttpRequest'

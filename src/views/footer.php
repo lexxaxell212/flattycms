@@ -6,7 +6,7 @@
             <h2 class="h3">NEWSLETTER</h2>
             <p class="small">Dapatkan event dan update Bandung terkini via email.</p>
         </div>
-        <form id="newsletterForm" class="row mx-auto align-items-center g-3">
+        <form id="newsletterForm" class="row mx-auto align-items-center g-3" novalidate>
           <div class="col-md-8">
               <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
               <input type="email" name="email" class="form-control" id="emailInput" placeholder="nama@email.com" required>

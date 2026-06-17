@@ -45,6 +45,7 @@ function sanitize(str) {
     spinner.classList.remove('d-none');
 
     try {
+      await new Promise(r => setTimeout(r, 500));
       const formData = new FormData(this);
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000);

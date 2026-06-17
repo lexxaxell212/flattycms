@@ -283,6 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.innerHTML = 'Membuat Rute...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
     btn.disabled = true;
     try {
+      await new Promise(r => setTimeout(r, 500));
       const res = await fetch(`${BASE}/api/map/api-route.php`, {
         method: 'POST', headers: {
           'X-Requested-With': 'XMLHttpRequest'
@@ -380,6 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.innerHTML = 'Menyimpan...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
       btn.disabled = true;
       try {
+        await new Promise(r => setTimeout(r, 500));
         const res = await fetch(API_TRIP, {
           method: 'POST', headers: {
             'X-Requested-With': 'XMLHttpRequest'
@@ -554,6 +556,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fd.append('csrf_token', CSRF); fd.append('poi_id', poi_id);
         fd.append('photo', file); fd.append('caption', document.getElementById('uploadCredit').value.trim());
         try {
+          await new Promise(r => setTimeout(r, 500));
           const res = await fetch(API_GAL, {
             method: 'POST', headers: {
               'X-Requested-With': 'XMLHttpRequest'
@@ -668,9 +671,10 @@ document.addEventListener('DOMContentLoaded', () => {
     render();
   }
 
-  function loadTripku() {
+  async function loadTripku() {
     const wrap = document.getElementById('tripkuList');
-    wrap.innerHTML = `<div class="text-center py-4 text-muted" style="grid-column:1/-1"><i class="fas fa-circle-notch fa-spin me-1"></i>Memuat...</div>`;
+    wrap.innerHTML = `<div class="text-center py-4 text-muted" style="grid-column:1/-1">Memuat...<i class="fas fa-circle-notch fa-spin ms-1"></i></div>`;
+    await new Promise(r => setTimeout(r, 500));
     fetch(API_TRIP + '?action=list')
     .then(r => r.json())
     .then(data => {

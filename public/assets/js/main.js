@@ -263,12 +263,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.key === "Escape") closeWrapper();
       });
 
-    window.OverlayManager?.register("search",
-      {
-        close: () => closeWrapper( {
-          silent: true
-        })
-      });
+    window.OverlayManager?.register("search", {
+      close: () => closeWrapper({ silent: true })
+    });
   }
 
   function openWrapper() {
@@ -277,8 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.classList.add("active");
     trigger.classList.add("is-active");
     window.ScrollLock?.lock();
-    setTimeout(() => input.focus(),
-      50);
+    setTimeout(() => input.focus(), 50);
     clearDropdown();
   }
 
@@ -473,22 +469,23 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 
 
-// ScrollLock
-
 const ScrollLock = {
   _count: 0,
 
   lock() {
     this._count++;
     if (this._count === 1) {
+      const scrollbarWidth = this._getScrollbarWidth();
+      document.documentElement.style.overflowY = "hidden";
       document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = this._getScrollbarWidth() + "px";
+      document.body.style.paddingRight = scrollbarWidth + "px";
     }
   },
 
   unlock() {
     this._count = Math.max(0, this._count - 1);
     if (this._count === 0) {
+      document.documentElement.style.overflowY = "";
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
     }
@@ -496,6 +493,7 @@ const ScrollLock = {
 
   reset() {
     this._count = 0;
+    document.documentElement.style.overflowY = "";
     document.body.style.overflow = "";
     document.body.style.paddingRight = "";
   },
@@ -506,7 +504,6 @@ const ScrollLock = {
 };
 window.ScrollLock = ScrollLock;
 
-// OverlayManager
 
 const OverlayManager = {
   _overlays: {},
@@ -542,7 +539,8 @@ const OverlayManager = {
 };
 window.OverlayManager = OverlayManager;
 
-// Navbar mobile menu
+
+// navbar
 
 const toggler = document.getElementById("navbarToggler");
 const menuOverlay = document.getElementById("menuOverlay");
@@ -579,9 +577,7 @@ async function toggleMenu() {
 }
 
 OverlayManager.register("menu", {
-  close: () => closeMenu( {
-    silent: true
-  })
+  close: () => closeMenu({ silent: true })
 });
 
 if (toggler) toggler.addEventListener("click", toggleMenu);
@@ -593,17 +589,17 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// Chatbot (Bootstrap Offcanvas) — didaftarkan ke OverlayManager
+
 function setupChatbotOverlay() {
   const chatbotElement = document.getElementById("chatbot");
   if (!chatbotElement || !window.bootstrap || !window.bootstrap.Offcanvas) return;
 
   const instance =
-  window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
-  new window.bootstrap.Offcanvas(chatbotElement, {
-    scroll: true,
-    backdrop: false
-  });
+    window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
+    new window.bootstrap.Offcanvas(chatbotElement, {
+      scroll: true,
+      backdrop: false
+    });
 
   chatbotElement.addEventListener("show.bs.offcanvas", () => {
     ScrollLock.lock();
@@ -623,9 +619,7 @@ function setupChatbotOverlay() {
         chatbotElement.addEventListener(
           "hidden.bs.offcanvas",
           () => resolve(),
-          {
-            once: true
-          }
+          { once: true }
         );
         instance.hide();
       });
@@ -642,10 +636,8 @@ async function openChatbot() {
   await OverlayManager.openExclusive("chatbot");
 
   const instance =
-  window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
-  new window.bootstrap.Offcanvas(chatbotElement, {
-    scroll: true, backdrop: false
-  });
+    window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
+    new window.bootstrap.Offcanvas(chatbotElement, { scroll: true, backdrop: false });
   instance.show();
 }
 
@@ -667,7 +659,7 @@ async function toggleChatbotGlobal() {
   }
 }
 
-// SmartFab (tombol chat floating)
+
 class SmartFab {
   constructor(fabId = "chatbotFabBtn",
     scrollThreshold = 200) {
@@ -839,7 +831,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("dmToggle")?.classList.add("dark");
   }
 });
-
 
 // weather
 

@@ -91,7 +91,7 @@ $categories = safe_get_categories($pdo);
         </h1>
       </div>
       <div class="col-12">
-        <img src="<?= BASE_UPLOAD_URL . htmlspecialchars($p['image_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>" onerror="this.onerror=null;this.src='/uploads/default.jpg'" alt="<?= htmlspecialchars($post['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>" class="w-100 d-block mx-auto rounded-lg" style="max-width: 600px">
+        <img src="<?= BASE_UPLOAD_URL . htmlspecialchars($post['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>" onerror="this.onerror=null;this.src='/uploads/default.jpg'" alt="<?= htmlspecialchars($post['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>" class="w-100 d-block mx-auto rounded-lg" style="max-width: 600px">
       </div>
       <div class="col-12">
         <section>

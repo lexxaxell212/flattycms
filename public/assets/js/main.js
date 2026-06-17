@@ -594,6 +594,9 @@ function setupChatbotOverlay() {
   const chatbotElement = document.getElementById("chatbot");
   if (!chatbotElement || !window.bootstrap || !window.bootstrap.Offcanvas) return;
 
+  const isMobileChatbot = () => window.matchMedia("(max-width: 767.98px)").matches;
+  let lockedThisOpen = false;
+
   const instance =
     window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
     new window.bootstrap.Offcanvas(chatbotElement, {
@@ -602,11 +605,15 @@ function setupChatbotOverlay() {
     });
 
   chatbotElement.addEventListener("show.bs.offcanvas", () => {
-    ScrollLock.lock();
+    lockedThisOpen = isMobileChatbot();
+    if (lockedThisOpen) ScrollLock.lock();
   });
 
   chatbotElement.addEventListener("hidden.bs.offcanvas", () => {
-    ScrollLock.unlock();
+    if (lockedThisOpen) {
+      ScrollLock.unlock();
+      lockedThisOpen = false;
+    }
     OverlayManager.notifyClosed("chatbot");
   });
 

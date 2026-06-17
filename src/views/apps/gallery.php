@@ -27,14 +27,12 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
           $items = array_merge($gallery);
           foreach ($items as $photo):
           $src = htmlspecialchars(BASE_UPLOAD_URL . $photo['photo_path'], ENT_QUOTES, 'UTF-8');
-          $alt = htmlspecialchars($photo['poi_name'], ENT_QUOTES, 'UTF-8');
           $useruploader = htmlspecialchars($photo['uploader_name'], ENT_QUOTES, 'UTF-8');
           ?>
           <div class="gallery-rand-item">
             <div class="gallery-rand-skeleton"></div>
             <img
             src="<?= $src ?>"
-            alt="<?= $alt ?>"
             onerror="this.onerror=null;this.src='/uploads/default.jpg';this.classList.add('loaded');this.previousElementSibling.classList.add('hidden')"
             onload="this.classList.add('loaded');this.previousElementSibling.classList.add('hidden')"
             >

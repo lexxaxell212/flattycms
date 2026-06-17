@@ -2,7 +2,12 @@
 $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 function isActive(string $path): string {
   global $currentPath;
-  return str_starts_with($currentPath, $path) ? 'is-current' : '';
+  $normalizedCurrent = ($currentPath === '' || $currentPath === '/') ? '/' : rtrim($currentPath, '/');
+  $normalizedTarget = ($path === '' || $path === '/') ? '/' : rtrim($path, '/');
+  if ($normalizedTarget === '/') {
+    return ($normalizedCurrent === '/') ? 'is-current' : '';
+  }
+  return str_starts_with($normalizedCurrent, $normalizedTarget) ? 'is-current' : '';
 }
 ?>
 <!DOCTYPE html>

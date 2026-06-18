@@ -35,9 +35,9 @@ $page_title = 'Upcoming Events';
     </div>
     <section>
       <div class="mb-4">
-        <h2>What’s On <em>Next?</em></h2>
+        <h2><span data-bhs="ue.next.title">Ada apa</span> <em data-bhs="ue.next.title.em">Selanjutnya?</em></h2>
         <p class="p-desc">
-          Jangan sampai kelewat! Intip deretan event seru dan festival hits yang bakal hadir dalam waktu dekat. <strong>Save the date!</strong>
+          <span data-bhs="ue.next.desc">Jangan sampai kelewat! Intip deretan event seru dan festival hits yang bakal hadir dalam waktu dekat.</span> <strong data-bhs="ue.next.cta">Save the date!</strong>
         </p>
       </div>
       <div class="row g-4">
@@ -58,7 +58,7 @@ $page_title = 'Upcoming Events';
                   <?= $_tdo_p['event_date'] ? date('d M Y', strtotime($_tdo_p['event_date'])) : '-' ?>
                 </span>
                 <a class="btn btn-primary btn-sm" href="<?= BASE_URL ?>pages/<?= safe_html($_tdo_p['slug']) ?>/">
-                  Selengkapnya
+                  <span data-bhs="btn.more">Selengkapnya</span>
                   <i class="fas fa-angle-right ms-1"></i>
                 </a>
               </div>
@@ -77,8 +77,8 @@ $page_title = 'Upcoming Events';
           <i class="fas fa-history"></i>
         </div>
         <div>
-          <h2 class="tdopage-section__title">Ended</h2>
-          <p class="tdopage-section__sub">
+          <h2 class="tdopage-section__title" data-bhs="ue.ended.title">Telah berakhir</h2>
+          <p class="tdopage-section__sub" data-bhs="ue.ended.desc">
             Event yang telah berlalu
           </p>
         </div>
@@ -98,7 +98,7 @@ $page_title = 'Upcoming Events';
                   <?= date('d M Y', strtotime($_tdo_p['event_date'])) ?>
                 </span>
                 <a href="/pages/<?= safe_html($_tdo_p['slug']) ?>/">
-                  Selengkapnya
+                  <span data-bhs="btn.more">Selengkapnya</span>
                   <i class="fas fa-arrow-right ms-2"></i>
                 </a>
               </div>

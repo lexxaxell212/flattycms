@@ -238,7 +238,7 @@ $nav_items = [
     </div>
   </ul>
   <div class="weather align-items-center gap-4 overflow-hidden justify-content-center position-relative" id="w">
-    <span class="small">Mengambil data cuaca
+    <span class="small">Load weather data
       <i class="fas fa-circle-notch fa-spin ms-2"></i>
     </span>
   </div>

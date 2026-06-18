@@ -8,8 +8,9 @@ header('Access-Control-Allow-Origin: https://ayokebandung.id');
 
 $city = $_GET['city'] ?? 'Bandung';
 $city = htmlspecialchars(strip_tags($city));
-
-$url = "https://api.openweathermap.org/data/2.5/weather?q={$city}&appid=" . WEATHER_API_KEY . "&units=metric&lang=id";
+$lang = $_GET['lang'] ?? 'id';
+$lang = in_array($lang, ['id', 'en']) ? $lang : 'id';
+$url = "https://api.openweathermap.org/data/2.5/weather?q={$city}&appid=" . WEATHER_API_KEY . "&units=metric&lang={$lang}";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -20,7 +21,7 @@ curl_close($ch);
 
 if (!$result) {
   http_response_code(500);
-  echo json_encode(['error' => 'Gagal menghubungi server cuaca']);
+  echo json_encode(['error' => 'Failed to connect weather server.']);
   exit;
 }
 
@@ -28,7 +29,7 @@ $data = json_decode($result, true);
 
 if (!$data || (int)$data['cod'] !== 200) {
   http_response_code(502);
-  echo json_encode(['error' => 'Gagal ambil data cuaca', 'detail' => $data['message'] ?? '']);
+  echo json_encode(['error' => 'Failed to load weather data.', 'detail' => $data['message'] ?? '']);
   exit;
 }
 

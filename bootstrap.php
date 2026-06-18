@@ -19,13 +19,9 @@ register_shutdown_function(function() {
 if (!function_exists("autoload_core")) {
   function autoload_core() {
     $dir = __DIR__;
-    // load constants
     $app = $dir . "/config/app.php";
-    // load key
     $key = $dir . "/config/key.php";
-    // load pdo
     $db = $dir . "/config/db.php";
-    // load helper global
     $helper = $dir . "/lib/helper.php";
 
     if (file_exists($app)) require_once $app;

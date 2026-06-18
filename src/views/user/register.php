@@ -5,47 +5,47 @@ $page_title = 'Daftar - ' . SITE_NAME;
   <div class="container">
     <div class="form mx-auto my-5 row g-2">
       <div class="col-12">
-        <h1 class="h3">Buat akun baru</h1>
-        <p class="text-muted">
+        <h1 class="h3" data-bhs="reg.title">Buat akun baru</h1>
+        <p class="text-muted" data-bhs="reg.excerpt">
           Isi data di bawah untuk mendaftar
         </p>
       </div>
       <div class="col-12">
         <label class="form-label">
           <i class="fas fa-circle-user me-1"></i>
-          Nama lengkap
+          <span data-bhs="form.name.label">Nama lengkap</span>
         </label>
         <div class="input-group">
-          <input type="text" id="reg-name" class="form-control" placeholder="Nama" required>
+          <input type="text" id="reg-name" class="form-control" data-bhs="form.name.placeholder" placeholder="Nama" required>
         </div>
       </div>
       <div class="col-12">
         <label class="form-label">
           <i class="fas fa-circle-user me-1"></i>
-          Username
+          <span data-bhs="form.username.label">Username</span>
         </label>
         <div class="input-group mb-1">
-          <input type="text" id="reg-username" class="form-control" placeholder="username" required>
+          <input type="text" id="reg-username" class="form-control" data-bhs="form.username.placeholder" placeholder="Nama pengguna" required>
         </div>
         <div class="form-text text-muted">
-          Hanya huruf, angka, dan underscore.
+          <span data-bhs="form.username.desc">Hanya huruf, angka, dan underscore.</span>
         </div>
       </div>
       <div class="col-12">
         <label class="form-label">
           <i class="fas fa-at me-1"></i>
-          Email</label>
+          <span data-bhs="form.email.label">Email</span></label>
         <div class="input-group">
-          <input type="email" id="reg-email" class="form-control" placeholder="nama@email.com" required>
+          <input type="email" id="reg-email" class="form-control" data-bhs="form.email.placeholder" placeholder="nama@email.com" required>
         </div>
       </div>
       <div class="col-12">
         <label class="form-label">
           <i class="fas fa-lock me-1"></i>
-          Password
+          <span data-bhs="form.password.label">Password</span>
         </label>
         <div class="input-group">
-          <input type="password" id="reg-pw-input" class="form-control" placeholder="Min. 8 karakter">
+          <input type="password" id="reg-pw-input" class="form-control" data-bhs="form.password.placeholder" placeholder="Min. 8 karakter">
           <button class="btn" type="button" id="toggle-pw-reg">
             <i class="text-muted fas fa-eye fa-sm"></i>
           </button>
@@ -54,10 +54,10 @@ $page_title = 'Daftar - ' . SITE_NAME;
       <div class="col-12">
         <label class="form-label">
           <i class="fas fa-lock me-1"></i>
-          Konfirmasi password
+          <span data-bhs="form.password.repeat label">Konfirmasi password</span>
         </label>
         <div class="input-group">
-          <input type="password" id="reg-pw-confirm" class="form-control" placeholder="Ulangi password">
+          <input type="password" id="reg-pw-confirm" class="form-control" data-bhs="form.password.repeat.placeholder" placeholder="Ulangi kata sandi">
           <button class="btn" type="button" id="toggle-pw-confirm">
             <i class="text-muted fas fa-eye fa-sm"></i>
           </button>
@@ -65,13 +65,12 @@ $page_title = 'Daftar - ' . SITE_NAME;
       </div>
       <div class="col-12 py-4">
         <button type="button" class="btn btn-outline-primary" id="btn-register">
-          <span id="btn-register-text">Daftar</span>
-          <i id="btn-register-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-1"></i>
+          <span data-bhs="btn.reg">Daftar</span>
         </button>
       </div>
     </div>
     <div class="text-center text-muted small">
-      Sudah punya akun? <a href="/login">Masuk</a>
+      <span data-bhs="have.account">Sudah punya akun?</span> <a href="/login" data-bhs="btn.login">Masuk</a>
     </div>
   </div>
 </main>
@@ -95,29 +94,26 @@ $page_title = 'Daftar - ' . SITE_NAME;
     const password = document.getElementById('reg-pw-input').value;
     const confirm = document.getElementById('reg-pw-confirm').value;
     const btn = document.getElementById('btn-register');
-    const btnText = document.getElementById('btn-register-text');
-    const btnSpinner = document.getElementById('btn-register-spinner');
 
     if (!name || !username || !email || !password || !confirm) {
-      flattyToast('error', 'Semua field wajib diisi.');
+      flattyToast('error', 'toast.form.error');
       return;
     }
     if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-      flattyToast('error', 'Username hanya boleh huruf, angka, dan underscore.');
+      flattyToast('error', 'toast.username.required');
       return;
     }
     if (password.length < 8) {
-      flattyToast('error', 'Password minimal 8 karakter.');
+      flattyToast('error', 'toast.password.required');
       return;
     }
     if (password !== confirm) {
-      flattyToast('error', 'Konfirmasi password tidak cocok.');
+      flattyToast('error', 'toast.password.confirm.required');
       return;
     }
     btn.disabled = true;
-    btnText.textContent = 'Mendaftar';
-    btnSpinner.classList.remove('d-none');
-    await new Promise(r => setTimeout(r, 500));
+    btn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
+    await new Promise(r => setTimeout(r, 1000));
     const res = await fetch('/api/auth/register.php', {
       method: 'POST',
       headers: {
@@ -131,12 +127,11 @@ $page_title = 'Daftar - ' . SITE_NAME;
     });
     const data = await res.json();
     btn.disabled = false;
-    btnText.textContent = 'Daftar';
-    btnSpinner.classList.add('d-none');
+    btn.innerHTML = '<span data-bhs="btn.reg">Daftar</span>';
     if (data.success) {
-      flattyToast('success', 'Akun berhasil dibuat! Cek emailmu untuk verifikasi sebelum login.');
+      flattyToast('success', 'toast.new.account.success');
     } else {
-      flattyToast('error', data.message ?? 'Pendaftaran gagal.');
+      flattyToast('error', data.message ?? 'toast.new.account.error');
     }
   });
 </script>

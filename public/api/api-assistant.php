@@ -31,19 +31,16 @@ function respond(int $code, array $body): never {
 
 $system_prompts = [
   'bandung' => <<<PROMPT
-Kamu adalah Yara, asisten website Ayokebandung.id yang bertugas membantu user apabila butuh bantuan informasi. YARA = "Yuk Arahkan Rute Andalan".
-KEPRIBADIAN:
-- Hangat, ramah seperti Mojang Bandung. Panggil user "Sobat"
-- Boleh sisipkan kata Sunda ringan sesekali tapi jangan setiap pesan, dan jangan dipaksakan.
-- Jika user menyapa atau tanya kabar: balas hangat singkat, lalu tawarkan bantuan wisata. JANGAN langsung ceramah soal tempat wisata tanpa merespons sapaannya.
-KEAHLIAN (fokus HANYA pada ini):
+- Kamu adalah Yara, asisten website Ayokebandung.id yang bertugas membantu user apabila butuh bantuan informasi. YARA = "Yuk Arahkan Rute Andalan".
+- Jika user menyapa: balas hangat singkat, lalu tawarkan bantuan wisata. JANGAN langsung ceramah soal tempat wisata tanpa merespons sapaannya.
+TOPIK KEAHLIAN (fokus pada ini):
 - Destinasi wisata Bandung Raya dan sekitarnya.
 - Kuliner khas & hits Bandung (termasuk yang viral 2025–2026).
 - Transportasi: Whoosh (KA Cepat Jakarta–Bandung), angkot, ojek online, rute tol.
 - Tips perjalanan: waktu terbaik kunjungan, estimasi budget, hidden gems.
-- Jika user bertanya tentang fitur website (cari tempat hits, galeri foto, trip planner, dll), arahkan ke halaman yang relevan dengan format: [teks](url)
+- Jika user bertanya tentang fitur website, arahkan ke halaman yang relevan dengan format: [teks](url)
   Halaman yang tersedia:
-  [Galeri Foto & Ulasan](https://ayokebandung.id/gallery)
+  [Galeri & Ulasan](https://ayokebandung.id/gallery)
   [Trip Planner & Jelajah Wisata](https://ayokebandung.id/trip)
   [Upcoming Events](https://ayokebandung.id/upcoming-events)
   [Blog & Artikel](https://ayokebandung.id/blogs)
@@ -52,16 +49,13 @@ KEAHLIAN (fokus HANYA pada ini):
 FORMAT JAWABAN:
 - Gunakan emoji secukupnya untuk keterbacaan (🌿🍜🚂).
 - Jika merekomendasikan tempat, gunakan format list:
-  - Nama tempat → lokasi singkat → keunggulan
+- Nama tempat → lokasi singkat → keunggulan
 - JANGAN campur format list dan format paragraf dalam satu rekomendasi. Pilih salah satu.
-- Jawab ringkas (2–4 paragraf). Jangan bertele-tele.
-- Jika info tidak pasti (misal harga tiket), katakan "sekitar" atau sarankan cek langsung.
+- Jawab ringkas (2–4 paragraf).
+- Jika info tidak pasti katakan "sekitar" atau sarankan cek langsung.
 BATASAN KETAT:
-- JANGAN menjawab pertanyaan di luar topik Bandung & wisata (politik, coding, matematika, dll).
-- Jika ada pertanyaan di luar topik, HARUS redirect dengan kalimat seperti:
-  "Wah, pertanyaannya seru Sobat, tapi Yara lebih jago soal Bandung nih 😄 Ada yang ingin Sobat eksplor di Kota Kembang?"
-- JANGAN mengarang fakta. Jika tidak tahu, katakan jujur dan sarankan cek sumber resmi.
-- JANGAN menyebut kompetitor (website/aplikasi wisata lain) secara positif.
+- Jika ada pertanyaan di luar topik, HARUS redirect
+- JANGAN mengarang fakta.
 PROMPT
 ];
 
@@ -75,14 +69,14 @@ $message = trim($input['message'] ?? '');
 $topic = preg_replace('/[^a-z0-9\-]/', '', strtolower($input['topic'] ?? ''));
 
 if (empty($message)) {
-  respond(400, ['error' => 'Field "message" wajib diisi.']);
+  respond(400, ['error' => 'Message cannot empty.']);
 }
 if (mb_strlen($message) > MAX_MESSAGE_LENGTH) {
-  respond(400, ['error' => 'Pesan terlalu panjang. Maksimal ' . MAX_MESSAGE_LENGTH . ' karakter.']);
+  respond(400, ['error' => 'Message too long. Max ' . MAX_MESSAGE_LENGTH . ' character.']);
 }
 if (!isset($system_prompts[$topic])) {
   $validTopics = implode(', ', array_keys($system_prompts));
-  respond(400, ['error' => "Topic '$topic' tidak dikenali. Topic tersedia: $validTopics."]);
+  respond(400, ['error' => "Topic '$topic' is not available. Topic available: $validTopics."]);
 }
 
 $rawHistory = is_array($input['history'] ?? null) ? $input['history'] : [];
@@ -139,7 +133,7 @@ curl_close($ch);
 
 if ($curl_err !== 0) {
   respond(503, array_merge(
-    ['success' => false, 'error' => 'Gagal menghubungi layanan. Silakan coba lagi sebentar lagi.'],
+    ['success' => false, 'error' => 'Failed to connect Groq AI, try again.'],
     DEV_MODE ? ['curl_error' => $curl_msg] : []
   ));
 }
@@ -155,7 +149,7 @@ if ($http_code === 200 && isset($result['choices'][0]['message']['content'])) {
     'topic' => ucfirst($topic)
   ]);
 } else {
-  $errorMsg = $result['error']['message'] ?? 'Unknown error dari Groq API.';
+  $errorMsg = $result['error']['message'] ?? 'Unknown error from Groq AI.';
   respond($http_code ?: 502, array_merge(
     ['success' => false, 'error' => "HTTP $http_code: $errorMsg"],
     DEV_MODE ? ['raw' => $result] : []

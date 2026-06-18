@@ -29,7 +29,7 @@ function sanitize(str) {
 
     if (Date.now() - lastSubmit < RATE_LIMIT_MS) {
       const remaining = Math.ceil((RATE_LIMIT_MS - (Date.now() - lastSubmit)) / 1000);
-      flattyToast('warning', `Tunggu ${remaining} detik sebelum kirim lagi.`);
+      flattyToast('warning', `${remaining} toast.feedback.warning`);
       return;
     }
     lastSubmit = Date.now();
@@ -37,15 +37,12 @@ function sanitize(str) {
     const form = document.getElementById('feedback-feedbackForm');
     const successMsg = document.getElementById('feedback-successMsg');
     const submitBtn = document.getElementById('feedback-submitBtn');
-    const btnTextEl = document.getElementById('feedback-btnText');
-    const spinner = document.getElementById('feedback-loadingSpinner');
 
     submitBtn.disabled = true;
-    btnTextEl.textContent = 'Mengirim...';
-    spinner.classList.remove('d-none');
+    submitBtn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
 
     try {
-      await new Promise(r => setTimeout(r, 500));
+      await new Promise(r => setTimeout(r, 1000));
       const formData = new FormData(this);
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000);
@@ -84,7 +81,6 @@ function sanitize(str) {
       flattyToast('error', msg);
     } finally {
       submitBtn.disabled = false;
-      btnTextEl.textContent = 'Kirim Feedback';
-      spinner.classList.add('d-none');
+      submitBtn.innerHTML = '<span data-bhs="btn.send">Kirim</span>';
     }
     });

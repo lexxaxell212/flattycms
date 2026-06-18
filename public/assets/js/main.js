@@ -3,14 +3,45 @@ const API_URL = "/api/api-assistant.php";
 const TOPIC = "bandung";
 const TIMEOUT = 20000;
 
-const SUGGEST_PROMPTS = [
-  "🍽️ Kuliner enak di Bandung",
-  "🏔️ Wisata alam sekitar",
-  "🎡 Weekend seru di Bandung",
-  "🕌 Tempat bersejarah",
-  "🛍️ Rekomendasi belanja",
-  "🌙 Tempat nongkrong malam",
-];
+const CHATBOT_TEXT = {
+  'chatbot.welcome': {
+    id: 'Wilujeng sumping! 👋 Yara siap bantu eksplor Bandung. Mau tanya apa nih..?',
+    en: 'Welcome! 👋 Yara is ready to help you explore Bandung. What would you like to ask?'
+  },
+  'chatbot.cleared': {
+    id: 'Chat dibersihkan. Ada yang bisa Yara bantu lagi? 😊',
+    en: 'Chat cleared. Is there anything else Yara can help with? 😊'
+  },
+  'chatbot.label.user': { id: 'Kamu', en: 'You' },
+  'chatbot.label.ai': { id: 'Yara', en: 'Yara' },
+  'chatbot.error.timeout': { id: 'Request timeout.', en: 'Request timeout.' },
+  'chatbot.error.connection': { id: 'Koneksi bermasalah.', en: 'Connection problem.' },
+  'chatbot.error.generic': { id: 'Terjadi kesalahan.', en: 'An error occurred.' },
+  'chatbot.suggest.1': { id: '🍽️ Kuliner enak di Bandung', en: '🍽️ Great food in Bandung' },
+  'chatbot.suggest.2': { id: '🏔️ Wisata alam sekitar', en: '🏔️ Nearby nature attractions' },
+  'chatbot.suggest.3': { id: '🎡 Weekend seru di Bandung', en: '🎡 Fun weekend in Bandung' },
+  'chatbot.suggest.4': { id: '🕌 Tempat bersejarah', en: '🕌 Historical sites' },
+  'chatbot.suggest.5': { id: '🛍️ Rekomendasi belanja', en: '🛍️ Shopping recommendations' },
+  'chatbot.suggest.6': { id: '🌙 Tempat nongkrong malam', en: '🌙 Nightlife hangout spots' }
+};
+
+function ct(key) {
+  const lang = localStorage.getItem('lang') || 'id';
+  const entry = CHATBOT_TEXT[key];
+  if (!entry) return key;
+  return entry[lang] || entry.id;
+}
+
+function getSuggestPrompts() {
+  return [
+    ct('chatbot.suggest.1'),
+    ct('chatbot.suggest.2'),
+    ct('chatbot.suggest.3'),
+    ct('chatbot.suggest.4'),
+    ct('chatbot.suggest.5'),
+    ct('chatbot.suggest.6')
+  ];
+}
 
 let conversationHistory = [];
 let isLoading = false;
@@ -91,7 +122,7 @@ function addMessage(text, type = "loading") {
   } else if (type === "error") {
     bubble.innerHTML = `<span class="error-text">⚠️ ${escapeHTML(text)}</span>`;
   } else {
-    const label = type === "user" ? "You": "Yara";
+    const label = type === "user" ? ct('chatbot.label.user') : ct('chatbot.label.ai');
     bubble.innerHTML = `
     <div class="msg-label">${label}</div>
     <div class="msg-text">${formatText(text)}</div>
@@ -151,16 +182,16 @@ async function sendMessage() {
       });
       // Show suggest chips after first AI reply if history is short
       if (conversationHistory.length <= 2) {
-        addSuggests(SUGGEST_PROMPTS.slice(0, 4));
+        addSuggests(getSuggestPrompts().slice(0, 4));
       }
     } else {
-      addMessage(data.error ?? "Terjadi kesalahan.", "error");
+      addMessage(data.error ?? ct('chatbot.error.generic'), "error");
       conversationHistory.pop();
     }
   } catch (err) {
     removeLoadingBubble(loadingId);
     const msg = err.name === "AbortError"
-    ? "Request timeout.": "Koneksi bermasalah.";
+    ? ct('chatbot.error.timeout') : ct('chatbot.error.connection');
     addMessage(msg, "error");
     conversationHistory.pop();
   } finally {
@@ -171,8 +202,8 @@ async function sendMessage() {
 function clearChat() {
   document.getElementById("chat-messages").innerHTML = "";
   conversationHistory = [];
-  addMessage("Chat dibersihkan. Ada yang bisa Yara bantu lagi? 😊", "ai");
-  addSuggests(SUGGEST_PROMPTS);
+  addMessage(ct('chatbot.cleared'), "ai");
+  addSuggests(getSuggestPrompts());
 }
 
 function autoResize(el) {
@@ -193,11 +224,11 @@ document.addEventListener("DOMContentLoaded", () => {
   input.addEventListener("input",
     () => autoResize(input));
 
-  addMessage("Wilujeng sumping! 👋 Yara siap bantu eksplor Bandung. Mau tanya apa nih..?",
-    "ai");
-  addSuggests(SUGGEST_PROMPTS);
+  addMessage(ct('chatbot.welcome'), "ai");
+  addSuggests(getSuggestPrompts());
   input.focus();
 });
+
 
 // live search
 
@@ -238,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function init() {
     if (!wrapper || !trigger || !input || !dropdown) {
-      console.warn("[live-search] Elemen tidak ditemukan.");
+      console.warn("[live-search] Element not found.");
       return;
     }
 
@@ -340,9 +371,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!data.results || data.results.length === 0) {
       dropdown.innerHTML =
-      '<div class="ls-empty">Tidak ada hasil untuk <strong>' +
+      '<div class="ls-empty">Search for <strong>' +
       esc(q) +
-      "</strong></div>";
+      "</strong> is not found.</div>";
       dropdown.classList.add("open");
       return;
     }
@@ -396,7 +427,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const footer = document.createElement("div");
     footer.className = "ls-footer";
-    footer.textContent = data.total + " hasil ditemukan";
+    footer.textContent = data.total + " result.";
     dropdown.appendChild(footer);
 
     dropdown.classList.add("open");
@@ -436,13 +467,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showLoading() {
     dropdown.innerHTML =
-    '<div class="ls-loading"><span class="ls-spinner"></span> Mencari...</div>';
+    '<div class="ls-loading"><span class="ls-spinner"></span> Searching...</div>';
     dropdown.classList.add("open");
   }
 
   function showError() {
     dropdown.innerHTML =
-    '<div class="ls-error">Terjadi kesalahan, coba lagi.</div>';
+    '<div class="ls-error">An error occured, Try again.</div>';
     dropdown.classList.add("open");
   }
 
@@ -539,7 +570,7 @@ const OverlayManager = {
     try {
       await handler.close();
     } catch (err) {
-      console.warn("[OverlayManager] gagal menutup overlay:", name, err);
+      console.warn("[OverlayManager] fail to close overlay:", name, err);
     }
     if (this._active === name) this._active = null;
   }
@@ -857,37 +888,86 @@ document.addEventListener("DOMContentLoaded", () => {
 // weather
 
 const weatherTranslations = {
-  "cerah": "Cerah",
-  "cerah berawan": "Cerah Berawan",
-  "sedikit berawan": "Sedikit Berawan",
-  "berawan": "Berawan",
-  "mendung": "Mendung",
-  "hujan ringan": "Hujan Ringan",
-  "hujan sedang": "Hujan Sedang",
-  "hujan lebat": "Hujan Lebat",
-  "hujan sangat lebat": "Hujan Lebat",
-  "hujan ekstrem": "Hujan Ekstrem",
-  "gerimis ringan": "Gerimis",
-  "gerimis": "Gerimis",
-  "gerimis lebat": "Gerimis Lebat",
-  "badai petir": "Badai Petir",
-  "badai petir dengan hujan ringan": "Badai Petir",
-  "badai petir dengan hujan lebat": "Badai Petir Lebat",
-  "hujan salju ringan": "Hujan Salju",
-  "hujan salju": "Hujan Salju",
-  "salju lebat": "Salju Lebat",
-  "hujan es": "Hujan Es",
-  "kabut": "Kabut",
-  "kabut tipis": "Kabut Tipis",
-  "asap": "Asap",
-  "debu": "Debu",
-  "pasir": "Pasir",
-  "abu": "Abu",
-  "angin puyuh": "Angin Puyuh",
-  "tornado": "Tornado",
-  "awan pecah": "Berawan",
-  "awan bergerak cepat": "Berawan"
+  id: {
+    "cerah": "Cerah",
+    "cerah berawan": "Cerah Berawan",
+    "sedikit berawan": "Sedikit Berawan",
+    "berawan": "Berawan",
+    "mendung": "Mendung",
+    "hujan ringan": "Hujan Ringan",
+    "hujan sedang": "Hujan Sedang",
+    "hujan lebat": "Hujan Lebat",
+    "hujan sangat lebat": "Hujan Lebat",
+    "hujan ekstrem": "Hujan Ekstrem",
+    "gerimis ringan": "Gerimis",
+    "gerimis": "Gerimis",
+    "gerimis lebat": "Gerimis Lebat",
+    "badai petir": "Badai Petir",
+    "badai petir dengan hujan ringan": "Badai Petir",
+    "badai petir dengan hujan lebat": "Badai Petir Lebat",
+    "hujan salju ringan": "Hujan Salju",
+    "hujan salju": "Hujan Salju",
+    "salju lebat": "Salju Lebat",
+    "hujan es": "Hujan Es",
+    "kabut": "Kabut",
+    "kabut tipis": "Kabut Tipis",
+    "asap": "Asap",
+    "debu": "Debu",
+    "pasir": "Pasir",
+    "abu": "Abu",
+    "angin puyuh": "Angin Puyuh",
+    "tornado": "Tornado",
+    "awan pecah": "Berawan",
+    "awan bergerak cepat": "Berawan"
+  },
+  en: {
+    "clear sky": "Clear Sky",
+    "few clouds": "Few Clouds",
+    "scattered clouds": "Scattered Clouds",
+    "broken clouds": "Broken Clouds",
+    "overcast clouds": "Overcast Clouds",
+    "light rain": "Light Rain",
+    "moderate rain": "Moderate Rain",
+    "heavy intensity rain": "Heavy Rain",
+    "very heavy rain": "Very Heavy Rain",
+    "extreme rain": "Extreme Rain",
+    "light intensity drizzle": "Light Drizzle",
+    "drizzle": "Drizzle",
+    "heavy intensity drizzle": "Heavy Drizzle",
+    "thunderstorm": "Thunderstorm",
+    "thunderstorm with light rain": "Thunderstorm",
+    "thunderstorm with heavy rain": "Heavy Thunderstorm",
+    "light snow": "Light Snow",
+    "snow": "Snow",
+    "heavy snow": "Heavy Snow",
+    "sleet": "Sleet",
+    "mist": "Mist",
+    "haze": "Haze",
+    "smoke": "Smoke",
+    "dust": "Dust",
+    "sand": "Sand",
+    "ash": "Ash",
+    "squalls": "Squalls",
+    "tornado": "Tornado"
+  }
 };
+
+const WEATHER_TEXT = {
+  'weather.error.failed': { id: 'Gagal memuat cuaca, coba lagi.', en: 'Failed to load weather, try again.' },
+  'weather.refresh.label': { id: 'Refresh cuaca', en: 'Refresh weather' }
+};
+
+function wt(key) {
+  const lang = localStorage.getItem('lang') || 'id';
+  const entry = WEATHER_TEXT[key];
+  if (!entry) return key;
+  return entry[lang] || entry.id;
+}
+
+function currentLang() {
+  const lang = localStorage.getItem('lang') || 'id';
+  return lang === 'en' ? 'en' : 'id';
+}
 
 let isRefreshing = false;
 
@@ -898,24 +978,28 @@ async function u() {
   const refreshIcon = document.querySelector("#w .fa-refresh");
   refreshIcon?.classList.add("fa-spin");
 
+  const lang = currentLang();
+  const refreshLabel = wt('weather.refresh.label');
+
   try {
-    await new Promise(r => setTimeout(r, 500));
-    const r = await fetch("/api/api-weather.php?city=Bandung",
+    await new Promise(resolve => setTimeout(resolve, 500));
+    const res = await fetch(`/api/api-weather.php?city=Bandung&lang=${lang}`,
       {
         headers: {
           "X-Requested-With": "XMLHttpRequest"
         }
       });
-    const d = await r.json();
+    const d = await res.json();
     if (d.error) throw new Error(d.error);
 
     const rawDesc = d.weather[0].description.toLowerCase();
+    const dict = weatherTranslations[lang] || weatherTranslations.id;
     let weatherDesc =
-    weatherTranslations[rawDesc] ||
+    dict[rawDesc] ||
     rawDesc.charAt(0).toUpperCase() + rawDesc.slice(1);
 
     document.getElementById("w").innerHTML = `
-    <button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="u()" aria-label="Refresh cuaca" title="Refresh cuaca">
+    <button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="u()" aria-label="${refreshLabel}" title="${refreshLabel}">
     <i class="fas fa-refresh"></i>
     </button>
     <div class="icon-w">
@@ -933,8 +1017,12 @@ async function u() {
     `;
   } catch (error) {
     console.error("Error fetching weather data:", error);
-    document.getElementById("w").innerHTML =
-    '<button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="u()" aria-label="Refresh cuaca" title="Refresh cuaca"><i class="fas fa-refresh"></i></button><div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>Gagal memuat cuaca</div>';
+    document.getElementById("w").innerHTML = `
+    <button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="u()" aria-label="${refreshLabel}" title="${refreshLabel}">
+    <i class="fas fa-refresh"></i>
+    </button>
+    <div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>${wt('weather.error.failed')}</div>
+    `;
   } finally {
     isRefreshing = false;
   }
@@ -956,7 +1044,6 @@ function g(c) {
 
 u();
 setInterval(u, 15 * 60 * 1000);
-
 
 // newsletter
 
@@ -1006,7 +1093,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .finally(() => {
       btn.disabled = false;
       btn.style.opacity = '1';
-      btn.innerHTML = 'BERLANGGANAN <i class="fa-solid fa-paper-plane ms-2"></i>';
+      btn.innerHTML = '<span data-bhs="btn.subs">Berlangganan</span> <i class="fas fa-paper-plane"></i>';
     });
   });
 });
@@ -1067,7 +1154,9 @@ function initTextRotator(el) {
   }, 5000);
 }
 
-document.querySelectorAll("[data-rotate]").forEach(initTextRotator);
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-rotate]").forEach(initTextRotator);
+});
 
 // ticker text
 function initTicker(el) {

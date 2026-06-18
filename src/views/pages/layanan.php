@@ -173,8 +173,8 @@ $page_title = "Layanan Publik Bandung";
           <circle cx="22" cy="240" r="2" class="dec-dot" style="animation-delay:0.4s" />
         </svg>
       </div>
-      <h1>Transportasi Bandung</h1>
-      <p class="lead">
+      <h1 data-bhs="layanan.title">Transportasi Bandung</h1>
+      <p class="lead" data-bhs="layanan.excerpt">
         Opsi transportasi tercepat, termurah, dan terpercaya di Kota Kembang.
       </p>
     </div>
@@ -183,16 +183,16 @@ $page_title = "Layanan Publik Bandung";
         <div class="card card-flatty h-100">
           <div class="card-body">
             <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="card-img" alt="default">
-            <h2 class="h4">Grab/Gojek</h2>
-            <p>
+            <h2 class="h4" data-bhs="layanan.grab.title">Grab/Gojek</h2>
+            <p data-bhs="layanan.grab.desc">
               Layanan door-to-door yang fleksibel, mencakup motor (Bike) dan mobil (Car).
             </p>
             <ul class="list-unstyled">
-              <li class="text-muted small mb-1"><strong>Motor :</strong> Jasa minimal sekitar Rp9.200 – Rp11.000 (untuk 4 km pertama), dengan tarif selanjutnya sekitar Rp2.300 – Rp2.750/km.</li>
+              <li class="text-muted small mb-1"><strong data-bhs="layanan.grab.motor.label">Motor :</strong> <span data-bhs="layanan.grab.motor.desc">Jasa minimal sekitar Rp9.200 – Rp11.000 (untuk 4 km pertama), dengan tarif selanjutnya sekitar Rp2.300 – Rp2.750/km.</span></li>
               <li class="text-muted small mb-1">
-                <strong>Mobil :</strong> Tarif sangat bergantung pada jam sibuk (surge pricing) dan jarak, biasanya mulai dari Rp15.000 – Rp20.000 untuk jarak pendek.
+                <strong data-bhs="layanan.grab.mobil.label">Mobil :</strong> <span data-bhs="layanan.grab.mobil.desc">Tarif sangat bergantung pada jam sibuk (surge pricing) dan jarak, biasanya mulai dari Rp15.000 – Rp20.000 untuk jarak pendek.</span>
               </li>
-              <li class="text-muted small mb-2"><strong>Pelayanan :</strong> Penjemputan sesuai titik GPS, pelacakan real-time, pilihan pembayaran tunai atau dompet digital (OVO/GoPay), dan fitur keamanan (tombol darurat).</li>
+              <li class="text-muted small mb-2"><strong data-bhs="layanan.grab.pelayanan.label">Pelayanan :</strong> <span data-bhs="layanan.grab.pelayanan.desc">Penjemputan sesuai titik GPS, pelacakan real-time, pilihan pembayaran tunai atau dompet digital (OVO/GoPay), dan fitur keamanan (tombol darurat).</span></li>
             </ul>
           </div>
           <div class="card-footer">
@@ -209,24 +209,24 @@ $page_title = "Layanan Publik Bandung";
         <div class="card card-flatty h-100">
           <div class="card-body">
             <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="card-img" alt="default">
-            <h2 class="h4">Metro Jabar Trans</h2>
-            <p>
+            <h2 class="h4" data-bhs="layanan.mjt.title">Metro Jabar Trans</h2>
+            <p data-bhs="layanan.mjt.desc">
               Evolusi dari Trans Metro Bandung (TMB) dan Teman Bus yang kini terintegrasi dalam sistem Metro Jabar Trans (MJT).
             </p>
             <div class="d-flex flex-wrap gap-1 mb-2">
               <ul class="list-unstyled mb-2">
-                <li class="text-muted small mb-1"><strong>Umum :</strong> Flat Rp4.900 per perjalanan (berlaku mulai 1 April 2026).</li>
+                <li class="text-muted small mb-1"><strong data-bhs="layanan.mjt.umum.label">Umum :</strong> <span data-bhs="layanan.mjt.umum.desc">Flat Rp4.900 per perjalanan (berlaku mulai 1 April 2026).</span></li>
                 <li class="text-muted small mb-1">
-                  <strong>Pelajar :</strong> Rp2.000 (dengan menunjukkan kartu pelajar/seragam).
+                  <strong data-bhs="layanan.mjt.pelajar.label">Pelajar :</strong> <span data-bhs="layanan.mjt.pelajar.desc">Rp2.000 (dengan menunjukkan kartu pelajar/seragam).</span>
                 </li>
-                <li class="text-muted small mb-1"><strong>Pelayanan :</strong> Bus ber-AC, berhenti hanya di halte resmi, pembayaran menggunakan kartu uang elektronik (Tap-on-Bus) atau QRIS. Mencakup rute strategis seperti Dago, Leuwipanjang, Jatinangor, dan Alun-alun.</li>
+                <li class="text-muted small mb-1"><strong data-bhs="layanan.mjt.pelayanan.label">Pelayanan :</strong> <span data-bhs="layanan.mjt.pelayanan.desc">Bus ber-AC, berhenti hanya di halte resmi, pembayaran menggunakan kartu uang elektronik (Tap-on-Bus) atau QRIS. Mencakup rute strategis seperti Dago, Leuwipanjang, Jatinangor, dan Alun-alun.</span></li>
               </ul>
             </div>
           </div>
           <div class="card-footer">
             <a
               href="https://www.google.com/maps/search/?api=1&query=halte%20metro%20jabar%20trans%20terdekat"
-              class="btn btn-primary">Cek Halte terdekat<i
+              class="btn btn-primary"><span data-bhs="layanan.mjt.btn.halte">Cek Halte terdekat</span><i
                 class="arrow-icon fas fa-angle-right"></i>
             </a>
           </div>
@@ -236,24 +236,24 @@ $page_title = "Layanan Publik Bandung";
         <div class="card card-flatty h-100">
           <div class="card-body">
             <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="card-img" alt="default">
-            <h2 class="h4">Bandara Kertajati/BDO</h2>
-            <p>
+            <h2 class="h4" data-bhs="layanan.bandara.title">Bandara Kertajati/BDO</h2>
+            <p data-bhs="layanan.bandara.desc">
               Layanan transportasi udara yang menghubungkan Bandung dengan kota-kota lain. Penerbangan jet komersial saat ini dipusatkan di Bandara Kertajati (KJT), sementara Husein Sastranegara (BDO) melayani pesawat baling-baling (propeller) dan jet pribadi/militer.
             </p>
             <div class="d-flex flex-wrap gap-1 mb-2">
               <ul class="list-unstyled mb-3">
-                <li class="text-muted small mb-1"><strong>Tarif Damri ke Kertajati :</strong> Sekitar Rp90.000 – Rp120.000 dari pusat kota Bandung.</li>
+                <li class="text-muted small mb-1"><strong data-bhs="layanan.bandara.damri.label">Tarif Damri ke Kertajati :</strong> <span data-bhs="layanan.bandara.damri.desc">Sekitar Rp90.000 – Rp120.000 dari pusat kota Bandung.</span></li>
                 <li class="text-muted small mb-1">
-                  <strong>Pelayanan :</strong> Layanan shuttle terjadwal, area check-in mandiri, dan fasilitas standar bandara internasional di Kertajati.
+                  <strong data-bhs="layanan.bandara.pelayanan.label">Pelayanan :</strong> <span data-bhs="layanan.bandara.pelayanan.desc">Layanan shuttle terjadwal, area check-in mandiri, dan fasilitas standar bandara internasional di Kertajati.</span>
                 </li>
               </ul>
               <ul class="list-unstyled list-inline small mb-3">
-                <li class="d-inline me-2 text-muted"><i class="fas fa-check text-success me-1"></i>Shuttle terjadwal</li>
-                <li class="d-inline text-muted"><i class="fas fa-check text-success me-1"></i>Check-in mandiri</li>
+                <li class="d-inline me-2 text-muted"><i class="fas fa-check text-success me-1"></i><span data-bhs="layanan.bandara.tag.shuttle">Shuttle terjadwal</span></li>
+                <li class="d-inline text-muted"><i class="fas fa-check text-success me-1"></i><span data-bhs="layanan.bandara.tag.checkin">Check-in mandiri</span></li>
               </ul>
             </div>
             <div class="card-footer">
-              <a href="https://www.google.com/maps/search/?api=1&query=bandara%20kertajati%20bdo" class="btn btn-primary">Lihat Maps<i class="arrow-icon fas fa-angle-right"></i>
+              <a href="https://www.google.com/maps/search/?api=1&query=bandara%20kertajati%20bdo" class="btn btn-primary"><span data-bhs="layanan.btn.maps">Lihat Maps</span><i class="arrow-icon fas fa-angle-right"></i>
               </a>
             </div>
           </div>
@@ -263,27 +263,27 @@ $page_title = "Layanan Publik Bandung";
         <div class="card card-flatty h-100">
           <div class="card-body">
             <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="card-img" alt="default">
-            <h2 class="h4">Terminal Leuwipanjang</h2>
-            <p>
+            <h2 class="h4" data-bhs="layanan.leuwipanjang.title">Terminal Leuwipanjang</h2>
+            <p data-bhs="layanan.leuwipanjang.desc">
               Pusat pemberangkatan bus Antar Kota Antar Provinsi (AKAP) dan Antar Kota Dalam Provinsi (AKDP).
             </p>
             <div class="d-flex flex-wrap gap-1 mb-2">
               <ul class="list-unstyled mb-3">
-                <li class="text-muted small mb-1"><strong>Status Terbaru (April 2026) :</strong> Layanan bus AKAP/AKDP mulai dipusatkan di Terminal Leuwipanjang. Terminal Cicaheum dialihfungsikan menjadi depo dan pusat layanan BRT Metro Jabar Trans.</li>
+                <li class="text-muted small mb-1"><strong data-bhs="layanan.leuwipanjang.status.label">Status Terbaru (April 2026) :</strong> <span data-bhs="layanan.leuwipanjang.status.desc">Layanan bus AKAP/AKDP mulai dipusatkan di Terminal Leuwipanjang. Terminal Cicaheum dialihfungsikan menjadi depo dan pusat layanan BRT Metro Jabar Trans.</span></li>
                 <li class="text-muted small mb-1">
-                  <strong>Tarif :</strong> Bergantung pada tujuan (Contoh: Bandung – Subang mulai Rp60.000, Bandung – Jakarta via Damri sekitar Rp175.000).
+                  <strong data-bhs="layanan.leuwipanjang.tarif.label">Tarif :</strong> <span data-bhs="layanan.leuwipanjang.tarif.desc">Bergantung pada tujuan (Contoh: Bandung – Subang mulai Rp60.000, Bandung – Jakarta via Damri sekitar Rp175.000).</span>
                 </li>
-                <li class="text-muted small mb-1"><strong>Pelayanan :</strong> Ruang tunggu penumpang, loket tiket terpadu, area UMKM, dan integrasi dengan angkutan pengumpan (feeder).</li>
+                <li class="text-muted small mb-1"><strong data-bhs="layanan.leuwipanjang.pelayanan.label">Pelayanan :</strong> <span data-bhs="layanan.leuwipanjang.pelayanan.desc">Ruang tunggu penumpang, loket tiket terpadu, area UMKM, dan integrasi dengan angkutan pengumpan (feeder).</span></li>
               </ul>
             </div>
             <ul class="list-unstyled list-inline small mb-3">
-              <li class="d-inline me-2 text-muted"><i class="fas fa-check text-success me-1"></i>Loket terpadu</li>
-              <li class="d-inline text-muted"><i class="fas fa-check text-success me-1"></i>UMKM</li>
+              <li class="d-inline me-2 text-muted"><i class="fas fa-check text-success me-1"></i><span data-bhs="layanan.leuwipanjang.tag.loket">Loket terpadu</span></li>
+              <li class="d-inline text-muted"><i class="fas fa-check text-success me-1"></i><span data-bhs="layanan.leuwipanjang.tag.umkm">UMKM</span></li>
             </ul>
           </div>
           <div class="card-footer">
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Terminal%20Lewuipanjang%20bandung" class="btn btn-primary">Lihat Maps<i class="arrow-icon fas fa-angle-right"></i>
+              href="https://www.google.com/maps/search/?api=1&query=Terminal%20Lewuipanjang%20bandung" class="btn btn-primary"><span data-bhs="layanan.btn.maps">Lihat Maps</span><i class="arrow-icon fas fa-angle-right"></i>
             </a>
           </div>
         </div>
@@ -292,31 +292,31 @@ $page_title = "Layanan Publik Bandung";
         <div class="card card-flatty h-100">
           <div class="card-body">
             <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="card-img" alt="default">
-            <h2 class="h4">Stasiun Hall/Kiaracondong</h2>
-            <p>
+            <h2 class="h4" data-bhs="layanan.stasiun.title">Stasiun Hall/Kiaracondong</h2>
+            <p data-bhs="layanan.stasiun.desc">
               Gerbang utama jalur kereta api jarak jauh dan komuter (Lokal Bandung Raya).
             </p>
             <div class="d-flex flex-wrap gap-1 mb-2">
               <ul class="list-unstyled mb-3">
-                <li class="text-muted small mb-1"><strong>Lokal / Commuter Line :</strong> Tarif
-                  sekitar Rp5000.</li>
+                <li class="text-muted small mb-1"><strong data-bhs="layanan.stasiun.lokal.label">Lokal / Commuter Line :</strong> <span data-bhs="layanan.stasiun.lokal.desc">Tarif
+                  sekitar Rp5000.</span></li>
                 <li class="text-muted small mb-1">
-                  <strong>Jarak jauh :</strong> Variatif mulai dari Rp80.000 (Ekonomi) hingga Rp500.000+ (Eksekutif/Luxury).
+                  <strong data-bhs="layanan.stasiun.jauh.label">Jarak jauh :</strong> <span data-bhs="layanan.stasiun.jauh.desc">Variatif mulai dari Rp80.000 (Ekonomi) hingga Rp500.000+ (Eksekutif/Luxury).</span>
                 </li>
-                <li class="text-muted small mb-1"><strong>Whoosh (Kereta Cepat) :</strong> Tarif normal sekitar Rp300.000 (Stasiun Tegalluar/Padalarang).</li>
-                <li class="text-muted small mb-1"><strong>Stasiun Bandung (Hall) :</strong> Fasilitas kelas satu, akses langsung ke pusat kota, integrasi dengan KA Feeder Whoosh.</li>
-                <li class="text-muted small mb-1"><strong>Stasiun Kiaracondong :</strong> Fokus pada kereta kelas ekonomi, fasilitas sudah direnovasi lebih modern dengan area tunggu yang lebih luas.</li>
+                <li class="text-muted small mb-1"><strong data-bhs="layanan.stasiun.whoosh.label">Whoosh (Kereta Cepat) :</strong> <span data-bhs="layanan.stasiun.whoosh.desc">Tarif normal sekitar Rp300.000 (Stasiun Tegalluar/Padalarang).</span></li>
+                <li class="text-muted small mb-1"><strong data-bhs="layanan.stasiun.hall.label">Stasiun Bandung (Hall) :</strong> <span data-bhs="layanan.stasiun.hall.desc">Fasilitas kelas satu, akses langsung ke pusat kota, integrasi dengan KA Feeder Whoosh.</span></li>
+                <li class="text-muted small mb-1"><strong data-bhs="layanan.stasiun.kiaracondong.label">Stasiun Kiaracondong :</strong> <span data-bhs="layanan.stasiun.kiaracondong.desc">Fokus pada kereta kelas ekonomi, fasilitas sudah direnovasi lebih modern dengan area tunggu yang lebih luas.</span></li>
               </ul>
             </div>
             <ul class="list-unstyled list-inline small mb-3">
-              <li class="d-inline me-2 text-muted"><i class="fas fa-check text-success me-1"></i>Renovasi modern</li>
-              <li class="d-inline text-muted"><i class="fas fa-check text-success me-1"></i>Feeder Whoosh</li>
+              <li class="d-inline me-2 text-muted"><i class="fas fa-check text-success me-1"></i><span data-bhs="layanan.stasiun.tag.renovasi">Renovasi modern</span></li>
+              <li class="d-inline text-muted"><i class="fas fa-check text-success me-1"></i><span data-bhs="layanan.stasiun.tag.feeder">Feeder Whoosh</span></li>
             </ul>
           </div>
           <div class="card-footer">
             <a
               href="https://www.google.com/maps/search/?api=1&query=statiun%20kiaracondong%20bandung"
-              class="btn btn-primary">Lihat Maps<i class="arrow-icon fas fa-angle-right"></i>
+              class="btn btn-primary"><span data-bhs="layanan.btn.maps">Lihat Maps</span><i class="arrow-icon fas fa-angle-right"></i>
             </a>
           </div>
         </div>
@@ -325,12 +325,12 @@ $page_title = "Layanan Publik Bandung";
     <div class="bg-primary mx-auto" style="max-width: 440px">
       <span class="badge badge-accent mx-0 mb-4 fw-bold">
         <i class="fas fa-lightbulb me-2"></i>
-        Tips
+        <span data-bhs="layanan.tips.badge">Tips</span>
       </span>
-      <p class="small mb-4">
+      <p class="small mb-4" data-bhs="layanan.tips.desc">
         Informasi lebih lengkap mengenai layanan publik di Bandung bisa kamu akses disini
       </p>
-      <a href="/trip#explore:3" class="btn btn-outline-white">Layanan Publik<i class="arrow-icon fas fa-angle-right ms-1"></i></a>
+      <a href="/trip#explore:3" class="btn btn-outline-white"><span data-bhs="layanan.tips.btn">Layanan Publik</span><i class="arrow-icon fas fa-angle-right ms-1"></i></a>
     </div>
   </div>
 </main>

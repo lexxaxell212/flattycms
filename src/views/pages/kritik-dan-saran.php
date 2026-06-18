@@ -192,24 +192,22 @@ $page_title = "Kritik dan Saran";
           <circle cx="95" cy="185" r="3" class="dot-primary" opacity="0.25" />
         </svg>
       </div>
-      <h1>Kritik & Saran</h1>
-      <p class="lead">
+      <h1 data-bhs="fb.title">Kritik & Saran</h1>
+      <p class="lead" data-bhs="fb.excerpt">
         Bantu kami menjadi lebih baik dengan feedback Anda.
       </p>
     </div>
     <div id="feedback-successMsg" class="mx-auto mb-4 d-none" style="max-width:440px">
       <div class="d-flex justify-content-center flex-column">
         <span class="h4 mb-2">
-          <i class="fa-solid fa-circle-check me-1"></i>
-          Terima Kasih!</span>
-        <span class="small mb-4">Kritik & saran Anda telah berhasil
-          terkirim.</span>
+          <i class="fa-solid fa-circle-check me-1"></i><span data-bhs="fb.ty">Terima Kasih!</span></span>
+        <span class="small mb-4" data-bhs="fb.ty.message">Kritik & saran Anda telah berhasil terkirim.</span>
         <div class="mb-4 text-start">
-          <strong>Detail:</strong><br>
+          <strong data-bhs="fb.label.detail">Detail:</strong><br>
           <small id="feedback-summaryDetail" class="text-dark"></small>
         </div>
         <button class="btn btn-primary mx-auto" onclick="location.reload()">
-          Kirim Feedback Lagi
+          <span data-bhs="btn.send.again">Kirim Lagi</span>
           <i class="fa-solid fa-rotate-right me-2"></i>
         </button>
       </div>
@@ -219,57 +217,54 @@ $page_title = "Kritik dan Saran";
         <div class="row g-3">
           <div class="col-12" id="feedback-col-rating">
             <label class="form-label">
-              <i class="fa-solid fa-star me-2"></i>Skor Website (1-10)
+              <i class="fa-solid fa-star me-2"></i><span data-bhs="form.score.label">Skor Website (1-10)</span>
             </label>
             <div class="d-flex align-items-center gap-3">
               <input type="range" class="form-range flex-grow-1"
               id="feedback-rating" name="rating" min="1" max="10" value="8">
               <span id="feedback-ratingValue" class="badge bg-success fs-6 px-3 py-2 fw-bold">8</span>
             </div>
-            <small class="text-muted">Rating Anda membantu kami prioritas perbaikan</small>
+            <small class="text-muted" data-bhs="form.score.desc">Rating Anda membantu kami prioritas perbaikan</small>
           </div>
           <div class="col-12">
             <label class="form-label">
-              <i class="fa-solid fa-tags me-2"></i>Kategori
+              <i class="fa-solid fa-tags me-2"></i><span data-bhs="form.cat.label">Kategori</span>
             </label>
             <select class="form-select" name="kategori" required>
-              <option value="">Pilih Kategori</option>
-              <option value="desain">Desain & UI/UX</option>
-              <option value="konten">Konten & Informasi</option>
-              <option value="fungsional">Fungsionalitas</option>
-              <option value="performance">Performance & Speed</option>
-              <option value="seo">SEO & Sharing</option>
-              <option value="mobile">Mobile Responsif</option>
-              <option value="lainnya">Lainnya</option>
+              <option value="" data-bhs="form.cat.select">Pilih kategori</option>
+              <option value="desain" data-bhs="form.cat.1">Desain & UI/UX</option>
+              <option value="konten" data-bhs="form.cat.2">Konten & Informasi</option>
+              <option value="fungsional" data-bhs="form.cat.3">Fungsionalitas</option>
+              <option value="performance" data-bhs="form.cat.4">Performance & Speed</option>
+              <option value="seo" data-bhs="form.cat.5">SEO & Sharing</option>
+              <option value="mobile" data-bhs="form.cat.6">Mobile Responsif</option>
+              <option value="lainnya" data-bhs="form.cat.7">Lainnya</option>
             </select>
           </div>
           <div class="col-12">
             <label class="form-label">
-              <i class="fa-solid fa-triangle-exclamation me-2"></i>Kritik & Kekurangan
+              <i class="fa-solid fa-triangle-exclamation me-2"></i><span data-bhs="form.kritik.label">Kritik & Kekurangan</span>
             </label>
-            <textarea class="form-control bg-white" name="kritik" rows="4"
-              placeholder="Apa yang perlu diperbaiki?" required></textarea>
+            <textarea class="form-control bg-white" name="kritik" rows="4" data-bhs="form.kritik.placeholder" placeholder="Apa yang perlu ditambahkan?" required></textarea>
           </div>
           <div class="col-12 mb-4">
             <label class="form-label">
-              <i class="fa-solid fa-lightbulb me-2"></i>Saran Perbaikan
+              <i class="fa-solid fa-lightbulb me-2"></i><span data-bhs="form.saran.label">Saran Perbaikan</span>
             </label>
-            <textarea class="form-control bg-white" name="saran" rows="4"
-              placeholder="Fitur apa yang ingin ditambahkan?" required></textarea>
+            <textarea class="form-control bg-white" name="saran" rows="4" data-bhs="form.saran.placeholder" placeholder="Fitur apa yang ingin diperbaiki?" required></textarea>
           </div>
           <div class="col-12">
             <div class="form-check">
               <input class="form-check-input" type="checkbox"
               id="feedback-anonymous" name="anonymous">
-              <label class="text-muted small" for="feedback-anonymous">
+              <label class="text-muted small" for="feedback-anonymous" data-bhs="form.anonymous">
                 Kirim sebagai anonim - centang untuk melanjutkan
               </label>
             </div>
           </div>
           <div class="col-12">
             <button type="submit" class="btn btn-primary" id="feedback-submitBtn" disabled>
-              <span id="feedback-btnText">Kirim Feedback</span>
-              <i id="feedback-loadingSpinner" class="d-none fa-solid fa-circle-notch fa-spin ms-2"></i>
+              <span data-bhs="btn.send">Kirim</span>
             </button>
           </div>
         </div>

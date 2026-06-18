@@ -3,19 +3,19 @@
     <div class="bg-surface border-0">
       <div class="text-center">
         <div class="mb-5">
-          <h2 class="h3">NEWSLETTER</h2>
-          <p class="small">
+          <h2 class="h3" data-bhs="f.newsletter.title">NEWSLETTER</h2>
+          <p class="small" data-bhs="f.newsletter excerpt">
             Dapatkan event dan update Bandung terkini via email.
           </p>
         </div>
         <form id="newsletterForm" class="row mx-auto align-items-center g-3" novalidate>
           <div class="col-md-8">
             <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
-            <input type="email" name="email" class="form-control" id="emailInput" placeholder="nama@email.com" required>
+            <input type="email" name="email" class="form-control" id="emailInput" data-bhs="f.newsletter.placeholder" placeholder="nama@email.com" required>
           </div>
           <div class="col-md-4">
             <button type="submit" class="btn btn-primary" id="submitBtn">
-              Berlangganan
+              <span data-bhs="btn.subs">Berlangganan</span>
               <i class="arrow-icon fas fa-paper-plane"></i>
             </button>
           </div>
@@ -24,32 +24,32 @@
     </div>
     <section class="footer-nav">
       <div class="footer-nav__col">
-        <span class="footer-nav__label">Halaman</span>
+        <span class="footer-nav__label" data-bhs="f.pages.title">Halaman</span>
         <ul>
-          <li><a class="<?= isActive('/') ?>" href="<?= BASE_URL ?>">Beranda</a></li>
-          <li><a class="<?= isActive('/blogs') ?>" href="/blogs">Blogs</a></li>
-          <li><a class="<?= isActive('/pages/sejarah') ?>" href="/pages/sejarah">Sejarah Bandung</a></li>
-          <li><a class="<?= isActive('/pages/layanan') ?>" href="/pages/layanan">Layanan di Bandung</a></li>
+          <li><a class="<?= isActive('/') ?>" href="<?= BASE_URL ?>" data-bhs="f.pages.1">Beranda</a></li>
+          <li><a class="<?= isActive('/blogs') ?>" href="/blogs" data-bhs="f.pages.2">Blogs</a></li>
+          <li><a class="<?= isActive('/pages/sejarah') ?>" href="/pages/sejarah" data-bhs="f.pages.3">Sejarah Bandung</a></li>
+          <li><a class="<?= isActive('/pages/layanan') ?>" href="/pages/layanan" data-bhs="f.pages.4">Layanan di Bandung</a></li>
         </ul>
       </div>
       <div class="footer-nav__col">
-        <span class="footer-nav__label">Untuk Pengunjung</span>
+        <span class="footer-nav__label" data-bhs="f.user.title">Untuk Pengunjung</span>
         <ul>
-          <li><a class="<?= isActive('/things-to-do') ?>" href="/things-to-do">Things to Do</a></li>
-          <li><a class="<?= isActive('/trip') ?>" href="/trip">Trip Planner</a></li>
-          <li><a class="<?= isActive('/gallery') ?>" href="/gallery">Gallery dan Review</a></li>
+          <li><a class="<?= isActive('/things-to-do') ?>" href="/things-to-do" data-bhs="f.user.1">Aktifitas</a></li>
+          <li><a class="<?= isActive('/trip') ?>" href="/trip" data-bhs="f.user.2">Perencana Perjalanan</a></li>
+          <li><a class="<?= isActive('/gallery') ?>" href="/gallery" data-bhs="f.user.3">Galeri dan Ulasan</a></li>
         </ul>
       </div>
       <div class="footer-nav__col">
-        <span class="footer-nav__label">Info</span>
+        <span class="footer-nav__label" data-bhs="f.info.title">Informasi</span>
         <ul>
-          <li><a class="<?= isActive('/pages/tentang') ?>" href="/pages/tentang">Tentang</a></li>
-          <li><a class="<?= isActive('/pages/privacy-policy') ?>" href="/pages/privacy-policy">Privasi</a></li>
-          <li><a class="<?= isActive('/pages/kritik-dan-saran') ?>" href="/pages/kritik-dan-saran">Kritik dan Saran</a></li>
+          <li><a class="<?= isActive('/pages/tentang') ?>" href="/pages/tentang" data-bhs="f.info.1">Tentang</a></li>
+          <li><a class="<?= isActive('/pages/privacy-policy') ?>" href="/pages/privacy-policy" data-bhs="f.info.2">Privasi</a></li>
+          <li><a class="<?= isActive('/pages/kritik-dan-saran') ?>" href="/pages/kritik-dan-saran" data-bhs="f.info.3">Kritik dan Saran</a></li>
         </ul>
       </div>
       <div class="footer-nav__col">
-        <span class="footer-nav__label">Ikuti Kami</span>
+        <span class="footer-nav__label" data-bhs="f.follow.title">Ikuti Kami</span>
         <div class="d-flex gap-3 mt-1">
           <a class="logo-social" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
           <a class="logo-social" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
@@ -80,7 +80,7 @@
   links.forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      flattyToast('warning', 'Belum ada link.');
+      flattyToast('warning', 'toast.link.unset');
     });
   });
 </script>

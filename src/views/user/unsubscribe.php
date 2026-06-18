@@ -14,7 +14,7 @@ require_once LIB_PATH . "v-unsubscribe.php";
         <?php elseif ($status == "error" && !$show_form): ?>
         <i class="fa-solid fa-circle-xmark fa-3x text-danger mb-2"></i>
         <?php else : ?>
-        <h1 class="h3 text-center">
+        <h1 class="h3 text-center" data-bhs="unsub.title">
           Unsubscribe Newsletter
         </h1>
         <?php endif; ?>
@@ -29,17 +29,17 @@ require_once LIB_PATH . "v-unsubscribe.php";
       <?php if ($show_form): ?>
       <form action="" method="POST" class="mx-auto row g-4 form">
         <div class="col-12">
-          <p>
+          <p data-bhs="unsub.excerpt">
             Masukkan email Anda untuk berhenti berlangganan.
           </p>
         </div>
         <div class="col-12">
           <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
-          <input type="email" name="email" class="form-control" placeholder="nama@email.com" required>
+          <input type="email" name="email" class="form-control" data-bhs="form.email.placeholder" placeholder="nama@email.com" required>
         </div>
         <div class="col-12">
-          <button type="submit" class="btn btn-outline-primary mt-2">
-            Berhenti Berlangganan
+          <button type="submit" class="btn btn-outline-primary mt-2" data-bhs="btn.unsubs">
+            Berhenti langganan
           </button>
         </div>
       </form>

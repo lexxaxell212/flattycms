@@ -17,8 +17,8 @@
           </svg>
         </div>
         <div class="bot-meta">
-          <span class="bot-name">Yara - Asisten Bandung</span>
-          <span class="bot-status">Online sekarang</span>
+          <span class="bot-name">Yara</span>
+          <span class="bot-status" data-bhs="chatbot.meta">Asisten Chat</span>
         </div>
       </div>
       <div>
@@ -36,7 +36,7 @@
       </div>
       <div class="bottom-area">
         <div class="chat-input-group">
-          <input type="text" id="message-input" class="input-chat" placeholder="Tanyakan sesuatu...">
+          <input type="text" id="message-input" class="input-chat" data-bhs="chatbot.placeholder" placeholder="Tanyakan sesuatu...">
           <button aria-label="Send chat" class="btn send-chat" onclick="sendMessage()">
             <i class="fas fa-paper-plane"></i>
           </button>

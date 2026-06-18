@@ -17,28 +17,28 @@ $page_title = 'Reset Password - ' . SITE_NAME;
     <div id="reset-pw-form">
       <div class="bg-surface my-5 py-5 text-center">
         <i class="fa-solid fa-circle-xmark fa-3x text-danger mb-4"></i>
-        <h2>Link tidak valid</h2>
-        <p class="text-muted small mb-4">
+        <h2 data-bhs="rp.invalid">Link tidak valid</h2>
+        <p class="text-muted small mb-4" data-bhs="rp.desc">
           Link reset password sudah kadaluarsa atau tidak valid.
         </p>
-        <a href="/forgot-password" class="btn btn-outline-primary">Minta link baru</a>
+        <a href="/forgot-password" class="btn btn-outline-primary" data-bhs="btn.link.reset.request">Minta link baru</a>
       </div>
     </div>
     <?php else : ?>
     <div class="form mx-auto my-5 row g-2">
       <div class="col-12">
-        <h1 class="h3">Buat password baru</h1>
-        <p class="text-muted">
+        <h1 class="h3" data-bhs="rp.title">Buat password baru</h1>
+        <p class="text-muted" data-bhs="rp.excerpt">
           Masukkan password baru untuk akunmu.
         </p>
       </div>
       <div class="col-12">
         <label class="form-label">
           <i class="fas fa-lock me-1"></i>
-          Password baru
+          <span data-bhs="form.password.new.label">Kata sandi baru</span>
         </label>
         <div class="input-group">
-          <input type="password" id="rp-pw" class="form-control password" placeholder="Min. 8 karakter">
+          <input type="password" id="rp-pw" class="form-control password" data-bhs="form.password.placeholder" placeholder="Min. 8 karakter">
           <button class="btn" type="button" id="toggle-pw">
             <i class="fas fa-eye fa-sm"></i>
           </button>
@@ -47,10 +47,10 @@ $page_title = 'Reset Password - ' . SITE_NAME;
       <div class="col-12">
         <label class="form-label">
           <i class="fas fa-lock me-1"></i>
-          Konfirmasi password
+          <span data-bhs="form.password.repeat.label">Konfirmasi kata sandi</span>
         </label>
         <div class="input-group">
-          <input type="password" id="rp-pw-confirm" class="form-control password" placeholder="Ulangi password">
+          <input type="password" id="rp-pw-confirm" class="form-control password" data-bhs="form.password.repeat.placeholder" placeholder="Ulangi kata sandi">
           <button class="btn" type="button" id="toggle-pw-confirm">
             <i class="fas fa-eye fa-sm"></i>
           </button>
@@ -58,8 +58,7 @@ $page_title = 'Reset Password - ' . SITE_NAME;
       </div>
       <div class="col-12 py-4">
         <button type="button" class="btn btn-outline-primary" id="btn-rp">
-          <span id="btn-rp-text">Simpan Password</span>
-          <i id="btn-rp-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-1"></i>
+          <span data-bhs="btn.save">Simpan</span>
         </button>
       </div>
     </div>
@@ -83,25 +82,22 @@ $page_title = 'Reset Password - ' . SITE_NAME;
     const password = document.getElementById('rp-pw').value;
     const confirm = document.getElementById('rp-pw-confirm').value;
     const btn = document.getElementById('btn-rp');
-    const btnText = document.getElementById('btn-rp-text');
-    const btnSpinner = document.getElementById('btn-rp-spinner');
 
     if (!password || !confirm) {
-      flattyToast('error', 'Semua field wajib diisi.');
+      flattyToast('error', 'toast.form.error');
       return;
     }
     if (password.length < 8) {
-      flattyToast('error', 'Password minimal 8 karakter.');
+      flattyToast('error', 'toast.password.required');
       return;
     }
     if (password !== confirm) {
-      flattyToast('error', 'Konfirmasi password tidak cocok.');
+      flattyToast('error', 'toast.password.confirm.required');
       return;
     }
     btn.disabled = true;
-    btnText.textContent = 'Menyimpan';
-    btnSpinner.classList.remove('d-none');
-    await new Promise(r => setTimeout(r, 500));
+    btn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
+    await new Promise(r => setTimeout(r, 1000));
     const res = await fetch('/api/auth/reset-password.php', {
       method: 'POST',
       headers: {
@@ -115,14 +111,13 @@ $page_title = 'Reset Password - ' . SITE_NAME;
     });
     const data = await res.json();
     if (data.success) {
-      flattyToast('success', 'Password berhasil diubah! Mengalihkan ke login...');
+      flattyToast('success', 'toast.reset.password.success');
       btn.classList.add('d-none');
       setTimeout(() => window.location.href = '/login', 2000);
     } else {
-      flattyToast('error', data.message ?? 'Gagal mengubah password.');
+      flattyToast('error', data.message ?? 'toast.password.error');
       btn.disabled = false;
-      btnText.textContent = 'Simpan Password';
-      btnSpinner.classList.add('d-none');
+      btn.innerHTML = '<span data-bhs="btn.save">Simpan</span>';
     }
   });
 </script>

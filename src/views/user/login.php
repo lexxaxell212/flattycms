@@ -8,22 +8,22 @@ if (isset($_SESSION['user'])) {
   <div class="container">
     <div class="form mx-auto my-5 row g-2">
       <div class="col-12">
-        <h1 class="h3">Selamat datang</h1>
-        <p class="text-muted">
+        <h1 class="h3" data-bhs="login.title">Selamat datang</h1>
+        <p class="text-muted" data-bhs="login.excerpt">
           Masuk ke akun kamu
         </p>
       </div>
       <div class="col-12">
         <label class="form-label">
           <i class="fas fa-at me-1"></i>
-          Email atau username
+          <span data-bhs="form.email.username.label">Email atau username</span>
         </label>
-        <input type="text" id="login-id" class="form-control" placeholder="nama@email.com">
+        <input type="text" id="login-id" class="form-control" data-bhs="form.email.placeholder" placeholder="nama@email.com">
       </div>
       <div class="col-12">
         <label class="form-label">
           <i class="fas fa-lock me-1"></i>
-          Password
+          <span data-bhs="form.password.label">Password</span>
         </label>
         <div class="input-group">
           <input type="password" id="login-pw" class="form-control password" placeholder="••••••••">
@@ -34,22 +34,21 @@ if (isset($_SESSION['user'])) {
       </div>
       <div class="col-12 py-4">
         <button type="button" class="btn btn-outline-primary" id="btn-login">
-          <span id="btn-login-text">Masuk</span>
-          <i id="btn-login-spinner" class="d-none fa-solid fa-circle-notch fa-spin ms-1"></i>
+          <span data-bhs="btn.login">Masuk</span>
         </button>
       </div>
     </div>
     <div class="d-flex justify-content-center mb-4">
-      <a href="/forgot-password" class="small">Lupa password?</a>
+      <a href="/forgot-password" class="small" data-bhs="fp.title">Lupa password?</a>
     </div>
     <div class="divider">
-      atau
+      <span data-bhs="or">atau</span>
     </div>
     <div class="d-flex justify-content-center">
       <div id="google-login-page"></div>
     </div>
     <p class="text-center text-muted small mt-2">
-      Belum punya akun? <a href="/register" class="fw-medium">Daftar sekarang</a>
+      <span data-bhs="not.have.account">Belum punya akun?</span> <a href="/register" class="fw-medium" data-bhs="btn.reg">Daftar</a>
     </p>
   </div>
 </main>
@@ -65,17 +64,14 @@ if (isset($_SESSION['user'])) {
     const identifier = document.getElementById('login-id').value.trim();
     const password = document.getElementById('login-pw').value;
     const btn = document.getElementById('btn-login');
-    const btnText = document.getElementById('btn-login-text');
-    const btnSpinner = document.getElementById('btn-login-spinner');
 
     if (!identifier || !password) {
-      flattyToast('error', 'Email/username dan password wajib diisi.');
+      flattyToast('error', 'toast.email.password.required');
       return;
     }
     btn.disabled = true;
-    btnText.textContent = 'Masuk';
-    btnSpinner.classList.remove('d-none');
-    await new Promise(r => setTimeout(r, 500));
+    btn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
+    await new Promise(r => setTimeout(r, 1000));
     const res = await fetch('/api/auth/login.php', {
       method: 'POST',
       headers: {
@@ -89,12 +85,11 @@ if (isset($_SESSION['user'])) {
     });
     const data = await res.json();
     btn.disabled = false;
-    btnText.textContent = 'Masuk';
-    btnSpinner.classList.add('d-none');
+    btn.innerHTML = '<span data-bhs="btn.login">Masuk</span>';
     if (data.success) {
       window.location.href = data.redirect;
     } else {
-      flattyToast('error', data.message ?? 'Email/username atau password salah.');
+      flattyToast('error', data.message ?? 'toast.login.denied');
     }
   });
 </script>

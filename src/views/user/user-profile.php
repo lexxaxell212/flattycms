@@ -40,14 +40,12 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
               </div>
             </div>
             <div id="editNameForm" style="display:none" class="mb-2">
-              <input type="text" id="inputDisplayName" class="form-control mb-2"
-              value="<?= safe_html($display) ?>" maxlength="100"
-              placeholder="Nama tampilan...">
+              <input type="text" id="inputDisplayName" class="form-control mb-2" value="<?= safe_html($display) ?>" maxlength="100" data-bhs="form.display.name" placeholder="Nama tampilan...">
               <div class="d-flex gap-2">
                 <button class="btn btn-primary btn-sm flex-grow-1" id="btnSaveName">
-                  <i class="fa-solid fa-check me-2"></i>Simpan
+                  <i class="fa-solid fa-check me-2"></i><span data-bhs="btn.save">Simpan</span>
                 </button>
-                <button class="btn btn-outline-primary btn-sm" id="btnCancelName">Batal</button>
+                <button class="btn btn-outline-primary btn-sm" id="btnCancelName" data-bhs="btn.cancel">Batal</button>
               </div>
             </div>
             <div class="row g-2 text-center mt-4">
@@ -56,7 +54,7 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
                   -
                 </div>
                 <div style="font-size:.7rem">
-                  <span class="badge badge-primary">Foto</span>
+                  <span class="badge badge-primary" data-bhs="up.photo">Foto</span>
                 </div>
               </div>
               <div class="col-4">
@@ -64,7 +62,7 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
                   -
                 </div>
                 <div style="font-size:.7rem">
-                  <span class="badge badge-primary">Trip</span>
+                  <span class="badge badge-primary" data-bhs="up.trip">Trip</span>
                 </div>
               </div>
               <div class="col-4">
@@ -72,7 +70,7 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
                   -
                 </div>
                 <div style="font-size:.7rem">
-                  <span class="badge badge-primary">Reaksi</span>
+                  <span class="badge badge-primary" data-bhs="up.reaction">Reaksi</span>
                 </div>
               </div>
             </div>
@@ -80,15 +78,15 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
         </div>
         <div class="up-tab-nav" id="profileTabs">
           <button class="up-tab-btn active" data-tab="photos">
-            <i class="fa-solid fa-images" style="width:16px"></i>Foto
+            <i class="fa-solid fa-images" style="width:16px"></i><span data-bhs="up.photo">Foto</span>
             <span class="up-tab-count" id="countPhotos">-</span>
           </button>
           <button class="up-tab-btn" data-tab="trips">
-            <i class="fa-solid fa-route" style="width:16px"></i>Trip
+            <i class="fa-solid fa-route" style="width:16px"></i><span data-bhs="up.trip">Trip</span>
             <span class="up-tab-count" id="countTrips">-</span>
           </button>
           <button class="up-tab-btn" data-tab="reactions">
-            <i class="fa-solid fa-heart" style="width:16px"></i>Reaksi
+            <i class="fa-solid fa-heart" style="width:16px"></i><span data-bhs="up.reaction">Reaksi</span>
             <span class="up-tab-count" id="countReactions">-</span>
           </button>
         </div>
@@ -96,9 +94,8 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
       <div class="up-content">
         <div class="bg-surface my-4">
           <div class="p-md-4">
-            <div id="tabLoading" class="text-center py-5 text-muted small">
-              <i class="fa-solid fa-circle-notch fa-spin fa-2x mb-3 d-block"></i>
-              Memuat data...
+            <div id="tabLoading" class="skeleton-wrapper">
+              <div></div>
             </div>
             <div id="tabPhotos" class="tab-content" style="display:none">
               <div class="row g-3" id="photoGrid"></div>

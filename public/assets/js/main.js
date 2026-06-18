@@ -824,7 +824,7 @@ class SmartScrollTop {
   isNearBottom() {
     const docHeight = document.documentElement.scrollHeight;
     const scrolledFromBottom = docHeight - window.scrollY - window.innerHeight;
-    return scrolledFromBottom <= docHeight * 0.25;
+    return scrolledFromBottom <= docHeight * 0.18;
   }
 
   scrollToTop() {
@@ -1057,19 +1057,18 @@ document.addEventListener('DOMContentLoaded', function() {
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = input.value.trim();
-    if (email === '') {
-      flattyToast('warning', 'Email-nya diisi dulu ya!');
+    if (!email === '') {
+      flattyToast('warning', 'toast.email.required');
       return;
     }
     const domain = email.split('@')[1];
     if (!allowed.includes(domain)) {
-      flattyToast('warning', 'Gunakan email umum ya (Gmail/Yahoo/Outlook)');
+      flattyToast('warning', 'toast.email.invalid');
       return;
     }
     btn.disabled = true;
-    btn.style.opacity = '0.7';
-    btn.innerHTML = 'MENGIRIM <i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
-    await new Promise(r => setTimeout(r, 500));
+    btn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
+    await new Promise(r => setTimeout(r, 1000));
     const formData = new FormData(form);
     fetch(CONFIG.baseUrl + '/api/api-newsletter.php', {
       method: 'POST',
@@ -1088,12 +1087,11 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     })
     .catch(() => {
-      flattyToast('error', 'Koneksi lagi bermasalah nih..');
+      flattyToast('error', 'toast.connection.error');
     })
     .finally(() => {
       btn.disabled = false;
-      btn.style.opacity = '1';
-      btn.innerHTML = '<span data-bhs="btn.subs">Berlangganan</span> <i class="fas fa-paper-plane"></i>';
+      btn.innerHTML = '<span data-bhs="btn.subs">Berlangganan</span>';
     });
   });
 });

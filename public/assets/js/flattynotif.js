@@ -15,8 +15,12 @@ const flattyMessages = {
     en: 'Link is not available yet.'
   },
   'toast.email.required': {
-    id: 'Email wajib diisi.',
+    id: 'Email-nya diisi dulu ya..',
     en: 'Email required.'
+  },
+  'toast.email.invalid': {
+    id: 'Gunakan email umum ya (Gmail/Yahoo/Outlook)',
+    en: 'Please use common email (Gmail/Yahoo/Outlook)'
   },
   'toast.username.required': {
     id: 'Nama pengguna hanya boleh huruf, angka, dan underscore.',
@@ -57,6 +61,10 @@ const flattyMessages = {
   'toast.feedback.warning': {
     id: ' detik sebelum kirim lagi.',
     en: ' second before send again.'
+  },
+  'toast.connection.error': {
+    id: 'Maaf, koneksi lagi bermasalah nih.',
+    en: 'Sorry, connection error has occured.'
   },
   'toast.login.denied': {
     id: 'Email/nama pengguna atau password salah.',

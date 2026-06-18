@@ -105,7 +105,7 @@
       'f.newsletter.placeholder': 'nama@email.com',
       'f.pages.title': 'Halaman',
       'f.pages.1': 'Beranda',
-      'f.pages.2': 'Blog',
+      'f.pages.2': 'Artikel',
       'f.pages.3': 'Sejarah Bandung',
       'f.pages.4': 'Layanan di Bandung',
       'f.info.title': 'Informasi',

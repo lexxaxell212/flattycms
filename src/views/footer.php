@@ -4,7 +4,7 @@
       <div class="text-center">
         <div class="mb-5">
           <h2 class="h3" data-bhs="f.newsletter.title">NEWSLETTER</h2>
-          <p class="small" data-bhs="f.newsletter excerpt">
+          <p class="small" data-bhs="f.newsletter.excerpt">
             Dapatkan event dan update Bandung terkini via email.
           </p>
         </div>
@@ -16,7 +16,6 @@
           <div class="col-md-4">
             <button type="submit" class="btn btn-primary" id="submitBtn">
               <span data-bhs="btn.subs">Berlangganan</span>
-              <i class="arrow-icon fas fa-paper-plane"></i>
             </button>
           </div>
         </form>

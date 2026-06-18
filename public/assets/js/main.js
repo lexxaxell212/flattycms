@@ -1057,7 +1057,7 @@ document.addEventListener('DOMContentLoaded', function() {
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = input.value.trim();
-    if (!email === '') {
+    if (email === '') {
       flattyToast('warning', 'toast.email.required');
       return;
     }

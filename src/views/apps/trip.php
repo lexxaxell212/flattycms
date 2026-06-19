@@ -1,3 +1,48 @@
+<?php
+require_once LIB_PATH . 'poi-actions.php';
+
+$page_title = 'Trip Planner - ' . SITE_NAME;
+
+$pois = get_all_poi(true);
+$pois = array_map(function($p) {
+  $p['description'] = mb_substr($p['description'] ?? '', 0, 150) .
+  (mb_strlen($p['description'] ?? '') > 150 ? '...' : '');
+  $p['name'] = mb_substr($p['name'] ?? '', 0, 30) . (mb_strlen($p['name'] ??
+    '') > 30 ? '...' : '');
+  return $p;
+}, $pois);
+
+$pois_full = array_map(function($p) {
+  return [
+    'id' => $p['id'],
+    'name' => $p['name'],
+    'description' => $p['description'],
+    'slug' => $p['slug'],
+    'category_name' => $p['category_name'],
+    'address' => $p['address'],
+  ];
+}, get_all_poi(true));
+
+$categories = get_poi_categories();
+$is_logged = isset($_SESSION['user']);
+$pois_json = json_encode($pois);
+$pois_full_json = json_encode($pois_full);
+$cats_json = json_encode($categories);
+?>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const CSRF = CONFIG.csrfToken;
+  const BASE = CONFIG.baseUrl;
+  const IS_LOGGED = <?= $is_logged ? 'true' : 'false' ?>;
+  const POIS = <?= $pois_json ?>;
+  const POIS_FULL = <?= $pois_full_json ?>;
+  const API_TRIP = BASE + '/api/map/api-trips.php';
+  const API_GAL = BASE + '/api/map/api-gallery.php';
+</script>
+<script src="<?= JS_URL ?>trip.js" defer></script>
+<script src="<?= JS_URL ?>ai-trip.js" defer></script>
 <main class="main-content">
   <div class="tp-main-hero"></div>
   <div class="tp-main-outer">

@@ -37,7 +37,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
             onload="this.classList.add('loaded');this.previousElementSibling.classList.add('hidden')"
             >
             <div class="gallery-rand-meta w-100 text-center">
-              <span class="gallery-rand-uploader" data-bhs="gal.page.rand.uploader" data-bhs-arg="<?= $useruploader ?>">Foto dari <?= $useruploader ?></span>
+              <span class="gallery-rand-uploader">Foto dari <?= $useruploader ?></span>
             </div>
           </div>
           <?php endforeach; ?>
@@ -46,7 +46,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
     </div>
     <div class="gal-hero">
       <div class="text-center">
-        <h1 class="text-hero" data-bhs="gal.page.hero.title">Share Your <em class="styled">Moments</em></h1>
+        <h1 class="text-hero">Share Your <em class="styled">Moments</em></h1>
         <div class="gal-stats">
           <div class="gal-stat">
             <span class="gal-stat__val" id="statTotal">-</span>

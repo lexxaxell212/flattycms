@@ -37,7 +37,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
             onload="this.classList.add('loaded');this.previousElementSibling.classList.add('hidden')"
             >
             <div class="gallery-rand-meta w-100 text-center">
-              <span class="gallery-rand-uploader" data-bhs="gal.page.rand.uploader" data-bhs-arg="<?= $useruploader ?>">Foto dari <?= $useruploader ?></span>
+              <span class="gallery-rand-uploader">Foto dari <?= $useruploader ?></span>
             </div>
           </div>
           <?php endforeach; ?>
@@ -46,32 +46,32 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
     </div>
     <div class="gal-hero">
       <div class="text-center">
-        <h1 class="text-hero" data-bhs="gal.page.hero.title">Share Your <em class="styled">Moments</em></h1>
+        <h1 class="text-hero">Share Your <em class="styled">Moments</em></h1>
         <div class="gal-stats">
           <div class="gal-stat">
             <span class="gal-stat__val" id="statTotal">-</span>
-            <span class="gal-stat__label" data-bhs="gal.page.stat.foto">Foto</span>
+            <span class="gal-stat__label">Foto</span>
           </div>
           <div class="gal-stat">
             <span class="gal-stat__val" id="statReview">-</span>
-            <span class="gal-stat__label" data-bhs="gal.page.stat.review">Review</span>
+            <span class="gal-stat__label">Review</span>
           </div>
           <div class="gal-stat">
             <span class="gal-stat__val"><?= count($pois) ?></span>
-            <span class="gal-stat__label" data-bhs="gal.page.stat.poi">POI</span>
+            <span class="gal-stat__label">POI</span>
           </div>
         </div>
       </div>
       <div class="gal-hero__actions">
         <button class="btn btn-primary" id="btnOpenUpload">
-          <i class="fas fa-camera"></i> <span data-bhs="gal.page.btn.upload">Upload Foto</span>
+          <i class="fas fa-camera"></i> Upload Foto
         </button>
         <button class="btn btn-primary" id="btnOpenReview">
-          <i class="fas fa-pen-to-square"></i> <span data-bhs="gal.page.btn.review">Tulis Review</span>
+          <i class="fas fa-pen-to-square"></i> Tulis Review
         </button>
         <?php if (!$is_logged): ?>
         <a href="/login" class="btn btn-outline-primary">
-          <span data-bhs="gal.page.btn.login">Masuk</span>
+          Masuk
         </a>
         <?php endif; ?>
       </div>
@@ -80,8 +80,8 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
       <div class="gal-search-block">
         <div class="gal-search-wrap">
           <i class="fa-solid fa-magnifying-glass gal-search-icon"></i>
-          <input type="text" id="searchPoiFilter" class="gal-search-input" data-bhs="gal.page.search.placeholder" placeholder="Cari dari POI...">
-          <button class="gal-search-reset" id="btnResetSearch" data-bhs="gal.page.search.reset.title" title="Reset">
+          <input type="text" id="searchPoiFilter" class="gal-search-input" placeholder="Cari dari POI...">
+          <button class="gal-search-reset" id="btnResetSearch" title="Reset">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
@@ -91,17 +91,17 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
       <div class="gal-content-wrap">
         <div class="gal-tabs">
           <button class="gal-tab active" data-tab="gallery">
-            <i class="fa-solid fa-image"></i> <span data-bhs="gal.page.tab.gallery">Gallery</span>
+            <i class="fa-solid fa-image"></i> Gallery
           </button>
           <button class="gal-tab" data-tab="review">
-            <i class="fa-solid fa-star"></i> <span data-bhs="gal.page.tab.review">Review</span>
+            <i class="fa-solid fa-star"></i> Review
           </button>
         </div>
         <div class="gal-content">
           <div id="tab-gallery">
             <div class="row g-4" id="galleryGrid">
               <div class="col-12 text-center text-muted py-5">
-                <i class="fas fa-circle-notch fa-spin fa-2x mb-3 d-block"></i><span data-bhs="gal.page.loading.photo">Memuat foto...</span>
+                <i class="fas fa-circle-notch fa-spin fa-2x mb-3 d-block"></i>Memuat foto...
               </div>
             </div>
             <div class="gal-pagination" id="pagination">
@@ -110,7 +110,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
           <div id="tab-review" style="display:none">
             <div id="reviewGrid" class="gal-review-grid">
               <div class="text-center text-muted py-5">
-                <i class="fa-solid fa-circle-notch fa-spin fa-2x mb-3 d-block"></i><span data-bhs="gal.page.loading.review">Memuat review...</span>
+                <i class="fa-solid fa-circle-notch fa-spin fa-2x mb-3 d-block"></i>Memuat review...
               </div>
             </div>
             <div class="gal-pagination" id="paginationReview"></div>
@@ -137,14 +137,14 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 <div id="uploadModal" class="gal-modal-overlay" style="display:none">
   <div class="gal-modal">
     <div class="gal-modal__header">
-      <span><i class="fa-solid fa-camera me-2"></i><span data-bhs="gal.page.upload.modal.title">Upload Foto</span></span>
+      <span><i class="fa-solid fa-camera me-2"></i>Upload Foto</span>
       <button class="gal-modal__close" id="btnBatalUpload"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="gal-modal__body">
       <div class="gal-field">
-        <label class="gal-label"><span data-bhs="gal.page.upload.lokasi.label">Lokasi Foto</span><span class="text-danger">*</span></label>
+        <label class="gal-label">Lokasi Foto<span class="text-danger">*</span></label>
         <div class="gal-search-field-wrap">
-          <input type="text" id="uploadPoiSearch" class="gal-input" data-bhs="gal.page.upload.poi.placeholder" placeholder="Cari nama POI...">
+          <input type="text" id="uploadPoiSearch" class="gal-input" placeholder="Cari nama POI...">
           <div id="uploadPoiResults" class="gal-search-results gal-search-results--modal">
           </div>
         </div>
@@ -156,26 +156,26 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
         </div>
       </div>
       <div class="gal-field">
-        <label class="gal-label"><span data-bhs="gal.page.upload.foto.label">Foto</span> <span class="text-danger">*</span></label>
+        <label class="gal-label">Foto <span class="text-danger">*</span></label>
         <label class="gal-file-label" id="uploadFileLabel">
           <input type="file" id="uploadFile" accept="image/jpeg,image/png,image/webp" class="gal-file-input">
           <i class="fa-solid fa-cloud-arrow-up gal-file-icon"></i>
-          <span class="gal-file-text" data-bhs="gal.page.upload.file.text">Klik untuk pilih foto</span>
-          <span class="gal-file-hint" data-bhs="gal.page.upload.file.hint">JPG, PNG, WebP</span>
+          <span class="gal-file-text">Klik untuk pilih foto</span>
+          <span class="gal-file-hint">JPG, PNG, WebP</span>
         </label>
         <div id="uploadPreview" style="display:none" class="mt-2">
           <img id="previewImg" src="" class="img-fluid rounded" style="max-height:180px;object-fit:cover;width:100%">
         </div>
       </div>
       <div class="gal-field">
-        <label class="gal-label"><span data-bhs="gal.page.upload.kredit.label">Kredit</span> <span class="gal-optional" data-bhs="gal.page.optional">opsional</span></label>
-        <input type="text" id="uploadCredit" class="gal-input" data-bhs="gal.page.upload.kredit.placeholder" placeholder="Nama / Instagram / Link...">
+        <label class="gal-label">Kredit <span class="gal-optional">opsional</span></label>
+        <input type="text" id="uploadCredit" class="gal-input" placeholder="Nama / Instagram / Link...">
       </div>
     </div>
     <div class="gal-modal__footer">
-      <button class="btn btn-outline-primary" id="btnBatalUpload2"><span data-bhs="gal.page.btn.batal">Batalkan</span></button>
+      <button class="btn btn-outline-primary" id="btnBatalUpload2">Batalkan</button>
       <button class="btn btn-primary" id="btnKirimUpload">
-        <i class="fa-solid fa-upload"></i> <span data-bhs="gal.page.btn.upload2">Upload</span>
+        <i class="fa-solid fa-upload"></i> Upload
       </button>
     </div>
   </div>
@@ -183,14 +183,14 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 <div id="reviewModal" class="gal-modal-overlay" style="display:none">
   <div class="gal-modal">
     <div class="gal-modal__header">
-      <span><i class="fa-solid fa-pen-to-square me-2"></i><span data-bhs="gal.page.review.modal.title">Tulis Review</span></span>
+      <span><i class="fa-solid fa-pen-to-square me-2"></i>Tulis Review</span>
       <button class="gal-modal__close" id="btnBatalReview"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="gal-modal__body">
       <div class="gal-field">
-        <label class="gal-label"><span data-bhs="gal.page.review.lokasi.label">Lokasi</span> <span class="text-danger">*</span></label>
+        <label class="gal-label">Lokasi <span class="text-danger">*</span></label>
         <div class="gal-search-field-wrap">
-          <input type="text" id="reviewPoiSearch" class="gal-input" data-bhs="gal.page.upload.poi.placeholder" placeholder="Cari nama POI...">
+          <input type="text" id="reviewPoiSearch" class="gal-input" placeholder="Cari nama POI...">
           <div id="reviewPoiResults" class="gal-search-results gal-search-results--modal"></div>
         </div>
         <input type="hidden" id="reviewPoiId">
@@ -201,7 +201,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
         </div>
       </div>
       <div class="gal-field">
-        <label class="gal-label"><span data-bhs="gal.page.review.rating.label">Rating</span> <span class="text-danger">*</span></label>
+        <label class="gal-label">Rating <span class="text-danger">*</span></label>
         <div class="gal-stars" id="starRating">
           <?php for ($s = 1; $s <= 5; $s++): ?>
           <i class="fa-regular fa-star gal-star" data-val="<?= $s ?>"></i>
@@ -210,18 +210,18 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
         <input type="hidden" id="reviewRating" value="0">
       </div>
       <div class="gal-field">
-        <label class="gal-label"><span data-bhs="gal.page.review.judul.label">Judul</span> <span class="gal-optional" data-bhs="gal.page.optional">opsional</span></label>
-        <input type="text" id="reviewJudul" class="gal-input" data-bhs="gal.page.review.judul.placeholder" placeholder="Judul review...">
+        <label class="gal-label">Judul <span class="gal-optional">opsional</span></label>
+        <input type="text" id="reviewJudul" class="gal-input" placeholder="Judul review...">
       </div>
       <div class="gal-field">
-        <label class="gal-label"><span data-bhs="gal.page.review.cerita.label">Review</span> <span class="text-danger">*</span></label>
-        <textarea id="reviewCerita" class="gal-input gal-textarea" data-bhs="gal.page.review.cerita.placeholder" placeholder="Ceritakan pengalamanmu..." rows="4"></textarea>
+        <label class="gal-label">Review <span class="text-danger">*</span></label>
+        <textarea id="reviewCerita" class="gal-input gal-textarea" placeholder="Ceritakan pengalamanmu..." rows="4"></textarea>
       </div>
     </div>
     <div class="gal-modal__footer">
-      <button class="btn btn-outline-primary" id="btnBatalReview2"><span data-bhs="gal.page.btn.batal">Batalkan</span></button>
+      <button class="btn btn-outline-primary" id="btnBatalReview2">Batalkan</button>
       <button class="btn btn-primary" id="btnKirimReview">
-        <i class="fa-solid fa-paper-plane"></i> <span data-bhs="gal.page.btn.kirimreview">Kirim Review</span>
+        <i class="fa-solid fa-paper-plane"></i> Kirim Review
       </button>
     </div>
   </div>

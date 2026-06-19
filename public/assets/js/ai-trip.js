@@ -67,7 +67,7 @@
   async function generateItinerary() {
     const input = document.getElementById('aiPromptInput').value.trim();
     if (!input) {
-      flattyToast('warning', 'Tulis dulu rencanamu');
+      flattyToast('warning', 'toast.fill.first');
       return;
     }
 

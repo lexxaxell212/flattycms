@@ -1,5 +1,5 @@
 <footer id="footer">
-  <section class="container">
+  <div class="container">
     <section class="revealed">
       <div class="text-center">
         <div class="mb-5">
@@ -25,26 +25,46 @@
       <div class="footer-nav__col">
         <span class="footer-nav__label" data-bhs="f.pages.title">Halaman</span>
         <ul>
-          <li><a class="<?= isActive('/') ?>" href="<?= BASE_URL ?>" data-bhs="f.pages.1">Beranda</a></li>
-          <li><a class="<?= isActive('/blogs') ?>" href="/blogs" data-bhs="f.pages.2">Blogs</a></li>
-          <li><a class="<?= isActive('/pages/sejarah') ?>" href="/pages/sejarah" data-bhs="f.pages.3">Sejarah Bandung</a></li>
-          <li><a class="<?= isActive('/pages/layanan') ?>" href="/pages/layanan" data-bhs="f.pages.4">Layanan di Bandung</a></li>
+          <li><a class="<?= isActive(
+            "/"
+          ) ?>" href="<?= BASE_URL ?>" data-bhs="f.pages.1">Beranda</a></li>
+          <li><a class="<?= isActive(
+            "/blogs"
+          ) ?>" href="/blogs" data-bhs="f.pages.2">Blogs</a></li>
+          <li><a class="<?= isActive(
+            "/pages/sejarah"
+          ) ?>" href="/pages/sejarah" data-bhs="f.pages.3">Sejarah Bandung</a></li>
+          <li><a class="<?= isActive(
+            "/pages/layanan"
+          ) ?>" href="/pages/layanan" data-bhs="f.pages.4">Layanan di Bandung</a></li>
         </ul>
       </div>
       <div class="footer-nav__col">
         <span class="footer-nav__label" data-bhs="f.user.title">Untukmu</span>
         <ul>
-          <li><a class="<?= isActive('/things-to-do') ?>" href="/things-to-do" data-bhs="f.user.1">Aktifitas</a></li>
-          <li><a class="<?= isActive('/trip') ?>" href="/trip" data-bhs="f.user.2">Perencana Perjalanan</a></li>
-          <li><a class="<?= isActive('/gallery') ?>" href="/gallery" data-bhs="f.user.3">Galeri dan Ulasan</a></li>
+          <li><a class="<?= isActive(
+            "/things-to-do"
+          ) ?>" href="/things-to-do" data-bhs="f.user.1">Aktifitas</a></li>
+          <li><a class="<?= isActive(
+            "/trip"
+          ) ?>" href="/trip" data-bhs="f.user.2">Perencana Perjalanan</a></li>
+          <li><a class="<?= isActive(
+            "/gallery"
+          ) ?>" href="/gallery" data-bhs="f.user.3">Galeri dan Ulasan</a></li>
         </ul>
       </div>
       <div class="footer-nav__col">
         <span class="footer-nav__label" data-bhs="f.info.title">Informasi</span>
         <ul>
-          <li><a class="<?= isActive('/pages/tentang') ?>" href="/pages/tentang" data-bhs="f.info.1">Tentang</a></li>
-          <li><a class="<?= isActive('/pages/privacy-policy') ?>" href="/pages/privacy-policy" data-bhs="f.info.2">Privasi</a></li>
-          <li><a class="<?= isActive('/pages/kritik-dan-saran') ?>" href="/pages/kritik-dan-saran" data-bhs="f.info.3">Kritik dan Saran</a></li>
+          <li><a class="<?= isActive(
+            "/pages/tentang"
+          ) ?>" href="/pages/tentang" data-bhs="f.info.1">Tentang</a></li>
+          <li><a class="<?= isActive(
+            "/pages/privacy-policy"
+          ) ?>" href="/pages/privacy-policy" data-bhs="f.info.2">Privasi</a></li>
+          <li><a class="<?= isActive(
+            "/pages/kritik-dan-saran"
+          ) ?>" href="/pages/kritik-dan-saran" data-bhs="f.info.3">Kritik dan Saran</a></li>
         </ul>
       </div>
       <div class="footer-nav__col">
@@ -58,7 +78,7 @@
     </section>
     <div class="footer-bottom">
       <span class="text-uppercase text-muted small" style="letter-spacing:2px;opacity:.9;">
-        <?= date('Y') ?> <?= SITE_NAME ?>
+        <?= date("Y") ?> <?= SITE_NAME ?>
       </span>
     </div>
   </div>

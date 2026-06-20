@@ -978,13 +978,12 @@ async function u() {
   const refreshIcon = document.querySelector("#w .fa-refresh");
   refreshIcon?.classList.add("fa-spin");
 
-  const city = 'Bandung Jawa Barat';
   const lang = currentLang();
   const refreshLabel = wt('weather.refresh.label');
 
   try {
     await new Promise(resolve => setTimeout(resolve, 1000));
-    const res = await fetch(`/api/api-weather.php?city=${city}&lang=${lang}`,
+    const res = await fetch(`/api/api-weather.php?city=Bandunglang=${lang}`,
       {
         headers: {
           "X-Requested-With": "XMLHttpRequest"

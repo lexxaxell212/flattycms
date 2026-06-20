@@ -10,7 +10,7 @@ $city = $_GET['city'] ?? 'Bandung,ID';
 $city = htmlspecialchars(strip_tags($city));
 $lang = $_GET['lang'] ?? 'id';
 $lang = in_array($lang, ['id', 'en']) ? $lang : 'id';
-$url = "https://api.openweathermap.org/data/2.5/weather?q={$city}&appid=" . WEATHER_API_KEY . "&units=metric&lang={$lang}";
+$url = "https://api.openweathermap.org/data/2.5/weather?lat=6.906&lon=107.613&appid=" . WEATHER_API_KEY . "&units=metric&lang={$lang}";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);

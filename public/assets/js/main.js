@@ -982,8 +982,8 @@ async function u() {
   const refreshLabel = wt('weather.refresh.label');
 
   try {
-    await new Promise(resolve => setTimeout(resolve, 500));
-    const res = await fetch(`/api/api-weather.php?city=&lang=${lang}`,
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    const res = await fetch(`/api/api-weather.php?lang=${lang}`,
       {
         headers: {
           "X-Requested-With": "XMLHttpRequest"

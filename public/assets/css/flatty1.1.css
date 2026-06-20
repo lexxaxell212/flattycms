@@ -1840,6 +1840,7 @@ table tbody td {
 }
 .btn-fit {
   width: fit-content;
+  min-width: auto;
 }
 
 .btn-primary {

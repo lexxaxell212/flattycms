@@ -983,7 +983,7 @@ async function u() {
 
   try {
     await new Promise(resolve => setTimeout(resolve, 500));
-    const res = await fetch(`/api/api-weather.php?city=Bandung,%20Jawa%20Barat&lang=${lang}`,
+    const res = await fetch(`/api/api-weather.php?city=Bandung+Jawa+Barat&lang=${lang}`,
       {
         headers: {
           "X-Requested-With": "XMLHttpRequest"

@@ -978,6 +978,7 @@ async function u() {
   const refreshIcon = document.querySelector("#w .fa-refresh");
   refreshIcon?.classList.add("fa-spin");
 
+  const city = 'Bandung, Jawa Barat';
   const lang = currentLang();
   const refreshLabel = wt('weather.refresh.label');
 

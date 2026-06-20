@@ -3,10 +3,10 @@
   <div class="auth-btn-group">
   <div id="<?= $google_btn_id ?>" class="avatar-circle"></div>
   <div class="divider-v"></div>
-  <a href="/login" class="btn btn-outline-primary btn-sm rounded-sm" data-bhs="btn.login">
+  <a href="/login" class="btn btn-outline-primary btn-sm rounded-sm btn-fit" data-bhs="btn.login">
     Masuk
   </a>
-  <a href="/register" class="btn btn-primary btn-sm rounded-sm" data-bhs="btn.reg">
+  <a href="/register" class="btn btn-primary btn-sm rounded-sm btn-fit" data-bhs="btn.reg">
     Daftar
   </a>
   </div>
@@ -27,7 +27,7 @@
     </span>
   </a>
   <div class="divider-v"></div>
-  <a href="/api/auth/logout.php" class="btn btn-outline-primary btn-sm rounded-sm" data-bhs="btn.logout">
+  <a href="/api/auth/logout.php" class="btn btn-outline-primary btn-sm rounded-sm btn-fit" data-bhs="btn.logout">
     Keluar
   </a>
   </div>

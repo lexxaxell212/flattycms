@@ -46,7 +46,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
     </div>
     <div class="gal-hero">
       <div class="text-center">
-        <h1 class="text-hero">Share Your <em class="styled">Moments</em></h1>
+        <h1 class="text-hero"><span data-bhs="gal.page.hero.title">Share Your</span> <em class="styled" data-bhs="gal.page.hero.title.em">Moments</em></h1>
         <div class="gal-stats">
           <div class="gal-stat">
             <span class="gal-stat__val" id="statTotal">-</span>

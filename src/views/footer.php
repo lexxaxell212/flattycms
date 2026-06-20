@@ -32,7 +32,7 @@
         </ul>
       </div>
       <div class="footer-nav__col">
-        <span class="footer-nav__label" data-bhs="f.user.title">Untuk Pengunjung</span>
+        <span class="footer-nav__label" data-bhs="f.user.title">Untukmu</span>
         <ul>
           <li><a class="<?= isActive('/things-to-do') ?>" href="/things-to-do" data-bhs="f.user.1">Aktifitas</a></li>
           <li><a class="<?= isActive('/trip') ?>" href="/trip" data-bhs="f.user.2">Perencana Perjalanan</a></li>

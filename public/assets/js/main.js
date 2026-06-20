@@ -887,6 +887,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // weather
 
+/*
 const weatherTranslations = {
   id: {
     "cerah": "Cerah",
@@ -1044,6 +1045,138 @@ function g(c) {
 
 u();
 setInterval(u, 15 * 60 * 1000);
+
+
+async function u() {
+  if (isRefreshing) return;
+  isRefreshing = true;
+  const refreshIcon = document.querySelector("#w .fa-refresh");
+  refreshIcon?.classList.add("fa-spin");
+  const lang = currentLang();
+  const refreshLabel = wt('weather.refresh.label');
+  try {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    const res = await fetch(`/api/api-weather.php?lat=-6.906&lon=107.613&lang=${lang}`, {
+      headers: { "X-Requested-With": "XMLHttpRequest" }
+    });
+    const d = await res.json();
+    if (d.error) throw new Error(d.error);
+    const rawDesc = d.weather[0].description.toLowerCase();
+    const dict = weatherTranslations[lang] || weatherTranslations.id;
+    let weatherDesc = dict[rawDesc] || rawDesc.charAt(0).toUpperCase() + rawDesc.slice(1);
+    document.getElementById("w").innerHTML = `
+    <button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="u()" aria-label="${refreshLabel}" title="${refreshLabel}">
+    <i class="fas fa-refresh"></i>
+    </button>
+    <div class="icon-w">
+    ${g(d.weather[0].main)}
+    </div>
+    <div>
+    <div class="temp">${Math.round(d.main.temp)}<sup>°C</sup></div>
+    <div class="cond">${weatherDesc}</div>
+    </div>
+    <div class="sep"></div>
+    <div class="d-flex align-items-center gap-1 city">
+    <i class="fa-solid fa-location-dot me-1"></i>
+    <span>Bandung</span>
+    </div>
+    `;
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+    document.getElementById("w").innerHTML = `
+    <button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="u()" aria-label="${refreshLabel}" title="${refreshLabel}">
+    <i class="fas fa-refresh"></i>
+    </button>
+    <div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>${wt('weather.error.failed')}</div>
+    `;
+  } finally {
+    isRefreshing = false;
+  }
+}
+function g(c) {
+  return ({ Clear:"☀️",Clouds:"☁️",Rain:"🌧️",Snow:"❄️",Thunderstorm:"⛈️",Drizzle:"🌦️",Atmosphere:"🌫️" }[c] || "🌤️");
+}
+u();
+setInterval(u, 15 * 60 * 1000);
+*/
+
+// BMKG weather
+
+function bmkgIcon(weatherCode) {
+  const map = {
+    0: "☀️", 1: "☀️",
+    2: "⛅", 3: "⛅",
+    4: "☁️", 5: "☁️",
+    10: "🌫️",
+    45: "🌫️",
+    60: "🌦️", 61: "🌧️", 62: "🌧️", 63: "🌧️",
+    80: "🌦️", 95: "⛈️", 97: "⛈️"
+  };
+  return map[weatherCode] ?? "🌤️";
+}
+
+async function fetchBMKG() {
+  if (isRefreshing) return;
+  isRefreshing = true;
+
+  const refreshIcon = document.querySelector("#w .fa-refresh");
+  refreshIcon?.classList.add("fa-spin");
+
+  const lang = currentLang();
+  const refreshLabel = wt('weather.refresh.label');
+
+  try {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    const res = await fetch(`/api/api-weather.php?lang=${lang}`, {
+      headers: { "X-Requested-With": "XMLHttpRequest" }
+    });
+    const d = await res.json();
+    if (d.error) throw new Error(d.error);
+
+    const cuacaFlat = d.cuaca.flat();
+    const now = new Date();
+    const closest = cuacaFlat.reduce((prev, cur) => {
+      const diffPrev = Math.abs(new Date(prev.utc_datetime) - now);
+      const diffCur = Math.abs(new Date(cur.utc_datetime) - now);
+      return diffCur < diffPrev ? cur : prev;
+    });
+
+    const temp = Math.round(closest.t);
+    const desc = lang === 'en' ? closest.weather_desc_en : closest.weather_desc;
+    const icon = bmkgIcon(closest.weather);
+
+    document.getElementById("w").innerHTML = `
+    <button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="fetchBMKG()" aria-label="${refreshLabel}" title="${refreshLabel}">
+    <i class="fas fa-refresh"></i>
+    </button>
+    <div class="icon-w">
+    ${icon}
+    </div>
+    <div>
+    <div class="temp">${temp}<sup>°C</sup></div>
+    <div class="cond">${desc}</div>
+    </div>
+    <div class="sep"></div>
+    <div class="d-flex align-items-center gap-1 city">
+    <i class="fa-solid fa-location-dot me-1"></i>
+    <span>Bandung</span>
+    </div>
+    `;
+  } catch (error) {
+    console.error("Error fetching BMKG data:", error);
+    document.getElementById("w").innerHTML = `
+    <button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="fetchBMKG()" aria-label="${refreshLabel}" title="${refreshLabel}">
+    <i class="fas fa-refresh"></i>
+    </button>
+    <div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>${wt('weather.error.failed')}</div>
+    `;
+  } finally {
+    isRefreshing = false;
+  }
+}
+
+fetchBMKG();
+setInterval(fetchBMKG, 15 * 60 * 1000);
 
 // newsletter
 

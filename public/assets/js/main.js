@@ -1012,7 +1012,7 @@ async function u() {
     <div class="sep"></div>
     <div class="d-flex align-items-center gap-1 city">
     <i class="fa-solid fa-location-dot me-1"></i>
-    ${d.name}
+    <span>Bandung</span>
     </div>
     `;
   } catch (error) {

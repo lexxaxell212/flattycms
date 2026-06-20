@@ -6,7 +6,7 @@ verify_ajax_request('GET');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: https://ayokebandung.id');
 
-$city = 'Bandung, ID';
+$city = $_GET['city'] ?? 'Bandung,ID';
 $city = htmlspecialchars(strip_tags($city));
 $lang = $_GET['lang'] ?? 'id';
 $lang = in_array($lang, ['id', 'en']) ? $lang : 'id';

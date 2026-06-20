@@ -982,7 +982,7 @@ async function u() {
   const refreshLabel = wt('weather.refresh.label');
 
   try {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 500));
     const res = await fetch(`/api/api-weather.php?city=Bandung&lang=${lang}`,
       {
         headers: {
@@ -1012,7 +1012,7 @@ async function u() {
     <div class="sep"></div>
     <div class="d-flex align-items-center gap-1 city">
     <i class="fa-solid fa-location-dot me-1"></i>
-    <span>Bandung</span>
+    ${d.name}
     </div>
     `;
   } catch (error) {

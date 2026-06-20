@@ -1123,7 +1123,7 @@ async function fetchBMKG() {
   const refreshIcon = document.querySelector("#w .fa-refresh");
   refreshIcon?.classList.add("fa-spin");
 
-  //const lang = currentLang();
+  const lang = currentLang();
   const refreshLabel = wt('weather.refresh.label');
 
   try {

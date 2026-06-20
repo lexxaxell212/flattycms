@@ -7,10 +7,10 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: https://ayokebandung.id');
 
 $city = $_GET['city'] ?? 'Bandung, Jawa Barat';
-$city = htmlspecialchars(strip_tags($city));
+$city = strip_tags($city);
 $lang = $_GET['lang'] ?? 'id';
 $lang = in_array($lang, ['id', 'en']) ? $lang : 'id';
-$url = "https://api.openweathermap.org/data/2.5/weather?q={$city}&appid=" . WEATHER_API_KEY . "&units=metric&lang={$lang}";
+$url = "https://api.openweathermap.org/data/2.5/weather?q=" . urlencode($city) . "&appid=" . WEATHER_API_KEY . "&units=metric&lang={$lang}";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);

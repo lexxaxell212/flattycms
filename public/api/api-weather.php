@@ -32,27 +32,44 @@ echo json_encode($data);
 
 // BMKG
 $url = "https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=32.73.04.1003";
+
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Accept: application/json',
+    'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+]);
+
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
 $result = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    $error_msg = curl_error($ch);
+}
 curl_close($ch);
 
 if (!$result) {
   http_response_code(500);
-  echo json_encode(['error' => 'Failed to connect BMKG server.']);
+  echo json_encode([
+      'error' => 'Failed to connect BMKG server.',
+      'debug' => $error_msg ?? 'Unknown cURL error'
+  ]);
   exit;
 }
 
 $data = json_decode($result, true);
-if (!$data || empty($data['data'][0]['cuaca'])) {
+
+if (!$data || !isset($data['data']) || empty($data['data'])) {
   http_response_code(502);
-  echo json_encode(['error' => 'Failed to load BMKG data.']);
+  echo json_encode([
+      'error' => 'Failed to load BMKG data.',
+      'raw_status' => $data['status'] ?? 'Koneksi OK tapi struktur kosong'
+  ]);
   exit;
 }
 

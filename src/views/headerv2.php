@@ -79,17 +79,13 @@ function isActive(string $path): string {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="<?= CSS_URL ?>fa720.all.min.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>bs538.min.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>flatty1.1.css">
   <?php
   $isMobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT']);
   $heroImg = $isMobile ? 'wisata-mobile.webp' : 'wisata.webp'; ?>
   <link rel="preload" as="image" href="<?= IMG_URL . $heroImg ?>" type="image/webp" fetchpriority="high">
-  <link rel="preload" as="style" href="<?= CSS_URL ?>fa720.all.min.css">
-  <link rel="stylesheet" href="<?= CSS_URL ?>fa720.all.min.css" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="<?= CSS_URL ?>fa720.all.min.css">
-  </noscript>
   <!-- script -->
   <script src="https://accounts.google.com/gsi/client"></script>
   <script src="<?= JS_URL ?>gsi.js"></script>

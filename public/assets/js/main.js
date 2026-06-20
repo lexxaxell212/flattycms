@@ -1128,7 +1128,7 @@ async function fetchBMKG() {
 
   try {
     await new Promise(resolve => setTimeout(resolve, 500));
-    const res = await fetch(`/api/api-weather.php?lang=${lang}`, {
+    const res = await fetch(`/api/api-weather.php`, {
       headers: { "X-Requested-With": "XMLHttpRequest" }
     });
     const d = await res.json();

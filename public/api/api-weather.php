@@ -57,4 +57,3 @@ if (!$data || empty($data['data'][0]['cuaca'])) {
 }
 
 echo json_encode($data['data'][0]);
-?>

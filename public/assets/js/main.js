@@ -887,7 +887,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // weather
 
-/*
+
 const weatherTranslations = {
   id: {
     "cerah": "Cerah",
@@ -972,6 +972,7 @@ function currentLang() {
 
 let isRefreshing = false;
 
+/*
 async function u() {
   if (isRefreshing) return;
   isRefreshing = true;

@@ -4,29 +4,53 @@ const TOPIC = "bandung";
 const TIMEOUT = 20000;
 
 const CHATBOT_TEXT = {
-  'chatbot.welcome': {
-    id: 'Wilujeng sumping! 👋 Yara siap bantu eksplor Bandung. Mau tanya apa nih..?',
-    en: 'Welcome! 👋 Yara is ready to help you explore Bandung. What would you like to ask?'
+  "chatbot.welcome": {
+    id: "Wilujeng sumping! 👋 Yara siap bantu eksplor Bandung. Mau tanya apa nih..?",
+    en: "Welcome! 👋 Yara is ready to help you explore Bandung. What would you like to ask?",
   },
-  'chatbot.cleared': {
-    id: 'Chat dibersihkan. Ada yang bisa Yara bantu lagi? 😊',
-    en: 'Chat cleared. Is there anything else Yara can help with? 😊'
+  "chatbot.cleared": {
+    id: "Chat dibersihkan. Ada yang bisa Yara bantu lagi? 😊",
+    en: "Chat cleared. Is there anything else Yara can help with? 😊",
   },
-  'chatbot.label.user': { id: 'Kamu', en: 'You' },
-  'chatbot.label.ai': { id: 'Yara', en: 'Yara' },
-  'chatbot.error.timeout': { id: 'Request timeout.', en: 'Request timeout.' },
-  'chatbot.error.connection': { id: 'Koneksi bermasalah.', en: 'Connection problem.' },
-  'chatbot.error.generic': { id: 'Terjadi kesalahan.', en: 'An error occurred.' },
-  'chatbot.suggest.1': { id: '🍽️ Kuliner enak di Bandung', en: '🍽️ Great food in Bandung' },
-  'chatbot.suggest.2': { id: '🏔️ Wisata alam sekitar', en: '🏔️ Nearby nature attractions' },
-  'chatbot.suggest.3': { id: '🎡 Weekend seru di Bandung', en: '🎡 Fun weekend in Bandung' },
-  'chatbot.suggest.4': { id: '🕌 Tempat bersejarah', en: '🕌 Historical sites' },
-  'chatbot.suggest.5': { id: '🛍️ Rekomendasi belanja', en: '🛍️ Shopping recommendations' },
-  'chatbot.suggest.6': { id: '🌙 Tempat nongkrong malam', en: '🌙 Nightlife hangout spots' }
+  "chatbot.label.user": { id: "Kamu", en: "You" },
+  "chatbot.label.ai": { id: "Yara", en: "Yara" },
+  "chatbot.error.timeout": { id: "Request timeout.", en: "Request timeout." },
+  "chatbot.error.connection": {
+    id: "Koneksi bermasalah.",
+    en: "Connection problem.",
+  },
+  "chatbot.error.generic": {
+    id: "Terjadi kesalahan.",
+    en: "An error occurred.",
+  },
+  "chatbot.suggest.1": {
+    id: "🍽️ Kuliner enak di Bandung",
+    en: "🍽️ Great food in Bandung",
+  },
+  "chatbot.suggest.2": {
+    id: "🏔️ Wisata alam sekitar",
+    en: "🏔️ Nearby nature attractions",
+  },
+  "chatbot.suggest.3": {
+    id: "🎡 Weekend seru di Bandung",
+    en: "🎡 Fun weekend in Bandung",
+  },
+  "chatbot.suggest.4": {
+    id: "🕌 Tempat bersejarah",
+    en: "🕌 Historical sites",
+  },
+  "chatbot.suggest.5": {
+    id: "🛍️ Rekomendasi belanja",
+    en: "🛍️ Shopping recommendations",
+  },
+  "chatbot.suggest.6": {
+    id: "🌙 Tempat nongkrong malam",
+    en: "🌙 Nightlife hangout spots",
+  },
 };
 
 function ct(key) {
-  const lang = localStorage.getItem('lang') || 'id';
+  const lang = localStorage.getItem("lang") || "id";
   const entry = CHATBOT_TEXT[key];
   if (!entry) return key;
   return entry[lang] || entry.id;
@@ -34,12 +58,12 @@ function ct(key) {
 
 function getSuggestPrompts() {
   return [
-    ct('chatbot.suggest.1'),
-    ct('chatbot.suggest.2'),
-    ct('chatbot.suggest.3'),
-    ct('chatbot.suggest.4'),
-    ct('chatbot.suggest.5'),
-    ct('chatbot.suggest.6')
+    ct("chatbot.suggest.1"),
+    ct("chatbot.suggest.2"),
+    ct("chatbot.suggest.3"),
+    ct("chatbot.suggest.4"),
+    ct("chatbot.suggest.5"),
+    ct("chatbot.suggest.6"),
   ];
 }
 
@@ -48,30 +72,31 @@ let isLoading = false;
 
 function escapeHTML(str) {
   return str
-  .replace(/&/g, "&amp;")
-  .replace(/</g, "&lt;")
-  .replace(/>/g, "&gt;")
-  .replace(/"/g, "&quot;")
-  .replace(/'/g, "&#039;");
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 function formatText(text) {
   let out = escapeHTML(text);
-  out = out.replace(/\*\*(.+?)\*\*/g, '$1');
+  out = out.replace(/\*\*(.+?)\*\*/g, "$1");
   // parse markdown link → <a>
   out = out.replace(
     /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,
-    '<a href="$2" target="_blank" rel="noopener noreferrer" class="chat-link">$1</a>'
+    '<a href="$2" target="_blank" rel="noopener noreferrer" class="chat-link">$1</a>',
   );
-  out = out.replace(/^- (.+)/gm, '<li>$1</li>');
-  out = out.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
-  out = out.replace(/\n/g, '<br>');
+  out = out.replace(/^- (.+)/gm, "<li>$1</li>");
+  out = out.replace(/(<li>.*<\/li>\n?)+/g, "<ul>$&</ul>");
+  out = out.replace(/\n/g, "<br>");
   return out;
 }
 
 function currentTime() {
   return new Date().toLocaleTimeString([], {
-    hour: "2-digit", minute: "2-digit"
+    hour: "2-digit",
+    minute: "2-digit",
   });
 }
 
@@ -85,19 +110,21 @@ function removeLoadingBubble(id) {
 }
 
 function removeSuggests() {
-  document.querySelectorAll(".suggest-row").forEach(el => el.remove());
+  document.querySelectorAll(".suggest-row").forEach((el) => el.remove());
 }
 
 function addSuggests(prompts) {
   const messages = document.getElementById("chat-messages");
   const row = document.createElement("div");
   row.className = "suggest-row";
-  prompts.forEach(text => {
+  prompts.forEach((text) => {
     const chip = document.createElement("button");
     chip.className = "suggest-chip";
     chip.textContent = text;
     chip.onclick = () => {
-      document.getElementById("message-input").value = text.replace(/^[\p{Emoji}\s]+/u, "").trim();
+      document.getElementById("message-input").value = text
+        .replace(/^[\p{Emoji}\s]+/u, "")
+        .trim();
       removeSuggests();
       sendMessage();
     };
@@ -122,7 +149,8 @@ function addMessage(text, type = "loading") {
   } else if (type === "error") {
     bubble.innerHTML = `<span class="error-text">⚠️ ${escapeHTML(text)}</span>`;
   } else {
-    const label = type === "user" ? ct('chatbot.label.user') : ct('chatbot.label.ai');
+    const label =
+      type === "user" ? ct("chatbot.label.user") : ct("chatbot.label.ai");
     bubble.innerHTML = `
     <div class="msg-label">${label}</div>
     <div class="msg-text">${formatText(text)}</div>
@@ -149,7 +177,8 @@ async function sendMessage() {
   input.focus();
 
   conversationHistory.push({
-    role: "user", content: message
+    role: "user",
+    content: message,
   });
 
   const loadingId = addMessage("", "loading");
@@ -163,12 +192,14 @@ async function sendMessage() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest"
+        "X-Requested-With": "XMLHttpRequest",
       },
       body: JSON.stringify({
-        message, topic: TOPIC, history: conversationHistory
+        message,
+        topic: TOPIC,
+        history: conversationHistory,
       }),
-      signal: controller.signal
+      signal: controller.signal,
     });
 
     clearTimeout(timeout);
@@ -178,20 +209,23 @@ async function sendMessage() {
     if (data.success) {
       addMessage(data.reply, "ai");
       conversationHistory.push({
-        role: "assistant", content: data.reply
+        role: "assistant",
+        content: data.reply,
       });
       // Show suggest chips after first AI reply if history is short
       if (conversationHistory.length <= 2) {
         addSuggests(getSuggestPrompts().slice(0, 4));
       }
     } else {
-      addMessage(data.error ?? ct('chatbot.error.generic'), "error");
+      addMessage(data.error ?? ct("chatbot.error.generic"), "error");
       conversationHistory.pop();
     }
   } catch (err) {
     removeLoadingBubble(loadingId);
-    const msg = err.name === "AbortError"
-    ? ct('chatbot.error.timeout') : ct('chatbot.error.connection');
+    const msg =
+      err.name === "AbortError"
+        ? ct("chatbot.error.timeout")
+        : ct("chatbot.error.connection");
     addMessage(msg, "error");
     conversationHistory.pop();
   } finally {
@@ -202,7 +236,7 @@ async function sendMessage() {
 function clearChat() {
   document.getElementById("chat-messages").innerHTML = "";
   conversationHistory = [];
-  addMessage(ct('chatbot.cleared'), "ai");
+  addMessage(ct("chatbot.cleared"), "ai");
   addSuggests(getSuggestPrompts());
 }
 
@@ -221,14 +255,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  input.addEventListener("input",
-    () => autoResize(input));
+  input.addEventListener("input", () => autoResize(input));
 
-  addMessage(ct('chatbot.welcome'), "ai");
+  addMessage(ct("chatbot.welcome"), "ai");
   addSuggests(getSuggestPrompts());
   input.focus();
 });
-
 
 // live search
 
@@ -249,13 +281,13 @@ document.addEventListener("DOMContentLoaded", () => {
     LABELS: {
       cmpt: "Things To Do",
       allcontent_posts: "Blogs",
-      poi: "POI Bandung"
+      poi: "POI Bandung",
     },
     URLS: {
       cmpt: "{button_link}",
       allcontent_posts: "/blogs/?slug={slug}",
-      poi: "/poi/{slug}"
-    }
+      poi: "/poi/{slug}",
+    },
   };
 
   let debounceTimer = null;
@@ -289,17 +321,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    document.addEventListener("keydown",
-      (e) => {
-        if (e.key === "Escape") closeWrapper();
-      });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeWrapper();
+    });
 
-    window.OverlayManager?.register("search",
-      {
-        close: () => closeWrapper( {
-          silent: true
-        })
-      });
+    window.OverlayManager?.register("search", {
+      close: () =>
+        closeWrapper({
+          silent: true,
+        }),
+    });
   }
 
   function openWrapper() {
@@ -308,8 +339,7 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.classList.add("active");
     trigger.classList.add("is-active");
     window.ScrollLock?.lock();
-    setTimeout(() => input.focus(),
-      50);
+    setTimeout(() => input.focus(), 50);
     clearDropdown();
   }
 
@@ -350,30 +380,29 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(CONFIG.SEARCH_URL + "?q=" + encodeURIComponent(q), {
       signal: currentRequest.signal,
       headers: {
-        "X-Requested-With": "XMLHttpRequest"
-      }
+        "X-Requested-With": "XMLHttpRequest",
+      },
     })
-    .then((res) => {
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      return res.json();
-    })
-    .then((data) => renderResults(data, q))
-    .catch((err) => {
-      if (err.name === "AbortError") return;
-      showError();
-      console.error("[live-search]", err);
-    });
+      .then((res) => {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then((data) => renderResults(data, q))
+      .catch((err) => {
+        if (err.name === "AbortError") return;
+        showError();
+        console.error("[live-search]", err);
+      });
   }
 
-  function renderResults(data,
-    q) {
+  function renderResults(data, q) {
     dropdown.innerHTML = "";
 
     if (!data.results || data.results.length === 0) {
       dropdown.innerHTML =
-      '<div class="ls-empty">Search for <strong>' +
-      esc(q) +
-      "</strong> is not found.</div>";
+        '<div class="ls-empty">Search for <strong>' +
+        esc(q) +
+        "</strong> is not found.</div>";
       dropdown.classList.add("open");
       return;
     }
@@ -397,7 +426,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let href = CONFIG.URLS[source] || "#";
         href = href.replace("{id}", item.id);
         if (item.slug) href = href.replace("{slug}", item.slug);
-        if (item.button_link) href = href.replace("{button_link}", item.button_link);
+        if (item.button_link)
+          href = href.replace("{button_link}", item.button_link);
 
         const a = document.createElement("a");
         a.className = "ls-item";
@@ -406,13 +436,14 @@ document.addEventListener("DOMContentLoaded", () => {
         a.style.animationDelay = itemIndex * 40 + "ms";
 
         a.innerHTML =
-        '<div class="ls-title">' +
-        hilite(item.title, q) +
-        "</div>" +
-        (item.description
-          ? '<div class="ls-desc">' +
-          hilite(trunc(item.description, 90), q) +
-          "</div>": "");
+          '<div class="ls-title">' +
+          hilite(item.title, q) +
+          "</div>" +
+          (item.description
+            ? '<div class="ls-desc">' +
+              hilite(trunc(item.description, 90), q) +
+              "</div>"
+            : "");
 
         dropdown.appendChild(a);
         itemIndex++;
@@ -440,10 +471,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      moveFocus(items, idx + 1 < items.length ? idx + 1: 0);
+      moveFocus(items, idx + 1 < items.length ? idx + 1 : 0);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      moveFocus(items, idx - 1 >= 0 ? idx - 1: items.length - 1);
+      moveFocus(items, idx - 1 >= 0 ? idx - 1 : items.length - 1);
     } else if (e.key === "Enter" && focused) {
       e.preventDefault();
       focused.click();
@@ -455,7 +486,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (items[idx]) {
       items[idx].classList.add("focused");
       items[idx].scrollIntoView({
-        block: "nearest"
+        block: "nearest",
       });
     }
   }
@@ -467,13 +498,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showLoading() {
     dropdown.innerHTML =
-    '<div class="ls-loading"><span class="ls-spinner"></span> Searching...</div>';
+      '<div class="ls-loading"><span class="ls-spinner"></span> Searching...</div>';
     dropdown.classList.add("open");
   }
 
   function showError() {
     dropdown.innerHTML =
-    '<div class="ls-error">An error occured, Try again.</div>';
+      '<div class="ls-error">An error occured, Try again.</div>';
     dropdown.classList.add("open");
   }
 
@@ -481,13 +512,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!q || !text) return esc(text || "");
     const re = new RegExp(
       "(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")",
-      "gi"
+      "gi",
     );
     return esc(text).replace(re, "<mark>$1</mark>");
   }
 
   function trunc(str, len) {
-    return str && str.length > len ? str.slice(0, len) + "…": str;
+    return str && str.length > len ? str.slice(0, len) + "…" : str;
   }
 
   function esc(str) {
@@ -503,7 +534,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })();
 
-
 const ScrollLock = {
   _count: 0,
 
@@ -511,7 +541,10 @@ const ScrollLock = {
     this._count++;
     if (this._count === 1) {
       const scrollbarWidth = this._getScrollbarWidth();
-      document.documentElement.style.setProperty("--scrollbar-width", scrollbarWidth + "px");
+      document.documentElement.style.setProperty(
+        "--scrollbar-width",
+        scrollbarWidth + "px",
+      );
       document.documentElement.style.overflowY = "hidden";
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = scrollbarWidth + "px";
@@ -538,10 +571,9 @@ const ScrollLock = {
 
   _getScrollbarWidth() {
     return window.innerWidth - document.documentElement.clientWidth;
-  }
+  },
 };
 window.ScrollLock = ScrollLock;
-
 
 const OverlayManager = {
   _overlays: {},
@@ -573,10 +605,9 @@ const OverlayManager = {
       console.warn("[OverlayManager] fail to close overlay:", name, err);
     }
     if (this._active === name) this._active = null;
-  }
+  },
 };
 window.OverlayManager = OverlayManager;
-
 
 // navbar
 
@@ -615,9 +646,10 @@ async function toggleMenu() {
 }
 
 OverlayManager.register("menu", {
-  close: () => closeMenu( {
-    silent: true
-  })
+  close: () =>
+    closeMenu({
+      silent: true,
+    }),
 });
 
 if (toggler) toggler.addEventListener("click", toggleMenu);
@@ -629,74 +661,76 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-
 function setupChatbotOverlay() {
   const chatbotElement = document.getElementById("chatbot");
-  if (!chatbotElement || !window.bootstrap || !window.bootstrap.Offcanvas) return;
+  if (!chatbotElement || !window.bootstrap || !window.bootstrap.Offcanvas)
+    return;
 
-  const isMobileChatbot = () => window.matchMedia("(max-width: 767.98px)").matches;
+  const isMobileChatbot = () =>
+    window.matchMedia("(max-width: 767.98px)").matches;
   let lockedThisOpen = false;
 
   const instance =
-  window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
-  new window.bootstrap.Offcanvas(chatbotElement, {
-    scroll: true,
-    backdrop: false
-  });
+    window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
+    new window.bootstrap.Offcanvas(chatbotElement, {
+      scroll: true,
+      backdrop: false,
+    });
 
   chatbotElement.addEventListener("show.bs.offcanvas", () => {
     lockedThisOpen = isMobileChatbot();
     if (lockedThisOpen) ScrollLock.lock();
   });
 
-  chatbotElement.addEventListener("hidden.bs.offcanvas",
-    () => {
-      if (lockedThisOpen) {
-        ScrollLock.unlock();
-        lockedThisOpen = false;
-      }
-      OverlayManager.notifyClosed("chatbot");
-    });
+  chatbotElement.addEventListener("hidden.bs.offcanvas", () => {
+    if (lockedThisOpen) {
+      ScrollLock.unlock();
+      lockedThisOpen = false;
+    }
+    OverlayManager.notifyClosed("chatbot");
+  });
 
-  OverlayManager.register("chatbot",
-    {
-      close: () => {
-        if (!chatbotElement.classList.contains("show")) {
-          return Promise.resolve();
-        }
-        return new Promise((resolve) => {
-          chatbotElement.addEventListener(
-            "hidden.bs.offcanvas",
-            () => resolve(),
-            {
-              once: true
-            }
-          );
-          instance.hide();
-        });
+  OverlayManager.register("chatbot", {
+    close: () => {
+      if (!chatbotElement.classList.contains("show")) {
+        return Promise.resolve();
       }
-    });
+      return new Promise((resolve) => {
+        chatbotElement.addEventListener(
+          "hidden.bs.offcanvas",
+          () => resolve(),
+          {
+            once: true,
+          },
+        );
+        instance.hide();
+      });
+    },
+  });
 
   return instance;
 }
 
 async function openChatbot() {
   const chatbotElement = document.getElementById("chatbot");
-  if (!chatbotElement || !window.bootstrap || !window.bootstrap.Offcanvas) return;
+  if (!chatbotElement || !window.bootstrap || !window.bootstrap.Offcanvas)
+    return;
 
   await OverlayManager.openExclusive("chatbot");
 
   const instance =
-  window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
-  new window.bootstrap.Offcanvas(chatbotElement, {
-    scroll: true, backdrop: false
-  });
+    window.bootstrap.Offcanvas.getInstance(chatbotElement) ??
+    new window.bootstrap.Offcanvas(chatbotElement, {
+      scroll: true,
+      backdrop: false,
+    });
   instance.show();
 }
 
 function closeChatbot() {
   const chatbotElement = document.getElementById("chatbot");
-  if (!chatbotElement || !window.bootstrap || !window.bootstrap.Offcanvas) return;
+  if (!chatbotElement || !window.bootstrap || !window.bootstrap.Offcanvas)
+    return;
   const instance = window.bootstrap.Offcanvas.getInstance(chatbotElement);
   instance?.hide();
 }
@@ -712,10 +746,8 @@ async function toggleChatbotGlobal() {
   }
 }
 
-
 class SmartFab {
-  constructor(fabId = "chatbotFabBtn",
-    scrollThreshold = 200) {
+  constructor(fabId = "chatbotFabBtn", scrollThreshold = 200) {
     this.fab = document.getElementById(fabId);
     this.threshold = scrollThreshold;
     this.isVisible = false;
@@ -727,7 +759,7 @@ class SmartFab {
     this.updateVisibility();
     this._scrollHandler = this.throttle(this.handleScroll.bind(this), 16);
     window.addEventListener("scroll", this._scrollHandler, {
-      passive: true
+      passive: true,
     });
     window.addEventListener("beforeunload", () => this.destroy());
     this.fab.addEventListener("click", this.onFabClick);
@@ -761,12 +793,10 @@ class SmartFab {
     this.isVisible = false;
     setTimeout(() => {
       if (!this.isVisible) this.fab.style.visibility = "hidden";
-    },
-      300);
+    }, 300);
   }
 
-  throttle(func,
-    limit) {
+  throttle(func, limit) {
     let inThrottle;
     return function () {
       if (!inThrottle) {
@@ -796,7 +826,7 @@ class SmartScrollTop {
     this._resizeHandler = this.throttle(this.handleResize.bind(this), 250);
     this.updateVisibility();
     window.addEventListener("scroll", this._scrollHandler, {
-      passive: true
+      passive: true,
     });
     window.addEventListener("resize", this._resizeHandler);
     this.btn.addEventListener("click", this.scrollToTop.bind(this));
@@ -829,7 +859,8 @@ class SmartScrollTop {
 
   scrollToTop() {
     window.scrollTo({
-      top: 0, behavior: "smooth"
+      top: 0,
+      behavior: "smooth",
     });
   }
 
@@ -847,12 +878,10 @@ class SmartScrollTop {
     this.isVisible = false;
     setTimeout(() => {
       if (!this.isVisible) this.btn.style.visibility = "hidden";
-    },
-      300);
+    }, 300);
   }
 
-  throttle(func,
-    limit) {
+  throttle(func, limit) {
     let inThrottle;
     return function () {
       if (!inThrottle) {
@@ -869,7 +898,7 @@ function toggleDark(el) {
   el.classList.toggle("dark");
   localStorage.setItem(
     "dark",
-    document.documentElement.hasAttribute("data-dark")
+    document.documentElement.hasAttribute("data-dark"),
   );
 }
 
@@ -887,21 +916,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // weather
 
-
 const weatherTranslations = {
   id: {
-    "cerah": "Cerah",
+    cerah: "Cerah",
     "cerah berawan": "Cerah Berawan",
     "sedikit berawan": "Sedikit Berawan",
-    "berawan": "Berawan",
-    "mendung": "Mendung",
+    berawan: "Berawan",
+    mendung: "Mendung",
     "hujan ringan": "Hujan Ringan",
     "hujan sedang": "Hujan Sedang",
     "hujan lebat": "Hujan Lebat",
     "hujan sangat lebat": "Hujan Lebat",
     "hujan ekstrem": "Hujan Ekstrem",
     "gerimis ringan": "Gerimis",
-    "gerimis": "Gerimis",
+    gerimis: "Gerimis",
     "gerimis lebat": "Gerimis Lebat",
     "badai petir": "Badai Petir",
     "badai petir dengan hujan ringan": "Badai Petir",
@@ -910,16 +938,16 @@ const weatherTranslations = {
     "hujan salju": "Hujan Salju",
     "salju lebat": "Salju Lebat",
     "hujan es": "Hujan Es",
-    "kabut": "Kabut",
+    kabut: "Kabut",
     "kabut tipis": "Kabut Tipis",
-    "asap": "Asap",
-    "debu": "Debu",
-    "pasir": "Pasir",
-    "abu": "Abu",
+    asap: "Asap",
+    debu: "Debu",
+    pasir: "Pasir",
+    abu: "Abu",
     "angin puyuh": "Angin Puyuh",
-    "tornado": "Tornado",
+    tornado: "Tornado",
     "awan pecah": "Berawan",
-    "awan bergerak cepat": "Berawan"
+    "awan bergerak cepat": "Berawan",
   },
   en: {
     "clear sky": "Clear Sky",
@@ -933,41 +961,44 @@ const weatherTranslations = {
     "very heavy rain": "Very Heavy Rain",
     "extreme rain": "Extreme Rain",
     "light intensity drizzle": "Light Drizzle",
-    "drizzle": "Drizzle",
+    drizzle: "Drizzle",
     "heavy intensity drizzle": "Heavy Drizzle",
-    "thunderstorm": "Thunderstorm",
+    thunderstorm: "Thunderstorm",
     "thunderstorm with light rain": "Thunderstorm",
     "thunderstorm with heavy rain": "Heavy Thunderstorm",
     "light snow": "Light Snow",
-    "snow": "Snow",
+    snow: "Snow",
     "heavy snow": "Heavy Snow",
-    "sleet": "Sleet",
-    "mist": "Mist",
-    "haze": "Haze",
-    "smoke": "Smoke",
-    "dust": "Dust",
-    "sand": "Sand",
-    "ash": "Ash",
-    "squalls": "Squalls",
-    "tornado": "Tornado"
-  }
+    sleet: "Sleet",
+    mist: "Mist",
+    haze: "Haze",
+    smoke: "Smoke",
+    dust: "Dust",
+    sand: "Sand",
+    ash: "Ash",
+    squalls: "Squalls",
+    tornado: "Tornado",
+  },
 };
 
 const WEATHER_TEXT = {
-  'weather.error.failed': { id: 'Gagal memuat cuaca, coba lagi.', en: 'Failed to load weather, try again.' },
-  'weather.refresh.label': { id: 'Refresh cuaca', en: 'Refresh weather' }
+  "weather.error.failed": {
+    id: "Gagal memuat cuaca, coba lagi.",
+    en: "Failed to load weather, try again.",
+  },
+  "weather.refresh.label": { id: "Refresh cuaca", en: "Refresh weather" },
 };
 
 function wt(key) {
-  const lang = localStorage.getItem('lang') || 'id';
+  const lang = localStorage.getItem("lang") || "id";
   const entry = WEATHER_TEXT[key];
   if (!entry) return key;
   return entry[lang] || entry.id;
 }
 
 function currentLang() {
-  const lang = localStorage.getItem('lang') || 'id';
-  return lang === 'en' ? 'en' : 'id';
+  const lang = localStorage.getItem("lang") || "id";
+  return lang === "en" ? "en" : "id";
 }
 
 let isRefreshing = false;
@@ -1105,13 +1136,21 @@ setInterval(u, 15 * 60 * 1000);
 
 function bmkgIcon(weatherCode) {
   const map = {
-    0: "☀️", 1: "☀️",
-    2: "⛅", 3: "⛅",
-    4: "☁️", 5: "☁️",
+    0: "☀️",
+    1: "☀️",
+    2: "⛅",
+    3: "⛅",
+    4: "☁️",
+    5: "☁️",
     10: "🌫️",
     45: "🌫️",
-    60: "🌦️", 61: "🌧️", 62: "🌧️", 63: "🌧️",
-    80: "🌦️", 95: "⛈️", 97: "⛈️"
+    60: "🌦️",
+    61: "🌧️",
+    62: "🌧️",
+    63: "🌧️",
+    80: "🌦️",
+    95: "⛈️",
+    97: "⛈️",
   };
   return map[weatherCode] ?? "🌤️";
 }
@@ -1124,12 +1163,12 @@ async function fetchBMKG() {
   refreshIcon?.classList.add("fa-spin");
 
   const lang = currentLang();
-  const refreshLabel = wt('weather.refresh.label');
+  const refreshLabel = wt("weather.refresh.label");
 
   try {
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     const res = await fetch(`/api/api-weather.php`, {
-      headers: { "X-Requested-With": "XMLHttpRequest" }
+      headers: { "X-Requested-With": "XMLHttpRequest" },
     });
     const d = await res.json();
     if (d.error) throw new Error(d.error);
@@ -1143,33 +1182,42 @@ async function fetchBMKG() {
     });
 
     const temp = Math.round(closest.t);
-    const desc = lang === 'en' ? closest.weather_desc_en : closest.weather_desc;
+    const desc = lang === "en" ? closest.weather_desc_en : closest.weather_desc;
     const icon = bmkgIcon(closest.weather);
 
     document.getElementById("w").innerHTML = `
-    <button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="fetchBMKG()" aria-label="${refreshLabel}" title="${refreshLabel}">
-    <i class="fas fa-refresh"></i>
-    </button>
-    <div class="icon-w">
-    ${icon}
-    </div>
-    <div>
-    <div class="temp">${temp}<sup>°C</sup></div>
-    <div class="cond">${desc}</div>
-    </div>
-    <div class="sep"></div>
-    <div class="d-flex align-items-center gap-1 city">
-    <i class="fa-solid fa-location-dot me-1"></i>
-    <span>Bandung</span>
-    </div>
+          <button type="button" class="position-absolute top-0 end-0 weather-refresh" onclick="fetchBMKG()" aria-label="${refreshLabel}" title="${refreshLabel}"
+          >
+            <i class="fas fa-refresh"></i>
+          </button>
+          <div class="position-absolute bottom-0 start-0 weather-api">
+            Data cuaca dari <a class="ms-1" href="https://bmkg.go.id/" target="_blank" rel="noopener noreferrer">BMKG.GO.ID</a>
+          </div>
+          <div class="weather-data">
+          <div class="icon-w">${icon}</div>
+          <div class="tc-w">
+            <div class="temp">
+              ${temp}
+              <sup>°C</sup>
+            </div>
+            <div class="cond">
+              <span>${desc}</span>
+            </div>
+          </div>
+          </div>
+          <div class="d-flex align-items-center gap-1 city">
+            <i class="fa-solid fa-location-dot me-1"></i>
+            <span>Bandung</span>
+          </div>
     `;
   } catch (error) {
     console.error("Error fetching BMKG data:", error);
     document.getElementById("w").innerHTML = `
-    <button type="button" class="position-absolute top-0 end-0 badge text-muted fw-bold border-0 bg-transparent" style="font-size:1rem" onclick="fetchBMKG()" aria-label="${refreshLabel}" title="${refreshLabel}">
-    <i class="fas fa-refresh"></i>
+    <button type="button" class="position-absolute top-0 end-0 weather-refresh" onclick="fetchBMKG()" aria-label="${refreshLabel}" title="${refreshLabel}"
+          >
+        <i class="fas fa-refresh"></i>
     </button>
-    <div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>${wt('weather.error.failed')}</div>
+    <div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>${wt("weather.error.failed")}</div>
     `;
   } finally {
     isRefreshing = false;
@@ -1181,52 +1229,60 @@ setInterval(fetchBMKG, 15 * 60 * 1000);
 
 // newsletter
 
-document.addEventListener('DOMContentLoaded', function() {
-  const allowed = ['gmail.com', 'googlemail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'proton.me'];
-  const form = document.getElementById('newsletterForm');
-  const input = document.getElementById('emailInput');
-  const btn = document.getElementById('submitBtn');
+document.addEventListener("DOMContentLoaded", function () {
+  const allowed = [
+    "gmail.com",
+    "googlemail.com",
+    "yahoo.com",
+    "outlook.com",
+    "hotmail.com",
+    "proton.me",
+  ];
+  const form = document.getElementById("newsletterForm");
+  const input = document.getElementById("emailInput");
+  const btn = document.getElementById("submitBtn");
   if (!form) return;
 
-  form.addEventListener('submit', async function(e) {
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
     const email = input.value.trim();
-    if (email === '') {
-      flattyToast('warning', 'toast.email.required');
+    if (email === "") {
+      flattyToast("warning", "toast.email.required");
       return;
     }
-    const domain = email.split('@')[1];
+    const domain = email.split("@")[1];
     if (!allowed.includes(domain)) {
-      flattyToast('warning', 'toast.email.invalid');
+      flattyToast("warning", "toast.email.invalid");
       return;
     }
     btn.disabled = true;
-    btn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
-    await new Promise(r => setTimeout(r, 1000));
+    btn.innerHTML =
+      '<div class="btn-fetch"><span></span><span></span><span></span></div>';
+    await new Promise((r) => setTimeout(r, 1000));
     const formData = new FormData(form);
-    fetch(CONFIG.baseUrl + '/api/api-newsletter.php', {
-      method: 'POST',
+    fetch(CONFIG.baseUrl + "/api/api-newsletter.php", {
+      method: "POST",
       headers: {
-        'X-Requested-With': 'XMLHttpRequest'
+        "X-Requested-With": "XMLHttpRequest",
       },
-      body: new URLSearchParams(formData)
+      body: new URLSearchParams(formData),
     })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        flattyToast('success', data.message);
-        input.value = '';
-      } else {
-        flattyToast('error', data.message);
-      }
-    })
-    .catch(() => {
-      flattyToast('error', 'toast.connection.error');
-    })
-    .finally(() => {
-      btn.disabled = false;
-      btn.innerHTML = '<span data-bhs="btn.subs">Berlangganan</span>';
-    });
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          flattyToast("success", data.message);
+          input.value = "";
+        } else {
+          flattyToast("error", data.message);
+        }
+      })
+      .catch(() => {
+        flattyToast("error", "toast.connection.error");
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<span data-bhs="btn.subs">Berlangganan</span>';
+      });
   });
 });
 
@@ -1306,7 +1362,8 @@ function initTicker(el) {
       el.style.opacity = "0";
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          el.style.transition = "transform 400ms cubic-bezier(0.16, 1, 0.3, 1), opacity 400ms ease";
+          el.style.transition =
+            "transform 400ms cubic-bezier(0.16, 1, 0.3, 1), opacity 400ms ease";
           el.style.transform = "translateY(0)";
           el.style.opacity = "1";
         });
@@ -1320,19 +1377,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // reveal
-document.addEventListener('DOMContentLoaded', () => {
-  const sections = document.querySelectorAll('section');
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("section");
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    },
+  );
 
-  sections.forEach(el => observer.observe(el));
+  sections.forEach((el) => observer.observe(el));
 });

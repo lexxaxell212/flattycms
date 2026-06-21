@@ -66,15 +66,15 @@
     }
     grid.innerHTML = data.photos.map(p => `
       <div class="col-6 col-md-4" id="photo-${p.id}">
-      <div class="card card-glass">
-      <img src="${BASE}/uploads/${p.photo_path}" class="card-img-top" loading="lazy">
+      <div class="card card-flatty">
       <div class="card-body">
+      <img src="${BASE}/uploads/${p.photo_path}" class="card-img" loading="lazy">
       <h3 class="h5 small text-truncate mb-2">${p.poi_name}</h3>
       ${p.caption ? `<p class="text-muted text-truncate small mb-2">${p.caption}</p>`: ''}
       <span class="text-muted" style="font-size:.68rem">${formatDate(p.created_at)}</span>
       </div>
       <div class="card-footer">
-      <button class="btn btn-danger btn-sm w-100" onclick="deleteContrib('photo', ${p.id})">Hapus<i class="fa-solid fa-trash ms-2"></i>
+      <button class="btn btn-danger" onclick="deleteContrib('photo', ${p.id})">Hapus<i class="fa-solid fa-trash ms-2"></i>
       </button>
       </div>
       </div>
@@ -90,7 +90,7 @@
       return;
     }
     list.innerHTML = data.trips.map(t => `
-      <div class="col-12 col-md-6 card card-flatty" id="trip-${t.id}">
+      <div class="col-12 col-md-6 card card-glass" id="trip-${t.id}">
       <div class="p-3 p-md-4">
       <h3 class="h4 text-truncate">${t.title}</h3>
       <div class="row g-2">
@@ -101,9 +101,9 @@
       </div>
       <div class="text-muted mb-4" style="font-size:.8rem">${formatDate(t.created_at)}</div>
       <div class="d-flex gap-2">
-      <a href="/trip" class="btn btn-primary btn-sm"> Buka di Map <i class="fa-solid fa-route ms-2"></i>
+      <a href="/trip" class="btn btn-primary"> Buka di Map <i class="fa-solid fa-route ms-2"></i>
       </a>
-      <button class="btn btn-danger btn-sm" onclick="deleteContrib('trip', ${t.id})"> Hapus <i class="fa-solid fa-trash"></i>
+      <button class="btn btn-danger" onclick="deleteContrib('trip', ${t.id})"> Hapus <i class="fa-solid fa-trash"></i>
       </button>
       </div>
       </div>
@@ -134,14 +134,14 @@
 
     list.innerHTML = data.reactions.map(r => `
       <div class="col-12 col-md-6" id="reaction-${r.id}">
-      <div class="card card-flatty">
+      <div class="card card-glass">
       <div class="card-body">
       <div class="rounded-circle d-flex align-items-center justify-content-center mb-2" style="width:40px;height:40px;background: var(--bg-primary-subtle)">
       <i class="fa-solid ${typeIcon[r.content_type] ?? 'fa-heart'} text-purple"></i>
       </div>
       <div class="small mb-2">${r.content_title ?? `${typeLabel[r.content_type] ?? r.content_type} #${r.content_id}`}</div>
       <div class="text-muted mb-2" style="font-size:.7rem">${formatDate(r.created_at)}</div>
-      <button class="btn btn-danger btn-sm" onclick="deleteContrib('reaction', ${r.id})"> Hapus
+      <button class="btn btn-danger" onclick="deleteContrib('reaction', ${r.id})"> Hapus
       <i class="fa-solid fa-trash ms-2"></i>
       </button>
       </div>

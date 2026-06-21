@@ -490,7 +490,7 @@ $page_title = 'Things to Do';
       <style>
         .accordion-item {
           margin-bottom: 0.5rem;
-          border-radius: var(--radius-lg) !important;
+          border-radius: var(--radius-sm) !important;
           background: var(--bg-card);
           color: var(--text-card);
           border: var(--border-card);

@@ -209,7 +209,7 @@ $cats_json = json_encode($categories);
                         </div>
                       </div>
                       <div class="col-12 col-md-8">
-                        <div class="card bg-card">
+                        <div class="card card-glass">
                           <div class="card-body">
                             <div id="startImg"></div>
                             <h5 id="startName" class="fw-semibold"></h5>

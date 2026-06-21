@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('startName2').textContent = startPoint.name;
         document.getElementById('startDesc').textContent = startPoint.description || 'Deskripsi belum tersedia.';
         document.getElementById('startImg').innerHTML = startPoint.poi_image
-        ? `<img src="${escHtml(startPoint.poi_image)}" class="card-img" onerror="this.src='/uploads/poi-placeholder.jpg'">`: `<img src="/uploads/poi-placeholder.jpg" class="card-img">`;
+        ? `<img src="${escHtml(startPoint.poi_image)}" class="card-img-top" onerror="this.src='/uploads/poi-placeholder.jpg'">`: `<img src="/uploads/poi-placeholder.jpg" class="card-img-top">`;
         document.getElementById('startSelected').style.display = '';
         document.getElementById('startInput').value = '';
         el.style.display = 'none';
@@ -228,15 +228,15 @@ document.addEventListener('DOMContentLoaded', () => {
       • ${r.name}
       </div>
       ${r.distance_from_prev ? `<div class="text-muted mb-2" style="font-size:.7rem"><i class="fa-solid fa-ruler me-1"></i>${r.distance_from_prev} km dari titik sebelumnya</div>`: ''}
-      <div class="card card-flatty mb-2">
-      <div class="card-body">
+      <div class="card card-glass mb-2">
       <button class="badge badge-accent btn-remove-route position-absolute
       top-0 end-0 m-4" data-idx="${i}">
       <i class="fa-solid fa-xmark"></i>
       </button>
       ${r.poi_image
-      ? `<img src="${escHtml(r.poi_image)}" class="card-img" onerror="this.src='/uploads/poi-placeholder.jpg'">`: `<img src="/uploads/poi-placeholder.jpg" class="card-img">`
+      ? `<img src="${escHtml(r.poi_image)}" class="card-img-top" onerror="this.src='/uploads/poi-placeholder.jpg'">`: `<img src="/uploads/poi-placeholder.jpg" class="card-img-top">`
       }
+      <div class="card-body">
       <h5 class="mb-2">${escHtml(r.name)}</h5>
       <p class="text-muted small">${escHtml(r.description || 'Deskripsi belum tersedia.')}</p>
       </div>
@@ -619,17 +619,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const limited = (!showAll && filtered.length > 10) ? filtered.slice(0, 10): filtered;
 
       wrap.innerHTML = limited.map(poi => `
-        <div class="card card-flatty">
-        <div class="card-body">
+        <div class="card card-glass">
         ${poi.poi_image
-        ? `<img src="${escHtml(poi.poi_image)}" class="card-img" onerror="this.src='/uploads/poi-placeholder.jpg'">`: `<img src="/uploads/poi-placeholder.jpg" class="card-img">`
+        ? `<img src="${escHtml(poi.poi_image)}" class="card-img-top" onerror="this.src='/uploads/poi-placeholder.jpg'">`: `<img src="/uploads/poi-placeholder.jpg" class="card-img-top">`
         }
+        <div class="card-body">
         <h3 class="h5 mb-2">${escHtml(poi.name)}</h3>
         <p class="text-muted mb-2">${escHtml(poi.description || 'Deskripsi belum tersedia.')}</p>
         </div>
         <div class="card-footer">
         ${poi.slug
-        ? `<a href="/poi/${escHtml(poi.slug)}" class="btn btn-outline-primary btn-sm fw-bold" target="_blank" rel="noopener">
+        ? `<a href="/poi/${escHtml(poi.slug)}" class="btn btn-outline-primary" target="_blank" rel="noopener">
         Selengkapnya
         <i class="arrow-icon fas fa-angle-right ms-1"></i>
         </a>`: `<span class="text-red small">
@@ -686,7 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       wrap.innerHTML = list.map(trip => `
-        <div class="card card-flatty">
+        <div class="card card-glass">
         <div class="card-body">
         <h3 class="h4 text-truncate">${escHtml(trip.title || 'Trip tanpa nama')}</h3>
         <div class="row g-2">
@@ -696,11 +696,11 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         </div>
         <div class="card-footer d-flex gap-2">
-        <button class="btn btn-primary btn-sm" onclick="loadSavedTrip(${trip.id})">
+        <button class="btn btn-primary" onclick="loadSavedTrip(${trip.id})">
         Buka
         <i class="fa-solid fa-route ms-1"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || 'Trip ini')}')">
+        <button class="btn btn-danger" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || 'Trip ini')}')">
         Hapus
         <i class="fa-solid fa-trash ms-1"></i>
         </button>

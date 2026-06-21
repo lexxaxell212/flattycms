@@ -47,4 +47,5 @@ define("BASE_UPLOAD_PATH", ROOT_PATH . "public/uploads/");
 // Etc
 define("APP_TIMEZONE", "Asia/Jakarta");
 define("DEBUG_MODE", in_array($_SERVER["SERVER_NAME"], ["localhost", "127.0.0.1"]));
+define("APP_ENV", DEBUG_MODE ? "development" : "production");
 date_default_timezone_set(APP_TIMEZONE);

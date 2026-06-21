@@ -38,20 +38,20 @@ $categories = safe_get_categories($pdo);
                 "UTF-8",
               ) ?>
             </span>
-            <div class="card-body">
-              <img
+            <img
               class="asl-img card-img"
               src="<?= BASE_UPLOAD_URL . htmlspecialchars($p['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
               onerror="this.onerror=null;this.src='/uploads/default.jpg'"
               alt="<?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
               loading="lazy"
               >
+            <div class="card-body">
               <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="h5">
                 <?= htmlspecialchars(mb_strlen($p['title'] ?? '') > 60 ?
                   mb_substr($p['title'], 0, 60) . '…' : ($p['title'] ?? ''),
                   ENT_QUOTES, 'UTF-8') ?>
               </a>
-              <p class="text-muted mt-2">
+              <p class="text-muted mt-2 small">
                 <?= safe_excerpt($p['excerpt'] ?? ($p['content'] ?? ''), 170) ?>
               </p>
             </div>

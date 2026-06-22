@@ -310,6 +310,8 @@ document.addEventListener("DOMContentLoaded", () => {
       console.warn("[live-search] Element not found.");
       return;
     }
+    
+    showSuggestCard();
 
     trigger.addEventListener("click", (e) => {
       e.preventDefault();
@@ -344,7 +346,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     wrapper.classList.add("active");
     trigger.classList.add("is-active");
-    showSuggestCard();
     suggest.classList.add("open");
     window.ScrollLock?.lock();
     setTimeout(() => input.focus(), 50);
@@ -356,7 +357,6 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.classList.remove("active");
     trigger.classList.remove("is-active");
     dropdown.classList.remove("open");
-    suggestCard.innerHTML ="";
     suggest.classList.remove("open");
     if (wasActive) window.ScrollLock?.unlock();
     input.value = "";

@@ -21,7 +21,7 @@ $stmt = $pdo->query("
     FROM cmpt
     WHERE status = 'active'
     AND category IN ('bandung_pusat','bandung_utara','bandung_selatan','bandung_timur','bandung_barat')
-    ORDER BY created_at DESC
+    ORDER BY RAND()
     LIMIT 3
   ");
 $results = array_merge($results, $stmt->fetchAll());
@@ -29,7 +29,7 @@ $results = array_merge($results, $stmt->fetchAll());
 $stmt = $pdo->query("
     SELECT id, title, excerpt AS description, slug, 'allcontent_posts' AS source, created_at
     FROM allcontent_posts
-    ORDER BY created_at DESC
+    ORDER BY RAND()
     LIMIT 3
   ");
 $results = array_merge($results, $stmt->fetchAll());
@@ -38,12 +38,12 @@ $stmt = $pdo->query("
     SELECT id, name AS title, description AS description, slug, 'poi' AS source, created_at
     FROM poi
     WHERE is_active = 1
-    ORDER BY created_at DESC
+    ORDER BY RAND()
     LIMIT 3
   ");
 $results = array_merge($results, $stmt->fetchAll());
 
-usort($results, fn($a, $b) => strtotime($b['created_at']) - strtotime($a['created_at']));
+shuffle($results);
 
 $results = array_slice($results, 0, 6);
 

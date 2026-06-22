@@ -393,13 +393,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return `
       <div class="col-12 col-md-6 col-lg-4">
-      <div class="card bg-card">
-      <div class="py-4 px-3">
+      <div class="card card-flatty">
+      <div class="py-3 px-3">
       <h2 class="h4">${esc(item.title)}</h2>
       <p class="small">${item.description ? esc(trunc(item.description, 90)) : ""}</p>
       </div>
       <div class="card-footer">
-      <a class="btn btn-primary" href="${href}">Lihat</a>
+      <a class="btn btn-primary" href="${href}">Lihat<i class="arrow-icon fas fa-angle-right ms-2"></i></a>
       </div>
       </div>
       </div>`;

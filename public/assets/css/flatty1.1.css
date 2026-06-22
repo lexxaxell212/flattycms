@@ -70,7 +70,7 @@
   /* ============= flatty light ============= */
   /* utils */
   --font-primary: "Inter", sans-serif;
-  --blur: blur(20px);
+  --blur: blur(18px);
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
   --duration: 0.3s;
@@ -110,7 +110,7 @@
   --bg-card-hover: oklch(0.99 0 0);
   --bg-modal: oklch(0.98 0 0);
   --bg-modal-hover: oklch(0.992 0 0);
-  --bg-backdrop: oklch(0.685 0 0 / 0.5);
+  --bg-backdrop: oklch(0.5 0 0 / 0.65);
   --bg-transparent: transparent;
   --bg-glass: oklch(1 0 0 / 0.6);
   --bg-glass-hover: oklch(1 0 0 / 0.75);
@@ -2678,7 +2678,7 @@ a:hover i.arrow-icon {
     opacity var(--duration) var(--ease);
 }
 #live-search-dropdown.open {
-  max-height: 61vh;
+  max-height: 60vh;
   opacity: 1;
   overflow-y: auto;
 }
@@ -2800,6 +2800,7 @@ a:hover i.arrow-icon {
 }
 
 .live-search-rec {
+  margin-block: 1rem;
   opacity: 0;
   pointer-events: none;
   overflow: hidden;
@@ -2811,11 +2812,13 @@ a:hover i.arrow-icon {
 .live-search-rec.open {
   opacity: 1;
   pointer-events: all;
+  max-height: 60vh;
   overflow-y: auto;
   transform: translateY(0);
   visibility: visible;
   transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
 }
+
 /* ======== /consent ========= */
 .consent-banner {
   position: fixed;

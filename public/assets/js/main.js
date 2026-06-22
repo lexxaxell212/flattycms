@@ -344,6 +344,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     wrapper.classList.add("active");
     trigger.classList.add("is-active");
+    showSuggestCard();
     suggest.classList.add("open");
     window.ScrollLock?.lock();
     setTimeout(() => input.focus(), 50);
@@ -355,6 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.classList.remove("active");
     trigger.classList.remove("is-active");
     dropdown.classList.remove("open");
+    suggestCard.innerHTML ="";
     suggest.classList.remove("open");
     if (wasActive) window.ScrollLock?.unlock();
     input.value = "";
@@ -365,48 +367,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   window.closeSearch = closeWrapper;
-  
-  async function showSuggestCard() {
-  try {
-    const res = await fetch(CONFIG.SUGGEST_URL, {
-      method: 'GET',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-      }
-    });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    const cards = suggestCard;
-
-    if (!data.results || data.results.length === 0) {
-      cards.innerHTML = `
-      <div class="text-muted text-center"><span>Tidak ada terbaru</span></div>`;
-      return;
-    }
-
-    cards.innerHTML = data.results.map(item => {
-      let href = CONFIG.URLS[item.source] || "#";
-      href = href.replace("{id}", item.id);
-      if (item.slug) href = href.replace("{slug}", item.slug);
-      if (item.button_link) href = href.replace("{button_link}", item.button_link);
-
-      return `
-      <div class="col-12 col-md-6 col-lg-4">
-      <div class="card card-flatty">
-      <div class="py-3 px-3">
-      <h2 class="h4">${esc(item.title)}</h2>
-      <p class="small">${item.description ? esc(trunc(item.description, 90)) : ""}</p>
-      </div>
-      <div class="card-footer">
-      <a class="btn btn-primary" href="${href}">Lihat<i class="arrow-icon fas fa-angle-right ms-2"></i></a>
-      </div>
-      </div>
-      </div>`;
-    }).join("");
-  } catch (e) {
-    console.error('Gagal ambil suggest card', e);
-  }
-}
 
   function onInput() {
     const q = input.value.trim();
@@ -514,6 +474,48 @@ document.addEventListener("DOMContentLoaded", () => {
     dropdown.classList.add("open");
     suggest.classList.remove("open");
   }
+
+  async function showSuggestCard() {
+  try {
+    const res = await fetch(CONFIG.SUGGEST_URL, {
+      method: 'GET',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const cards = suggestCard;
+
+    if (!data.results || data.results.length === 0) {
+      cards.innerHTML = `
+      <div class="text-muted text-center"><span>Tidak ada terbaru</span></div>`;
+      return;
+    }
+
+    cards.innerHTML = data.results.map(item => {
+      let href = CONFIG.URLS[item.source] || "#";
+      href = href.replace("{id}", item.id);
+      if (item.slug) href = href.replace("{slug}", item.slug);
+      if (item.button_link) href = href.replace("{button_link}", item.button_link);
+
+      return `
+      <div class="col-12 col-md-6 col-lg-4">
+      <div class="card card-flatty">
+      <div class="py-3 px-3">
+      <h2 class="h4">${esc(item.title)}</h2>
+      <p class="small">${item.description ? esc(trunc(item.description, 90)) : ""}</p>
+      </div>
+      <div class="card-footer">
+      <a class="btn btn-primary" href="${href}">Lihat<i class="arrow-icon fas fa-angle-right ms-2"></i></a>
+      </div>
+      </div>
+      </div>`;
+    }).join("");
+  } catch (e) {
+    console.error('Gagal ambil suggest card', e);
+  }
+}
 
   function onKeydown(e) {
     const items = [...dropdown.querySelectorAll(".ls-item")];

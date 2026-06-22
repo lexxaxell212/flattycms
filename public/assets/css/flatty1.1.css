@@ -2804,7 +2804,7 @@ a:hover i.arrow-icon {
   opacity: 0;
   max-height: 0;
   pointer-events: none;
-  overflow-y: hidden;
+  overflow: hidden;
   transform: translateY(20px);
   visibility: hidden;
   transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
@@ -2814,6 +2814,7 @@ a:hover i.arrow-icon {
   opacity: 1;
   pointer-events: all;
   max-height: 60vh;
+  overflow-y: auto;
   transform: translateY(0);
   visibility: visible;
   transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);

@@ -8,7 +8,7 @@
       </button>
     </div>
     <div id="live-search-dropdown" role="listbox" aria-label="Hasil pencarian"></div>
-    <div id="live-search-rec" class="live-search-rec row g-2">
+    <div id="live-search-rec" class="live-search-rec">
       <h2 class="h4">Rekomendasi untukmu</h2>
       <div id="live-search-rec-card" class="row g-2">
       </div>

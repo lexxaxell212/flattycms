@@ -314,7 +314,6 @@ document.addEventListener("DOMContentLoaded", () => {
     trigger.addEventListener("click", (e) => {
       e.preventDefault();
       openWrapper();
-      showSuggestCard();
     });
 
     closeBtn?.addEventListener("click", closeWrapper);
@@ -455,7 +454,6 @@ document.addEventListener("DOMContentLoaded", () => {
         esc(q) +
         "</strong> is not found.</div>";
       dropdown.classList.add("open");
-      suggest.classList.add("open");
       return;
     }
 
@@ -547,7 +545,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function clearDropdown() {
     dropdown.innerHTML = "";
     dropdown.classList.remove("open");
-    suggest.classList.add("open");
   }
 
   function showLoading() {
@@ -560,7 +557,6 @@ document.addEventListener("DOMContentLoaded", () => {
     dropdown.innerHTML =
       '<div class="ls-error">An error occured, Try again.</div>';
     dropdown.classList.add("open");
-    suggest.classList.add("open");
   }
 
   function hilite(text, q) {

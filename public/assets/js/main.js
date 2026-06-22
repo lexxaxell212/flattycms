@@ -393,8 +393,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return `
       <div class="col-12 col-md-6 col-lg-4">
-      <div class="card card-glass">
-      <div class="card-body">
+      <div class="card bg-card">
+      <div class="py-4 px-3">
       <h2 class="h4">${esc(item.title)}</h2>
       <p class="small">${item.description ? esc(trunc(item.description, 90)) : ""}</p>
       </div>

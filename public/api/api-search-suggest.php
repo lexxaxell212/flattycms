@@ -45,7 +45,7 @@ $results = array_merge($results, $stmt->fetchAll());
 
 usort($results, fn($a, $b) => strtotime($b['created_at']) - strtotime($a['created_at']));
 
-$results = array_slice($results, 0, 3);
+$results = array_slice($results, 0, 6);
 
 echo json_encode([
   'total' => count($results),

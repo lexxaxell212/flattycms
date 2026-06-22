@@ -346,10 +346,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     wrapper.classList.add("active");
     trigger.classList.add("is-active");
-    suggest.classList.add("open");
     window.ScrollLock?.lock();
     setTimeout(() => input.focus(), 50);
     clearDropdown();
+    suggest.classList.add("open");
   }
 
   function closeWrapper(opts = {}) {

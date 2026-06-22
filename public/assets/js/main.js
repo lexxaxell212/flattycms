@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
     SEARCH_URL: "/api/api-search.php",
     MIN_CHARS: 2,
     DEBOUNCE_MS: 300,
-    
+
     SUGGEST_URL: "/api/api-search-suggest.php",
 
     TRIGGER: "#btn-search",
@@ -310,12 +310,12 @@ document.addEventListener("DOMContentLoaded", () => {
       console.warn("[live-search] Element not found.");
       return;
     }
-    
+
     showSuggestCard();
 
     trigger.addEventListener("click", (e) => {
       e.preventDefault();
-      openWrapper();
+      toggleWrapper();
     });
 
     closeBtn?.addEventListener("click", closeWrapper);
@@ -341,15 +341,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function openWrapper() {
-    window.OverlayManager?.openExclusive("search");
+  async function toggleWrapper() {
+    const isOpen = wrapper.classList.contains("active");
 
+    if (isOpen) {
+      closeWrapper();
+    } else {
+      await window.OverlayManager?.openExclusive("search");
+      openWrapper();
+    }
+  }
+
+  function openWrapper() {
     wrapper.classList.add("active");
     trigger.classList.add("is-active");
+    suggest.classList.add("open");
     window.ScrollLock?.lock();
     setTimeout(() => input.focus(), 50);
     clearDropdown();
-    suggest.classList.add("open");
   }
 
   function closeWrapper(opts = {}) {
@@ -476,30 +485,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function showSuggestCard() {
-  try {
-    const res = await fetch(CONFIG.SUGGEST_URL, {
-      method: 'GET',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-      }
-    });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    const cards = suggestCard;
+    try {
+      const res = await fetch(CONFIG.SUGGEST_URL, {
+        method: "GET",
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
+      const cards = suggestCard;
 
-    if (!data.results || data.results.length === 0) {
-      cards.innerHTML = `
+      if (!data.results || data.results.length === 0) {
+        cards.innerHTML = `
       <div class="text-muted text-center"><span>Tidak ada terbaru</span></div>`;
-      return;
-    }
+        return;
+      }
 
-    cards.innerHTML = data.results.map(item => {
-      let href = CONFIG.URLS[item.source] || "#";
-      href = href.replace("{id}", item.id);
-      if (item.slug) href = href.replace("{slug}", item.slug);
-      if (item.button_link) href = href.replace("{button_link}", item.button_link);
+      cards.innerHTML = data.results
+        .map((item) => {
+          let href = CONFIG.URLS[item.source] || "#";
+          href = href.replace("{id}", item.id);
+          if (item.slug) href = href.replace("{slug}", item.slug);
+          if (item.button_link)
+            href = href.replace("{button_link}", item.button_link);
 
-      return `
+          return `
       <div class="col-12 col-md-6 col-lg-4">
       <div class="card card-flatty">
       <div class="py-3 px-3">
@@ -511,11 +522,12 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
       </div>
       </div>`;
-    }).join("");
-  } catch (e) {
-    console.error('Gagal ambil suggest card', e);
+        })
+        .join("");
+    } catch (e) {
+      console.error("Gagal ambil suggest card", e);
+    }
   }
-}
 
   function onKeydown(e) {
     const items = [...dropdown.querySelectorAll(".ls-item")];

@@ -271,12 +271,16 @@ document.addEventListener("DOMContentLoaded", () => {
     SEARCH_URL: "/api/api-search.php",
     MIN_CHARS: 2,
     DEBOUNCE_MS: 300,
+    
+    SUGGEST_URL: "/api/api-search-suggest.php",
 
     TRIGGER: "#btn-search",
     WRAPPER: "#live-search-wrapper",
     INPUT: "#searchInput2",
     DROPDOWN: "#live-search-dropdown",
     CLOSE: "#ls-close-btn",
+    SUGGEST: "#live-search-rec",
+    SUGGEST_CARD: "#live-search-rec-card",
 
     LABELS: {
       cmpt: "Things To Do",
@@ -298,9 +302,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const input = document.querySelector(CONFIG.INPUT);
   const dropdown = document.querySelector(CONFIG.DROPDOWN);
   const closeBtn = document.querySelector(CONFIG.CLOSE);
+  const suggest = document.querySelector(CONFIG.SUGGEST);
+  const suggestCard = document.querySelector(CONFIG.SUGGEST_CARD);
 
   function init() {
-    if (!wrapper || !trigger || !input || !dropdown) {
+    if (!wrapper || !trigger || !input || !dropdown || !suggest) {
       console.warn("[live-search] Element not found.");
       return;
     }
@@ -308,6 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
     trigger.addEventListener("click", (e) => {
       e.preventDefault();
       openWrapper();
+      showSuggestCard();
     });
 
     closeBtn?.addEventListener("click", closeWrapper);
@@ -338,6 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     wrapper.classList.add("active");
     trigger.classList.add("is-active");
+    suggest.classList.add("open");
     window.ScrollLock?.lock();
     setTimeout(() => input.focus(), 50);
     clearDropdown();
@@ -348,6 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.classList.remove("active");
     trigger.classList.remove("is-active");
     dropdown.classList.remove("open");
+    suggest.classList.remove("open");
     if (wasActive) window.ScrollLock?.unlock();
     input.value = "";
     clearDropdown();
@@ -357,6 +366,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   window.closeSearch = closeWrapper;
+  
+  function showSuggestCard() {
+  try {
+    const res = fetch('/api/api-search-suggest.php', {
+      method: 'GET',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    });
+    const data = res.json();
+    const cards = suggestCard;
+
+    if (!data.results || data.results.length === 0) {
+      cards.innerHTML = `
+      <div class="text-muted text-center"><span>Tidak ada terbaru</span></div>`;
+    }
+    return;
+    
+    data.results.forEach(item => {
+      let href = CONFIG.URLS[item.source] || "#";
+      href = href.replace("{id}", item.id);
+      if (item.slug) href = href.replace("{slug}", item.slug);
+      if (item.button_link) href = href.replace("{button_link}", item.button_link);
+
+      cards.innerHTML = `
+      <div class="col-12 col-md-6 col-lg-4">
+      <div class="card card-glass">
+      <div class="card-body">
+      <h2 class="h4">${item.title}</h2>
+      <p class="small">${item.description ? trunc(item.description, 90) : ""}</p>
+      </div>
+      <div class="card-footer">
+      <a class="btn btn-primary" href="${href}">Lihat</a>
+      </div>
+      </div>
+      </div>`;
+    });
+  } catch (e) {
+    console.error('Gagal ambil suggest card', e);
+  }
+}
 
   function onInput() {
     const q = input.value.trim();
@@ -404,6 +454,7 @@ document.addEventListener("DOMContentLoaded", () => {
         esc(q) +
         "</strong> is not found.</div>";
       dropdown.classList.add("open");
+      suggest.classList.add("open");
       return;
     }
 
@@ -462,6 +513,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dropdown.appendChild(footer);
 
     dropdown.classList.add("open");
+    suggest.classList.remove("open");
   }
 
   function onKeydown(e) {
@@ -494,6 +546,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function clearDropdown() {
     dropdown.innerHTML = "";
     dropdown.classList.remove("open");
+    suggest.classList.add("open");
   }
 
   function showLoading() {
@@ -506,6 +559,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dropdown.innerHTML =
       '<div class="ls-error">An error occured, Try again.</div>';
     dropdown.classList.add("open");
+    suggest.classList.add("open");
   }
 
   function hilite(text, q) {

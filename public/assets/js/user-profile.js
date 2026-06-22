@@ -9,7 +9,7 @@
   // ── LOAD DATA ────────────────────────────────────────────
   async function loadProfile() {
     try {
-      await new Promise(r => setTimeout(r, 500));
+      await new Promise(r => setTimeout(r, 1000));
       const res = await fetch(API, {
         headers: {
           'X-Requested-With': 'XMLHttpRequest'
@@ -211,7 +211,7 @@
       }
 
       const btn = document.getElementById('btnSaveName');
-      btn.innerHTML = 'Menyimpan...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
+      btn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
       btn.disabled = true;
 
       const fd = new FormData();
@@ -220,7 +220,7 @@
       fd.append('display_name', name);
 
       try {
-        await new Promise(r => setTimeout(r, 500));
+        await new Promise(r => setTimeout(r, 1000));
         const res = await fetch(API, {
           method: 'POST', headers: {
             'X-Requested-With': 'XMLHttpRequest'

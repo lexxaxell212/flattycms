@@ -56,7 +56,7 @@ require_once LIB_PATH . 'v-reactions-page.php';
           </div>
           <div class="align-items-center">
             <button id="btn-reaction"
-              class="btn <?php echo \$_user_liked ? 'btn-primary btn-sm' : 'btn-outline-primary btn-sm'; ?>" data-id="<?php echo \$_page_id; ?>" data-type="page">
+              class="btn <?php echo \$_user_liked ? 'btn-primary btn-fit' : 'btn-outline-primary btn-fit'; ?>" data-id="<?php echo \$_page_id; ?>" data-type="page">
               <i class="fas fa-heart me-1"></i>
               <span id="reaction-count"><?php echo \$_reaction_count; ?></span>
             </button>
@@ -73,16 +73,16 @@ require_once LIB_PATH . 'v-reactions-page.php';
             ?>
             <a href="https://wa.me/?text=<?php echo \$_share_title; ?>%20<?php echo \$_share_url; ?>"
                target="_blank" rel="noopener"
-               class="btn btn-outline-primary btn-sm">
+               class="btn btn-outline-primary btn-fit">
               <i class="fa-brands fa-whatsapp"></i>
             </a>
             <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo \$_share_url; ?>"
                target="_blank" rel="noopener"
-               class="btn btn-outline-primary btn-sm">
+               class="btn btn-outline-primary btn-fit">
               <i class="fa-brands fa-facebook-f"></i>
             </a>
             <button onclick="copyLink()"
-               class="btn btn-outline-primary btn-sm">
+               class="btn btn-outline-primary btn-fit">
               <i class="fa-brands fa-instagram"></i>
             </button>
           </div>

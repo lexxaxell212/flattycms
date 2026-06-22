@@ -81,7 +81,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
         <div class="gal-search-wrap">
           <i class="fa-solid fa-magnifying-glass gal-search-icon"></i>
           <input type="text" id="searchPoiFilter" class="gal-search-input" data-bhs="gal.page.search.placeholder" placeholder="Cari dari POI...">
-          <button class="gal-search-reset" id="btnResetSearch" data-bhs="gal.page.search.reset.title" title="Reset">
+          <button class="gal-search-reset" id="btnResetSearch" title="Reset">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
@@ -100,8 +100,10 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
         <div class="gal-content">
           <div id="tab-gallery">
             <div class="row g-4" id="galleryGrid">
-              <div class="col-12 text-center text-muted py-5">
-                <i class="fas fa-circle-notch fa-spin fa-2x mb-3 d-block"></i><span data-bhs="gal.page.loading.photo">Memuat foto...</span>
+              <div class="col-12">
+                <div class="skeleton-wrapper">
+                  <div></div>
+                </div>
               </div>
             </div>
             <div class="gal-pagination" id="pagination">
@@ -109,8 +111,10 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
           </div>
           <div id="tab-review" style="display:none">
             <div id="reviewGrid" class="gal-review-grid">
-              <div class="text-center text-muted py-5">
-                <i class="fa-solid fa-circle-notch fa-spin fa-2x mb-3 d-block"></i><span data-bhs="gal.page.loading.review">Memuat review...</span>
+              <div class="col-12">
+                <div class="skeleton-wrapper">
+                  <div></div>
+                </div>
               </div>
             </div>
             <div class="gal-pagination" id="paginationReview"></div>

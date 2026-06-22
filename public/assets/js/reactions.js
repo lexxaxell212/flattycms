@@ -32,13 +32,13 @@
       }
       document.getElementById('reaction-count').textContent = data.count;
       btn.classList.toggle('btn-danger', data.liked);
-      btn.classList.toggle('btn-outline-danger', !data.liked);
+      btn.classList.toggle('btn-outline-primary', !data.liked);
     });
   });
 })();
 
 function copyLink() {
   navigator.clipboard.writeText(window.location.href).then(() => {
-    flattyToast('success', 'Link disalin! Paste di Instagram kamu ya');
+    flattyToast('success', 'Link disalin!');
   });
 }

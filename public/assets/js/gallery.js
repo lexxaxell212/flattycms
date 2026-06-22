@@ -30,7 +30,7 @@
       const matches = POIS.filter(p => p.name.toLowerCase().includes(q)).slice(0, 6);
       results.classList.add('open');
       if (!matches.length) {
-        results.innerHTML = '<div class="list-group small text-muted">Tidak ditemukan</div>';
+        results.innerHTML = '<div class="small text-muted">Tidak ditemukan</div>';
         return;
       }
       matches.forEach(p => {
@@ -62,11 +62,11 @@
     currentPage = page;
     currentPoi = poi_id;
     const grid = document.getElementById('galleryGrid');
-    grid.innerHTML = '<div class="col-12 text-center py-5 text-muted"><i class="fa-solid fa-circle-notch fa-spin fa-2x mb-3 d-block"></i>Memuat foto...</div>';
+    grid.innerHTML = '<div class="col-12"><div class="skeleton-wrapper"><div></div></div>';
     let url = `${API_GAL}?page=${page}`;
     if (poi_id) url += `&poi_id=${poi_id}`;
     try {
-      await new Promise(r => setTimeout(r, 500));
+      await new Promise(r => setTimeout(r, 1000));
       const res = await fetch(url, {
         headers: {
           'X-Requested-With': 'XMLHttpRequest'
@@ -79,7 +79,7 @@
         <div class="col-12 text-center py-5 text-muted small">
         <i class="fa-solid fa-image fa-2x mb-3 d-block opacity-25"></i>
         Belum ada foto${poi_id ? ' untuk lokasi ini': ''}
-        ${IS_LOGGED ? '<br><button class="btn btn-primary btn-sm mt-4" id="btnEmptyUpload"><i class="fa-solid fa-camera me-1"></i>Upload pertama!</button>': ''}
+        ${IS_LOGGED ? '<br><button class="btn btn-primary mt-4" id="btnEmptyUpload"><i class="fa-solid fa-camera me-1"></i>Upload pertama!</button>': ''}
         </div>`;
         if (IS_LOGGED) document.getElementById('btnEmptyUpload')?.addEventListener('click', () => openUploadModal());
         renderPagination(0, 0);
@@ -88,11 +88,11 @@
       grid.innerHTML = json.data.map(p => `
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
         <div class="card card-flatty h-100">
+        <div class="card-body">
         <div class="position-relative" style="padding-top:75%;cursor:pointer"
         onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${p.poi_name}','${p.uploader_name}','${p.caption || ''}','${p.created_at}',${p.id},${p.user_id})">
         <img src="${BASE}/uploads/${p.photo_path}" class="position-absolute top-0 start-0 w-100 h-100" style="object-fit:cover;transition:.2s" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
         </div>
-        <div class="card-body">
         <div class="small fw-semibold text-truncate">${p.poi_name}</div>
         <div class="d-flex align-items-center gap-1 mt-1">
         <img src="${p.uploader_avatar || BASE+'/uploads/default.jpg'}"
@@ -102,14 +102,14 @@
         ${p.caption ? `<div class="text-muted mt-1" style="font-size:.7rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.caption}</div>`: ''}
         </div>
         <div class="card-footer">
-        <div class="text-muted" style="font-size:.68rem">${formatDate(p.created_at)}</div>
+        <div class="text-muted" style="font-size:.72rem">${formatDate(p.created_at)}</div>
         </div>
         </div>
         </div>
         `).join('');
       renderPagination(json.page, json.pages);
     } catch(e) {
-      grid.innerHTML = '<div class="col-12 text-center py-4 text-muted small">Gagal memuat foto</div>';
+      grid.innerHTML = '<div class="badge badge-red btn-fit">Gagal memuat foto</div>';
     }
   }
   function renderPagination(page, pages) {
@@ -120,7 +120,7 @@
     el.innerHTML = Array.from({
       length: pages
     }, (_, i) => i+1).map(p =>
-      `<button class="btn btn-sm ${p === page ? 'btn-primary': 'btn-outline-primary'}"
+      `<button class="btn ${p === page ? 'btn-primary': 'btn-outline-primary'}"
       onclick="loadGallery(${p},'${currentPoi}')">${p}</button>`
     ).join('');
   }
@@ -128,11 +128,11 @@
   async function loadReviews(page = 1, poi_id = '') {
     currentReviewPage = page;
     const grid = document.getElementById('reviewGrid');
-    grid.innerHTML = '<div class="text-center text-muted py-5"><i class="fa-solid fa-circle-notch fa-spin fa-2x mb-3 d-block"></i>Memuat review...</div>';
+    grid.innerHTML = '<div class="skeleton-wrapper"><div></div></div>';
     let url = `${API_REV}?page=${page}`;
     if (poi_id) url += `&poi_id=${poi_id}`;
     try {
-      await new Promise(r => setTimeout(r, 500));
+      await new Promise(r => setTimeout(r, 1000));
       const res = await fetch(url, {
         headers: {
           'X-Requested-With': 'XMLHttpRequest'
@@ -145,7 +145,7 @@
         <div class="text-center py-5 text-muted small">
         <i class="fa-solid fa-star fa-2x mb-3 d-block opacity-25"></i>
         Belum ada review${poi_id ? ' untuk lokasi ini': ''}
-        ${IS_LOGGED ? '<br><button class="btn btn-primary btn-sm mt-3" id="btnEmptyReview"><i class="fa-solid fa-pen-to-square me-1"></i>Tulis pertama!</button>': ''}
+        ${IS_LOGGED ? '<br><button class="btn btn-primary mt-3" id="btnEmptyReview"><i class="fa-solid fa-pen-to-square me-1"></i>Tulis pertama!</button>': ''}
         </div>`;
         if (IS_LOGGED) document.getElementById('btnEmptyReview')?.addEventListener('click', () => openReviewModal());
         renderPaginationReview(0, 0);
@@ -173,7 +173,7 @@
         `).join('');
       renderPaginationReview(json.page, json.pages);
     } catch(e) {
-      grid.innerHTML = '<div class="text-center py-4 text-muted small">Gagal memuat review</div>';
+      grid.innerHTML = '<div class="badge badge-red btn-fit">Gagal memuat review</div>';
     }
   }
   function renderPaginationReview(page, pages) {
@@ -184,7 +184,7 @@
     el.innerHTML = Array.from({
       length: pages
     }, (_, i) => i+1).map(p =>
-      `<button class="btn btn-sm ${p === page ? 'btn-primary': 'btn-outline-primary'}"
+      `<button class="btn ${p === page ? 'btn-primary': 'btn-outline-primary'}"
       onclick="loadReviews(${p},'${currentPoi}')">${p}</button>`
     ).join('');
   }
@@ -243,6 +243,7 @@
     if (activeTab === 'review') loadReviews(1, '');
   }
   document.getElementById('btnResetSearch').addEventListener('click', resetFilter);
+  
   window.openLightbox = function(src, poi, uploader, credit, date, photo_id, owner_id) {
     document.getElementById('lightboxImg').src = src;
     document.getElementById('lightboxInfo').innerHTML = `
@@ -251,15 +252,15 @@
     <i class="fas fa-user me-1"></i>${uploader} ${credit ? ` • <i class="fas fa-link me-1"></i>${credit}`: ''} • ${formatDate(date)}
     </div>
     <div class="d-flex gap-2 justify-content-center mt-2">
-    <a href="${src}" target="_blank" class="btn btn-primary btn-sm">
+    <a href="${src}" target="_blank" class="btn btn-primary">
     <i class="fas fa-expand me-1"></i>Lihat FULL
     </a>
-    ${owner_id === MY_ID ? `<button class="btn btn-danger btn-sm" onclick="deletePhoto(${photo_id})"><i class="fas fa-trash me-1"></i>Hapus</button>`: ''}
+    ${owner_id === MY_ID ? `<button class="btn btn-danger" onclick="deletePhoto(${photo_id})"><i class="fas fa-trash me-1"></i>Hapus</button>`: ''}
     </div>`;
     new bootstrap.Modal(document.getElementById('lightboxModal')).show();
   };
   window.deletePhoto = async function(photo_id) {
-    flattyConfirm('Hapus foto ini? Tindakan ini permanen.', async () => {
+    flattyConfirm('Hapus foto ini?', async () => {
       const fd = new FormData();
       fd.append('action', 'delete');
       fd.append('csrf_token', CONFIG.csrfToken);
@@ -390,7 +391,7 @@
           flattyToast('warning', 'Pilih lokasi dan foto dulu.'); return;
         }
         const btn = document.getElementById('btnKirimUpload');
-        btn.innerHTML = 'Mengupload...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
+        btn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
         btn.disabled = true;
         const fd = new FormData();
         fd.append('csrf_token', CSRF);
@@ -398,7 +399,7 @@
         fd.append('photo', file);
         fd.append('caption', document.getElementById('uploadCredit').value.trim());
         try {
-          await new Promise(r => setTimeout(r, 500));
+          await new Promise(r => setTimeout(r, 1000));
           const res = await fetch(API_GAL, {
             method: 'POST', headers: {
               'X-Requested-With': 'XMLHttpRequest'
@@ -415,7 +416,7 @@
         } catch(e) {
           flattyToast('error', 'Gagal upload foto.');
         } finally {
-          btn.innerHTML = 'Upload<i class="fa-solid fa-upload ms-2"></i>';
+          btn.innerHTML = 'Upload';
           btn.disabled = false;
         }
       });
@@ -431,11 +432,11 @@
         if (rating < 1) {
           flattyToast('warning', 'Kasih rating dulu.'); return;
         }
-        if (cerita.length < 3) {
+        if (cerita.length < 2) {
           flattyToast('warning', 'Ceritamu terlalu singkat.'); return;
         }
         const btn = document.getElementById('btnKirimReview');
-        btn.innerHTML = 'Mengirim...<i class="fa-solid fa-circle-notch fa-spin ms-2"></i>';
+        btn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
         btn.disabled = true;
         const fd = new FormData();
         fd.append('csrf_token', CSRF);
@@ -444,7 +445,7 @@
         fd.append('judul', document.getElementById('reviewJudul').value.trim());
         fd.append('cerita', cerita);
         try {
-          await new Promise(r => setTimeout(r, 500));
+          await new Promise(r => setTimeout(r, 1000));
           const res = await fetch(API_REV, {
             method: 'POST', headers: {
               'X-Requested-With': 'XMLHttpRequest'
@@ -461,7 +462,7 @@
         } catch(e) {
           flattyToast('error', 'Gagal kirim review.');
         } finally {
-          btn.innerHTML = 'Kirim Review<i class="fa-solid fa-paper-plane ms-2"></i>';
+          btn.innerHTML = 'Kirim Review';
           btn.disabled = false;
         }
       });

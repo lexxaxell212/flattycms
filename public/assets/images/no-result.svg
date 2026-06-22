@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <style>
+    .ns-glass {
+      transform-origin: 26px 26px;
+      animation: ns-pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes ns-shake {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(12deg); }
+    }
+    @keyframes ns-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ns-glass { animation: none; }
+    }
+  </style>
+
+  <!-- magnifying glass, fa-solid style -->
+  <g class="ns-glass">
+    <circle cx="26" cy="26" r="16" fill="none" stroke="oklch(0.65 0.018 295)" stroke-width="5"/>
+    <line x1="37.5" y1="37.5" x2="50" y2="50" stroke="oklch(0.65 0.018 295)" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>

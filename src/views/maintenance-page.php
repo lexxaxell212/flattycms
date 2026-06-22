@@ -27,11 +27,8 @@
   </style>
 </head>
 <body>
-  <h1 style="font-size:24px;color:#ea580c;">.!.</h1>
+  <h1 style="font-size:24px;color:#ea580c;">Offline</h1>
   <h2 style="font-weight:300;color:#94a3b8">|</h2>
-  <h1 style="font-size:14px;font-weight:400;color:#94a3b8;">'i' _-|-_</h1>
-  <div style="position:fixed;bottom:20px;font-size:14px;font-weight:400;col:#94a3b8;">
-    ∆^∆
-  </div>
+  <h1 style="font-size:14px;font-weight:400;color:#94a3b8;">Maintenance</h1>
 </body>
 </html>

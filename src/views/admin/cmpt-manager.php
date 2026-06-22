@@ -3,48 +3,45 @@ $success_msg = $success_msg ?? null;
 $error_msg = $error_msg   ?? null;
 $csrf = generate_csrf_token();
 ?>
-
-<main id="content">
+<main class="main-content">
   <div class="container">
-
+    <div class="page-header">
+      <div class="text-center">
+        <h1>CMPT <em class="styled">Manager</em></h1>
+        <ul class="d-flex row g-2 justify-content-center m-0 p-0">
+          <li class="list-unstyled badge badge-green fit-content"><i class="fas fa-check me-2"></i>Card</li>
+          <li class="list-unstyled badge badge-green fit-content"><i class="fas fa-check me-2"></i>Activity ( Things To Do )</li>
+          <li class="list-unstyled badge badge-green fit-content"><i class="fas fa-check me-2"></i>Pop Up</li>
+          <li class="list-unstyled badge badge-green fit-content"><i class="fas fa-check me-2"></i>Toast like</li>
+        </ul>
+        <button class="btn btn-primary btn-fit mt-4" data-bs-toggle="modal" data-bs-target="#itemModal" onclick="resetForm()">
+          <i class="fa-solid fa-plus me-2"></i>Buat Baru
+        </button>
+      </div>
+    </div>
     <?php if (isset($_GET['success']) || $success_msg): ?>
     <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
       <i class="fa-solid fa-circle-check me-2"></i><?= $success_msg ?: 'Sukses disimpan!' ?>
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     <?php endif; ?>
-
     <?php if ($error_msg): ?>
     <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
       <i class="fa-solid fa-circle-exclamation me-2"></i><?= safe_html($error_msg) ?>
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     <?php endif; ?>
-
-    <!-- Header -->
-    <div class="d-flex align-items-center justify-content-between mb-4">
-      <div class="d-flex align-items-center gap-2">
-        <span class="bg-primary bg-opacity-10 text-primary rounded p-2 lh-1">
-          <i class="fa-solid fa-layer-group fa-sm"></i>
-        </span>
-        <h1 class="text-title">CMPT Manager</h1>
-      </div>
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#itemModal" onclick="resetForm()">
-        <i class="fa-solid fa-plus me-1"></i> Buat Baru
-      </button>
-    </div>
-
     <!-- Filter & Search -->
-    <div class="card border-0 shadow-sm mb-4">
-      <div class="card-body px-4 py-3">
-        <div class="row g-2">
-          <div class="col-md-5">
+    <div class="card card-flatty mb-4">
+      <div class="py-3 px-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-md-8">
             <div class="input-group">
               <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
               <input type="text" id="searchInput" class="form-control" placeholder="Cari judul atau kategori..." onkeyup="filterItems()">
             </div>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-4">
             <div class="input-group">
               <span class="input-group-text"><i class="fa-solid fa-filter"></i></span>
               <select id="categoryFilter" class="form-select" onchange="filterItems()">
@@ -55,24 +52,23 @@ $csrf = generate_csrf_token();
               </select>
             </div>
           </div>
-          <div class="col-md-2">
-            <button class="btn btn-outline-secondary w-100" onclick="clearFilters()">
+          <div class="col-auto mx-auto">
+            <button class="btn btn-primary" onclick="clearFilters()">
               <i class="fa-solid fa-xmark"></i> Clear
             </button>
           </div>
         </div>
       </div>
     </div>
-
     <!-- Cards -->
     <?php if (empty($items)): ?>
-    <div class="card border-0 shadow-sm">
-      <div class="card-body text-center py-5 text-muted">
-        <i class="fa-solid fa-box fa-2x mb-3 d-block opacity-50"></i>
-        <div>
-          Belum ada CMPT aktif
-        </div>
-        <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#itemModal" onclick="resetForm()">
+    <div class="card card-flatty mb-4">
+      <div class="card-body text-center">
+        <i class="fa-solid fa-box fa-2x mb-3 d-block opacity-50 mx-auto"></i>
+        Belum ada CMPT aktif
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#itemModal" onclick="resetForm()">
           Buat yang pertama
         </button>
       </div>
@@ -80,11 +76,11 @@ $csrf = generate_csrf_token();
     <?php else : ?>
     <div class="row g-3" id="cardsContainer">
       <?php foreach ($items as $item): ?>
-      <div class="col-lg-3 col-md-4 col-sm-6 card-item"
+      <div class="col-lg-3 col-md-4 col-sm-6"
         data-category="<?= safe_html(strtolower($item['category'])) ?>"
         data-title="<?= safe_html(strtolower($item['title'])) ?>"
         data-type="<?= safe_html(strtolower($item['type'])) ?>">
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card card-glass h-100">
           <!-- Category Badge -->
           <span class="position-absolute top-0 start-0 m-2 badge bg-primary bg-opacity-75 z-1" style="font-size:.7rem">
             <?= safe_html($categories[$item['category']] ?? ucwords(str_replace('_', ' ', $item['category']))) ?>
@@ -104,33 +100,32 @@ $csrf = generate_csrf_token();
           </div>
           <?php endif; ?>
 
-          <div class="card-body pt-4 pb-4">
-            <h6 class="card-title fw-semibold"><?= safe_html(mb_substr($item['title'], 0, 40)) ?></h6>
-            <p class="card-text text-muted small">
+          <div class="card-body">
+            <h5 class="mb-2"><?= safe_html(mb_substr($item['title'], 0, 40)) ?></h5>
+            <p class="text-muted small">
               <?= safe_html(mb_substr($item['desc'], 0, 60)) ?>
             </p>
-            <div class="d-flex gap-1 mt-2">
-              <button class="btn btn-outline-primary btn-sm flex-fill"
-                data-bs-toggle="modal" data-bs-target="#itemModal"
-                onclick="editItem(<?= $item['id'] ?>,'<?= addslashes($item['title']) ?>','<?= addslashes($item['image']) ?>','<?= addslashes($item['desc']) ?>','<?= addslashes($item['button_link']) ?>','<?= addslashes($item['type']) ?>','<?= addslashes($item['status']) ?>','<?= addslashes($item['category']) ?>')">
-                <i class="fa-solid fa-pencil"></i>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-primary me-4"
+              data-bs-toggle="modal" data-bs-target="#itemModal"
+              onclick="editItem(<?= $item['id'] ?>,'<?= addslashes($item['title']) ?>','<?= addslashes($item['image']) ?>','<?= addslashes($item['desc']) ?>','<?= addslashes($item['button_link']) ?>','<?= addslashes($item['type']) ?>','<?= addslashes($item['status']) ?>','<?= addslashes($item['category']) ?>')">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+            <form method="POST" class="p-0 m-0 border-0" onsubmit="return confirm('Hapus card ini?')">
+              <input type="hidden" name="csrf_token" value="<?= $csrf ?>">
+              <input type="hidden" name="action" value="delete">
+              <input type="hidden" name="id" value="<?= (int)$item['id'] ?>">
+              <button class="btn btn-danger" type="submit">
+                <i class="fa-solid fa-archive"></i>
               </button>
-              <form method="POST" class="flex-fill" onsubmit="return confirm('Hapus card ini?')">
-                <input type="hidden" name="csrf_token" value="<?= $csrf ?>">
-                <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="id" value="<?= (int)$item['id'] ?>">
-                <button class="btn btn-outline-danger btn-sm w-100" type="submit">
-                  <i class="fa-solid fa-archive"></i>
-                </button>
-              </form>
-            </div>
+            </form>
           </div>
         </div>
       </div>
       <?php endforeach; ?>
     </div>
     <?php endif; ?>
-
     <!-- Modal Form -->
     <div class="modal fade" id="itemModal" tabindex="-1">
       <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -215,10 +210,8 @@ $csrf = generate_csrf_token();
         </div>
       </div>
     </div>
-
   </div>
 </main>
-
 <script>
   let uploading = false;
   const categories = <?= json_encode($categories) ?>;

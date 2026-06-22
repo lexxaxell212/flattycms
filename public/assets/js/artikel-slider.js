@@ -95,7 +95,7 @@
         viewport.scrollLeft = current * cardStep();
         viewport.style.scrollBehavior = "";
         updateUI();
-      }, 120);
+      }, 500);
     });
 
     buildDots();

@@ -37,7 +37,6 @@ $categories = $pdo->query('SELECT * FROM allcontent_categories ORDER BY name')->
 $count_active = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE status='active'")->fetchColumn();
 $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE source_domain IS NOT NULL")->fetchColumn();
 ?>
-
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <style>
   .ql-container {
@@ -53,52 +52,57 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
     line-height: 1.6;
   }
 </style>
-
-<main id="content">
+<main class="main-content">
   <div class="container">
-
+    <div class="page-header text-center">
+      <h1>Blog <em class="styled">Manager</em></h1>
+      <ul class="d-flex row g-2 justify-content-center m-0 p-0">
+        <li class="list-unstyled badge badge-green fit-content"><i class="fas fa-check me-2"></i>Like</li>
+        <li class="list-unstyled badge badge-green fit-content"><i class="fas fa-check me-2"></i>View Counter</li>
+        <li class="list-unstyled badge badge-green fit-content"><i class="fas fa-check me-2"></i>Share</li>
+        <li class="list-unstyled badge badge-red fit-content"><i class="fas fa-xmark me-2"></i>Public Comment</li>
+      </ul>
+    </div>
     <?php if ($msg): ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <i class="fa-solid fa-circle-check me-2"></i><?= safe_html($msg) ?>
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     <?php endif; ?>
-
     <?php if (!empty($form_error)): ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
       <i class="fa-solid fa-triangle-exclamation me-2"></i><?= safe_html($form_error) ?>
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     <?php endif; ?>
-
     <!-- Stats -->
-    <div class="row g-3 mb-4">
-      <div class="col-6 col-md-3">
-        <div class="card border-0 shadow-sm text-center py-3">
+    <div class="row g-3 mb-4 mx-auto" style="max-width:440px">
+      <div class="col-3">
+        <div class="card card-glass text-center py-2">
           <div class="fs-3 fw-bold text-primary">
             <?= is_array($posts) ? count($posts) : 0 ?>
           </div>
           <small class="text-muted">Posts</small>
         </div>
       </div>
-      <div class="col-6 col-md-3">
-        <div class="card border-0 shadow-sm text-center py-3">
+      <div class="col-3">
+        <div class="card card-glass text-center py-2">
           <div class="fs-3 fw-bold text-success">
             <?= $count_active ?>
           </div>
           <small class="text-muted">Active</small>
         </div>
       </div>
-      <div class="col-6 col-md-3">
-        <div class="card border-0 shadow-sm text-center py-3">
+      <div class="col-3">
+        <div class="card card-glass text-center py-2">
           <div class="fs-3 fw-bold text-info">
             <?= count($categories) ?>
           </div>
           <small class="text-muted">Kategori</small>
         </div>
       </div>
-      <div class="col-6 col-md-3">
-        <div class="card border-0 shadow-sm text-center py-3">
+      <div class="col-3">
+        <div class="card card-glass text-center py-2">
           <div class="fs-3 fw-bold text-warning">
             <?= $count_scrapped ?>
           </div>
@@ -106,12 +110,11 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
         </div>
       </div>
     </div>
-
     <?php if ($edit_post): ?>
     <!-- EDIT MODE -->
-    <div class="card border-0 shadow-sm mb-4">
-      <div class="card-header bg-white border-bottom py-3 px-4">
-        <div class="d-flex align-items-center justify-content-between">
+    <div class="card card-flatty shadow-sm mb-4">
+      <div class="py-3 px-4">
+        <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
           <div class="d-flex align-items-center gap-2">
             <span class="bg-primary bg-opacity-10 text-primary rounded p-1 lh-1">
               <i class="fa-solid fa-pencil fa-sm"></i>
@@ -122,8 +125,6 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
             <i class="fa-solid fa-list-ul me-1"></i> Daftar
           </a>
         </div>
-      </div>
-      <div class="card-body px-4 py-3">
         <form method="POST" enctype="multipart/form-data">
           <input type="hidden" name="csrf_token" value="<?= safe_html($_SESSION['csrf_token']) ?>">
           <input type="hidden" name="id" value="<?= (int)$edit_post['id'] ?>">
@@ -149,24 +150,24 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
             </div>
           </div>
 
-          <div class="mb-3">
+          <div class="col-12">
             <label class="form-label fw-medium">Judul<span class="text-danger">*</span></label>
             <input type="text" name="title" class="form-control" maxlength="255" value="<?= safe_html($edit_post['title']) ?>" required>
           </div>
 
-          <div class="mb-3">
+          <div class="col-12">
             <label class="form-label fw-medium">Excerpt</label>
             <textarea name="excerpt" class="form-control" rows="2" maxlength="500"><?= safe_html($edit_post['excerpt']) ?></textarea>
           </div>
 
-          <div class="mb-3">
+          <div class="col-12">
             <label class="form-label fw-medium">Content<span class="text-danger">*</span></label>
             <div id="quill-editor"></div>
             <input type="hidden" name="content" id="quill-content">
             <div id="edit-content-data" data-content="<?= safe_html($edit_post['content']) ?>" style="display:none"></div>
           </div>
 
-          <div class="mb-3">
+          <div class="col-12">
             <label class="form-label fw-medium">Gambar Thumbnail</label>
             <input type="file" name="image" class="form-control" accept="image/jpeg,image/png,image/gif,image/webp">
             <input type="hidden" name="image_url" id="edit-image-url" value="<?= safe_html($edit_post['image_url'] ?? '') ?>">
@@ -180,7 +181,7 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
           </div>
 
           <div class="d-flex gap-2">
-            <button name="save" class="btn btn-primary px-4">
+            <button name="save" class="btn btn-primary">
               <i class="fa-solid fa-floppy-disk me-1"></i> Update Post
             </button>
             <a href="?" class="btn btn-outline-secondary">Batal</a>
@@ -188,32 +189,23 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
         </form>
       </div>
     </div>
-
     <?php else : ?>
     <!-- LIST MODE -->
-
     <!-- Search -->
-    <div class="card border-0 shadow-sm mb-4">
-      <div class="card-body px-4 py-3">
-        <form method="GET" class="row g-2 align-items-end">
-          <div class="col-md-9">
-            <input type="search" name="q" class="form-control" placeholder="Cari judul atau konten..." value="<?= safe_html($q) ?>">
-          </div>
-          <div class="col-md-2">
-            <button class="btn btn-primary w-100"><i class="fa-solid fa-search me-1"></i> Cari</button>
-          </div>
-          <?php if ($q): ?>
-          <div class="col-md-1">
-            <a href="?" class="btn btn-outline-secondary w-100">✕</a>
-          </div>
-          <?php endif; ?>
-        </form>
+    <form method="GET" class="row g-2 mx-auto align-items-center mb-3">
+      <div class="col-12 col-md-8">
+        <input type="search" name="q" class="form-control" placeholder="Cari judul atau konten..." value="<?= safe_html($q) ?>">
       </div>
-    </div>
-
+      <div class="col-12 col-md-4">
+        <button class="btn btn-primary"><i class="fa-solid fa-search me-1"></i> Cari</button>
+        <?php if ($q): ?>
+        <a href="?" class="btn btn-outline-secondary">✕</a>
+      </div>
+      <?php endif; ?>
+    </form>
     <!-- Add Form -->
-    <div class="card border-0 shadow-sm mb-4">
-      <div class="card-header bg-white border-bottom py-3 px-4" style="cursor:pointer" onclick="this.nextElementSibling.classList.toggle('d-none')">
+    <div class="card card-flatty mb-4">
+      <div class="card-header border-bottom py-3 px-4" style="cursor:pointer" onclick="this.nextElementSibling.classList.toggle('d-none')">
         <div class="d-flex align-items-center gap-2">
           <span class="bg-success bg-opacity-10 text-success rounded p-1 lh-1">
             <i class="fa-solid fa-plus fa-sm"></i>
@@ -222,7 +214,7 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
           <i class="fa-solid fa-chevron-down ms-auto text-muted"></i>
         </div>
       </div>
-      <div class="card-body px-4 py-3 d-none">
+      <div class="px-4 py-3 d-none">
         <form method="POST" enctype="multipart/form-data">
           <input type="hidden" name="csrf_token" value="<?= safe_html($_SESSION['csrf_token']) ?>">
           <div class="row g-3 mb-3">
@@ -268,10 +260,9 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
         </form>
       </div>
     </div>
-
     <!-- Table -->
-    <div class="card border-0 shadow-sm">
-      <div class="card-header bg-white border-bottom py-3 px-4">
+    <div class="card card-flatty">
+      <div class="card-header border-bottom py-3 px-4">
         <div class="d-flex align-items-center gap-2">
           <span class="bg-primary bg-opacity-10 text-primary rounded p-1 lh-1">
             <i class="fa-solid fa-table fa-sm"></i>
@@ -285,7 +276,7 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
       </div>
       <div class="table-responsive">
         <table class="table table-hover mb-0">
-          <thead class="table-light">
+          <thead class="">
             <tr>
               <th width="60">#</th>
               <th>Judul</th>
@@ -298,8 +289,8 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
           <tbody>
             <?php if (empty($posts)): ?>
             <tr>
-              <td colspan="6" class="text-center py-5 text-muted">
-                <i class="fa-solid fa-inbox fa-2x d-block mb-3 opacity-50"></i>
+              <td colspan="6" class="text-center py-5 text-muted small">
+                <i class="fa-solid fa-inbox fa-2x d-block mb-3 opacity-50 mx-auto"></i>
                 Belum ada post
               </td>
             </tr>
@@ -325,23 +316,23 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
               <td><small class="text-muted"><?= fmt_date($p['created_at'] ?? '') ?></small></td>
               <td>
                 <div class="btn-group btn-group-sm">
-                  <a href="?edit=<?= (int)$p['id'] ?>" class="btn btn-outline-primary btn-sm" title="Edit">
+                  <a href="?edit=<?= (int)$p['id'] ?>" class="btn btn-primary btn-fit" title="Edit">
                     <i class="fa-solid fa-pencil"></i>
                   </a>
                   <a href="?action=toggle&id=<?= (int)$p['id'] ?>&tok=<?= $toggle_tok ?>"
-                    class="btn <?= $is_active ? 'btn-outline-warning' : 'btn-outline-success' ?> btn-sm"
+                    class="btn <?= $is_active ? 'btn-accent' : 'btn-success' ?> btn-fit"
                     onclick="return confirm('<?= $is_active ? 'Nonaktifkan' : 'Aktifkan' ?> post ini?')"
                     title="Toggle">
                     <i class="fa-solid fa-power-off"></i>
                   </a>
-                  <form method="POST" style="display:inline" onsubmit="return confirm('Hapus permanen?')">
+                  <form class="p-0 m-0 border-0" method="POST" style="display:inline" onsubmit="return confirm('Hapus permanen?')">
                     <input type="hidden" name="csrf_token" value="<?= safe_html($_SESSION['csrf_token']) ?>">
                     <input type="hidden" name="id" value="<?= (int)$p['id'] ?>">
-                    <button name="delete" class="btn btn-outline-danger btn-sm" title="Hapus">
+                    <button name="delete" class="btn btn-danger btn-fit rounded-0" title="Hapus">
                       <i class="fa-solid fa-trash"></i>
                     </button>
                   </form>
-                  <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" target="_blank" class="btn btn-outline-secondary btn-sm" title="Lihat">
+                  <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" target="_blank" class="btn btn-primary btn-fit" title="Lihat">
                     <i class="fa-solid fa-eye"></i>
                   </a>
                 </div>
@@ -353,12 +344,9 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
         </table>
       </div>
     </div>
-
     <?php endif; ?>
-
   </div>
 </main>
-
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js" defer></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {

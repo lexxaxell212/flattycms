@@ -16,23 +16,22 @@ try {
 
 $csrf = generate_csrf_token();
 ?>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-
-<main id="content">
+<main class="main-content">
   <div class="container">
-
+    <div class="page-header text-center">
+      <h1>Welcome<em>!</em></h1>
+    </div>
     <?php
     safe_include(SRC_PATH . "partials/part-cloudflare.php", "Cloudflare Analytics");
     ?>
-
     <!-- Stats Cards -->
     <div class="row g-3 mb-4">
       <div class="col-6 col-lg-3">
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card bg-card h-100">
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-2">
-              <span class="bg-primary bg-opacity-10 text-primary rounded p-2 lh-1">
+              <span class="badge-red bg-opacity-10 text-red rounded p-2 lh-1">
                 <i class="fa-solid fa-eye fa-sm"></i>
               </span>
               <small class="text-muted">Hari ini</small>
@@ -51,10 +50,10 @@ $csrf = generate_csrf_token();
         </div>
       </div>
       <div class="col-6 col-lg-3">
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card bg-card h-100">
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-2">
-              <span class="bg-primary bg-opacity-10 text-primary rounded p-2 lh-1">
+              <span class="badge-primary bg-opacity-10 text-primary rounded p-2 lh-1">
                 <i class="fa-solid fa-chart-line fa-sm"></i>
               </span>
               <small class="text-muted">7 Hari</small>
@@ -73,7 +72,7 @@ $csrf = generate_csrf_token();
         </div>
       </div>
       <div class="col-6 col-lg-3">
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card bg-card h-100">
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-2">
               <span class="bg-success bg-opacity-10 text-success rounded p-2 lh-1">
@@ -95,7 +94,7 @@ $csrf = generate_csrf_token();
         </div>
       </div>
       <div class="col-6 col-lg-3">
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card bg-card h-100">
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-2">
               <span class="bg-warning bg-opacity-10 text-warning rounded p-2 lh-1">
@@ -117,13 +116,12 @@ $csrf = generate_csrf_token();
         </div>
       </div>
     </div>
-
     <!-- Chart + Top Pages -->
     <div class="row g-3 mb-4">
       <div class="col-lg-8">
-        <div class="card border-0 shadow-sm h-100">
-          <div class="card-header bg-white border-bottom py-3 px-4">
-            <div class="d-flex align-items-center gap-2">
+        <div class="card card-glass h-100">
+          <div class="card-header">
+            <div class="bg-card d-flex align-items-center gap-2">
               <span class="bg-primary bg-opacity-10 text-primary rounded p-1 lh-1">
                 <i class="fa-solid fa-chart-area fa-sm"></i>
               </span>
@@ -136,16 +134,16 @@ $csrf = generate_csrf_token();
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="card border-0 shadow-sm h-100">
-          <div class="card-header bg-white border-bottom py-3 px-4">
-            <div class="d-flex align-items-center gap-2">
+        <div class="card card-glass h-100">
+          <div class="card-header">
+            <div class="bg-card d-flex align-items-center gap-2">
               <span class="bg-primary bg-opacity-10 text-primary rounded p-1 lh-1">
                 <i class="fa-solid fa-ranking-star fa-sm"></i>
               </span>
               <span class="fw-semibold">Top Pages</span>
             </div>
           </div>
-          <div class="card-body px-4 py-2">
+          <div class="card-body">
             <?php foreach ($top_pages as $i => $tp): ?>
             <div class="d-flex align-items-center justify-content-between py-2 <?= $i < count($top_pages) - 1 ? 'border-bottom' : '' ?>">
               <div class="text-truncate me-2" style="max-width:180px">
@@ -164,20 +162,19 @@ $csrf = generate_csrf_token();
         </div>
       </div>
     </div>
-
     <!-- Referrers + Quick Actions -->
-    <div class="row g-3">
+    <div class="row g-3 mb-4">
       <div class="col-lg-6">
-        <div class="card border-0 shadow-sm">
-          <div class="card-header bg-white border-bottom py-3 px-4">
-            <div class="d-flex align-items-center gap-2">
+        <div class="card card-glass h-100">
+          <div class="card-header">
+            <div class="bg-card d-flex align-items-center gap-2">
               <span class="bg-primary bg-opacity-10 text-primary rounded p-1 lh-1">
                 <i class="fa-solid fa-link fa-sm"></i>
               </span>
               <span class="fw-semibold">Top Referrers</span>
             </div>
           </div>
-          <div class="card-body px-4 py-2">
+          <div class="card-body">
             <?php foreach ($top_referrers as $i => $ref): ?>
             <div class="d-flex align-items-center justify-content-between py-2 <?= $i < count($top_referrers) - 1 ? 'border-bottom' : '' ?>">
               <small class="text-truncate me-2" style="max-width:260px">
@@ -195,10 +192,8 @@ $csrf = generate_csrf_token();
         </div>
       </div>
     </div>
-
   </div>
 </main>
-
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const dailyData = <?= json_encode($daily_views ?? []) ?>;

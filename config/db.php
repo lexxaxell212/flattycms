@@ -2,11 +2,6 @@
 if (defined('DB_LOADED')) return;
 define('DB_LOADED', true);
 
-// if (!defined('DB_HOST')) define('DB_HOST', '');
-// if (!defined('DB_NAME')) define('DB_NAME', '');
-// if (!defined('DB_USER')) define('DB_USER', '');
-// if (!defined('DB_PASS')) define('DB_PASS', '');
-
 try {
   $GLOBALS['pdo'] = new PDO(
     "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",

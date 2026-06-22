@@ -27,7 +27,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
   <link rel="stylesheet" href="<?= CSS_URL ?>flatty1.1.css">
 ¬
   <script src="<?= JS_URL ?>bs538.bundle.min.js" defer></script>
-  <script src="<?= JS_URL ?>swal2.all.min.js" defer></script>
+  <script src="<?= JS_URL ?>flattynotif.js" defer></script>
   <script src="<?= JS_URL ?>admin.js" defer></script>
   <script>
     const CONFIG = {

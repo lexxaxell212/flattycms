@@ -367,42 +367,43 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   window.closeSearch = closeWrapper;
   
-  function showSuggestCard() {
+  async function showSuggestCard() {
   try {
-    const res = fetch('/api/api-search-suggest.php', {
+    const res = await fetch(CONFIG.SUGGEST_URL, {
       method: 'GET',
       headers: {
         'X-Requested-With': 'XMLHttpRequest'
       }
     });
-    const data = res.json();
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
     const cards = suggestCard;
 
     if (!data.results || data.results.length === 0) {
       cards.innerHTML = `
       <div class="text-muted text-center"><span>Tidak ada terbaru</span></div>`;
+      return;
     }
-    return;
-    
-    data.results.forEach(item => {
+
+    cards.innerHTML = data.results.map(item => {
       let href = CONFIG.URLS[item.source] || "#";
       href = href.replace("{id}", item.id);
       if (item.slug) href = href.replace("{slug}", item.slug);
       if (item.button_link) href = href.replace("{button_link}", item.button_link);
 
-      cards.innerHTML = `
+      return `
       <div class="col-12 col-md-6 col-lg-4">
       <div class="card card-glass">
       <div class="card-body">
-      <h2 class="h4">${item.title}</h2>
-      <p class="small">${item.description ? trunc(item.description, 90) : ""}</p>
+      <h2 class="h4">${esc(item.title)}</h2>
+      <p class="small">${item.description ? esc(trunc(item.description, 90)) : ""}</p>
       </div>
       <div class="card-footer">
       <a class="btn btn-primary" href="${href}">Lihat</a>
       </div>
       </div>
       </div>`;
-    });
+    }).join("");
   } catch (e) {
     console.error('Gagal ambil suggest card', e);
   }

@@ -6,7 +6,7 @@ $zona_bandung = $GLOBALS['pdo']->query("
   ")->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($zona_bandung as &$item) {
-  $item['is_new'] = strtotime($item['created_at']) >= strtotime('-7 days');
+  $item['is_new'] = strtotime($item['created_at']) >= strtotime('-14 days');
 }
 unset($item);
 

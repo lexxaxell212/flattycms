@@ -46,12 +46,12 @@ $categories = safe_get_categories($pdo);
               loading="lazy"
               >
             <div class="card-body">
-              <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="h5">
+              <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="h4 mb-2">
                 <?= htmlspecialchars(mb_strlen($p['title'] ?? '') > 60 ?
                   mb_substr($p['title'], 0, 60) . '…' : ($p['title'] ?? ''),
                   ENT_QUOTES, 'UTF-8') ?>
               </a>
-              <p class="text-muted mt-2 small">
+              <p class="text-muted">
                 <?= safe_excerpt($p['excerpt'] ?? ($p['content'] ?? ''), 170) ?>
               </p>
             </div>
@@ -59,7 +59,7 @@ $categories = safe_get_categories($pdo);
               <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="btn
                 btn-primary btn-asl-read">
                 <span data-bhs="btn.read.more">Baca Selengkapnya</span>
-                <i class="arrow-icon fas fa-angle-right ms-2" aria-hidden="true"></i>
+                <i class="arrow-icon fas fa-angle-right ms-1" aria-hidden="true"></i>
               </a>
             </div>
           </article>

@@ -180,8 +180,7 @@ $page_title = 'Things to Do';
               283.0,180.3 L 289.5,185.8 L 303.5,187.6 L 311.2,193.5 L 315.3,188.5 L
               327.9,181.9 L 328.1,180.3 L 325.8,179.2 L 320.3,179.2 L 321.7,176.2 L
               320.3,175.6 Z" fill="var(--fill-1)" stroke="var(--stroke)"
-              stroke-width="0.5" fill-rule="evenodd"
-              onclick="handleZone('bandung-pusat')" />
+              stroke-width="0.5" fill-rule="evenodd" />
             <path class="zone" data-zone="bandung-barat" d="M 110.6,192.0 L
               111.7,196.7 L 112.6,199.4 L 118.5,198.7 L 127.7,202.0 L 128.7,198.7 L
               130.8,200.2 L 129.2,202.9 L 135.3,204.8 L 136.6,201.9 L 133.6,199.7 L
@@ -207,7 +206,7 @@ $page_title = 'Things to Do';
               120.0,149.3 L 118.0,149.1 L 114.6,153.0 L 125.6,164.4 L 133.2,163.5 L
               150.0,166.0 L 145.2,161.8 L 144.4,158.1 L 142.0,157.6 L 143.3,153.5 Z"
               fill="var(--fill-1)" stroke="var(--stroke)" stroke-width="0.5"
-              fill-rule="evenodd" onclick="handleZone('bandung-barat')" />
+              fill-rule="evenodd" />
             <path class="zone" data-zone="bandung-utara" d="M 300.7,176.0 L
               302.1,172.8 L 305.5,173.0 L 305.7,166.7 L 308.0,166.9 L 309.2,165.0 L
               314.8,165.8 L 316.4,164.8 L 317.7,165.6 L 317.5,177.3 L 320.3,175.6 L
@@ -289,8 +288,7 @@ $page_title = 'Things to Do';
               134.5,134.1 L 133.9,136.5 L 138.3,139.2 L 132.5,149.6 L 136.5,152.3 L
               143.3,153.5 L 141.7,155.8 L 143.0,158.7 L 147.4,153.4 L 150.5,142.8 L
               165.7,135.1 L 165.1,131.9 L 167.1,131.3 Z" fill="var(--fill-1)"
-              stroke="var(--stroke)" stroke-width="0.5" fill-rule="evenodd"
-              onclick="handleZone('bandung-utara')" />
+              stroke="var(--stroke)" stroke-width="0.5" fill-rule="evenodd" />
             <path class="zone" data-zone="bandung-timur" d="M 218.9,266.6 L
               229.2,272.4 L 232.2,273.1 L 233.0,274.9 L 234.5,274.2 L 235.4,276.3 L
               236.2,274.5 L 243.2,273.5 L 243.6,276.4 L 246.8,276.8 L 250.5,268.9 L
@@ -350,8 +348,7 @@ $page_title = 'Things to Do';
               347.3,288.9 L 351.3,294.2 L 353.6,293.3 L 361.3,297.0 L 362.9,296.6 L
               360.6,288.7 L 379.5,296.3 L 379.5,304.5 L 381.6,305.2 L 382.7,297.8 L
               390.4,300.0 L 391.8,292.5 Z" fill="var(--fill-1)" stroke="var(--stroke)"
-              stroke-width="0.5" fill-rule="evenodd"
-              onclick="handleZone('bandung-timur')" />
+              stroke-width="0.5" fill-rule="evenodd" />
             <path class="zone" data-zone="bandung-selatan" d="M 280.0,345.8 L
               276.9,343.1 L 279.6,340.4 L 282.2,337.4 L 279.4,334.7 L 278.5,330.3 L
               284.4,320.2 L 282.3,318.1 L 283.2,312.7 L 281.1,311.6 L 277.3,313.9 L
@@ -474,8 +471,7 @@ $page_title = 'Things to Do';
               52.8,318.2 L 52.9,321.4 L 50.4,324.9 L 50.8,328.8 L 53.2,330.2 L
               52.1,333.9 L 55.1,336.3 L 60.0,336.7 L 63.6,340.1 L 67.4,340.2 L
               73.2,337.1 L 81.4,336.6 Z" fill="var(--fill-1)" stroke="var(--stroke)"
-              stroke-width="0.5" fill-rule="evenodd"
-              onclick="handleZone('bandung-selatan')" />
+              stroke-width="0.5" fill-rule="evenodd" />
             <text class="zone-label" x="227.3" y="193.0">Bandung Pusat</text>
             <text class="zone-label" x="106.0" y="183.7">Bandung Barat</text>
             <text class="zone-label" x="215.1" y="123.9">Bandung Utara</text>

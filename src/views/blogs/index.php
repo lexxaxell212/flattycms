@@ -69,36 +69,34 @@ $categories = safe_get_categories($pdo);
           </li>
         </ol>
       </nav>
-    </div>
-    <div class="row g-4">
-      <div class="col-12">
-        <div class="text-muted small d-flex flex-wrap align-items-center gap-2">
-          <?php if (!empty($post["views"]) && (int) $post["views"] > 0): ?>
-          <span class="text-muted"><i class="fas fa-eye"></i><?= number_format((int) $post["views"]) ?></span>
-          <span><?= fmt_date($post["created_at"] ?? "") ?></span>
-          <?php endif; ?>
-          <?php if (!empty($post["cat_name"])): ?>
-          <a href="/blogs/?cat=<?= (int) ($post["category_id"] ?? 0) ?>"
-            class="badge badge-primary text-decoration-none">
-            <?= htmlspecialchars($post["cat_name"], ENT_QUOTES, "UTF-8") ?>
-          </a>
-          <?php endif; ?>
-        </div>
+      <div class="text-muted small d-flex flex-wrap align-items-center gap-1">
+        <?php if (!empty($post["views"]) && (int) $post["views"] > 0): ?>
+        <span><i class="fas fa-eye me-1"></i><?= number_format((int) $post["views"]) ?></span>
+        <span><?= fmt_date($post["created_at"] ?? "") ?></span>
+        <?php endif; ?>
+        <?php if (!empty($post["cat_name"])): ?>
+        <a href="/blogs/?cat=<?= (int) ($post["category_id"] ?? 0) ?>"
+          class="badge badge-primary text-decoration-none">
+          <?= htmlspecialchars($post["cat_name"], ENT_QUOTES, "UTF-8") ?>
+        </a>
+        <?php endif; ?>
       </div>
+    </div>
+    <div class="row g-2">
       <div class="col-12">
         <h1 class="h2">
           <?= htmlspecialchars($post["title"] ?? "", ENT_QUOTES, "UTF-8") ?>
         </h1>
       </div>
       <div class="col-12">
-        <img src="<?= BASE_UPLOAD_URL . htmlspecialchars($post['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>" onerror="this.onerror=null;this.src='/uploads/default.jpg'" alt="<?= htmlspecialchars($post['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>" class="w-100 d-block mx-auto rounded-lg" style="max-width: 600px">
+        <img src="<?= BASE_UPLOAD_URL . htmlspecialchars($post['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>" onerror="this.onerror=null;this.src='/uploads/default.jpg'" alt="<?= htmlspecialchars($post['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>" class="w-100 d-block mx-auto rounded-lg" style="max-width: 600px;aspect-ratio:3/4;box-shadow: var(--shadow-card);">
       </div>
       <div class="col-12">
-        <section>
+        <section class="revealed">
           <article class="post-content">
             <?= sanitize_content($post["content"] ?? "") ?>
           </article>
-          <hr class="my-5">
+          <hr class="my-4">
           <?php
           require_once LIB_PATH . "v-reactions.php";
           ?>
@@ -110,7 +108,7 @@ $categories = safe_get_categories($pdo);
               <div class="align-items-center">
                 <button
                   id="btn-reaction"
-                  class="btn <?= $user_liked ? 'btn-primary btn-sm' : 'btn-outline-primary btn-sm' ?>" data-id="<?= $id ?>" data-type="blog">
+                  class="btn <?= $user_liked ? 'btn-primary btn-fit' : 'btn-outline-primary btn-fit' ?>" data-id="<?= $id ?>" data-type="blog">
                   <i class="fas fa-heart me-1"></i>
                   <span id="reaction-count"><?= $reaction_count ?></span>
                 </button>
@@ -125,16 +123,16 @@ $categories = safe_get_categories($pdo);
                 <?php $share_title = urlencode($post['title'] ?? ''); ?>
                 <a href="https://wa.me/?text=<?= $share_title ?>%20<?= $share_url ?>"
                   target="_blank" rel="noopener"
-                  class="btn btn-outline-primary btn-sm">
+                  class="btn btn-outline-primary btn-fit">
                   <i class="fa-brands fa-whatsapp"></i>
                 </a>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $share_url ?>"
                   target="_blank" rel="noopener"
-                  class="btn btn-outline-primary btn-sm">
+                  class="btn btn-outline-primary btn-fit">
                   <i class="fa-brands fa-facebook-f"></i>
                 </a>
                 <button onclick="copyLink()"
-                  class="btn btn-outline-primary btn-sm">
+                  class="btn btn-outline-primary btn-fit">
                   <i class="fa-brands fa-instagram"></i>
                 </button>
               </div>
@@ -148,7 +146,7 @@ $categories = safe_get_categories($pdo);
       </div>
     </div>
     <?php else : ?>
-    <div class="row g-4">
+    <div class="row g-2">
       <div class="col-md-7">
         <div class="page-header">
           <div class="d-flex align-items-center justify-content-between">
@@ -175,7 +173,7 @@ $categories = safe_get_categories($pdo);
         </div>
         <?php if (empty($posts)): ?>
         <div class="text-center py-5 text-muted">
-          <i class="fas fa-inbox fs-1 d-block mb-3 opacity-50"></i>
+          <i class="fas fa-inbox fs-1 d-block mb-3 opacity-50 mx-auto"></i>
           <p class="mb-0">
             Belum ada artikel di sini.
           </p>
@@ -184,16 +182,16 @@ $categories = safe_get_categories($pdo);
         <?php foreach ($posts as $p): ?>
         <article class="card card-flatty mb-4">
           <div class="card-body">
-            <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="h5 mb-2">
+            <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="h4 mb-2">
               <?= htmlspecialchars(mb_strlen($p['title'] ?? '') > 60 ?
                 mb_substr($p['title'], 0, 60) . '…' : ($p['title'] ?? ''),
                 ENT_QUOTES, 'UTF-8') ?>
             </a>
-            <div class="d-flex align-items-center justify-content-start gap-2 small text-muted mb-3">
+            <div class="d-flex align-items-center justify-content-start gap-1 small text-muted mb-2">
               <!-- TAMBAH VIEW -->
               <?php if (!empty($p["views"]) && (int) $p["views"] > 0): ?>
-              <span class="text-muted"><i class="fas fa-eye me-2"></i><?= number_format((int) $p["views"]) ?></span>
-              <span class="small"><?= fmt_date($p["created_at"] ?? "") ?></span>
+              <span><i class="fas fa-eye me-1"></i><?= number_format((int) $p["views"]) ?></span>
+              <span><?= fmt_date($p["created_at"] ?? "") ?></span>
               <?php endif; ?>
               <?php if (!empty($p["cat_name"])): ?>
               <a href="/blogs/?cat=<?= (int) ($p["category_id"] ?? 0) ?>"
@@ -202,12 +200,12 @@ $categories = safe_get_categories($pdo);
               </a>
               <?php endif; ?>
             </div>
-            <p class="text-muted small">
+            <p class="text-muted">
               <?= safe_excerpt($p["excerpt"] ?? ($p["content"] ?? ""), 160) ?>
             </p>
           </div>
           <div class="card-footer">
-            <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="btn btn-primary btn-sm">
+            <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="btn btn-primary">
               Baca Selengkapnya
               <i class="arrow-icon fas fa-angle-right me-1"></i>
             </a>
@@ -224,7 +222,6 @@ $categories = safe_get_categories($pdo);
                 href="?<?= http_build_query(array_filter(["cat" => $cat_id ?: null, "page" => $page - 1])) ?>"
                 aria-label="Halaman sebelumnya">&laquo;</a>
             </li>
-            <!-- Nomor halaman dengan ellipsis -->
             <?php
             $range = 2;
             $prev_printed = false;
@@ -264,7 +261,7 @@ $categories = safe_get_categories($pdo);
       <div class="col-md-5">
         <div style="position:sticky !important; top:82px; align-self:flex-start;">
           <div class="cat-panel">
-            <h5 class="mb-3">Kategori</h5>
+            <h3 class="h4 mb-2">Kategori</h3>
             <?php if (empty($categories)): ?>
             <p class="text-muted small mb-0">
               Belum ada kategori.
@@ -272,7 +269,7 @@ $categories = safe_get_categories($pdo);
             <?php endif; ?>
             <?php foreach ($categories as $cat): ?>
             <a href="/blogs/?cat=<?= (int) ($cat["id"] ?? 0) ?>"
-              class="d-flex justify-content-between align-items-center py-2 border-bottom cat-link <?= (int) ($cat["id"] ?? 0) === $cat_id ? "fw-bold" : "text-card" ?>">
+              class="d-flex justify-content-between align-items-center mb-2 border-bottom cat-link <?= (int) ($cat["id"] ?? 0) === $cat_id ? "fw-bold" : "text-card" ?>">
               <span class="text-card"><?= htmlspecialchars($cat["name"] ?? "", ENT_QUOTES, "UTF-8") ?></span>
               <span class="badge badge-white rounded-pill">
                 <?= (int) ($cat["post_count"] ?? 0) ?>

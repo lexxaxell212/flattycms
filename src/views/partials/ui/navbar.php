@@ -237,7 +237,7 @@ $nav_items = [
       <?php $google_btn_id = 'google-login-btn-mobile'; include SRC_PATH . 'partials/ui/auth.php'; ?>
     </div>
   </ul>
-  <div class="weather align-items-center gap-4 overflow-hidden justify-content-center position-relative" id="w">
+  <div class="weather align-items-center gap-4 overflow-hidden position-relative" id="w">
     <span class="small">Load weather data
       <i class="fas fa-circle-notch fa-spin ms-2"></i>
     </span>

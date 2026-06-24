@@ -35,7 +35,7 @@ if ($method === 'GET') {
 
     // Trips
     $stmt = $pdo->prepare("
-            SELECT t.id, t.title, t.start_point_name, t.total_distance, t.duration, t.created_at,
+            SELECT t.id, t.title, t.start_point_name, t.total_distance, t.duration, t.source, t.created_at,
                    COUNT(ti.id) AS total_stops
             FROM trips t
             LEFT JOIN trip_items ti ON ti.trip_id = t.id

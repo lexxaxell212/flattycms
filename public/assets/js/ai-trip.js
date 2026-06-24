@@ -56,7 +56,7 @@
         </div>
         <h5 class="mb-2">${escHtml(slot.nama)}</h5>
         <p class="text-muted small mb-3">${escHtml(slot.tips)}</p>
-        <a href="${BASE}pages/poi/${escHtml(slot.slug)}" class="btn btn-outline-primary" target="_blank" rel="noopener">
+        <a href="${BASE}poi/${escHtml(slot.slug)}" class="btn btn-outline-primary" target="_blank" rel="noopener">
         Selengkapnya <i class="fa-solid fa-angle-right ms-1"></i>
         </a>
         </div>

@@ -9,7 +9,7 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
 <main class="main-content">
   <div class="container">
     <div class="page-header">
-      <img src="<?= htmlspecialchars($poi['poi_image'] ?? '') ?>" alt="<?= htmlspecialchars($poi['name']) ?>" class="w-100 d-block rounded-lg mx-auto" style="max-width:600px">
+      <img src="<?= htmlspecialchars($poi['poi_image'] ?? '') ?>" alt="<?= htmlspecialchars($poi['name']) ?>" class="w-100 d-block rounded-lg mx-auto" style="max-width:600px" onerror="this.onerror=null;this.src='/uploads/default.jpg'">
     </div>
     <section class="revealed">
       <h1 class="h2"><?= htmlspecialchars($poi['name']) ?></h1>

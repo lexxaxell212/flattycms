@@ -5926,7 +5926,6 @@ input[type="range"]::-moz-range-track {
   max-width: 600px;
   height: auto;
   display: block;
-  aspect-ratio: 3/4;
   border-radius: var(--radius-lg);
   margin: var(--space-4) auto;
   font-size: 0.85rem;

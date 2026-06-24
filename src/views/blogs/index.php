@@ -84,12 +84,12 @@ $categories = safe_get_categories($pdo);
     </div>
     <div class="row g-2">
       <div class="col-12">
-        <h1 class="h2">
+        <h1 class="h2 mb-4">
           <?= htmlspecialchars($post["title"] ?? "", ENT_QUOTES, "UTF-8") ?>
         </h1>
       </div>
       <div class="col-12">
-        <img src="<?= BASE_UPLOAD_URL . htmlspecialchars($post['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>" onerror="this.onerror=null;this.src='/uploads/default.jpg'" alt="<?= htmlspecialchars($post['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>" class="w-100 d-block mx-auto rounded-lg" style="max-width: 600px;aspect-ratio:3/4;box-shadow: var(--shadow-card);">
+        <img src="<?= BASE_UPLOAD_URL . htmlspecialchars($post['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>" onerror="this.onerror=null;this.src='/uploads/default.jpg'" alt="<?= htmlspecialchars($post['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>" class="w-100 d-block mx-auto rounded-lg" style="max-width: 600px;box-shadow: var(--shadow-card);">
       </div>
       <div class="col-12">
         <section class="revealed">

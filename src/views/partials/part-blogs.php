@@ -32,7 +32,13 @@ $categories = safe_get_categories($pdo);
           <?php foreach ($posts as $p): ?>
           <article class="artikel-slide-card card card-flatty" style="box-shadow:none;" role="listitem">
             </span>
-            <div class="card-body">
+            <div class="card-body position-relative">
+              <span class="badge badge-white top-0 end-0 position-absolute m-4">
+              <?= htmlspecialchars(
+                $p["cat_name"],
+                ENT_QUOTES,
+                "UTF-8",
+              ) ?>
               <img
               class="asl-img card-img"
               src="<?= BASE_UPLOAD_URL . htmlspecialchars($p['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
@@ -40,12 +46,6 @@ $categories = safe_get_categories($pdo);
               alt="<?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
               loading="lazy"
               >
-              <span class="badge badge-white top-0 end-0 position-absolute m-4">
-              <?= htmlspecialchars(
-                $p["cat_name"],
-                ENT_QUOTES,
-                "UTF-8",
-              ) ?>
               <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="h4">
                 <?= htmlspecialchars(mb_strlen($p['title'] ?? '') > 60 ?
                   mb_substr($p['title'], 0, 60) . '…' : ($p['title'] ?? ''),

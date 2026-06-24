@@ -23,7 +23,7 @@ $categories = safe_get_categories($pdo);
         <div class="artikel-slider-track" role="list">
           <?php if (empty($posts)): ?>
           <div class="text-center text-muted py-5 w-100">
-            <i class="fas fa-newspaper fs-1 d-block mb-3 opacity-50" aria-hidden="true"></i>
+            <i class="fas fa-newspaper fs-1 d-block mb-3 opacity-50 mx-auto" aria-hidden="true"></i>
             <p>
               Belum ada artikel.
             </p>
@@ -38,14 +38,14 @@ $categories = safe_get_categories($pdo);
                 "UTF-8",
               ) ?>
             </span>
-            <img
+            <div class="card-body">
+              <img
               class="asl-img card-img"
               src="<?= BASE_UPLOAD_URL . htmlspecialchars($p['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
               onerror="this.onerror=null;this.src='/uploads/default.jpg'"
               alt="<?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
               loading="lazy"
               >
-            <div class="card-body">
               <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="h4 mb-2">
                 <?= htmlspecialchars(mb_strlen($p['title'] ?? '') > 60 ?
                   mb_substr($p['title'], 0, 60) . '…' : ($p['title'] ?? ''),

@@ -76,8 +76,8 @@
       document.getElementById('statTotal').textContent = json.total;
       if (!json.data.length) {
         grid.innerHTML = `
-        <div class="col-12 text-center py-5 text-muted small">
-        <i class="fa-solid fa-image fa-2x mb-3 d-block opacity-25"></i>
+        <div class="col-12 text-center py-5 text-muted small justify-content-center">
+        <i class="fa-solid fa-image fa-2x mb-3 d-block opacity-25 mx-auto"></i>
         Belum ada foto${poi_id ? ' untuk lokasi ini': ''}
         ${IS_LOGGED ? '<br><button class="btn btn-primary mt-4" id="btnEmptyUpload"><i class="fa-solid fa-camera me-1"></i>Upload pertama!</button>': ''}
         </div>`;
@@ -91,18 +91,18 @@
         <div class="card-body">
         <div class="position-relative" style="padding-top:75%;cursor:pointer"
         onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${p.poi_name}','${p.uploader_name}','${p.caption || ''}','${p.created_at}',${p.id},${p.user_id})">
-        <img src="${BASE}/uploads/${p.photo_path}" class="position-absolute top-0 start-0 w-100 h-100" style="object-fit:cover;transition:.2s" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
+        <img src="${BASE}/uploads/${p.photo_path}" class="position-absolute top-0 start-0 w-100 h-100 card-img" style="object-fit:cover;transition:.2s" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
         </div>
-        <div class="small fw-semibold text-truncate">${p.poi_name}</div>
-        <div class="d-flex align-items-center gap-1 mt-1">
+        <div class="text-truncate"><h2 class="h4">${p.poi_name}</h2></div>
+        <div class="d-flex align-items-center gap-1 mt-2">
         <img src="${p.uploader_avatar || BASE+'/uploads/default.jpg'}"
         class="rounded-circle" width="18" height="18" style="object-fit:cover">
-        <span class="text-muted" style="font-size:.7rem">${p.uploader_name}</span>
+        <span class="text-muted small">${p.uploader_name}</span>
         </div>
-        ${p.caption ? `<div class="text-muted mt-1" style="font-size:.7rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.caption}</div>`: ''}
+        ${p.caption ? `<div class="text-muted mt-2" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.caption}</div>`: ''}
         </div>
         <div class="card-footer">
-        <div class="text-muted" style="font-size:.72rem">${formatDate(p.created_at)}</div>
+        <div class="text-muted">${formatDate(p.created_at)}</div>
         </div>
         </div>
         </div>
@@ -142,8 +142,8 @@
       document.getElementById('statReview').textContent = json.total ?? 0;
       if (!json.data || !json.data.length) {
         grid.innerHTML = `
-        <div class="text-center py-5 text-muted small">
-        <i class="fa-solid fa-star fa-2x mb-3 d-block opacity-25"></i>
+        <div class="text-center py-5 text-muted small justify-content-center">
+        <i class="fa-solid fa-star fa-2x mb-3 d-block opacity-25 mx-auto"></i>
         Belum ada review${poi_id ? ' untuk lokasi ini': ''}
         ${IS_LOGGED ? '<br><button class="btn btn-primary mt-3" id="btnEmptyReview"><i class="fa-solid fa-pen-to-square me-1"></i>Tulis pertama!</button>': ''}
         </div>`;
@@ -475,4 +475,5 @@
     });
   }
   loadGallery();
+  loadReviews();
 })();

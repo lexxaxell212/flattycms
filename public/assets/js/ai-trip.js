@@ -42,7 +42,12 @@
 
     const saveBtn = IS_LOGGED && !savedTripId ? `
     <div class="d-flex justify-content-center mb-4">
-      <button class="btn btn-outline-success btn-sm" id="btnSaveItinerary">
+      <button class="btn btn-success" id="btnSaveItinerary">
+        <i class="fa-solid fa-floppy-disk me-1"></i>Simpan Itinerary
+      </button>
+    </div>` : !IS_LOGGED ? `
+    <div class="d-flex justify-content-center mb-4">
+      <button class="btn btn-outline-success" onclick="flattyToast('info', 'Login untuk menyimpan itinerary ini')">
         <i class="fa-solid fa-floppy-disk me-1"></i>Simpan Itinerary
       </button>
     </div>` : '';
@@ -105,8 +110,8 @@
         </div>
         <input type="text" id="aiTripTitle" class="form-control mb-3" placeholder="Nama itinerary (opsional)" value="Itinerary Bandungku">
         <div class="d-flex gap-2 justify-content-end">
-          <button class="btn btn-outline-primary btn-sm" id="btnCancelAiSave">Batalkan</button>
-          <button class="btn btn-success btn-sm" id="btnConfirmAiSave">
+          <button class="btn btn-outline-primary" id="btnCancelAiSave">Batalkan</button>
+          <button class="btn btn-success" id="btnConfirmAiSave">
             <i class="fa-solid fa-floppy-disk me-1"></i>Simpan
           </button>
         </div>
@@ -122,8 +127,9 @@
     const title = document.getElementById("aiTripTitle")?.value.trim() || "Itinerary Bandungku";
     const btn = document.getElementById("btnConfirmAiSave");
     btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin me-1"></i>Menyimpan...';
+    btn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
     try {
+      await new Promise((r) => setTimeout(r, 1000));
       const res = await fetch(API_GROQ, {
         method: "POST",
         headers: {

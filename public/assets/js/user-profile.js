@@ -65,13 +65,13 @@
       return;
     }
     grid.innerHTML = data.photos.map(p => `
-      <div class="col-6 col-md-4" id="photo-${p.id}">
+      <div class="col-12 col-md-6" id="photo-${p.id}">
       <div class="card card-flatty">
       <div class="card-body">
       <img src="${BASE}/uploads/${p.photo_path}" class="card-img" loading="lazy">
-      <h3 class="h5 small text-truncate mb-2">${p.poi_name}</h3>
-      ${p.caption ? `<p class="text-muted text-truncate small mb-2">${p.caption}</p>`: ''}
-      <span class="text-muted" style="font-size:.68rem">${formatDate(p.created_at)}</span>
+      <h3 class="h4 small text-truncate mb-2">${p.poi_name}</h3>
+      ${p.caption ? `<p class="text-muted text-truncate mb-2">${p.caption}</p>`: ''}
+      <span class="text-muted">${formatDate(p.created_at)}</span>
       </div>
       <div class="card-footer">
       <button class="btn btn-danger" onclick="deleteContrib('photo', ${p.id})">Hapus<i class="fa-solid fa-trash ms-2"></i>
@@ -89,26 +89,34 @@
       list.innerHTML = emptyState('fa-route', 'Belum ada trip tersimpan');
       return;
     }
-    list.innerHTML = data.trips.map(t => `
-      <div class="col-12 col-md-6 card card-glass" id="trip-${t.id}">
-      <div class="p-3 p-md-4">
-      <h3 class="h4 text-truncate">${t.title}</h3>
-      <div class="row g-2">
-      <span class="small p-2 rounded-sm badge-blue"><i class="fa-solid fa-location-dot me-2"></i>Mulai dari : <strong>${t.start_point_name}</strong></span>
-      <span class="small p-2 rounded-sm badge-blue"><i class="fa-solid fa-map-pin me-2"></i><strong>${t.total_stops}</strong> lokasi</span>
-      ${t.total_distance ? `<span class="small p-2 rounded-sm badge-blue"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${t.total_distance}</strong> km</span>`: ''}
-      ${t.duration ? `<span class="small p-2 rounded-sm badge-blue"><i class="fa-solid fa-clock me-2"></i><strong>${t.duration}</strong> menit</span>`: ''}
+    list.innerHTML = data.trips.map(t => {
+      const isAi = t.source === 'itinerary';
+      const badge = isAi
+        ? `<span class="badge badge-accent ms-2" style="font-size:.7rem"><i class="fas fa-wand-magic-sparkles me-1"></i>Itinerary</span>`
+        : `<span class="badge badge-blue ms-2" style="font-size:.7rem"><i class="fas fa-route me-1"></i>Classic</span>`;
+      const openBtn = isAi
+        ? `<a href="/trip?open_ai=${t.id}" class="btn btn-primary">Buka<i class="fa-solid fa-wand-magic-sparkles ms-2"></i></a>`
+        : `<a href="/trip?open_trip=${t.id}" class="btn btn-primary">Buka di Map<i class="fa-solid fa-route ms-2"></i></a>`;
+      return `
+      <div class="col-12 col-md-6" id="trip-${t.id}">
+      <div class="card card-flatty">
+      <div class="card-body">
+      <h3 class="h4 text-truncate">${t.title}${badge}</h3>
+      <div class="row g-2 mb-2">
+      ${!isAi ? `<span class="small p-2"><i class="fa-solid fa-location-dot me-2"></i>Mulai dari : <strong>${t.start_point_name}</strong></span>` : ''}
+      <span class="small p-2"><i class="fa-solid fa-map-pin me-2"></i><strong>${t.total_stops}</strong> lokasi</span>
+      ${!isAi && t.total_distance ? `<span class="small p-2"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${t.total_distance}</strong> km</span>` : ''}
+      ${!isAi && t.duration ? `<span class="small p-2"><i class="fa-solid fa-clock me-2"></i><strong>${t.duration}</strong> menit</span>` : ''}
       </div>
-      <div class="text-muted mb-4" style="font-size:.8rem">${formatDate(t.created_at)}</div>
-      <div class="d-flex gap-2">
-      <a href="/trip" class="btn btn-primary"> Buka di Map <i class="fa-solid fa-route ms-2"></i>
-      </a>
-      <button class="btn btn-danger" onclick="deleteContrib('trip', ${t.id})"> Hapus <i class="fa-solid fa-trash"></i>
-      </button>
+      <div class="text-muted mb-2" style="font-size:.8rem">${formatDate(t.created_at)}</div>
+      </div>
+      <div class="card-footer">
+      ${openBtn}
+      <button class="btn btn-danger" onclick="deleteContrib('trip', ${t.id})">Hapus<i class="fa-solid fa-trash ms-2"></i></button>
       </div>
       </div>
-      </div>
-      `).join('');
+      </div>`;
+    }).join('');
   }
 
   // ── RENDER REACTIONS ─────────────────────────────────────
@@ -127,20 +135,28 @@
     };
     const typeIcon = {
       blog: 'fa-newspaper',
-      page: 'fa-map-location-dot',
-      place: 'fa-route',
+      page: 'fa-bullhorn',
+      place: 'fa-map-location-dot',
       event: 'fa-bullhorn'
     };
 
     list.innerHTML = data.reactions.map(r => `
-      <div class="col-12 col-md-6 col-lg-4" id="reaction-${r.id}">
-      <div class="card card-glass">
+      <div class="col-12 col-md-6" id="reaction-${r.id}">
+      <div class="card card-flatty">
       <div class="card-body">
-      <div class="rounded-circle d-flex align-items-center justify-content-center mb-2" style="width:40px;height:40px;background: var(--bg-primary-subtle)">
+      <div class="rounded-circle d-flex align-items-center justify-content-center mb-3" style="width:40px;height:40px;background: var(--bg-primary-subtle)">
       <i class="fa-solid ${typeIcon[r.content_type] ?? 'fa-heart'} text-purple mx-auto"></i>
       </div>
-      <div class="small mb-2">${r.content_title ?? `${typeLabel[r.content_type] ?? r.content_type} #${r.content_id}`}</div>
-      <div class="text-muted mb-2" style="font-size:.7rem">${formatDate(r.created_at)}</div>
+      <div class="mb-2">
+        <h3 class="h4">
+          ${r.content_title ?? `${typeLabel[r.content_type] ?? r.content_type} #${r.content_id}`}
+          </h3>
+        </div>
+      <div class="text-muted mb-4"
+        <p>
+        ${formatDate(r.created_at)}
+        </p>
+      </div>
       <button class="btn btn-danger" onclick="deleteContrib('reaction', ${r.id})"> Hapus
       <i class="fa-solid fa-trash ms-2"></i>
       </button>

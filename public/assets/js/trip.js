@@ -104,8 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     box.style.display = "block";
     if (!matches.length) {
-      box.innerHTML =
-        '<div class="small text-muted">Tidak ditemukan</div>';
+      box.innerHTML = '<div class="small text-muted">Tidak ditemukan</div>';
       return;
     }
     matches.forEach((p) => {
@@ -135,12 +134,14 @@ document.addEventListener("DOMContentLoaded", () => {
     )
       document.getElementById("searchPoiResults").style.display = "none";
   });
-  
-  document.getElementById("btnResetPoiSearch").addEventListener("click", function () {
-  document.getElementById("searchPoi").value = "";
-  document.getElementById("searchPoiResults").innerHTML = "";
-  document.getElementById("searchPoiResults").style.display = "none";
-});
+
+  document
+    .getElementById("btnResetPoiSearch")
+    .addEventListener("click", function () {
+      document.getElementById("searchPoi").value = "";
+      document.getElementById("searchPoiResults").innerHTML = "";
+      document.getElementById("searchPoiResults").style.display = "none";
+    });
 
   function searchStartPoint(q) {
     const el = document.getElementById("startResults");
@@ -154,8 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     el.innerHTML = "";
     el.style.display = "";
     if (!matches.length) {
-      el.innerHTML =
-        '<div class="small text-muted">Tidak ditemukan</div>';
+      el.innerHTML = '<div class="small text-muted">Tidak ditemukan</div>';
       return;
     }
     matches.forEach((p) => {
@@ -199,12 +199,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape")
       document.getElementById("startResults").style.display = "none";
   });
-  
-  document.getElementById("btnResetStartSearch").addEventListener("click", function () {
-  document.getElementById("startInput").value = "";
-  document.getElementById("startResults").innerHTML = "";
-  document.getElementById("startResults").style.display = "none";
-});
+
+  document
+    .getElementById("btnResetStartSearch")
+    .addEventListener("click", function () {
+      document.getElementById("startInput").value = "";
+      document.getElementById("startResults").innerHTML = "";
+      document.getElementById("startResults").style.display = "none";
+    });
 
   window.addToRoute = function (poi_id) {
     window.isLoadedTrip = false;
@@ -246,7 +248,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (routes.length === 0) {
       if (empty) empty.style.display = "flex";
-      list.innerHTML = '<i class="fa-solid fa-map-pin text-accent"></i><span data-bhs="tp.page.map.route_empty">Pilih titik awal - Klik pin di map untuk tambah lokasi</span>';
+      list.innerHTML = `<div class="route-empty mt-2" id="routeEmpty">
+      <i class="fa-solid fa-map-pin text-accent"></i>
+      <span data-bhs="tp.page.map.route_empty">Pilih titik awal - Klik pin di map untuk tambah lokasi</span>
+      </div>`;
       if (empty) list.appendChild(empty);
       btnG.disabled = true;
       // FIX: disable simpan juga reset
@@ -364,7 +369,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (e) {
         flattyToast("error", "Tidak bisa buat rute.");
       } finally {
-        btn.innerHTML = 'Buat Trip';
+        btn.innerHTML = "Buat Trip";
         btn.disabled = false;
       }
     });
@@ -478,7 +483,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (e) {
         flattyToast("error", "Tidak bisa menyimpan trip.");
       } finally {
-        btn.innerHTML = 'Simpan';
+        btn.innerHTML = "Simpan";
         btn.disabled = false;
       }
     }
@@ -608,8 +613,7 @@ document.addEventListener("DOMContentLoaded", () => {
           p.name.toLowerCase().includes(q),
         ).slice(0, 6);
         if (!matches.length) {
-          box.innerHTML =
-            '<div class="small text-muted">Tidak ditemukan</div>';
+          box.innerHTML = '<div class="small text-muted">Tidak ditemukan</div>';
           return;
         }
         matches.forEach((p) => {
@@ -687,7 +691,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (e) {
           flattyToast("error", "Gagal upload foto.");
         } finally {
-          btn.innerHTML = 'Upload';
+          btn.innerHTML = "Upload";
           btn.disabled = false;
         }
       });
@@ -838,21 +842,22 @@ document.addEventListener("DOMContentLoaded", () => {
           wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fas fa-bookmark"></i><p>Belum ada trip tersimpan.</p></div>`;
           return;
         }
-        wrap.innerHTML = list.map((trip) => {
-          const isAi = trip.source === 'itinerary';
-          const badge = isAi
-            ? `<span class="badge badge-accent ms-2" style="font-size:.7rem"><i class="fas fa-wand-magic-sparkles me-1"></i>Itinerary</span>`
-            : '';
-          const openBtn = isAi
-            ? `<button class="btn btn-primary" onclick="window.renderAiItinerary(${trip.id})">Buka<i class="fa-solid fa-wand-magic-sparkles ms-1"></i></button>`
-            : `<button class="btn btn-primary" onclick="loadSavedTrip(${trip.id})">Buka<i class="fa-solid fa-route ms-1"></i></button>`;
-          return `
+        wrap.innerHTML = list
+          .map((trip) => {
+            const isAi = trip.source === "itinerary";
+            const badge = isAi
+              ? `<span class="badge badge-accent ms-2" style="font-size:.7rem"><i class="fas fa-wand-magic-sparkles me-1"></i>Itinerary</span>`
+              : "";
+            const openBtn = isAi
+              ? `<button class="btn btn-primary" onclick="window.renderAiItinerary(${trip.id})">Buka<i class="fa-solid fa-wand-magic-sparkles ms-1"></i></button>`
+              : `<button class="btn btn-primary" onclick="loadSavedTrip(${trip.id})">Buka<i class="fa-solid fa-route ms-1"></i></button>`;
+            return `
           <div class="card card-glass">
           <div class="card-body">
           <h3 class="h4 text-truncate">${escHtml(trip.title || "Trip tanpa nama")}${badge}</h3>
           <div class="row g-2">
-          ${!isAi ? `<span class="small p-2 rounded-sm badge-blue"><i class="fa-solid fa-map-pin me-2"></i><strong>${trip.total_stops}</strong> lokasi</span>` : ''}
-          ${!isAi && trip.total_distance ? `<span class="small p-2 rounded-sm badge-blue"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${trip.total_distance}</strong> km</span>` : ''}
+          ${!isAi ? `<span class="small p-2"><i class="fa-solid fa-map-pin me-2"></i><strong>${trip.total_stops}</strong> lokasi</span>` : ""}
+          ${!isAi && trip.total_distance ? `<span class="small p-2"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${trip.total_distance}</strong> km</span>` : ""}
           </div>
           </div>
           <div class="card-footer d-flex gap-2">
@@ -862,7 +867,8 @@ document.addEventListener("DOMContentLoaded", () => {
           </button>
           </div>
           </div>`;
-        }).join("");
+          })
+          .join("");
       })
       .catch(() => {
         wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-triangle-exclamation"></i><p>Gagal memuat trip. Coba refresh halaman.</p></div>`;
@@ -911,6 +917,9 @@ document.addEventListener("DOMContentLoaded", () => {
     loadExplorePoi();
 
     if (IS_LOGGED) {
+      loadTripku();
+      tripkuLoaded = true;
+
       fetch(API_TRIP + "?action=count")
         .then((r) => r.json())
         .then((d) => {
@@ -935,5 +944,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if (catBtn) catBtn.click();
       }, 100);
     }
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const openTrip = urlParams.get("open_trip");
+  const openAi = urlParams.get("open_ai");
+
+  if (openTrip) {
+    setTimeout(() => {
+      document.querySelector('[data-tab="map"]')?.click();
+      if (typeof window.loadTripById === "function")
+        window.loadTripById(parseInt(openTrip));
+    }, 300);
+  }
+
+  if (openAi) {
+    setTimeout(() => {
+      if (typeof window.renderAiItinerary === "function")
+        window.renderAiItinerary(parseInt(openAi));
+    }, 300);
   }
 })();

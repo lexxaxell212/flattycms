@@ -92,7 +92,7 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
         </div>
       </aside>
       <div class="up-content">
-        <div class="bg-surface my-4">
+        <div class="bg-surface">
           <div class="p-md-4">
             <div id="tabLoading" class="skeleton-wrapper">
               <div></div>

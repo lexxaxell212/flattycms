@@ -1,7 +1,4 @@
 (function () {
-  const API_GROQ = BASE + "/api/map/api-groq-trip.php";
-  const API_TRIP = BASE + "/api/map/api-trips.php";
-
   const waktuIcon = {
     Pagi: "fas fa-cloud",
     Siang: "fas fa-cloud-sun",
@@ -149,6 +146,7 @@
         document.getElementById("aiSaveForm")?.remove();
         flattyToast("success", "Itinerary berhasil disimpan!");
         renderTimeline(lastItinerary.days, data.trip_id);
+        window.refreshTripku();
       } else {
         flattyToast("error", data.message ?? "Gagal menyimpan.");
         btn.disabled = false;

@@ -6314,7 +6314,7 @@ input[type="range"]::-moz-range-track {
 /* ── UPLOAD MODAL ────────────────────────────────────────────── */
 .modal {
   z-index: 9999;
-  background: var(--bg-backdrop);
+  background: var(--bg-glass);
   border-radius: none;
 }
 .modal-content {
@@ -6336,7 +6336,7 @@ input[type="range"]::-moz-range-track {
 }
 
 .lightbox {
-  background: var(--bg-backdrop);
+  background: var(--bg-glass);
   box-shadow: var(--shadow-lg);
 }
 

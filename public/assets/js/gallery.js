@@ -86,16 +86,16 @@
         return;
       }
       grid.innerHTML = json.data.map(p => `
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-        <div class="card card-flatty">
-        <div class="card-body">
-        <div class="position-relative" style="padding-top:75%;cursor:pointer" onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${p.poi_name}','${p.uploader_name}','${p.caption || ''}','${p.created_at}',${p.id},${p.user_id})">
-        <img src="${BASE}/uploads/${p.photo_path}" class="position-absolute top-0 start-0 card-img" style="object-fit:cover;transition:.2s" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
+        <div class="col-12 col-md-6 col-lg-4">
+        <div class="card card-flatty h-100">
+          <div class="position-relative test" style="padding-top:50%;cursor:pointer" onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${p.poi_name}','${p.uploader_name}','${p.caption || ''}','${p.created_at}',${p.id},${p.user_id})">
+        <img src="${BASE}/uploads/${p.photo_path}" class="position-absolute top-0 start-0 card-img" style="object-fit:cover;transition:.2s;aspect-ratio:16/9;width:100%;height:100%" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
         </div>
+        <div class="card-body">
         <div class="text-truncate"><h2 class="h4">${p.poi_name}</h2></div>
         <div class="d-flex align-items-center gap-1 mt-2">
         <img src="${p.uploader_avatar || BASE+'/uploads/default.jpg'}"
-        class="rounded-circle" width="18" height="18" style="object-fit:cover">
+        class="rounded-circle me-2" width="18" height="18" style="object-fit:cover">
         <span class="text-muted">${p.uploader_name}</span>
         </div>
         ${p.caption ? `<div class="text-muted mt-2" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.caption}</div>`: ''}

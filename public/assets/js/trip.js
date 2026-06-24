@@ -248,10 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (routes.length === 0) {
       if (empty) empty.style.display = "flex";
-      list.innerHTML = `<div class="route-empty mt-2" id="routeEmpty">
-      <i class="fa-solid fa-map-pin text-accent"></i>
-      <span data-bhs="tp.page.map.route_empty">Pilih titik awal - Klik pin di map untuk tambah lokasi</span>
-      </div>`;
+      list.innerHTML = '';
       if (empty) list.appendChild(empty);
       btnG.disabled = true;
       // FIX: disable simpan juga reset

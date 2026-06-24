@@ -61,7 +61,7 @@
   function renderPhotos() {
     const grid = document.getElementById('photoGrid');
     if (!data.photos.length) {
-      grid.innerHTML = emptyState('fa-images', 'Belum ada foto yang diupload');
+      grid.innerHTML = emptyState('fa-images mx-auto d-block', 'Belum ada foto yang diupload');
       return;
     }
     grid.innerHTML = data.photos.map(p => `
@@ -86,7 +86,7 @@
   function renderTrips() {
     const list = document.getElementById('tripList');
     if (!data.trips.length) {
-      list.innerHTML = emptyState('fa-route', 'Belum ada trip tersimpan');
+      list.innerHTML = emptyState('fa-route mx-auto d-block', 'Belum ada trip tersimpan');
       return;
     }
     list.innerHTML = data.trips.map(t => `
@@ -115,7 +115,7 @@
   function renderReactions() {
     const list = document.getElementById('reactionList');
     if (!data.reactions.length) {
-      list.innerHTML = emptyState('fa-heart', 'Belum ada reaksi');
+      list.innerHTML = emptyState('fa-heart mx-auto d-block', 'Belum ada reaksi');
       return;
     }
 
@@ -133,11 +133,11 @@
     };
 
     list.innerHTML = data.reactions.map(r => `
-      <div class="col-12 col-md-6" id="reaction-${r.id}">
+      <div class="col-12 col-md-6 col-lg-3" id="reaction-${r.id}">
       <div class="card card-glass">
       <div class="card-body">
       <div class="rounded-circle d-flex align-items-center justify-content-center mb-2" style="width:40px;height:40px;background: var(--bg-primary-subtle)">
-      <i class="fa-solid ${typeIcon[r.content_type] ?? 'fa-heart'} text-purple"></i>
+      <i class="fa-solid ${typeIcon[r.content_type] ?? 'fa-heart'} text-purple mx-auto"></i>
       </div>
       <div class="small mb-2">${r.content_title ?? `${typeLabel[r.content_type] ?? r.content_type} #${r.content_id}`}</div>
       <div class="text-muted mb-2" style="font-size:.7rem">${formatDate(r.created_at)}</div>

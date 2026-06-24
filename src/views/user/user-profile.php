@@ -19,7 +19,7 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
             <img src="<?= safe_html($user['avatar']) ?>"
             class="rounded-circle mb-3"
             width="80" height="80"
-            style="object-fit:cover;border:2px solid var(--btn-bg-primary)">
+            style="object-fit:cover;border:2px solid var(--border-primary-subtle)">
             <?php else : ?>
             <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold mx-auto mb-3"
               style="width:80px;height:80px;font-size:28px;background:var(--bg-primary-subtle);color:var(--text-primary);border:var(--border-primary-subtle)">
@@ -98,7 +98,7 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
               <div></div>
             </div>
             <div id="tabPhotos" class="tab-content" style="display:none">
-              <div class="row g-3" id="photoGrid"></div>
+              <div class="row g-2" id="photoGrid"></div>
             </div>
             <div id="tabTrips" class="tab-content" style="display:none">
               <div id="tripList" class="row g-2"></div>

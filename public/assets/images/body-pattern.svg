@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
   <defs>
     <style>
-      .b-line { stroke: oklch(0.865 0.001 295); fill: none; }
-      .b-dot  { fill: oklch(0.865 0.001 295); }
+      .b-line { stroke: oklch(0.885 0.001 295); fill: none; }
+      .b-dot  { fill: oklch(0.885 0.001 295); }
     </style>
   </defs>
 

@@ -27,7 +27,7 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
         <div class="align-items-center">
           <button
             id="btn-reaction"
-            class="btn <?= $user_liked ? 'btn-primary btn-fit' : 'btn-outline-primary btn-fit' ?>" data-id="<?= $slug ?>" data-type="blog">
+            class="btn <?= $user_liked ? 'btn-primary btn-fit' : 'btn-outline-primary btn-fit' ?>" data-id="<?= $slug ?>" data-type="place">
             <i class="fas fa-heart me-1"></i>
             <span id="reaction-count"><?= $reaction_count ?></span>
           </button>
@@ -38,8 +38,8 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
           <span class="text-muted">Bagikan artikel ini</span>
         </div>
         <div class="gap-2 align-items-center">
-          <?php $share_url = urlencode(BASE_URL . 'poi/' . ($poi['name'] ?? '')); ?>
-          <?php $share_title = urlencode($poi['name'] ?? ''); ?>
+          <?php $share_url = urlencode(BASE_URL . 'poi/' . $slug); ?>
+          <?php $share_title = urlencode($slug); ?>
           <a href="https://wa.me/?text=<?= $share_title ?>%20<?= $share_url ?>"
             target="_blank" rel="noopener"
             class="btn btn-outline-primary btn-fit">
@@ -48,7 +48,7 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
           <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $share_url ?>"
             target="_blank" rel="noopener"
             class="btn btn-outline-primary btn-fit">
-            <i class="fa-brands fa-facebo<ok-f"></i>
+            <i class="fa-brands fa-facebook"></i>
           </a>
           <button onclick="copyLink()"
             class="btn btn-outline-primary btn-fit">

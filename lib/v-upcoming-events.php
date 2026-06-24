@@ -13,7 +13,8 @@ $_tdo_stmt = $GLOBALS['pdo']->prepare("
     SELECT id, title, slug, html_content, event_date
     FROM pages
     WHERE event_date IS NOT NULL
-    And id != ?
+    AND event_date >= CURDATE()
+    AND id != ?
     ORDER BY event_date ASC
     LIMIT 6
   ");

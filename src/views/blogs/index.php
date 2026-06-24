@@ -129,7 +129,7 @@ $categories = safe_get_categories($pdo);
                 <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $share_url ?>"
                   target="_blank" rel="noopener"
                   class="btn btn-outline-primary btn-fit">
-                  <i class="fa-brands fa-facebook-f"></i>
+                  <i class="fa-brands fa-facebook"></i>
                 </a>
                 <button onclick="copyLink()"
                   class="btn btn-outline-primary btn-fit">

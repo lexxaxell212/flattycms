@@ -28,9 +28,9 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
         <div class="align-items-center">
           <button
             id="btn-reaction"
-            class="btn <?= $user_liked ? 'btn-primary btn-fit' : 'btn-outline-primary btn-fit' ?>" data-id="<?= $poi_id ?>" data-type="place">
+            class="btn <?= $__user_liked ? 'btn-primary btn-fit' : 'btn-outline-primary btn-fit' ?>" data-id="<?= $poi_id ?>" data-type="place">
             <i class="fas fa-heart me-1"></i>
-            <span id="reaction-count"><?= $reaction_count ?></span>
+            <span id="reaction-count"><?= $__reaction_count ?></span>
           </button>
         </div>
       </div>

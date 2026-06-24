@@ -5,6 +5,7 @@ $poi_id = $poi['id'];
 
 $page_title = $poi['name'] . ' - ' . SITE_NAME;
 ?>
+<script src="<?= JS_URL ?>reactions.js" defer></script>
 <main class="main-content">
   <div class="container">
     <div class="page-header">

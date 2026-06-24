@@ -31,7 +31,7 @@
         return;
       }
       document.getElementById('reaction-count').textContent = data.count;
-      btn.classList.toggle('btn-danger', data.liked);
+      btn.classList.toggle('btn-primary', data.liked);
       btn.classList.toggle('btn-outline-primary', !data.liked);
     });
   });

@@ -1930,8 +1930,6 @@ table tbody td {
   background: oklch(0.97 0.001 295) !important;
   color: oklch(0.131 0.089 295);
   border: 1px solid oklch(0.131 0.089 295) !important;
-  font-weight: 600;
-  font-size: 0.75rem;
 }
 [data-dark] .btn-outline-primary {
   background: oklch(0.31 0 0/0.5) !important;
@@ -2397,9 +2395,6 @@ a:hover i.arrow-icon {
   background: var(--bg-surface);
   border: var(--border-card);
   box-shadow: var(--shadow-card);
-  transition:
-    transform var(--duration) var(--ease),
-    justify-content var(--duration) var(--ease);
 }
 .card-flatty .card-header {
   background: var(--bg-card);
@@ -2410,20 +2405,12 @@ a:hover i.arrow-icon {
   border-bottom: var(--border-card);
   box-shadow: var(--shadow-card);
   z-index: 2;
-  transition: transform var(--duration) var(--ease);
 }
 
 .card-flatty .card-footer {
   background: var(--bg-surface);
   border-top: none;
   z-index: 1;
-  transition:
-    transform var(--duration) var(--ease),
-    justify-content var(--duration) var(--ease);
-}
-
-.card-flatty:hover .card-body {
-  transform: translateY(-4px);
 }
 
 .card-flatty:hover h2,
@@ -2802,6 +2789,17 @@ a:hover i.arrow-icon {
   transition:
     opacity var(--duration) var(--ease),
     transform var(--duration) var(--ease);
+}
+
+.live-search-rec::-webkit-scrollbar {
+  width: 2px;
+}
+.live-search-rec::-webkit-scrollbar-track {
+  background: transparent;
+}
+.live-search-rec::-webkit-scrollbar-thumb {
+  background: var(--bg-primary);
+  border-radius: 99px;
 }
 
 /* ======== /consent ========= */

@@ -18,7 +18,7 @@ $page_title = 'Lupa Password - ' . SITE_NAME;
         <input type="email" id="fp-email" class="form-control mb-4" data-bhs="form.email.placeholder" placeholder="nama@email.com">
       </div>
       <div class="col-12 py-4">
-        <button type="button" class="btn btn-outline-primary" id="btn-fp">
+        <button type="button" class="btn btn-primary" id="btn-fp">
           <span data-bhs="btn.link.reset">Kirim Link Reset</span>
         </button>
       </div>

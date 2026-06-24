@@ -81,6 +81,6 @@ function sanitize(str) {
       flattyToast('error', msg);
     } finally {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = '<span data-bhs="btn.send">Kirim</span>';
+      submitBtn.innerHTML = 'Kirim <i class="fas fa-paper-plane ms-1">';
     }
     });

@@ -64,7 +64,7 @@ $page_title = 'Daftar - ' . SITE_NAME;
         </div>
       </div>
       <div class="col-12 py-4">
-        <button type="button" class="btn btn-outline-primary" id="btn-register">
+        <button type="button" class="btn btn-primary" id="btn-register">
           <span data-bhs="btn.reg">Daftar</span>
         </button>
       </div>

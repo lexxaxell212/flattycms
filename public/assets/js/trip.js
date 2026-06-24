@@ -828,7 +828,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const wrap = document.getElementById("tripkuList");
     wrap.innerHTML = `<div class="skeleton-wrapper" style="grid-column:1/-1"><div></div></div>`;
     await new Promise((r) => setTimeout(r, 1000));
-    fetch(API_TRIP + "?action=list")
+    fetch(API_TRIP)
       .then((r) => r.json())
       .then((data) => {
         const list = Array.isArray(data) ? data : data.data || [];
@@ -838,31 +838,31 @@ document.addEventListener("DOMContentLoaded", () => {
           wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fas fa-bookmark"></i><p>Belum ada trip tersimpan.</p></div>`;
           return;
         }
-        wrap.innerHTML = list
-          .map(
-            (trip) => `
-        <div class="card card-glass">
-        <div class="card-body">
-        <h3 class="h4 text-truncate">${escHtml(trip.title || "Trip tanpa nama")}</h3>
-        <div class="row g-2">
-        <span class="small p-2 rounded-sm badge-blue"><i class="fa-solid fa-map-pin me-2"></i><strong>${trip.total_stops}</strong> lokasi</span>
-        ${trip.total_distance ? `<span class="small p-2 rounded-sm badge-blue"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${trip.total_distance}</strong> km</span>` : ""}
-        ${!trip.total_stops && !trip.total_distance ? escHtml(trip.notes || "Catatan kosong.") : ""}
-        </div>
-        </div>
-        <div class="card-footer d-flex gap-2">
-        <button class="btn btn-primary" onclick="loadSavedTrip(${trip.id})">
-        Buka
-        <i class="fa-solid fa-route ms-1"></i>
-        </button>
-        <button class="btn btn-danger" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || "Trip ini")}')">
-        Hapus
-        <i class="fa-solid fa-trash ms-1"></i>
-        </button>
-        </div>
-        </div>`,
-          )
-          .join("");
+        wrap.innerHTML = list.map((trip) => {
+          const isAi = trip.source === 'itinerary';
+          const badge = isAi
+            ? `<span class="badge badge-accent ms-2" style="font-size:.7rem"><i class="fas fa-wand-magic-sparkles me-1"></i>Itinerary</span>`
+            : '';
+          const openBtn = isAi
+            ? `<button class="btn btn-primary" onclick="window.renderAiItinerary(${trip.id})">Buka<i class="fa-solid fa-wand-magic-sparkles ms-1"></i></button>`
+            : `<button class="btn btn-primary" onclick="loadSavedTrip(${trip.id})">Buka<i class="fa-solid fa-route ms-1"></i></button>`;
+          return `
+          <div class="card card-glass">
+          <div class="card-body">
+          <h3 class="h4 text-truncate">${escHtml(trip.title || "Trip tanpa nama")}${badge}</h3>
+          <div class="row g-2">
+          ${!isAi ? `<span class="small p-2 rounded-sm badge-blue"><i class="fa-solid fa-map-pin me-2"></i><strong>${trip.total_stops}</strong> lokasi</span>` : ''}
+          ${!isAi && trip.total_distance ? `<span class="small p-2 rounded-sm badge-blue"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${trip.total_distance}</strong> km</span>` : ''}
+          </div>
+          </div>
+          <div class="card-footer d-flex gap-2">
+          ${openBtn}
+          <button class="btn btn-danger" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || "Trip ini")}')">
+          Hapus<i class="fa-solid fa-trash ms-1"></i>
+          </button>
+          </div>
+          </div>`;
+        }).join("");
       })
       .catch(() => {
         wrap.innerHTML = `<div class="tp-empty-state" style="grid-column:1/-1"><i class="fa-solid fa-triangle-exclamation"></i><p>Gagal memuat trip. Coba refresh halaman.</p></div>`;

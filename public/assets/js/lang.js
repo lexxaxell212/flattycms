@@ -422,7 +422,7 @@
       'privasi.s10.intro': 'Pertanyaan atau keluhan terkait privasi dapat disampaikan melalui:',
       //Sejarah
       'sejarah.title': 'Sejarah Bandung',
-      'sejarah.lead': 'Berawal dari dasar danau purba yang mengering, Bandung berevolusi dari sekadar titik nol di Jalan Raya Pos menjadi "<strong>Paris van Java</strong>" yang anggun, hingga kini bertransformasi menjadi pusat kreativitas digital dunia.',
+      'sejarah.lead': 'Berawal dari dasar danau purba yang mengering, Bandung berevolusi dari sekadar titik nol di Jalan Raya Pos menjadi "Paris van Java" yang anggun, hingga kini bertransformasi menjadi pusat kreativitas digital dunia.',
 
       'sejarah.t1.era': 'Prasejarah',
       'sejarah.t1.title': 'Danau Purba Bandung',
@@ -883,7 +883,7 @@
       'privasi.s10.intro': 'Questions or complaints related to privacy can be submitted via:',
       //sejarah
       'sejarah.title': 'History of Bandung',
-      'sejarah.lead': 'Starting from the bed of an ancient lake that dried up, Bandung evolved from a mere zero-point marker on the Great Post Road into the elegant "<strong>Paris van Java</strong>", and has now transformed into a global hub of digital creativity.',
+      'sejarah.lead': 'Starting from the bed of an ancient lake that dried up, Bandung evolved from a mere zero-point marker on the Great Post Road into the elegant "Paris van Java", and has now transformed into a global hub of digital creativity.',
 
       'sejarah.t1.era': 'Prehistoric Era',
       'sejarah.t1.title': 'Ancient Lake Bandung',

@@ -25,7 +25,9 @@ $page_title = 'Upcoming Events';
                 <h1 class="text-white text-center mb-4">
                   <?= safe_html($_tdo_next['title']) ?>
                 </h1>
-                <?= safe_html($_tdo_next['html_content']) ?>
+                <p>
+                  <?= sanitizeHtml($_tdo_next['html_content']) ?>
+                </p>
               </div>
             </div>
           </div>
@@ -111,7 +113,7 @@ $page_title = 'Upcoming Events';
     <?php endif; ?>
     <?php if (!$_tdo_next && empty($_tdo_pages) && empty($_tdo_past)): ?>
     <div class="text-center py-5 text-muted">
-      <i class="fas fa-file fa-3x mb-3 opacity-50 d-block"></i>
+      <i class="fas fa-file fa-3x mb-3 opacity-50 d-block mx-auto"></i>
       Belum ada konten tersedia.
     </div>
     <?php endif; ?>

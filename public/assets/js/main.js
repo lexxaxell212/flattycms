@@ -518,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <p class="small">${item.description ? esc(trunc(item.description, 90)) : ""}</p>
       </div>
       <div class="card-footer">
-      <a class="btn btn-primary" href="${href}">Lihat<i class="arrow-icon fas fa-angle-right ms-2"></i></a>
+      <a class="btn btn-primary btn-sm" href="${href}">Lihat<i class="arrow-icon fas fa-angle-right ms-2"></i></a>
       </div>
       </div>
       </div>`;
@@ -1346,7 +1346,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .finally(() => {
         btn.disabled = false;
-        btn.innerHTML = '<span data-bhs="btn.subs">Berlangganan</span>';
+        btn.innerHTML = `<span data-bhs="btn.subs">Berlangganan</span><i class="arrow-icon fas fa-paper-plane ms-1"></i>`;
       });
   });
 });

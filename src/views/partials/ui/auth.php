@@ -16,7 +16,7 @@
   <div class="auth-btn-group">
   <a href="/profile" class="profile-pill">
     <?php if (!empty($_SESSION['user']['avatar'])): ?>
-    <img src="<?= safe_html($_SESSION['user']['avatar']) ?>" class="rounded-circle" width="30" height="30" style="object-fit:cover;flex-shrink:0;border:1.5px solid var(--btn-bg-primary)">
+    <img src="<?= safe_html($_SESSION['user']['avatar']) ?>" class="rounded-circle" width="30" height="30" style="object-fit:cover;flex-shrink:0;border:1.5px solid var(--bg-primary-subtle)">
     <?php else : ?>
     <div class="avatar-circle">
       <?= strtoupper(substr($_SESSION['user']['name'] ?? 'U', 0, 1)) ?>

@@ -1,11 +1,14 @@
 (function () {
   const API_GROQ = BASE + "/api/map/api-groq-trip.php";
+  const API_TRIP = BASE + "/api/map/api-trips.php";
 
   const waktuIcon = {
     Pagi: "fas fa-cloud",
     Siang: "fas fa-cloud-sun",
     Sore: "fas fa-cloud-moon",
   };
+
+  let lastItinerary = null;
 
   function escHtml(str) {
     if (!str) return "";
@@ -16,7 +19,17 @@
       .replace(/"/g, "&quot;");
   }
 
-  function renderTimeline(days) {
+  function getPoiSlugs(days) {
+    const slugs = [];
+    days.forEach(day => {
+      day.slots.forEach(slot => {
+        if (slot.slug && !slugs.includes(slot.slug)) slugs.push(slot.slug);
+      });
+    });
+    return slugs;
+  }
+
+  function renderTimeline(days, savedTripId = null) {
     const wrap = document.getElementById("aiItineraryResult");
     if (!days || !days.length) {
       wrap.innerHTML = `
@@ -27,9 +40,14 @@
       return;
     }
 
-    wrap.innerHTML = days
-      .map(
-        (day) => `
+    const saveBtn = IS_LOGGED && !savedTripId ? `
+    <div class="d-flex justify-content-center mb-4">
+      <button class="btn btn-outline-success btn-sm" id="btnSaveItinerary">
+        <i class="fa-solid fa-floppy-disk me-1"></i>Simpan Itinerary
+      </button>
+    </div>` : '';
+
+    wrap.innerHTML = saveBtn + days.map(day => `
       <div class="rounded-lg py-4 bg-surface mx-auto" style="max-width:740px">
       <div class="ai-day-block mb-4">
       <div class="ai-day-label mb-2">
@@ -39,9 +57,7 @@
       <span class="fw-bold">Hari ${day.day}</span>
       </div>
       <div class="ai-slots">
-      ${day.slots
-        .map(
-          (slot, idx) => `
+      ${day.slots.map((slot, idx) => `
         <div class="ai-slot d-flex gap-3 mb-3">
         <div class="ai-slot-line d-flex flex-column align-items-center">
         <div class="ai-slot-dot"></div>
@@ -62,15 +78,81 @@
         </div>
         </div>
         </div>
-        `,
-        )
-        .join("")}
+        `).join("")}
       </div>
       </div>
       </div>
-      `,
-      )
-      .join("");
+      `).join("");
+
+    if (IS_LOGGED && !savedTripId) {
+      document.getElementById("btnSaveItinerary")?.addEventListener("click", openSaveModal);
+    }
+  }
+
+  function openSaveModal() {
+    const existing = document.getElementById("aiSaveForm");
+    if (existing) existing.remove();
+
+    const form = document.createElement("div");
+    form.id = "aiSaveForm";
+    form.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1rem";
+    form.innerHTML = `
+    <div class="card bg-card shadow-lg" style="width:100%;max-width:400px;border-radius:1rem;overflow:hidden">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center mb-3">
+          <span class="badge badge-primary me-2"><i class="fas fa-floppy-disk"></i></span>
+          <h5 class="mb-0 fw-semibold">Simpan Itinerary</h5>
+        </div>
+        <input type="text" id="aiTripTitle" class="form-control mb-3" placeholder="Nama itinerary (opsional)" value="Itinerary Bandungku">
+        <div class="d-flex gap-2 justify-content-end">
+          <button class="btn btn-outline-primary btn-sm" id="btnCancelAiSave">Batalkan</button>
+          <button class="btn btn-success btn-sm" id="btnConfirmAiSave">
+            <i class="fa-solid fa-floppy-disk me-1"></i>Simpan
+          </button>
+        </div>
+      </div>
+    </div>`;
+    document.body.appendChild(form);
+    document.getElementById("btnCancelAiSave").addEventListener("click", () => form.remove());
+    document.getElementById("btnConfirmAiSave").addEventListener("click", saveItinerary);
+  }
+
+  async function saveItinerary() {
+    if (!lastItinerary) return;
+    const title = document.getElementById("aiTripTitle")?.value.trim() || "Itinerary Bandungku";
+    const btn = document.getElementById("btnConfirmAiSave");
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin me-1"></i>Menyimpan...';
+    try {
+      const res = await fetch(API_GROQ, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+        body: JSON.stringify({
+          action: "save",
+          csrf_token: CSRF,
+          title,
+          ai_json: lastItinerary,
+          poi_slugs: getPoiSlugs(lastItinerary.days),
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById("aiSaveForm")?.remove();
+        flattyToast("success", "Itinerary berhasil disimpan!");
+        renderTimeline(lastItinerary.days, data.trip_id);
+      } else {
+        flattyToast("error", data.message ?? "Gagal menyimpan.");
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-floppy-disk me-1"></i>Simpan';
+      }
+    } catch (e) {
+      flattyToast("error", "Gagal menyimpan itinerary.");
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-floppy-disk me-1"></i>Simpan';
+    }
   }
 
   async function generateItinerary() {
@@ -79,15 +161,12 @@
       flattyToast("warning", "toast.fill.first");
       return;
     }
-
     const btn = document.getElementById("btnGenerateAI");
     const result = document.getElementById("aiItineraryResult");
-
     btn.disabled = true;
-    btn.innerHTML =
-      '<div class="btn-fetch"><span></span><span></span><span></span></div>';
+    btn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
     result.innerHTML = "";
-
+    lastItinerary = null;
     try {
       await new Promise((r) => setTimeout(r, 1000));
       const res = await fetch(API_GROQ, {
@@ -97,13 +176,14 @@
           "X-Requested-With": "XMLHttpRequest",
         },
         body: JSON.stringify({
+          action: "generate",
           prompt: input,
           pois: POIS_FULL,
         }),
       });
       const data = await res.json();
-
       if (data.success) {
+        lastItinerary = data.data;
         renderTimeline(data.data.days);
       } else {
         flattyToast("error", data.message ?? "Gagal membuat itinerary.");
@@ -113,10 +193,24 @@
       flattyToast("error", "Tidak bisa menghubungi AI. Coba lagi.");
     } finally {
       btn.disabled = false;
-      btn.innerHTML =
-        'BUAT ITINERARY<i class="fas fa-wand-magic-sparkles ms-1"></i>';
+      btn.innerHTML = 'BUAT ITINERARY<i class="fas fa-wand-magic-sparkles ms-1"></i>';
     }
   }
+
+  window.renderAiItinerary = async function(tripId) {
+    const res = await fetch(`${API_GROQ}?action=get_ai&trip_id=${tripId}`, {
+      headers: { "X-Requested-With": "XMLHttpRequest" }
+    });
+    const data = await res.json();
+    if (data.success) {
+      lastItinerary = data.data;
+      const tabAi = document.querySelector('[data-tab="ai"]');
+      tabAi?.click();
+      setTimeout(() => renderTimeline(data.data.days, tripId), 100);
+    } else {
+      flattyToast("error", "Gagal memuat itinerary.");
+    }
+  };
 
   window.initAiTrip = function () {
     const btn = document.getElementById("btnGenerateAI");
@@ -131,7 +225,6 @@
     });
   };
 
-  // init setelah tab AI aktif
   const aiTab = document.querySelector('[data-tab="ai"]');
   if (aiTab) {
     aiTab.addEventListener("click", function () {
@@ -139,7 +232,6 @@
     });
   }
 
-  // fallback kalau langsung landing di tab ai
   if (
     document.getElementById("tab-ai") &&
     document.getElementById("tab-ai").style.display !== "none"
@@ -147,7 +239,6 @@
     window.initAiTrip();
   }
 
-  // auto trigger dari home
   const urlParams = new URLSearchParams(window.location.search);
   const autoPrompt = urlParams.get("ai_prompt");
   if (autoPrompt) {

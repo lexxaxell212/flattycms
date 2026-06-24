@@ -38,7 +38,7 @@ require_once LIB_PATH . "v-unsubscribe.php";
           <input type="email" name="email" class="form-control" data-bhs="form.email.placeholder" placeholder="nama@email.com" required>
         </div>
         <div class="col-12">
-          <button type="submit" class="btn btn-outline-primary mt-2" data-bhs="btn.unsubs">
+          <button type="submit" class="btn btn-primary mt-2" data-bhs="btn.unsubs">
             Berhenti langganan
           </button>
         </div>

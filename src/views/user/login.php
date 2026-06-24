@@ -33,7 +33,7 @@ if (isset($_SESSION['user'])) {
         </div>
       </div>
       <div class="col-12 py-4">
-        <button type="button" class="btn btn-outline-primary" id="btn-login">
+        <button type="button" class="btn btn-primary" id="btn-login">
           <span data-bhs="btn.login">Masuk</span>
         </button>
       </div>

@@ -22,10 +22,10 @@
         </div>
       </div>
       <div>
-        <button aria-label="Clear chat" class="btn clear-chat me-1" onclick="clearChat()">
+        <button aria-label="Clear chat" class="btn clear-chat me-1 btn-fit" onclick="clearChat()">
           <i class="fas fa-trash"></i>
         </button>
-        <button aria-label="Close chat" class="btn close-btn" data-bs-dismiss="offcanvas">
+        <button aria-label="Close chat" class="btn close-btn btn-fit" data-bs-dismiss="offcanvas">
           <i class="fas fa-xmark"></i>
         </button>
       </div>

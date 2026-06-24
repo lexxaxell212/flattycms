@@ -21,7 +21,7 @@ $page_title = 'Reset Password - ' . SITE_NAME;
         <p class="text-muted small mb-4" data-bhs="rp.desc">
           Link reset password sudah kadaluarsa atau tidak valid.
         </p>
-        <a href="/forgot-password" class="btn btn-outline-primary" data-bhs="btn.link.reset.request">Minta link baru</a>
+        <a href="/forgot-password" class="btn btn-primary" data-bhs="btn.link.reset.request">Minta link baru</a>
       </div>
     </div>
     <?php else : ?>

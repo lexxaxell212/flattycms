@@ -411,10 +411,11 @@ p:last-child {
   margin-bottom: 0;
 }
 .lead {
-  font-size: 1.09rem;
+  font-size: 1.05rem;
   font-weight: var(--fw-medium);
   color: oklch(0.446 0.016 264);
   margin-bottom: var(--space-8);
+  letter-spacing: -0.01em;
 }
 [data-dark] .lead {
   color: oklch(0.706 0.015 264);
@@ -1466,14 +1467,14 @@ main.main-content::before {
   width: 30px;
   height: 30px;
   border-radius: var(--radius-full);
-  background: var(--bg-primary-subtle);
+  background: var(--bg-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--space-4);
   font-weight: var(--fw-bold);
   color: var(--text-modal);
-  border: 1.5px solid var(--btn-bg-primary);
+  border: 1.5px solid var(--bg-primary-subtle);
 }
 .account-name {
   font-size: var(--space-4);
@@ -1715,14 +1716,6 @@ table tbody td {
   opacity: 0.8;
 }
 
-.swal2-container.swal2-top-end {
-  top: calc(var(--navbar-height) + var(--space-4)) !important;
-  z-index: 9999 !important;
-}
-.swal2-container {
-  z-index: 9999 !important;
-}
-
 .pulse-glow {
   animation: pulse-glow 2s var(--ease) infinite;
 }
@@ -1953,19 +1946,19 @@ table tbody td {
 .btn-accent {
   background: var(--bg-accent) !important;
   color: var(--text-white);
-  border: 1.5px solid var(--bg-accent) !important;
+  border: 1px solid var(--bg-accent) !important;
 }
 
 .btn-outline-primary {
-  background: oklch(0.89 0 0/0.4) !important;
-  color: oklch(0.131 0.089 295/0.72);
-  border: 1px solid oklch(0.131 0.089 295/0.62) !important;
+  background: oklch(0.915 0 0/0.5) !important;
+  color: oklch(0.131 0.089 295);
+  border: 1px solid oklch(0.131 0.089 295) !important;
   font-weight: 600;
   font-size: 0.75rem;
 }
 [data-dark] .btn-outline-primary {
   background: oklch(0.31 0 0/0.5) !important;
-  color: oklch(0.72 0.189 295/0.72);
+  color: oklch(0.72 0.189 295);
   border: var(--border-card) !important;
 }
 
@@ -4617,7 +4610,7 @@ input[type="range"]::-moz-range-track {
   color: var(--text-card);
   letter-spacing: 0.05em;
   text-align: right;
-  white-space: nowrap;
+  white-space: wrap;
 }
 .sb-item__year--now {
   color: var(--text-primary);

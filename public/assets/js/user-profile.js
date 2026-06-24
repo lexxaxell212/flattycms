@@ -61,7 +61,7 @@
   function renderPhotos() {
     const grid = document.getElementById('photoGrid');
     if (!data.photos.length) {
-      grid.innerHTML = emptyState('fa-images mx-auto d-block', 'Belum ada foto yang diupload');
+      grid.innerHTML = emptyState('fa-images', 'Belum ada foto yang diupload');
       return;
     }
     grid.innerHTML = data.photos.map(p => `
@@ -86,7 +86,7 @@
   function renderTrips() {
     const list = document.getElementById('tripList');
     if (!data.trips.length) {
-      list.innerHTML = emptyState('fa-route mx-auto d-block', 'Belum ada trip tersimpan');
+      list.innerHTML = emptyState('fa-route', 'Belum ada trip tersimpan');
       return;
     }
     list.innerHTML = data.trips.map(t => `
@@ -115,7 +115,7 @@
   function renderReactions() {
     const list = document.getElementById('reactionList');
     if (!data.reactions.length) {
-      list.innerHTML = emptyState('fa-heart mx-auto d-block', 'Belum ada reaksi');
+      list.innerHTML = emptyState('fa-heart', 'Belum ada reaksi');
       return;
     }
 
@@ -133,7 +133,7 @@
     };
 
     list.innerHTML = data.reactions.map(r => `
-      <div class="col-12 col-md-6 col-lg-3" id="reaction-${r.id}">
+      <div class="col-12 col-md-6 col-lg-4" id="reaction-${r.id}">
       <div class="card card-glass">
       <div class="card-body">
       <div class="rounded-circle d-flex align-items-center justify-content-center mb-2" style="width:40px;height:40px;background: var(--bg-primary-subtle)">
@@ -262,7 +262,7 @@
   function emptyState(icon,
     text) {
     return `<div class="text-center text-muted py-5 col-12">
-    <i class="fa-solid ${icon} fa-2x mb-3 d-block opacity-25"></i>
+    <i class="fa-solid ${icon} fa-2x mb-2 d-block opacity-25 mx-auto"></i>
     <div class="small">${text}</div>
     </div>`;
   }

@@ -16,6 +16,7 @@
           <div class="col-md-4">
             <button type="submit" class="btn btn-primary" id="submitBtn">
               <span data-bhs="btn.subs">Berlangganan</span>
+              <i class="arrow-icon fas fa-paper-plane ms-1"></i>
             </button>
           </div>
         </form>

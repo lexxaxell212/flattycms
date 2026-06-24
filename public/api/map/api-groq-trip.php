@@ -88,6 +88,7 @@ Format response:
   ]
 }
 PROMPT;
+
   $body = json_encode([
     'model' => 'llama-3.3-70b-versatile',
     'messages' => [
@@ -163,8 +164,8 @@ if ($action === 'save') {
   }
   try {
     $pdo->beginTransaction();
-    $stmt = $pdo->prepare("INSERT INTO trips (user_id, title, source) VALUES (?, ?, 'itinerary')");
-    $stmt->execute([$user_id, $title]);
+    $stmt = $pdo->prepare("INSERT INTO trips (user_id, title, source, start_point_name, start_lat, start_lng) VALUES (?, ?, 'itinerary', ?, ?, ?)");
+    $stmt->execute([$user_id, $title, 'Tidak ditentukan', 0, 0]);
     $trip_id = $pdo->lastInsertId();
     $stmtPoi = $pdo->prepare("SELECT id FROM poi WHERE slug = ? LIMIT 1");
     $stmtItem = $pdo->prepare("INSERT INTO trip_items (trip_id, poi_id, order_index) VALUES (?, ?, ?)");

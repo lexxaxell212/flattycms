@@ -32,7 +32,7 @@ $categories = safe_get_categories($pdo);
           <?php foreach ($posts as $p): ?>
           <article class="artikel-slide-card card card-flatty" style="box-shadow:none;" role="listitem">
             </span>
-            <div class="card-body position-relative">
+            <div class="card-body">
               <span class="badge badge-white top-0 end-0 position-absolute m-4">
               <?= htmlspecialchars(
                 $p["cat_name"],

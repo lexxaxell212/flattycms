@@ -641,8 +641,8 @@ main.main-content::before {
   border: var(--border-red-subtle);
 }
 .flatty-toast--warning {
-  background: var(--bg-yellow-subtle);
-  border: var(--border-yellow-subtle);
+  background: var(--bg-accent-subtle);
+  border: var(--border-accent-subtle);
 }
 .flatty-toast--info {
   background: var(--bg-blue-subtle);
@@ -656,7 +656,7 @@ main.main-content::before {
   color: var(--text-red);
 }
 .flatty-toast--warning i {
-  color: var(--text-yellow);
+  color: var(--text-accent);
 }
 .flatty-toast--info i {
   color: var(--text-blue);
@@ -6314,7 +6314,9 @@ input[type="range"]::-moz-range-track {
 /* ── UPLOAD MODAL ────────────────────────────────────────────── */
 .modal {
   z-index: 9999;
-  background: var(--bg-glass);
+  background: var(--bg-backdrop);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border-radius: none;
 }
 .modal-content {
@@ -6336,7 +6338,9 @@ input[type="range"]::-moz-range-track {
 }
 
 .lightbox {
-  background: var(--bg-glass);
+  background: var(--bg-backdrop);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: var(--shadow-lg);
 }
 

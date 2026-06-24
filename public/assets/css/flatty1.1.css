@@ -6317,7 +6317,6 @@ input[type="range"]::-moz-range-track {
   background: var(--bg-backdrop);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border-radius: none;
 }
 .modal-content {
   border-radius: var(--radius-lg) !important;

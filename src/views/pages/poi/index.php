@@ -1,6 +1,7 @@
 <?php
 require_once LIB_PATH . 'poi-actions.php';
 $poi = get_poi_by_slug($slug);
+$poi_id = $poi['id'];
 
 $page_title = $poi['name'] . ' - ' . SITE_NAME;
 ?>
@@ -27,7 +28,7 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
         <div class="align-items-center">
           <button
             id="btn-reaction"
-            class="btn <?= $user_liked ? 'btn-primary btn-fit' : 'btn-outline-primary btn-fit' ?>" data-id="<?= $slug ?>" data-type="place">
+            class="btn <?= $user_liked ? 'btn-primary btn-fit' : 'btn-outline-primary btn-fit' ?>" data-id="<?= $poi_id ?>" data-type="place">
             <i class="fas fa-heart me-1"></i>
             <span id="reaction-count"><?= $reaction_count ?></span>
           </button>
@@ -39,7 +40,7 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
         </div>
         <div class="gap-2 align-items-center">
           <?php $share_url = urlencode(BASE_URL . 'poi/' . $slug); ?>
-          <?php $share_title = urlencode($slug); ?>
+          <?php $share_title = urlencode(htmlspecialchars($poi['name'])); ?>
           <a href="https://wa.me/?text=<?= $share_title ?>%20<?= $share_url ?>"
             target="_blank" rel="noopener"
             class="btn btn-outline-primary btn-fit">

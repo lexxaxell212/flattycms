@@ -52,6 +52,7 @@ if ($method === 'GET') {
                    CASE
                      WHEN r.content_type = 'blog' THEN (SELECT title FROM allcontent_posts WHERE id = r.content_id)
                      WHEN r.content_type = 'page' THEN (SELECT title FROM pages WHERE id = r.content_id)
+                     WHEN r.content_type = 'place' THEN (SELECT name FROM poi WHERE id = r.content_id)
                      ELSE NULL
                    END AS content_title
             FROM reactions r

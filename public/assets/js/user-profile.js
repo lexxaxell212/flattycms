@@ -122,7 +122,7 @@
     const typeLabel = {
       blog: 'Blog',
       page: 'Halaman',
-      place: 'Tempat',
+      place: 'POI',
       event: 'Event'
     };
     const typeIcon = {

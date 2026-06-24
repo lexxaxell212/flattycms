@@ -29,7 +29,7 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
             <div class="d-flex align-items-center justify-content-center gap-2 flex-wrap mb-1">
               <span class="h4 mb-0" id="displayNameText"><?= safe_html($display) ?>
               </span>
-              <button class="btn btn-accent p-2" id="btnEditName" style="font-size:.85rem">
+              <button class="btn btn-accent p-2 btn-fit" id="btnEditName" style="font-size:.85rem">
                 <i class="fa-solid fa-pen fa-xs"></i>
               </button>
             </div>
@@ -101,10 +101,10 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
               <div class="row g-3" id="photoGrid"></div>
             </div>
             <div id="tabTrips" class="tab-content" style="display:none">
-              <div id="tripList" class="row g-3"></div>
+              <div id="tripList" class="row g-2"></div>
             </div>
             <div id="tabReactions" class="tab-content" style="display:none">
-              <div id="reactionList" class="row g-3"></div>
+              <div id="reactionList" class="row g-2"></div>
             </div>
           </div>
         </div>

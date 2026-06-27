@@ -24,7 +24,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
 
   <link rel="stylesheet" href="<?= CSS_URL ?>fa720.all.min.css">
   <link rel="stylesheet" href="<?= CSS_URL ?>bs538.min.css">
-  <link rel="stylesheet" href="<?= CSS_URL ?>flatty1.1.min.css">
+  <link rel="stylesheet" href="<?= CSS_URL ?>flatty1.1.css">
 ¬
   <script src="<?= JS_URL ?>bs538.bundle.min.js" defer></script>
   <script src="<?= JS_URL ?>flattynotif.js" defer></script>

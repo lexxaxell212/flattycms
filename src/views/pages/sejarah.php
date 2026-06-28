@@ -3,9 +3,9 @@ $page_title = "Sejarah Bandung";
 ?>
 <main class="main-content">
   <div class="container">
-    <div class="row g-4">
+    <div class="row g-4 page-header">
       <div class="col-12 col-lg-4">
-        <div class="text-center page-header">
+        <div class="text-center sticky-wrapper">
           <h1 class="mb-4 text-gradient"><span data-bhs="sejarah.title">Sejarah Bandung</span></h1>
           <p class="lead" data-bhs="sejarah.lead">
             Berawal dari dasar danau purba yang mengering, Bandung berevolusi dari sekadar titik nol di Jalan Raya Pos menjadi "Paris van Java" yang anggun, hingga kini bertransformasi menjadi pusat kreativitas digital dunia.

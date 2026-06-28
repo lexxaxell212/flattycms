@@ -5,7 +5,7 @@ $page_title = "Layanan Publik Bandung";
   <div class="container">
     <div class="row g-4 page-header">
       <div class="col-12 col-lg-4">
-        <div class="page-header text-center">
+        <div class="sticky-wrapper text-center">
           <div class="page-header-svg">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280">
               <defs>

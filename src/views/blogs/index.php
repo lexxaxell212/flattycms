@@ -146,7 +146,7 @@ $categories = safe_get_categories($pdo);
       </div>
     </div>
     <?php else : ?>
-    <div class="row g-2">
+    <div class="row g-4">
       <div class="col-md-7">
         <div class="page-header">
           <div class="d-flex align-items-center justify-content-between">

@@ -632,6 +632,16 @@ main.main-content::before {
   filter: drop-shadow(0 6px 6px oklch(0 0 0 / 0.15));
 }
 
+ .sticky-wrapper {
+    position: relative;
+  }
+  @media (min-width:1200px) {
+    .sticky-wrapper {
+      position: sticky;
+      top: calc(var(--navbar-height) + 2.5rem);
+    }
+  }
+
 /* ========== flatty notif =========== */
 #flatty-container-top-end {
   position: fixed;
@@ -3217,6 +3227,19 @@ input[type="range"]::-moz-range-track {
   }
 }
 
+@media (orientation: landscape) and (max-width: 960px) {
+  .chatbot-overlay {
+    bottom: 12px;
+    right: 12px;
+    height: 100vh;
+    width: 420px;
+  }
+  .chatbot-overlay .chatbot {
+    height:100%;
+    width: 100%;
+  }
+}
+
 .chatbot-overlay.show {
   opacity: 1;
 }
@@ -4623,15 +4646,11 @@ input[type="range"]::-moz-range-track {
     width var(--duration);
 }
 .artikel-dot.is-active {
-  background: var(--bg-primary);
+  background: var(--bg-primary) !important;
 }
 
 [data-dark] .artikel-dot {
   background: rgba(255, 255, 255, 0.25);
-}
-
-[data-dark] .artikel-dot.is-active {
-  background: var(--bg-primary);
 }
 
 .asl-nav-btn {
@@ -6419,7 +6438,7 @@ input[type="range"]::-moz-range-track {
 /* ── UPLOAD MODAL ────────────────────────────────────────────── */
 .modal {
   z-index: 9999;
-  background: var(--bg-backdrop);
+  background: var(--bg-glass);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
@@ -6442,7 +6461,7 @@ input[type="range"]::-moz-range-track {
 }
 
 .lightbox {
-  background: var(--bg-backdrop);
+  background: var(--bg-glass);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: var(--shadow-lg);

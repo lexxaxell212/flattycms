@@ -1578,8 +1578,8 @@ main.main-content::before {
   color: var(--text-primary);
 }
 .avatar-circle {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-full);
   background: var(--bg-primary-subtle);
   display: flex;
@@ -1587,8 +1587,10 @@ main.main-content::before {
   justify-content: center;
   font-size: var(--space-4);
   font-weight: var(--fw-bold);
-  color: var(--text-white);
+  color: var(--text-primary);
   border: 1.5px solid var(--bg-primary-subtle);
+  cursor: pointer;
+  overflow: hidden;
 }
 .account-name {
   font-size: var(--space-4);

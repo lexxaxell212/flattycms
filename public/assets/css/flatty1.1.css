@@ -957,6 +957,9 @@ main.main-content::before {
     height: calc(100vh - var(--navbar-height));
     top: var(--navbar-height);
   }
+  .hero-content {
+    padding-bottom: 2rem !important;
+  }
   .hero-title {
     font-size: clamp(2.5rem, 4vw, 3rem);
   }

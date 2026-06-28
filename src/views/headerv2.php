@@ -87,12 +87,6 @@ function isActive(string $path): string {
   $heroImg = $isMobile ? 'wisata-mobile.webp' : 'wisata.webp'; ?>
   <link rel="preload" as="image" href="<?= IMG_URL . $heroImg ?>" type="image/webp" fetchpriority="high">
   <!-- script -->
-  <script src="https://accounts.google.com/gsi/client"></script>
-  <script src="<?= JS_URL ?>gsi.js"></script>
-  <script src="<?= JS_URL ?>bs538.bundle.min.js" defer></script>
-  <script src="<?= JS_URL ?>flattynotif.js" defer></script>
-  <script src="<?= JS_URL ?>main.js" defer></script>
-  <script src="<?= JS_URL ?>lang.js" defer></script>
   <script>
     const CONFIG = {
       baseUrl: '<?= BASE_URL ?>',
@@ -100,6 +94,12 @@ function isActive(string $path): string {
       csrfToken: '<?= generate_csrf_token() ?>',
     };
   </script>
+  <script src="https://accounts.google.com/gsi/client"></script>
+  <script src="<?= JS_URL ?>gsi.js"></script>
+  <script src="<?= JS_URL ?>bs538.bundle.min.js" defer></script>
+  <script src="<?= JS_URL ?>flattynotif.js" defer></script>
+  <script src="<?= JS_URL ?>main.js" defer></script>
+  <script src="<?= JS_URL ?>lang.js" defer></script>
   <?php if (!empty($_SESSION['flash'])): ?>
   <script>
     document.addEventListener('DOMContentLoaded', () => {

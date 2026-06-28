@@ -1581,13 +1581,13 @@ main.main-content::before {
   width: 30px;
   height: 30px;
   border-radius: var(--radius-full);
-  background: var(--bg-primary);
+  background: var(--bg-primary-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--space-4);
   font-weight: var(--fw-bold);
-  color: var(--text-modal);
+  color: var(--text-white);
   border: 1.5px solid var(--bg-primary-subtle);
 }
 .account-name {
@@ -7292,8 +7292,13 @@ i .fa-solid.fa-spin {
     align-items: center;
     display: flex;
     flex: 1;
-    justify-content: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-right: 2.5rem;
   }
+  .nav-link {
+    margin-bottom: 0;
+    }
   .nav-desktop-list {
     display: flex;
     align-items: center;

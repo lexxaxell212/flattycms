@@ -1,7 +1,7 @@
 <?php if (empty($_SESSION['user'])): ?>
 <div class="d-flex align-items-center mx-auto">
   <div class="auth-btn-group">
-  <div id="<?= $google_btn_id ?>" class="avatar-circle"></div>
+  <div id="<?= $google_btn_id ?>" class="avatar-circle"><i class="fa-brands fa-google"></i></div>
   <div class="divider-v"></div>
   <a href="/login" class="btn btn-outline-primary btn-sm rounded-sm btn-fit" data-bhs="btn.login">
     Masuk

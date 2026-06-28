@@ -805,7 +805,7 @@ main.main-content::before {
 /* ============= hero ============= */
 .hero-wrapper {
   height: 100vh;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   border-radius: 0 !important;
   top: var(--navbar-height);
 }
@@ -954,8 +954,14 @@ main.main-content::before {
     text-align: center;
   }
   .hero-wrapper {
-    height: calc(70vh - var(--navbar-height));
+    height: calc(100vh - var(--navbar-height));
     top: var(--navbar-height);
+  }
+  .hero-title {
+    font-size: clamp(2.5rem, 4vw, 3rem);
+  }
+  .hero-lead {
+    font-size: clamp(0.9rem, 2vw, 1rem);
   }
 }
 
@@ -969,10 +975,9 @@ main.main-content::before {
   .hero-wrapper {
     top: var(--navbar-height);
     height: 100vh;
-    margin-bottom: 2rem;
   }
   .hero-content {
-    padding-bottom: 6rem !important;
+    padding-bottom: 2rem !important;
   }
   .hero-content-inner {
     text-align: left;

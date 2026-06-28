@@ -10,9 +10,9 @@ $slides = [["slug" => "wisata"], ["slug" => "kuliner"], ["slug" => "hotel"]]; ?>
   <?php endforeach; ?>
   <div class="hero-overlay"></div>
   <div class="hero-overlay-global"></div>
-  <div class="hero-card-wrapper test">
-  <div class="container hero-content align-items-end test">
-    <div class="row g-4 hero-content-inner test">
+  <div class="hero-card-wrapper">
+  <div class="container hero-content align-items-end">
+    <div class="row g-4 hero-content-inner">
       <div class="col-12">
         <span class="hero-eyebrow" data-bhs="hero.eyebrow">Explore</span>
         <h1 class="hero-title" data-bhs="hero.title">BANDUNG</h1>

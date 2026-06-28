@@ -4329,12 +4329,14 @@ input[type="range"]::-moz-range-track {
 /* partials */
 .surprise-me-panel {
   width: 100%;
+  max-width: 740px;
   background: var(--bg-card);
   color: var(--text-card);
   border: var(--border-card);
   border-radius: var(--radius);
   padding-block: var(--space-4) var(--space-6);
   padding-inline: var(--space-6);
+  margin-inline: auto;
 }
 
 .textarea-wrap {

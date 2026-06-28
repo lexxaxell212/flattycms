@@ -1,5 +1,5 @@
 <div class="container">
-  <section id="surprise-me" class="surprise-me-section mx-auto" style="max-width:740px">
+  <section id="surprise-me" class="surprise-me-section mx-auto">
     <div class="text-center mb-4">
       <span class="text-eyebrow" data-bhs="it.eyebrow">Itinerary</span>
       <h2 class="text-hero"><span data-bhs="it.title">Buatin Dong</span><em><i>!</i></em></h2>

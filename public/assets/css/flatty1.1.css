@@ -958,7 +958,7 @@ main.main-content::before {
     top: var(--navbar-height);
   }
   .hero-content {
-    padding-bottom: 2rem !important;
+    padding-bottom: 7rem !important;
   }
   .hero-title {
     font-size: clamp(2.5rem, 4vw, 3rem);
@@ -980,7 +980,7 @@ main.main-content::before {
     height: 100vh;
   }
   .hero-content {
-    padding-bottom: 2rem !important;
+    padding-bottom: 7rem !important;
   }
   .hero-content-inner {
     text-align: left;

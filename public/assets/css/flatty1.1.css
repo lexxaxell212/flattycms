@@ -1285,7 +1285,7 @@ main.main-content::before {
 }
 .navbar-collapse.menu-open {
   opacity: 1;
-  max-height: 60vh;
+  max-height: 100vh;
   overflow-y: auto;
   visibility: visible;
   transform: translateY(0) scale(1);
@@ -1293,6 +1293,16 @@ main.main-content::before {
     opacity var(--duration) var(--ease),
     transform var(--duration) var(--ease),
     visibility var(--duration) var(--ease);
+}
+.navbar-collapse::-webkit-scrollbar {
+  width: 2px;
+}
+.navbar-collapse::-webkit-scrollbar-track {
+  background: transparent;
+}
+.navbar-collapse::-webkit-scrollbar-thumb {
+  background: var(--bg-primary);
+  border-radius: 99px;
 }
 .navbar-collapse .dropdown-menu {
   position: static !important;

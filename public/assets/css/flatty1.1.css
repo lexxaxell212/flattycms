@@ -1389,7 +1389,8 @@ main.main-content::before {
   color: var(--text-heading);
   padding: var(--space-3) !important;
   font-size: 0.9rem;
-  margin-bottom: 6px;
+  font-weight: 500;
+  margin-bottom: 3px;
   border-radius: var(--radius-sm);
   border: none;
   display: flex;
@@ -1397,20 +1398,18 @@ main.main-content::before {
   position: relative;
   transition:
     background var(--duration) var(--ease),
-    color var(--duration) var(--ease),
-    transform var(--duration) var(--ease);
+    color var(--duration) var(--ease);
 }
 .nav-link:hover,
 .nav-link:focus,
 .nav-link.active {
   background: var(--bg-primary-subtle);
   color: var(--text-primary);
-  transform: translateX(2px);
 }
 .nav-link i {
   opacity: 0.89;
   font-size: 0.9rem;
-  margin-right: var(--space-3);
+  margin-right: var(--space-2);
 }
 .dropdown-menu {
   border: none;
@@ -7298,7 +7297,7 @@ i .fa-solid.fa-spin {
   .nav-desktop-list {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 7px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -7385,8 +7384,7 @@ i .fa-solid.fa-spin {
     text-decoration: none;
     transition:
       background var(--duration) var(--ease),
-      color var(--duration) var(--ease),
-      transform var(--duration) var(--ease);
+      color var(--duration) var(--ease);
   }
   .nav-dd-item i {
     font-size: var(--space-4);
@@ -7395,6 +7393,5 @@ i .fa-solid.fa-spin {
   .nav-dd-item:hover {
     background: var(--bg-primary-subtle);
     color: var(--text-primary);
-    transform: translateX(2px);
   }
 }

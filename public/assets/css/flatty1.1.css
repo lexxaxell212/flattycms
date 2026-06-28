@@ -959,7 +959,7 @@ main.main-content::before {
   }
 }
 
-@media (orientation: landscape) and (max-width: 900px) {
+@media (orientation: landscape) and (max-width: 961px) {
   .hero-title {
     font-size: clamp(2.5rem, 4vw, 3rem);
   }
@@ -1285,7 +1285,6 @@ main.main-content::before {
 }
 .navbar-collapse.menu-open {
   opacity: 1;
-  max-height: 100vh;
   overflow-y: auto;
   visibility: visible;
   transform: translateY(0) scale(1);
@@ -1294,6 +1293,13 @@ main.main-content::before {
     transform var(--duration) var(--ease),
     visibility var(--duration) var(--ease);
 }
+
+media (orientation: landscape) and (max-width: 900px) {
+.navbar-collapse.menu-open {
+  max-height: 70vh;
+  }
+}
+
 .navbar-collapse::-webkit-scrollbar {
   width: 2px;
 }
@@ -1359,7 +1365,6 @@ main.main-content::before {
   padding: var(--space-6) var(--space-4);
   background: var(--bg-surface);
   border: var(--border-surface);
-  box-shadow: var(--shadow-lg);
   margin-bottom: 1rem;
 }
 .nav-link {
@@ -1430,7 +1435,6 @@ main.main-content::before {
   background: var(--bg-surface);
   color: var(--text-card);
   border: var(--border-surface);
-  box-shadow: var(--shadow-lg);
   margin-bottom: 1rem;
   gap: 10px;
 }
@@ -1585,7 +1589,6 @@ main.main-content::before {
   align-items: center;
   background: var(--bg-surface);
   border: var(--border-surface);
-  box-shadow: var(--shadow-lg);
   border-radius: 100px;
   padding: 0.2rem;
   gap: 0.1rem;
@@ -2874,7 +2877,7 @@ a:hover i.arrow-icon {
 .live-search-rec.open {
   opacity: 1;
   pointer-events: all;
-  max-height: 60vh;
+  max-height: 50vh;
   overflow-y: auto;
   transform: translateY(0);
   visibility: visible;

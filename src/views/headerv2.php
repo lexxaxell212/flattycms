@@ -19,7 +19,7 @@ function isActive(string $path): string {
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="<?= BASE_URL ?>">
   <?php $s = $GLOBALS['site_settings'] ?? []; ?>
-  <title><?= $show_title ?></title>
+  <title><?= $show_title ?? SITE_NAME ?></title>
   <meta name="description" content="<?= safe_html($s['site_description'] ?? 'Eksplorasi Wisata, Kuliner, dan Budaya Bandung Terlengkap.') ?>">
   <meta property="og:description" content="<?= safe_html($s['site_tagline'] ?? '') ?>">
   <link rel="icon" href="<?= !empty($s['favicon_url']) ? safe_html($s['favicon_url']) : IMG_URL . 'favicon.ico' ?>" type="image/x-icon">

@@ -1385,13 +1385,14 @@ main.main-content::before {
   border: var(--border-surface);
   margin-bottom: 1rem;
 }
-.nav-link {
+a.nav-link {
   color: var(--text-heading);
   padding: var(--space-3) !important;
   font-size: 0.9rem;
   font-weight: 500;
   margin-bottom: 3px;
   border-radius: var(--radius-sm);
+  text-decoration: none;
   border: none;
   display: flex;
   align-items: center;
@@ -1400,13 +1401,11 @@ main.main-content::before {
     background var(--duration) var(--ease),
     color var(--duration) var(--ease);
 }
-.nav-link:hover,
-.nav-link:focus,
-.nav-link.active {
+a.nav-link:hover {
   background: var(--bg-primary-subtle);
   color: var(--text-primary);
 }
-.nav-link i {
+a.nav-link i {
   opacity: 0.89;
   font-size: 0.9rem;
   margin-right: var(--space-2);
@@ -1436,7 +1435,7 @@ a.nav-link:hover i {
 }
 .dropdown-item i {
   opacity: 0.85;
-  margin-right: var(--space-3) !important;
+  margin-right: var(--space-2) !important;
 }
 .dropdown-item:hover {
   background: var(--bg-primary-subtle);

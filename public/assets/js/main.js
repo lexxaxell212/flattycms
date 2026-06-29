@@ -1275,7 +1275,6 @@ async function fetchBMKG() {
             <span>Kota Bandung</span>
           </div>
     `;
-    flattyToast('info', 'Telah direfresh');
   } catch (error) {
     console.error("Error fetching BMKG data:", error);
     document.getElementById("w").innerHTML = `
@@ -1285,7 +1284,6 @@ async function fetchBMKG() {
     </button>
     <div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>${wt("weather.error.failed")}</div>
     `;
-    flattyToast('error', 'Gagal mendapatkan data');
   } finally {
     isRefreshing = false;
   }

@@ -1460,6 +1460,7 @@ a.nav-link:hover i {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  animation: fadeShow 0.4s ease forwards;
 }
 .weather-api {
   background: var(--bg-card);

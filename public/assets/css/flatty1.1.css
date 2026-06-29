@@ -1850,6 +1850,8 @@ table tbody td {
 }
 
 .text-gradient {
+  display: inline-flex;
+  width: fit-content;
   background: linear-gradient(
     135deg,
     var(--purple-600) 0%,
@@ -1861,6 +1863,7 @@ table tbody td {
   -webkit-text-fill-color: transparent;
 }
 [data-dark] .text-gradient {
+  width: fit-content;
   background: linear-gradient(
     135deg,
     var(--purple-600) 0%,

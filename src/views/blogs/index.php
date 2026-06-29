@@ -151,6 +151,7 @@ $categories = safe_get_categories($pdo);
         <div class="page-header">
           <div class="d-flex align-items-center justify-content-between">
             <h1 class="h2">
+              <em class="styled">
               <?php if ($cat_id > 0):
               $active_cats = array_filter($categories, fn($c) => (int) $c["id"] === $cat_id);
               $active_cat = reset($active_cats);
@@ -158,6 +159,7 @@ $categories = safe_get_categories($pdo);
               else :
               echo "Daftar Blog";
               endif; ?>
+              </em>
             </h1>
             <?php if ($cat_id > 0): ?>
             <a href="/blogs/">

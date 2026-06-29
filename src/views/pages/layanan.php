@@ -179,7 +179,7 @@ $page_title = "Layanan Publik Bandung";
               <circle cx="22" cy="240" r="2" class="dec-dot" style="animation-delay:0.4s" />
             </svg>
           </div>
-          <h1 class="text-gradient">Transportasi</h1>
+          <h1><em class="styled" data-bhs="layanan.title">Transportasi</em></h1>
           <p class="lead" data-bhs="layanan.excerpt">
             Opsi tercepat, termurah, dan terpercaya di Kota Kembang.
           </p>

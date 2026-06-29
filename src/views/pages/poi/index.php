@@ -12,7 +12,11 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
       <img src="<?= htmlspecialchars($poi['poi_image'] ?? '') ?>" alt="<?= htmlspecialchars($poi['name']) ?>" class="w-100 d-block rounded-lg mx-auto" style="max-width:600px" onerror="this.onerror=null;this.src='/uploads/default.jpg'">
     </div>
     <section class="revealed">
-      <h1 class="h2"><?= htmlspecialchars($poi['name']) ?></h1>
+      <h1 class="h2">
+        <em class="styled">
+        <?= htmlspecialchars($poi['name']) ?>
+        </em>
+      </h1>
       <p>
         <?= nl2br(htmlspecialchars($poi['description'] ?? '')) ?>
       </p>

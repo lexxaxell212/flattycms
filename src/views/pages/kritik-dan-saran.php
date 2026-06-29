@@ -194,7 +194,7 @@ $page_title = "Kritik dan Saran";
               <circle cx="95" cy="185" r="3" class="dot-primary" opacity="0.25" />
             </svg>
           </div>
-          <h1 class="text-gradient" data-bhs="fb.title">Kritik & Saran</h1>
+          <h1><em class="styled" data-bhs="fb.title">Kritik & Saran</em></h1>
           <p class="lead" data-bhs="fb.excerpt">
             Bantu kami menjadi lebih baik dengan feedback Anda.
           </p>

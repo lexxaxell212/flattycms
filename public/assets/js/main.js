@@ -1066,7 +1066,7 @@ function currentLang() {
   return lang === "en" ? "en" : "id";
 }
 
-let isRefreshing = false;
+// let isRefreshing = false;
 
 /*
 async function u() {
@@ -1241,8 +1241,8 @@ async function fetchBMKG() {
     const cuacaFlat = d.cuaca.flat();
     const now = new Date();
     const closest = cuacaFlat.reduce((prev, cur) => {
-      const diffPrev = Math.abs(new Date(prev.utc_datetime) - now);
-      const diffCur = Math.abs(new Date(cur.utc_datetime) - now);
+      const diffPrev = Math.abs(new Date(prev.datetime) - now);
+      const diffCur = Math.abs(new Date(cur.datetime) - now);
       return diffCur < diffPrev ? cur : prev;
     });
 

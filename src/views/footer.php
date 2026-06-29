@@ -3,12 +3,12 @@
     <section class="revealed">
       <div class="text-center">
         <div class="mb-5">
-          <h2 class="h2" data-bhs="f.newsletter.title">NEWSLETTER</h2>
-          <p class="small" data-bhs="f.newsletter.excerpt">
+          <h2 class="h1" data-bhs="f.newsletter.title">NEWSLETTER</h2>
+          <p data-bhs="f.newsletter.excerpt">
             Dapatkan event dan update Bandung terkini via email.
           </p>
         </div>
-        <form id="newsletterForm" class="row mx-auto align-items-center g-2" novalidate>
+        <form id="newsletterForm" class="row mx-auto align-items-center g-3" novalidate>
           <div class="col-md-8">
             <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
             <input type="email" name="email" class="form-control" id="emailInput" data-bhs="f.newsletter.placeholder" placeholder="nama@email.com" required>

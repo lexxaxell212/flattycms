@@ -152,7 +152,6 @@ $nav_items = [
           1.5-6.9-3.1-15.3-10-17.9-1.8-.7-193.1-1-579.3-1h-576.7z" /></svg>
       </div>
     </a>
-    <!-- Desktop -->
     <div class="nav-desktop" id="navbarNav">
       <?php foreach ($nav_items as $item): ?>
       <a data-bhs="<?= $item['data-bhs'] ?>" class="nav-link <?= isActive($item['href']) ?>" href="<?= $item['href'] ?>">

@@ -1411,6 +1411,9 @@ main.main-content::before {
   font-size: 0.9rem;
   margin-right: var(--space-2);
 }
+a.nav-link:hover i {
+  transform: translateX(0);
+}
 .dropdown-menu {
   border: none;
   background: transparent;
@@ -1438,7 +1441,6 @@ main.main-content::before {
 .dropdown-item:hover {
   background: var(--bg-primary-subtle);
   color: var(--text-primary) !important;
-  transform: translateX(2px);
 }
 .weather {
   display: flex;
@@ -6988,9 +6990,9 @@ a.logo-social i {
   }
 }
 
-i .fa-spin,
-i .fas.fa-spin,
-i .fa-solid.fa-spin {
+i.fa-spin,
+i.fas.fa-spin,
+i.fa-solid.fa-spin {
   -webkit-animation: fa-spin 2s infinite linear !important;
   animation: fa-spin 2s infinite linear !important;
 }

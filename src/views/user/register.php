@@ -46,7 +46,7 @@ $page_title = 'Daftar - ' . SITE_NAME;
         </label>
         <div class="input-group">
           <input type="password" id="reg-pw-input" class="form-control" data-bhs="form.password.placeholder" placeholder="Min. 8 karakter">
-          <button class="btn btn-fit" type="button" id="toggle-pw-reg">
+          <button class="btn text-muted btn-fit shadow-none" type="button" id="toggle-pw-reg">
             <i class="text-muted fas fa-eye fa-sm"></i>
           </button>
         </div>
@@ -58,7 +58,7 @@ $page_title = 'Daftar - ' . SITE_NAME;
         </label>
         <div class="input-group">
           <input type="password" id="reg-pw-confirm" class="form-control" data-bhs="form.password.repeat.placeholder" placeholder="Ulangi kata sandi">
-          <button class="btn btn-fit" type="button" id="toggle-pw-confirm">
+          <button class="btn text-muted btn-fit shadow-none" type="button" id="toggle-pw-confirm">
             <i class="text-muted fas fa-eye fa-sm"></i>
           </button>
         </div>

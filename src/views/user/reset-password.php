@@ -39,7 +39,7 @@ $page_title = 'Reset Password - ' . SITE_NAME;
         </label>
         <div class="input-group">
           <input type="password" id="rp-pw" class="form-control password" data-bhs="form.password.placeholder" placeholder="Min. 8 karakter">
-          <button class="btn btn-fit" type="button" id="toggle-pw">
+          <button class="btn text-muted btn-fit shadow-none" type="button" id="toggle-pw">
             <i class="fas fa-eye fa-sm"></i>
           </button>
         </div>
@@ -51,7 +51,7 @@ $page_title = 'Reset Password - ' . SITE_NAME;
         </label>
         <div class="input-group">
           <input type="password" id="rp-pw-confirm" class="form-control password" data-bhs="form.password.repeat.placeholder" placeholder="Ulangi kata sandi">
-          <button class="btn btn-fit" type="button" id="toggle-pw-confirm">
+          <button class="btn text-muted btn-fit shadow-none" type="button" id="toggle-pw-confirm">
             <i class="fas fa-eye fa-sm"></i>
           </button>
         </div>

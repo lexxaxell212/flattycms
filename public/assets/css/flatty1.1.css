@@ -549,7 +549,7 @@ h6,
 }
 
 .main-content {
-  padding-top: var(--navbar-height) !important;
+  padding-block: var(--navbar-height) !important;
 }
 main.main-content {
   position: relative;
@@ -6833,7 +6833,7 @@ input[type="range"]::-moz-range-track {
 footer {
   position: relative;
   z-index: 2;
-  padding-top: var(--space-24) !important;
+  padding-block: var(--space-7) !important;
   background: var(--bg-body);
   color: var(--text-body);
 }
@@ -6873,7 +6873,6 @@ footer {
 .footer-bottom {
   align-items: center;
   text-align: center;
-  padding-bottom: 3rem;
 }
 
 .logo-social {

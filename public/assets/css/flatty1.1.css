@@ -814,7 +814,7 @@ main.main-content::before {
 
 /* ============= hero ============= */
 .hero-wrapper {
-  height: 100vh;
+  height: calc(100vh - var(--navbar-height));
   margin-bottom: 2rem;
   border-radius: 0 !important;
   top: var(--navbar-height);

@@ -1455,7 +1455,6 @@ a.nav-link:hover i {
   border: var(--border-surface);
   margin-bottom: 1rem;
   gap: 10px;
-  animation: fadeShow 0.4s ease forwards;
 }
 .weather-data {
   display: flex;

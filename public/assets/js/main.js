@@ -1256,7 +1256,7 @@ async function fetchBMKG() {
             <i class="fas fa-refresh"></i>
           </button>
           <div class="position-absolute bottom-0 start-0 weather-api">
-            Data cuaca dari <a class="ms-1" href="https://bmkg.go.id/" target="_blank" rel="noopener noreferrer">BMKG.GO.ID</a>
+            Data cuaca dari <a class="ms-1" href="https://bmkg.go.id/cuaca/prakiraan-cuaca/32.73.09.1003" target="_blank" rel="noopener noreferrer">BMKG.GO.ID</a>
           </div>
           <div class="weather-data">
           <div class="icon-w">${icon}</div>
@@ -1272,7 +1272,7 @@ async function fetchBMKG() {
           </div>
           <div class="d-flex align-items-center gap-1 city">
             <i class="fa-solid fa-location-dot me-1"></i>
-            <span>Bandung</span>
+            <span><span class="fw-regular me-1">Citarum /</span>Kota Bandung</span>
           </div>
     `;
   } catch (error) {

@@ -15,6 +15,7 @@ function isActive(string $path): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="<?= BASE_URL ?>">
   <?php $s = $GLOBALS['site_settings'] ?? []; ?>

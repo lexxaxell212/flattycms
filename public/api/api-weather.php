@@ -31,7 +31,7 @@ echo json_encode($data);
 */
 
 // BMKG
-$url = "https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=32.73.04.1003";
+$url = "https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=32.73.09.1003";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);

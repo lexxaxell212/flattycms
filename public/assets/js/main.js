@@ -1272,7 +1272,7 @@ async function fetchBMKG() {
           </div>
           <div class="d-flex align-items-center gap-1 city">
             <i class="fa-solid fa-location-dot me-1"></i>
-            <span><span class="fw-regular me-1">Citarum /</span>Kota Bandung</span>
+            <span>Kota Bandung</span>
           </div>
     `;
   } catch (error) {

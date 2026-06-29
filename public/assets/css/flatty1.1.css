@@ -1455,7 +1455,7 @@ a.nav-link:hover i {
   border: var(--border-surface);
   margin-bottom: 1rem;
   gap: 10px;
-  animation: fadeShow var(--duration) var(--ease);
+  animation: fadeShow 0.4s ease forwards;
 }
 .weather-data {
   display: flex;
@@ -6958,10 +6958,10 @@ a.logo-social i {
 }
 
 @keyframes fadeShow {
-  0% {
+  from {
     opacity: 0;
   }
-  100% {
+  to {
     opacity: 1;
   }
 }

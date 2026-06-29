@@ -27,7 +27,7 @@ if (isset($_SESSION['user'])) {
         </label>
         <div class="input-group">
           <input type="password" id="login-pw" class="form-control password" placeholder="••••••••">
-          <button class="btn text-muted" type="button" id="toggle-pw">
+          <button class="btn text-muted btn-fit" type="button" id="toggle-pw">
             <i class="fas fa-eye fa-sm"></i>
           </button>
         </div>

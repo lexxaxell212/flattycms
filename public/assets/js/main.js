@@ -1066,7 +1066,7 @@ function currentLang() {
   return lang === "en" ? "en" : "id";
 }
 
-// let isRefreshing = false;
+ let isRefreshing = false;
 
 /*
 async function u() {

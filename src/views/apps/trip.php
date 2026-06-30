@@ -230,10 +230,8 @@ $cats_json = json_encode($categories);
                   </div>
                   <div id="routeList" class="mb-4">
                   </div>
-                  <div class="route-empty" id="routeEmpty" style="display:flex">
-                      <i class="fa-solid fa-map-pin text-accent"></i>
-                      <span data-bhs="tp.page.map.route_empty">Pilih titik awal - Klik pin di map untuk tambah lokasi</span>
-                    </div>
+                  <div id="routeEmpty" style="display:none">
+                  </div>
                   <div id="distanceInfo" class="alert alert-primary py-2 px-3 small mb-4" style="display:none;width:fit-content">
                     <i class="fa-solid fa-ruler me-2"></i><span data-bhs="tp.page.map.distance_info">Total jarak:</span> <strong id="totalDist">0</strong> km
                     <span class="ms-2 text-muted" id="totalStops"></span>

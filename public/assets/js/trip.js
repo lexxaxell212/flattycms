@@ -247,8 +247,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const distI = document.getElementById("distanceInfo");
 
     if (routes.length === 0) {
-      empty.innerHTML = '';
       if (empty) empty.style.display = "flex";
+      empty.innerHTML = `<div class="route-empty">
+                      <i class="fa-solid fa-map-pin text-accent"></i>
+                      <span data-bhs="tp.page.map.route_empty">Pilih titik awal - Klik pin di map untuk tambah lokasi</span>
+                    </div>`;
       list.innerHTML = '';
       if (empty) list.appendChild(empty);
       btnG.disabled = true;

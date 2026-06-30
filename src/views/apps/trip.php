@@ -319,7 +319,9 @@ $cats_json = json_encode($categories);
         </div>
       </div>
     </div>
-    <?php if ($is_logged): ?>
+  </div>
+</main>
+<?php if ($is_logged): ?>
 <div id="uploadModal" class="gal-modal-overlay" style="display:none">
   <div class="gal-modal">
     <div class="gal-modal__header">
@@ -367,8 +369,6 @@ $cats_json = json_encode($categories);
   </div>
 </div>
 <?php endif; ?>
-  </div>
-</main>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("#homeAiChips .ai-chip").forEach((chip) => {

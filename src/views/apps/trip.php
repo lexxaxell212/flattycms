@@ -109,7 +109,7 @@ $cats_json = json_encode($categories);
             </button>
             <button class="tp-tab" data-tab="ai">
               <i class="fa-solid fa-wand-magic-sparkles me-1"></i>
-              <span data-bhs="tp.page.tab.ai">Itenerary</span>
+              <span data-bhs="tp.page.tab.ai">Itinerary</span>
             </button>
             <button class="tp-tab" data-tab="tripku">
               <i class="fas fa-bookmark me-1"></i>

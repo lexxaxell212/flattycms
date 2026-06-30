@@ -844,7 +844,7 @@ document.getElementById("startImg").innerHTML = `<img src="/uploads/poi-placehol
               ? `<button class="btn btn-primary" onclick="window.renderAiItinerary(${trip.id})">Buka<i class="fa-solid fa-wand-magic-sparkles ms-1"></i></button>`
               : `<button class="btn btn-primary" onclick="loadSavedTrip(${trip.id})">Buka<i class="fa-solid fa-route ms-1"></i></button>`;
             return `
-          <div class="card card-glass">
+          <div class="card card-flatty">
           <div class="card-body">
           <h3 class="h4 text-truncate">${escHtml(trip.title || "Trip tanpa nama")}${badge}</h3>
           <div class="row g-1 mb-2">

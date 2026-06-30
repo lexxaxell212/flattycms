@@ -127,6 +127,7 @@ $csrf = generate_csrf_token();
     </div>
     <?php endif; ?>
   </div>
+</main>
     <!-- Modal Form -->
     <div class="modal fade" id="itemModal" tabindex="-1">
       <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -211,7 +212,6 @@ $csrf = generate_csrf_token();
         </div>
       </div>
     </div>
-</main>
 <script>
   let uploading = false;
   const categories = <?= json_encode($categories) ?>;

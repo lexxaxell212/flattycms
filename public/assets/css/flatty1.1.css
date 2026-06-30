@@ -2926,21 +2926,26 @@ a:hover i.arrow-icon {
 /* ======== /consent ========= */
 .consent-banner {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
   max-width: var(--max-width-form);
-  background: var(--bg-modal);
-  color: var(--text-body);
-  border: var(--border-surface);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  color: var(--text-card);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  box-shadow: var(--shadow-card);
   z-index: 9990;
   transform: translateY(100%);
-  transition: transform var(--duration) var(--ease);
+  opacity: 0;
+  transition: transform var(--duration) var(--ease), opacity var(--duration) var(--ease);
 }
 .consent-banner.show {
   transform: translateY(0);
+  opacity: 1;
 }
 
 /* ============= /fab ============= */

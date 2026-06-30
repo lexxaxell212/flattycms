@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let routeDuration = 0;
   let routeGenerated = false; // FIX: flag untuk disable simpan sebelum generate
 
+  console.log('routeEmpty at load:', document.getElementById('routeEmpty'));
   const map = L.map("mainMap").setView([-6.9175, 107.6191], 13);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "© OpenStreetMap",

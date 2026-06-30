@@ -72,7 +72,7 @@
       <div class="text-truncate">
       <h2 class="h4">${p.poi_name}</h2>
       </div>
-      ${p.caption ? `<div class="mb-2"><i class="fas fa-link me-1"></i>${p.caption}</div>`: ''}
+      ${p.caption ? `<div class="mb-2">${p.caption}</div>`: ''}
       <div class="text-muted small">
       <span>Diupload pada : <strong>${formatDate(p.created_at)}</strong>
       </span>

@@ -87,8 +87,8 @@
       }
       grid.innerHTML = json.data.map(p => `
         <div class="col-12 col-md-6 col-lg-4">
-        <div class="card card-flatty h-100">
-          <div class="position-relative test" style="padding-top:50%;cursor:pointer" onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${p.poi_name}','${p.uploader_name}','${p.caption || ''}','${p.created_at}',${p.id},${p.user_id})">
+        <div class="card card-glass h-100">
+          <div class="position-relative" style="padding-top:50%;cursor:pointer" onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${p.poi_name}','${p.uploader_name}','${p.caption || ''}','${p.created_at}',${p.id},${p.user_id})">
         <img src="${BASE}/uploads/${p.photo_path}" class="position-absolute top-0 start-0 card-img" style="object-fit:cover;transition:.2s;aspect-ratio:16/9;width:100%;height:100%" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
         </div>
         <div class="card-body">

@@ -838,17 +838,17 @@ document.getElementById("startImg").innerHTML = `<img src="/uploads/poi-placehol
           .map((trip) => {
             const isAi = trip.source === "itinerary";
             const badge = isAi
-              ? `<span class="badge badge-accent ms-2" style="font-size:.7rem"><i class="fas fa-wand-magic-sparkles me-1"></i>Itinerary</span>`
-              : `<span class="badge badge-blue ms-2" style="font-size:.7rem"><i class="fas fa-route me-1"></i>Classic</span>`;
+              ? `<span class="badge badge-accent me-2" style="font-size:.7rem"><i class="fas fa-wand-magic-sparkles me-1"></i>Itinerary</span>`
+              : `<span class="badge badge-blue me-2" style="font-size:.7rem"><i class="fas fa-route me-1"></i>Classic</span>`;
             const openBtn = isAi
               ? `<button class="btn btn-primary" onclick="window.renderAiItinerary(${trip.id})">Buka<i class="fa-solid fa-wand-magic-sparkles ms-1"></i></button>`
               : `<button class="btn btn-primary" onclick="loadSavedTrip(${trip.id})">Buka<i class="fa-solid fa-route ms-1"></i></button>`;
             return `
           <div class="card card-flatty">
           <div class="card-body">
-          <h3 class="h4 text-truncate">${escHtml(trip.title || "Trip tanpa nama")}${badge}</h3>
+          <h3 class="h4 text-truncate align-items-center">${badge}<span>${escHtml(trip.title || "Trip tanpa nama")}</span></h3>
           <div class="row g-1 mb-2">
-          ${!isAi ? `<span class="small p-2"><i class="fa-solid fa-location-dot me-2"></i>Mulai dari : <strong>${trip.start_point_name}</strong></span>` : ''}
+          ${!isAi ? `<span class="small p-1"><i class="fa-solid fa-location-dot me-2"></i>Mulai dari : <strong>${trip.start_point_name}</strong></span>` : ''}
           <span class="small p-1"><i class="fa-solid fa-map-pin me-2"></i><strong>${trip.total_stops}</strong> lokasi</span>
           ${!isAi && trip.total_distance ? `<span class="small p-1"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${trip.total_distance}</strong> km</span>` : ''}
           ${!isAi && trip.duration ? `<span class="small p-1"><i class="fa-solid fa-clock me-2"></i><strong>${trip.duration}</strong> menit</span>` : ''}

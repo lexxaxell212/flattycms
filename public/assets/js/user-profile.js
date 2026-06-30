@@ -74,7 +74,8 @@
       </div>
       ${p.caption ? `<div class="mb-2"><i class="fas fa-link me-1"></i>${p.caption}</div>`: ''}
       <div class="text-muted small">
-      <span>Diupload pada : ${formatDate(p.created_at)}</span>
+      <span>Diupload pada : <strong>${formatDate(p.created_at)}</strong>
+      </span>
       </div>
       </div>
       <div class="card-footer">
@@ -96,8 +97,8 @@
     list.innerHTML = data.trips.map(t => {
       const isAi = t.source === 'itinerary';
       const badge = isAi
-        ? `<span class="badge badge-accent ms-2" style="font-size:.7rem"><i class="fas fa-wand-magic-sparkles me-1"></i>Itinerary</span>`
-        : `<span class="badge badge-blue ms-2" style="font-size:.7rem"><i class="fas fa-route me-1"></i>Classic</span>`;
+        ? `<span class="badge badge-accent me-2" style="font-size:.7rem"><i class="fas fa-wand-magic-sparkles me-1"></i>Itinerary</span>`
+        : `<span class="badge badge-blue me-2" style="font-size:.7rem"><i class="fas fa-route me-1"></i>Classic</span>`;
       const openBtn = isAi
         ? `<a href="/trip?open_ai=${t.id}" class="btn btn-primary">Buka<i class="fa-solid fa-wand-magic-sparkles ms-2"></i></a>`
         : `<a href="/trip?open_trip=${t.id}" class="btn btn-primary">Buka di Map<i class="fa-solid fa-route ms-2"></i></a>`;
@@ -105,15 +106,16 @@
       <div class="col-12 col-md-6" id="trip-${t.id}">
       <div class="card card-flatty">
       <div class="card-body">
-      <h3 class="h4 text-truncate">${t.title}${badge}</h3>
+      <h3 class="h4 text-truncate align-items-center">${badge}<span>${t.title}</span></h3>
       <div class="row g-1 mb-2">
-      ${!isAi ? `<span class="small p-2"><i class="fa-solid fa-location-dot me-2"></i>Mulai dari : <strong>${t.start_point_name}</strong></span>` : ''}
+      ${!isAi ? `<span class="small p-1"><i class="fa-solid fa-location-dot me-2"></i>Mulai dari : <strong>${t.start_point_name}</strong></span>` : ''}
       <span class="small p-1"><i class="fa-solid fa-map-pin me-2"></i><strong>${t.total_stops}</strong> lokasi</span>
       ${!isAi && t.total_distance ? `<span class="small p-1"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${t.total_distance}</strong> km</span>` : ''}
       ${!isAi && t.duration ? `<span class="small p-1"><i class="fa-solid fa-clock me-2"></i><strong>${t.duration}</strong> menit</span>` : ''}
       </div>
       <div class="text-muted small mb-2">
-      <span>Dibuat pada : ${formatDate(t.created_at)}</span>
+      <span>Dibuat pada : <strong>${formatDate(t.created_at)}</strong>
+      </span>
       </div>
       </div>
       <div class="card-footer">
@@ -159,8 +161,10 @@
         </h2>
       </div>
       <div class="text-muted mb-2 small">
-        <span>Kamu memberi <i class="fas fa-heart"></i> pada :  ${formatDate(r.created_at)}</span>
+        <span>Kamu memberi <i class="fas fa-heart text-danger"></i> pada :  <strong>${formatDate(r.created_at)}</strong></span>
       </div>
+      </div>
+      <div class="card-footer">
       <button class="btn btn-danger" onclick="deleteContrib('reaction', ${r.id})"> Hapus
       <i class="fa-solid fa-trash ms-2"></i>
       </button>

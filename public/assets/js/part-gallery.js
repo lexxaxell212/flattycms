@@ -55,7 +55,7 @@
     if (photo.caption) {
       const cap = document.createElement('div');
       cap.className = 'poi-gallery-caption';
-      cap.textContent = photo.caption;
+      cap.innerHTML = `<i class="fas fa-link me-1"></i>${photo.caption}`;
       overlay.appendChild(cap);
     }
 

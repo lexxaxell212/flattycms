@@ -247,6 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const distI = document.getElementById("distanceInfo");
 
     if (routes.length === 0) {
+      empty.innerHTML = '';
       if (empty) empty.style.display = "flex";
       list.innerHTML = '';
       if (empty) list.appendChild(empty);

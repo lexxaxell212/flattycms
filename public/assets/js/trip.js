@@ -581,23 +581,129 @@ document.getElementById("startImg").innerHTML = `<img src="/uploads/poi-placehol
   };
 
   if (IS_LOGGED) {
+    const uploadModal = document.getElementById("uploadModal");
+
     window.openUpload = function (poi_id, poi_name) {
-      if (typeof window.openUploadModal === "function") {
-        window.openUploadModal(poi_id, poi_name);
-        return;
-      }
-      document.getElementById("uploadPoiId").value = poi_id;
-      document.getElementById("uploadPoiName").textContent = poi_name;
-      document.getElementById("uploadPoiSelected").style.display = "";
-      document.getElementById("uploadPoiSearch").value = poi_name;
+      document.getElementById("uploadPoiId").value = poi_id || "";
+      document.getElementById("uploadPoiName").textContent = poi_name || "";
+      document.getElementById("uploadPoiSelected").style.display =
+        poi_id && poi_name ? "" : "none";
+      document.getElementById("uploadPoiSearch").value = poi_name || "";
       document.getElementById("uploadPreview").style.display = "none";
       document.getElementById("uploadFile").value = "";
       document.getElementById("uploadCredit").value = "";
-      bootstrap.Modal.getOrCreateInstance(
-        document.getElementById("uploadModal"),
-      ).show();
+      uploadModal.style.display = "flex";
     };
 
+    window.openUploadModal = window.openUpload;
+
+    ["btnBatalUpload", "btnBatalUpload2"].forEach((id) => {
+      document.getElementById(id)?.addEventListener("click", () => {
+        uploadModal.style.display = "none";
+      });
+    });
+
+    uploadModal.addEventListener("click", (e) => {
+      if (e.target === uploadModal) uploadModal.style.display = "none";
+    });
+
+    document
+      .getElementById("uploadPoiSearch")
+      .addEventListener("input", function () {
+        const q = this.value.toLowerCase();
+        const box = document.getElementById("uploadPoiResults");
+        box.innerHTML = "";
+        if (!q) {
+          box.style.display = "none";
+          return;
+        }
+        box.style.display = "";
+        const matches = POIS.filter((p) =>
+          p.name.toLowerCase().includes(q),
+        ).slice(0, 6);
+        if (!matches.length) {
+          box.innerHTML = '<div class="small text-muted">Tidak ditemukan</div>';
+          return;
+        }
+        matches.forEach((p) => {
+          const el = document.createElement("button");
+          el.type = "button";
+          el.className = "btn-popup";
+          el.textContent = p.name;
+          el.addEventListener("click", () => {
+            document.getElementById("uploadPoiId").value = p.id;
+            document.getElementById("uploadPoiName").textContent = p.name;
+            document.getElementById("uploadPoiSelected").style.display = "";
+            box.style.display = "none";
+          });
+          box.appendChild(el);
+        });
+      });
+
+    document
+      .getElementById("uploadFile")
+      .addEventListener("change", function () {
+        const file = this.files[0];
+        if (!file) return;
+        if (file.size > 10 * 1024 * 1024) {
+          flattyToast("warning", "File terlalu besar, maksimal 10MB.");
+          this.value = "";
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.getElementById("previewImg").src = e.target.result;
+          document.getElementById("uploadPreview").style.display = "";
+        };
+        reader.readAsDataURL(file);
+      });
+
+    document
+      .getElementById("btnKirimUpload")
+      .addEventListener("click", async () => {
+        const poi_id = document.getElementById("uploadPoiId").value;
+        const file = document.getElementById("uploadFile").files[0];
+        if (!poi_id || !file) {
+          flattyToast("warning", "Pilih lokasi dan foto dulu.");
+          return;
+        }
+        const btn = document.getElementById("btnKirimUpload");
+        btn.innerHTML =
+          '<div class="btn-fetch"><span></span><span></span><span></span></div>';
+        btn.disabled = true;
+        const fd = new FormData();
+        fd.append("csrf_token", CSRF);
+        fd.append("poi_id", poi_id);
+        fd.append("photo", file);
+        fd.append(
+          "caption",
+          document.getElementById("uploadCredit").value.trim(),
+        );
+        try {
+          await new Promise((r) => setTimeout(r, 1000));
+          const res = await fetch(API_GAL, {
+            method: "POST",
+            headers: {
+              "X-Requested-With": "XMLHttpRequest",
+            },
+            body: fd,
+          });
+          const data = await res.json();
+          if (data.success) {
+            uploadModal.style.display = "none";
+            flattyToast("success", "Foto berhasil diupload!");
+          } else {
+            flattyToast("error", data.message ?? "Gagal upload foto.");
+          }
+        } catch (e) {
+          flattyToast("error", "Gagal upload foto.");
+        } finally {
+          btn.innerHTML = "Upload";
+          btn.disabled = false;
+        }
+      });
+  }
+  
     document
       .getElementById("uploadPoiSearch")
       .addEventListener("input", function () {

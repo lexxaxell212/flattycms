@@ -319,61 +319,56 @@ $cats_json = json_encode($categories);
         </div>
       </div>
     </div>
-  </div>
-</main>
-<?php if ($is_logged): ?>
-    <div class="modal fade" id="uploadModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg" style="border-radius:1rem;overflow:hidden">
-          <div class="modal-header border-bottom py-3 px-4">
-            <h5 class="modal-title fw-semibold mb-0">
-              <i class="fas fa-camera me-2 text-primary"></i><span data-bhs="tp.page.upload.title">Upload Foto</span>
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <?php if ($is_logged): ?>
+<div id="uploadModal" class="gal-modal-overlay" style="display:none">
+  <div class="gal-modal">
+    <div class="gal-modal__header">
+      <span><i class="fa-solid fa-camera me-2"></i><span data-bhs="gal.page.upload.modal.title">Upload Foto</span></span>
+      <button class="gal-modal__close" id="btnBatalUpload"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="gal-modal__body">
+      <div class="gal-field">
+        <label class="gal-label"><span data-bhs="gal.page.upload.lokasi.label">Lokasi Foto</span><span class="text-danger">*</span></label>
+        <div class="gal-search-field-wrap">
+          <input type="text" id="uploadPoiSearch" class="gal-input" data-bhs="gal.page.upload.poi.placeholder" placeholder="Cari nama POI...">
+          <div id="uploadPoiResults" class="gal-search-results gal-search-results--modal">
           </div>
-          <div class="modal-body p-4">
-            <div class="mb-3">
-              <label class="form-label small fw-semibold" data-bhs="tp.page.upload.loc_label">Lokasi <span class="text-danger">*</span></label>
-              <div class="input-group">
-                <input type="text" id="uploadPoiSearch" class="form-control" data-bhs="tp.page.upload.loc_placeholder">
-              </div>
-              <div id="uploadPoiResults" style="overflow-y:auto;display:none"></div>
-              <input type="hidden" id="uploadPoiId">
-              <div id="uploadPoiSelected" class="mt-2" style="display:block">
-                <div class="mb-2">
-                  <div class="badge badge-green">
-                    <span id="uploadPoiName" class="text-truncate fw-bold ms-2">
-                      <i class="fas fa-location-dot me-1"></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label small fw-semibold" data-bhs="tp.page.upload.photo_label">Foto <span class="text-danger">*</span></label>
-              <input type="file" id="uploadFile" class="form-control form-control-sm" accept="image/jpeg,image/png,image/webp">
-              <div class="form-text" data-bhs="tp.page.upload.photo_hint">
-                Maks 10MB · JPG, PNG, WebP
-              </div>
-              <div id="uploadPreview" class="mt-2" style="display:none">
-                <img id="previewImg" src="" class="img-fluid rounded" style="max-height:200px;object-fit:cover;width:100%">
-              </div>
-            </div>
-            <div class="mb-1">
-              <label class="form-label small fw-semibold" data-bhs="tp.page.upload.credit_label">Kredit <span class="text-muted fw-normal">(opsional)</span></label>
-              <input type="text" id="uploadCredit" class="form-control" data-bhs="tp.page.upload.credit_placeholder">
-            </div>
-          </div>
-          <div class="modal-footer border-top py-3 px-4">
-            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" data-bhs="tp.page.upload.btn_cancel">Batalkan</button>
-            <button type="button" class="btn btn-primary" id="btnKirimUpload" data-bhs="tp.page.upload.btn_upload">
-              Upload
-            </button>
+        </div>
+        <input type="hidden" id="uploadPoiId">
+        <div id="uploadPoiSelected" class="gal-selected" style="display:none">
+          <div class="badge badge-green">
+            <span id="uploadPoiName" class="text-truncate fw-bold"></span>
           </div>
         </div>
       </div>
+      <div class="gal-field">
+        <label class="gal-label"><span data-bhs="gal.page.upload.foto.label">Foto</span> <span class="text-danger">*</span></label>
+        <label class="gal-file-label" id="uploadFileLabel">
+          <input type="file" id="uploadFile" accept="image/jpeg,image/png,image/webp" class="gal-file-input">
+          <i class="fa-solid fa-cloud-arrow-up gal-file-icon"></i>
+          <span class="gal-file-text" data-bhs="gal.page.upload.file.text">Klik untuk pilih foto</span>
+          <span class="gal-file-hint" data-bhs="gal.page.upload.file.hint">JPG, PNG, WebP</span>
+        </label>
+        <div id="uploadPreview" style="display:none" class="mt-2">
+          <img id="previewImg" src="" class="img-fluid rounded" style="max-height:180px;object-fit:cover;width:100%">
+        </div>
+      </div>
+      <div class="gal-field">
+        <label class="gal-label"><span data-bhs="gal.page.upload.kredit.label">Kredit</span> <span class="gal-optional" data-bhs="gal.page.optional">opsional</span></label>
+        <input type="text" id="uploadCredit" class="gal-input" data-bhs="gal.page.upload.kredit.placeholder" placeholder="Nama / Instagram / Link...">
+      </div>
     </div>
-    <?php endif; ?>
+    <div class="gal-modal__footer">
+      <button class="btn btn-outline-primary" id="btnBatalUpload2"><span data-bhs="gal.page.btn.batal">Batalkan</span></button>
+      <button class="btn btn-primary" id="btnKirimUpload">
+        <i class="fa-solid fa-upload"></i> <span data-bhs="gal.page.btn.upload2">Upload</span>
+      </button>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
+  </div>
+</main>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("#homeAiChips .ai-chip").forEach((chip) => {

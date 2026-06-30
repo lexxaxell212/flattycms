@@ -31,10 +31,16 @@
     }
 
     if (FB_PIXEL_ID && categories.marketing) {
-      !function(f,b,e,v,n,t,s){/* Script FB Pixel Standard */}
-      (window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
-      fbq("init", FB_PIXEL_ID);
-      fbq("track", "PageView");
+      !function(f,b,e,v,n,t,s){
+        if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)
+      }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', FB_PIXEL_ID);
+      fbq('track', 'PageView');
     }
   }
 
@@ -51,11 +57,12 @@
     const originalAccept = btnAccept?.innerHTML;
     const originalReject = btnReject?.innerHTML;
 
-    if (btnAccept)  { btnAccept.disabled  = true; btnAccept.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>'; }
-    if (btnReject)  { btnReject.disabled  = true; btnReject.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>'; }
+    if (btnAccept)  { btnAccept.disabled  = true; btnAccept.innerHTML  = '<div class="btn-fetch"><span></span><span></span><span></span></div>'; }
+    if (btnReject)  { btnReject.disabled  = true; btnReject.innerHTML  = '<div class="btn-fetch"><span></span><span></span><span></span></div>'; }
     if (btnDismiss) { btnDismiss.disabled = true; }
 
     try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       await fetch("/api/api-consent.php", {
         method: "POST",
         headers: {

@@ -102,11 +102,11 @@
       <div class="card card-flatty">
       <div class="card-body">
       <h3 class="h4 text-truncate">${t.title}${badge}</h3>
-      <div class="row g-2 mb-2">
+      <div class="row g-1 mb-2">
       ${!isAi ? `<span class="small p-2"><i class="fa-solid fa-location-dot me-2"></i>Mulai dari : <strong>${t.start_point_name}</strong></span>` : ''}
-      <span class="small p-2"><i class="fa-solid fa-map-pin me-2"></i><strong>${t.total_stops}</strong> lokasi</span>
-      ${!isAi && t.total_distance ? `<span class="small p-2"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${t.total_distance}</strong> km</span>` : ''}
-      ${!isAi && t.duration ? `<span class="small p-2"><i class="fa-solid fa-clock me-2"></i><strong>${t.duration}</strong> menit</span>` : ''}
+      <span class="small p-1"><i class="fa-solid fa-map-pin me-2"></i><strong>${t.total_stops}</strong> lokasi</span>
+      ${!isAi && t.total_distance ? `<span class="small p-1"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${t.total_distance}</strong> km</span>` : ''}
+      ${!isAi && t.duration ? `<span class="small p-1"><i class="fa-solid fa-clock me-2"></i><strong>${t.duration}</strong> menit</span>` : ''}
       </div>
       <div class="text-muted mb-2" style="font-size:.8rem">${formatDate(t.created_at)}</div>
       </div>

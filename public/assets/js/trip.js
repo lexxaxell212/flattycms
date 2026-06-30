@@ -847,9 +847,11 @@ document.getElementById("startImg").innerHTML = `<img src="/uploads/poi-placehol
           <div class="card card-glass">
           <div class="card-body">
           <h3 class="h4 text-truncate">${escHtml(trip.title || "Trip tanpa nama")}${badge}</h3>
-          <div class="row g-2">
-          ${!isAi ? `<span class="small p-2"><i class="fa-solid fa-map-pin me-2"></i><strong>${trip.total_stops}</strong> lokasi</span>` : ""}
-          ${!isAi && trip.total_distance ? `<span class="small p-2"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${trip.total_distance}</strong> km</span>` : ""}
+          <div class="row g-1 mb-2">
+          ${!isAi ? `<span class="small p-2"><i class="fa-solid fa-location-dot me-2"></i>Mulai dari : <strong>${trip.start_point_name}</strong></span>` : ''}
+          <span class="small p-1"><i class="fa-solid fa-map-pin me-2"></i><strong>${trip.total_stops}</strong> lokasi</span>
+          ${!isAi && trip.total_distance ? `<span class="small p-1"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${trip.total_distance}</strong> km</span>` : ''}
+          ${!isAi && trip.duration ? `<span class="small p-1"><i class="fa-solid fa-clock me-2"></i><strong>${trip.duration}</strong> menit</span>` : ''}
           </div>
           </div>
           <div class="card-footer d-flex gap-2">

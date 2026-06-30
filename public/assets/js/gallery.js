@@ -95,8 +95,8 @@
         <div class="text-truncate">
           <h2 class="h4">${p.poi_name}</h2>
         </div>
-        <div class="text-muted small">${formatDate(p.created_at)}</div>
-        ${p.caption ? `<div>${p.caption}</div>`: ''}
+        <div class="text-muted small mb-2">${formatDate(p.created_at)}</div>
+        ${p.caption ? `<div><i class="fas fa-link me-1"></i>${p.caption}</div>`: ''}
         </div>
         <div class="card-footer">
           <div class="d-flex align-items-center gap-1">

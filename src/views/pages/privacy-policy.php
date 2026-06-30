@@ -55,12 +55,11 @@ $page_title = "Kebijakan Privasi";
       <div class="col-12 col-lg-8">
         <h2 class="h4" data-bhs="privasi.s4.title">4. Cookie</h2>
         <p class="mb-2" data-bhs="privasi.s4.intro">
-          Kami menggunakan tiga jenis cookie:
+          Kami menggunakan cookie untuk meningkatkan pengalaman browsing anda.
         </p>
         <ul class="list-unstyled small">
           <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong data-bhs="privasi.s4.item1.label">Esensial</strong> <span data-bhs="privasi.s4.item1.desc">- diperlukan agar situs berfungsi dengan benar.</span></li>
           <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong data-bhs="privasi.s4.item2.label">Analitik</strong> <span data-bhs="privasi.s4.item2.desc">- membantu kami memahami cara pengunjung menggunakan situs.</span></li>
-          <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong data-bhs="privasi.s4.item3.label">Preferensi</strong> <span data-bhs="privasi.s4.item3.desc">- menyimpan pengaturan dan preferensi tampilan Anda.</span></li>
         </ul>
         <p class="small mb-0" data-bhs="privasi.s4.note">
           Anda dapat menonaktifkan cookie melalui pengaturan browser kapan saja.
@@ -79,10 +78,6 @@ $page_title = "Kebijakan Privasi";
             href="/unsubscribe" class="link" data-bhs="privasi.s5.item3.link">Unsubscribe</a> <span data-bhs="privasi.s5.item3.desc2">di email kami atau
             hubungi kami langsung.</span></li>
         </ul>
-        <p class="small mb-0">
-          <span data-bhs="privasi.s5.contact.pre">Permintaan dapat dikirim ke</span>
-          <strong>admin@ayokebandung.id</strong>
-        </p>
       </div>
       <div class="col-12 col-lg-8">
         <h2 class="h4" data-bhs="privasi.s6.title">6. Keamanan Data</h2>
@@ -96,10 +91,6 @@ $page_title = "Kebijakan Privasi";
             text-purple"></i><strong data-bhs="privasi.s6.item3.label">Waspada Phishing</strong> <span data-bhs="privasi.s6.item3.desc">- kami tidak
             pernah meminta kata sandi melalui email.</span></li>
         </ul>
-        <p class="small mb-0">
-          <span data-bhs="privasi.s6.report.pre">Temukan celah keamanan? Laporkan ke</span>
-          <strong>security@ayokebandung.id</strong>.
-        </p>
       </div>
       <div class="col-12 col-lg-8">
         <h2 class="h4" data-bhs="privasi.s7.title">7. Retensi Data</h2>

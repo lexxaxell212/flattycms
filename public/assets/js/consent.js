@@ -1,53 +1,90 @@
-let bannerShown = false;
+(function () {
+  "use strict";
 
-function showBannerOnScroll() {
-  const banner = document.getElementById('consentBanner');
-  if (!banner || bannerShown) return;
-  if (window.scrollY > 200) {
-    banner.classList.add('show');
-    bannerShown = true;
-    window.removeEventListener('scroll', showBannerOnScroll);
+  let bannerShown = false;
+
+  function showBannerOnScroll() {
+    const banner = document.getElementById("consentBanner");
+    if (!banner || bannerShown) return;
+    if (window.scrollY > 300) {
+      banner.classList.add("show");
+      bannerShown = true;
+      window.removeEventListener("scroll", showBannerOnScroll);
+    }
   }
-}
 
-function dismissBanner() {
-  const banner = document.getElementById('consentBanner');
-  if (banner) banner.classList.remove('show');
-}
+  function dismissBanner() {
+    const banner = document.getElementById("consentBanner");
+    if (banner) banner.classList.remove("show");
+  }
 
-function saveConsent(all = true, rejectAll = false) {
-  const cats = {
-    necessary: true,
-    analytics: !rejectAll,
-    marketing: !rejectAll
-  };
-  fetch("/api/api-consent.php", {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest',
-    },
-    body: JSON.stringify({
-      consent_given: !rejectAll, categories: cats
-    })
-  })
-  .then(() => {
-    flattyToast('success', rejectAll ? 'Preferensi cookie disimpan.' : 'Cookie diterima!');
-    setTimeout(() => location.reload(), 1000);
-  })
-  .catch(err => {
-    flattyToast('error', 'Gagal menyimpan preferensi cookie.');
-    console.error('Consent error:', err);
+  function injectTracking(categories) {
+    const gaScript = document.createElement("script");
+    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`;
+    gaScript.async = true;
+    document.head.appendChild(gaScript);
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", GTAG_ID);
+
+    if (categories.marketing) {
+      !function(f,b,e,v,n,t,s){/* FB Pixel Standard */}
+      (window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+      fbq("init", FB_PIXEL_ID);
+      fbq("track", "PageView");
+    }
+  }
+
+  async function saveConsent(rejectAll = false) {
+    const cats = {
+      necessary: true,
+      analytics: !rejectAll,
+      marketing: !rejectAll,
+    };
+
+    const btnAccept = document.getElementById("btnAcceptConsent");
+    const btnReject = document.getElementById("btnRejectConsent");
+    const btnDismiss = document.getElementById("btnDismissConsent");
+    const originalAccept = btnAccept?.innerHTML;
+    const originalReject = btnReject?.innerHTML;
+
+    if (btnAccept) { btnAccept.disabled = true; btnAccept.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Menyimpan...'; }
+    if (btnReject) { btnReject.disabled = true; btnReject.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Menyimpan...'; }
+    if (btnDismiss) btnDismiss.disabled = true;
+
+    try {
+      await fetch("/api/api-consent.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+        body: JSON.stringify({ consent_given: !rejectAll, categories: cats }),
+      });
+
+      dismissBanner();
+      flattyToast("success", rejectAll ? "Preferensi cookie disimpan." : "Cookie diterima!");
+      if (!rejectAll) injectTracking(cats);
+
+    } catch (err) {
+      flattyToast("error", "Gagal menyimpan preferensi cookie.");
+      console.error("Consent error:", err);
+
+      if (btnAccept) { btnAccept.disabled = false; btnAccept.innerHTML = originalAccept; }
+      if (btnReject) { btnReject.disabled = false; btnReject.innerHTML = originalReject; }
+      if (btnDismiss) btnDismiss.disabled = false;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const banner = document.getElementById("consentBanner");
+    if (!banner) return;
+
+    window.addEventListener("scroll", showBannerOnScroll);
+
+    document.getElementById("btnDismissConsent")?.addEventListener("click", () => saveConsent(true));
+    document.getElementById("btnAcceptConsent")?.addEventListener("click", () => saveConsent(false));
+    document.getElementById("btnRejectConsent")?.addEventListener("click", () => saveConsent(true));
   });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const banner = document.getElementById('consentBanner');
-  if (!banner) return;
-
-  window.addEventListener('scroll', showBannerOnScroll);
-
-  document.getElementById('btnDismissConsent')?.addEventListener('click', dismissBanner);
-  document.getElementById('btnAcceptConsent')?.addEventListener('click', () => saveConsent(true));
-  document.getElementById('btnRejectConsent')?.addEventListener('click', () => saveConsent(false, true));
-});
+})();

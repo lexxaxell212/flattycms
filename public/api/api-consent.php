@@ -37,7 +37,7 @@ try {
   ]);
 
   // Set cookies (1 tahun)
-  $expire = time() + (365 * 24 * 3600);
+  $expire = time() + (13 * 30 * 24 * 3600);
 
   setcookie('consent_accepted', $consent_given ? '1' : '0', $expire, '/', '', true, true);
   setcookie('consent_categories', json_encode($categories), $expire, '/', '', true, false);

@@ -2048,7 +2048,7 @@ table tbody td {
 }
 
 .btn-outline-primary {
-  background: oklch(0.97 0.001 295) !important;
+  background: oklch(0.97 0.001 295/0.3) !important;
   color: oklch(0.131 0.089 295);
   border: 1px solid oklch(0.131 0.089 295) !important;
 }
@@ -2151,7 +2151,7 @@ table tbody td {
   width: 40px;
   height: 40px;
   font-size: 1.5rem;
-  font-weight: 900;
+  font-weight: 700;
   color: var(--text-white);
   background: oklch(1 0 0 / 0.09) !important;
   border: none !important;
@@ -2160,6 +2160,7 @@ table tbody td {
 .close-btn:hover,
 .btn-close:hover {
   background: oklch(1 0 0 / 0.18) !important;
+  color: var(--text-white);
 }
 
 .submit-btn,

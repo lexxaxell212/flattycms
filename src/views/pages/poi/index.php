@@ -86,6 +86,7 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
 
 <script>
   const POI_ID_CURRENT = <?= (int)$poi_id ?>;
+  const BASE = CONFIG.baseUrl;
 </script>
 <script src="<?= JS_URL ?>poi-detail.js" defer></script>
     

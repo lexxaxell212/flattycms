@@ -126,6 +126,7 @@ $csrf = generate_csrf_token();
       <?php endforeach; ?>
     </div>
     <?php endif; ?>
+  </div>
     <!-- Modal Form -->
     <div class="modal fade" id="itemModal" tabindex="-1">
       <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -210,7 +211,6 @@ $csrf = generate_csrf_token();
         </div>
       </div>
     </div>
-  </div>
 </main>
 <script>
   let uploading = false;

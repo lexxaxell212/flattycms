@@ -42,10 +42,10 @@
 
     function updateUI() {
       const dots = dotsWrap.querySelectorAll(".artikel-dot");
-      const activeIdx = Math.floor(current / getVisible());
+      const activeIdx = Math.round(current / getVisible());
       dots.forEach((d, i) => {
         d.classList.toggle("is-active", i === activeIdx);
-        d.setAttribute("aria-current", i === activeIdx ? "true": "false");
+        d.setAttribute("aria-current", i === activeIdx ? "true" : "false");
       });
       if (btnPrev) btnPrev.disabled = current === 0;
       if (btnNext) btnNext.disabled = current >= maxIndex();
@@ -82,8 +82,8 @@
       }, 80);
     });
 
-    if (btnPrev) btnPrev.addEventListener("click", () => scrollToIndex(current - 1));
-    if (btnNext) btnNext.addEventListener("click", () => scrollToIndex(current + 1));
+    if (btnPrev) btnPrev.addEventListener("click", () => scrollToIndex(current - getVisible()));
+    if (btnNext) btnNext.addEventListener("click", () => scrollToIndex(current + getVisible()));
 
     let resizeTimer;
     window.addEventListener("resize", () => {

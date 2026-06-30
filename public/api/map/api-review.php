@@ -33,7 +33,7 @@ if ($method === 'GET') {
             SELECT
                 r.id, r.rating, r.judul, r.cerita, r.created_at,
                 u.id   AS user_id,
-                u.name AS user_name,
+                COALESCE(NULLIF(u.display_name, ''), u.name) AS user_name,
                 u.avatar,
                 p.id   AS poi_id,
                 p.name AS poi_name

@@ -17,7 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let routeDuration = 0;
   let routeGenerated = false; // FIX: flag untuk disable simpan sebelum generate
 
-  console.log('routeEmpty at load:', document.getElementById('routeEmpty'));
+  const routeEmptyHTML = `<div id="routeEmpty" style="display:flex">
+  <div class="route-empty">
+    <i class="fa-solid fa-map-pin text-accent"></i>
+    <span data-bhs="tp.page.map.route_empty">Pilih titik awal - Klik pin di map untuk tambah lokasi</span>
+  </div>
+</div>`;
+
   const map = L.map("mainMap").setView([-6.9175, 107.6191], 13);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "© OpenStreetMap",
@@ -242,22 +248,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updatePlannerUI() {
     const list = document.getElementById("routeList");
-    const empty = document.getElementById("routeEmpty");
     const btnG = document.getElementById("btnGenerateRoute");
     const btnS = document.getElementById("btnSaveTrip");
     const distI = document.getElementById("distanceInfo");
 
     if (routes.length === 0) {
-      if (empty) empty.style.display = "flex";
-      list.innerHTML = '';
-      if (empty) list.appendChild(empty);
+      list.innerHTML = routeEmptyHTML;
       btnG.disabled = true;
-      // FIX: disable simpan juga reset
       if (btnS) btnS.disabled = true;
       distI.style.display = "none";
       return;
     }
-
+    
     if (empty) empty.style.display = "none";
     list.innerHTML = routes
       .map(

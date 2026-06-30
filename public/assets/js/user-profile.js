@@ -121,7 +121,7 @@
       </span>
       </div>
       </div>
-      <div class="card-footer d-flex g-2">
+      <div class="card-footer d-flex gap-2">
       ${openBtn}
       <button class="btn btn-danger btn-fit" onclick="deleteContrib('trip', ${t.id})">Hapus<i class="fa-solid fa-trash ms-2"></i></button>
       </div>

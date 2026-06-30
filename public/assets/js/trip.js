@@ -857,7 +857,7 @@ document.getElementById("startImg").innerHTML = `<img src="/uploads/poi-placehol
           ${!isAi && trip.duration ? `<span class="small p-1"><i class="fa-solid fa-clock me-2"></i><strong>${trip.duration}</strong> menit</span>` : ''}
           </div>
           </div>
-          <div class="card-footer d-flex g-2">
+          <div class="card-footer d-flex gap-2">
           ${openBtn}
           <button class="btn btn-danger btn-fit" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || "Trip ini")}')">
           Hapus<i class="fa-solid fa-trash ms-1"></i>

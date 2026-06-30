@@ -139,7 +139,7 @@ function get_gallery_rand($limit = 6) {
   $pdo = $GLOBALS['pdo'];
   $limit = (int)$limit;
   return $pdo->query("
-    SELECT ph.photo_path, u.name AS uploader_name
+    SELECT ph.photo_path, COALESCE(NULLIF(u.display_name, ''), u.name) AS uploader_name
     FROM poi_photos ph
     JOIN users u ON u.id = ph.user_id
     JOIN poi p ON p.id = ph.poi_id

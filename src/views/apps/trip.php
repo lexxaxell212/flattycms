@@ -70,7 +70,7 @@ $cats_json = json_encode($categories);
             </div>
             <div class="tp-profile-info">
               <div class="name">
-                <?= safe_html($u['name'] ?? 'Pengguna') ?>
+                <?= safe_html($u['display_name'] ?? $u['name'] ?? 'Pengguna') ?>
               </div>
               <div class="email">
                 <?= safe_html($u['email'] ?? '') ?>

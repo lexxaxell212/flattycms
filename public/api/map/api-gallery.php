@@ -28,16 +28,16 @@ if ($method === 'GET') {
     $total = (int)$countStmt->fetchColumn();
 
     $stmt = $pdo->prepare("
-            SELECT ph.id, ph.poi_id, ph.user_id, ph.photo_path, ph.caption, ph.created_at,
-                   u.name AS uploader_name, u.avatar AS uploader_avatar,
-                   p.name AS poi_name, p.slug AS poi_slug
-            FROM poi_photos ph
-            JOIN users u ON u.id = ph.user_id
-            JOIN poi p ON p.id = ph.poi_id
-            {$whereSQL}
-            ORDER BY ph.created_at DESC
-            LIMIT {$limit} OFFSET {$offset}
-        ");
+        SELECT ph.id, ph.poi_id, ph.user_id, ph.photo_path, ph.caption, ph.created_at,
+               COALESCE(NULLIF(u.display_name, ''), u.name) AS uploader_name, u.avatar AS uploader_avatar,
+               p.name AS poi_name, p.slug AS poi_slug
+        FROM poi_photos ph
+        JOIN users u ON u.id = ph.user_id
+        JOIN poi p ON p.id = ph.poi_id
+        {$whereSQL}
+        ORDER BY ph.created_at DESC
+        LIMIT {$limit} OFFSET {$offset}
+    ");
     $stmt->execute($params);
     $photos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

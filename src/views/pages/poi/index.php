@@ -68,8 +68,8 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
 <section class="revealed">
   <h2 class="h3 mb-3">Galeri Foto</h2>
   <div id="poiGalleryGrid" class="row g-3">
-    <div class="col-12 text-center text-muted py-3">
-      <i class="fas fa-circle-notch fa-spin me-2"></i>Memuat foto...
+    <div class="skeleton-wrapper">
+      <div></div>
     </div>
   </div>
 </section>
@@ -78,8 +78,8 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
 <section class="revealed">
   <h2 class="h3 mb-3">Review</h2>
   <div id="poiReviewGrid" class="gal-review-grid">
-    <div class="text-center text-muted py-3">
-      <i class="fas fa-circle-notch fa-spin me-2"></i>Memuat review...
+    <div class="skeleton-wrapper">
+      <div></div>
     </div>
   </div>
 </section>

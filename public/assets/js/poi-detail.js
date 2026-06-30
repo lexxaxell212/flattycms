@@ -26,21 +26,17 @@
       if (!photos.length) {
         wrap.innerHTML = `<div class="col-12 text-center text-muted py-3">
           <i class="fa-solid fa-image fa-2x mb-2 d-block opacity-25 mx-auto"></i>
-          Belum ada foto untuk lokasi ini.
+          Belum ada foto untuk lokasi ini. Upload di <a href="/gallery">Gallery & Reviews.</a>
         </div>`;
         return;
       }
 
       wrap.innerHTML = photos.map(p => `
-        <div class="col-6 col-md-4 col-lg-2dot4">
-        <div class="card card-flatty h-100">
-        <div class="card-body p-2">
-        <div class="position-relative" style="padding-top:100%">
-        <img src="${BASE}/uploads/${p.photo_path}" class="position-absolute top-0 start-0 w-100 h-100 card-img" style="object-fit:cover" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
-        </div>
-        </div>
-        <div class="card-footer p-2">
-        <div class="text-muted small text-truncate">${p.uploader_name}</div>
+        <div class="col-12 col-md-6 col-lg-4">
+        <div class="card card-glass shadow-none">
+          <img src="${BASE}/uploads/${p.photo_path}" class="card-img-top" style="object-fit:cover" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
+        <div class="card-body">
+          <span class="text-truncate small fw-semibold">Foto dari • ${p.uploader_name}</span>
         </div>
         </div>
         </div>
@@ -62,7 +58,7 @@
       if (!reviews.length) {
         wrap.innerHTML = `<div class="text-center text-muted py-3">
           <i class="fa-solid fa-star fa-2x mb-2 d-block opacity-25 mx-auto"></i>
-          Belum ada review untuk lokasi ini.
+          Belum ada review untuk lokasi ini. Upload di <a href="/gallery">Gallery & Reviews.</a>
         </div>`;
         return;
       }

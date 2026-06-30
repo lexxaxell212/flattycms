@@ -6840,7 +6840,6 @@ footer {
   padding-block: var(--navbar-height) var(--space-7) !important;
   background: var(--bg-body);
   color: var(--text-body);
-  border-radius: 2rem 2rem 0 0;
 }
 
 .footer-nav {

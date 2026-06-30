@@ -391,7 +391,6 @@ document.addEventListener("DOMContentLoaded", () => {
       routePolyline = null;
       routeDuration = 0;
       window.isLoadedTrip = false;
-      empty.style.display = "flex";
       // FIX: reset flag
       routeGenerated = false;
       document.getElementById("startSelected").style.display = "none";

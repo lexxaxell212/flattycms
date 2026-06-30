@@ -100,13 +100,16 @@
         ? `<span class="badge badge-accent me-2" style="font-size:.7rem"><i class="fas fa-wand-magic-sparkles me-1"></i>Itinerary</span>`
         : `<span class="badge badge-blue me-2" style="font-size:.7rem"><i class="fas fa-route me-1"></i>Classic</span>`;
       const openBtn = isAi
-        ? `<a href="/trip?open_ai=${t.id}" class="btn btn-primary">Buka<i class="fa-solid fa-wand-magic-sparkles ms-2"></i></a>`
-        : `<a href="/trip?open_trip=${t.id}" class="btn btn-primary">Buka di Map<i class="fa-solid fa-route ms-2"></i></a>`;
+        ? `<a href="/trip?open_ai=${t.id}" class="btn btn-primary btn-fit">Buka<i class="fa-solid fa-wand-magic-sparkles ms-2"></i></a>`
+        : `<a href="/trip?open_trip=${t.id}" class="btn btn-primary btn-fit">Buka<i class="fa-solid fa-route ms-2"></i></a>`;
       return `
       <div class="col-12 col-md-6" id="trip-${t.id}">
       <div class="card card-flatty">
       <div class="card-body">
-      <h3 class="h4 text-truncate align-items-center">${badge}<span>${t.title}</span></h3>
+      <div class="d-flex align-items-center">
+      ${badge}
+      <span class="h4" style="margin:0.5rem;padding:0.5rem 0;">${t.title}</span>
+      </div>
       <div class="row g-1 mb-2">
       ${!isAi ? `<span class="small p-1"><i class="fa-solid fa-location-dot me-2"></i>Mulai dari : <strong>${t.start_point_name}</strong></span>` : ''}
       <span class="small p-1"><i class="fa-solid fa-map-pin me-2"></i><strong>${t.total_stops}</strong> lokasi</span>
@@ -118,9 +121,9 @@
       </span>
       </div>
       </div>
-      <div class="card-footer">
+      <div class="card-footer d-flex g-2">
       ${openBtn}
-      <button class="btn btn-danger" onclick="deleteContrib('trip', ${t.id})">Hapus<i class="fa-solid fa-trash ms-2"></i></button>
+      <button class="btn btn-danger btn-fit" onclick="deleteContrib('trip', ${t.id})">Hapus<i class="fa-solid fa-trash ms-2"></i></button>
       </div>
       </div>
       </div>`;

@@ -841,12 +841,15 @@ document.getElementById("startImg").innerHTML = `<img src="/uploads/poi-placehol
               ? `<span class="badge badge-accent me-2" style="font-size:.7rem"><i class="fas fa-wand-magic-sparkles me-1"></i>Itinerary</span>`
               : `<span class="badge badge-blue me-2" style="font-size:.7rem"><i class="fas fa-route me-1"></i>Classic</span>`;
             const openBtn = isAi
-              ? `<button class="btn btn-primary" onclick="window.renderAiItinerary(${trip.id})">Buka<i class="fa-solid fa-wand-magic-sparkles ms-1"></i></button>`
-              : `<button class="btn btn-primary" onclick="loadSavedTrip(${trip.id})">Buka<i class="fa-solid fa-route ms-1"></i></button>`;
+              ? `<button class="btn btn-primary btn-fit" onclick="window.renderAiItinerary(${trip.id})">Buka<i class="fa-solid fa-wand-magic-sparkles ms-1"></i></button>`
+              : `<button class="btn btn-primary btn-fit" onclick="loadSavedTrip(${trip.id})">Buka<i class="fa-solid fa-route ms-1"></i></button>`;
             return `
           <div class="card card-flatty">
           <div class="card-body">
-          <h3 class="h4 text-truncate align-items-center">${badge}<span>${escHtml(trip.title || "Trip tanpa nama")}</span></h3>
+          <div class="d-flex align-items-center">
+          ${badge}
+          <span class="h4" style="margin:0.5rem;padding:0.5rem 0;">${escHtml(trip.title || "Trip tanpa nama")}</span>
+          </div>
           <div class="row g-1 mb-2">
           ${!isAi ? `<span class="small p-1"><i class="fa-solid fa-location-dot me-2"></i>Mulai dari : <strong>${trip.start_point_name}</strong></span>` : ''}
           <span class="small p-1"><i class="fa-solid fa-map-pin me-2"></i><strong>${trip.total_stops}</strong> lokasi</span>
@@ -854,9 +857,9 @@ document.getElementById("startImg").innerHTML = `<img src="/uploads/poi-placehol
           ${!isAi && trip.duration ? `<span class="small p-1"><i class="fa-solid fa-clock me-2"></i><strong>${trip.duration}</strong> menit</span>` : ''}
           </div>
           </div>
-          <div class="card-footer d-flex gap-2">
+          <div class="card-footer d-flex g-2">
           ${openBtn}
-          <button class="btn btn-danger" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || "Trip ini")}')">
+          <button class="btn btn-danger btn-fit" onclick="window.deleteTripById(${trip.id}, '${escHtml(trip.title || "Trip ini")}')">
           Hapus<i class="fa-solid fa-trash ms-1"></i>
           </button>
           </div>

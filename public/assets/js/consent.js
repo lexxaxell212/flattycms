@@ -44,21 +44,17 @@
     }
   }
 
-  async function saveConsent(rejectAll = false) {
+  async function saveConsent(rejectAll = false, clickedBtn = null) {
     const cats = {
       necessary: true,
       analytics: !rejectAll,
       marketing: !rejectAll,
     };
 
-    const btnAccept  = document.getElementById("btnAcceptConsent");
-    const btnReject  = document.getElementById("btnRejectConsent");
     const btnDismiss = document.getElementById("btnDismissConsent");
-    const originalAccept = btnAccept?.innerHTML;
-    const originalReject = btnReject?.innerHTML;
+    const originalHTML = clickedBtn?.innerHTML;
 
-    if (btnAccept)  { btnAccept.disabled  = true; btnAccept.innerHTML  = '<div class="btn-fetch"><span></span><span></span><span></span></div>'; }
-    if (btnReject)  { btnReject.disabled  = true; btnReject.innerHTML  = '<div class="btn-fetch"><span></span><span></span><span></span></div>'; }
+    if (clickedBtn) { clickedBtn.disabled = true; clickedBtn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>'; }
     if (btnDismiss) { btnDismiss.disabled = true; }
 
     try {
@@ -80,8 +76,7 @@
       flattyToast("error", "Gagal menyimpan preferensi cookie.");
       console.error("Consent error:", err);
 
-      if (btnAccept)  { btnAccept.disabled  = false; btnAccept.innerHTML  = originalAccept; }
-      if (btnReject)  { btnReject.disabled  = false; btnReject.innerHTML  = originalReject; }
+      if (clickedBtn) { clickedBtn.disabled = false; clickedBtn.innerHTML = originalHTML; }
       if (btnDismiss) { btnDismiss.disabled = false; }
     }
   }
@@ -92,8 +87,8 @@
 
     window.addEventListener("scroll", showBannerOnScroll);
 
-    document.getElementById("btnDismissConsent")?.addEventListener("click", () => saveConsent(true));
-    document.getElementById("btnAcceptConsent")?.addEventListener("click", () => saveConsent(false));
-    document.getElementById("btnRejectConsent")?.addEventListener("click", () => saveConsent(true));
+    document.getElementById("btnDismissConsent")?.addEventListener("click", function () { saveConsent(true, null); });
+    document.getElementById("btnAcceptConsent")?.addEventListener("click", function () { saveConsent(false, this); });
+    document.getElementById("btnRejectConsent")?.addEventListener("click", function () { saveConsent(true, this); });
   });
 })();

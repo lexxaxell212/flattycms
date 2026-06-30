@@ -1,4 +1,5 @@
 <?php
+$consent_decided = isset($_COOKIE["consent_accepted"]);
 $consent_accepted = ($_COOKIE["consent_accepted"] ?? "0") === "1";
 $categories = json_decode($_COOKIE["consent_categories"] ?? "[]", true);
 ?>
@@ -27,7 +28,7 @@ $categories = json_decode($_COOKIE["consent_categories"] ?? "[]", true);
     </script>
 <?php endif; ?>
 
-<?php if (!$consent_accepted): ?>
+<?php if (!$consent_decided): ?>
 <script>
     const GTAG_ID = "<?= defined('G_TAG_ID') ? G_TAG_ID : '' ?>";
     const FB_PIXEL_ID = "<?= defined('FB_PIXEL_ID') ? FB_PIXEL_ID : '' ?>";

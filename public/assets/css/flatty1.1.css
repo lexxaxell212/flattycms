@@ -118,6 +118,7 @@
   /* brand colors */
   --bg-primary: oklch(0.5 0.174 295);
   --bg-primary-subtle: oklch(0.94 0.018 295);
+  --bg-active: oklch(0.94 0.018 295/0.4);
   --bg-accent: oklch(0.7 0.163 60);
   --bg-accent-subtle: oklch(0.96 0.025 60);
   --bg-red: oklch(0.577 0.212 27);
@@ -237,6 +238,7 @@
   --bg-glass-hover: oklch(0.24 0.03 295 / 0.75);
   --bg-primary: oklch(0.5 0.214 295);
   --bg-primary-subtle: oklch(0.25 0.045 295);
+  --bg-active: oklch(0.25 0.045 295/0.4);
   --bg-accent: oklch(0.72 0.163 60);
   --bg-accent-subtle: oklch(0.25 0.04 60);
   --bg-red: oklch(0.61 0.212 27);
@@ -1066,7 +1068,7 @@ main.main-content::before {
 }
 .search-btn:hover,
 .dm-btn:hover {
-  background: var(--bg-primary-subtle);
+  background: var(--bg-active);
   color: var(--text-primary);
 }
 .dm-icon {
@@ -1220,7 +1222,7 @@ main.main-content::before {
   -webkit-tap-highlight-color: transparent;
 }
 .navbar-toggler:hover {
-  background: var(--bg-primary-subtle);
+  background: var(--bg-active);
   color: var(--text-primary);
 }
 .navbar-toggler:focus {
@@ -1656,7 +1658,7 @@ a.nav-link:hover i {
     font-weight: 500;
   }
   .lang-btn.active {
-    background: var(--bg-primary-subtle);
+    background: var(--bg-active);
     color: var(--text-primary);
     font-weight: 700;
   }
@@ -7313,6 +7315,10 @@ i.fa-solid.fa-spin {
   .nav-link {
     margin-bottom: 0;
     }
+  .nav-link:hover {
+    background: var(--bg-active);
+    color: var(--text-primary);
+  }
   .nav-desktop-list {
     display: flex;
     align-items: center;

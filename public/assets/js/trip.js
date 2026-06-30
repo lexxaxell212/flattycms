@@ -507,6 +507,9 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("startName").textContent = startPoint.name;
       document.getElementById("startName2").textContent = startPoint.name;
       document.getElementById("startSelected").style.display = "";
+      document.getElementById("startDesc").textContent = "Deskripsi belum tersedia.";
+document.getElementById("startImg").innerHTML = `<img src="/uploads/poi-placeholder.jpg" class="card-img-top">`;
+      
       routes = trip.items.map((item) => ({
         poi_id: item.poi_id,
         name: item.poi_name,

@@ -20,8 +20,9 @@ if ($consent_accepted): ?>
 <?php if (!$consent_accepted): ?>
 <script src="<?= JS_URL ?>consent.js" defer></script>
 <div id="consentBanner" class="mx-auto consent-banner">
+    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" onclick="dismissBanner()" aria-label="Close"></button>
     <h3 class="h4">Kami Menghargai Privasi Anda</h3>
-    <p class="text-muted mb-4">
+    <p class="mb-4">
         Kami menggunakan cookie untuk meningkatkan pengalaman browsing anda.
         Dengan mengklik <strong>Terima</strong>, anda menyetujui 
         penggunaan cookie sesuai <a href="/privacy-policy">Kebijakan Privasi</a> kami.

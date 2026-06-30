@@ -19,16 +19,16 @@ if ($consent_accepted): ?>
 <?php endif; ?>
 <?php if (!$consent_accepted): ?>
 <script src="<?= JS_URL ?>consent.js" defer></script>
-<div id="consentBanner" class="mx-auto consent-banner show">
-    <h5>Kami Menghargai Privasi Anda</h5>
-    <p class="small text-muted mb-4">
+<div id="consentBanner" class="mx-auto consent-banner">
+    <h3 class="h4">Kami Menghargai Privasi Anda</h3>
+    <p class="text-muted mb-4">
         Kami menggunakan cookie untuk meningkatkan pengalaman browsing anda.
         Dengan mengklik <strong>Terima</strong>, anda menyetujui 
         penggunaan cookie sesuai <a href="/privacy-policy">Kebijakan Privasi</a> kami.
     </p>
     <div class="d-flex gap-2 flex-wrap">
-        <button class="btn btn-primary btn-sm" onclick="saveConsent(true)">Terima</button>
-        <button class="btn btn-outline-primary btn-sm" onclick="saveConsent(false, true)">
+        <button class="btn btn-primary btn-fit" onclick="saveConsent(true)">Terima</button>
+        <button class="btn btn-outline-primary btn-fit" onclick="saveConsent(false, true)">
           Tolak</button>
     </div>
 </div>

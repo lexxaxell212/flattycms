@@ -2937,7 +2937,7 @@ a:hover i.arrow-icon {
   box-shadow: var(--shadow);
   z-index: 9990;
   transform: translateY(100%);
-  transition: all var(--duration) var(--ease);
+  transition: transform var(--duration) var(--ease);
 }
 .consent-banner.show {
   transform: translateY(0);

@@ -1,10 +1,14 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const banner = document.getElementById('consentBanner');
+  if (banner) requestAnimationFrame(() => banner.classList.add('show'));
+});
+
 function saveConsent(all = true, rejectAll = false) {
   const cats = {
     necessary: true,
-    analytics: rejectAll ? false: (all || document.getElementById('check_analytics').checked),
-    marketing: rejectAll ? false: (all || document.getElementById('check_marketing').checked)
+    analytics: !rejectAll,
+    marketing: !rejectAll
   };
-
   fetch("/api/api-consent.php", {
     method: 'POST',
     headers: {

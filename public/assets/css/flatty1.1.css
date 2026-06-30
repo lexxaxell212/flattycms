@@ -549,7 +549,7 @@ h6,
 }
 
 .main-content {
-  padding-block: var(--navbar-height) !important;
+  padding-top: var(--navbar-height) !important;
 }
 main.main-content {
   position: relative;

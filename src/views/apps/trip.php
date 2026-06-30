@@ -245,11 +245,11 @@ $cats_json = json_encode($categories);
                       Buat Trip
                     </button>
                     <?php if ($is_logged): ?>
-                    <button class="btn btn-outline-success btn-fit" id="btnSaveTrip" disabled data-bhs="tp.page.map.btn_save">
+                    <button class="btn btn-success btn-fit" id="btnSaveTrip" disabled data-bhs="tp.page.map.btn_save">
                       Simpan
                     </button>
                     <?php endif; ?>
-                    <button class="btn btn-outline-danger btn-fit" id="btnResetTrip" title="Reset" data-bhs="tp.page.map.btn_reset">
+                    <button class="btn btn-danger btn-fit" id="btnResetTrip" title="Reset" data-bhs="tp.page.map.btn_reset">
                       Reset
                     </button>
                   </div>

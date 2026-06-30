@@ -69,9 +69,13 @@
       <div class="card card-flatty">
       <div class="card-body">
       <img src="${BASE}/uploads/${p.photo_path}" class="card-img" loading="lazy">
-      <h3 class="h4 small text-truncate mb-2">${p.poi_name}</h3>
-      ${p.caption ? `<p class="text-muted text-truncate mb-2">${p.caption}</p>`: ''}
-      <span class="text-muted">${formatDate(p.created_at)}</span>
+      <div class="text-truncate">
+      <h2 class="h4">${p.poi_name}</h2>
+      </div>
+      ${p.caption ? `<div class="mb-2"><i class="fas fa-link me-1"></i>${p.caption}</div>`: ''}
+      <div class="text-muted small">
+      <span>Diupload pada : ${formatDate(p.created_at)}</span>
+      </div>
       </div>
       <div class="card-footer">
       <button class="btn btn-danger" onclick="deleteContrib('photo', ${p.id})">Hapus<i class="fa-solid fa-trash ms-2"></i>
@@ -108,7 +112,9 @@
       ${!isAi && t.total_distance ? `<span class="small p-1"><i class="fa-solid fa-ruler me-2"></i>Total jarak : <strong>${t.total_distance}</strong> km</span>` : ''}
       ${!isAi && t.duration ? `<span class="small p-1"><i class="fa-solid fa-clock me-2"></i><strong>${t.duration}</strong> menit</span>` : ''}
       </div>
-      <div class="text-muted mb-2" style="font-size:.8rem">${formatDate(t.created_at)}</div>
+      <div class="text-muted small mb-2">
+      <span>Dibuat pada : ${formatDate(t.created_at)}</span>
+      </div>
       </div>
       <div class="card-footer">
       ${openBtn}
@@ -148,14 +154,12 @@
       <i class="fa-solid ${typeIcon[r.content_type] ?? 'fa-heart'} text-purple mx-auto"></i>
       </div>
       <div class="mb-2">
-        <h3 class="h4">
+        <h2 class="h4">
           ${r.content_title ?? `${typeLabel[r.content_type] ?? r.content_type} #${r.content_id}`}
-          </h3>
-        </div>
-      <div class="text-muted mb-4"
-        <p>
-        ${formatDate(r.created_at)}
-        </p>
+        </h2>
+      </div>
+      <div class="text-muted mb-2 small">
+        <span>Kamu memberi <i class="fas fa-heart"></i> pada :  ${formatDate(r.created_at)}</span>
       </div>
       <button class="btn btn-danger" onclick="deleteContrib('reaction', ${r.id})"> Hapus
       <i class="fa-solid fa-trash ms-2"></i>

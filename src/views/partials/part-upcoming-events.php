@@ -18,7 +18,7 @@ require_once LIB_PATH . "v-upcoming-events.php";
         <div class="tdop-featured__inner">
           <div class="tdop-badge">
             <i class="fas fa-bolt me-2"></i>
-            <span data-bhs="ue.rotate" data-rotate="Cek Sekarang|Event Terdekat|Segera Hadir">Cek Sekarang</span>
+            <span data-rotate="Cek Sekarang|Event Terdekat|Segera Hadir">Cek Sekarang</span>
           </div>
           <div class="tdop-featured__body">
             <h3 class="tdop-featured__title"><?= safe_html($_tdo_next['title'])

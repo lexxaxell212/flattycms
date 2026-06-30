@@ -518,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <p class="small">${item.description ? esc(trunc(item.description, 90)) : ""}</p>
       </div>
       <div class="card-footer">
-      <a class="btn btn-primary btn-sm" href="${href}">Lihat<i class="arrow-icon fas fa-angle-right ms-2"></i></a>
+      <a class="btn btn-primary btn-sm btn-fit" href="${href}">Buka<i class="arrow-icon fas fa-angle-right ms-2"></i></a>
       </div>
       </div>
       </div>`;

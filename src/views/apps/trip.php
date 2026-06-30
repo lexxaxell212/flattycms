@@ -80,7 +80,7 @@ $cats_json = json_encode($categories);
               </div>
             </div>
             <?php else : ?>
-            <div class="tp-profile-avatar" style="background:var(--bg-primary-subtle);color:var(--text-primary)">
+            <div class="tp-profile-avatar" style="background:var(--bg-primary-subtle);color:var(--text-body)">
               <i class="fa-solid fa-user"></i>
             </div>
             <div class="tp-profile-info">

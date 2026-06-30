@@ -92,7 +92,7 @@
       'tp.page.tab.poi': 'POI',
       'tp.page.tab.tripku': 'Tripku',
       'tp.page.tab.buat': 'Buat',
-      'tp.page.tab.ai': 'Itenerary',
+      'tp.page.tab.ai': 'Itinerary',
       'tp.page.explore.search_placeholder': 'Cari...',
       'tp.page.explore.cat_all': 'Semua',
       'tp.page.explore.show_all': 'Lihat Semua',

@@ -95,7 +95,7 @@ function fallback_card($title = "Konten")
         <div class="card card-flatty">
           <div class="card-body text-center">
             <i class="fas fa-circle-notch fa-spin fa-2x text-muted mb-2"></i>
-            <span class="h5 text-muted mb-1">' .
+            <span class="h4 mb-1">' .
     htmlspecialchars($title) .
     '</span>
             <p class="text-muted small">Will come soon.</p>

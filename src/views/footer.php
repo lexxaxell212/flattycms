@@ -84,6 +84,9 @@
     </div>
   </div>
 </footer>
+<?php
+safe_include(SRC_PATH . "partials/part-consent.php", "Consent");
+?>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('page-loader');

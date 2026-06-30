@@ -2936,9 +2936,10 @@ a:hover i.arrow-icon {
   color: var(--text-card);
   border: var(--border-card);
   border-radius: var(--radius-lg);
-  padding: 1rem;
-  box-shadow: var(--shadow-card);
+  padding: 0;
+  box-shadow: var(--shadow-lg);
   z-index: 9990;
+  overflow: hidden;
   transform: translateY(100%);
   opacity: 0;
   transition: transform var(--duration) var(--ease), opacity var(--duration) var(--ease);
@@ -2946,6 +2947,18 @@ a:hover i.arrow-icon {
 .consent-banner.show {
   transform: translateY(0);
   opacity: 1;
+}
+.consent-header {
+  background: var(--btn-bg-primary);
+  color: var(--text-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+.consent-body {
+  padding: 1rem;
 }
 
 /* ============= /fab ============= */

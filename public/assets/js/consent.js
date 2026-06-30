@@ -10,12 +10,6 @@ function showBannerOnScroll() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const banner = document.getElementById('consentBanner');
-  if (!banner) return;
-  window.addEventListener('scroll', showBannerOnScroll);
-});
-
 function dismissBanner() {
   const banner = document.getElementById('consentBanner');
   if (banner) banner.classList.remove('show');
@@ -37,6 +31,23 @@ function saveConsent(all = true, rejectAll = false) {
       consent_given: !rejectAll, categories: cats
     })
   })
-  .then(() => location.reload())
-  .catch(err => console.error('Consent error:', err));
+  .then(() => {
+    flattyToast('success', rejectAll ? 'Preferensi cookie disimpan.' : 'Cookie diterima!');
+    setTimeout(() => location.reload(), 1000);
+  })
+  .catch(err => {
+    flattyToast('error', 'Gagal menyimpan preferensi cookie.');
+    console.error('Consent error:', err);
+  });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const banner = document.getElementById('consentBanner');
+  if (!banner) return;
+
+  window.addEventListener('scroll', showBannerOnScroll);
+
+  document.getElementById('btnDismissConsent')?.addEventListener('click', dismissBanner);
+  document.getElementById('btnAcceptConsent')?.addEventListener('click', () => saveConsent(true));
+  document.getElementById('btnRejectConsent')?.addEventListener('click', () => saveConsent(false, true));
+});

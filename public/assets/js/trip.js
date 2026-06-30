@@ -259,8 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
       distI.style.display = "none";
       return;
     }
-    
-    if (empty) empty.style.display = "none";
+
     list.innerHTML = routes
       .map(
         (r, i) => `
@@ -301,7 +300,6 @@ document.addEventListener("DOMContentLoaded", () => {
     list.querySelectorAll(".btn-remove-route").forEach((btn) => {
       btn.addEventListener("click", function () {
         routes.splice(parseInt(this.dataset.idx), 1);
-        // FIX: reset routeGenerated saat hapus stop
         routeGenerated = false;
         updatePlannerUI();
         updateRouteOnMap();
@@ -309,7 +307,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     btnG.disabled = !(startPoint && routes.length > 0);
-    // FIX: btnSaveTrip hanya enabled setelah rute di-generate
     if (btnS)
       btnS.disabled = !(routeGenerated && startPoint && routes.length > 0);
 
@@ -324,7 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
       distI.style.display = "";
     }
   }
-
+  
   document
     .getElementById("btnGenerateRoute")
     .addEventListener("click", async () => {

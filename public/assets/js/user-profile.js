@@ -61,7 +61,7 @@
   function renderPhotos() {
     const grid = document.getElementById('photoGrid');
     if (!data.photos.length) {
-      grid.innerHTML = emptyState('fa-images', 'Belum ada foto yang diupload');
+      grid.innerHTML = emptyState('fa-image', 'Belum ada foto yang diupload');
       return;
     }
     grid.innerHTML = data.photos.map(p => `

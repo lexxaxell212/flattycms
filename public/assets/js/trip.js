@@ -839,7 +839,7 @@ document.getElementById("startImg").innerHTML = `<img src="/uploads/poi-placehol
             const isAi = trip.source === "itinerary";
             const badge = isAi
               ? `<span class="badge badge-accent ms-2" style="font-size:.7rem"><i class="fas fa-wand-magic-sparkles me-1"></i>Itinerary</span>`
-              : "";
+              : `<span class="badge badge-blue ms-2" style="font-size:.7rem"><i class="fas fa-route me-1"></i>Classic</span>`;
             const openBtn = isAi
               ? `<button class="btn btn-primary" onclick="window.renderAiItinerary(${trip.id})">Buka<i class="fa-solid fa-wand-magic-sparkles ms-1"></i></button>`
               : `<button class="btn btn-primary" onclick="loadSavedTrip(${trip.id})">Buka<i class="fa-solid fa-route ms-1"></i></button>`;

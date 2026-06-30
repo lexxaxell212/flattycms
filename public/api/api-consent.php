@@ -20,6 +20,10 @@ if (!is_array($categories)) {
   $categories = [];
 }
 
+$ip = $_SERVER['HTTP_CF_CONNECTING_IP']
+   ?? $_SERVER['HTTP_X_FORWARDED_FOR']
+   ?? $_SERVER['REMOTE_ADDR'];
+
 $pdo = $GLOBALS['pdo'];
 
 try {
@@ -32,11 +36,10 @@ try {
     session_id(),
     $consent_given ? 1 : 0,
     json_encode($categories),
-    $_SERVER['REMOTE_ADDR'],
+    $ip,
     $_SERVER['HTTP_USER_AGENT'] ?? ''
   ]);
 
-  // Set cookies (1 tahun)
   $expire = time() + (13 * 30 * 24 * 3600);
 
   setcookie('consent_accepted', $consent_given ? '1' : '0', $expire, '/', '', true, true);
@@ -47,7 +50,7 @@ try {
 } catch (Exception $e) {
   http_response_code(500);
   $msg = defined('APP_ENV') && APP_ENV === 'development'
-  ? $e->getMessage()
-  : 'Terjadi kesalahan.';
+    ? $e->getMessage()
+    : 'Terjadi kesalahan.';
   echo json_encode(['error' => $msg]);
 }

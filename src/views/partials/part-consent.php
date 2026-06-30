@@ -3,25 +3,26 @@ $consent_accepted = ($_COOKIE["consent_accepted"] ?? "0") === "1";
 $categories = json_decode($_COOKIE["consent_categories"] ?? "[]", true);
 ?>
 
-<?php if ($consent_accepted): ?>
+<?php if ($consent_accepted && defined('G_TAG_ID') && G_TAG_ID): ?>
     <script async src="https://www.googletagmanager.com/gtag/js?id=<?= G_TAG_ID ?>"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date()); gtag('config', '<?= G_TAG_ID ?>');
     </script>
-    <?php if ($categories["marketing"] ?? false): ?>
-        <script>
-            !function(f,b,e,v,n,t,s){/* Script FB Pixel Standard */}...
-            fbq('init', '<?= FB_PIXEL_ID ?>'); fbq('track', 'PageView');
-        </script>
-    <?php endif; ?>
+<?php endif; ?>
+
+<?php if ($consent_accepted && ($categories["marketing"] ?? false) && defined('FB_PIXEL_ID') && FB_PIXEL_ID): ?>
+    <script>
+        !function(f,b,e,v,n,t,s){/* Script FB Pixel Standard */}...
+        fbq('init', '<?= FB_PIXEL_ID ?>'); fbq('track', 'PageView');
+    </script>
 <?php endif; ?>
 
 <?php if (!$consent_accepted): ?>
 <script>
-    const GTAG_ID = "<?= G_TAG_ID ?>";
-    const FB_PIXEL_ID = "<?= FB_PIXEL_ID ?>";
+    const GTAG_ID = "<?= defined('G_TAG_ID') ? G_TAG_ID : '' ?>";
+    const FB_PIXEL_ID = "<?= defined('FB_PIXEL_ID') ? FB_PIXEL_ID : '' ?>";
 </script>
 <script src="<?= JS_URL ?>consent.js" defer></script>
 <div id="consentBanner" class="mx-auto consent-banner">
@@ -33,7 +34,7 @@ $categories = json_decode($_COOKIE["consent_categories"] ?? "[]", true);
   </div>
   <div class="consent-body">
     <p class="small fw-medium mb-4">
-      Kami menggunakan cookie untuk meningkatkan pengalaman browsing anda. Dengan mengklik <strong>Terima</strong>, anda menyetujui penggunaan cookie sesuai <a href="/pages/privacy-policy">Kebijakan Privasi</a> kami.
+      Kami menggunakan cookie untuk meningkatkan pengalaman browsing anda. Dengan mengklik <strong>Terima</strong>, anda menyetujui penggunaan cookie sesuai <a href="/privacy-policy">Kebijakan Privasi</a> kami.
     </p>
     <div class="d-flex gap-2 flex-wrap">
       <button id="btnAcceptConsent" class="btn btn-primary btn-fit">Terima</button>

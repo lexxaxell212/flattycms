@@ -6,7 +6,7 @@
   function showBannerOnScroll() {
     const banner = document.getElementById("consentBanner");
     if (!banner || bannerShown) return;
-    if (window.scrollY > 300) {
+    if (window.scrollY > 400) {
       banner.classList.add("show");
       bannerShown = true;
       window.removeEventListener("scroll", showBannerOnScroll);
@@ -19,17 +19,19 @@
   }
 
   function injectTracking(categories) {
-    const gaScript = document.createElement("script");
-    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`;
-    gaScript.async = true;
-    document.head.appendChild(gaScript);
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag("js", new Date());
-    gtag("config", GTAG_ID);
+    if (GTAG_ID) {
+      const gaScript = document.createElement("script");
+      gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`;
+      gaScript.async = true;
+      document.head.appendChild(gaScript);
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", GTAG_ID);
+    }
 
-    if (categories.marketing) {
-      !function(f,b,e,v,n,t,s){/* FB Pixel Standard */}
+    if (FB_PIXEL_ID && categories.marketing) {
+      !function(f,b,e,v,n,t,s){/* Script FB Pixel Standard */}
       (window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
       fbq("init", FB_PIXEL_ID);
       fbq("track", "PageView");
@@ -43,15 +45,15 @@
       marketing: !rejectAll,
     };
 
-    const btnAccept = document.getElementById("btnAcceptConsent");
-    const btnReject = document.getElementById("btnRejectConsent");
+    const btnAccept  = document.getElementById("btnAcceptConsent");
+    const btnReject  = document.getElementById("btnRejectConsent");
     const btnDismiss = document.getElementById("btnDismissConsent");
     const originalAccept = btnAccept?.innerHTML;
     const originalReject = btnReject?.innerHTML;
 
-    if (btnAccept) { btnAccept.disabled = true; btnAccept.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Menyimpan...'; }
-    if (btnReject) { btnReject.disabled = true; btnReject.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Menyimpan...'; }
-    if (btnDismiss) btnDismiss.disabled = true;
+    if (btnAccept)  { btnAccept.disabled  = true; btnAccept.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>'; }
+    if (btnReject)  { btnReject.disabled  = true; btnReject.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>'; }
+    if (btnDismiss) { btnDismiss.disabled = true; }
 
     try {
       await fetch("/api/api-consent.php", {
@@ -71,9 +73,9 @@
       flattyToast("error", "Gagal menyimpan preferensi cookie.");
       console.error("Consent error:", err);
 
-      if (btnAccept) { btnAccept.disabled = false; btnAccept.innerHTML = originalAccept; }
-      if (btnReject) { btnReject.disabled = false; btnReject.innerHTML = originalReject; }
-      if (btnDismiss) btnDismiss.disabled = false;
+      if (btnAccept)  { btnAccept.disabled  = false; btnAccept.innerHTML  = originalAccept; }
+      if (btnReject)  { btnReject.disabled  = false; btnReject.innerHTML  = originalReject; }
+      if (btnDismiss) { btnDismiss.disabled = false; }
     }
   }
 

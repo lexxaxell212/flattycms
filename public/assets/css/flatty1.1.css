@@ -6347,15 +6347,13 @@ input[type="range"]::-moz-range-track {
 }
 
 /* ── ROUTE LIST ─────────────────────────────────────────────── */
-#routeList {
-  min-height: 48px;
-}
 .route-empty {
   display: flex;
   align-items: center;
   gap: 8px;
   font-weight: 500;
   padding: 0.875rem 1rem;
+  margin-block: 0.75rem;
   background: var(--bg-accent-subtle);
   border: var(--border-accent-subtle);
   border-radius: var(--radius);

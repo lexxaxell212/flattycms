@@ -230,7 +230,7 @@ $cats_json = json_encode($categories);
                   </div>
                   <div id="routeList" class="mb-4">
                   </div>
-                  <div class="route-empty mt-2" id="routeEmpty" style="display:flex">
+                  <div class="route-empty" id="routeEmpty" style="display:flex">
                       <i class="fa-solid fa-map-pin text-accent"></i>
                       <span data-bhs="tp.page.map.route_empty">Pilih titik awal - Klik pin di map untuk tambah lokasi</span>
                     </div>

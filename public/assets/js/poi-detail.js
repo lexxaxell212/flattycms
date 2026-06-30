@@ -36,7 +36,7 @@
         <div class="card card-glass shadow-none">
           <img src="${BASE}/uploads/${p.photo_path}" class="card-img-top" style="object-fit:cover" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
         <div class="card-body">
-          <span class="text-truncate small fw-semibold">Foto dari • ${p.uploader_name}</span>
+          <span class="text-truncate small fw-semibold">Dari • ${p.uploader_name}</span>
         </div>
         </div>
         </div>

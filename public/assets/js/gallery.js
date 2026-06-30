@@ -86,18 +86,18 @@
         return;
       }
       grid.innerHTML = json.data.map(p => `
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6">
         <div class="card card-glass h-100">
           <div class="position-relative" style="padding-top:60%;cursor:pointer" onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${p.poi_name}','${p.uploader_name}','${p.caption || ''}','${p.created_at}',${p.id},${p.user_id})">
         <img src="${BASE}/uploads/${p.photo_path}" class="position-absolute top-0 start-0" style="object-fit:cover;transition:.2s;aspect-ratio:16/9;width:100%;height:100%" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
         </div>
         <div class="card-body text-center">
         <div class="text-truncate">
-          <h2 class="h3">${p.poi_name}</h2>
+          <h2 class="h4">${p.poi_name}</h2>
         </div>
         <div class="text-muted small">${formatDate(p.created_at)}</div>
+        ${p.caption ? `<div>${p.caption}</div>`: ''}
         </div>
-          ${p.caption ? `<div>${p.caption}</div>`: ''}
         <div class="card-footer">
           <div class="d-flex align-items-center gap-1">
         <img src="${p.uploader_avatar || BASE+'/uploads/default.jpg'}"

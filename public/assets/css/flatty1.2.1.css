@@ -1393,7 +1393,6 @@ a.nav-link {
   padding: var(--space-3) !important;
   font-size: 0.9rem;
   font-weight: 500;
-  margin-bottom: 3px;
   border-radius: var(--radius-sm);
   text-decoration: none;
   border: none;

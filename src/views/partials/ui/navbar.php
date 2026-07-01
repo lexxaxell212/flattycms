@@ -219,7 +219,7 @@ $nav_items = [
         <?php $google_btn_id = 'google-login-btn-desktop'; include SRC_PATH . 'partials/ui/auth.php'; ?>
         <div class="weather-dekstop">
           <div class="d-inline-flex align-items-center h-100">
-             <span class="temp" id="temp"><i class="fas fa-circle-notch fa-spin small opacity-50"></i>
+             <span class="temp" id="tempc"><i class="fas fa-circle-notch fa-spin small opacity-50"></i>
              </span>
              <i class="weather-dekstop-chevron fas fa-chevron-down ms-2"></i>
           </div>

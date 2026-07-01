@@ -169,7 +169,7 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
 
           <div class="col-12">
             <label class="form-label fw-medium">Gambar Thumbnail</label>
-            <input type="file" name="image" class="form-control" accept="image/jpeg,image/png,image/gif,image/webp">
+            <input id="image" type="file" name="image" class="form-control" accept="image/jpeg,image/png,image/gif,image/webp">
             <input type="hidden" name="image_url" id="edit-image-url" value="<?= safe_html($edit_post['image_url'] ?? '') ?>">
             <?php if ($edit_post['image_url']): ?>
             <div class="mt-2">
@@ -200,8 +200,8 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
         <button class="btn btn-primary"><i class="fa-solid fa-search me-1"></i> Cari</button>
         <?php if ($q): ?>
         <a href="?" class="btn btn-outline-secondary">✕</a>
-      </div>
       <?php endif; ?>
+      </div>
     </form>
     <!-- Add Form -->
     <div class="card card-flatty mb-4">

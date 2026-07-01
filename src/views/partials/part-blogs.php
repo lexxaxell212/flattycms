@@ -68,7 +68,7 @@ $categories = safe_get_categories($pdo);
         </div>
       </div>
       <div class="asl-controls-row">
-        <div class="artikel-slider-dots" role="tablist" aria-label="Navigasi slide"></div>
+        <div class="artikel-slider-dots" role="group" aria-label="Navigasi slide"></div>
         <button class="asl-nav-btn artikel-btn-prev" aria-label="Artikel sebelumnya" disabled>
           <i class="fas fa-angle-left" aria-hidden="true"></i>
         </button>

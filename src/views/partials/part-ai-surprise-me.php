@@ -21,7 +21,7 @@
       </div>
       <div class="d-flex justify-content-center flex-column">
         <div class="textarea-wrap">
-          <textarea id="homeAiPrompt" class="form-control mb-4 mx-auto" rows="3" placeholder=" " style="resize:none;"></textarea>
+          <textarea id="homeAiPrompt" class="form-control mb-4 mx-auto" rows="3" placeholder=" " style="resize:none;" aria-label="Susun itinerary pakai AI"></textarea>
           <div class="ticker-text">
             <span data-bhs="it.ticker" data-ticker="Buat itinerary kuliner Bandung 2 hari..|Rute wisata alam Lembang seharian..|Itinerary belanja factory outlet Bandung..">Buat itinerary kuliner Bandung 2 hari</span>
           </div>

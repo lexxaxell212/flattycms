@@ -12,9 +12,9 @@
         <div class="khb-icon-wrap red">
           <i class="fas fa-kitchen-set"></i>
         </div>
-        <h5 data-bhs="khb.1.title">
+        <h3 class="h5" data-bhs="khb.1.title">
           Surga Kuliner & Kafe Estetik
-        </h5>
+        </h3>
         <p class="small text-muted"data-bhs="khb.1.excerpt">
           Dari kaki lima legendaris hingga kafe aesthetic di dataran tinggi, Bandung selalu punya tren kuliner baru yang bikin ketagihan.
         </p>
@@ -23,9 +23,9 @@
         <div class="khb-icon-wrap green">
           <i class="fas fa-tree"></i>
         </div>
-        <h5 data-bhs="khb.2.title">
+        <h3 class="h5" data-bhs="khb.2.title">
           Pesona Alam & Udara Sejuk
-        </h5>
+        </h3>
         <p class="small text-muted" data-bhs="khb.2.excerpt">
           Dikelilingi Lembang dan Ciwidey - kebun teh, hutan pinus berkabut, dan udara sejuk yang sempurna untuk healing.
         </p>
@@ -34,9 +34,9 @@
         <div class="khb-icon-wrap accent">
           <i class="fas fa-bag-shopping"></i>
         </div>
-        <h5 data-bhs="khb.3.title">
+        <h3 class="h5" data-bhs="khb.3.title">
           Kiblat Fashion & Kreativitas
-        </h5>
+        </h3>
         <p class="small text-muted" data-bhs="khb.3.excerpt">
           Dari factory outlet hingga brand lokal kreatif, Bandung adalah kiblat fashion dengan harga yang tetap ramah di kantong.
         </p>
@@ -45,9 +45,9 @@
         <div class="khb-icon-wrap blue">
           <i class="fas fa-city"></i>
         </div>
-        <h5 data-bhs="khb.4.title">
+        <h3 class="h5" data-bhs="khb.4.title">
           Romantisme Kota & Akses Cepat
-        </h5>
+        </h3>
         <p class="small text-muted" data-bhs="khb.4.excerpt">
           Arsitektur Art Deco klasik di Braga, dipadu kemudahan akses Kereta Cepat Whoosh - liburan akhir pekan yang praktis dan romantis.
         </p>

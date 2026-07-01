@@ -78,7 +78,7 @@
       </div>
     </section>
     <div class="footer-bottom">
-      <span class="text-uppercase text-muted small" style="letter-spacing:2px;opacity:.9;">
+      <span class="text-uppercase small" style="letter-spacing:2px;">
         <?= date("Y") ?> <?= SITE_NAME ?>
       </span>
     </div>

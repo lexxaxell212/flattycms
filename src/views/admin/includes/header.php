@@ -11,6 +11,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
   <title><?= $page_title ?></title>
 
   <meta name="description" content="Admin Dashboard">
@@ -38,7 +39,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
 </head>
 <body>
   <nav class="navbar">
-    <div class="container">
+    <div class="container-fluid">
       <a class="h2 navbar-brand text-gradient" aria-label="Admin Dashboard" href="<?= $admin_url
         ?>">
         flattyDash

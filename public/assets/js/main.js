@@ -1224,7 +1224,7 @@ async function fetchBMKG() {
   if (isRefreshing) return;
   isRefreshing = true;
 
-  const refreshIcon = document.querySelector("#w .fa-refresh");
+  const refreshIcon = document.querySelector(".weather .fa-refresh");
   refreshIcon?.classList.add("fa-spin");
 
   const lang = currentLang();
@@ -1250,7 +1250,7 @@ async function fetchBMKG() {
     const desc = lang === "en" ? closest.weather_desc_en : closest.weather_desc;
     const icon = bmkgIcon(closest.weather);
 
-    document.getElementById("w").innerHTML = `
+    document.getElementById("w-mobile").innerHTML = `
           <button type="button" class="position-absolute top-0 end-0 weather-refresh" onclick="fetchBMKG()" aria-label="${refreshLabel}" title="${refreshLabel}"
           >
             <i class="fas fa-refresh"></i>
@@ -1275,14 +1275,52 @@ async function fetchBMKG() {
             <span>Kota Bandung</span>
           </div>
     `;
+   document.getElementById('w-dekstop').innerHTML = `
+       <button type="button" class="position-absolute top-0 end-0 weather-refresh" onclick="fetchBMKG()" aria-label="${refreshLabel}" title="${refreshLabel}"
+          >
+            <i class="fas fa-refresh"></i>
+          </button>
+          <div class="position-absolute bottom-0 start-0 weather-api">
+            Data cuaca dari <a class="ms-1" href="https://bmkg.go.id/cuaca/prakiraan-cuaca/32.73.09.1003" target="_blank" rel="noopener noreferrer">BMKG.GO.ID</a>
+          </div>
+          <div class="weather-data">
+          <div class="icon-w">${icon}</div>
+          <div class="tc-w">
+            <div class="temp">
+              ${temp}
+              <sup>°C</sup>
+            </div>
+            <div class="cond">
+              <span>${desc}</span>
+            </div>
+          </div>
+          </div>
+          <div class="d-flex align-items-center gap-1 city">
+            <i class="fa-solid fa-location-dot me-1"></i>
+            <span>Kota Bandung</span>
+          </div>
+       `;
+     document.getElementById('tempc').innerHTML = `
+     ${temp} <sup class="mt-2 ms-1">°C</sup>
+     `;
   } catch (error) {
     console.error("Error fetching BMKG data:", error);
-    document.getElementById("w").innerHTML = `
+    document.getElementById("w-mobile").innerHTML = `
     <button type="button" class="position-absolute top-0 end-0 weather-refresh" onclick="fetchBMKG()" aria-label="${refreshLabel}" title="${refreshLabel}"
           >
         <i class="fas fa-refresh"></i>
     </button>
     <div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>${wt("weather.error.failed")}</div>
+    `;
+    document.getElementById("w-dekstop").innerHTML = `
+    <button type="button" class="position-absolute top-0 end-0 weather-refresh" onclick="fetchBMKG()" aria-label="${refreshLabel}" title="${refreshLabel}"
+          >
+        <i class="fas fa-refresh"></i>
+    </button>
+    <div class="badge badge-red small"><i class="fas fa-triangle-exclamation me-2"></i>${wt("weather.error.failed")}</div>
+    `;
+    document.getElementById('temp').innerHTML = `
+    <i class="fas fa-triangle-exclamation small opacity-50></i>
     `;
   } finally {
     isRefreshing = false;

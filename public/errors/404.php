@@ -40,7 +40,7 @@ require_once SRC_PATH . "headerv2.php";
   document.getElementById('btnReport404').addEventListener('click', async function() {
     if (Date.now() - lastReportSubmit < REPORT_RATE_LIMIT_MS) {
       const remaining = Math.ceil((REPORT_RATE_LIMIT_MS - (Date.now() - lastReportSubmit)) / 1000);
-      flattyToast('warning', `${remaining} toast.feedback.warning`);
+      flattyToast('warning', `${remaining} sebelum kirim lagi.`);
       return;
     }
     lastReportSubmit = Date.now();

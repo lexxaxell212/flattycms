@@ -31,7 +31,7 @@ if (
     <div class="container">
       <div class="page-header">
         <div class="text-center">
-          <h1 class="h2">You're Accessing <em class="styled">Flatty Dashboard</em></h1>
+          <h1 class="h2">Welcome to <em class="styled">Flatty Dashboard</em></h1>
         </div>
       </div>
       <div class="mx-auto" style="max-width:440px">

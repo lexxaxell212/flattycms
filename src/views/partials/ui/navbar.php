@@ -8,7 +8,7 @@ $nav_items = [
 ];
 ?>
 <nav class="navbar">
-  <div class="container">
+  <div class="container-fluid">
     <a aria-label="Halaman awal" href="<?= BASE_URL ?>">
       <div class="navbar-brand">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="1644 484 1810 335"><path
@@ -217,6 +217,19 @@ $nav_items = [
           </div>
         </div>
         <?php $google_btn_id = 'google-login-btn-desktop'; include SRC_PATH . 'partials/ui/auth.php'; ?>
+        <div class="weather-dekstop">
+          <div class="d-inline-flex align-items-center h-100">
+             <span class="temp" id="temp"><i class="fas fa-circle-notch fa-spin small opacity-50"></i>
+             </span>
+             <i class="weather-dekstop-chevron fas fa-chevron-down ms-2"></i>
+          </div>
+          <div class="weather-dekstop-panel">
+             <div class="weather align-items-center gap-4 overflow-hidden position-relative" id="w-dekstop">
+               <span class="small mx-auto">Load weather data <i class="fas fa-circle-notch fa-spin ms-2"></i>
+               </span>
+             </div>
+           </div>
+         </div>
       </div>
     </div>
   </div>
@@ -236,8 +249,8 @@ $nav_items = [
       <?php $google_btn_id = 'google-login-btn-mobile'; include SRC_PATH . 'partials/ui/auth.php'; ?>
     </div>
   </ul>
-  <div class="weather align-items-center gap-4 overflow-hidden position-relative" id="w">
-    <span class="small">Load weather data
+  <div class="weather align-items-center gap-4 overflow-hidden position-relative" id="w-mobile">
+    <span class="small mx-auto">Load weather data
       <i class="fas fa-circle-notch fa-spin ms-2"></i>
     </span>
   </div>

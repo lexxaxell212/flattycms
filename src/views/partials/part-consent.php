@@ -43,7 +43,7 @@ $categories = json_decode($_COOKIE["consent_categories"] ?? "[]", true);
   </div>
   <div class="consent-body">
     <p class="small fw-medium mb-4">
-      Kami menggunakan cookie untuk meningkatkan pengalaman browsing anda. Dengan mengklik <strong>Terima</strong>, anda menyetujui penggunaan cookie sesuai <a href="/privacy-policy">Kebijakan Privasi</a> kami.
+      Kami menggunakan cookie untuk meningkatkan pengalaman browsing anda. Dengan mengklik <strong>Terima</strong>, anda menyetujui penggunaan cookie sesuai <a href="/pages/privacy-policy">Kebijakan Privasi</a> kami.
     </p>
     <div class="d-flex gap-2 flex-wrap">
       <button id="btnAcceptConsent" class="btn btn-primary btn-fit">Terima</button>

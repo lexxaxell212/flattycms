@@ -100,8 +100,8 @@ function isActive(string $path): string
   $isMobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT']);
   $heroImg = $isMobile ? 'wisata-mobile.webp' : 'wisata.webp'; ?>
   <link rel="preload" as="image" href="<?= IMG_URL . $heroImg ?>" type="image/webp" fetchpriority="high">
-  <script src="https://accounts.google.com/gsi/client"></script>
-  <script src="<?= JS_URL ?>gsi.js"></script>
+  <script src="<?= JS_URL ?>gsi.js" defer></script>
+  <script src="https://accounts.google.com/gsi/client" defer></script>
   <script src="<?= JS_URL ?>bs538.bundle.min.js" defer></script>
   <script src="<?= JS_URL ?>flattynotif.js" defer></script>
   <script src="<?= JS_URL ?>main.js" defer></script>

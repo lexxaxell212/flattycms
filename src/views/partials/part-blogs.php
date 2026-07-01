@@ -30,7 +30,7 @@ $categories = safe_get_categories($pdo);
           </div>
           <?php else : ?>
           <?php foreach ($posts as $p): ?>
-          <article class="artikel-slide-card card card-flatty" style="box-shadow:none;" role="listitem">
+          <div class="artikel-slide-card card card-flatty" style="box-shadow:none;" role="listitem">
             <div class="card-body">
               <span class="badge badge-white top-0 end-0 position-absolute m-4">
               <?= htmlspecialchars(
@@ -62,7 +62,7 @@ $categories = safe_get_categories($pdo);
                 <i class="arrow-icon fas fa-angle-right ms-1" aria-hidden="true"></i>
               </a>
             </div>
-          </article>
+          </div>
           <?php endforeach; ?>
           <?php endif; ?>
         </div>

@@ -182,7 +182,7 @@ $categories = safe_get_categories($pdo);
         </div>
         <?php endif; ?>
         <?php foreach ($posts as $p): ?>
-        <article class="card card-flatty mb-4" role="listitem">
+        <div class="card card-flatty mb-4" role="listitem">
           <div class="card-body">
             <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="h4 mb-2">
               <?= htmlspecialchars(mb_strlen($p['title'] ?? '') > 60 ?
@@ -212,7 +212,7 @@ $categories = safe_get_categories($pdo);
               <i class="arrow-icon fas fa-angle-right me-1"></i>
             </a>
           </div>
-        </article>
+        </div>
         <?php endforeach; ?>
         <!-- PAGINATION -->
         <?php if ($total_pages > 1): ?>

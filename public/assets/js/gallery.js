@@ -247,19 +247,21 @@
   
   window.openLightbox = function(src, poi, uploader, credit, date, photo_id, owner_id) {
     document.getElementById('lightboxImg').src = src;
+    const hdUrl = src.replace('/uploads/', '/uploads/original/');
     document.getElementById('lightboxInfo').innerHTML = `
     <div class="fw-bold mb-2">${poi}</div>
     <div class="small">
     <i class="fas fa-user me-1"></i>${uploader} ${credit ? ` • <i class="fas fa-link me-1"></i>${credit}`: ''} • ${formatDate(date)}
     </div>
     <div class="d-flex gap-2 justify-content-center mt-2">
-    <a href="${src}" target="_blank" class="btn btn-primary">
-    <i class="fas fa-expand me-1"></i>Lihat FULL
+    <a href="${hdUrl}" target="_blank" class="btn btn-primary">
+    <i class="fas fa-expand me-1"></i>Lihat HD
     </a>
     ${owner_id === MY_ID ? `<button class="btn btn-danger" onclick="deletePhoto(${photo_id})"><i class="fas fa-trash me-1"></i>Hapus</button>`: ''}
     </div>`;
     new bootstrap.Modal(document.getElementById('lightboxModal')).show();
-  };
+};
+  
   window.deletePhoto = async function(photo_id) {
     flattyConfirm('Hapus foto ini?', async () => {
       const fd = new FormData();

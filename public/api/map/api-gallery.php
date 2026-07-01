@@ -93,16 +93,11 @@ if ($action === 'upload') {
     exit;
   }
 
- // if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
-  //  http_response_code(400);
-   // echo json_encode(['success' => false, 'message' => 'File tidak valid']);
-   // exit;
- // }
-
   if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
-  echo json_encode(['success' => false, 'message' => 'File tidak valid', 'error_code' => $_FILES['photo']['error'] ?? 'no file']);
-  exit;
-}
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'File tidak valid', 'error_code' => $_FILES['photo']['error'] ?? 'no file']);
+    exit;
+  }
 
   $file = $_FILES['photo'];
   $allowed_mime = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
@@ -121,27 +116,83 @@ if ($action === 'upload') {
     exit;
   }
 
-  $filename = 'gallery_' . uniqid('', true) . '.' . $allowed_mime[$mime];
-  $dest = BASE_UPLOAD_PATH . $filename;
+  // ── Setup folder original ─────────────────────────────────
+  $original_dir = BASE_UPLOAD_PATH . 'original/';
+  if (!is_dir($original_dir)) {
+    mkdir($original_dir, 0755, true);
+  }
 
-  if (!move_uploaded_file($file['tmp_name'], $dest)) {
+  $basename = 'gallery_' . uniqid('', true);
+  $compressed_filename = $basename . '.webp';
+  $original_filename = $basename . '.webp';
+
+  $temp_dest = sys_get_temp_dir() . '/' . $basename . '_tmp';
+  $original_dest = $original_dir . $original_filename;
+  $compressed_dest = BASE_UPLOAD_PATH . $compressed_filename;
+
+  if (!move_uploaded_file($file['tmp_name'], $temp_dest)) {
     echo json_encode(['success' => false, 'message' => 'Gagal menyimpan file.']);
     exit;
   }
 
+  // ── Compress ke WebP ─────────────────────────────────────
+  try {
+    $image = match($mime) {
+      'image/jpeg' => imagecreatefromjpeg($temp_dest),
+      'image/png'  => imagecreatefrompng($temp_dest),
+      'image/webp' => imagecreatefromwebp($temp_dest),
+    };
+
+    if (!$image) throw new Exception('Gagal membaca gambar.');
+
+    // Simpan original webp quality 100
+    imagewebp($image, $original_dest, 100);
+
+    $orig_w = imagesx($image);
+    $orig_h = imagesy($image);
+    $max_w = 1920;
+
+    if ($orig_w > $max_w) {
+      $ratio = $max_w / $orig_w;
+      $new_w = $max_w;
+      $new_h = (int)($orig_h * $ratio);
+      $resized = imagecreatetruecolor($new_w, $new_h);
+
+      if ($mime === 'image/png') {
+        imagealphablending($resized, false);
+        imagesavealpha($resized, true);
+      }
+
+      imagecopyresampled($resized, $image, 0, 0, 0, 0, $new_w, $new_h, $orig_w, $orig_h);
+      imagedestroy($image);
+      $image = $resized;
+    }
+
+    imagewebp($image, $compressed_dest, 82);
+    imagedestroy($image);
+
+  } catch (Exception $e) {
+    copy($temp_dest, $compressed_dest);
+    copy($temp_dest, $original_dest);
+  } finally {
+    @unlink($temp_dest);
+  }
+
+  // ── Simpan ke DB ─────────────────────────────────────────
   try {
     $stmt = $pdo->prepare("INSERT INTO poi_photos (poi_id, user_id, photo_path, caption) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$poi_id, $user_id, $filename, $caption ?: null]);
+    $stmt->execute([$poi_id, $user_id, $compressed_filename, $caption ?: null]);
 
     echo json_encode([
       'success' => true,
       'photo_id' => $pdo->lastInsertId(),
-      'url' => BASE_UPLOAD_URL . $filename,
+      'url' => BASE_UPLOAD_URL . $compressed_filename,
       'message' => 'Foto berhasil diupload!',
     ]);
 
   } catch (PDOException $e) {
-    @unlink($dest);
+    @unlink($original_dest);
+    @unlink($compressed_dest);
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Gagal menyimpan data foto']);
   }
@@ -173,6 +224,9 @@ if ($action === 'delete') {
 
     $filepath = BASE_UPLOAD_PATH . $photo['photo_path'];
     if (file_exists($filepath)) @unlink($filepath);
+
+    $original_path = BASE_UPLOAD_PATH . 'original/' . pathinfo($photo['photo_path'], PATHINFO_FILENAME) . '.webp';
+    if (file_exists($original_path)) @unlink($original_path);
 
     echo json_encode(['success' => true, 'message' => 'Foto dihapus']);
 

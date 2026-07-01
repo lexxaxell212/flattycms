@@ -247,7 +247,7 @@
   
   window.openLightbox = function(src, poi, uploader, credit, date, photo_id, owner_id) {
     document.getElementById('lightboxImg').src = src;
-    const hdUrl = src.replace('/uploads/', '/uploads/original/');
+    const hdUrl = src.replace(/\/\/uploads\//, '/uploads/original/');
     document.getElementById('lightboxInfo').innerHTML = `
     <div class="fw-bold mb-2">${poi}</div>
     <div class="small">

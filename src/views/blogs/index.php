@@ -150,7 +150,7 @@ $categories = safe_get_categories($pdo);
       <div class="col-md-7">
         <div class="page-header">
           <div class="d-flex align-items-center justify-content-between">
-            <h1 class="h2">
+            <h1 class="h2" role="list">
               <em class="styled">
               <?php if ($cat_id > 0):
               $active_cats = array_filter($categories, fn($c) => (int) $c["id"] === $cat_id);
@@ -174,7 +174,7 @@ $categories = safe_get_categories($pdo);
           <?php endif; ?>
         </div>
         <?php if (empty($posts)): ?>
-        <div class="text-center py-5 text-muted">
+        <div class="text-center py-5 text-muted" role="listitem">
           <i class="fas fa-inbox fs-1 d-block mb-3 opacity-50 mx-auto"></i>
           <p class="mb-0">
             Belum ada artikel di sini.
@@ -182,7 +182,7 @@ $categories = safe_get_categories($pdo);
         </div>
         <?php endif; ?>
         <?php foreach ($posts as $p): ?>
-        <article class="card card-flatty mb-4">
+        <article class="card card-flatty mb-4" role="listitem">
           <div class="card-body">
             <a href="/blogs/?slug=<?= htmlspecialchars($p['slug'] ?? '') ?>" class="h4 mb-2">
               <?= htmlspecialchars(mb_strlen($p['title'] ?? '') > 60 ?

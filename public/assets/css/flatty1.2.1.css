@@ -1678,7 +1678,7 @@ a.nav-link:hover i {
 
 @media (min-width: 1200px) {
   .lang-wrapper {
-    margin-left: 2rem;
+    margin-left: 1rem;
     justify-content: center;
   }
   .lang-toggle {

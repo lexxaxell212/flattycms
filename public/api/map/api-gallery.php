@@ -93,11 +93,16 @@ if ($action === 'upload') {
     exit;
   }
 
+ // if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
+  //  http_response_code(400);
+   // echo json_encode(['success' => false, 'message' => 'File tidak valid']);
+   // exit;
+ // }
+
   if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'File tidak valid']);
-    exit;
-  }
+  echo json_encode(['success' => false, 'message' => 'File tidak valid', 'error_code' => $_FILES['photo']['error'] ?? 'no file']);
+  exit;
+}
 
   $file = $_FILES['photo'];
   $allowed_mime = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];

@@ -69,7 +69,7 @@
       });
 
       dismissBanner();
-      flattyToast("success", rejectAll ? "Preferensi cookie disimpan." : "Cookie diterima!");
+      flattyToast("success", rejectAll ? "Preferensi disimpan." : "Terima kasih.");
       if (!rejectAll) injectTracking(cats);
 
     } catch (err) {

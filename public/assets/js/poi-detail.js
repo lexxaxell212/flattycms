@@ -3,22 +3,26 @@
   const API_REV = BASE + "/api/map/api-review.php";
 
   function formatDate(str) {
-    return new Date(str).toLocaleDateString('id-ID', {
-      day: 'numeric', month: 'short', year: 'numeric'
+    return new Date(str).toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
     });
   }
 
   function stars(rating) {
-    return Array.from({ length: 5 }, (_, i) =>
-      `<i class="fa-${i < rating ? 'solid' : 'regular'} fa-star"></i>`
-    ).join('');
+    return Array.from(
+      { length: 5 },
+      (_, i) =>
+        `<i class="fa-${i < rating ? "solid" : "regular"} fa-star"></i>`,
+    ).join("");
   }
 
   async function loadPoiGallery() {
-    const wrap = document.getElementById('poiGalleryGrid');
+    const wrap = document.getElementById("poiGalleryGrid");
     try {
       const res = await fetch(`${API_GAL}?poi_id=${POI_ID_CURRENT}&page=1`, {
-        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        headers: { "X-Requested-With": "XMLHttpRequest" },
       });
       const json = await res.json();
       const photos = (json.data || []).slice(0, 5);
@@ -31,7 +35,9 @@
         return;
       }
 
-      wrap.innerHTML = photos.map(p => `
+      wrap.innerHTML = photos
+        .map(
+          (p) => `
         <div class="col-12 col-md-6 col-lg-4">
         <div class="card card-glass shadow-none">
           <img src="${BASE}/uploads/${p.photo_path}" class="card-img-top" style="object-fit:cover" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
@@ -40,17 +46,19 @@
         </div>
         </div>
         </div>
-      `).join('');
+      `,
+        )
+        .join("");
     } catch (e) {
       wrap.innerHTML = `<div class="col-12 text-center text-muted py-3">Gagal memuat foto.</div>`;
     }
   }
 
   async function loadPoiReviews() {
-    const wrap = document.getElementById('poiReviewGrid');
+    const wrap = document.getElementById("poiReviewGrid");
     try {
       const res = await fetch(`${API_REV}?poi_id=${POI_ID_CURRENT}&page=1`, {
-        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        headers: { "X-Requested-With": "XMLHttpRequest" },
       });
       const json = await res.json();
       const reviews = (json.data || []).slice(0, 5);
@@ -63,11 +71,13 @@
         return;
       }
 
-      wrap.innerHTML = reviews.map(r => `
+      wrap.innerHTML = reviews
+        .map(
+          (r) => `
         <div class="gal-review-card">
         <div class="gal-review-card__header">
         <div class="gal-review-card__user">
-        <img src="${r.avatar || BASE+'/uploads/default.jpg'}" class="gal-review-card__avatar" onerror="this.src='${BASE}/uploads/default.jpg'">
+        <img src="${r.avatar || BASE + "/uploads/default.jpg"}" class="gal-review-card__avatar" onerror="this.src='${BASE}/uploads/default.jpg'">
         <div>
         <div class="gal-review-card__name">${r.user_name}</div>
         </div>
@@ -77,10 +87,12 @@
         <div class="gal-review-card__date">${formatDate(r.created_at)}</div>
         </div>
         </div>
-        ${r.judul ? `<div class="gal-review-card__title">${r.judul}</div>` : ''}
+        ${r.judul ? `<div class="gal-review-card__title">${r.judul}</div>` : ""}
         <div class="gal-review-card__body">${r.cerita}</div>
         </div>
-      `).join('');
+      `,
+        )
+        .join("");
     } catch (e) {
       wrap.innerHTML = `<div class="text-center text-muted py-3">Gagal memuat review.</div>`;
     }

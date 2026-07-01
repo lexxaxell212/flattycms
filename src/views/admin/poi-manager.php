@@ -43,10 +43,10 @@ $total = count($pois);
         </div>
       </div>
       <?php else : ?>
-      <div class="row g-2 bg-card mb-4" id="poiList">
+      <div class="row g-2 mb-4" id="poiList">
         <?php foreach ($pois as $p): ?>
         <div class="col-12 col-md-6 poi-item" data-category="<?= $p['category_id'] ?>">
-          <div class="card card-glass">
+          <div class="card card-flatty">
             <div class="card-body">
               <div class="d-flex gap-3">
                 <!-- Thumbnail -->
@@ -107,6 +107,8 @@ $total = count($pois);
       </div>
       <?php endif; ?>
     </div>
+  </div>
+</main>
     <!-- Modal Tambah POI -->
     <div class="modal fade" id="modalTambahPoi" tabindex="-1">
       <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -267,8 +269,6 @@ $total = count($pois);
         </div>
       </div>
     </div>
-  </div>
-</main>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>

@@ -4,33 +4,36 @@ autoload_core();
 verify_ajax_request();
 require_once LIB_PATH . "mailer.php";
 
-$csrf = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
+$csrf = $_SERVER["HTTP_X_CSRF_TOKEN"] ?? "";
 if (!verify_csrf_token($csrf)) {
   http_response_code(403);
-  echo json_encode(['success' => false, 'message' => 'Invalid request.']);
-  exit;
+  echo json_encode(["success" => false, "message" => "Invalid request."]);
+  exit();
 }
 
-$input = json_decode(file_get_contents('php://input'), true);
-$email = trim($input['email'] ?? '');
+$input = json_decode(file_get_contents("php://input"), true);
+$email = trim($input["email"] ?? "");
 
 if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-  echo json_encode(['success' => false, 'message' => 'Format email tidak valid.']);
-  exit;
+  echo json_encode([
+    "success" => false,
+    "message" => "Format email tidak valid.",
+  ]);
+  exit();
 }
 
-$pdo = $GLOBALS['pdo'];
+$pdo = $GLOBALS["pdo"];
 $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? LIMIT 1");
 $stmt->execute([$email]);
 $user = $stmt->fetch();
 
-if (!$user || !$user['password']) {
-  echo json_encode(['success' => true]);
-  exit;
+if (!$user || !$user["password"]) {
+  echo json_encode(["success" => true]);
+  exit();
 }
 
 $token = bin2hex(random_bytes(32));
-$expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
+$expires = date("Y-m-d H:i:s", strtotime("+1 hour"));
 
 $stmt = $pdo->prepare("
     INSERT INTO password_resets (email, token, expires_at)
@@ -39,8 +42,8 @@ $stmt = $pdo->prepare("
   ");
 $stmt->execute([$email, $token, $expires]);
 
-$resetLink = rtrim(BASE_URL, '/') . '/reset-password?token=' . $token;
-$subject = 'Reset Password - ' . SITE_NAME;
+$resetLink = rtrim(BASE_URL, "/") . "/reset-password?token=" . $token;
+$subject = "Reset Password - " . SITE_NAME;
 $message_html = "
 <div style='font-family:sans-serif;max-width:600px;margin:0 auto;padding:20px;border:1px solid #eee;border-radius:10px;'>
     <h2 style='color:#1a2478;'>Reset Password</h2>
@@ -57,5 +60,5 @@ if (!$result) {
   error_log("[forgot-password] gagal kirim ke: {$email}");
 }
 
-echo json_encode(['success' => true]);
-exit;
+echo json_encode(["success" => true]);
+exit();

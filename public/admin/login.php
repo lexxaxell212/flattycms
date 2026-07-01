@@ -1,19 +1,21 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['password'])) {
+if (
+  $_SERVER["REQUEST_METHOD"] === "POST" &&
+  isset($_POST["username"], $_POST["password"])
+) {
   $stmt = $pdo->prepare("SELECT * FROM admins WHERE username = ?");
-  $stmt->execute([$_POST['username']]);
+  $stmt->execute([$_POST["username"]]);
   $admin = $stmt->fetch();
 
-  if ($admin && password_verify($_POST['password'], $admin['password'])) {
-    $_SESSION['admin_id'] = $admin['id'];
-    $_SESSION['admin_name'] = $admin['name'] ?? $admin['username'];
-    header('Location: /admin/');
-    exit;
+  if ($admin && password_verify($_POST["password"], $admin["password"])) {
+    $_SESSION["admin_id"] = $admin["id"];
+    $_SESSION["admin_name"] = $admin["name"] ?? $admin["username"];
+    header("Location: /admin/");
+    exit();
   } else {
     $error = "Username atau password salah!";
   }
-}
-?>
+} ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['p
             <div class="card-body">
               <label class="form-label text-start">Username</label>
               <input type="text" class="form-control" name="username"
-              value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>"
+              value="<?= isset($_POST["username"])
+                ? htmlspecialchars($_POST["username"])
+                : "" ?>"
               placeholder="Your username" required autofocus>
               <label class="form-label fw-semibold text-start">Password</label>
               <input type="password" class="form-control" name="password"

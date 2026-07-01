@@ -1036,7 +1036,7 @@ main.main-content::before {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   min-width: 100px;
   justify-content: flex-end;
 }
@@ -1597,7 +1597,7 @@ a.nav-link:hover i {
 @media (min-width: 1200px) {
   .auth-btn-group {
     margin-top: auto;
-    margin-inline: 1.5rem;
+    margin-inline: 1rem;
     background: transparent;
     border: none;
   }
@@ -7080,9 +7080,6 @@ i.fa-solid.fa-spin {
   .container {
     max-width: clamp(699px, 100%, 899px);
   }
-  .navbar .container-fluid {
-    padding-inline: 2rem;
-  }
   .artikel-slide-card {
     flex: 0 0 calc((100% - 1rem) / 2);
   }
@@ -7348,15 +7345,15 @@ i.fa-solid.fa-spin {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-inline: 3.5rem;
+    padding-inline: 1.5rem;
   }
   .nav-desktop {
     align-items: center;
     display: flex;
     flex: 1;
     justify-content: flex-end;
-    gap: 10px;
-    margin-right: 2.5rem;
+    gap: 5px;
+    margin-right: 1.5rem;
   }
   .nav-link {
     margin-bottom: 0;

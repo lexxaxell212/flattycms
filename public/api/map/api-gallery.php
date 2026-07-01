@@ -100,27 +100,19 @@ if ($action === 'upload') {
   }
 
   $file = $_FILES['photo'];
-
-  if ($file['size'] > 10 * 1024 * 1024) {
-    echo json_encode(['success' => false, 'message' => 'File terlalu besar! Maksimal 10MB.']);
-    exit;
-  }
+  $allowed_mime = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
 
   $finfo = finfo_open(FILEINFO_MIME_TYPE);
   $mime = finfo_file($finfo, $file['tmp_name']);
   finfo_close($finfo);
-
-  $allowed_mime = ['image/jpeg' => 'jpg',
-    'image/png' => 'png',
-    'image/webp' => 'webp'];
 
   if (!array_key_exists($mime, $allowed_mime)) {
     echo json_encode(['success' => false, 'message' => 'Hanya JPG, PNG, dan WebP yang diizinkan.']);
     exit;
   }
 
-  if (getimagesize($file['tmp_name']) === false) {
-    echo json_encode(['success' => false, 'message' => 'File bukan gambar valid.']);
+  if ($file['size'] > 10 * 1024 * 1024) {
+    echo json_encode(['success' => false, 'message' => 'File terlalu besar! Maksimal 10MB.']);
     exit;
   }
 

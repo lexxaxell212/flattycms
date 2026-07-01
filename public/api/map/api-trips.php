@@ -116,6 +116,7 @@ if ($action === 'save') {
   $start_lng = (float)($_POST['start_lng'] ?? 0);
   $route_polyline = $_POST['route_polyline'] ?? null;
   $duration = isset($_POST['duration']) ? (float)$_POST['duration'] : null;
+  $total_distance_input = isset($_POST['total_distance']) ? (float)$_POST['total_distance'] : null;
   $items = json_decode($_POST['items'] ?? '[]', true) ?: [];
 
   if (!$start_name || !$start_lat || !$start_lng) {
@@ -127,7 +128,7 @@ if ($action === 'save') {
   try {
     $pdo->beginTransaction();
 
-    $total_dist = array_sum(array_column($items, 'distance_from_prev'));
+    $total_dist = $total_distance_input;
 
     $stmt = $pdo->prepare("
             INSERT INTO trips (user_id, title, start_point_name, start_lat,

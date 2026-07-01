@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let activeCat = "";
   let routePolyline = null;
   let routeDuration = 0;
+  let routeTotalDistance = 0;
   let routeGenerated = false; // FIX: flag untuk disable simpan sebelum generate
 
   const routeEmptyHTML = `<div id="routeEmpty" style="display:flex">
@@ -349,6 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data.success) {
           routePolyline = data.polyline;
           routeDuration = data.duration;
+          routeTotalDistance = data.distance;
           // FIX: set flag routeGenerated = true setelah berhasil
           routeGenerated = true;
           updateRouteOnMap(routePolyline);
@@ -444,6 +446,7 @@ document.addEventListener("DOMContentLoaded", () => {
         routePolyline ? JSON.stringify(routePolyline) : "",
       );
       fd.append("duration", routeDuration ?? 0);
+      fd.append("total_distance", routeTotalDistance ?? 0);
       fd.append(
         "items",
         JSON.stringify(
@@ -530,6 +533,7 @@ document.getElementById("startImg").innerHTML = matchedPoi?.poi_image
       if (trip.route_polyline) {
         routePolyline = JSON.parse(trip.route_polyline);
         routeDuration = trip.duration || 0;
+        routeTotalDistance = trip.total_distance || 0;
         updateRouteOnMap(routePolyline);
         // FIX: total_distance dari trip tersimpan langsung ditampilkan
         document.getElementById("totalDist").textContent =

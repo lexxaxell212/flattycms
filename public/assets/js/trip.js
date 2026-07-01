@@ -534,7 +534,7 @@ document.getElementById("startImg").innerHTML = matchedPoi?.poi_image
         updateRouteOnMap(routePolyline);
         // FIX: total_distance dari trip tersimpan langsung ditampilkan
         document.getElementById("totalDist").textContent =
-          trip.total_distance ?? "—";
+          trip.total_distance ?? t.total_distance ?? "—";
         document.getElementById("totalStops").textContent =
           `· ${routes.length} lokasi${trip.duration ? " · ~" + trip.duration + " menit" : ""}`;
         document.getElementById("distanceInfo").style.display = "flex";

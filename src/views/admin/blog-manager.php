@@ -157,14 +157,14 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
 
           <div class="col-12">
             <label class="form-label fw-medium">Excerpt</label>
-            <textarea name="excerpt" class="form-control" rows="2" maxlength="500"><?= $edit_post['excerpt'] ?></textarea>
+            <textarea name="excerpt" class="form-control" rows="2" maxlength="500"><?= safe_html($edit_post['excerpt']) ?></textarea>
           </div>
 
           <div class="col-12">
             <label class="form-label fw-medium">Content<span class="text-danger">*</span></label>
             <div id="quill-editor"></div>
             <input type="hidden" name="content" id="quill-content">
-            <div id="edit-content-data" data-content="<?= $edit_post['content'] ?>" style="display:none"></div>
+            <div id="edit-content-data" data-content="<?= safe_html($edit_post['content']) ?>" style="display:none"></div>
           </div>
 
           <div class="col-12">

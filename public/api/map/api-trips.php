@@ -61,6 +61,7 @@ if ($method === 'GET') {
           'address' => $row['address'],
           'poi_image' => $row['poi_image'],
           'description' => $row['description'],
+          'total_distance' => $row['total_distance'],
           'order_index' => $row['order_index'],
           'distance_from_prev' => $row['distance_from_prev'],
           'note_id' => $row['note_id'],

@@ -520,6 +520,7 @@ document.getElementById("startImg").innerHTML = matchedPoi?.poi_image
         lng: parseFloat(item.longitude),
         distance_from_prev: item.distance_from_prev,
         note: item.note || "",
+        total_distance: item.total_distance,
         poi_image: item.poi_image || null,
         description: item.description || "",
       }));

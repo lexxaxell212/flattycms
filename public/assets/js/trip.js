@@ -423,16 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function doSaveTrip() {
       const title =
-        document.getElementById("tripTitle").value.trim() || "Trip Bandungku";
-
-      const existingNames = routes.map((r) => r.name.toLowerCase());
-      if (existingNames.includes(startPoint.name.toLowerCase())) {
-        flattyToast(
-          "warning",
-          "Nama tidak boleh sama, gunakan nama yang berbeda",
-        );
-        return;
-      }
+        document.getElementById("tripTitle").value.trim() || "Trip ..";
 
       const fd = new FormData();
       fd.append("action", "save");

@@ -262,7 +262,7 @@ $cats_json = json_encode($categories);
                       <span class="h5 my-auto ms-2" data-bhs="tp.page.map.save_label">Simpan Rute</span>
                     </div>
                     <input type="text" id="tripTitle" class="form-control mb-3" data-bhs="tp.page.map.trip_title_placeholder" value="Trip Bandungku">
-                    <button class="btn btn-success btn-sm" id="btnConfirmSave" data-bhs="tp.page.map.btn_confirm_save">
+                    <button class="btn btn-success" id="btnConfirmSave" data-bhs="tp.page.map.btn_confirm_save">
                       <i class="fa-solid fa-floppy-disk me-1"></i>Simpan
                     </button>
                   </div>

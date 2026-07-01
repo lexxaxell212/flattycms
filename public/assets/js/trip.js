@@ -520,7 +520,6 @@ document.getElementById("startImg").innerHTML = matchedPoi?.poi_image
         lng: parseFloat(item.longitude),
         distance_from_prev: item.distance_from_prev,
         note: item.note || "",
-        total_distance: item.total_distance,
         poi_image: item.poi_image || null,
         description: item.description || "",
       }));
@@ -534,7 +533,7 @@ document.getElementById("startImg").innerHTML = matchedPoi?.poi_image
         updateRouteOnMap(routePolyline);
         // FIX: total_distance dari trip tersimpan langsung ditampilkan
         document.getElementById("totalDist").textContent =
-          trip.total_distance ?? t.total_distance ?? "—";
+          trip.total_distance ?? "—";
         document.getElementById("totalStops").textContent =
           `· ${routes.length} lokasi${trip.duration ? " · ~" + trip.duration + " menit" : ""}`;
         document.getElementById("distanceInfo").style.display = "flex";

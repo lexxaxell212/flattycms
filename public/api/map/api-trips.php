@@ -20,7 +20,7 @@ if ($method === 'GET') {
                 SELECT t.id, t.title, t.start_point_name, t.start_lat, t.start_lng,
                        t.total_distance, t.duration, t.route_polyline, t.created_at,
                        ti.id AS item_id, ti.poi_id, ti.order_index, ti.distance_from_prev,
-                       p.name AS poi_name, p.latitude, p.longitude, p.address,
+                       p.name AS poi_name, p.latitude, p.longitude, p.address, p.poi_image, p.description,
                        tn.id AS note_id, tn.note
                 FROM trips t
                 LEFT JOIN trip_items ti ON ti.trip_id = t.id
@@ -59,6 +59,8 @@ if ($method === 'GET') {
           'latitude' => $row['latitude'],
           'longitude' => $row['longitude'],
           'address' => $row['address'],
+          'poi_image' => $row['poi_image'],
+          'description' => $row['description'],
           'order_index' => $row['order_index'],
           'distance_from_prev' => $row['distance_from_prev'],
           'note_id' => $row['note_id'],

@@ -24,7 +24,7 @@ if (
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
   <link href="<?= CSS_URL ?>bs538.min.css" rel="stylesheet">
-  <link href="<?= CSS_URL ?>flatty1.1.css" rel="stylesheet">
+  <link href="<?= CSS_URL ?>flatty1.2.1.min.css" rel="stylesheet">
 </head>
 <body>
   <main class="main-content">

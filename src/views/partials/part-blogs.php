@@ -22,7 +22,7 @@ $categories = safe_get_categories($pdo);
       <div class="artikel-slider-viewport">
         <div class="artikel-slider-track" role="list">
           <?php if (empty($posts)): ?>
-          <div class="text-center text-muted py-5 w-100">
+          <div class="text-center text-muted py-5 w-100" role="listitem">
             <i class="fas fa-newspaper fs-1 d-block mb-3 opacity-50 mx-auto" aria-hidden="true"></i>
             <p>
               Belum ada artikel.

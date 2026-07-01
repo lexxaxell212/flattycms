@@ -98,13 +98,13 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
               <div></div>
             </div>
             <div id="tabPhotos" class="tab-content" style="display:none">
-              <div class="row g-2" id="photoGrid"></div>
+              <div class="row g-4" id="photoGrid"></div>
             </div>
             <div id="tabTrips" class="tab-content" style="display:none">
-              <div id="tripList" class="row g-2"></div>
+              <div id="tripList" class="row g-4"></div>
             </div>
             <div id="tabReactions" class="tab-content" style="display:none">
-              <div id="reactionList" class="row g-2"></div>
+              <div id="reactionList" class="row g-4"></div>
             </div>
           </div>
         </div>

@@ -21,7 +21,7 @@ $page_title = "Sejarah Bandung";
       </div>
       <div class="col-12 col-lg-8">
         <div class="sb-timeline mx-auto">
-          <section class="revealed">
+          <div class="bg-surface" style="padding:var(--section-padding);">
             <div class="sb-item">
               <div class="sb-item__left">
                 <div class="sb-item__year" data-bhs="sejarah.t1.era">
@@ -174,7 +174,7 @@ $page_title = "Sejarah Bandung";
                 </p>
               </div>
             </div>
-          </section>
+          </div>
         </div>
       </div>
     </div>

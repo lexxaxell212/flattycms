@@ -261,7 +261,7 @@ $categories = safe_get_categories($pdo);
         <?php endif; ?>
       </div>
       <div class="col-md-5">
-        <div style="position:sticky !important; top:82px; align-self:flex-start;">
+        <div style="position:sticky !important; top:calc(var(--navbar-height) + 2.5rem); align-self:flex-start;">
           <div class="cat-panel">
             <h3 class="h4 mb-2">Kategori</h3>
             <?php if (empty($categories)): ?>

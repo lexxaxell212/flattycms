@@ -228,7 +228,7 @@ $cats_json = json_encode($categories);
                       <span class="h5 my-auto ms-2" data-bhs="tp.page.map.route_label">Rute POI</span>
                     </div>
                   </div>
-                  <div id="routeList" class="mb-2">
+                  <div id="routeList" class="mb-2 col-12 col-md-8">
                     <div id="routeEmpty" style="display:flex">
                       <div class="route-empty">
                         <i class="fa-solid fa-map-pin text-accent"></i>
@@ -297,7 +297,7 @@ $cats_json = json_encode($categories);
                 <a id="btnGenerateAI" class="btn btn-primary mx-auto"><span data-bhs="btn.it">Buat Itinerary</span><i class="fas fa-wand-magic-sparkles ms-1"></i></a>
               </div>
             </div>
-            <div id="aiItineraryResult"></div>
+            <div id="aiItineraryResult" class="row g-4"></div>
           </div>
           <div id="tab-tripku" class="tp-tab-content" style="display:none">
             <?php if ($is_logged): ?>

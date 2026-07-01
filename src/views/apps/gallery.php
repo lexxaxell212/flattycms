@@ -76,7 +76,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
         <?php endif; ?>
       </div>
     </div>
-    <div class="bg-surface">
+    <div class="bg-surface" style="padding:var(--section-padding);">
       <div class="gal-search-block">
         <div class="gal-search-wrap">
           <i class="fa-solid fa-magnifying-glass gal-search-icon"></i>

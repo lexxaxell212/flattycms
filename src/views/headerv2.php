@@ -1,13 +1,19 @@
 <?php
-$currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-function isActive(string $path): string {
+$currentPath = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+function isActive(string $path): string
+{
   global $currentPath;
-  $normalizedCurrent = ($currentPath === '' || $currentPath === '/') ? '/' : rtrim($currentPath, '/');
-  $normalizedTarget = ($path === '' || $path === '/') ? '/' : rtrim($path, '/');
-  if ($normalizedTarget === '/') {
-    return ($normalizedCurrent === '/') ? 'is-current' : '';
+  $normalizedCurrent =
+    $currentPath === "" || $currentPath === "/"
+      ? "/"
+      : rtrim($currentPath, "/");
+  $normalizedTarget = $path === "" || $path === "/" ? "/" : rtrim($path, "/");
+  if ($normalizedTarget === "/") {
+    return $normalizedCurrent === "/" ? "is-current" : "";
   }
-  return str_starts_with($normalizedCurrent, $normalizedTarget) ? 'is-current' : '';
+  return str_starts_with($normalizedCurrent, $normalizedTarget)
+    ? "is-current"
+    : "";
 }
 ?>
 <!DOCTYPE html>
@@ -76,18 +82,6 @@ function isActive(string $path): string {
       ]
     }
   </script>
-  <!-- assets -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?= CSS_URL ?>fa720.all.min.css">
-  <link rel="stylesheet" href="<?= CSS_URL ?>bs538.min.css">
-  <link rel="stylesheet" href="<?= CSS_URL ?>flatty1.1.css">
-  <?php
-  $isMobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT']);
-  $heroImg = $isMobile ? 'wisata-mobile.webp' : 'wisata.webp'; ?>
-  <link rel="preload" as="image" href="<?= IMG_URL . $heroImg ?>" type="image/webp" fetchpriority="high">
-  <!-- script -->
   <script>
     const CONFIG = {
       baseUrl: '<?= BASE_URL ?>',
@@ -95,6 +89,17 @@ function isActive(string $path): string {
       csrfToken: '<?= generate_csrf_token() ?>',
     };
   </script>
+  <!-- assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="<?= CSS_URL ?>fa720.all.min.css">
+  <link rel="stylesheet" href="<?= CSS_URL ?>bs538.min.css">
+  <link rel="stylesheet" href="<?= CSS_URL ?>flatty1.2.1.min.css">
+  <?php
+  $isMobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT']);
+  $heroImg = $isMobile ? 'wisata-mobile.webp' : 'wisata.webp'; ?>
+  <link rel="preload" as="image" href="<?= IMG_URL . $heroImg ?>" type="image/webp" fetchpriority="high">
   <script src="https://accounts.google.com/gsi/client"></script>
   <script src="<?= JS_URL ?>gsi.js"></script>
   <script src="<?= JS_URL ?>bs538.bundle.min.js" defer></script>
@@ -113,7 +118,6 @@ function isActive(string $path): string {
     body {
       visibility: hidden;
     }
-
     #page-loader {
       position: fixed;
       top: 0;
@@ -137,4 +141,4 @@ function isActive(string $path): string {
   require_once SRC_PATH . "partials/ui/navbar.php";
   require_once SRC_PATH . "partials/ui/livesearch.php";
   require_once SRC_PATH . "partials/ui/chatbot.php";
-  ?>
+?>

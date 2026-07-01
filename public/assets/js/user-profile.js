@@ -66,7 +66,7 @@
     }
     grid.innerHTML = data.photos.map(p => `
       <div class="col-12 col-md-6" id="photo-${p.id}">
-      <div class="card card-flatty">
+      <div class="card card-flatty h-100">
       <div class="card-body">
       <img src="${BASE}/uploads/${p.photo_path}" class="card-img" loading="lazy">
       <div class="text-truncate">
@@ -104,7 +104,7 @@
         : `<a href="/trip?open_trip=${t.id}" class="btn btn-primary btn-fit">Buka<i class="fa-solid fa-route ms-2"></i></a>`;
       return `
       <div class="col-12 col-md-6" id="trip-${t.id}">
-      <div class="card card-flatty">
+      <div class="card card-flatty h-100">
       <div class="card-body">
       <div class="d-flex align-items-center">
       ${badge}
@@ -153,7 +153,7 @@
 
     list.innerHTML = data.reactions.map(r => `
       <div class="col-12 col-md-6" id="reaction-${r.id}">
-      <div class="card card-flatty">
+      <div class="card card-flatty h-100">
       <div class="card-body">
       <div class="rounded-circle d-flex align-items-center justify-content-center mb-3" style="width:40px;height:40px;background: var(--bg-primary-subtle)">
       <i class="fa-solid ${typeIcon[r.content_type] ?? 'fa-heart'} text-purple mx-auto"></i>

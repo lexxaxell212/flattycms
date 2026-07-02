@@ -71,6 +71,23 @@ function generateStaticPage($slug, $html_content, $page_id, $title)
     }
     ?>
     <script src="<?= JS_URL ?>reactions.js" defer></script>
+    <?php if (\$_this_event && \$_this_event['event_date']): ?>
+    <script id="event-data" type="application/json">
+    <?php echo json_encode([
+      'date_range' => _tdo_date_range(\$_this_event['event_date'], \$_this_event['event_date_end'])
+    ]); ?>
+    </script>
+    <?php endif; ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const dataEl = document.getElementById('event-data');
+      const slot = document.getElementById('event-info-slot');
+      if (dataEl && slot) {
+        const data = JSON.parse(dataEl.textContent);
+        slot.textContent = data.date_range;
+      }
+    });
+    </script>
     <main class="main-content">
       <div class="container">
       <div class="page-header text-center">

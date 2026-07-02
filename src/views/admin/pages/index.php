@@ -42,6 +42,10 @@ if (isset($_GET['edit'])) {
     border-radius: .5rem;
     background: #fff;
   }
+  .CodeMirror,
+  .CodeMirror * {
+    text-align: left !important;
+  }
   .page-list-item {
     transition: all .2s;
     border-radius: .5rem;
@@ -128,13 +132,13 @@ if (isset($_GET['edit'])) {
           <div class="mb-4">
             <div class="px-4 py-3">
               <div class="row g-3 align-items-end">
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <label class="form-label">Title <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" name="title"
                   placeholder="Judul halaman"
                   value="<?= safe_html($page['title'] ?? '') ?>" required>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label class="form-label">Slug</label>
                   <input type="text" class="form-control" id="slug-preview"
                   value="<?= safe_html($page['slug'] ?? '') ?>"

@@ -2,10 +2,7 @@
 require_once LIB_PATH . "blogs.php";
 
 $cat_id = (int) ($_GET["cat"]  ?? 0);
-$page = max(1, (int) ($_GET["page"] ?? 1));
-$per_page = 6;
-$offset = ($page - 1) * $per_page;
-$posts = safe_get_posts($pdo, $per_page, $offset, $cat_id);
+$posts = safe_get_random_posts($pdo, 6, $cat_id);
 $categories = safe_get_categories($pdo);
 ?>
 <script src="<?= JS_URL ?>artikel-slider.js" defer></script>

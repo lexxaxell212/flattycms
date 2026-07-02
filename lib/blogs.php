@@ -70,6 +70,7 @@ function safe_get_post(PDO $pdo, int $id): array|false
   $stmt->execute([(int) $id, "active"]);
   return $stmt->fetch();
 }
+
 function safe_get_posts(PDO $pdo, int $limit, int $offset, int $cat_id = 0): array
 {
   $limit = max(1, (int) $limit);
@@ -100,6 +101,38 @@ function safe_get_posts(PDO $pdo, int $limit, int $offset, int $cat_id = 0): arr
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function safe_get_random_posts(PDO $pdo, int $limit = 6, int $cat_id = 0): array
+{
+  $limit = max(1, (int) $limit);
+  $cat_id = (int) $cat_id;
+
+  if ($cat_id > 0) {
+    $sql = "
+      SELECT p.id, p.title, p.slug, p.excerpt, p.content, p.created_at, p.views,
+      p.category_id, p.image_url AS image, c.name AS cat_name
+      FROM allcontent_posts p
+      LEFT JOIN allcontent_categories c ON p.category_id = c.id
+      WHERE p.status = 'active' AND p.category_id = $cat_id
+      ORDER BY RAND()
+      LIMIT $limit
+    ";
+  } else {
+    $sql = "
+      SELECT p.id, p.title, p.slug, p.excerpt, p.content, p.created_at, p.views,
+      p.category_id, p.image_url AS image, c.name AS cat_name
+      FROM allcontent_posts p
+      LEFT JOIN allcontent_categories c ON p.category_id = c.id
+      WHERE p.status = 'active'
+      ORDER BY RAND()
+      LIMIT $limit
+    ";
+  }
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function safe_count_posts(PDO $pdo, int $cat_id = 0): int
 {
   if ($cat_id > 0) {

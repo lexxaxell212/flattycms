@@ -3783,13 +3783,13 @@ input[type="range"]::-moz-range-track {
 
 .tdop-featured__excerpt {
   color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   text-align: left;
   word-break: break-word;
   overflow-wrap: break-word;
 }
 .tdop-featured__content {
-  color: var(--text-white);
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: 1rem;
   text-align: left;
   word-break: break-word;

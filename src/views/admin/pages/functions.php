@@ -68,6 +68,9 @@ function generateStaticPage($slug, $html_content, $page_id, $title)
     <script src="<?= JS_URL ?>reactions.js" defer></script>
     <main class="main-content">
       <div class="container">
+      <div class="page-header">
+        <h1><em class="styled">{$page_title_val}</em></h>
+      </div>
           {$html_content}
           <hr class="my-5">
           <div class="d-flex justify-content-between align-items-center mb-4">

@@ -17,19 +17,19 @@ require_once LIB_PATH . "v-upcoming-events.php";
       <div class="tdop-featured">
         <div class="tdop-featured__inner">
           <div class="tdop-badge">
-            <i class="fas fa-bolt me-2"></i>
-            <span data-rotate="Cek Sekarang|Event Terdekat|Segera Hadir">Cek Sekarang</span>
+            <i class="fas fa-fire me-2"></i>
+            <span data-rotate="Cek Sekarang|Event Terdekat|Sedang berlangsung">Cek Sekarang</span>
           </div>
           <div class="tdop-featured__body">
             <h3 class="tdop-featured__title"><?= safe_html($_tdo_next['title'])
             ?></h3>
-            <p class="tdop-featured__excerpt"><?= safe_html(_tdo_excerpt($_tdo_next['html_content'])) ?></p>
+            <div class="tdop-featured__excerpt"><?= safe_html(_tdo_excerpt($_tdo_next['html_content'])) ?></div>
             <span class="tdop-featured__date">
   <i class="far fa-calendar me-1"></i>
   <?= _tdo_date_range($_tdo_next['event_date'], $_tdo_next['event_date_end']) ?>
             </span>
           </div>
-          <a href="/pages/<?= safe_html($_tdo_next['slug']) ?>/" class="tdop-featured__cta">
+          <a href="/upcoming-events" class="tdop-featured__cta">
             <span data-bhs="btn.more">Selengkapnya</span> <i class="fas fa-angle-right ms-2"></i>
           </a>
         </div>
@@ -39,8 +39,8 @@ require_once LIB_PATH . "v-upcoming-events.php";
         <div class="tdop-card">
           <div class="tdop-card__inner">
             <h4 class="mb-1"><?= safe_html($_tdo_p['title']) ?></h4>
-            <p class="text-muted small"><?=
-            safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?></p>
+            <div class="text-muted small"><?=
+            safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?></div>
             <div class="d-flex align-items-center justify-content-between mt-auto">
               <span class="tdop-card__date">
   <i class="far fa-calendar me-1"></i>

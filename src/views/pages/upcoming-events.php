@@ -16,18 +16,18 @@ $page_title = 'Upcoming Events';
   <?= _tdo_date_range($_tdo_next['event_date'], $_tdo_next['event_date_end']) ?>
               </span>
               <span class="badge badge-accent position-absolute top-0 start-0 m-4 fw-bold">
-                <i class="fas fa-bolt me-1"></i>
+                <i class="fas fa-fire me-1"></i>
                 Featured
               </span>
             </div>
             <div class="tdop-featured__body">
               <div class="tdop-featured__content">
-                <h1 class="text-white text-center mb-4">
+                <h1 class="text-white text-center mb-2">
                   <?= safe_html($_tdo_next['title']) ?>
                 </h1>
-                <p>
+                <div class="text-white">
                   <?= sanitizeHtml($_tdo_next['html_content']) ?>
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -48,12 +48,12 @@ $page_title = 'Upcoming Events';
         <div class="col-12 col-md-6">
           <div class="card card-flatty shadow-none">
             <div class="card-body">
-              <h4 class="mb-2">
+              <h3 class="h4 mb-2">
                 <?= safe_html($_tdo_p['title']) ?>
-              </h4>
-              <p class="text-muted small">
+              </h3>
+              <div class="text-muted small">
                 <?= safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?>
-              </p>
+              </div>
               <div class="d-flex align-items-center justify-content-between mt-auto">
                 <span class="tdop-card__date">
   <i class="far fa-calendar me-2"></i>
@@ -90,10 +90,10 @@ $page_title = 'Upcoming Events';
         <div class="col-md-6 col-lg-4">
           <div class="tdop-card">
             <div class="tdop-card__inner">
-              <h4 class="mb-1"><?= safe_html($_tdo_p['title']) ?></h4>
-              <p class="text-muted small">
+              <h3 class="h4 mb-1"><?= safe_html($_tdo_p['title']) ?></h3>
+              <div class="text-muted small">
                 <?= safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?>
-              </p>
+              </div>
               <div class="d-flex align-items-center justify-content-between mt-auto">
                 <span class="tdop-card__date">
   <i class="far fa-calendar me-2"></i>

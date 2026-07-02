@@ -63,13 +63,24 @@ function generateStaticPage($slug, $html_content, $page_id, $title)
     <?php
     \$_page_id = {$page_id};
     require_once LIB_PATH . 'v-reactions-page.php';
+    require_once LIB_PATH . 'v-upcoming-events.php';
     \$page_title = '{$page_title_val}';
+    \$_this_event = null;
+    foreach (\$_tdo_all as \$_e) {
+      if (\$_e['slug'] === '{$slug}') { \$_this_event = \$_e; break; }
+    }
     ?>
     <script src="<?= JS_URL ?>reactions.js" defer></script>
     <main class="main-content">
       <div class="container">
-      <div class="page-header">
-        <h1><em class="styled">{$page_title_val}</em></h>
+      <div class="page-header text-center">
+        <h1><em class="styled">{$page_title_val}</em></h1>
+      <?php if (\$_this_event && \$_this_event['event_date']): ?>
+      <div class="badge badge-accent fw-bold mt-2">
+        <i class="far fa-calendar-check me-1"></i>
+        <?php echo _tdo_date_range(\$_this_event['event_date'], \$_this_event['event_date_end']); ?>
+      </div>
+      <?php endif; ?>
       </div>
           {$html_content}
           <hr class="my-5">

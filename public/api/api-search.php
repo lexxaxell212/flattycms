@@ -73,6 +73,22 @@ $stmt = $pdo->prepare("
 $stmt->execute([':q' => $keyword, ':q2' => $keyword]);
 $results = array_merge($results, $stmt->fetchAll());
 
+$stmt = $pdo->prepare("
+    SELECT
+        id,
+        title,
+        html_content AS description,
+        slug,
+        'pages' AS source
+    FROM pages
+    WHERE event_date IS NOT NULL
+    AND (title LIKE :q OR html_content LIKE :q2)
+    ORDER BY title ASC
+    LIMIT 10
+");
+$stmt->execute([':q' => $keyword, ':q2' => $keyword]);
+$results = array_merge($results, $stmt->fetchAll());
+
 usort($results, function ($a, $b) use ($q) {
   $aExact = stripos($a['title'], $q) === 0 ? 0 : 1;
   $bExact = stripos($b['title'], $q) === 0 ? 0 : 1;

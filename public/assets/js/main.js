@@ -286,11 +286,13 @@ document.addEventListener("DOMContentLoaded", () => {
       cmpt: "Things To Do",
       allcontent_posts: "Blogs",
       poi: "POI Bandung",
+      pages: "Events",
     },
     URLS: {
       cmpt: "{button_link}",
       allcontent_posts: "/blogs/?slug={slug}",
       poi: "/poi/{slug}",
+      pages: "/pages/{slug}",
     },
   };
 

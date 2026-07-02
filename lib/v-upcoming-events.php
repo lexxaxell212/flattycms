@@ -30,9 +30,19 @@ $_tdo_past_stmt = $GLOBALS['pdo']->prepare("
     WHERE event_date IS NOT NULL
     AND COALESCE(event_date_end, event_date) < ?
     ORDER BY event_date DESC
+    LIMIT 6
 ");
 $_tdo_past_stmt->execute([$today]);
 $_tdo_past = $_tdo_past_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$_tdo_all_stmt = $GLOBALS['pdo']->prepare("
+    SELECT id, title, slug, html_content, event_date, event_date_end
+    FROM pages
+    WHERE event_date IS NOT NULL
+    ORDER BY event_date ASC
+");
+$_tdo_all_stmt->execute();
+$_tdo_all = $_tdo_all_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 function _tdo_excerpt($html, $limit = 150) {
   $text = trim(preg_replace('/\s+/', ' ', strip_tags($html)));

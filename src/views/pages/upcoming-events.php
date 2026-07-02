@@ -22,7 +22,7 @@ $page_title = 'Upcoming Events';
             </div>
             <div class="tdop-featured__body">
               <div class="tdop-featured__content">
-                <h1 class="text-white text-center mb-2">
+                <h1 class="text-white text-center mb-4">
                   <?= safe_html($_tdo_next['title']) ?>
                 </h1>
                 <div class="text-white">

@@ -25,9 +25,8 @@ require_once LIB_PATH . "v-upcoming-events.php";
             ?></h3>
             <p class="tdop-featured__excerpt"><?= safe_html(_tdo_excerpt($_tdo_next['html_content'])) ?></p>
             <span class="tdop-featured__date">
-              <i class="far fa-calendar me-1"></i>
-              <?= $_tdo_next['event_date'] ? date('d M Y',
-              strtotime($_tdo_next['event_date'])) : '—' ?>
+  <i class="far fa-calendar me-1"></i>
+  <?= _tdo_date_range($_tdo_next['event_date'], $_tdo_next['event_date_end']) ?>
             </span>
           </div>
           <a href="/pages/<?= safe_html($_tdo_next['slug']) ?>/" class="tdop-featured__cta">
@@ -44,9 +43,8 @@ require_once LIB_PATH . "v-upcoming-events.php";
             safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?></p>
             <div class="d-flex align-items-center justify-content-between mt-auto">
               <span class="tdop-card__date">
-                <i class="far fa-calendar me-1"></i>
-                <?= $_tdo_p['event_date'] ? date('d M Y',
-                strtotime($_tdo_p['event_date'])) : '—' ?>
+  <i class="far fa-calendar me-1"></i>
+  <?= _tdo_date_range($_tdo_p['event_date'], $_tdo_p['event_date_end']) ?>
               </span>
               <a href="<?= BASE_URL ?>pages/<?= safe_html($_tdo_p['slug']) ?>/">
               <span data-bhs="btn.more">Selengkapnya</span>

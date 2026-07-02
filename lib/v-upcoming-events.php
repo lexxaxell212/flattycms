@@ -2,41 +2,49 @@
 $today = date('Y-m-d');
 
 $_tdo_next_stmt = $GLOBALS['pdo']->prepare("
-    SELECT id, title, slug, html_content, event_date
+    SELECT id, title, slug, html_content, event_date, event_date_end
     FROM pages
     WHERE event_date IS NOT NULL
-    AND event_date >= ?
+    AND COALESCE(event_date_end, event_date) >= ?
     ORDER BY event_date ASC
     LIMIT 1
-  ");
+");
 $_tdo_next_stmt->execute([$today]);
 $_tdo_next = $_tdo_next_stmt->fetch(PDO::FETCH_ASSOC);
 
 $_tdo_stmt = $GLOBALS['pdo']->prepare("
-    SELECT id, title, slug, html_content, event_date
+    SELECT id, title, slug, html_content, event_date, event_date_end
     FROM pages
     WHERE event_date IS NOT NULL
-    AND event_date >= ?
+    AND COALESCE(event_date_end, event_date) >= ?
     AND id != ?
     ORDER BY event_date ASC
     LIMIT 6
-  ");
+");
 $_tdo_stmt->execute([$today, $_tdo_next['id'] ?? 0]);
 $_tdo_pages = $_tdo_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $_tdo_past_stmt = $GLOBALS['pdo']->prepare("
-    SELECT id, title, slug, html_content, event_date
+    SELECT id, title, slug, html_content, event_date, event_date_end
     FROM pages
     WHERE event_date IS NOT NULL
-    AND event_date < ?
+    AND COALESCE(event_date_end, event_date) < ?
     ORDER BY event_date DESC
-  ");
+");
 $_tdo_past_stmt->execute([$today]);
 $_tdo_past = $_tdo_past_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 function _tdo_excerpt($html, $limit = 150) {
   $text = trim(preg_replace('/\s+/', ' ', strip_tags($html)));
   return mb_strlen($text) > $limit ? mb_substr($text, 0, $limit) . '…' : $text;
+}
+
+function _tdo_date_range($date_start, $date_end = null) {
+  if (!$date_start) return '—';
+  $start = date('d M Y', strtotime($date_start));
+  if (!$date_end) return $start;
+  $end = date('d M Y', strtotime($date_end));
+  return $start . ' – ' . $end;
 }
 
 function sanitizeHtml($html) {

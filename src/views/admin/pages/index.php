@@ -141,10 +141,15 @@ if (isset($_GET['edit'])) {
                   placeholder="auto-generate..." readonly>
                 </div>
                 <div class="col-md-3">
-                  <label class="form-label">Tanggal Event <span class="p-1 p-2 rounded-sm badge-red fw-normal small">Hanya untuk upcoming event</span></label>
-                  <input type="date" class="form-control" name="event_date"
-                  value="<?= safe_html($page['event_date'] ?? '') ?>">
-                </div>
+                <label class="form-label">Tanggal Mulai Event <span class="p-1 p-2 rounded-sm badge-red fw-normal small">Hanya untuk upcoming event</span></label>
+                <input type="date" class="form-control" name="event_date"
+                value="<?= safe_html($page['event_date'] ?? '') ?>">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Tanggal Akhir Event <span class="p-1 rounded-sm badge-blue fw-normal small">Kosongkan jika 1 hari</span></label>
+                <input type="date" class="form-control" name="event_date_end"
+                value="<?= safe_html($page['event_date_end'] ?? '') ?>">
+              </div>
               </div>
             </div>
             <div class="py-2 px-4">

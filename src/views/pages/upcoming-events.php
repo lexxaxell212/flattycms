@@ -12,8 +12,8 @@ $page_title = 'Upcoming Events';
           <div class="tdop-featured__inner">
             <div class="d-flex justify-content-between align-items-center mb-5">
               <span class="badge badge-accent position-absolute top-0 end-0 m-4 fw-bold">
-                <i class="far fa-calendar-check me-1"></i>
-                <?= $_tdo_next['event_date'] ? date('d M Y', strtotime($_tdo_next['event_date'])) : '—' ?>
+  <i class="far fa-calendar-check me-1"></i>
+  <?= _tdo_date_range($_tdo_next['event_date'], $_tdo_next['event_date_end']) ?>
               </span>
               <span class="badge badge-accent position-absolute top-0 start-0 m-4 fw-bold">
                 <i class="fas fa-bolt me-1"></i>
@@ -56,8 +56,8 @@ $page_title = 'Upcoming Events';
               </p>
               <div class="d-flex align-items-center justify-content-between mt-auto">
                 <span class="tdop-card__date">
-                  <i class="far fa-calendar me-2"></i>
-                  <?= $_tdo_p['event_date'] ? date('d M Y', strtotime($_tdo_p['event_date'])) : '-' ?>
+  <i class="far fa-calendar me-2"></i>
+  <?= _tdo_date_range($_tdo_p['event_date'], $_tdo_p['event_date_end']) ?>
                 </span>
                 <a class="btn btn-primary btn-sm" href="<?= BASE_URL ?>pages/<?= safe_html($_tdo_p['slug']) ?>/">
                   <span data-bhs="btn.more">Selengkapnya</span>
@@ -96,8 +96,8 @@ $page_title = 'Upcoming Events';
               </p>
               <div class="d-flex align-items-center justify-content-between mt-auto">
                 <span class="tdop-card__date">
-                  <i class="far fa-calendar me-2"></i>
-                  <?= date('d M Y', strtotime($_tdo_p['event_date'])) ?>
+  <i class="far fa-calendar me-2"></i>
+  <?= _tdo_date_range($_tdo_p['event_date'], $_tdo_p['event_date_end']) ?>
                 </span>
                 <a href="/pages/<?= safe_html($_tdo_p['slug']) ?>/">
                   <span data-bhs="btn.more">Selengkapnya</span>

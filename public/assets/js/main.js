@@ -461,9 +461,7 @@ document.addEventListener("DOMContentLoaded", () => {
           hilite(item.title, q) +
           "</div>" +
           (item.description
-            ? '<div class="ls-desc">' +
-              hilite(trunc(item.description, 90), q) +
-              "</div>"
+            ? '<div class="ls-desc">' + hilite(trunc(stripHtml(item.description), 90), q) + "</div>"
             : "");
 
         dropdown.appendChild(a);
@@ -586,6 +584,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function trunc(str, len) {
     return str && str.length > len ? str.slice(0, len) + "…" : str;
+  }
+
+  function stripHtml(str) {
+    const d = document.createElement("div");
+    d.innerHTML = str || "";
+    return d.textContent || d.innerText || "";
   }
 
   function esc(str) {

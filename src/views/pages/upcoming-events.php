@@ -5,6 +5,10 @@ $page_title = 'Upcoming Events';
 
 <?php
 //show event date inside html_content
+$_this_event = null;
+    foreach ($_tdo_all as $_e) {
+      if ($_e['slug'] === '{$slug}') { $_this_event = $_e; break; }
+    }
 if ($_this_event && $_this_event['event_date']): ?>
 <script id="event-data" type="application/json">
 <?php echo json_encode(['date_range' => _tdo_date_range($_this_event['event_date'], $_this_event['event_date_end'])

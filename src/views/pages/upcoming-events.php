@@ -49,7 +49,7 @@ if ($_this_event && $_this_event['event_date']): ?>
                   <?= safe_html($_tdo_next['title']) ?>
                 </h1>
                 <div class="text-white">
-                  <?= sanitizeHtml($_tdo_next['html_content']) ?>
+                  <?= $_tdo_next['html_content'] ?>
                 </div>
               </div>
             </div>

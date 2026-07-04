@@ -14,7 +14,7 @@ require_once LIB_PATH . "v-upcoming-events.php";
       </a>
     </div>
     <div class="tdop-bento">
-      <div class="tdop-featured">
+      <div class="tdop-featured-home">
         <div class="tdop-featured__inner">
           <div class="tdop-badge">
             <i class="fas fa-fire me-2"></i>

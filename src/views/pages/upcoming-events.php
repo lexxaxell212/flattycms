@@ -41,10 +41,10 @@ if ($_tdo_next && $_tdo_next['event_date']): ?>
             </div>
             <div class="tdop-featured__body">
               <div class="tdop-featured__content">
-                <h1 class="text-white text-center mb-4">
+                <h1 class="text-center mb-4">
                   <?= safe_html($_tdo_next['title']) ?>
                 </h1>
-                <div class="text-white">
+                <div>
                   <?= $_tdo_next['html_content'] ?>
                 </div>
               </div>

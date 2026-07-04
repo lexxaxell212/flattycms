@@ -3713,10 +3713,11 @@ input[type="range"]::-moz-range-track {
 .tdop-featured {
   background: linear-gradient(
     135deg,
-    var(--purple-950) 40%,
-    var(--purple-900) 100%
+    var(--bg-primary-subtle) 40%,
+    var(--bg-blue-subtle) 100%
   );
   border-radius: var(--radius);
+  border: var(--border-primary-subtle);
   min-height: 220px;
   position: relative;
   overflow: hidden;
@@ -3724,14 +3725,6 @@ input[type="range"]::-moz-range-track {
   transition:
     transform var(--duration) var(--ease),
     box-shadow var(--duration) var(--ease);
-}
-
-[data-dark] .tdop-featured {
-  background: linear-gradient(
-    135deg,
-    var(--purple-950) 40%,
-    var(--purple-900) 100%
-  );
 }
 
 .tdop-featured::before {
@@ -3756,11 +3749,49 @@ input[type="range"]::-moz-range-track {
   background: rgba(255, 255, 255, 0.02);
 }
 
+.tdop-featured-home {
+  background: linear-gradient(
+    135deg,
+    var(--bg-primary-subtle) 40%,
+    var(--bg-blue-subtle) 100%
+  );
+  border-radius: var(--radius);
+  min-height: 220px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  transition:
+    transform var(--duration) var(--ease),
+    box-shadow var(--duration) var(--ease);
+}
+
+.tdop-featured-home::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.tdop-featured-home::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  right: 20px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.02);
+}
+
 .tdop-featured__inner {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: var(--section-padding);
   position: relative;
   z-index: 1;
 }
@@ -3784,12 +3815,10 @@ input[type="range"]::-moz-range-track {
   overflow-wrap: break-word;
 }
 .tdop-featured__content {
-  color: rgba(255, 255, 255, 0.75);
   margin-bottom: 1rem;
   text-align: left;
   word-break: break-word;
   overflow-wrap: break-word;
-  max-width: 740px;
   margin-inline: auto;
   display: block;
 }

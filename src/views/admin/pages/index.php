@@ -181,6 +181,7 @@ if (isset($_GET['edit'])) {
                 <div class="card-header bg-white border-0">
                   <div class="d-flex gap-2">
                     <span class="small fw-bold">Code Editor</span>
+                    <button class="btn btn-primary btn-sm" onclick="copyTextarea('htmlEditor')">Copy</button>
                     <span class="small ms-auto rounded">html • css</span>
                   </div>
                 </div>
@@ -258,6 +259,16 @@ if (isset($_GET['edit'])) {
     const iframe = document.getElementById('previewFrame');
     iframe.srcdoc = `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>${editor.getValue()}</body></html>`;
   }
+
+  function copyTextarea(id, btn) {
+  const el = document.getElementById(id);
+  el.select();
+  el.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(el.value);
+  const original = btn.textContent;
+  btn.textContent = 'Copied!';
+  setTimeout(() => btn.textContent = original, 1500);
+}
 
   document.getElementById('previewBtn').onclick = updatePreview;
 

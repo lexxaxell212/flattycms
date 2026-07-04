@@ -181,11 +181,11 @@ if (isset($_GET['edit'])) {
                 <div class="card-header bg-white border-0">
                   <div class="d-flex gap-2">
                     <span class="small fw-bold">Code Editor</span>
-                    <button class="btn btn-primary btn-sm" onclick="copyTextarea('htmlEditor')">Copy</button>
-                    <span class="small ms-auto rounded">html • css</span>
+                    <span class="small">html • css</span>
                   </div>
                 </div>
                 <div class="card-body">
+                  <button class="btn btn-primary btn-sm btn-fit" onclick="copyTextarea('htmlEditor')">Copy</button>
                   <textarea id="htmlEditor" name="html_content"><?= htmlspecialchars($page['html_content'] ?? '') ?></textarea>
                 </div>
               </div>
@@ -200,7 +200,7 @@ if (isset($_GET['edit'])) {
                     <span class="fw-bold">Live Preview</span>
                   </div>
                 </div>
-                <div class="card-body p-2">
+                <div class="card-body p-0">
                   <iframe id="previewFrame" class="preview-frame" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
                 </div>
               </div>
@@ -260,6 +260,14 @@ if (isset($_GET['edit'])) {
     iframe.srcdoc = `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>${editor.getValue()}</body></html>`;
   }
 
+  document.getElementById('previewBtn').onclick = updatePreview;
+
+  document.getElementById('clearBtn').onclick = function() {
+    if (!confirm('Hapus semua kode?')) return;
+    editor.setValue(`<div class="p-5 text-center">\n  <h1>${titleInput?.value || 'New Page'}</h1>\n  <p>Siap diedit!</p>\n</div>`);
+    updatePreview();
+  };
+
   function copyTextarea(id, btn) {
   const el = document.getElementById(id);
   el.select();
@@ -269,12 +277,4 @@ if (isset($_GET['edit'])) {
   btn.textContent = 'Copied!';
   setTimeout(() => btn.textContent = original, 1500);
 }
-
-  document.getElementById('previewBtn').onclick = updatePreview;
-
-  document.getElementById('clearBtn').onclick = function() {
-    if (!confirm('Hapus semua kode?')) return;
-    editor.setValue(`<div class="p-5 text-center">\n  <h1>${titleInput?.value || 'New Page'}</h1>\n  <p>Siap diedit!</p>\n</div>`);
-    updatePreview();
-  };
 </script>

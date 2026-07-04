@@ -73,6 +73,8 @@ if ($_tdo_next && $_tdo_next['event_date']): ?>
               <div class="text-muted small">
                 <?= safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?>
               </div>
+            </div>
+            <div class="card-footer">
               <div class="d-flex align-items-center justify-content-between mt-auto">
                 <span class="tdop-card__date">
   <i class="far fa-calendar me-2"></i>

@@ -28,7 +28,7 @@ function isActive(string $path): string
   <title><?= $show_title ?? SITE_NAME ?></title>
   <meta name="description" content="<?= safe_html($s['site_description'] ?? 'Eksplorasi Wisata, Kuliner, dan Budaya Bandung Terlengkap.') ?>">
   <meta property="og:description" content="<?= safe_html($s['site_tagline'] ?? '') ?>">
-  <link rel="icon" href="<?= !empty($s['favicon_url']) ? safe_html($s['favicon_url']) : IMG_URL . 'favicon.ico' ?>" type="image/x-icon">
+  <link rel="icon" href="<?= !empty($s['favicon_url']) ? safe_html($s['favicon_url']) : IMG_URL . 'favicon.png' ?>" type="image/png">
   <?php if (!empty($s['meta_keywords'])): ?>
   <meta name="keywords" content="<?= safe_html($s['meta_keywords']) ?>">
   <?php endif; ?>

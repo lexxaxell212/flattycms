@@ -190,7 +190,7 @@ $page_title = "Layanan Publik Bandung";
           <div class="col-lg-6">
             <div class="card card-flatty h-100">
               <div class="card-body">
-                <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="card-img" alt="default">
+                <img src="<?= IMG_URL ?>default.png" class="card-img" alt="default">
                 <h2 class="h4" data-bhs="layanan.grab.title">Grab/Gojek</h2>
                 <p data-bhs="layanan.grab.desc">
                   Layanan door-to-door yang fleksibel, mencakup motor (Bike) dan mobil (Car).
@@ -216,7 +216,7 @@ $page_title = "Layanan Publik Bandung";
           <div class="col-lg-6">
             <div class="card card-flatty h-100">
               <div class="card-body">
-                <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="card-img" alt="default">
+                <img src="<?= IMG_URL ?>default.png" class="card-img" alt="default">
                 <h2 class="h4" data-bhs="layanan.mjt.title">Metro Jabar Trans</h2>
                 <p data-bhs="layanan.mjt.desc">
                   Evolusi dari Trans Metro Bandung (TMB) dan Teman Bus yang kini terintegrasi dalam sistem Metro Jabar Trans (MJT).
@@ -243,7 +243,7 @@ $page_title = "Layanan Publik Bandung";
           <div class="col-lg-12">
             <div class="card card-flatty h-100">
               <div class="card-body">
-                <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="card-img" alt="default">
+                <img src="<?= IMG_URL ?>default.png" class="card-img" alt="default">
                 <h2 class="h4" data-bhs="layanan.bandara.title">Bandara Kertajati/BDO</h2>
                 <p data-bhs="layanan.bandara.desc">
                   Layanan transportasi udara yang menghubungkan Bandung dengan kota-kota lain. Penerbangan jet komersial saat ini dipusatkan di Bandara Kertajati (KJT), sementara Husein Sastranegara (BDO) melayani pesawat baling-baling (propeller) dan jet pribadi/militer.
@@ -270,7 +270,7 @@ $page_title = "Layanan Publik Bandung";
           <div class="col-lg-6">
             <div class="card card-flatty h-100">
               <div class="card-body">
-                <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="card-img" alt="default">
+                <img src="<?= IMG_URL ?>default.png" class="card-img" alt="default">
                 <h2 class="h4" data-bhs="layanan.leuwipanjang.title">Terminal Leuwipanjang</h2>
                 <p data-bhs="layanan.leuwipanjang.desc">
                   Pusat pemberangkatan bus Antar Kota Antar Provinsi (AKAP) dan Antar Kota Dalam Provinsi (AKDP).
@@ -299,7 +299,7 @@ $page_title = "Layanan Publik Bandung";
           <div class="col-lg-6">
             <div class="card card-flatty h-100">
               <div class="card-body">
-                <img src="<?= BASE_UPLOAD_URL ?>default.jpg" class="card-img" alt="default">
+                <img src="<?= IMG_URL ?>default.png" class="card-img" alt="default">
                 <h2 class="h4" data-bhs="layanan.stasiun.title">Stasiun Hall/Kiaracondong</h2>
                 <p data-bhs="layanan.stasiun.desc">
                   Gerbang utama jalur kereta api jarak jauh dan komuter (Lokal Bandung Raya).

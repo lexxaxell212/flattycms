@@ -13,7 +13,7 @@ require_once LIB_PATH . "v-poi-hotel.php";
       <?php if (!empty($hotel_poi)): ?>
       <?php foreach ($hotel_poi as $item): ?>
       <?php
-      $img = htmlspecialchars($item['poi_image'] ?? BASE_UPLOAD_URL . 'default.jpg');
+      $img = htmlspecialchars($item['poi_image'] ?? IMG_URL . 'default.png');
       $name = htmlspecialchars($item['name'] ?? '');
       $desc = htmlspecialchars(mb_substr($item['description'] ?? '', 0, 90));
       $desc .= mb_strlen($item['description'] ?? '') > 90 ? '...' : '';

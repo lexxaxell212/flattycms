@@ -40,7 +40,7 @@
           (p) => `
         <div class="col-12 col-md-6 col-lg-4">
         <div class="card card-glass shadow-none">
-          <img src="${BASE}/uploads/${p.photo_path}" class="card-img-top" style="object-fit:cover" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
+          <img src="${BASE}/uploads/${p.photo_path}" class="card-img-top" style="object-fit:cover" loading="lazy" onerror="this.src='${BASE}/assets/images/default.png'">
         <div class="card-body">
           <span class="text-truncate small fw-semibold">Dari • ${p.uploader_name}</span>
         </div>
@@ -77,7 +77,7 @@
         <div class="gal-review-card">
         <div class="gal-review-card__header">
         <div class="gal-review-card__user">
-        <img src="${r.avatar || BASE + "/uploads/default.jpg"}" class="gal-review-card__avatar" onerror="this.src='${BASE}/uploads/default.jpg'">
+        <img src="${r.avatar || BASE + "/uploads/default.jpg"}" class="gal-review-card__avatar" onerror="this.src='${BASE}/assets/images/avatar.png'">
         <div>
         <div class="gal-review-card__name">${r.user_name}</div>
         </div>

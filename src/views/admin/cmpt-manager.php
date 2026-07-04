@@ -102,7 +102,7 @@ $csrf = generate_csrf_token();
           ): ?>
           <img src="<?= safe_html($item["image"]) ?>"
           class="card-img-top" alt="<?= safe_html($item["title"]) ?>"
-          onerror="this.onerror=null;this.src='/uploads/default.jpg'">
+          onerror="this.onerror=null;this.src='/assets/images/default.png'">
           <?php else: ?>
           <div class="d-flex align-items-center justify-content-center bg-light text-muted" style="height:150px;">
             <i class="fa-solid fa-image fa-2x opacity-50"></i>

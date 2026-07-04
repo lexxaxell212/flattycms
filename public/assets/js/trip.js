@@ -187,8 +187,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("startDesc").textContent =
           startPoint.description || "Deskripsi belum tersedia.";
         document.getElementById("startImg").innerHTML = startPoint.poi_image
-          ? `<img src="${escHtml(startPoint.poi_image)}" class="card-img-top" onerror="this.src='/uploads/poi-placeholder.jpg'">`
-          : `<img src="/uploads/poi-placeholder.jpg" class="card-img-top">`;
+          ? `<img src="${escHtml(startPoint.poi_image)}" class="card-img-top" onerror="this.src='/assets/images/default.png'">`
+          : `<img src="/assets/images/default.png" class="card-img-top">`;
         document.getElementById("startSelected").style.display = "";
         document.getElementById("startInput").value = "";
         el.style.display = "none";
@@ -279,8 +279,8 @@ document.addEventListener("DOMContentLoaded", () => {
       </button>
       ${
         r.poi_image
-          ? `<img src="${escHtml(r.poi_image)}" class="card-img-top" onerror="this.src='/uploads/poi-placeholder.jpg'">`
-          : `<img src="/uploads/poi-placeholder.jpg" class="card-img-top">`
+          ? `<img src="${escHtml(r.poi_image)}" class="card-img-top" onerror="this.src='/assets/images/default.png'">`
+          : `<img src="/assets/images/default.png" class="card-img-top">`
       }
       <div class="card-body">
       <h5 class="mb-2">${escHtml(r.name)}</h5>
@@ -504,8 +504,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const matchedPoi = POIS.find(p => p.name === trip.start_point_name);
 document.getElementById("startDesc").textContent = matchedPoi?.description || "Deskripsi belum tersedia.";
 document.getElementById("startImg").innerHTML = matchedPoi?.poi_image
-  ? `<img src="${escHtml(matchedPoi.poi_image)}" class="card-img-top" onerror="this.src='/uploads/poi-placeholder.jpg'">`
-  : `<img src="/uploads/poi-placeholder.jpg" class="card-img-top">`;
+  ? `<img src="${escHtml(matchedPoi.poi_image)}" class="card-img-top" onerror="this.src='/assets/images/default.png'">`
+  : `<img src="/assets/images/default.png" class="card-img-top">`;
       
       routes = trip.items.map((item) => ({
         poi_id: item.poi_id,
@@ -746,8 +746,8 @@ document.getElementById("startImg").innerHTML = matchedPoi?.poi_image
         <div class="card-body">
         ${
           poi.poi_image
-            ? `<img src="${escHtml(poi.poi_image)}" class="card-img" onerror="this.src='/uploads/poi-placeholder.jpg'">`
-            : `<img src="/uploads/poi-placeholder.jpg" class="card-img">`
+            ? `<img src="${escHtml(poi.poi_image)}" class="card-img" onerror="this.src='/assets/images/default.png'">`
+            : `<img src="/assets/images/default.png" class="card-img">`
         }
         <h3 class="h5 mb-2">${escHtml(poi.name)}</h3>
         <p class="text-muted mb-2">${escHtml(poi.description || "Deskripsi belum tersedia.")}</p>

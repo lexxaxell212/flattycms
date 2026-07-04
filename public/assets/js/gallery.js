@@ -89,7 +89,7 @@
         <div class="col-12 col-md-6">
         <div class="card card-glass h-100">
           <div class="position-relative" style="padding-top:60%;cursor:pointer" onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${p.poi_name}','${p.uploader_name}','${p.caption || ''}','${p.created_at}',${p.id},${p.user_id})">
-        <img src="${BASE}/uploads/${p.photo_path}" class="position-absolute top-0 start-0" style="object-fit:cover;transition:.2s;aspect-ratio:16/9;width:100%;height:100%" loading="lazy" onerror="this.src='${BASE}/uploads/default.jpg'">
+        <img src="${BASE}/uploads/${p.photo_path}" class="position-absolute top-0 start-0" style="object-fit:cover;transition:.2s;aspect-ratio:16/9;width:100%;height:100%" loading="lazy" onerror="this.src='${BASE}/assets/images/default.png'">
         </div>
         <div class="card-body text-center">
         <div class="text-truncate">
@@ -100,7 +100,7 @@
         </div>
         <div class="card-footer">
           <div class="d-flex align-items-center gap-1">
-        <img src="${p.uploader_avatar || BASE+'/uploads/default.jpg'}"
+        <img src="${p.uploader_avatar || BASE+'/assets/images/avatar.png'}"
         class="rounded-circle me-2" width="18" height="18" style="object-fit:cover">
         <span class="fw-medium me-2"><small class="small fw-normal">Dari •</small> ${p.uploader_name}</span>
         </div>
@@ -157,7 +157,7 @@
         <div class="gal-review-card__header">
         <div class="gal-review-card__user">
         <img src="${r.avatar || BASE+'/uploads/default.jpg'}" class="gal-review-card__avatar"
-        onerror="this.src='${BASE}/uploads/default.jpg'">
+        onerror="this.src='${BASE}/assets/images/avatar.png'">
         <div>
         <div class="gal-review-card__name">${r.user_name}</div>
         <div class="gal-review-card__poi"><i class="fa-solid fa-location-dot me-1"></i>${r.poi_name}</div>

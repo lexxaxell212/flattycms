@@ -32,9 +32,9 @@ require_once LIB_PATH . "v-review.php";
           (mb_strlen($_rev['cerita']) > 160 ? '…' : '')) ?>
         </p>
         <div class="rev-card__author">
-          <img src="<?= !empty($_rev['avatar']) ? safe_html($_rev['avatar']) : '/uploads/default.jpg' ?>"
+          <img src="<?= !empty($_rev['avatar']) ? safe_html($_rev['avatar']) : '/assets/images/avatar.png' ?>"
                class="rev-card__avatar"
-               onerror="this.src='/uploads/default.jpg'"
+               onerror="this.src='/assets/images/avatar.png'"
                alt="<?= safe_html($_rev['user_name']) ?>">
           <div>
             <div class="rev-card__name"><?= safe_html($_rev['user_name']) ?></div>

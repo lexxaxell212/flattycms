@@ -12,7 +12,7 @@ require_once LIB_PATH . "v-poi-wisata.php";
       <?php if (!empty($wisata_poi)): ?>
       <?php foreach ($wisata_poi as $item): ?>
       <?php
-      $img = htmlspecialchars($item['poi_image'] ?? BASE_UPLOAD_URL . 'default.jpg');
+      $img = htmlspecialchars($item['poi_image'] ?? IMG_URL . 'default.png');
       $name = htmlspecialchars($item['name'] ?? '');
       $desc = htmlspecialchars(mb_substr($item['description'] ?? '', 0, 90));
       $desc .= mb_strlen($item['description'] ?? '') > 90 ? '...' : '';

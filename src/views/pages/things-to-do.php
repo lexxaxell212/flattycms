@@ -588,7 +588,10 @@ $page_title = 'Things to Do';
             </div>
             <div class="accordion-body">
               <div>
-                <img src="public/uploads/default.jpg" ysrc="<?= htmlspecialchars($item['image']) ?>" alt='<?= htmlspecialchars($item['title']) ?>'>
+                <img src="<?= htmlspecialchars($item['image']) ?>" 
+     alt="<?= htmlspecialchars($item['title']) ?>" 
+     onerror="this.onerror=null; this.src='/assets/images/default.png';">
+
                 <div class="badge badge-primary">
                   <?= ucwords(str_replace('_', ' ', $item['category'])) ?>
                 </div>
@@ -617,7 +620,10 @@ $page_title = 'Things to Do';
             </div>
             <div class="accordion-body">
               <div>
-                <img src="<?= htmlspecialchars($item['image']) ?>" alt='<?= htmlspecialchars($item['title']) ?>'>
+                <img src="<?= htmlspecialchars($item['image']) ?>" 
+     alt="<?= htmlspecialchars($item['title']) ?>" 
+     onerror="this.onerror=null; this.src='/assets/images/default.png';">
+
                 <div class="badge badge-primary">
                   <?= ucwords(str_replace('_', ' ', $item['category'])) ?>
                 </div>

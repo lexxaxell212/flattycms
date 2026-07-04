@@ -39,7 +39,7 @@ $categories = safe_get_categories($pdo);
               <img
               class="asl-img card-img"
               src="<?= BASE_UPLOAD_URL . htmlspecialchars($p['image'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-              onerror="this.onerror=null;this.src='/uploads/default.jpg'"
+              onerror="this.onerror=null;this.src='/assets/images/default.png'"
               alt="<?= htmlspecialchars($p['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
               loading="lazy"
               >

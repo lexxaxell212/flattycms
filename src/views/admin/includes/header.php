@@ -17,7 +17,7 @@ $current = preg_replace('#^admin/?#', '', $request_path);
   <meta name="description" content="Admin Dashboard">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="<?= BASE_URL ?>">
-  <link rel="icon" href="<?= IMG_URL ?>favicon.ico" type="image/x-icon">
+  <link rel="icon" href="<?= IMG_URL ?>favicon.png" type="image/png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

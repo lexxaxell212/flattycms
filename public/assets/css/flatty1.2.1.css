@@ -3756,16 +3756,11 @@ input[type="range"]::-moz-range-track {
   background: rgba(255, 255, 255, 0.02);
 }
 
-.tdop-featured:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
 .tdop-featured__inner {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 1.75rem;
+  padding: 1rem;
   position: relative;
   z-index: 1;
 }
@@ -3830,10 +3825,6 @@ input[type="range"]::-moz-range-track {
   transition: background var(--duration);
   position: relative;
   z-index: 1;
-}
-
-.tdop-featured:hover .tdop-featured__cta {
-  background: rgba(255, 255, 255, 0.25);
 }
 
 /* Badge */

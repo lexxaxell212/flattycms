@@ -33,7 +33,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
             <div class="gallery-rand-skeleton"></div>
             <img
             src="<?= $src ?>"
-            onerror="this.onerror=null;this.src='/uploads/default.jpg';this.classList.add('loaded');this.previousElementSibling.classList.add('hidden')"
+            onerror="this.onerror=null;this.src='/assets/images/default.png';this.classList.add('loaded');this.previousElementSibling.classList.add('hidden')"
             onload="this.classList.add('loaded');this.previousElementSibling.classList.add('hidden')"
             >
             <div class="gallery-rand-meta w-100 text-center">

@@ -93,7 +93,7 @@ function generateStaticPage($slug, $html_content, $page_id, $title)
       <div class="page-header text-center">
         <h1><em class="styled">{$page_title_val}</em></h1>
       <?php if (\$_this_event && \$_this_event['event_date']): ?>
-      <div class="badge badge-accent fw-bold mt-2">
+      <div style="border:var(--border-accent-subtle);" class="badge badge-accent fw-bold mt-2">
         <i class="far fa-calendar-check me-1"></i>
         <?php echo _tdo_date_range(\$_this_event['event_date'], \$_this_event['event_date_end']); ?>
       </div>

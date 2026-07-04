@@ -30,11 +30,11 @@ if ($_tdo_next && $_tdo_next['event_date']): ?>
         <div class="tdop-featured rounded-lg mx-auto" style="max-width:900px">
           <div class="tdop-featured__inner">
             <div class="d-flex justify-content-between align-items-center mb-5">
-              <span class="badge badge-accent position-absolute top-0 end-0 m-4 fw-bold">
+              <span style="border:var(--border-accent-subtle);" class="badge badge-accent position-absolute top-0 end-0 m-4 fw-bold">
   <i class="far fa-calendar-check me-1"></i>
   <?= _tdo_date_range($_tdo_next['event_date'], $_tdo_next['event_date_end']) ?>
               </span>
-              <span class="badge badge-accent position-absolute top-0 start-0 m-4 fw-bold">
+              <span style="border:var(--border-accent-subtle);" class="badge badge-accent position-absolute top-0 start-0 m-4 fw-bold">
                 <i class="fas fa-fire me-1"></i>
                 Featured
               </span>

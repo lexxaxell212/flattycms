@@ -3752,8 +3752,8 @@ input[type="range"]::-moz-range-track {
 .tdop-featured-home {
   background: linear-gradient(
     135deg,
-    var(--bg-primary-subtle) 40%,
-    var(--bg-blue-subtle) 100%
+    var(--purple-950) 40%,
+    var(--purple-900) 100%
   );
   border-radius: var(--radius);
   min-height: 220px;

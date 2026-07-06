@@ -596,9 +596,9 @@ $page_title = 'Things to Do';
                   <?= ucwords(str_replace('_', ' ', $item['category'])) ?>
                 </div>
                 <h3><?= htmlspecialchars($item['title']) ?></h3>
-                <p>
+                <div>
                   <?= $item['desc'] ?>
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -628,9 +628,9 @@ $page_title = 'Things to Do';
                   <?= ucwords(str_replace('_', ' ', $item['category'])) ?>
                 </div>
                 <h3><?= htmlspecialchars($item['title']) ?></h3>
-                <p>
+                <div>
                   <?= $item['desc'] ?>
-                </p>
+                </div>
               </div>
             </div>
           </div>

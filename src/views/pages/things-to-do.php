@@ -588,9 +588,10 @@ $page_title = 'Things to Do';
             </div>
             <div class="accordion-body">
               <div>
+                <!-- 
                 <img src="<?= htmlspecialchars($item['image']) ?>" 
      alt="<?= htmlspecialchars($item['title']) ?>" 
-     onerror="this.classList.add('d-none');">
+     onerror="this.classList.add('d-none');"> -->
 
                 <div class="badge badge-primary">
                   <?= ucwords(str_replace('_', ' ', $item['category'])) ?>
@@ -620,9 +621,10 @@ $page_title = 'Things to Do';
             </div>
             <div class="accordion-body">
               <div>
+                <!--
                 <img src="<?= htmlspecialchars($item['image']) ?>" 
      alt="<?= htmlspecialchars($item['title']) ?>" 
-     onerror="this.classList.add('d-none');">
+     onerror="this.classList.add('d-none');"> -->
 
                 <div class="badge badge-primary">
                   <?= ucwords(str_replace('_', ' ', $item['category'])) ?>

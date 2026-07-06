@@ -162,7 +162,7 @@
   /* ─── Text ─── */
   --text-body: oklch(0.35 0.03 295);
   /* dark, purple undertone subtle */
-  --text-heading: oklch(0.231 0.089 295);
+  --text-heading: oklch(0.231 0.089 295/0.88);
   /* dark purple */
   --text-surface: oklch(0.4 0.12 295);
   /* medium purple  */
@@ -280,7 +280,7 @@
 
   /* Text */
   --text-body: oklch(0.82 0.01 295);
-  --text-heading: oklch(0.94 0.014 295);
+  --text-heading: oklch(0.91 0.014 295/0.88);
   --text-surface: oklch(0.87 0.02 295);
   --text-card: oklch(0.82 0.01 295);
   --text-modal: oklch(0.82 0.01 295);
@@ -2125,9 +2125,9 @@ table tbody td {
 }
 .btn-outline-white:hover,
 .btn-outline-white:active {
-  background: rgba(255, 255, 255, 0.15);
+  background: oklch(0.151 0.08 295/0.05);
   border: 1px solid #fff !important;
-  color: #fff;
+  color: var(--text-white) !important;
 }
 
 .btn-hero {

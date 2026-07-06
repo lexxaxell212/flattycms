@@ -1485,6 +1485,36 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-ticker]").forEach(initTicker);
 });
 
+// feeder text
+function initFeeder(el) {
+  let index = 0;
+
+  setInterval(() => {
+    const texts = el.dataset.feeder.split("|");
+    el.style.transform = "translateY(-30%)";
+    el.style.opacity = "0";
+    setTimeout(() => {
+      index = (index + 1) % texts.length;
+      el.textContent = texts[index];
+      el.style.transition = "none";
+      el.style.transform = "translateY(30%)";
+      el.style.opacity = "0";
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          el.style.transition =
+            "transform 400ms cubic-bezier(0.16, 1, 0.3, 1), opacity 400ms ease";
+          el.style.transform = "translateY(0)";
+          el.style.opacity = "1";
+        });
+      });
+    }, 400);
+  }, 2000);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-feeder]").forEach(initFeeder);
+});
+
 // reveal
 document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll("section");

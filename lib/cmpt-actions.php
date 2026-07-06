@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
       $pdo->prepare("INSERT INTO cmpt (title, image, `desc`, button_link, type, category, status) VALUES (?,?,?,?,?,?,'active')")
       ->execute([
         $title,
-        $_POST['image']       ?? BASE_UPLOAD_URL . 'default.jpg',
+        $_POST['image']       ?? IMG_URL . 'default.png',
         trim($_POST['desc']      ?? ''),
         trim($_POST['button_link']  ?? '#'),
         $_POST['type']        ?? 'card',
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
       $pdo->prepare("UPDATE cmpt SET title=?, image=?, `desc`=?, button_link=?, type=?, category=?, status=? WHERE id=?")
       ->execute([
         trim($_POST['title']       ?? ''),
-        $_POST['image']            ?? BASE_UPLOAD_URL . 'default.jpg',
+        $_POST['image']            ?? IMG_URL . 'default.png',
         trim($_POST['desc']     ?? ''),
         trim($_POST['button_link'] ?? '#'),
         $_POST['type']             ?? 'card',
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 $items = $pdo->query("SELECT * FROM cmpt WHERE status = 'active' ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
 $items = array_map(fn($i) => array_merge([
   'title' => 'Tanpa Judul',
-  'image' => BASE_UPLOAD_URL . 'default.jpg',
+  'image' => IMG_URL . 'default.png',
   'desc' => '',
   'button_link' => '#',
   'type' => 'card',

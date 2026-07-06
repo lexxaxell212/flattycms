@@ -98,7 +98,7 @@ $csrf = generate_csrf_token();
 
           <?php if (
             !empty($item["image"]) &&
-            $item["image"] !== "/uploads/default.jpg"
+            $item["image"] !== "/assets/images/default.png"
           ): ?>
           <img src="<?= safe_html($item["image"]) ?>"
           class="card-img-top" alt="<?= safe_html($item["title"]) ?>"

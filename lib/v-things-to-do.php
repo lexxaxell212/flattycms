@@ -15,4 +15,4 @@ foreach ($zona_bandung as $item) {
   $zona_map[$item['category']][] = $item;
 }
 
-$latest_items = array_filter($zona_bandung, fn($i) => $i['is_new']);
+$latest_items = array_slice(array_filter($zona_bandung, fn($i) => $i['is_new']), 0, 5);

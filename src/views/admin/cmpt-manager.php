@@ -98,7 +98,7 @@ $csrf = generate_csrf_token();
 
           <?php if (
             !empty($item["image"]) &&
-            $item["image"] !== "/assets/images/default.png"
+            $item["image"] !== IMG_URL . "default.png"
           ): ?>
           <img src="<?= safe_html($item["image"]) ?>"
           class="card-img-top" alt="<?= safe_html($item["title"]) ?>"
@@ -313,7 +313,7 @@ $csrf = generate_csrf_token();
 
   function clearImage() {
     document.getElementById('imageInput').value = '';
-    document.getElementById('modalImage').value = BASE_UPLOAD_URL + 'default.jpg';
+    document.getElementById('modalImage').value = IMG_URL + 'default.png';
     document.getElementById('previewContainer').classList.add('d-none');
   }
 
@@ -328,7 +328,7 @@ $csrf = generate_csrf_token();
     document.getElementById('modalType').value = type;
     document.getElementById('modalStatus').value = status;
     document.getElementById('modalCategory').value = category;
-    if (image && image !== BASE_UPLOAD_URL + 'default.jpg') {
+    if (image && image !== IMG_URL + 'default.png') {
       document.getElementById('imagePreview').src = image + '?t=' + Date.now();
       document.getElementById('previewContainer').classList.remove('d-none');
     }
@@ -366,7 +366,7 @@ $csrf = generate_csrf_token();
     document.getElementById('modalTitle').textContent = 'Buat Baru';
     document.getElementById('modalAction').value = 'create';
     document.getElementById('cardForm').reset();
-    document.getElementById('modalImage').value = BASE_UPLOAD_URL + 'default.jpg';
+    document.getElementById('modalImage').value = IMG_URL + 'default.png';
     document.getElementById('modalCategory').value = 'general';
     document.getElementById('modalType').value = 'card';
     document.getElementById('modalStatus').value = 'active';

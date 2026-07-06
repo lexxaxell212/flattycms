@@ -590,7 +590,7 @@ $page_title = 'Things to Do';
               <div>
                 <img src="<?= htmlspecialchars($item['image']) ?>" 
      alt="<?= htmlspecialchars($item['title']) ?>" 
-     onerror="this.onerror=null; this.src='/assets/images/default.png';">
+     onerror="this.classList.add('d-none');">
 
                 <div class="badge badge-primary">
                   <?= ucwords(str_replace('_', ' ', $item['category'])) ?>
@@ -622,7 +622,7 @@ $page_title = 'Things to Do';
               <div>
                 <img src="<?= htmlspecialchars($item['image']) ?>" 
      alt="<?= htmlspecialchars($item['title']) ?>" 
-     onerror="this.onerror=null; this.src='/assets/images/default.png';">
+     onerror="this.classList.add('d-none');">
 
                 <div class="badge badge-primary">
                   <?= ucwords(str_replace('_', ' ', $item['category'])) ?>

@@ -597,7 +597,7 @@ $page_title = 'Things to Do';
                 </div>
                 <h3><?= htmlspecialchars($item['title']) ?></h3>
                 <p>
-                  <?= htmlspecialchars($item['desc']) ?>
+                  <?= $item['desc'] ?>
                 </p>
               </div>
             </div>
@@ -629,7 +629,7 @@ $page_title = 'Things to Do';
                 </div>
                 <h3><?= htmlspecialchars($item['title']) ?></h3>
                 <p>
-                  <?= htmlspecialchars($item['desc']) ?>
+                  <?= $item['desc'] ?>
                 </p>
               </div>
             </div>

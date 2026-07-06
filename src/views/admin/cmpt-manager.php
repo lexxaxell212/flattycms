@@ -114,7 +114,7 @@ $csrf = generate_csrf_token();
               mb_substr($item["title"], 0, 40)
             ) ?></h5>
             <p class="text-muted small">
-              <?= safe_html(mb_substr($item["desc"], 0, 60)) ?>
+              <?= mb_substr($item["desc"], 0, 60) ?>
             </p>
           </div>
           <div class="card-footer">

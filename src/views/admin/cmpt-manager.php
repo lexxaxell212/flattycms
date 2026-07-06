@@ -21,16 +21,13 @@ $csrf = generate_csrf_token();
     </div>
     <?php if (isset($_GET["success"]) || $success_msg): ?>
     <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
-      <i class="fa-solid fa-circle-check me-2"></i><?= $success_msg ?:
-        "Sukses disimpan!" ?>
+      <i class="fa-solid fa-circle-check me-2"></i><?= $success_msg ?: "Sukses disimpan!" ?>
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     <?php endif; ?>
     <?php if ($error_msg): ?>
     <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
-      <i class="fa-solid fa-circle-exclamation me-2"></i><?= safe_html(
-        $error_msg
-      ) ?>
+      <i class="fa-solid fa-circle-exclamation me-2"></i><?= safe_html($error_msg) ?>
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     <?php endif; ?>
@@ -79,27 +76,21 @@ $csrf = generate_csrf_token();
     <?php else: ?>
     <div class="row g-2" id="cardsContainer">
       <?php foreach ($items as $item): ?>
-      <div class="col-lg-4 col-md-6 col-12"
+      <div class="col-lg-4 col-md-6 col-12 card-item"
         data-category="<?= safe_html(strtolower($item["category"])) ?>"
         data-title="<?= safe_html(strtolower($item["title"])) ?>"
         data-type="<?= safe_html(strtolower($item["type"])) ?>">
         <div class="card card-glass h-100">
           <!-- Category Badge -->
           <span class="position-absolute top-0 start-0 m-2 badge bg-primary bg-opacity-75 z-1" style="font-size:.7rem">
-            <?= safe_html(
-              $categories[$item["category"]] ??
-                ucwords(str_replace("_", " ", $item["category"]))
-            ) ?>
+            <?= safe_html($categories[$item["category"]] ?? ucwords(str_replace("_", " ", $item["category"]))) ?>
           </span>
           <!-- ID Badge -->
           <span class="position-absolute bottom-0 end-0 m-2 badge bg-dark bg-opacity-75 z-1" style="font-size:.7rem">
             #<?= (int) $item["id"] ?>
           </span>
 
-          <?php if (
-            !empty($item["image"]) &&
-            $item["image"] !== IMG_URL . "default.png"
-          ): ?>
+          <?php if (!empty($item["image"]) && $item["image"] !== IMG_URL . "default.png"): ?>
           <img src="<?= safe_html($item["image"]) ?>"
           class="card-img-top" alt="<?= safe_html($item["title"]) ?>"
           onerror="this.onerror=null;this.src='/assets/images/default.png'">
@@ -110,9 +101,7 @@ $csrf = generate_csrf_token();
           <?php endif; ?>
 
           <div class="card-body">
-            <h5 class="mb-2"><?= safe_html(
-              mb_substr($item["title"], 0, 40)
-            ) ?></h5>
+            <h5 class="mb-2"><?= safe_html(mb_substr($item["title"], 0, 40)) ?></h5>
             <div class="text-muted small">
               <?= mb_substr($item["desc"], 0, 250) ?>
             </div>
@@ -120,15 +109,7 @@ $csrf = generate_csrf_token();
           <div class="card-footer">
             <button class="btn btn-primary me-4"
               data-bs-toggle="modal" data-bs-target="#itemModal"
-              onclick="editItem(<?= $item["id"] ?>,'<?= addslashes(
-  $item["title"]
-) ?>','<?= addslashes($item["image"]) ?>','<?= addslashes(
-  $item["desc"]
-) ?>','<?= addslashes($item["button_link"]) ?>','<?= addslashes(
-  $item["type"]
-) ?>','<?= addslashes($item["status"]) ?>','<?= addslashes(
-  $item["category"]
-) ?>')">
+              onclick='editItem(<?= (int) $item["id"] ?>, <?= json_encode($item["title"], JSON_HEX_APOS | JSON_HEX_QUOT) ?>, <?= json_encode($item["image"], JSON_HEX_APOS | JSON_HEX_QUOT) ?>, <?= json_encode($item["desc"], JSON_HEX_APOS | JSON_HEX_QUOT) ?>, <?= json_encode($item["button_link"], JSON_HEX_APOS | JSON_HEX_QUOT) ?>, <?= json_encode($item["type"], JSON_HEX_APOS | JSON_HEX_QUOT) ?>, <?= json_encode($item["status"], JSON_HEX_APOS | JSON_HEX_QUOT) ?>, <?= json_encode($item["category"], JSON_HEX_APOS | JSON_HEX_QUOT) ?>)'>
               <i class="fa-solid fa-pencil"></i>
             </button>
             <form method="POST" class="p-0 m-0 border-0" onsubmit="return confirm('Hapus card ini?')">
@@ -180,7 +161,7 @@ $csrf = generate_csrf_token();
                   <img id="imagePreview" style="max-width:80px;max-height:80px;border-radius:8px;object-fit:cover;">
                   <button type="button" class="btn btn-sm btn-outline-danger" onclick="clearImage()">Ganti</button>
                 </div>
-                <input type="hidden" name="image" id="modalImage" value="default.jpg">
+                <input type="hidden" name="image" id="modalImage" value="<?= safe_html(IMG_URL . "default.png") ?>">
                 <div id="uploadStatus" class="alert d-none mt-2"></div>
               </div>
 
@@ -208,9 +189,7 @@ $csrf = generate_csrf_token();
                   <select name="category" id="modalCategory" class="form-select">
                     <option value="general">General</option>
                     <?php foreach ($categories as $key => $label): ?>
-                    <option value="<?= $key ?>"><?= safe_html(
-  $label
-) ?></option>
+                    <option value="<?= $key ?>"><?= safe_html($label) ?></option>
                     <?php endforeach; ?>
                   </select>
                 </div>
@@ -237,19 +216,11 @@ $csrf = generate_csrf_token();
   let uploading = false;
   const categories = <?= json_encode($categories) ?>;
   const BASE_UPLOAD_URL = '<?= BASE_UPLOAD_URL ?>';
+  const IMG_URL = '<?= IMG_URL ?>';
 
   const typeCategories = {
-    'card': ['ads',
-      'cta',
-      'promo',
-      'form',
-      'media'],
-    'activity': ['bandung_pusat',
-      'bandung_utara',
-      'bandung_selatan',
-      'bandung_timur',
-      'bandung_barat',
-      'lain_nya'],
+    'card': ['ads', 'cta', 'promo', 'form', 'media'],
+    'activity': ['bandung_pusat', 'bandung_utara', 'bandung_selatan', 'bandung_timur', 'bandung_barat', 'lain_nya'],
     'popup': ['consent'],
     'toast': ['notifikasi']
   };
@@ -307,8 +278,7 @@ $csrf = generate_csrf_token();
     const status = document.getElementById('uploadStatus');
     status.className = `alert alert-${type} d-block`;
     status.innerHTML = message;
-    setTimeout(() => status.classList.add('d-none'),
-      4000);
+    setTimeout(() => status.classList.add('d-none'), 4000);
   }
 
   function clearImage() {
@@ -356,7 +326,7 @@ $csrf = generate_csrf_token();
     const sel = document.getElementById('modalCategory');
     Array.from(sel.options).forEach(opt => {
       const show = opt.value === 'general' || !typeCategories[type] || typeCategories[type].includes(opt.value);
-      opt.style.display = show ? '': 'none';
+      opt.style.display = show ? '' : 'none';
       opt.disabled = !show;
     });
     if (sel.value !== 'general' && !typeCategories[type]?.includes(sel.value)) sel.value = 'general';

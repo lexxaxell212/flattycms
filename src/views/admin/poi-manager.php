@@ -169,7 +169,7 @@ $total = count($pois);
           </div>
           <div class="col-12">
             <label class="form-label small fw-semibold">Copyright <span class="text-muted fw-normal">(opsional)</span></label>
-            <input type="text" id="poiCopyright" class="form-control" placeholder="Nama / Sumber foto...">
+            <textarea rows="3" id="poiCopyright" class="form-control" placeholder="Nama / Sumber foto..."></textarea>
           </div>
           <div class="col-12">
             <label class="form-label small fw-semibold">Gambar POI</label>
@@ -239,7 +239,7 @@ $total = count($pois);
           </div>
           <div class="col-12">
             <label class="form-label small fw-semibold">Copyright <span class="text-muted fw-normal">(opsional)</span></label>
-            <input type="text" id="editPoiCopyright" class="form-control" placeholder="Nama / Sumber foto...">
+            <textarea rows="3" id="editPoiCopyright" class="form-control" placeholder="Nama / Sumber foto..."></textarea>
           </div>
           <div class="col-12">
             <label class="form-label small fw-semibold">Ganti Gambar <span class="text-muted fw-normal">(opsional)</span></label>

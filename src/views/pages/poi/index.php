@@ -4,6 +4,14 @@ $poi = get_poi_by_slug($slug);
 $poi_id = $poi['id'];
 
 $page_title = $poi['name'] . ' - ' . SITE_NAME;
+
+function sanitizeHtml($html) {
+  $html = preg_replace('/<\?(?:php|=)?[\s\S]*?\?>/i', '', $html);
+  $html = preg_replace('/<script\b[^>]*>[\s\S]*?<\/script>/i', '', $html);
+  $html = preg_replace('/(<[^>]+?)\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i', '$1', $html);
+  $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i', '', $html);
+  return $html;
+}
 ?>
 <script src="<?= JS_URL ?>reactions.js" defer></script>
 <main class="main-content">
@@ -11,7 +19,7 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
     <div class="page-header">
       <img src="<?= htmlspecialchars($poi['poi_image'] ?? '') ?>" alt="<?= htmlspecialchars($poi['name']) ?>" class="w-100 d-block rounded-lg mx-auto mb-2" style="max-width:600px" onerror="this.onerror=null;this.src='/assets/images/default.png'">
       <div class="text-center">
-        <?= $poi['copyright'] ?? '' ?>
+        <?= sanitizeHtml($poi['copyright'] ?? '') ?>
       </div>
     </div>
     <section class="revealed">

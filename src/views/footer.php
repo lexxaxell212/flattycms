@@ -35,9 +35,6 @@
           <li><a class="<?= isActive(
             "/pages/sejarah"
           ) ?>" href="/pages/sejarah" data-bhs="f.pages.3">Sejarah Bandung</a></li>
-          <li><a class="<?= isActive(
-            "/pages/layanan"
-          ) ?>" href="/pages/layanan" data-bhs="f.pages.4">Layanan di Bandung</a></li>
         </ul>
       </div>
       <div class="footer-nav__col">

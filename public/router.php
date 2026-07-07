@@ -10,7 +10,6 @@ $titles = [
   'upcoming-events' => 'Upcoming Events',
   'pages/tentang' => 'Tentang',
   'pages/sejarah' => 'Sejarah',
-  'pages/layanan' => 'Layanan',
   'pages/privacy-policy' => 'Kebijakan Privasi',
   'pages/kritik-dan-saran' => 'Kritik dan Saran',
   'blogs' => 'Blog',
@@ -35,7 +34,6 @@ $routes = [
   // etc pages
   'pages/sejarah' => SRC_PATH . 'pages/sejarah.php',
   'pages/tentang' => SRC_PATH . 'pages/tentang.php',
-  'pages/layanan' => SRC_PATH . 'pages/layanan.php',
   'pages/privacy-policy' => SRC_PATH . 'pages/privacy-policy.php',
   'pages/kritik-dan-saran' => SRC_PATH . 'pages/kritik-dan-saran.php',
   // blogs

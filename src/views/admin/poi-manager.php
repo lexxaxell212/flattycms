@@ -74,11 +74,6 @@ $total = count($pois);
                     <i class="fa-solid fa-road me-1"></i><?= safe_html($p['address']) ?>
                   </div>
                   <?php endif; ?>
-                  <?php if ($p['copyright']): ?>
-                  <div class="small text-muted mt-1">
-                    <i class="fa-solid fa-copyright me-1"></i><?= safe_html($p['copyright']) ?>
-                  </div>
-                  <?php endif; ?>
                   <div class="d-flex flex-wrap gap-2 mt-2">
                     <button class="btn btn-fit btn-outline-primary btn-edit-poi"
                       data-id="<?= $p['id'] ?>"

@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("startName").textContent = startPoint.name;
         document.getElementById("startName2").textContent = startPoint.name;
         document.getElementById("startDesc").textContent =
-          startPoint.description || "Deskripsi belum tersedia.";
+          stripHtml(startPoint.description || "Deskripsi belum tersedia.");
         document.getElementById("startImg").innerHTML = startPoint.poi_image
           ? `<img src="${escHtml(startPoint.poi_image)}" class="card-img-top" onerror="this.src='/assets/images/default.png'">`
           : `<img src="/assets/images/default.png" class="card-img-top">`;
@@ -284,7 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       <div class="card-body">
       <h5 class="mb-2">${escHtml(r.name)}</h5>
-      <p class="text-muted small">${escHtml(r.description || "Deskripsi belum tersedia.")}</p>
+      <p class="text-muted small">${escHtml(stripHtml(r.description || "Deskripsi belum tersedia."))}</p>
       </div>
       </div>
       ${IS_LOGGED ? `<div class="mt-2"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan untuk POI ini..." value="${escHtml(r.note)}" style="font-size:.9rem" ${window.isLoadedTrip ? "disabled" : ""}></div>` : ""}
@@ -502,7 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("startName2").textContent = startPoint.name;
       document.getElementById("startSelected").style.display = "";
       const matchedPoi = POIS.find(p => p.name === trip.start_point_name);
-document.getElementById("startDesc").textContent = matchedPoi?.description || "Deskripsi belum tersedia.";
+document.getElementById("startDesc").textContent = stripHtml(matchedPoi?.description || "Deskripsi belum tersedia.");
 document.getElementById("startImg").innerHTML = matchedPoi?.poi_image
   ? `<img src="${escHtml(matchedPoi.poi_image)}" class="card-img-top" onerror="this.src='/assets/images/default.png'">`
   : `<img src="/assets/images/default.png" class="card-img-top">`;
@@ -710,6 +710,13 @@ document.getElementById("startImg").innerHTML = matchedPoi?.poi_image
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
   }
+  
+  function stripHtml(html) {
+    if (!html) return "";
+    const tmp = document.createElement("div");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  }
 
   function loadExplorePoi() {
     const wrap = document.getElementById("explorePoiList");
@@ -750,7 +757,7 @@ document.getElementById("startImg").innerHTML = matchedPoi?.poi_image
             : `<img src="/assets/images/default.png" class="card-img">`
         }
         <h3 class="h5 mb-2">${escHtml(poi.name)}</h3>
-        <p class="text-muted mb-2">${escHtml(poi.description || "Deskripsi belum tersedia.")}</p>
+        <p class="text-muted mb-2">${escHtml(stripHtml(poi.description || "Deskripsi belum tersedia."))}</p>
         </div>
         <div class="card-footer">
         ${

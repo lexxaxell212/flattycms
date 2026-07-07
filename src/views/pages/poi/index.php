@@ -29,7 +29,7 @@ function sanitizeHtml($html) {
         </em>
       </h1>
       <div>
-        <?= nl2br(htmlspecialchars($poi['description'] ?? '')) ?>
+        <?= sanitizeHtml($poi['description'] ?? '') ?>
       </div>
     </section>
     <hr class="my-4">

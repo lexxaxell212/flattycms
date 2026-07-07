@@ -23,7 +23,7 @@ function sanitizeHtml($html) {
       </div>
     </div>
     <section class="revealed">
-      <h1 class="h2 mb-4">
+      <h1 class="mb-4">
         <em class="styled">
         <?= htmlspecialchars($poi['name']) ?>
         </em>

@@ -1,5 +1,13 @@
 <?php
 require_once LIB_PATH . "v-poi-wisata.php";
+
+function sanitizeHtml($html) {
+  $html = preg_replace('/<\?(?:php|=)?[\s\S]*?\?>/i', '', $html);
+  $html = preg_replace('/<script\b[^>]*>[\s\S]*?<\/script>/i', '', $html);
+  $html = preg_replace('/(<[^>]+?)\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i', '$1', $html);
+  $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i', '', $html);
+  return $html;
+}
 ?>
 <script src="<?= JS_URL ?>part-wisata.js" defer></script>
 <div class="container">
@@ -14,7 +22,7 @@ require_once LIB_PATH . "v-poi-wisata.php";
       <?php
       $img = htmlspecialchars($item['poi_image'] ?? IMG_URL . 'default.png');
       $name = htmlspecialchars($item['name'] ?? '');
-      $desc = htmlspecialchars(mb_substr($item['description'] ?? '', 0, 90));
+      $desc = mb_substr(sanitizeHtml($item['description'] ?? ''), 0, 90);
       $desc .= mb_strlen($item['description'] ?? '') > 90 ? '...' : '';
       $url = htmlspecialchars($item['slug'] ?? '');
       ?>

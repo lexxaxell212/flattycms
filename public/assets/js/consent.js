@@ -44,7 +44,7 @@
     }
   }
 
-  async function saveConsent(rejectAll = false, clickedBtn = null) {
+  async function saveConsent(rejectAll = false, clickedBtn = null, silent = false) {
     const cats = {
       necessary: true,
       analytics: !rejectAll,
@@ -69,11 +69,15 @@
       });
 
       dismissBanner();
-      flattyToast("success", rejectAll ? "Preferensi disimpan." : "Terima kasih.");
+      if (!silent) {
+        flattyToast("success", rejectAll ? "Preferensi disimpan." : "Terima kasih.");
+      }
       if (!rejectAll) injectTracking(cats);
 
     } catch (err) {
-      flattyToast("error", "Gagal menyimpan preferensi cookie.");
+      if (!silent) {
+        flattyToast("error", "Gagal menyimpan preferensi cookie.");
+      }
       console.error("Consent error:", err);
 
       if (clickedBtn) { clickedBtn.disabled = false; clickedBtn.innerHTML = originalHTML; }
@@ -87,7 +91,7 @@
 
     window.addEventListener("scroll", showBannerOnScroll);
 
-    document.getElementById("btnDismissConsent")?.addEventListener("click", function () { saveConsent(true, null); });
+    document.getElementById("btnDismissConsent")?.addEventListener("click", function () { saveConsent(true, null, true); });
     document.getElementById("btnAcceptConsent")?.addEventListener("click", function () { saveConsent(false, this); });
     document.getElementById("btnRejectConsent")?.addEventListener("click", function () { saveConsent(true, this); });
   });

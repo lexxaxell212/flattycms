@@ -28,8 +28,8 @@ require_once LIB_PATH . "v-review.php";
         <div class="rev-card__title"><?= safe_html($_rev['judul']) ?></div>
         <?php endif; ?>
         <p class="rev-card__text">
-          <?= safe_html(mb_substr($_rev['cerita'], 0, 160) .
-          (mb_strlen($_rev['cerita']) > 160 ? '…' : '')) ?>
+          <?= safe_html(mb_substr($_rev['cerita'], 0, 300) .
+          (mb_strlen($_rev['cerita']) > 300 ? '…' : '')) ?>
         </p>
         <div class="rev-card__author">
           <img src="<?= !empty($_rev['avatar']) ? safe_html($_rev['avatar']) : '/assets/images/avatar.png' ?>"

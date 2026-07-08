@@ -15,7 +15,7 @@ require_once LIB_PATH . "v-poi-hotel.php";
       <?php
       $img = htmlspecialchars($item['poi_image'] ?? IMG_URL . 'default.png');
       $name = htmlspecialchars($item['name'] ?? '');
-      $desc = htmlspecialchars(mb_substr($item['description'] ?? '', 0, 90));
+      $desc = mb_substr(sanitizeHtml($item['description'] ?? '', 0, 90));
       $desc .= mb_strlen($item['description'] ?? '') > 90 ? '...' : '';
       $url = htmlspecialchars($item['slug'] ?? '');
       ?>
@@ -23,9 +23,9 @@ require_once LIB_PATH . "v-poi-hotel.php";
         style="background-image: url('<?= $img ?>')">
         <div class="poi-hotel-overlay">
           <h3 class="poi-hotel-name"><?= $name ?></h3>
-          <p class="poi-hotel-desc">
+          <div class="poi-hotel-desc">
             <?= $desc ?>
-          </p>
+          </div>
           <?php if (!empty($url)): ?>
           <a href="/poi/<?= $url ?>"
             class="poi-wisata-btn"

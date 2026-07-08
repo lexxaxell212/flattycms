@@ -183,7 +183,12 @@
           action: "generate",
           csrf_token: CSRF,
           prompt: input,
-          pois: POIS_FULL,
+          pois: POIS_FULL.map(p => ({
+            name: p.name,
+            category_name: p.category_name,
+            address: p.address,
+            slug: p.slug,
+          })),
         }),
       });
       const data = await res.json();

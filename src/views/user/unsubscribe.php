@@ -86,9 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
             unsubBody.remove();
             successPlace.innerHTML = '<p class="text-success">Unsubscribe berhasil. Terima kasih telah berlangganan.</p>';
           }
-          setTimeout(() => {
-            window.location.reload();
-          }, 3000);
         }
       })
       .catch(error => {

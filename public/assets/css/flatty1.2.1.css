@@ -5657,7 +5657,7 @@ input[type="range"]::-moz-range-track {
 }
 
 .poi-wisata-desc {
-  color: oklch(85% 0.01 270);
+  color: oklch(0.9 0 0/0.8);
   font-size: 0.89rem;
   margin: 0 0 0.9rem;
   line-height: 1.5;

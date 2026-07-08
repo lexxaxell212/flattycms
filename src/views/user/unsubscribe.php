@@ -1,40 +1,36 @@
-<?php
-$page_title = "Unsubscribe";
-require_once LIB_PATH . "mailer.php";
-require_once LIB_PATH . "subscriber.php";
-require_once LIB_PATH . "v-unsubscribe.php"; 
-?>
 <main class="main-content">
   <div class="container">
     <div class="my-5">
-      <div class="p-3 text-center mb-4">
+      <div class="p-3 text-center mb-5">
         <h1 class="h2 text-center" data-bhs="unsub.title">
           Unsubscribe Newsletter
         </h1>
+        <div id="successPlace"></div>
       </div>
 
       <?php if ($show_form): ?>
-      <form id="unsubForm" action="/api/api-unsubscribe.php" method="POST" class="mx-auto row g-4 form">
-        <div class="col-12">
-          <p data-bhs="unsub.excerpt">
+      <div id="unsubBody">
+        <div class="col-12 text-center">
+          <p id="unsubExcerpt" data-bhs="unsub.excerpt">
             Masukkan email Anda untuk berhenti berlangganan.
           </p>
         </div>
-        <div class="col-12">
-          <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
-          <input type="email" name="email" class="form-control" data-bhs="form.email.placeholder" placeholder="nama@email.com" required>
-        </div>
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary mt-2" data-bhs="btn.unsubs">
-            Berhenti langganan
-          </button>
-        </div>
-      </form>
+        <form id="unsubForm" action="api/unsubscribe.php" method="POST" class="mx-auto row g-4 form">
+          <div class="col-12">
+            <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
+            <input type="email" name="email" class="form-control" data-bhs="form.email.placeholder" placeholder="nama@email.com" required>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary mt-2" data-bhs="btn.unsubs">
+              Berhenti langganan
+            </button>
+          </div>
+        </form>
+      </div>
       <?php endif; ?>
     </div>
   </div>
 </main>
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   <?php if (!empty($status) && !empty($message)): ?>
@@ -51,6 +47,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       submitBtn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
 
+      try {
+        await new Promise(r => setTimeout(r, 1000));
+      } catch (err) {
+        console.error(err);
+      }
+
       const formData = new FormData(form);
 
       fetch(form.action, {
@@ -65,10 +67,13 @@ document.addEventListener("DOMContentLoaded", function () {
         flattyToast(data.status, data.message);
         
         if (data.status === 'success') {
-          form.reset(); 
-          setTimeout(() => {
-            window.location.reload();
-          }, 1500);
+          const unsubBody = document.getElementById('unsubBody');
+          const successPlace = document.getElementById('successPlace');
+          
+          if (unsubBody && successPlace) {
+            unsubBody.remove();
+            successPlace.innerHTML = '<p class="mt-3 text-success">' + data.message + '</p>';
+          }
         }
       })
       .catch(error => {
@@ -76,8 +81,9 @@ document.addEventListener("DOMContentLoaded", function () {
         flattyToast('error', 'Terjadi kesalahan sistem, silakan coba lagi.');
       })
       .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Berhenti langganan';
+        if (submitBtn) {
+          submitBtn.disabled = false;
+        }
       });
     });
   }

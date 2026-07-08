@@ -43,11 +43,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const form = document.getElementById('unsubForm');
   if (form) {
-    form.addEventListener('submit', function (e) {
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
       
       const submitBtn = form.querySelector('button[type="submit"]');
       submitBtn.disabled = true; 
+
+      submitBtn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
 
       const formData = new FormData(form);
 
@@ -64,6 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
         
         if (data.status === 'success') {
           form.reset(); 
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
         }
       })
       .catch(error => {
@@ -72,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .finally(() => {
         submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Berhenti langganan';
       });
     });
   }

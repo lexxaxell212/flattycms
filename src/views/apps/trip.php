@@ -142,7 +142,7 @@ $cats_json = json_encode($categories);
                   <div></div>
                 </div>
               </div>
-              <div id="exploreOverlay" style="position:absolute;bottom:0;left:-1rem;right:-1rem;height:300px;background:linear-gradient(to bottom, transparent 0%, var(--bg-surface) 50%);align-items:flex-end;justify-content:center;padding-bottom:1rem;z-index:120;">
+              <div id="exploreOverlay" style="position:absolute;bottom:-1rem;left:-1rem;right:-1rem;height:200px;background:linear-gradient(to bottom, transparent 0%, var(--bg-surface) 60%);align-items:flex-end;justify-content:center;padding-bottom:1rem;z-index:120;">
                 <button class="btn btn-outline-primary btn-sm" id="btnShowAllPoi" data-bhs="tp.page.explore.show_all">
                   Lihat Semua
                 </button>

@@ -24,7 +24,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
         <div class="gallery-rand-track">
           <?php
           $gallery = get_gallery_rand(3);
-          $items = array_merge($gallery);
+          $items = array_merge($gallery, $gallery);
           foreach ($items as $photo):
           $src = htmlspecialchars(BASE_UPLOAD_URL . $photo['photo_path'], ENT_QUOTES, 'UTF-8');
           $useruploader = htmlspecialchars($photo['uploader_name'], ENT_QUOTES, 'UTF-8');

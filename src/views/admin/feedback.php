@@ -44,7 +44,7 @@ $feedbacks = $pdo->query("SELECT * FROM feedback ORDER BY created_at DESC LIMIT 
             </div>
           </div>
           <div class="small text-muted text-start">
-            <?= safe_html($f['pesan'] ?? '-') ?>
+            <?= nl2br(safe_html($f['pesan'] ?? '-')) ?>
           </div>
         </div>
       </div>

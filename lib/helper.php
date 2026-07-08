@@ -99,8 +99,8 @@ function safe_include($file_path, $fallback_title = "Konten")
 function fallback_card($title = "Konten")
 {
   return '
-    <section>
-      <div class="container">
+    <div class="container">
+      <section>
         <div class="card card-flatty">
           <div class="card-body text-center">
             <i class="fas fa-circle-notch fa-spin fa-2x text-muted mb-2"></i>
@@ -110,8 +110,9 @@ function fallback_card($title = "Konten")
             <p class="text-muted small">Will come soon.</p>
           </div>
         </div>
-      </div>
-    </section>';
+      </section>
+    </div>
+      ';
 }
 
 // image upload

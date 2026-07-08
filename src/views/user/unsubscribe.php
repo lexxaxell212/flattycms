@@ -2,36 +2,19 @@
 $page_title = "Unsubscribe";
 require_once LIB_PATH . "mailer.php";
 require_once LIB_PATH . "subscriber.php";
-require_once LIB_PATH . "v-unsubscribe.php";
+require_once LIB_PATH . "v-unsubscribe.php"; 
 ?>
 <main class="main-content">
   <div class="container">
     <div class="my-5">
-      <div class="p-3 text-center mb-5">
-        <?php if ($status == "success"): ?>
-        <i class="fa-solid fa-circle-check fa-3x text-success mb-2"></i>
-        <?php elseif ($status == "error" && !$show_form): ?>
-        <i class="fa-solid fa-circle-xmark fa-3x text-danger mb-2"></i>
-        <?php else : ?>
+      <div class="p-3 text-center mb-4">
         <h1 class="h2 text-center" data-bhs="unsub.title">
           Unsubscribe Newsletter
         </h1>
-        <?php endif; ?>
       </div>
-      <?php if ($message): ?>
-      <div class="text-center">
-        <div id="unsubMsg" class="badge <?= $status == 'success' ? 'badge-green' : 'badge-red' ?> small" style="max-width:740px">
-          <?= $message ?>
-        </div>
-      </div>
-      <script>
-        setTimeout(() => {
-          document.getElementById('unsubMsg')?.classList.add('d-none');
-        }, 5000);
-      </script>
-      <?php endif; ?>
+
       <?php if ($show_form): ?>
-      <form action="" method="POST" class="mx-auto row g-4 form">
+      <form id="unsubForm" action="/api/unsubscribe.php" method="POST" class="mx-auto row g-4 form">
         <div class="col-12">
           <p data-bhs="unsub.excerpt">
             Masukkan email Anda untuk berhenti berlangganan.
@@ -51,3 +34,46 @@ require_once LIB_PATH . "v-unsubscribe.php";
     </div>
   </div>
 </main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  <?php if (!empty($status) && !empty($message)): ?>
+    flattyToast('<?= $status ?>', '<?= addslashes($message) ?>');
+  <?php endif; ?>
+
+  const form = document.getElementById('unsubForm');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true; 
+
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+      })
+      .then(data => {
+        flattyToast(data.status, data.message);
+        
+        if (data.status === 'success') {
+          form.reset(); 
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        flattyToast('error', 'Terjadi kesalahan sistem, silakan coba lagi.');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+      });
+    });
+  }
+});
+</script>

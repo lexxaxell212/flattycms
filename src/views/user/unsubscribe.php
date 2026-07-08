@@ -15,11 +15,11 @@ require_once LIB_PATH . "v-unsubscribe.php";
         <h1 class="h2 text-center" data-bhs="unsub.title">
           Unsubscribe Newsletter
         </h1>
-        <div id="successPlace"></div>
+        <div id="successPlace" class="p-3"></div>
       </div>
 
       <?php if ($show_form): ?>
-      <div id="unsubBody">
+      <div id="unsubBody" class="p-3">
         <div class="col-12 text-center">
           <p id="unsubExcerpt" data-bhs="unsub.excerpt">
             Masukkan email Anda untuk berhenti berlangganan.
@@ -53,8 +53,10 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       
       const submitBtn = form.querySelector('button[type="submit"]');
-      submitBtn.disabled = true; 
+      if (!submitBtn) return;
 
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true; 
       submitBtn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
 
       try {
@@ -82,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
           
           if (unsubBody && successPlace) {
             unsubBody.remove();
-            successPlace.innerHTML = '<p class="mt-3 text-success">' + data.message + '</p>';
+            successPlace.innerHTML = '<p class="text-success">Unsubscribe berhasil. Terima kasih telah berlangganan.</p>';
           }
         }
       })
@@ -93,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .finally(() => {
         if (submitBtn) {
           submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
         }
       });
     });

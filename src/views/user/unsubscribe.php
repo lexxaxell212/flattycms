@@ -15,17 +15,17 @@ require_once LIB_PATH . "v-unsubscribe.php";
         <h1 class="h2 text-center" data-bhs="unsub.title">
           Unsubscribe Newsletter
         </h1>
-        <div id="successPlace" class="p-3"></div>
+        <div id="successPlace"></div>
       </div>
 
       <?php if ($show_form): ?>
-      <div id="unsubBody" class="p-3">
-        <div class="col-12 text-center">
-          <p id="unsubExcerpt" data-bhs="unsub.excerpt">
-            Masukkan email Anda untuk berhenti berlangganan.
-          </p>
-        </div>
+      <div id="unsubBody">
         <form id="unsubForm" action="/api/api-unsubscribe.php" method="POST" class="mx-auto row g-4 form">
+          <div class="col-12">
+            <p id="unsubExcerpt" data-bhs="unsub.excerpt">
+            Masukkan email Anda untuk berhenti berlangganan.
+            </p>
+          </div>
           <div class="col-12">
             <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
             <input type="email" name="email" class="form-control" data-bhs="form.email.placeholder" placeholder="nama@email.com" required>
@@ -86,6 +86,9 @@ document.addEventListener("DOMContentLoaded", function () {
             unsubBody.remove();
             successPlace.innerHTML = '<p class="text-success">Unsubscribe berhasil. Terima kasih telah berlangganan.</p>';
           }
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
         }
       })
       .catch(error => {

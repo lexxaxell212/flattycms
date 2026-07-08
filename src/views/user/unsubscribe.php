@@ -1,3 +1,13 @@
+<?php
+$page_title = "Unsubscribe";
+$show_form = true;
+$status = "";
+$message = "";
+
+require_once LIB_PATH . "mailer.php";
+require_once LIB_PATH . "subscriber.php";
+require_once LIB_PATH . "v-unsubscribe.php"; 
+?>
 <main class="main-content">
   <div class="container">
     <div class="my-5">
@@ -15,7 +25,7 @@
             Masukkan email Anda untuk berhenti berlangganan.
           </p>
         </div>
-        <form id="unsubForm" action="api/unsubscribe.php" method="POST" class="mx-auto row g-4 form">
+        <form id="unsubForm" action="/api/api-unsubscribe.php" method="POST" class="mx-auto row g-4 form">
           <div class="col-12">
             <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
             <input type="email" name="email" class="form-control" data-bhs="form.email.placeholder" placeholder="nama@email.com" required>

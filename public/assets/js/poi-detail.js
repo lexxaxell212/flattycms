@@ -40,7 +40,7 @@
           (p) => `
         <div class="col-12 col-md-6 col-lg-4">
         <div class="card card-glass shadow-none">
-          <img src="${BASE}/uploads/${p.photo_path}" class="card-img-top" style="object-fit:cover" loading="lazy" onerror="this.src='${BASE}/assets/images/default.png'">
+          <img src="${BASE}/uploads/${p.photo_path}" class="card-img-top" style="object-fit:cover" loading="lazy" onerror="this.src='${BASE}/assets/images/default-poi.png'">
         <div class="card-body">
           <span class="text-truncate small fw-semibold">Dari • ${p.uploader_name}</span>
         </div>

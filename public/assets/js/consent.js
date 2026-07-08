@@ -58,7 +58,7 @@
     if (btnDismiss) { btnDismiss.disabled = true; }
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 300));
       await fetch("/api/api-consent.php", {
         method: "POST",
         headers: {

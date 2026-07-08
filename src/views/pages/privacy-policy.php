@@ -148,16 +148,6 @@ $page_title = "Kebijakan Privasi";
           Kami dapat memperbarui kebijakan ini sewaktu-waktu. Perubahan signifikan akan diinformasikan melalui notifikasi email, banner pengumuman di situs, dan pembaruan tanggal di halaman ini. Penggunaan layanan setelah tanggal berlaku baru dianggap sebagai persetujuan Anda.
         </p>
       </div>
-      <div class="col-12 col-lg-8">
-        <h2 class="h4" data-bhs="privasi.s10.title">10. Hubungi Kami</h2>
-        <p class="mb-2" data-bhs="privasi.s10.intro">
-          Pertanyaan atau keluhan terkait privasi dapat disampaikan melalui:
-        </p>
-        <ul class="list-unstyled small">
-          <li class="mb-2"><i class="fas fa-envelope me-2 text-purple"></i><a
-            href="mailto:admin@ayokebandung.id" class="link">admin@ayokebandung.id</a></li>
-        </ul>
-      </div>
     </div>
   </div>
 </main>

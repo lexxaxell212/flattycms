@@ -42,7 +42,7 @@ $page_title = 'Daftar - ' . SITE_NAME;
       <div class="col-12">
         <label class="form-label">
           <i class="fas fa-lock me-1"></i>
-          <span data-bhs="form.password.label">Password</span>
+          <span data-bhs="form.password.label">Kata Sandi</span>
         </label>
         <div class="input-group">
           <input type="password" id="reg-pw-input" class="form-control" data-bhs="form.password.placeholder" placeholder="Min. 8 karakter">
@@ -54,7 +54,7 @@ $page_title = 'Daftar - ' . SITE_NAME;
       <div class="col-12">
         <label class="form-label">
           <i class="fas fa-lock me-1"></i>
-          <span data-bhs="form.password.repeat label">Konfirmasi password</span>
+          <span data-bhs="form.password.repeat.label">Konfirmasi Kata Sandi</span>
         </label>
         <div class="input-group">
           <input type="password" id="reg-pw-confirm" class="form-control" data-bhs="form.password.repeat.placeholder" placeholder="Ulangi kata sandi">

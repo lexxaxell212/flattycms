@@ -1,6 +1,5 @@
 <?php
 $page_title = "Unsubscribe";
-
 require_once LIB_PATH . "mailer.php";
 require_once LIB_PATH . "subscriber.php";
 require_once LIB_PATH . "v-unsubscribe.php";
@@ -8,7 +7,7 @@ require_once LIB_PATH . "v-unsubscribe.php";
 <main class="main-content">
   <div class="container">
     <div class="my-5">
-      <div class="p-3 text-center">
+      <div class="p-3 text-center mb-5">
         <?php if ($status == "success"): ?>
         <i class="fa-solid fa-circle-check fa-3x text-success mb-2"></i>
         <?php elseif ($status == "error" && !$show_form): ?>
@@ -21,10 +20,15 @@ require_once LIB_PATH . "v-unsubscribe.php";
       </div>
       <?php if ($message): ?>
       <div class="text-center">
-        <div class="badge <?= $status == 'success' ? 'badge-green' : 'badge-red' ?> small" style="max-width:740px">
+        <div id="unsubMsg" class="badge <?= $status == 'success' ? 'badge-green' : 'badge-red' ?> small" style="max-width:740px">
           <?= $message ?>
         </div>
       </div>
+      <script>
+        setTimeout(() => {
+          document.getElementById('unsubMsg')?.classList.add('d-none');
+        }, 5000);
+      </script>
       <?php endif; ?>
       <?php if ($show_form): ?>
       <form action="" method="POST" class="mx-auto row g-4 form">
@@ -43,8 +47,6 @@ require_once LIB_PATH . "v-unsubscribe.php";
           </button>
         </div>
       </form>
-      <?php endif; ?>
-      <?php if ($status == "success" || ($status == "error" && !$show_form)): ?>
       <?php endif; ?>
     </div>
   </div>

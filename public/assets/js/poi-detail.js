@@ -66,7 +66,7 @@
       if (!reviews.length) {
         wrap.innerHTML = `<div class="text-center text-muted py-3">
           <i class="fa-solid fa-star fa-2x mb-2 d-block opacity-25 mx-auto"></i>
-          Belum ada review untuk lokasi ini. Upload di <a href="/gallery">Gallery & Reviews.</a>
+          Belum ada review untuk lokasi ini. Tulis di <a href="/gallery">Gallery & Reviews.</a>
         </div>`;
         return;
       }

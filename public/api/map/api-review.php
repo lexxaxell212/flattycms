@@ -96,7 +96,7 @@ if ($rating < 1 || $rating > 5) {
   exit;
 }
 
-if (strlen($cerita) < 10) {
+if (strlen($cerita) < 2) {
   http_response_code(400);
   echo json_encode(['success' => false, 'message' => 'Cerita terlalu singkat']);
   exit;

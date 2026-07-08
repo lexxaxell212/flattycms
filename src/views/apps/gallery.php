@@ -4,7 +4,7 @@ require_once LIB_PATH . 'poi-actions.php';
 $page_title = 'Galeri Foto - ' . SITE_NAME;
 $pois = get_all_poi(true);
 $is_logged = isset($_SESSION['user']['id']);
-$pois_json = json_encode($pois);
+$pois_json = json_encode($pois, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
 ?>
 <script>

@@ -5,6 +5,20 @@
   let currentReviewPage = 1;
   let activeTab = 'gallery';
 
+  function escHtml(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  // untuk teks multi-baris (misal cerita review) - escape dulu baru convert newline
+  function escHtmlNl(str) {
+    return escHtml(str).replace(/\n/g, "<br>");
+  }
+
   function formatDate(str) {
     return new Date(str).toLocaleDateString('id-ID', {
       day: 'numeric', month: 'short', year: 'numeric'
@@ -37,7 +51,7 @@
         const el = document.createElement('button');
         el.type = 'button';
         el.className = 'btn-popup';
-        el.innerHTML = `<span>${p.name}</span> • <span class="text-muted small">${p.category_name || ''}</span>`;
+        el.innerHTML = `<span>${escHtml(p.name)}</span> • <span class="text-muted small">${escHtml(p.category_name || '')}</span>`;
         el.addEventListener('click', () => {
           input.value = p.name;
           document.getElementById(hiddenId).value = p.id;
@@ -88,21 +102,21 @@
       grid.innerHTML = json.data.map(p => `
         <div class="col-12 col-md-6">
         <div class="card card-glass h-100">
-          <div class="position-relative" style="padding-top:60%;cursor:pointer" onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${p.poi_name}','${p.uploader_name}','${p.caption || ''}','${p.created_at}',${p.id},${p.user_id})">
+          <div class="position-relative" style="padding-top:60%;cursor:pointer" onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${escHtml(p.poi_name).replace(/'/g, "&#39;")}','${escHtml(p.uploader_name).replace(/'/g, "&#39;")}','${escHtml(p.caption || '').replace(/'/g, "&#39;")}','${p.created_at}',${p.id},${p.user_id})">
         <img src="${BASE}/uploads/${p.photo_path}" class="position-absolute top-0 start-0" style="object-fit:cover;transition:.2s;aspect-ratio:16/9;width:100%;height:100%" loading="lazy" onerror="this.src='${BASE}/assets/images/default.png'">
         </div>
         <div class="card-body text-center">
         <div class="text-truncate">
-          <h2 class="h4">${p.poi_name}</h2>
+          <h2 class="h4">${escHtml(p.poi_name)}</h2>
         </div>
         <div class="text-muted small mb-2">${formatDate(p.created_at)}</div>
-        ${p.caption ? `<div><i class="fas fa-link me-1"></i>${p.caption}</div>`: ''}
+        ${p.caption ? `<div><i class="fas fa-link me-1"></i>${escHtml(p.caption)}</div>`: ''}
         </div>
         <div class="card-footer">
           <div class="d-flex align-items-center gap-1">
         <img src="${p.uploader_avatar || BASE+'/assets/images/avatar.png'}"
         class="rounded-circle me-2" width="18" height="18" style="object-fit:cover">
-        <span class="fw-medium me-2"><small class="small fw-normal">Dari •</small> ${p.uploader_name}</span>
+        <span class="fw-medium me-2"><small class="small fw-normal">Dari •</small> ${escHtml(p.uploader_name)}</span>
         </div>
         </div>
         </div>
@@ -152,6 +166,9 @@
         renderPaginationReview(0, 0);
         return;
       }
+      // NOTE: r.user_name, r.poi_name, r.judul, r.cerita di-escape karena
+      // judul & cerita berasal langsung dari input user (form review) -
+      // wajib di-escape untuk cegah stored XSS.
       grid.innerHTML = json.data.map(r => `
         <div class="gal-review-card">
         <div class="gal-review-card__header">
@@ -159,8 +176,8 @@
         <img src="${r.avatar || BASE+'/uploads/default.jpg'}" class="gal-review-card__avatar"
         onerror="this.src='${BASE}/assets/images/avatar.png'">
         <div>
-        <div class="gal-review-card__name">${r.user_name}</div>
-        <div class="gal-review-card__poi"><i class="fa-solid fa-location-dot me-1"></i>${r.poi_name}</div>
+        <div class="gal-review-card__name">${escHtml(r.user_name)}</div>
+        <div class="gal-review-card__poi"><i class="fa-solid fa-location-dot me-1"></i>${escHtml(r.poi_name)}</div>
         </div>
         </div>
         <div class="text-end">
@@ -168,8 +185,8 @@
         <div class="gal-review-card__date">${formatDate(r.created_at)}</div>
         </div>
         </div>
-        ${r.judul ? `<div class="gal-review-card__title">${r.judul}</div>`: ''}
-        <div class="gal-review-card__body">${r.cerita}</div>
+        ${r.judul ? `<div class="gal-review-card__title">${escHtml(r.judul)}</div>`: ''}
+        <div class="gal-review-card__body">${escHtmlNl(r.cerita)}</div>
         </div>
         `).join('');
       renderPaginationReview(json.page, json.pages);
@@ -217,7 +234,7 @@
       const el = document.createElement('button');
       el.type = 'button';
       el.className = 'btn-popup';
-      el.innerHTML = `<span>${p.name}</span> • <span class="text-muted small">${p.category_name || ''}</span>`;
+      el.innerHTML = `<span>${escHtml(p.name)}</span> • <span class="text-muted small">${escHtml(p.category_name || '')}</span>`;
       el.addEventListener('click', () => {
         document.getElementById('searchPoiFilter').value = p.name;
         box.classList.remove('open');
@@ -244,14 +261,14 @@
     if (activeTab === 'review') loadReviews(1, '');
   }
   document.getElementById('btnResetSearch').addEventListener('click', resetFilter);
-  
+
   window.openLightbox = function(src, poi, uploader, credit, date, photo_id, owner_id) {
     document.getElementById('lightboxImg').src = src;
     const hdUrl = src.replace(/\/\/uploads\//, '/uploads/original/');
     document.getElementById('lightboxInfo').innerHTML = `
-    <div class="fw-bold mb-2">${poi}</div>
+    <div class="fw-bold mb-2">${escHtml(poi)}</div>
     <div class="small">
-    <i class="fas fa-user me-1"></i>${uploader} ${credit ? ` • <i class="fas fa-link me-1"></i>${credit}`: ''} • ${formatDate(date)}
+    <i class="fas fa-user me-1"></i>${escHtml(uploader)} ${credit ? ` • <i class="fas fa-link me-1"></i>${escHtml(credit)}`: ''} • ${formatDate(date)}
     </div>
     <div class="d-flex gap-2 justify-content-center mt-2">
     <a href="${hdUrl}" target="_blank" class="btn btn-primary">
@@ -261,7 +278,7 @@
     </div>`;
     new bootstrap.Modal(document.getElementById('lightboxModal')).show();
 };
-  
+
   window.deletePhoto = async function(photo_id) {
     flattyConfirm('Hapus foto ini?', async () => {
       const fd = new FormData();

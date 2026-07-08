@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
 
   $_SESSION['unsub_status'] = $status;
   $_SESSION['unsub_message'] = $message;
-  header('Location: ' . strtok($_SERVER['REQUEST_URI'], '?'));
+  //header('Location: ' . strtok($_SERVER['REQUEST_URI'], '?'));
   exit;
 
 } elseif (isset($_GET["token"]) && !empty($_GET["token"])) {

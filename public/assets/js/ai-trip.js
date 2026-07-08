@@ -181,6 +181,7 @@
         },
         body: JSON.stringify({
           action: "generate",
+          csrf_token: CSRF,
           prompt: input,
           pois: POIS_FULL,
         }),

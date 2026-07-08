@@ -22,8 +22,13 @@ if ($method === 'GET') {
       exit;
     }
     try {
-      $stmt = $pdo->prepare("SELECT ai_json FROM trip_ai WHERE trip_id = ?");
-      $stmt->execute([$trip_id]);
+      $stmt = $pdo->prepare("
+        SELECT ta.ai_json
+        FROM trip_ai ta
+        INNER JOIN trips t ON t.id = ta.trip_id
+        WHERE ta.trip_id = ? AND t.user_id = ?
+      ");
+      $stmt->execute([$trip_id, $user_id]);
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
       if (!$row) {
         http_response_code(404);
@@ -49,6 +54,15 @@ $input = json_decode(file_get_contents('php://input'), true);
 $action = $input['action'] ?? 'generate';
 
 if ($action === 'generate') {
+  verify_ajax_request('POST');
+
+  $csrf = $input['csrf_token'] ?? '';
+  if (!verify_csrf_token($csrf)) {
+    http_response_code(403);
+    echo json_encode(['success' => false, 'message' => 'Invalid CSRF token']);
+    exit;
+  }
+
   $prompt = trim($input['prompt'] ?? '');
   $pois = $input['pois'] ?? [];
   if (!$prompt || empty($pois)) {
@@ -113,7 +127,7 @@ PROMPT;
   curl_close($ch);
   if ($err) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'cURL error: ' . $err]);
+    echo json_encode(['success' => false, 'message' => 'Gagal menghubungi layanan AI']);
     exit;
   }
   $data = json_decode($response, true);

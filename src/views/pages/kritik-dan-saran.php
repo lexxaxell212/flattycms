@@ -249,13 +249,13 @@ $page_title = "Kritik dan Saran";
                 <label class="form-label">
                   <i class="fa-solid fa-triangle-exclamation me-2"></i><span data-bhs="form.kritik.label">Kritik & Kekurangan</span>
                 </label>
-                <textarea class="form-control bg-white" name="kritik" rows="4" data-bhs="form.kritik.placeholder" placeholder="Apa yang perlu ditambahkan?" required></textarea>
+                <textarea class="form-control bg-white" name="kritik" rows="4" placeholder="Tulis kritik dan kekurangan.." required></textarea>
               </div>
               <div class="col-12 mb-4">
                 <label class="form-label">
                   <i class="fa-solid fa-lightbulb me-2"></i><span data-bhs="form.saran.label">Saran Perbaikan</span>
                 </label>
-                <textarea class="form-control bg-white" name="saran" rows="4" data-bhs="form.saran.placeholder" placeholder="Fitur apa yang ingin diperbaiki?" required></textarea>
+                <textarea class="form-control bg-white" name="saran" rows="4" placeholder="Tulis saran perbaikanmu.." required></textarea>
               </div>
               <div class="col-12">
                 <div class="form-check">

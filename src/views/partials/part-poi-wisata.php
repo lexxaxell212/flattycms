@@ -14,8 +14,7 @@ require_once LIB_PATH . "v-poi-wisata.php";
       <?php
       $img = htmlspecialchars($item['poi_image'] ?? IMG_URL . 'default.png');
       $name = htmlspecialchars($item['name'] ?? '');
-      $desc = sanitizeHtml(mb_substr($item['description'] ?? '', 0, 90));
-      $desc = mb_strlen($item['description'] ?? '') > 90 ? '...' : '';
+      $desc = mb_substr(sanitizeHtml($item['description'] ?? ''), 0, 90);
       $url = htmlspecialchars($item['slug'] ?? '');
       ?>
       <div class="poi-wisata-card" style="--card-bg: url('<?= $img ?>')">

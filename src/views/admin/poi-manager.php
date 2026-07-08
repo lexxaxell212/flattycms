@@ -26,6 +26,15 @@ $total = count($pois);
         </div>
       </div>
       <div class="bg-card mb-4">
+        <div class="gal-search-block">
+          <div class="gal-search-wrap">
+            <i class="fa-solid fa-magnifying-glass gal-search-icon"></i>
+            <input type="text" id="exploreSearch" class="gal-search-input" data-bhs="tp.page.explore.search_placeholder" placeholder="Cari POI..">
+            <button class="gal-search-reset" id="btnResetExploreSearch" title="Reset">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
         <div class="explore-cat-wrapper">
           <button class="explore-cat active" data-category="">Semua</button>
           <?php foreach ($categories as $cat): ?>
@@ -274,18 +283,52 @@ $total = count($pois);
     const BASE = CONFIG.baseUrl;
     const API = BASE + '/api/map/api-admin-poi.php';
     let miniMap = null, miniMark = null;
-
-    document.querySelectorAll('.explore-cat').forEach(btn => {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('.explore-cat').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        const cat = this.dataset.category;
-        document.querySelectorAll('.poi-item').forEach(el => {
-          el.style.display = (!cat || el.dataset.category === cat) ? '' : 'none';
-        });
+    let activeCatExplore = "";
+    let searchQuery = "";
+    
+    function filterPoiList() {
+      const items = document.querySelectorAll('.poi-item');
+      
+      items.forEach(el => {
+        const itemCategory = el.dataset.category;
+        
+        const poiName = el.querySelector('.fw-semibold')?.textContent.toLowerCase() || '';
+        const poiAddress = el.querySelector('.small.text-muted mt-1')?.textContent.toLowerCase() || '';
+        
+        const matchCategory = (!activeCatExplore || itemCategory === activeCatExplore);
+      
+        const matchSearch = (!searchQuery || poiName.includes(searchQuery) || poiAddress.includes(searchQuery));
+        
+        if (matchCategory && matchSearch) {
+          el.style.display = '';
+        } else {
+          el.style.display = 'none';
+        }
       });
+    }
+    document.getElementById("exploreSearch").addEventListener("input", function () {
+      searchQuery = this.value.toLowerCase().trim();
+      filterPoiList();
     });
 
+    document.querySelectorAll(".explore-cat").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll(".explore-cat").forEach((b) => b.classList.remove("active"));
+        this.classList.add("active");
+        
+        activeCatExplore = this.dataset.category; 
+        filterPoiList();
+      });
+    });
+    document.getElementById("btnResetExploreSearch").addEventListener("click", function () {
+      searchQuery = "";
+      activeCatExplore = "";
+      document.getElementById("exploreSearch").value = "";
+      document.querySelectorAll(".explore-cat").forEach((b) => b.classList.remove("active"));
+      document.querySelector('.explore-cat[data-category=""]').classList.add("active");
+      
+      filterPoiList(); 
+    });
     document.getElementById('modalTambahPoi').addEventListener('shown.bs.modal', () => {
       if (!miniMap) {
         document.getElementById('mapPreviewWrap').style.display = '';

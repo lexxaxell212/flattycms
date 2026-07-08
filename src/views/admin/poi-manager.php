@@ -148,11 +148,11 @@ $total = count($pois);
           </div>
           <div class="col-6 col-md-3">
             <label class="form-label small fw-semibold">Latitude</label>
-            <input type="text" id="poiLat" class="form-control" readonly placeholder="-6.9xxx">
+            <input type="text" id="poiLat" class="form-control" placeholder="-6.9xxx">
           </div>
           <div class="col-6 col-md-3">
             <label class="form-label small fw-semibold">Longitude</label>
-            <input type="text" id="poiLng" class="form-control" readonly placeholder="107.6xxx">
+            <input type="text" id="poiLng" class="form-control" placeholder="107.6xxx">
           </div>
           <div class="col-12">
             <label class="form-label small fw-semibold">Alamat</label>

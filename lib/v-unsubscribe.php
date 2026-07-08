@@ -10,6 +10,7 @@ if (isset($_GET["token"]) && !empty($_GET["token"])) {
   if (!$subscriber) {
     $status = "error";
     $message = "Token tidak valid atau sudah kadaluarsa.";
+    $show_form = true;
   } else {
     $now = date("Y-m-d H:i:s");
     if ($subscriber["token_expires"] && $subscriber["token_expires"] < $now) {

@@ -20,7 +20,7 @@ require_once LIB_PATH . "v-poi-wisata.php";
       ?>
       <div class="poi-wisata-card" style="--card-bg: url('<?= $img ?>')">
         <div class="poi-wisata-overlay">
-          <h3 class="poi-wisata-name"><?= $name ?></h3>
+          <h4 class="poi-wisata-name"><?= $name ?></h4>
           <div class="poi-wisata-desc">
             <?= $desc ?>
           </div>

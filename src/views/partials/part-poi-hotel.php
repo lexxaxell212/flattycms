@@ -20,7 +20,7 @@ require_once LIB_PATH . "v-poi-hotel.php";
       ?>
       <div class="poi-hotel-card" style="--card-bg: url('<?= $img ?>')">
         <div class="poi-hotel-overlay">
-          <h3 class="poi-hotel-name"><?= $name ?></h3>
+          <h4 class="poi-hotel-name"><?= $name ?></h4>
           <div class="poi-hotel-desc">
             <?= $desc ?>
           </div>

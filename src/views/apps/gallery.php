@@ -30,12 +30,9 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
           $useruploader = htmlspecialchars($photo['uploader_name'], ENT_QUOTES, 'UTF-8');
           ?>
           <div class="gallery-rand-item">
-            <div class="gallery-rand-skeleton"></div>
             <img
             src="<?= $src ?>"
-            onerror="this.onerror=null;this.src='/assets/images/default.png';this.classList.add('loaded');this.previousElementSibling.classList.add('hidden')"
-            onload="this.classList.add('loaded');this.previousElementSibling.classList.add('hidden')"
-            >
+            onerror="this.onerror=null;this.src='/assets/images/default-poi.png'">
             <div class="gallery-rand-meta w-100 text-center">
               <span class="gallery-rand-uploader">Foto dari <?= $useruploader ?></span>
             </div>

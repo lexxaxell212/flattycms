@@ -4987,33 +4987,10 @@ input[type="range"]::-moz-range-track {
   object-fit: cover;
   object-position: center;
   display: block;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.4s ease;
   pointer-events: none;
   -webkit-user-drag: none;
-}
-.gallery-rand-item img.loaded {
-  opacity: 1;
-}
-.gallery-rand-skeleton {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.4s infinite;
-  transition: opacity 0.3s ease;
-}
-.gallery-rand-skeleton.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-@keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
 }
 .gallery-rand-meta {
   position: absolute;

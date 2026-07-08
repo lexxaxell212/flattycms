@@ -1,13 +1,14 @@
 <?php
 require_once LIB_PATH . "v-poi-hotel.php";
 ?>
-<script src="<?= JS_URL ?>part-hotel.js" defer></script>
 <div class="container">
   <section id="hotel-recommendations">
-    <div class="mb-4">
-      <span class="text-eyebrow" data-bhs="h.eyebrow">Recommendations</span>
-      <h2 class="text-sub-hero mb-4" data-bhs="h.title">Hotel Favorit</h2>
-    </div>
+    <span class="text-eyebrow" data-bhs="h.eyebrow">
+      Recommendations
+    </span>
+    <h2 class="text-sub-hero mb-4" data-bhs="h.title">
+      Hotel Favorit
+    </h2>
     <div class="poi-hotel-grid" id="poiHotelGrid">
       <?php if (!empty($hotel_poi)): ?>
       <?php foreach ($hotel_poi as $item): ?>
@@ -18,7 +19,8 @@ require_once LIB_PATH . "v-poi-hotel.php";
       $desc .= mb_strlen($item['description'] ?? '') > 90 ? '...' : '';
       $url = htmlspecialchars($item['slug'] ?? '');
       ?>
-      <div class="poi-hotel-card" style="--card-bg: url('<?= $img ?>')">
+      <div class="poi-hotel-card"
+        style="background-image: url('<?= $img ?>')">
         <div class="poi-hotel-overlay">
           <h3 class="poi-hotel-name"><?= $name ?></h3>
           <div class="poi-hotel-desc">
@@ -26,7 +28,7 @@ require_once LIB_PATH . "v-poi-hotel.php";
           </div>
           <?php if (!empty($url)): ?>
           <a href="/poi/<?= $url ?>"
-            class="poi-hotel-btn"
+            class="poi-wisata-btn"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Lihat detail <?= $name ?>">
@@ -43,6 +45,5 @@ require_once LIB_PATH . "v-poi-hotel.php";
       </p>
       <?php endif; ?>
     </div>
-    <div class="poi-hotel-dots" id="poiHotelDots"></div>
   </section>
 </div>

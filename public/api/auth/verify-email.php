@@ -5,8 +5,8 @@ autoload_core();
 $token = trim($_GET['token'] ?? '');
 
 if (!$token) {
-  header('Location: /?verified=invalid');
-  exit;
+ header('Location: /?verified=invalid');
+ exit;
 }
 
 $pdo = $GLOBALS['pdo'];
@@ -15,8 +15,8 @@ $stmt->execute([$token]);
 $user = $stmt->fetch();
 
 if (!$user) {
-  header('Location: /?verified=invalid');
-  exit;
+ header('Location: /?verified=invalid');
+ exit;
 }
 
 $stmt = $pdo->prepare("UPDATE users SET email_verified = 1, verify_token = NULL, verify_expires = NULL WHERE id = ?");

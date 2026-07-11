@@ -6,13 +6,13 @@ $zona_bandung = $GLOBALS['pdo']->query("
   ")->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($zona_bandung as &$item) {
-  $item['is_new'] = strtotime($item['created_at']) >= strtotime('-14 days');
+ $item['is_new'] = strtotime($item['created_at']) >= strtotime('-14 days');
 }
 unset($item);
 
 $zona_map = [];
 foreach ($zona_bandung as $item) {
-  $zona_map[$item['category']][] = $item;
+ $zona_map[$item['category']][] = $item;
 }
 
 $latest_items = array_slice(array_filter($zona_bandung, fn($i) => $i['is_new']), 0, 5);

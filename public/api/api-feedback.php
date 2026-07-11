@@ -6,8 +6,8 @@ require_once LIB_PATH . 'mailer.php';
 header('Content-Type: application/json; charset=utf-8');
 
 if (isset($_SESSION['last_feedback']) && (time() - $_SESSION['last_feedback']) < 30) {
-  echo json_encode(['success' => false, 'message' => 'Tunggu sebentar sebelum kirim feedback lagi.']);
-  exit;
+ echo json_encode(['success' => false, 'message' => 'Tunggu sebentar sebelum kirim feedback lagi.']);
+ exit;
 }
 
 $nama = 'Anonim';
@@ -22,15 +22,15 @@ $rating = max(0, min(10, $rating));
 $kategori = trim($_POST['kategori'] ?? '-');
 
 if (empty($kritik)) {
-  echo json_encode(['success' => false, 'message' => 'Kritik wajib diisi!']);
-  exit;
+ echo json_encode(['success' => false, 'message' => 'Kritik wajib diisi!']);
+ exit;
 }
 
 try {
-  $pdo->prepare("INSERT INTO feedback (nama, email, pesan, rating) VALUES (?,?,?,?)")
-    ->execute([$nama, $email, $pesan, $rating]);
+ $pdo->prepare("INSERT INTO feedback (nama, email, pesan, rating) VALUES (?,?,?,?)")
+ ->execute([$nama, $email, $pesan, $rating]);
 } catch (PDOException $e) {
-  error_log('Feedback insert failed: ' . $e->getMessage());
+ error_log('Feedback insert failed: ' . $e->getMessage());
 }
 
 $_SESSION['last_feedback'] = time();
@@ -47,9 +47,9 @@ $html = "
 $sent = kirimEmailAyo(SMTP_USER, $subject, $html);
 
 echo json_encode([
-  'success' => true,
-  'data' => [
-    'rating' => $rating,
-    'kategori' => $kategori,
-  ]
+ 'success' => true,
+ 'data' => [
+  'rating' => $rating,
+  'kategori' => $kategori,
+ ]
 ]);

@@ -4,9 +4,9 @@ autoload_core();
 verify_ajax_request('GET');
 
 if (!isset($GLOBALS['pdo'])) {
-  http_response_code(500);
-  echo json_encode(['error' => 'Koneksi database gagal.']);
-  exit;
+ http_response_code(500);
+ echo json_encode(['error' => 'Koneksi database gagal.']);
+ exit;
 }
 
 $pdo = $GLOBALS['pdo'];
@@ -48,6 +48,6 @@ shuffle($results);
 $results = array_slice($results, 0, 6);
 
 echo json_encode([
-  'total' => count($results),
-  'results' => $results,
+ 'total' => count($results),
+ 'results' => $results,
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);

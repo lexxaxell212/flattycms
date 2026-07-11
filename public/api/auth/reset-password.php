@@ -6,9 +6,9 @@ verify_ajax_request();
 
 $csrf = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
 if (!verify_csrf_token($csrf)) {
-  http_response_code(403);
-  echo json_encode(['success' => false, 'message' => 'Invalid request.']);
-  exit;
+ http_response_code(403);
+ echo json_encode(['success' => false, 'message' => 'Invalid request.']);
+ exit;
 }
 
 $input = json_decode(file_get_contents('php://input'), true);
@@ -16,12 +16,12 @@ $token = trim($input['token'] ?? '');
 $password = $input['password'] ?? '';
 
 if (!$token || !$password) {
-  echo json_encode(['success' => false, 'message' => 'Data tidak lengkap.']);
-  exit;
+ echo json_encode(['success' => false, 'message' => 'Data tidak lengkap.']);
+ exit;
 }
 if (strlen($password) < 8) {
-  echo json_encode(['success' => false, 'message' => 'Password minimal 8 karakter.']);
-  exit;
+ echo json_encode(['success' => false, 'message' => 'Password minimal 8 karakter.']);
+ exit;
 }
 
 $pdo = $GLOBALS['pdo'];
@@ -30,8 +30,8 @@ $stmt->execute([$token]);
 $reset = $stmt->fetch();
 
 if (!$reset) {
-  echo json_encode(['success' => false, 'message' => 'Link tidak valid atau sudah kadaluarsa.']);
-  exit;
+ echo json_encode(['success' => false, 'message' => 'Link tidak valid atau sudah kadaluarsa.']);
+ exit;
 }
 
 // update password

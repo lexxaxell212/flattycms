@@ -3,59 +3,63 @@ require_once LIB_PATH . "v-upcoming-events.php";
 ?>
 <?php if ($_tdo_next): ?>
 <div class="container">
-  <section id="upcoming-event">
-    <div class="d-flex align-items-end justify-content-between mb-4">
-      <div>
-        <span class="text-eyebrow" data-bhs="ue.eyebrow">Highlight</span>
-        <h2 class="text-sub-hero" data-bhs="ue.title">Upcoming Events</h2>
+ <section id="upcoming-event">
+  <div class="d-flex align-items-end justify-content-between mb-4">
+   <div>
+    <span class="text-eyebrow" data-bhs="ue.eyebrow">Highlight</span>
+    <h2 class="text-sub-hero" data-bhs="ue.title">Upcoming Events</h2>
+   </div>
+   <a href="/upcoming-events" class="link-all">
+    <span data-bhs="btn.all">Lihat Semua</span> <i class="fas fa-arrow-right ms-2"></i>
+   </a>
+  </div>
+  <div class="tdop-bento">
+   <div class="tdop-featured-home">
+    <div class="tdop-featured__inner">
+     <div class="tdop-badge">
+      <i class="fas fa-fire me-2"></i>
+      <span data-rotate="Cek Sekarang|Event Terdekat|Sedang berlangsung">Cek Sekarang</span>
+     </div>
+     <div class="tdop-featured__body">
+      <h3 class="tdop-featured__title"><?= safe_html($_tdo_next['title'])
+       ?></h3>
+      <div class="tdop-featured__excerpt">
+       <?= safe_html(_tdo_excerpt($_tdo_next['html_content'])) ?>
       </div>
-      <a href="/upcoming-events" class="link-all">
-        <span data-bhs="btn.all">Lihat Semua</span> <i class="fas fa-arrow-right ms-2"></i>
-      </a>
+      <span class="tdop-featured__date">
+       <i class="far fa-calendar me-1"></i>
+       <?= _tdo_date_range($_tdo_next['event_date'], $_tdo_next['event_date_end']) ?>
+      </span>
+     </div>
+     <a href="/upcoming-events" class="tdop-featured__cta">
+      <span data-bhs="btn.more">Selengkapnya</span> <i class="fas fa-angle-right ms-2"></i>
+     </a>
     </div>
-    <div class="tdop-bento">
-      <div class="tdop-featured-home">
-        <div class="tdop-featured__inner">
-          <div class="tdop-badge">
-            <i class="fas fa-fire me-2"></i>
-            <span data-rotate="Cek Sekarang|Event Terdekat|Sedang berlangsung">Cek Sekarang</span>
-          </div>
-          <div class="tdop-featured__body">
-            <h3 class="tdop-featured__title"><?= safe_html($_tdo_next['title'])
-            ?></h3>
-            <div class="tdop-featured__excerpt"><?= safe_html(_tdo_excerpt($_tdo_next['html_content'])) ?></div>
-            <span class="tdop-featured__date">
-  <i class="far fa-calendar me-1"></i>
-  <?= _tdo_date_range($_tdo_next['event_date'], $_tdo_next['event_date_end']) ?>
-            </span>
-          </div>
-          <a href="/upcoming-events" class="tdop-featured__cta">
-            <span data-bhs="btn.more">Selengkapnya</span> <i class="fas fa-angle-right ms-2"></i>
-          </a>
-        </div>
+   </div>
+   <div class="tdop-stack">
+    <?php foreach ($_tdo_pages as $_tdo_p): ?>
+    <div class="tdop-card">
+     <div class="tdop-card__inner">
+      <h4 class="mb-1"><?= safe_html($_tdo_p['title']) ?></h4>
+      <div class="text-muted small">
+       <?=
+       safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?>
       </div>
-      <div class="tdop-stack">
-        <?php foreach ($_tdo_pages as $_tdo_p): ?>
-        <div class="tdop-card">
-          <div class="tdop-card__inner">
-            <h4 class="mb-1"><?= safe_html($_tdo_p['title']) ?></h4>
-            <div class="text-muted small"><?=
-            safe_html(_tdo_excerpt($_tdo_p['html_content'], 80)) ?></div>
-            <div class="d-flex align-items-center justify-content-between mt-auto">
-              <span class="tdop-card__date">
-  <i class="far fa-calendar me-1"></i>
-  <?= _tdo_date_range($_tdo_p['event_date'], $_tdo_p['event_date_end']) ?>
-              </span>
-              <a href="<?= BASE_URL ?>pages/<?= safe_html($_tdo_p['slug']) ?>/">
-              <span data-bhs="btn.more">Selengkapnya</span>
-              <i class="fas fa-arrow-right ms-2"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <?php endforeach; ?>
+      <div class="d-flex align-items-center justify-content-between mt-auto">
+       <span class="tdop-card__date">
+        <i class="far fa-calendar me-1"></i>
+        <?= _tdo_date_range($_tdo_p['event_date'], $_tdo_p['event_date_end']) ?>
+       </span>
+       <a href="<?= BASE_URL ?>pages/<?= safe_html($_tdo_p['slug']) ?>/">
+        <span data-bhs="btn.more">Selengkapnya</span>
+        <i class="fas fa-arrow-right ms-2"></i>
+       </a>
       </div>
+     </div>
     </div>
-  </section>
+    <?php endforeach; ?>
+   </div>
+  </div>
+ </section>
 </div>
 <?php endif; ?>

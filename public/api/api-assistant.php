@@ -20,17 +20,17 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') exit(0);
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  respond(405, ['error' => 'Method not allowed. Use POST.']);
+ respond(405, ['error' => 'Method not allowed. Use POST.']);
 }
 
 function respond(int $code, array $body): never {
-  http_response_code($code);
-  echo json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-  exit();
+ http_response_code($code);
+ echo json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+ exit();
 }
 
 $system_prompts = [
-  'bandung' => <<<PROMPT
+ 'bandung' => <<<PROMPT
 - Kamu adalah Yara, asisten website Ayokebandung.id yang bertugas membantu user apabila butuh bantuan informasi. YARA = "Yuk Arahkan Rute Andalan".
 - Jika user menyapa: balas hangat singkat, lalu tawarkan bantuan wisata. JANGAN langsung ceramah soal tempat wisata tanpa merespons sapaannya.
 TOPIK KEAHLIAN (fokus pada ini):
@@ -56,27 +56,27 @@ FORMAT JAWABAN:
 BATASAN KETAT:
 - Jika ada pertanyaan di luar topik, HARUS redirect
 - JANGAN mengarang fakta.
-PROMPT
+ PROMPT
 ];
 
 $input = json_decode(file_get_contents('php://input'), true);
 
 if (!is_array($input)) {
-  respond(400, ['error' => 'Invalid JSON body.']);
+ respond(400, ['error' => 'Invalid JSON body.']);
 }
 
 $message = trim($input['message'] ?? '');
 $topic = preg_replace('/[^a-z0-9\-]/', '', strtolower($input['topic'] ?? ''));
 
 if (empty($message)) {
-  respond(400, ['error' => 'Message cannot empty.']);
+ respond(400, ['error' => 'Message cannot empty.']);
 }
 if (mb_strlen($message) > MAX_MESSAGE_LENGTH) {
-  respond(400, ['error' => 'Message too long. Max ' . MAX_MESSAGE_LENGTH . ' character.']);
+ respond(400, ['error' => 'Message too long. Max ' . MAX_MESSAGE_LENGTH . ' character.']);
 }
 if (!isset($system_prompts[$topic])) {
-  $validTopics = implode(', ', array_keys($system_prompts));
-  respond(400, ['error' => "Topic '$topic' is not available. Topic available: $validTopics."]);
+ $validTopics = implode(', ', array_keys($system_prompts));
+ respond(400, ['error' => "Topic '$topic' is not available. Topic available: $validTopics."]);
 }
 
 $rawHistory = is_array($input['history'] ?? null) ? $input['history'] : [];
@@ -85,44 +85,44 @@ $rawHistory = array_slice($rawHistory, -(MAX_HISTORY_PAIRS * 2));
 
 $history = [];
 foreach ($rawHistory as $entry) {
-  if (
-    !is_array($entry) ||
-    !isset($entry['role'], $entry['content']) ||
-    !in_array($entry['role'], ['user', 'assistant'], true) ||
-    !is_string($entry['content']) ||
-    trim($entry['content']) === ''
-  ) continue;
+ if (
+  !is_array($entry) ||
+  !isset($entry['role'], $entry['content']) ||
+  !in_array($entry['role'], ['user', 'assistant'], true) ||
+  !is_string($entry['content']) ||
+  trim($entry['content']) === ''
+ ) continue;
 
-  $history[] = [
-    'role' => $entry['role'],
-    'content' => mb_substr(trim($entry['content']), 0, 1000)
-  ];
+ $history[] = [
+  'role' => $entry['role'],
+  'content' => mb_substr(trim($entry['content']), 0, 1000)
+ ];
 }
 
 $messages = array_merge(
-  [['role' => 'system', 'content' => $system_prompts[$topic]]],
-  $history,
-  [['role' => 'user', 'content' => $message]]
+ [['role' => 'system', 'content' => $system_prompts[$topic]]],
+ $history,
+ [['role' => 'user', 'content' => $message]]
 );
 
 $payload = [
-  'model' => GROQ_MODEL,
-  'max_tokens' => MAX_TOKENS,
-  'temperature' => TEMPERATURE,
-  'stream' => false,
-  'messages' => $messages
+ 'model' => GROQ_MODEL,
+ 'max_tokens' => MAX_TOKENS,
+ 'temperature' => TEMPERATURE,
+ 'stream' => false,
+ 'messages' => $messages
 ];
 
 $ch = curl_init(GROQ_ENDPOINT);
 curl_setopt_array($ch, [
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_POST => true,
-  CURLOPT_POSTFIELDS => json_encode($payload),
-  CURLOPT_HTTPHEADER => [
-    'Authorization: Bearer ' . GROQ_API,
-    'Content-Type: application/json'
-  ],
-  CURLOPT_TIMEOUT => CURL_TIMEOUT
+ CURLOPT_RETURNTRANSFER => true,
+ CURLOPT_POST => true,
+ CURLOPT_POSTFIELDS => json_encode($payload),
+ CURLOPT_HTTPHEADER => [
+  'Authorization: Bearer ' . GROQ_API,
+  'Content-Type: application/json'
+ ],
+ CURLOPT_TIMEOUT => CURL_TIMEOUT
 ]);
 
 $response = curl_exec($ch);
@@ -132,26 +132,26 @@ $curl_msg = curl_error($ch);
 curl_close($ch);
 
 if ($curl_err !== 0) {
-  respond(503, array_merge(
-    ['success' => false, 'error' => 'Failed to connect Groq AI, try again.'],
-    DEV_MODE ? ['curl_error' => $curl_msg] : []
-  ));
+ respond(503, array_merge(
+  ['success' => false, 'error' => 'Failed to connect Groq AI, try again.'],
+  DEV_MODE ? ['curl_error' => $curl_msg] : []
+ ));
 }
 
 $result = json_decode($response, true);
 
 if ($http_code === 200 && isset($result['choices'][0]['message']['content'])) {
-  respond(200, [
-    'success' => true,
-    'reply' => trim($result['choices'][0]['message']['content']),
-    'model' => GROQ_MODEL,
-    'tokens' => $result['usage']['total_tokens'] ?? 0,
-    'topic' => ucfirst($topic)
-  ]);
+ respond(200, [
+  'success' => true,
+  'reply' => trim($result['choices'][0]['message']['content']),
+  'model' => GROQ_MODEL,
+  'tokens' => $result['usage']['total_tokens'] ?? 0,
+  'topic' => ucfirst($topic)
+ ]);
 } else {
-  $errorMsg = $result['error']['message'] ?? 'Unknown error from Groq AI.';
-  respond($http_code ?: 502, array_merge(
-    ['success' => false, 'error' => "HTTP $http_code: $errorMsg"],
-    DEV_MODE ? ['raw' => $result] : []
-  ));
+ $errorMsg = $result['error']['message'] ?? 'Unknown error from Groq AI.';
+ respond($http_code ?: 502, array_merge(
+  ['success' => false, 'error' => "HTTP $http_code: $errorMsg"],
+  DEV_MODE ? ['raw' => $result] : []
+ ));
 }

@@ -40,14 +40,14 @@ GQL;
 
 $ch = curl_init('https://api.cloudflare.com/client/v4/graphql');
 curl_setopt_array($ch, [
-  CURLOPT_POST => true,
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_HTTPHEADER => [
-    'Authorization: Bearer ' . $token,
-    'Content-Type: application/json',
-  ],
-  CURLOPT_POSTFIELDS => json_encode(['query' => $query]),
-  CURLOPT_TIMEOUT => 10,
+ CURLOPT_POST => true,
+ CURLOPT_RETURNTRANSFER => true,
+ CURLOPT_HTTPHEADER => [
+  'Authorization: Bearer ' . $token,
+  'Content-Type: application/json',
+ ],
+ CURLOPT_POSTFIELDS => json_encode(['query' => $query]),
+ CURLOPT_TIMEOUT => 10,
 ]);
 
 $raw = curl_exec($ch);
@@ -55,18 +55,18 @@ $errno = curl_errno($ch);
 curl_close($ch);
 
 if ($errno || !$raw) {
-  http_response_code(502);
-  echo json_encode(['success' => false, 'message' => 'Gagal koneksi ke Cloudflare']);
-  exit;
+ http_response_code(502);
+ echo json_encode(['success' => false, 'message' => 'Gagal koneksi ke Cloudflare']);
+ exit;
 }
 
 $cf = json_decode($raw, true);
 $zone = $cf['data']['viewer']['zones'][0] ?? null;
 
 if (!$zone) {
-  http_response_code(502);
-  echo json_encode(['success' => false, 'message' => 'Data zona tidak ditemukan']);
-  exit;
+ http_response_code(502);
+ echo json_encode(['success' => false, 'message' => 'Data zona tidak ditemukan']);
+ exit;
 }
 
 // ── Today ─────────────────────────────────────────────────
@@ -80,22 +80,22 @@ $uniq_week = 0;
 $chart = [];
 
 foreach ($zone['weekly'] as $day) {
-  $hit_week += $day['sum']['requests'] ?? 0;
-  $uniq_week += $day['uniq']['uniques'] ?? 0;
-  $chart[] = [
-    'date' => $day['dimensions']['date'],
-    'hits' => $day['sum']['requests'] ?? 0,
-    'uniques' => $day['uniq']['uniques'] ?? 0,
-  ];
+ $hit_week += $day['sum']['requests'] ?? 0;
+ $uniq_week += $day['uniq']['uniques'] ?? 0;
+ $chart[] = [
+  'date' => $day['dimensions']['date'],
+  'hits' => $day['sum']['requests'] ?? 0,
+  'uniques' => $day['uniq']['uniques'] ?? 0,
+ ];
 }
 
 echo json_encode([
-  'success' => true,
-  'data' => [
-    'hit_today' => $hit_today,
-    'uniq_today' => $uniq_today,
-    'hit_week' => $hit_week,
-    'uniq_week' => $uniq_week,
-    'chart' => $chart,
-  ],
+ 'success' => true,
+ 'data' => [
+  'hit_today' => $hit_today,
+  'uniq_today' => $uniq_today,
+  'hit_week' => $hit_week,
+  'uniq_week' => $uniq_week,
+  'chart' => $chart,
+ ],
 ]);

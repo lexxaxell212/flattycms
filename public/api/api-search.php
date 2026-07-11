@@ -4,9 +4,9 @@ autoload_core();
 verify_ajax_request('GET');
 
 if (!isset($GLOBALS['pdo'])) {
-  http_response_code(500);
-  echo json_encode(['error' => 'Koneksi database gagal.']);
-  exit;
+ http_response_code(500);
+ echo json_encode(['error' => 'Koneksi database gagal.']);
+ exit;
 }
 
 $pdo = $GLOBALS['pdo'];
@@ -17,8 +17,8 @@ header('X-Content-Type-Options: nosniff');
 $q = trim($_GET['q'] ?? '');
 
 if (mb_strlen($q) < 2) {
-  echo json_encode(['results' => [], 'total' => 0]);
-  exit;
+ echo json_encode(['results' => [], 'total' => 0]);
+ exit;
 }
 
 $keyword = '%' . $q . '%';
@@ -85,21 +85,21 @@ $stmt = $pdo->prepare("
     AND (title LIKE :q OR html_content LIKE :q2)
     ORDER BY title ASC
     LIMIT 10
-");
+ ");
 $stmt->execute([':q' => $keyword, ':q2' => $keyword]);
 $results = array_merge($results, $stmt->fetchAll());
 
 usort($results, function ($a, $b) use ($q) {
-  $aExact = stripos($a['title'], $q) === 0 ? 0 : 1;
-  $bExact = stripos($b['title'], $q) === 0 ? 0 : 1;
-  if ($aExact !== $bExact) return $aExact - $bExact;
-  return strcmp($a['title'], $b['title']);
+ $aExact = stripos($a['title'], $q) === 0 ? 0 : 1;
+ $bExact = stripos($b['title'], $q) === 0 ? 0 : 1;
+ if ($aExact !== $bExact) return $aExact - $bExact;
+ return strcmp($a['title'], $b['title']);
 });
 
 $results = array_slice($results, 0, 20);
 
 echo json_encode([
-  'query' => $q,
-  'total' => count($results),
-  'results' => $results,
+ 'query' => $q,
+ 'total' => count($results),
+ 'results' => $results,
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);

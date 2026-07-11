@@ -6,20 +6,20 @@ require_once LIB_PATH . "mailer.php";
 
 $csrf = $_SERVER["HTTP_X_CSRF_TOKEN"] ?? "";
 if (!verify_csrf_token($csrf)) {
-  http_response_code(403);
-  echo json_encode(["success" => false, "message" => "Invalid request."]);
-  exit();
+ http_response_code(403);
+ echo json_encode(["success" => false, "message" => "Invalid request."]);
+ exit();
 }
 
 $input = json_decode(file_get_contents("php://input"), true);
 $email = trim($input["email"] ?? "");
 
 if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-  echo json_encode([
-    "success" => false,
-    "message" => "Format email tidak valid.",
-  ]);
-  exit();
+ echo json_encode([
+  "success" => false,
+  "message" => "Format email tidak valid.",
+ ]);
+ exit();
 }
 
 $pdo = $GLOBALS["pdo"];
@@ -28,8 +28,8 @@ $stmt->execute([$email]);
 $user = $stmt->fetch();
 
 if (!$user || !$user["password"]) {
-  echo json_encode(["success" => true]);
-  exit();
+ echo json_encode(["success" => true]);
+ exit();
 }
 
 $token = bin2hex(random_bytes(32));
@@ -57,7 +57,7 @@ $message_html = "
 $result = kirimEmailAyo($email, $subject, $message_html);
 
 if (!$result) {
-  error_log("[forgot-password] gagal kirim ke: {$email}");
+ error_log("[forgot-password] gagal kirim ke: {$email}");
 }
 
 echo json_encode(["success" => true]);

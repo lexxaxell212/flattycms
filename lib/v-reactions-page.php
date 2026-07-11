@@ -5,7 +5,7 @@ $_reaction_count = $stmt->fetchColumn();
 
 $_user_liked = false;
 if (isset($_SESSION['user'])) {
-  $stmt = $GLOBALS['pdo']->prepare("SELECT id FROM reactions WHERE user_id=? AND content_type='page' AND content_id=?");
-  $stmt->execute([$_SESSION['user']['id'], $_page_id]);
-  $_user_liked = (bool) $stmt->fetch();
+ $stmt = $GLOBALS['pdo']->prepare("SELECT id FROM reactions WHERE user_id=? AND content_type='page' AND content_id=?");
+ $stmt->execute([$_SESSION['user']['id'], $_page_id]);
+ $_user_liked = (bool) $stmt->fetch();
 }

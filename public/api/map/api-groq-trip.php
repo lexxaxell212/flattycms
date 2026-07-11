@@ -8,72 +8,72 @@ $method = $_SERVER['REQUEST_METHOD'];
 $user_id = isset($_SESSION['user']) ? (int)$_SESSION['user']['id'] : null;
 
 if ($method === 'GET') {
-  $action = $_GET['action'] ?? '';
-  if ($action === 'get_ai') {
-    if (!$user_id) {
-      http_response_code(401);
-      echo json_encode(['success' => false, 'message' => 'Login diperlukan']);
-      exit;
-    }
-    $trip_id = (int)($_GET['trip_id'] ?? 0);
-    if (!$trip_id) {
-      http_response_code(400);
-      echo json_encode(['success' => false, 'message' => 'trip_id wajib']);
-      exit;
-    }
-    try {
-      $stmt = $pdo->prepare("
+ $action = $_GET['action'] ?? '';
+ if ($action === 'get_ai') {
+  if (!$user_id) {
+   http_response_code(401);
+   echo json_encode(['success' => false, 'message' => 'Login diperlukan']);
+   exit;
+  }
+  $trip_id = (int)($_GET['trip_id'] ?? 0);
+  if (!$trip_id) {
+   http_response_code(400);
+   echo json_encode(['success' => false, 'message' => 'trip_id wajib']);
+   exit;
+  }
+  try {
+   $stmt = $pdo->prepare("
         SELECT ta.ai_json
         FROM trip_ai ta
         INNER JOIN trips t ON t.id = ta.trip_id
         WHERE ta.trip_id = ? AND t.user_id = ?
       ");
-      $stmt->execute([$trip_id, $user_id]);
-      $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      if (!$row) {
-        http_response_code(404);
-        echo json_encode(['success' => false, 'message' => 'Itinerary tidak ditemukan']);
-        exit;
-      }
-      echo json_encode(['success' => true, 'data' => json_decode($row['ai_json'], true)]);
-    } catch (PDOException $e) {
-      http_response_code(500);
-      echo json_encode(['success' => false, 'message' => 'Database error']);
-    }
+   $stmt->execute([$trip_id, $user_id]);
+   $row = $stmt->fetch(PDO::FETCH_ASSOC);
+   if (!$row) {
+    http_response_code(404);
+    echo json_encode(['success' => false, 'message' => 'Itinerary tidak ditemukan']);
     exit;
+   }
+   echo json_encode(['success' => true, 'data' => json_decode($row['ai_json'], true)]);
+  } catch (PDOException $e) {
+   http_response_code(500);
+   echo json_encode(['success' => false, 'message' => 'Database error']);
   }
+  exit;
+ }
 }
 
 if ($method !== 'POST') {
-  http_response_code(405);
-  echo json_encode(['success' => false, 'message' => 'Method not allowed']);
-  exit;
+ http_response_code(405);
+ echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+ exit;
 }
 
 $input = json_decode(file_get_contents('php://input'), true);
 $action = $input['action'] ?? 'generate';
 
 if ($action === 'generate') {
-  verify_ajax_request('POST');
+ verify_ajax_request('POST');
 
-  $csrf = $input['csrf_token'] ?? '';
-  if (!verify_csrf_token($csrf)) {
-    http_response_code(403);
-    echo json_encode(['success' => false, 'message' => 'Invalid CSRF token']);
-    exit;
-  }
+ $csrf = $input['csrf_token'] ?? '';
+ if (!verify_csrf_token($csrf)) {
+  http_response_code(403);
+  echo json_encode(['success' => false, 'message' => 'Invalid CSRF token']);
+  exit;
+ }
 
-  $prompt = trim($input['prompt'] ?? '');
-  $pois = $input['pois'] ?? [];
-  if (!$prompt || empty($pois)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Prompt dan data POI wajib diisi']);
-    exit;
-  }
-  $poi_list = implode("\n", array_map(function($p) {
-    return "- {$p['name']} | {$p['category_name']} | {$p['address']} | slug: {$p['slug']}";
-  }, $pois));
-  $system_prompt = <<<PROMPT
+ $prompt = trim($input['prompt'] ?? '');
+ $pois = $input['pois'] ?? [];
+ if (!$prompt || empty($pois)) {
+  http_response_code(400);
+  echo json_encode(['success' => false, 'message' => 'Prompt dan data POI wajib diisi']);
+  exit;
+ }
+ $poi_list = implode("\n", array_map(function($p) {
+  return "- {$p['name']} | {$p['category_name']} | {$p['address']} | slug: {$p['slug']}";
+ }, $pois));
+ $system_prompt = <<<PROMPT
 Kamu adalah asisten wisata Bandung. Berdasarkan permintaan user dan daftar POI yang tersedia, buatkan itinerary perjalanan.
 Jika user tidak menyebutkan jumlah hari, defaultkan menjadi 2 hari.
 Daftar POI tersedia:
@@ -101,104 +101,104 @@ Format response:
     }
   ]
 }
-PROMPT;
+ PROMPT;
 
-  $body = json_encode([
-    'model' => 'llama-3.3-70b-versatile',
-    'messages' => [
-      ['role' => 'system', 'content' => $system_prompt],
-      ['role' => 'user', 'content' => $prompt]
-    ],
-    'max_tokens' => 1500,
-    'temperature' => 0.7,
-  ]);
-  $ch = curl_init('https://api.groq.com/openai/v1/chat/completions');
-  curl_setopt_array($ch, [
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => $body,
-    CURLOPT_HTTPHEADER => [
-      'Authorization: Bearer ' . GROQ_API_TRIP,
-      'Content-Type: application/json'
-    ],
-  ]);
-  $response = curl_exec($ch);
-  $err = curl_error($ch);
-  curl_close($ch);
-  if ($err) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Gagal menghubungi layanan AI']);
-    exit;
-  }
-  $data = json_decode($response, true);
-  if (isset($data['error'])) {
-    $errType = $data['error']['code'] ?? '';
-    if ($errType === 'rate_limit_exceeded') {
-      http_response_code(429);
-      echo json_encode(['success' => false, 'message' => 'Batas request AI tercapai, coba lagi dalam 1 menit.']);
-      exit;
-    }
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Gagal menghubungi AI']);
-    exit;
-  }
-  $text = $data['choices'][0]['message']['content'] ?? '';
-  $text = preg_replace('/```json|```/', '', $text);
-  $text = trim($text);
-  $itinerary = json_decode($text, true);
-  if (!$itinerary || !isset($itinerary['days'])) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Gagal parse response AI']);
-    exit;
-  }
-  echo json_encode(['success' => true, 'data' => $itinerary]);
+ $body = json_encode([
+  'model' => 'llama-3.3-70b-versatile',
+  'messages' => [
+   ['role' => 'system', 'content' => $system_prompt],
+   ['role' => 'user', 'content' => $prompt]
+  ],
+  'max_tokens' => 1500,
+  'temperature' => 0.7,
+ ]);
+ $ch = curl_init('https://api.groq.com/openai/v1/chat/completions');
+ curl_setopt_array($ch, [
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_POST => true,
+  CURLOPT_POSTFIELDS => $body,
+  CURLOPT_HTTPHEADER => [
+   'Authorization: Bearer ' . GROQ_API_TRIP,
+   'Content-Type: application/json'
+  ],
+ ]);
+ $response = curl_exec($ch);
+ $err = curl_error($ch);
+ curl_close($ch);
+ if ($err) {
+  http_response_code(500);
+  echo json_encode(['success' => false, 'message' => 'Gagal menghubungi layanan AI']);
   exit;
+ }
+ $data = json_decode($response, true);
+ if (isset($data['error'])) {
+  $errType = $data['error']['code'] ?? '';
+  if ($errType === 'rate_limit_exceeded') {
+   http_response_code(429);
+   echo json_encode(['success' => false, 'message' => 'Batas request AI tercapai, coba lagi dalam 1 menit.']);
+   exit;
+  }
+  http_response_code(500);
+  echo json_encode(['success' => false, 'message' => 'Gagal menghubungi AI']);
+  exit;
+ }
+ $text = $data['choices'][0]['message']['content'] ?? '';
+ $text = preg_replace('/```json|```/', '', $text);
+ $text = trim($text);
+ $itinerary = json_decode($text, true);
+ if (!$itinerary || !isset($itinerary['days'])) {
+  http_response_code(500);
+  echo json_encode(['success' => false, 'message' => 'Gagal parse response AI']);
+  exit;
+ }
+ echo json_encode(['success' => true, 'data' => $itinerary]);
+ exit;
 }
 
 if ($action === 'save') {
-  verify_ajax_request('POST');
-  if (!$user_id) {
-    http_response_code(401);
-    echo json_encode(['success' => false, 'message' => 'Login diperlukan']);
-    exit;
-  }
-  $csrf = $input['csrf_token'] ?? '';
-  if (!verify_csrf_token($csrf)) {
-    http_response_code(403);
-    echo json_encode(['success' => false, 'message' => 'Invalid CSRF token']);
-    exit;
-  }
-  $title = trim($input['title'] ?? 'Itinerary Bandungku');
-  $ai_json = $input['ai_json'] ?? null;
-  $poi_slugs = $input['poi_slugs'] ?? [];
-  if (!$ai_json || empty($poi_slugs)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Data itinerary wajib diisi']);
-    exit;
-  }
-  try {
-    $pdo->beginTransaction();
-    $stmt = $pdo->prepare("INSERT INTO trips (user_id, title, source, start_point_name, start_lat, start_lng) VALUES (?, ?, 'itinerary', ?, ?, ?)");
-    $stmt->execute([$user_id, $title, 'Tidak ditentukan', 0, 0]);
-    $trip_id = $pdo->lastInsertId();
-    $stmtPoi = $pdo->prepare("SELECT id FROM poi WHERE slug = ? LIMIT 1");
-    $stmtItem = $pdo->prepare("INSERT INTO trip_items (trip_id, poi_id, order_index) VALUES (?, ?, ?)");
-    foreach ($poi_slugs as $idx => $slug) {
-      $stmtPoi->execute([$slug]);
-      $poi = $stmtPoi->fetch(PDO::FETCH_ASSOC);
-      if (!$poi) continue;
-      $stmtItem->execute([$trip_id, $poi['id'], $idx + 1]);
-    }
-    $stmtAi = $pdo->prepare("INSERT INTO trip_ai (trip_id, ai_json) VALUES (?, ?)");
-    $stmtAi->execute([$trip_id, json_encode($ai_json)]);
-    $pdo->commit();
-    echo json_encode(['success' => true, 'trip_id' => $trip_id, 'message' => 'Itinerary berhasil disimpan!']);
-  } catch (PDOException $e) {
-    $pdo->rollBack();
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Gagal menyimpan itinerary']);
-  }
+ verify_ajax_request('POST');
+ if (!$user_id) {
+  http_response_code(401);
+  echo json_encode(['success' => false, 'message' => 'Login diperlukan']);
   exit;
+ }
+ $csrf = $input['csrf_token'] ?? '';
+ if (!verify_csrf_token($csrf)) {
+  http_response_code(403);
+  echo json_encode(['success' => false, 'message' => 'Invalid CSRF token']);
+  exit;
+ }
+ $title = trim($input['title'] ?? 'Itinerary Bandungku');
+ $ai_json = $input['ai_json'] ?? null;
+ $poi_slugs = $input['poi_slugs'] ?? [];
+ if (!$ai_json || empty($poi_slugs)) {
+  http_response_code(400);
+  echo json_encode(['success' => false, 'message' => 'Data itinerary wajib diisi']);
+  exit;
+ }
+ try {
+  $pdo->beginTransaction();
+  $stmt = $pdo->prepare("INSERT INTO trips (user_id, title, source, start_point_name, start_lat, start_lng) VALUES (?, ?, 'itinerary', ?, ?, ?)");
+  $stmt->execute([$user_id, $title, 'Tidak ditentukan', 0, 0]);
+  $trip_id = $pdo->lastInsertId();
+  $stmtPoi = $pdo->prepare("SELECT id FROM poi WHERE slug = ? LIMIT 1");
+  $stmtItem = $pdo->prepare("INSERT INTO trip_items (trip_id, poi_id, order_index) VALUES (?, ?, ?)");
+  foreach ($poi_slugs as $idx => $slug) {
+   $stmtPoi->execute([$slug]);
+   $poi = $stmtPoi->fetch(PDO::FETCH_ASSOC);
+   if (!$poi) continue;
+   $stmtItem->execute([$trip_id, $poi['id'], $idx + 1]);
+  }
+  $stmtAi = $pdo->prepare("INSERT INTO trip_ai (trip_id, ai_json) VALUES (?, ?)");
+  $stmtAi->execute([$trip_id, json_encode($ai_json)]);
+  $pdo->commit();
+  echo json_encode(['success' => true, 'trip_id' => $trip_id, 'message' => 'Itinerary berhasil disimpan!']);
+ } catch (PDOException $e) {
+  $pdo->rollBack();
+  http_response_code(500);
+  echo json_encode(['success' => false, 'message' => 'Gagal menyimpan itinerary']);
+ }
+ exit;
 }
 
 http_response_code(400);

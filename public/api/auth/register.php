@@ -6,9 +6,9 @@ verify_ajax_request();
 
 $csrf = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
 if (!verify_csrf_token($csrf)) {
-  http_response_code(403);
-  echo json_encode(['success' => false, 'message' => 'Invalid request.']);
-  exit;
+ http_response_code(403);
+ echo json_encode(['success' => false, 'message' => 'Invalid request.']);
+ exit;
 }
 
 $input = json_decode(file_get_contents('php://input'), true);
@@ -18,20 +18,20 @@ $email = trim($input['email'] ?? '');
 $password = $input['password'] ?? '';
 
 if (!$name || !$username || !$email || !$password) {
-  echo json_encode(['success' => false, 'message' => 'Data tidak lengkap.']);
-  exit;
+ echo json_encode(['success' => false, 'message' => 'Data tidak lengkap.']);
+ exit;
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-  echo json_encode(['success' => false, 'message' => 'Format email tidak valid.']);
-  exit;
+ echo json_encode(['success' => false, 'message' => 'Format email tidak valid.']);
+ exit;
 }
 if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
-  echo json_encode(['success' => false, 'message' => 'Username tidak valid.']);
-  exit;
+ echo json_encode(['success' => false, 'message' => 'Username tidak valid.']);
+ exit;
 }
 if (strlen($password) < 8) {
-  echo json_encode(['success' => false, 'message' => 'Password minimal 8 karakter.']);
-  exit;
+ echo json_encode(['success' => false, 'message' => 'Password minimal 8 karakter.']);
+ exit;
 }
 
 $pdo = $GLOBALS['pdo'];
@@ -39,8 +39,8 @@ $pdo = $GLOBALS['pdo'];
 $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? OR username = ? LIMIT 1");
 $stmt->execute([$email, $username]);
 if ($stmt->fetch()) {
-  echo json_encode(['success' => false, 'message' => 'Email atau username sudah digunakan.']);
-  exit;
+ echo json_encode(['success' => false, 'message' => 'Email atau username sudah digunakan.']);
+ exit;
 }
 
 $hashed = password_hash($password, PASSWORD_DEFAULT);

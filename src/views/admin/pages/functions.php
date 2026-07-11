@@ -1,65 +1,60 @@
 <?php
-function generateUniqueSlug($pdo, $base_slug)
-{
-  $slug = rtrim($base_slug, "-");
-  $counter = 1;
-  while (true) {
-    $check = $counter === 1 ? $slug : $slug . "-" . $counter;
-    $stmt = $pdo->prepare("SELECT id FROM pages WHERE slug = ?");
-    $stmt->execute([$check]);
-    if (!$stmt->fetch()) {
-      return $check;
-    }
-    $counter++;
+function generateUniqueSlug($pdo, $base_slug) {
+ $slug = rtrim($base_slug, "-");
+ $counter = 1;
+ while (true) {
+  $check = $counter === 1 ? $slug : $slug . "-" . $counter;
+  $stmt = $pdo->prepare("SELECT id FROM pages WHERE slug = ?");
+  $stmt->execute([$check]);
+  if (!$stmt->fetch()) {
+   return $check;
   }
+  $counter++;
+ }
 }
 
-function sanitizeSlug($slug)
-{
-  return preg_replace("/[^a-z0-9\-]/", "", strtolower(trim($slug)));
+function sanitizeSlug($slug) {
+ return preg_replace("/[^a-z0-9\-]/", "", strtolower(trim($slug)));
 }
 
-function sanitizeTitle($title)
-{
-  return str_replace(
-    ["'", "\\", "\n", "\r", "\0"],
-    ["\\'", "\\\\", "", "", ""],
-    trim($title),
-  );
+function sanitizeTitle($title) {
+ return str_replace(
+  ["'", "\\", "\n", "\r", "\0"],
+  ["\\'", "\\\\", "", "", ""],
+  trim($title),
+ );
 }
 
-function sanitizeHtml($html)
-{
-  $html = preg_replace("/<\?(?:php|=)?[\s\S]*?\?>/i", "", $html);
-  $html = preg_replace("/<script\b[^>]*>[\s\S]*?<\/script>/i", "", $html);
-  $html = preg_replace(
-    '/(<[^>]+?)\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i',
-    '$1',
-    $html,
-  );
-  $html = preg_replace(
-    '/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i',
-    "",
-    $html,
-  );
-  return $html;
+function sanitizeHtml($html) {
+ $html = preg_replace("/<\?(?:php|=)?[\s\S]*?\?>/i", "", $html);
+ $html = preg_replace("/<script\b[^>]*>[\s\S]*?<\/script>/i", "", $html);
+ $html = preg_replace(
+  '/(<[^>]+?)\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i',
+  '$1',
+  $html,
+ );
+ $html = preg_replace(
+  '/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i',
+  "",
+  $html,
+ );
+ return $html;
 }
 
-function generateStaticPage($slug, $html_content, $page_id, $title)
-{
-  $slug = sanitizeSlug($slug);
-  $page_title_val = sanitizeTitle($title);
-  $html_content = sanitizeHtml($html_content);
+function generateStaticPage($slug, $html_content, $page_id, $title) {
+ $slug = sanitizeSlug($slug);
+ $page_title_val = sanitizeTitle($title);
+ $html_content = sanitizeHtml($html_content);
 
-  $pages_dir = PUBLIC_PATH . "pages/";
-  $page_dir = $pages_dir . $slug . "/";
+ $pages_dir = PUBLIC_PATH . "pages/";
+ $page_dir = $pages_dir . $slug . "/";
 
-  try {
-    if (!is_dir($page_dir)) {
-      mkdir($page_dir, 0755, true);
-    }
+ try {
+  if (!is_dir($page_dir)) {
+   mkdir($page_dir, 0755, true);
+  }
 
-    $content = <<<PHP
+  $content = <<<PHP
     <?php
     \$_page_id = {$page_id};
     require_once LIB_PATH . 'v-reactions-page.php';

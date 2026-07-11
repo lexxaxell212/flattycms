@@ -39,38 +39,38 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_TIMEOUT, 15);
 
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Accept: application/json',
-    'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+ 'Accept: application/json',
+ 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 ]);
 
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
 $result = curl_exec($ch);
 
 if (curl_errno($ch)) {
-    $error_msg = curl_error($ch);
+ $error_msg = curl_error($ch);
 }
 curl_close($ch);
 
 if (!$result) {
-  http_response_code(500);
-  echo json_encode([
-      'error' => 'Failed to connect BMKG server.',
-      'debug' => $error_msg ?? 'Unknown cURL error'
-  ]);
-  exit;
+ http_response_code(500);
+ echo json_encode([
+  'error' => 'Failed to connect BMKG server.',
+  'debug' => $error_msg ?? 'Unknown cURL error'
+ ]);
+ exit;
 }
 
 $data = json_decode($result, true);
 
 if (!$data || !isset($data['data']) || empty($data['data'])) {
-  http_response_code(502);
-  echo json_encode([
-      'error' => 'Failed to load BMKG data.',
-      'raw_status' => $data['status'] ?? 'Koneksi OK tapi struktur kosong'
-  ]);
-  exit;
+ http_response_code(502);
+ echo json_encode([
+  'error' => 'Failed to load BMKG data.',
+  'raw_status' => $data['status'] ?? 'Koneksi OK tapi struktur kosong'
+ ]);
+ exit;
 }
 
 echo json_encode($data['data'][0]);

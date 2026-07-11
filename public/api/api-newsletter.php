@@ -11,20 +11,20 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 
 $response = [
-  "success" => false,
-  "message" => "",
-  "type" => "error",
-  "email_value" => "",
+ "success" => false,
+ "message" => "",
+ "type" => "error",
+ "email_value" => "",
 ];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST["email"])) {
-  $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+ $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
 
-  if (!isValidEmailDomain($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $response["message"] = "Email tidak valid atau domain tidak didukung!";
-    $response["email_value"] = $_POST["email"];
-  } else {
-    $stmt = $pdo->prepare("
+ if (!isValidEmailDomain($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  $response["message"] = "Email tidak valid atau domain tidak didukung!";
+  $response["email_value"] = $_POST["email"];
+ } else {
+  $stmt = $pdo->prepare("
             INSERT INTO subscribers (email, status, subscribed_at)
             VALUES (?, 'active', NOW())
             ON DUPLICATE KEY UPDATE
@@ -33,19 +33,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST["email"])) {
                 unsubscribe_token = NULL
         ");
 
-    if ($stmt->execute([$email])) {
-      $subscriber_id = $pdo->lastInsertId();
-      if (!$subscriber_id) {
-        $stmt_getId = $pdo->prepare("SELECT id FROM subscribers WHERE email = ?");
-        $stmt_getId->execute([$email]);
-        $subscriber_id = $stmt_getId->fetchColumn();
-      }
+  if ($stmt->execute([$email])) {
+   $subscriber_id = $pdo->lastInsertId();
+   if (!$subscriber_id) {
+    $stmt_getId = $pdo->prepare("SELECT id FROM subscribers WHERE email = ?");
+    $stmt_getId->execute([$email]);
+    $subscriber_id = $stmt_getId->fetchColumn();
+   }
 
-      $token = generateUnsubscribeToken($subscriber_id);
-      $unsub_link = "https://ayokebandung.id/unsubscribe?token=" . $token;
+   $token = generateUnsubscribeToken($subscriber_id);
+   $unsub_link = "https://ayokebandung.id/unsubscribe?token=" . $token;
 
-      $subject = "Konfirmasi Berlangganan - Ayokebandung.id";
-      $message_html = "
+   $subject = "Konfirmasi Berlangganan - Ayokebandung.id";
+   $message_html = "
         <div style='font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;'>
             <h2 style='color: #1a2478;'>Halo! Terimakasih telah bergabung.</h2>
             <p>Email Anda <b>$email</b> telah terdaftar di newsletter Ayokebandung.id.</p>
@@ -57,33 +57,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST["email"])) {
             </p>
         </div>";
 
-      kirimEmailAyo($email, $subject, $message_html);
+   kirimEmailAyo($email, $subject, $message_html);
 
-      $response["success"] = true;
-      $response["message"] = "Berhasil berlangganan! Cek inbox email Kamu.";
-      $response["type"] = "success";
-    } else {
-      $response["message"] = "Gagal menyimpan data!";
-    }
+   $response["success"] = true;
+   $response["message"] = "Berhasil berlangganan! Cek inbox email Kamu.";
+   $response["type"] = "success";
+  } else {
+   $response["message"] = "Gagal menyimpan data!";
   }
+ }
 }
 
 echo json_encode($response);
 
 function isValidEmailDomain($email) {
-  $allowed_domains = ["gmail.com",
-    "googlemail.com",
-    "yahoo.com",
-    "ymail.com",
-    "rocketmail.com",
-    "outlook.com",
-    "hotmail.com",
-    "live.com",
-    "icloud.com",
-    "me.com",
-    "protonmail.com",
-    "proton.me"];
-  $domain = strtolower(substr(strrchr($email, "@"), 1));
-  return in_array($domain, $allowed_domains);
+ $allowed_domains = ["gmail.com",
+  "googlemail.com",
+  "yahoo.com",
+  "ymail.com",
+  "rocketmail.com",
+  "outlook.com",
+  "hotmail.com",
+  "live.com",
+  "icloud.com",
+  "me.com",
+  "protonmail.com",
+  "proton.me"];
+ $domain = strtolower(substr(strrchr($email, "@"), 1));
+ return in_array($domain, $allowed_domains);
 }
 ?>

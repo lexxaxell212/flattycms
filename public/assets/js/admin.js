@@ -3,306 +3,306 @@ const menuOverlay = document.getElementById("menuOverlay");
 const navbarCollapse = document.getElementById("navbarNav-mobile");
 
 const ScrollLock = {
-  _count: 0,
-  _pendingOpen: false,
+ _count: 0,
+ _pendingOpen: false,
 
-  lock() {
-    this._pendingOpen = false;
-    this._count++;
-    document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = this._getScrollbarWidth() + "px";
-  },
+ lock() {
+  this._pendingOpen = false;
+  this._count++;
+  document.body.style.overflow = "hidden";
+  document.body.style.paddingRight = this._getScrollbarWidth() + "px";
+ },
 
-  unlock(skipIfPending = false) {
-    this._count = Math.max(0, this._count - 1);
-    if (this._count === 0) {
-      if (skipIfPending && this._pendingOpen) return;
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-    }
-  },
-
-  flagPendingOpen() {
-    this._pendingOpen = true;
-  },
-
-  reset() {
-    this._count = 0;
-    this._pendingOpen = false;
-    document.body.style.overflow = "";
-    document.body.style.paddingRight = "";
-  },
-
-  _getScrollbarWidth() {
-    return window.innerWidth - document.documentElement.clientWidth;
+ unlock(skipIfPending = false) {
+  this._count = Math.max(0, this._count - 1);
+  if (this._count === 0) {
+   if (skipIfPending && this._pendingOpen) return;
+   document.body.style.overflow = "";
+   document.body.style.paddingRight = "";
   }
+ },
+
+ flagPendingOpen() {
+  this._pendingOpen = true;
+ },
+
+ reset() {
+  this._count = 0;
+  this._pendingOpen = false;
+  document.body.style.overflow = "";
+  document.body.style.paddingRight = "";
+ },
+
+ _getScrollbarWidth() {
+  return window.innerWidth - document.documentElement.clientWidth;
+ }
 };
 
 function closeOffcanvas() {
-  const activeOffcanvas = document.querySelector(".offcanvas.show");
-  if (activeOffcanvas && window.bootstrap && window.bootstrap.Offcanvas) {
-    const instance = window.bootstrap.Offcanvas.getInstance(activeOffcanvas);
-    if (instance) instance.hide();
-  }
+ const activeOffcanvas = document.querySelector(".offcanvas.show");
+ if (activeOffcanvas && window.bootstrap && window.bootstrap.Offcanvas) {
+  const instance = window.bootstrap.Offcanvas.getInstance(activeOffcanvas);
+  if (instance) instance.hide();
+ }
 }
 
 function toggleMenu() {
-  const isOpen = menuOverlay.classList.contains("menu-open");
+ const isOpen = menuOverlay.classList.contains("menu-open");
 
-  if (isOpen) {
-    menuOverlay.classList.remove("menu-open");
-    navbarCollapse.classList.remove("menu-open");
-    toggler.classList.remove("menu-open");
-    ScrollLock.unlock();
+ if (isOpen) {
+  menuOverlay.classList.remove("menu-open");
+  navbarCollapse.classList.remove("menu-open");
+  toggler.classList.remove("menu-open");
+  ScrollLock.unlock();
+ } else {
+  if (document.querySelector(".offcanvas.show")) {
+   ScrollLock.flagPendingOpen();
+   closeOffcanvas();
+   setTimeout(() => {
+    menuOverlay.classList.add("menu-open");
+    navbarCollapse.classList.add("menu-open");
+    toggler.classList.add("menu-open");
+    ScrollLock.lock();
+   }, 50);
   } else {
-    if (document.querySelector(".offcanvas.show")) {
-      ScrollLock.flagPendingOpen();
-      closeOffcanvas();
-      setTimeout(() => {
-        menuOverlay.classList.add("menu-open");
-        navbarCollapse.classList.add("menu-open");
-        toggler.classList.add("menu-open");
-        ScrollLock.lock();
-      }, 50);
-    } else {
-      menuOverlay.classList.add("menu-open");
-      navbarCollapse.classList.add("menu-open");
-      toggler.classList.add("menu-open");
-      ScrollLock.lock();
-    }
+   menuOverlay.classList.add("menu-open");
+   navbarCollapse.classList.add("menu-open");
+   toggler.classList.add("menu-open");
+   ScrollLock.lock();
   }
+ }
 }
 
 if (toggler) toggler.addEventListener("click", toggleMenu);
 if (menuOverlay) menuOverlay.addEventListener("click", toggleMenu);
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && menuOverlay?.classList.contains("menu-open")) {
-    toggleMenu();
-  }
+ if (e.key === "Escape" && menuOverlay?.classList.contains("menu-open")) {
+  toggleMenu();
+ }
 });
 
 class SmartFab {
-  constructor(fabId = "chatbotFabBtn",
-    scrollThreshold = 200) {
-    this.fab = document.getElementById(fabId);
-    this.threshold = scrollThreshold;
-    this.isVisible = false;
-    this.init();
-  }
+ constructor(fabId = "chatbotFabBtn",
+  scrollThreshold = 200) {
+  this.fab = document.getElementById(fabId);
+  this.threshold = scrollThreshold;
+  this.isVisible = false;
+  this.init();
+ }
 
-  init() {
-    if (!this.fab) return;
-    this.updateVisibility();
-    this._scrollHandler = this.throttle(this.handleScroll.bind(this), 16);
-    window.addEventListener("scroll", this._scrollHandler, {
-      passive: true
-    });
-    window.addEventListener("beforeunload", () => this.destroy());
-    this.fab.addEventListener("click", this.onFabClick);
-  }
+ init() {
+  if (!this.fab) return;
+  this.updateVisibility();
+  this._scrollHandler = this.throttle(this.handleScroll.bind(this), 16);
+  window.addEventListener("scroll", this._scrollHandler, {
+   passive: true
+  });
+  window.addEventListener("beforeunload", () => this.destroy());
+  this.fab.addEventListener("click", this.onFabClick);
+ }
 
-  onFabClick = () => {
-    const isMenuOpen = menuOverlay?.classList.contains("menu-open");
-    if (isMenuOpen) {
-      toggleMenu();
-      setTimeout(() => this.toggleChatbot(), 50);
-    } else {
-      this.toggleChatbot();
-    }
-  };
-
-  toggleChatbot() {
-    const chatbotElement = document.getElementById("chatbot");
-    if (chatbotElement && window.bootstrap && window.bootstrap.Offcanvas) {
-      const existing = window.bootstrap.Offcanvas.getInstance(chatbotElement);
-      const modal =
-      existing ??
-      new window.bootstrap.Offcanvas(chatbotElement, {
-        scroll: true,
-        backdrop: false
-      });
-      modal.toggle();
-    }
+ onFabClick = () => {
+  const isMenuOpen = menuOverlay?.classList.contains("menu-open");
+  if (isMenuOpen) {
+   toggleMenu();
+   setTimeout(() => this.toggleChatbot(), 50);
+  } else {
+   this.toggleChatbot();
   }
+ };
 
-  handleScroll() {
-    this.updateVisibility();
+ toggleChatbot() {
+  const chatbotElement = document.getElementById("chatbot");
+  if (chatbotElement && window.bootstrap && window.bootstrap.Offcanvas) {
+   const existing = window.bootstrap.Offcanvas.getInstance(chatbotElement);
+   const modal =
+   existing ??
+   new window.bootstrap.Offcanvas(chatbotElement, {
+    scroll: true,
+    backdrop: false
+   });
+   modal.toggle();
   }
+ }
 
-  updateVisibility() {
-    const shouldShow = window.scrollY >= this.threshold;
-    if (shouldShow && !this.isVisible) this.show();
-    else if (!shouldShow && this.isVisible) this.hide();
-  }
+ handleScroll() {
+  this.updateVisibility();
+ }
 
-  show() {
-    this.fab.style.opacity = "1";
-    this.fab.style.transform = "scale(1) translateY(0)";
-    this.fab.style.visibility = "visible";
-    this.fab.style.animation = "fabSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
-    this.isVisible = true;
-  }
+ updateVisibility() {
+  const shouldShow = window.scrollY >= this.threshold;
+  if (shouldShow && !this.isVisible) this.show();
+  else if (!shouldShow && this.isVisible) this.hide();
+ }
 
-  hide() {
-    this.fab.style.opacity = "0";
-    this.fab.style.transform = "scale(0.8) translateY(20px)";
-    this.isVisible = false;
-    setTimeout(() => {
-      if (!this.isVisible) this.fab.style.visibility = "hidden";
-    },
-      300);
-  }
+ show() {
+  this.fab.style.opacity = "1";
+  this.fab.style.transform = "scale(1) translateY(0)";
+  this.fab.style.visibility = "visible";
+  this.fab.style.animation = "fabSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+  this.isVisible = true;
+ }
 
-  throttle(func,
-    limit) {
-    let inThrottle;
-    return function () {
-      if (!inThrottle) {
-        func.apply(this, arguments);
-        inThrottle = true;
-        setTimeout(() => (inThrottle = false), limit);
-      }
-    }.bind(this);
-  }
+ hide() {
+  this.fab.style.opacity = "0";
+  this.fab.style.transform = "scale(0.8) translateY(20px)";
+  this.isVisible = false;
+  setTimeout(() => {
+   if (!this.isVisible) this.fab.style.visibility = "hidden";
+  },
+   300);
+ }
 
-  destroy() {
-    window.removeEventListener("scroll", this._scrollHandler);
-    this.fab.removeEventListener("click", this.onFabClick);
-  }
+ throttle(func,
+  limit) {
+  let inThrottle;
+  return function () {
+   if (!inThrottle) {
+    func.apply(this, arguments);
+    inThrottle = true;
+    setTimeout(() => (inThrottle = false), limit);
+   }
+  }.bind(this);
+ }
+
+ destroy() {
+  window.removeEventListener("scroll", this._scrollHandler);
+  this.fab.removeEventListener("click", this.onFabClick);
+ }
 }
 
 class SmartScrollTop {
-  constructor(btnId = "scrollTopBtn") {
-    this.btn = document.getElementById(btnId);
-    this.isVisible = false;
-    this.init();
-  }
+ constructor(btnId = "scrollTopBtn") {
+  this.btn = document.getElementById(btnId);
+  this.isVisible = false;
+  this.init();
+ }
 
-  init() {
-    if (!this.btn) return;
-    this._scrollHandler = this.throttle(this.handleScroll.bind(this), 16);
-    this._resizeHandler = this.throttle(this.handleResize.bind(this), 250);
-    this.updateVisibility();
-    window.addEventListener("scroll", this._scrollHandler, {
-      passive: true
-    });
-    window.addEventListener("resize", this._resizeHandler);
-    this.btn.addEventListener("click", this.scrollToTop.bind(this));
-  }
+ init() {
+  if (!this.btn) return;
+  this._scrollHandler = this.throttle(this.handleScroll.bind(this), 16);
+  this._resizeHandler = this.throttle(this.handleResize.bind(this), 250);
+  this.updateVisibility();
+  window.addEventListener("scroll", this._scrollHandler, {
+   passive: true
+  });
+  window.addEventListener("resize", this._resizeHandler);
+  this.btn.addEventListener("click", this.scrollToTop.bind(this));
+ }
 
-  destroy() {
-    window.removeEventListener("scroll", this._scrollHandler);
-    window.removeEventListener("resize", this._resizeHandler);
-    this.btn?.removeEventListener("click", this.scrollToTop);
-  }
+ destroy() {
+  window.removeEventListener("scroll", this._scrollHandler);
+  window.removeEventListener("resize", this._resizeHandler);
+  this.btn?.removeEventListener("click", this.scrollToTop);
+ }
 
-  handleScroll() {
-    const nearBottom = this.isNearBottom();
-    if (nearBottom && !this.isVisible) this.show();
-    else if (!nearBottom && this.isVisible) this.hide();
-  }
+ handleScroll() {
+  const nearBottom = this.isNearBottom();
+  if (nearBottom && !this.isVisible) this.show();
+  else if (!nearBottom && this.isVisible) this.hide();
+ }
 
-  handleResize() {
-    this.updateVisibility();
-  }
-  updateVisibility() {
-    this.handleScroll();
-  }
+ handleResize() {
+  this.updateVisibility();
+ }
+ updateVisibility() {
+  this.handleScroll();
+ }
 
-  isNearBottom() {
-    const docHeight = document.documentElement.scrollHeight;
-    const scrolledFromBottom = docHeight - window.scrollY - window.innerHeight;
-    return scrolledFromBottom <= docHeight * 0.25;
-  }
+ isNearBottom() {
+  const docHeight = document.documentElement.scrollHeight;
+  const scrolledFromBottom = docHeight - window.scrollY - window.innerHeight;
+  return scrolledFromBottom <= docHeight * 0.25;
+ }
 
-  scrollToTop() {
-    window.scrollTo({
-      top: 0, behavior: "smooth"
-    });
-  }
+ scrollToTop() {
+  window.scrollTo({
+   top: 0, behavior: "smooth"
+  });
+ }
 
-  show() {
-    this.btn.style.opacity = "1";
-    this.btn.style.transform = "scale(1) translateY(0)";
-    this.btn.style.visibility = "visible";
-    this.btn.style.animation = "fabSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
-    this.isVisible = true;
-  }
+ show() {
+  this.btn.style.opacity = "1";
+  this.btn.style.transform = "scale(1) translateY(0)";
+  this.btn.style.visibility = "visible";
+  this.btn.style.animation = "fabSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+  this.isVisible = true;
+ }
 
-  hide() {
-    this.btn.style.opacity = "0";
-    this.btn.style.transform = "scale(0.7) translateY(20px)";
-    this.isVisible = false;
-    setTimeout(() => {
-      if (!this.isVisible) this.btn.style.visibility = "hidden";
-    },
-      300);
-  }
+ hide() {
+  this.btn.style.opacity = "0";
+  this.btn.style.transform = "scale(0.7) translateY(20px)";
+  this.isVisible = false;
+  setTimeout(() => {
+   if (!this.isVisible) this.btn.style.visibility = "hidden";
+  },
+   300);
+ }
 
-  throttle(func,
-    limit) {
-    let inThrottle;
-    return function () {
-      if (!inThrottle) {
-        func.apply(this, arguments);
-        inThrottle = true;
-        setTimeout(() => (inThrottle = false), limit);
-      }
-    }.bind(this);
-  }
+ throttle(func,
+  limit) {
+  let inThrottle;
+  return function () {
+   if (!inThrottle) {
+    func.apply(this, arguments);
+    inThrottle = true;
+    setTimeout(() => (inThrottle = false), limit);
+   }
+  }.bind(this);
+ }
 }
 
 function toggleDark(el) {
-  document.documentElement.toggleAttribute("data-dark");
-  el.classList.toggle("dark");
-  localStorage.setItem(
-    "dark",
-    document.documentElement.hasAttribute("data-dark")
-  );
+ document.documentElement.toggleAttribute("data-dark");
+ el.classList.toggle("dark");
+ localStorage.setItem(
+  "dark",
+  document.documentElement.hasAttribute("data-dark")
+ );
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  new SmartFab("chatbotFabBtn", 200);
-  new SmartScrollTop("scrollTopBtn");
+ new SmartFab("chatbotFabBtn", 200);
+ new SmartScrollTop("scrollTopBtn");
 
-  const chatbotElement = document.getElementById("chatbot");
+ const chatbotElement = document.getElementById("chatbot");
 
-  if (chatbotElement && window.bootstrap && window.bootstrap.Offcanvas) {
-    new window.bootstrap.Offcanvas(chatbotElement, {
-      scroll: true,
-      backdrop: false
-    });
+ if (chatbotElement && window.bootstrap && window.bootstrap.Offcanvas) {
+  new window.bootstrap.Offcanvas(chatbotElement, {
+   scroll: true,
+   backdrop: false
+  });
 
-    chatbotElement.addEventListener("show.bs.offcanvas", () => {
-      ScrollLock.lock();
-    });
+  chatbotElement.addEventListener("show.bs.offcanvas", () => {
+   ScrollLock.lock();
+  });
 
-    chatbotElement.addEventListener("hidden.bs.offcanvas", () => {
-      ScrollLock.unlock(true);
-    });
-  }
+  chatbotElement.addEventListener("hidden.bs.offcanvas", () => {
+   ScrollLock.unlock(true);
+  });
+ }
 
-  if (localStorage.getItem("dark") === "true") {
-    document.documentElement.setAttribute("data-dark", "");
-    document.getElementById("dmToggle")?.classList.add("dark");
-  }
+ if (localStorage.getItem("dark") === "true") {
+  document.documentElement.setAttribute("data-dark", "");
+  document.getElementById("dmToggle")?.classList.add("dark");
+ }
 });
 
 // reveal
 document.addEventListener('DOMContentLoaded', () => {
-  const sections = document.querySelectorAll('section');
+ const sections = document.querySelectorAll('section');
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1
+ const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+   if (entry.isIntersecting) {
+    entry.target.classList.add('revealed');
+    observer.unobserve(entry.target);
+   }
   });
+ }, {
+  threshold: 0.1
+ });
 
-  sections.forEach(el => observer.observe(el));
+ sections.forEach(el => observer.observe(el));
 });

@@ -3289,7 +3289,7 @@ input[type="range"]::-moz-range-track {
  .chatbot-overlay {
   bottom: 12px;
   right: 12px;
-  height: calc(100vh - var(--navbar-height));
+  height: calc(100vh - (var(--navbar-height) / 2));
   width: 420px;
  }
  .chatbot-overlay .chatbot {

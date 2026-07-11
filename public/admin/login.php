@@ -44,7 +44,7 @@ if (
     <form method="POST" style="background:none;border:none;box-shadow:none">
      <div class="card card-flatty">
       <div class="card-body">
-       <input type="text" class="form-control" name="username"
+       <input type="text" class="form-control mb-2" name="username"
        value="<?= isset($_POST["username"])
        ? htmlspecialchars($_POST["username"])
        : "" ?>"

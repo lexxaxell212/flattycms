@@ -22,13 +22,13 @@ $csrf = generate_csrf_token();
   <?php if (isset($_GET["success"]) || $success_msg): ?>
   <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
    <i class="fa-solid fa-circle-check me-2"></i><?= $success_msg ?: "Sukses disimpan!" ?>
-   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+   <button type="button" class="btn btn-close btn-fit" data-bs-dismiss="alert"></button>
   </div>
   <?php endif; ?>
   <?php if ($error_msg): ?>
   <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
    <i class="fa-solid fa-circle-exclamation me-2"></i><?= safe_html($error_msg) ?>
-   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+   <button type="button" class="btn btn-close btn-fit" data-bs-dismiss="alert"></button>
   </div>
   <?php endif; ?>
   <!-- Filter & Search -->
@@ -103,7 +103,7 @@ $csrf = generate_csrf_token();
      <div class="card-body">
       <h5 class="mb-2"><?= safe_html(mb_substr($item["title"], 0, 40)) ?></h5>
       <div class="text-muted small">
-       <?= mb_substr($item["desc"], 0, 250) ?>
+       <?= mb_substr(sanitizeHtml($item["desc"], 0, 250)) ?>
       </div>
      </div>
      <div class="card-footer">

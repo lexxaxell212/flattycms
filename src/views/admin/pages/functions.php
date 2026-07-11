@@ -25,22 +25,6 @@ function sanitizeTitle($title) {
  );
 }
 
-function sanitizeHtml($html) {
- $html = preg_replace("/<\?(?:php|=)?[\s\S]*?\?>/i", "", $html);
- $html = preg_replace("/<script\b[^>]*>[\s\S]*?<\/script>/i", "", $html);
- $html = preg_replace(
-  '/(<[^>]+?)\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i',
-  '$1',
-  $html,
- );
- $html = preg_replace(
-  '/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|\S+)/i',
-  "",
-  $html,
- );
- return $html;
-}
-
 function generateStaticPage($slug, $html_content, $page_id, $title) {
  $slug = sanitizeSlug($slug);
  $page_title_val = sanitizeTitle($title);
@@ -137,7 +121,7 @@ function generateStaticPage($slug, $html_content, $page_id, $title) {
           </div>
       </div>
     </main>
-    PHP;
+PHP;
 
     $result = file_put_contents($page_dir . "index.php", $content);
     if ($result === false) {

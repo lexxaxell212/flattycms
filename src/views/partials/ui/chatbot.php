@@ -41,7 +41,7 @@
       <i class="fas fa-paper-plane"></i>
      </button>
     </div>
-    <div class="d-flex justify-content-start form-text text-muted small ms-4 p-0">
+    <div class="d-flex justify-content-start form-text text-muted small ms-4 p-0" style="margin-top:-4px">
      <span>*Jawaban dari AI bisa saja salah, jangan lupa cek ulang</span>
     </div>
    </div>

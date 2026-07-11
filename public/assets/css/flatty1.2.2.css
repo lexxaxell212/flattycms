@@ -5183,9 +5183,12 @@ input[type="range"]::-moz-range-track {
  width: 100%;
  padding: 0.5rem;
  gap: 4px;
- background: var(--bg-surface);
- border: var(--border-surface);
+ background: var(--bg-glass);
+ backdrop-filter: var(--blur);
+ -webkit-backdrop-filter: var(--blur);
+ border: var(--border-card);
  border-radius: var(--radius-lg);
+ box-shadow: var(--shadow-card);
 }
 
 .gal-tab {

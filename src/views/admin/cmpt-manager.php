@@ -103,7 +103,7 @@ $csrf = generate_csrf_token();
      <div class="card-body">
       <h5 class="mb-2"><?= safe_html(mb_substr($item["title"], 0, 40)) ?></h5>
       <div class="text-muted small">
-       <?= mb_substr(sanitizeHtml($item["desc"], 0, 250)) ?>
+       <?= mb_substr(sanitizeHtml($item["desc"]), 0, 250) ?>
       </div>
      </div>
      <div class="card-footer">

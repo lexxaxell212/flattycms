@@ -100,7 +100,7 @@
    }
    grid.innerHTML = json.data.map(p => `
     <div class="col-12 col-md-6">
-    <div class="card card-glass h-100">
+    <div class="card card-flatty h-100">
     <div class="position-relative" style="padding-top:60%;cursor:pointer" onclick="openLightbox('${BASE}/uploads/${p.photo_path}','${escHtml(p.poi_name).replace(/'/g, "&#39;")}','${escHtml(p.uploader_name).replace(/'/g, "&#39;")}','${escHtml(p.caption || '').replace(/'/g, "&#39;")}','${p.created_at}',${p.id},${p.user_id})">
     <img src="${BASE}/uploads/${p.photo_path}" class="position-absolute top-0 start-0" style="object-fit:cover;transition:.2s;aspect-ratio:16/9;width:100%;height:100%" loading="lazy" onerror="this.src='${BASE}/assets/images/default-poi.png'">
     </div>
@@ -110,7 +110,7 @@
     </div>
     <div class="d-flex align-items-center gap-1">
     <img src="${p.uploader_avatar || BASE+'/assets/images/avatar.png'}"
-    class="rounded-circle me-2" width="18" height="18" style="object-fit:cover">
+    class="rounded-circle me-1" width="18" height="18" style="object-fit:cover">
     <span class="fw-medium small">${escHtml(p.uploader_name)}</span>
     </div>
     <div class="text-muted small"><i class="fas fa-upload me-1 text-primary"></i>${formatDate(p.created_at)}</div>

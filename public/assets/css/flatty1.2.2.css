@@ -291,7 +291,7 @@
  --text-green: oklch(0.66 0.14 149);
  --text-yellow: oklch(0.82 0.14 85);
  --text-blue: oklch(0.68 0.16 240);
- --text-white: oklch(0.984 0.003 264);
+ --text-white: oklch(0.91 0.014 295/0.88);
 
  /* button text dark */
  --btn-text-primary: oklch(0.984 0.003 264);
@@ -302,7 +302,7 @@
 
  /* Logo */
  --ayoke: oklch(0.82 0.01 295);
- --bandung: oklch(0.977 0.014 295);
+ --bandung: oklch(0.91 0.014 295 / 0.88);
  --dotid: oklch(0.55 0.214 295);
  --strips: oklch(0.6 0.174 295 / 0.35);
 
@@ -380,7 +380,7 @@ a {
  color: var(--text-card);
  text-decoration: underline var(--purple-400) solid 1px;
  text-underline-offset: 4px;
- font-size: 0.82rem;
+ font-size: 0.85rem;
  transition: text-decoration-color var(--duration) var(--ease);
 }
 a:hover,
@@ -473,7 +473,7 @@ em.styled {
  background: linear-gradient(
  to right,
  oklch(0.5 0.214 295),
- oklch(0.977 0.014 295)
+ oklch(0.91 0.014 295)
  );
  -webkit-background-clip: text;
  -webkit-text-fill-color: transparent;

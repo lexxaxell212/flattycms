@@ -221,7 +221,7 @@ $page_title = "Kritik dan Saran";
       <div class="row g-3">
        <div class="col-12" id="feedback-col-rating">
         <label class="form-label">
-         <i class="fa-solid fa-star me-2"></i><span data-bhs="form.score.label">Skor Website (1-10)</span>
+         <i class="fa-solid fa-star me-2"></i><span data-bhs="form.score.label">Rating website (1-10)</span>
         </label>
         <div class="d-flex align-items-center gap-3">
          <input type="range" class="form-range flex-grow-1"

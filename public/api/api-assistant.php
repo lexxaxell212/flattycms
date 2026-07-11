@@ -58,7 +58,7 @@ FORMAT JAWABAN:
 BATASAN KETAT:
 - Jika ada pertanyaan di luar topik, HARUS redirect
 - JANGAN mengarang fakta.
- PROMPT
+PROMPT
 ];
 
 $input = json_decode(file_get_contents('php://input'), true);

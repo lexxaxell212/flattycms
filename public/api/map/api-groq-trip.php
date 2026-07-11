@@ -101,7 +101,7 @@ Format response:
     }
   ]
 }
- PROMPT;
+PROMPT;
 
  $body = json_encode([
   //'model' => 'llama-3.3-70b-versatile',

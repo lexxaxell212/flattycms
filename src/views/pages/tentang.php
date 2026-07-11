@@ -18,7 +18,7 @@ $page_title = "Tentang";
    <div class="row g-4">
     <div class="col-lg-4">
      <div class="h-100 text-center p-3">
-      <i class="fa-solid fa-mountain-sun fs-1 text-primary mb-3"></i>
+      <i class="fa-solid fa-location-dot fs-1 text-primary mb-3"></i>
       <h3 class="h5">
        POI
       </h3>

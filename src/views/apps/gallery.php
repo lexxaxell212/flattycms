@@ -86,7 +86,7 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
     </div>
    </div>
    <div class="gal-content-wrap">
-    <div class="gal-tabs" style="position:sticky;top: calc(var(--navbar-height) + 12px);">
+    <div class="gal-tabs" style="position:sticky;top: calc(var(--navbar-height) + 12px);z-index:90;">
      <button class="gal-tab active" data-tab="gallery">
       <i class="fa-solid fa-image"></i> <span data-bhs="gal.page.tab.gallery">Gallery</span>
      </button>

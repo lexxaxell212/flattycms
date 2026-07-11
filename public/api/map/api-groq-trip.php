@@ -104,7 +104,9 @@ Format response:
  PROMPT;
 
  $body = json_encode([
-  'model' => 'llama-3.3-70b-versatile',
+  //'model' => 'llama-3.3-70b-versatile',
+  //'model' => 'openai/gpt-oss-20b',
+  'model' => 'openai/gpt-oss-120b',
   'messages' => [
    ['role' => 'system', 'content' => $system_prompt],
    ['role' => 'user', 'content' => $prompt]

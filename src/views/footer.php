@@ -3,7 +3,7 @@
   <section class="revealed">
    <div class="text-center">
     <div class="mb-5">
-     <h2 class="h1" data-bhs="f.newsletter.title">NEWSLETTER</h2>
+     <h2 data-bhs="f.newsletter.title">NEWSLETTER</h2>
      <p data-bhs="f.newsletter.excerpt">
       Dapatkan event dan update Bandung terkini via email.
      </p>

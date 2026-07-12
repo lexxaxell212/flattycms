@@ -28,7 +28,7 @@ require_once SRC_PATH . "headerv2.php";
  }
 
  .stage404 {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: -1;
   background: #0B0E14;
@@ -107,7 +107,7 @@ require_once SRC_PATH . "headerv2.php";
  <div class="flashlight404"></div>
 </div>
 
-<div class="container row min-vh-100 align-items-center">
+<div class="container row main-content min-vh-100 align-items-center">
  <div class="col-12 col-md-4 mx-auto">
   <div class="card card-flatty">
    <div class="card-body">

@@ -95,7 +95,7 @@ function isActive(string $path): string
  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
  <link rel="stylesheet" href="<?= CSS_URL ?>fa720.all.min.css">
  <link rel="stylesheet" href="<?= CSS_URL ?>bs538.min.css">
- <link rel="stylesheet" href="<?= CSS_URL ?>flatty1.2.2.css">
+ <link rel="stylesheet" href="<?= CSS_URL ?>flatty1.2.2.min.css">
  <?php
  $isMobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT']);
  $heroImg = $isMobile ? 'hero-mobile.webp' : 'hero.webp'; ?>

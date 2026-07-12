@@ -98,7 +98,7 @@ function isActive(string $path): string
  <link rel="stylesheet" href="<?= CSS_URL ?>flatty1.2.2.min.css">
  <?php
  $isMobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT']);
- $heroImg = $isMobile ? 'wisata-mobile.webp' : 'wisata.webp'; ?>
+ $heroImg = $isMobile ? 'hero-mobile.webp' : 'hero.webp'; ?>
  <link rel="preload" as="image" href="<?= IMG_URL . $heroImg ?>" type="image/webp" fetchpriority="high">
  <script src="<?= JS_URL ?>gsi.js" defer></script>
  <script src="https://accounts.google.com/gsi/client" defer></script>

@@ -827,26 +827,9 @@ main.main-content::before {
  inset: 0;
  background-size: cover;
  background-position: center;
- opacity: 0;
- transition:
- opacity 1s var(--ease),
- transform 1.2s var(--ease);
- transform: scale(1.07);
-}
-.hero-item.active {
  opacity: 1;
- transform: scale(1);
  z-index: 1;
-}
-
-.hero-slide-wisata {
- background-image: url("../images/wisata-mobile.webp");
-}
-.hero-slide-kuliner {
- background-image: url("../images/kuliner-mobile.webp");
-}
-.hero-slide-hotel {
- background-image: url("../images/hotel-mobile.webp");
+ background-image: url("../images/hero-mobile.webp");
 }
 
 .hero-overlay {
@@ -935,28 +918,6 @@ main.main-content::before {
  }
 }
 
-.hero-dots {
- position: absolute;
- bottom: 30px;
- left: 50%;
- transform: translateX(-50%);
- display: flex;
- gap: 12px;
-}
-.dot {
- width: 10px;
- height: 10px;
- border-radius: 50%;
- background: rgba(255, 255, 255, 0.4);
- cursor: pointer;
- transition: var(--duration);
-}
-.dot.active {
- background: #fff;
- width: 30px;
- border-radius: 10px;
-}
-
 .btn-hero-group {
  gap: 5px;
 }
@@ -1004,14 +965,8 @@ main.main-content::before {
   height: calc(100vh - var(--navbar-height));
   top: var(--navbar-height);
  }
- .hero-slide-wisata {
-  background-image: url("../images/wisata.webp");
- }
- .hero-slide-kuliner {
-  background-image: url("../images/kuliner.webp");
- }
- .hero-slide-hotel {
-  background-image: url("../images/hotel.webp");
+ .hero-item {
+  background-image: url("../images/hero.webp");
  }
 }
 

@@ -32,64 +32,13 @@ require_once SRC_PATH . "headerv2.php";
   overflow: hidden;
  }
 
- .stars404 {
+ .stage404 img.bg404 {
   position: absolute;
   inset: 0;
-  background-image:
-  radial-gradient(1px 1px at 10% 20%, #fff 0, transparent 50%),
-  radial-gradient(1px 1px at 25% 15%, #fff 0, transparent 50%),
-  radial-gradient(1px 1px at 40% 30%, #fff 0, transparent 50%),
-  radial-gradient(1px 1px at 60% 10%, #fff 0, transparent 50%),
-  radial-gradient(1px 1px at 75% 25%, #fff 0, transparent 50%),
-  radial-gradient(1px 1px at 90% 18%, #fff 0, transparent 50%),
-  radial-gradient(1px 1px at 15% 40%, #fff 0, transparent 50%),
-  radial-gradient(1px 1px at 85% 35%, #fff 0, transparent 50%);
-  opacity: 0.35;
- }
-
- .skyline404 {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 38vh;
-  display: flex;
-  align-items: flex-end;
- }
- .skyline404 .bld {
-  background: #161B26;
-  flex-shrink: 0;
- }
- .skyline404 .bld.alt {
-  background: #1F2531;
- }
- .skyline404 .tower {
-  position: relative;
-  width: 60px;
-  height: 60%;
-  background: #1F2531;
- }
- .skyline404 .tower::before {
-  content: "";
-  position: absolute;
-  top: -28px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
-  border-bottom: 32px solid #1F2531;
- }
- .skyline404 .tower::after {
-  content: "";
-  position: absolute;
-  top: -38px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 14px;
-  background: #1F2531;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.9) brightness(0.85);
  }
 
  .lamp-hint404 {
@@ -150,8 +99,7 @@ require_once SRC_PATH . "headerv2.php";
 </style>
 
 <div class="stage404" id="stage404">
- <div class="stars404"></div>
- <div class="skyline404" id="skyline404"></div>
+ <img src="<?= IMG_URL ?>hero.webp" alt="" class="bg404">
  <div class="lamp-hint404"></div>
  <div class="flashlight404"></div>
 </div>
@@ -173,23 +121,8 @@ require_once SRC_PATH . "headerv2.php";
  </div>
 </div>
 <script>
- // Build randomized skyline silhouette
+ // Flashlight cursor/touch tracking
  (function() {
-  const skyline = document.getElementById('skyline404');
-  const buildingCount = 14;
-  let html = '';
-  for (let i = 0; i < buildingCount; i++) {
-   if (i === Math.floor(buildingCount / 2)) {
-    html += '<div class="tower"></div>';
-    continue;
-   }
-   const w = 30 + Math.random() * 50;
-   const h = 25 + Math.random() * 65;
-   const alt = Math.random() > 0.5 ? ' alt': '';
-   html += `<div class="bld${alt}" style="width:${w}px;height:${h}%"></div>`;
-  }
-  skyline.innerHTML = html;
-
   const root = document.documentElement;
   function setLight(x, y) {
    root.style.setProperty('--fl-x', x + 'px');

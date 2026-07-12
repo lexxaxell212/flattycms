@@ -16,6 +16,9 @@ require_once SRC_PATH . "headerv2.php";
   color: var(--text-accent);
   font-size: 0.8rem;
  }
+ body {
+  background: transparent;
+ }
 
  /* ===== Flashlight background effect ===== */
 :root {

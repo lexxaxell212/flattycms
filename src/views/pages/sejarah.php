@@ -3,23 +3,18 @@ $page_title = "Sejarah Bandung";
 ?>
 <main class="main-content">
  <div class="container">
-  <div class="row g-4 page-header">
-   <div class="col-12 col-lg-4">
-    <div class="sticky-wrapper">
+  <div class="row g-4">
+   <div class="col-12">
+    <div class="page-header">
      <div class="text-center mb-4">
       <h1 class="mb-4"><em class="styled" data-bhs="sejarah.title">Sejarah Bandung</em></h1>
       <p class="lead" data-bhs="sejarah.lead">
        Berawal dari dasar danau purba yang mengering, Bandung berevolusi dari sekadar titik nol di Jalan Raya Pos menjadi "Paris van Java" yang anggun, hingga kini bertransformasi menjadi pusat kreativitas digital dunia.
       </p>
      </div>
-     <div class="video-playback p-0 mb-4 mx-auto" style="max-width:600px">
-      <video controls class="rounded d-block mx-auto" width="100%" height="240">
-       <source src="video.mp4" type="video/mp4">
-      </video>
-     </div>
     </div>
    </div>
-   <div class="col-12 col-lg-8">
+   <div class="col-12">
     <div class="sb-timeline mx-auto">
      <div class="bg-surface" style="padding:var(--section-padding);">
       <div class="sb-item">

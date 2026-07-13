@@ -22,6 +22,11 @@ function limit_str(string $val, int $max): string {
  return mb_substr(trim($val), 0, $max);
 }
 
+function make_slug(string $title): string {
+ $slug = strtolower($title);
+ return trim(preg_replace('/[^a-z0-9]+/', '-', $slug), '-');
+}
+
 function handle_image_upload($file_key = 'image') {
  if (!isset($_FILES[$file_key]) || $_FILES[$file_key]['error'] !== UPLOAD_ERR_OK) {
   return null;
@@ -94,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if (!$form_error) {
    $content = limit_str($_POST['content'] ?? '', MAX_CONTENT_LEN);
-   $slug = trim(strtolower(preg_replace('/[^a-z0-9]+/', '-', $title)), '-');
+   $slug = make_slug($title);
    $pdo->prepare(
     'UPDATE allcontent_posts SET category_id=?, title=?, slug=?, excerpt=?, content=?, image_url=?, status=? WHERE id=?'
    )->execute([
@@ -130,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if (!$form_error) {
    $content = limit_str($_POST['content'] ?? '', MAX_CONTENT_LEN);
-   $slug = trim(strtolower(preg_replace('/[^a-z0-9]+/', '-', $title)), '-');
+   $slug = make_slug($title);
    $pdo->prepare(
     'INSERT INTO allcontent_posts(category_id, title, slug, excerpt, content, image_url, status) VALUES(?,?,?,?,?,?,?)'
    )->execute([(int)$_POST['category_id'], $title, $slug, $excerpt, $content, $image_url, $status]);

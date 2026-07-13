@@ -10,7 +10,7 @@ require_once SRC_PATH . "headerv2.php";
 <main class="main-content">
  <div class="container">
   <div class="tp-main-hero"></div>
-  <div class="tp-main-outer">
+  <div class="tp-main-outer" style="padding-top:0">
    <style>
     code {
      background: var(--bg-primary);
@@ -42,9 +42,20 @@ require_once SRC_PATH . "headerv2.php";
      position: absolute;
      inset: 0;
      width: 100%;
-     height: 100%;
+     height: 100vh;
      object-fit: cover;
      filter: saturate(0.9) brightness(0.85);
+    }
+
+    .card {
+     opacity: 0.2;
+     filter: blur(4px);
+     transition: opacity 0.3s ease, filter 0.3s ease;
+    }
+
+    .card:hover {
+     opacity: 0.85;
+     filter: blur(0);
     }
 
     .lamp-hint404 {
@@ -77,17 +88,17 @@ require_once SRC_PATH . "headerv2.php";
      pointer-events: none;
      -webkit-mask-image: radial-gradient(
      circle at var(--fl-x) var(--fl-y),
-     rgba(0, 0, 0, 0.35) 30px,
-     rgba(0, 0, 0, 0.45) 60px,
-     rgba(0, 0, 0, 0.75) 90px,
-     rgba(0, 0, 0, 0.95) 140px
+     rgba(0, 0, 0, 0.35) 22px,
+     rgba(0, 0, 0, 0.45) 65px,
+     rgba(0, 0, 0, 0.75) 130px,
+     rgba(0, 0, 0, 0.95) 200px
      );
      mask-image: radial-gradient(
      circle at var(--fl-x) var(--fl-y),
-     rgba(0, 0, 0, 0.35) 30px,
-     rgba(0, 0, 0, 0.45) 60px,
-     rgba(0, 0, 0, 0.75) 90px,
-     rgba(0, 0, 0, 0.95) 140px
+     rgba(0, 0, 0, 0.35) 22px,
+     rgba(0, 0, 0, 0.45) 65px,
+     rgba(0, 0, 0, 0.75) 130px,
+     rgba(0, 0, 0, 0.95) 200px
      );
     }
 
@@ -110,15 +121,13 @@ require_once SRC_PATH . "headerv2.php";
      }
     }
    </style>
-
    <div class="stage404" id="stage404">
-    <img src="/assets/images/forest.webp" alt="" class="bg404" />
+    <img src="public/assets/images/forest.webp" alt="" class="bg404" />
    <div class="flashlight404"></div>
   </div>
-
-  <div style="min-height: 60vh">
-   <div class="col-12 col-md-4 mx-auto">
-    <div class="card" style="background:rgba(50,50,50,0.3);border:1px solid rgba(50,50,50,0.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);">
+  <div style="height: 100vh" class="row align-items-center">
+   <div class="col-12 col-md-5 mx-auto">
+    <div class="card" style="background:rgba(10,10,10,0.2);border:1px solid rgba(50,50,50,0.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
      <div class="py-4 px-3">
       <h1 class="text-hero text-white mb-4">
        <span

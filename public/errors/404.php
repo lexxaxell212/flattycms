@@ -42,7 +42,8 @@ require_once SRC_PATH . "headerv2.php";
      position: absolute;
      inset: 0;
      width: 100%;
-     height: 100%;
+     height: 100dvh;
+     max-height: 1920px;
      object-fit: cover;
      filter: saturate(0.9) brightness(0.85);
     }

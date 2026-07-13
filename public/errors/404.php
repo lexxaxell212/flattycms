@@ -122,7 +122,7 @@ require_once SRC_PATH . "headerv2.php";
     }
    </style>
    <div class="stage404" id="stage404">
-    <img src="public/assets/images/forest.webp" alt="" class="bg404" />
+    <img src="/assets/images/forest.webp" alt="" class="bg404" />
    <div class="flashlight404"></div>
   </div>
   <div style="height: 100vh" class="row align-items-center">
@@ -141,7 +141,7 @@ require_once SRC_PATH . "headerv2.php";
         >It's a.. </span
        >404
       </h1>
-      <code><?= BASE_URL . ltrim($_SERVER['REQUEST_URI'], '/') ?>vggyhhhbv</code>
+      <code><?= BASE_URL . ltrim($_SERVER['REQUEST_URI'], '/') ?></code>
       <p class="text-white mt-2 mb-4 small">
        Hmm, halaman yang kamu tuju tidak ada. Beritahu kami untuk segera
        memperbaikinya.

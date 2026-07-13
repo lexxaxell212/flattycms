@@ -43,7 +43,7 @@ require_once SRC_PATH . "headerv2.php";
      position: absolute;
      inset: 0;
      width: 100%;
-     height: calc(100vh - var(navbar-height));
+     height: calc(100vh - var(--navbar-height));
      object-fit: cover;
      filter: saturate(0.9) brightness(0.85);
     }

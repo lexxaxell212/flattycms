@@ -11,7 +11,7 @@
    </a>
   </div>
   <div class="poi-gallery-masonry" id="poiGalleryGrid">
-   <?php for ($i = 0; $i < 6; $i++): ?>
+   <?php for ($i = 0; $i < 3; $i++): ?>
    <div class="poi-gallery-card poi-gallery-skeleton"></div>
    <?php endfor; ?>
   </div>

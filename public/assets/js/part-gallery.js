@@ -89,7 +89,7 @@
    return;
   }
 
-  const photos = res.data.slice(0, 6);
+  const photos = res.data.slice(0, 3);
   photos.forEach(photo => grid.appendChild(buildCard(photo)));
  })
  .catch(() => {

@@ -33,8 +33,8 @@
       "/blogs"
      ) ?>" href="/blogs" data-bhs="f.pages.2">Blogs</a></li>
      <li><a class="<?= isActive(
-      "/pages/sejarah"
-     ) ?>" href="/pages/sejarah" data-bhs="f.pages.3">Sejarah Bandung</a></li>
+      "/pages/tentang-bandung"
+     ) ?>" href="/pages/tentang-bandung" data-bhs="f.pages.3">Tentang Bandung</a></li>
     </ul>
    </div>
    <div class="footer-nav__col">
@@ -55,8 +55,8 @@
     <span class="footer-nav__label" data-bhs="f.info.title">Informasi</span>
     <ul>
      <li><a class="<?= isActive(
-      "/pages/tentang"
-     ) ?>" href="/pages/tentang" data-bhs="f.info.1">Tentang</a></li>
+      "/pages/tentang-web"
+     ) ?>" href="/pages/tentang-web" data-bhs="f.info.1">Tentang Website</a></li>
      <li><a class="<?= isActive(
       "/pages/privacy-policy"
      ) ?>" href="/pages/privacy-policy" data-bhs="f.info.2">Privasi</a></li>

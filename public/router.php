@@ -8,8 +8,8 @@ $titles = [
  'gallery' => 'Gallery',
  'things-to-do' => 'Things To Do',
  'upcoming-events' => 'Upcoming Events',
- 'pages/tentang' => 'Tentang',
- 'pages/sejarah' => 'Sejarah',
+ 'pages/tentang-web' => 'Tentang Website',
+ 'pages/tentang-bandung' => 'Tentang Bandung',
  'pages/privacy-policy' => 'Kebijakan Privasi',
  'pages/kritik-dan-saran' => 'Kritik dan Saran',
  'blogs' => 'Blog',
@@ -32,8 +32,8 @@ $routes = [
  'things-to-do' => SRC_PATH . 'pages/things-to-do.php',
  'upcoming-events' => SRC_PATH . 'pages/upcoming-events.php',
  // etc pages
- 'pages/sejarah' => SRC_PATH . 'pages/sejarah.php',
- 'pages/tentang' => SRC_PATH . 'pages/tentang.php',
+ 'pages/tentang-bandung' => SRC_PATH . 'pages/tentang-bandung.php',
+ 'pages/tentang-web' => SRC_PATH . 'pages/tentang-web.php',
  'pages/privacy-policy' => SRC_PATH . 'pages/privacy-policy.php',
  'pages/kritik-dan-saran' => SRC_PATH . 'pages/kritik-dan-saran.php',
  // blogs

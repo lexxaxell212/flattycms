@@ -102,7 +102,7 @@ require_once SRC_PATH . "headerv2.php";
      );
     }
 
-    @media (min-width: 601px) {
+    @media (min-width: 1200px) {
      .flashlight404 {
       -webkit-mask-image: radial-gradient(
       circle at var(--fl-x) var(--fl-y),

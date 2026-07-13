@@ -36,6 +36,7 @@ require_once SRC_PATH . "headerv2.php";
      z-index: -1;
      background: #0b0e14;
      overflow: hidden;
+     top: var(--navbar-height);
     }
 
     .stage404 img.bg404 {

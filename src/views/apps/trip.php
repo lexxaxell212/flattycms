@@ -295,7 +295,7 @@ $cats_json = json_encode($categories);
           <span data-bhs="it.ticker" data-ticker="Buat itinerary kuliner Bandung 2 hari..|Rute wisata alam Lembang seharian..|Itinerary belanja factory outlet Bandung..">Buat itinerary kuliner Bandung 2 hari</span>
          </div>
         </div>
-        <a id="btnGenerateAI" class="btn btn-primary mx-auto"><span data-bhs="btn.it">Buat Itinerary</span><i class="fas fa-wand-magic-sparkles ms-1"></i></a>
+        <button type="button" id="btnGenerateAI" class="btn btn-primary mx-auto"><span data-bhs="btn.it">Buat Itinerary</span><i class="fas fa-wand-magic-sparkles ms-1"></i></button>
        </div>
       </div>
       <div id="aiItineraryResult" class="row g-4"></div>

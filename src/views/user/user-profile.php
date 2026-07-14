@@ -49,7 +49,7 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
        </div>
       </div>
       <div class="row g-2 text-center mt-4">
-       <div class="col-4">
+       <div class="col-3">
         <div class="fw-bold" id="statPhotos">
          -
         </div>
@@ -57,7 +57,7 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
          <span class="badge badge-primary" data-bhs="up.photo">Foto</span>
         </div>
        </div>
-       <div class="col-4">
+       <div class="col-3">
         <div class="fw-bold" id="statTrips">
          -
         </div>
@@ -65,12 +65,20 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
          <span class="badge badge-primary" data-bhs="up.trip">Trip</span>
         </div>
        </div>
-       <div class="col-4">
+       <div class="col-3">
         <div class="fw-bold" id="statReactions">
          -
         </div>
         <div style="font-size:.7rem">
          <span class="badge badge-primary" data-bhs="up.reaction">Reaksi</span>
+        </div>
+       </div>
+       <div class="col-3">
+        <div class="fw-bold" id="statReviews">
+         -
+        </div>
+        <div style="font-size:.7rem">
+         <span class="badge badge-primary" data-bhs="up.review">Review</span>
         </div>
        </div>
       </div>
@@ -89,6 +97,10 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
       <i class="fa-solid fa-heart" style="width:16px"></i><span data-bhs="up.reaction">Reaksi</span>
       <span class="up-tab-count" id="countReactions">-</span>
      </button>
+     <button class="up-tab-btn" data-tab="reviews">
+      <i class="fa-solid fa-star" style="width:16px"></i><span data-bhs="up.review">Review</span>
+      <span class="up-tab-count" id="countReviews">-</span>
+     </button>
     </div>
    </aside>
    <div class="up-content">
@@ -105,6 +117,9 @@ $initials = strtoupper(substr($user['name'] ?? 'U', 0, 1));
       </div>
       <div id="tabReactions" class="tab-content" style="display:none">
        <div id="reactionList" class="row g-4"></div>
+      </div>
+      <div id="tabReviews" class="tab-content" style="display:none">
+       <div id="reviewList" class="row g-4"></div>
       </div>
      </div>
     </div>

@@ -23,13 +23,16 @@
    const pc = json.photos.length;
    const tc = json.trips.length;
    const rc = json.reactions.length;
+   const vc = json.reviews.length;
 
    document.getElementById('statPhotos').textContent = pc;
    document.getElementById('statTrips').textContent = tc;
    document.getElementById('statReactions').textContent = rc;
+   document.getElementById('statReviews').textContent = vc;
    document.getElementById('countPhotos').textContent = pc;
    document.getElementById('countTrips').textContent = tc;
    document.getElementById('countReactions').textContent = rc;
+   document.getElementById('countReviews').textContent = vc;
 
    document.getElementById('tabLoading').style.display = 'none';
    renderTab(activeTab);
@@ -55,6 +58,7 @@
   if (tab === 'photos') renderPhotos();
   if (tab === 'trips') renderTrips();
   if (tab === 'reactions') renderReactions();
+  if (tab === 'reviews') renderReviews();
  }
 
  // ── RENDER FOTO ──────────────────────────────────────────
@@ -175,12 +179,56 @@
    `).join('');
  }
 
+ // ── RENDER REVIEWS ───────────────────────────────────────
+ function renderReviews() {
+  const list = document.getElementById('reviewList');
+  if (!data.reviews.length) {
+   list.innerHTML = emptyState('fa-star', 'Belum ada review yang ditulis');
+   return;
+  }
+
+  list.innerHTML = data.reviews.map(r => `
+   <div class="col-12 col-md-6" id="review-${r.id}">
+   <div class="card card-flatty h-100">
+   <div class="card-body">
+   <div class="mb-2">
+   ${starIcons(r.rating)}
+   </div>
+   <div class="mb-1">
+   <h2 class="h4 text-truncate">${r.judul || r.poi_name}</h2>
+   </div>
+   <div class="text-muted small mb-2">
+   <i class="fa-solid fa-map-location-dot me-1"></i>${r.poi_name}
+   </div>
+   <p class="small mb-2" style="max-height:4.5em;overflow:hidden">${r.cerita}</p>
+   <div class="text-muted small">
+   <span>Ditulis pada : <strong>${formatDate(r.created_at)}</strong></span>
+   </div>
+   </div>
+   <div class="card-footer">
+   <button class="btn btn-danger" onclick="deleteContrib('review', ${r.id})">Hapus<i class="fa-solid fa-trash ms-2"></i>
+   </button>
+   </div>
+   </div>
+   </div>
+   `).join('');
+ }
+
+ function starIcons(rating) {
+  let html = '';
+  for (let i = 1; i <= 5; i++) {
+   html += `<i class="fa-solid fa-star ${i <= rating ? 'text-warning' : 'text-muted'}" style="font-size:.85rem"></i>`;
+  }
+  return html;
+ }
+
  // ── DELETE ────────────────────────────────────────────────
  window.deleteContrib = async function(type, id) {
   const labels = {
    photo: 'foto',
    trip: 'trip',
-   reaction: 'reaksi'
+   reaction: 'reaksi',
+   review: 'review'
   };
   flattyConfirm(`Hapus ${labels[type]} ini? Tindakan ini permanen.`, async () => {
    const fd = new FormData();
@@ -198,7 +246,7 @@
 
     if (json.success) {
      document.getElementById(`${type}-${id}`)?.remove();
-     const key = type === 'photo' ? 'photos': type === 'trip' ? 'trips': 'reactions';
+     const key = type === 'photo' ? 'photos': type === 'trip' ? 'trips': type === 'reaction' ? 'reactions': 'reviews';
      data[key] = data[key].filter(i => i.id !== id);
      const count = data[key].length;
      const capKey = key.charAt(0).toUpperCase() + key.slice(1);

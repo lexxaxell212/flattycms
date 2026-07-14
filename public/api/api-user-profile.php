@@ -62,12 +62,25 @@ if ($method === 'GET') {
   $stmt->execute([$user_id]);
   $reactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+  // Reviews
+  $stmt = $pdo->prepare("
+            SELECT r.id, r.rating, r.judul, r.cerita, r.created_at,
+                   p.id AS poi_id, p.name AS poi_name, p.slug AS poi_slug
+            FROM poi_reviews r
+            JOIN poi p ON p.id = r.poi_id
+            WHERE r.user_id = ?
+            ORDER BY r.created_at DESC
+        ");
+  $stmt->execute([$user_id]);
+  $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
   echo json_encode([
    'success' => true,
    'user' => $user,
    'photos' => $photos,
    'trips' => $trips,
    'reactions' => $reactions,
+   'reviews' => $reviews,
   ]);
 
  } catch (PDOException $e) {
@@ -206,6 +219,35 @@ if ($action === 'delete_reaction') {
   }
 
   echo json_encode(['success' => true, 'message' => 'Reaksi dihapus']);
+
+ } catch (PDOException $e) {
+  http_response_code(500);
+  echo json_encode(['success' => false, 'message' => 'Database error']);
+ }
+ exit;
+}
+
+// ── ACTION: delete_review ─────────────────────────────────────
+if ($action === 'delete_review') {
+ $review_id = (int)($_POST['review_id'] ?? 0);
+
+ if (!$review_id) {
+  http_response_code(400);
+  echo json_encode(['success' => false, 'message' => 'review_id wajib']);
+  exit;
+ }
+
+ try {
+  $stmt = $pdo->prepare("DELETE FROM poi_reviews WHERE id = ? AND user_id = ?");
+  $stmt->execute([$review_id, $user_id]);
+
+  if ($stmt->rowCount() === 0) {
+   http_response_code(404);
+   echo json_encode(['success' => false, 'message' => 'Review tidak ditemukan']);
+   exit;
+  }
+
+  echo json_encode(['success' => true, 'message' => 'Review dihapus']);
 
  } catch (PDOException $e) {
   http_response_code(500);

@@ -1,5 +1,6 @@
 (function () {
  const grid = document.getElementById('poiGalleryGrid');
+ const section = document.getElementById('poi-gallery-part');
  const apiUrl = (typeof BASE !== 'undefined' ? BASE: '') + '/api/map/api-gallery.php?page=1';
  function initials(name) {
   return name
@@ -82,10 +83,7 @@
   grid.innerHTML = '';
 
   if (!res.success || !res.data || res.data.length === 0) {
-   const empty = document.createElement('div');
-   empty.className = 'poi-gallery-empty';
-   empty.textContent = 'Belum ada foto yang diunggah.';
-   grid.appendChild(empty);
+   if (section) section.style.display = 'none';
    return;
   }
 
@@ -93,6 +91,6 @@
   photos.forEach(photo => grid.appendChild(buildCard(photo)));
  })
  .catch(() => {
-  grid.innerHTML = '';
+  if (section) section.style.display = 'none';
  });
 })();

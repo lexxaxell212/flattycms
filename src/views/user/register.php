@@ -126,11 +126,15 @@ $page_title = 'Daftar - ' . SITE_NAME;
    })
   });
   const data = await res.json();
-  btn.disabled = false;
-  btn.innerHTML = '<span data-bhs="btn.reg">Daftar</span>';
   if (data.success) {
    flattyToast('success', 'toast.new.account.success');
+   btn.innerHTML = '<span data-bhs="btn.reg">Daftar</span>';
+   setTimeout(() => {
+    window.location.href = '/login';
+   }, 2500);
   } else {
+   btn.disabled = false;
+   btn.innerHTML = '<span data-bhs="btn.reg">Daftar</span>';
    flattyToast('error', data.message ?? 'toast.new.account.error');
   }
  });

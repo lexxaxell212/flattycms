@@ -85,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $title = limit_str($_POST['title'] ?? '', MAX_TITLE_LEN);
   $excerpt = limit_str($_POST['excerpt'] ?? '', MAX_EXCERPT_LEN);
   $image_url = $_POST['image_url'] ?? '';
+  $copyright = limit_str($_POST['copyright'] ?? '', 255);
 
   if (empty($title)) $form_error = 'Judul tidak boleh kosong.';
 
@@ -101,10 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    $content = limit_str($_POST['content'] ?? '', MAX_CONTENT_LEN);
    $slug = make_slug($title);
    $pdo->prepare(
-    'UPDATE allcontent_posts SET category_id=?, title=?, slug=?, excerpt=?, content=?, image_url=?, status=? WHERE id=?'
+    'UPDATE allcontent_posts SET category_id=?, title=?, slug=?, excerpt=?, content=?, image_url=?, copyright=?, status=? WHERE id=?'
    )->execute([
      (int)$_POST['category_id'],
-     $title, $slug, $excerpt, $content, $image_url, $status,
+     $title, $slug, $excerpt, $content, $image_url, $copyright, $status,
      (int)$_POST['id'],
     ]);
    regenerate_csrf_token();
@@ -119,6 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $title = limit_str($_POST['title'] ?? '', MAX_TITLE_LEN);
   $excerpt = limit_str($_POST['excerpt'] ?? '', MAX_EXCERPT_LEN);
   $image_url = '';
+  $copyright = limit_str($_POST['copyright'] ?? '', 255);
 
   if (empty($title)) $form_error = 'Judul tidak boleh kosong.';
 
@@ -137,8 +139,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    $content = limit_str($_POST['content'] ?? '', MAX_CONTENT_LEN);
    $slug = make_slug($title);
    $pdo->prepare(
-    'INSERT INTO allcontent_posts(category_id, title, slug, excerpt, content, image_url, status) VALUES(?,?,?,?,?,?,?)'
-   )->execute([(int)$_POST['category_id'], $title, $slug, $excerpt, $content, $image_url, $status]);
+    'INSERT INTO allcontent_posts(category_id, title, slug, excerpt, content, image_url, copyright, status) VALUES(?,?,?,?,?,?,?,?)'
+   )->execute([(int)$_POST['category_id'], $title, $slug, $excerpt, $content, $image_url, $copyright, $status]);
    regenerate_csrf_token();
    header('Location: ?msg=' . urlencode('Post ditambah'));
    exit;

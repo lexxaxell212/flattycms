@@ -180,6 +180,11 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
       <div id="image-preview-edit" class="mt-2"></div>
      </div>
 
+     <div class="col-12">
+      <label class="form-label fw-medium">Copyright <span class="text-muted fw-normal">*</span></label>
+      <textarea name="copyright" class="form-control" rows="4" maxlength="255" placeholder="Nama / Sumber gambar..."><?= safe_html($edit_post['copyright'] ?? '') ?></textarea>
+     </div>
+
      <div class="d-flex gap-2">
       <button name="save" class="btn btn-primary">
        <i class="fa-solid fa-floppy-disk me-1"></i> Update Post
@@ -253,6 +258,10 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
       <input type="file" name="image" id="add-image" class="form-control" accept="image/jpeg,image/png,image/gif,image/webp" required>
       <input type="hidden" name="image_url" id="add-image-url">
       <div id="image-preview-add" class="mt-2"></div>
+     </div>
+     <div class="mb-3">
+      <label class="form-label fw-medium">Copyright <span class="text-muted fw-normal">*</span></label>
+      <textarea name="copyright" class="form-control" rows="4" maxlength="255" placeholder="Nama / Sumber gambar..."></textarea>
      </div>
      <button name="add" class="btn btn-primary px-4">
       <i class="fa-solid fa-plus me-1"></i> Tambah Post

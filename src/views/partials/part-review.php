@@ -7,7 +7,7 @@ require_once LIB_PATH . "v-review.php";
   <div class="d-flex align-items-end justify-content-between mb-4">
    <div>
     <span class="text-eyebrow" data-bhs="r.eyebrow">ULASAN</span>
-    <h2 class="text-sub-hero"><em class="styled" data-bhs="r.title">Cerita Pengunjung</h2>
+    <h2 class="text-sub-hero"><em class="styled" data-bhs="r.title">Cerita Pengunjung</em></h2>
    </div>
    <a href="/gallery" class="link-all">
     <span data-bhs="btn.all">Lihat Semua</span> <i class="fas fa-arrow-right ms-2"></i>

@@ -228,6 +228,9 @@
   const btn = document.getElementById("btnGenerateAI");
   const input = document.getElementById("aiPromptInput");
   if (!btn || !input) return;
+  if (btn.dataset.initialized) return;
+  btn.dataset.initialized = "true";
+  
   btn.addEventListener("click", generateItinerary);
   input.addEventListener("keydown", (e) => {
    if (e.key === "Enter" && e.shiftKey) {

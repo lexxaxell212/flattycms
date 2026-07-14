@@ -14,8 +14,8 @@ require_once LIB_PATH . "v-poi-hotel.php";
    <?php
    $img = htmlspecialchars($item['poi_image'] ?? IMG_URL . 'default-poi.png');
    $name = htmlspecialchars($item['name'] ?? '');
-   $desc = mb_substr(sanitizeHtml($item['description'] ?? ''), 0, 90);
-   $desc .= mb_strlen($item['description'] ?? '') > 90 ? '...' : '';
+   $desc = mb_substr(strip_tags(sanitizeHtml($item['description'] ?? '')), 0, 90);
+   $desc .= mb_strlen(strip_tags($item['description'] ?? '')) > 90 ? '...' : '';
    $url = htmlspecialchars($item['slug'] ?? '');
    ?>
    <div class="poi-hotel-card" style="--card-bg: url('<?= $img ?>')">

@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $title = limit_str($_POST['title'] ?? '', MAX_TITLE_LEN);
   $excerpt = limit_str($_POST['excerpt'] ?? '', MAX_EXCERPT_LEN);
   $image_url = $_POST['image_url'] ?? '';
-  $copyright = limit_str($_POST['copyright'] ?? '', 255);
+  $copyright = $_POST['copyright'] ?? '';
 
   if (empty($title)) $form_error = 'Judul tidak boleh kosong.';
 
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $title = limit_str($_POST['title'] ?? '', MAX_TITLE_LEN);
   $excerpt = limit_str($_POST['excerpt'] ?? '', MAX_EXCERPT_LEN);
   $image_url = '';
-  $copyright = limit_str($_POST['copyright'] ?? '', 255);
+  $copyright = $_POST['copyright'];
 
   if (empty($title)) $form_error = 'Judul tidak boleh kosong.';
 

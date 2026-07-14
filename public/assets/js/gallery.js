@@ -109,7 +109,7 @@
     <h2 class="h6"><i class="text-primary fas fa-location-dot me-2"></i>${escHtml(p.poi_name)}</h2>
     </div>
     <div class="text-muted small"><i class="fas fa-upload me-2 text-primary"></i>${formatDate(p.created_at)}</div>
-    ${p.caption ? `<div class="text-muted small"><i class="fas fa-link me-2 text-primary"></i>${escHtml(p.caption)}</div>`: ''}
+    ${p.caption ? `<div class="text-muted small"><i class="fas fa-thumbtack me-2 text-primary"></i>${escHtml(p.caption)}</div>`: ''}
     <div class="d-flex align-items-center">
     <img src="${p.uploader_avatar || BASE+'/assets/images/avatar.png'}"
     class="rounded-circle me-2" width="15" height="15" style="object-fit:cover">

@@ -169,8 +169,8 @@ $user_id_js = $is_logged ? (int)$_SESSION['user']['id'] : 0;
     </div>
    </div>
    <div class="gal-field">
-    <label class="gal-label"><span data-bhs="gal.page.upload.kredit.label">Kredit</span> <span class="gal-optional" data-bhs="gal.page.optional">opsional</span></label>
-    <input type="text" id="uploadCredit" class="gal-input" data-bhs="gal.page.upload.kredit.placeholder" placeholder="Nama / Instagram / Link...">
+    <label class="gal-label"><span data-bhs="gal.page.upload.kredit.label">Catatan</span> <span class="gal-optional" data-bhs="gal.page.optional">optional</span></label>
+    <input type="text" id="uploadCredit" class="gal-input" data-bhs="gal.page.upload.kredit.placeholder" placeholder="Catatan / Sosial Media / Kredit">
    </div>
   </div>
   <div class="gal-modal__footer">

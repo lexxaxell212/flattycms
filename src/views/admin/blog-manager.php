@@ -180,9 +180,9 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
       <div id="image-preview-edit" class="mt-2"></div>
      </div>
 
-     <div class="col-12">
+     <div class="col-12 mb-4">
       <label class="form-label fw-medium">Copyright <span class="text-muted fw-normal">*</span></label>
-      <textarea name="copyright" class="form-control" rows="4" maxlength="255" placeholder="Nama / Sumber gambar..."><?= safe_html($edit_post['copyright'] ?? '') ?></textarea>
+      <textarea name="copyright" class="form-control" rows="4" maxlength="500" placeholder="Nama / Sumber gambar..."><?= safe_html($edit_post['copyright'] ?? '') ?></textarea>
      </div>
 
      <div class="d-flex gap-2">
@@ -261,7 +261,7 @@ $count_scrapped = (int)$pdo->query("SELECT COUNT(*) FROM allcontent_posts WHERE 
      </div>
      <div class="mb-3">
       <label class="form-label fw-medium">Copyright <span class="text-muted fw-normal">*</span></label>
-      <textarea name="copyright" class="form-control" rows="4" maxlength="255" placeholder="Nama / Sumber gambar..."></textarea>
+      <textarea name="copyright" class="form-control" rows="4" maxlength="500" placeholder="Nama / Sumber gambar..."></textarea>
      </div>
      <button name="add" class="btn btn-primary px-4">
       <i class="fa-solid fa-plus me-1"></i> Tambah Post

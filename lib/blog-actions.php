@@ -11,7 +11,7 @@ $_POST['content'] = $_POST['content'] ?? '';
 
 $form_error = '';
 
-define('MAX_TITLE_LEN', 255);
+define('MAX_TITLE_LEN', 500);
 define('MAX_EXCERPT_LEN', 500);
 define('MAX_URL_LEN', 2048);
 define('MAX_CONTENT_LEN', 500000);

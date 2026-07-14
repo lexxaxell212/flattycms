@@ -74,7 +74,7 @@
     </div>
    </div>
   </section>
-  <div class="footer-bottom">
+  <div class="footer-bottom" style="text-align: left">
    <span class="text-uppercase" style="font-size:0.72rem">
     <?= date("Y") ?> | <?= $s['site_name'] ?? SITE_NAME ?>
    </span>

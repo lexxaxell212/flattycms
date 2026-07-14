@@ -167,8 +167,8 @@
   }
   const btn = document.getElementById("btnGenerateAI");
   const result = document.getElementById("aiItineraryResult");
-  btn.disabled = true;
   btn.innerHTML = '<div class="btn-fetch"><span></span><span></span><span></span></div>';
+  btn.disabled = true;
   result.innerHTML = "";
   lastItinerary = null;
   try {

@@ -6,8 +6,8 @@ require_once LIB_PATH . "v-review.php";
  <section class="rev-section">
   <div class="d-flex align-items-end justify-content-between mb-4">
    <div>
-    <span class="text-eyebrow" data-bhs="r.eyebrow">REVIEW</span>
-    <h2 class="text-sub-hero">Traveler <em class="styled">Sto</em>ry</h2>
+    <span class="text-eyebrow" data-bhs="r.eyebrow">ULASAN</span>
+    <h2 class="text-sub-hero"><em class="styled" data-bhs="r.title">Cerita Pengunjung</h2>
    </div>
    <a href="/gallery" class="link-all">
     <span data-bhs="btn.all">Lihat Semua</span> <i class="fas fa-arrow-right ms-2"></i>
@@ -39,10 +39,10 @@ require_once LIB_PATH . "v-review.php";
      onerror="this.src='/assets/images/avatar.png'"
      alt="<?= safe_html($_rev['user_name']) ?>">
      <div>
-      <div class="rev-card__name">
+      <div class="rev-card__name fw-medium">
        <?= safe_html($_rev['user_name']) ?>
       </div>
-      <div class="rev-card__poi">
+      <div class="rev-card__poi text-muted">
        <i class="fas fa-location-dot me-1"></i><?=
        safe_html($_rev['poi_name']) ?>
       </div>

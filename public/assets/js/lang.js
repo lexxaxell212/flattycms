@@ -11,7 +11,7 @@
    'btn.read.more': 'Baca Selengkapnya',
    'btn.it': 'Buat Itinerary',
    'btn.detail': 'Lihat Detail',
-   "btn.check": "let's Check it",
+   "btn.check": "Mulai Jelajahi",
    'btn.subs': 'Berlangganan',
    'btn.unsubs': 'Berhenti langganan',
    'btn.login': 'Masuk',
@@ -27,7 +27,7 @@
    'nav.home': 'Beranda',
    'nav.ue': 'Event Mendatang',
    'nav.ttd': 'Aktifitas',
-   'nav.tp': 'Perencana Perjalanan',
+   'nav.tp': 'Trip Planner',
    'nav.gr': 'Galeri & Ulasan',
    'nav.b': 'Artikel',
    //hero
@@ -41,7 +41,7 @@
    'ue.next.title': 'Ada apa ',
    'ue.next.title.em': 'Selanjutnya?',
    'ue.next.desc': 'Jangan sampai kelewat! Intip deretan event seru dan festival hits yang bakal hadir dalam waktu dekat.',
-   'ue.next.cta': 'Save the date!',
+   'ue.next.cta': 'Catat tanggalnya!',
    'ue.ended.title': 'Telah berakhir',
    'ue.ended.desc': 'Event yang telah berlalu',
    //part.khb
@@ -60,7 +60,7 @@
    'it.eyebrow': 'Itinerary',
    'it.title': 'Buatin Dong',
    'it.excerpt': 'Ceritain mau ngpain di Bandung, biar AI yang susunin itinerary-nya.',
-   'it.qp': 'Pilih Cepat',
+   'it.qp': 'Pilih Cepat:',
    'it.qp.1': 'Kuliner',
    'it.qp.2': 'Alam',
    'it.qp.3': 'Belanja',
@@ -75,12 +75,12 @@
    'it.qp.6.val': 'Premium',
    'it.ticker': 'Rute wisata alam Lembang seharian... | Itinerary belanja factory outlet Bandung... | Buat itinerary kuliner Bandung 2 hari...',
    //part.wisata
-   'w.eyebrow': 'Recommendations',
-   'w.title': 'Wisata Favorit',
+   'w.eyebrow': 'Rekomendasi',
+   'w.title': 'Point Of Interest',
    //tp
-   'tp.eyebrow': 'Perencana Perjalanan',
+   'tp.eyebrow': 'Trip Planner',
    'tp.title': 'Bikin Rencana Liburanmu di Bandung',
-   'tp.excerpt': 'Dari kuliner legendaris hingga wisata alam tersembunyi, susun agenda liburan terbaikmu di Bandung dengan mudah.',
+   'tp.excerpt': 'Dari resto kuliner legendaris hingga wisata alam tersembunyi, susun agenda liburan terbaikmu di Bandung dengan mudah.',
    'tp.li.1': 'Jelajahi ratusan tempat hits di Bandung',
    'tp.li.2': 'Atur & simpan rute sesukamu',
    'tp.li.3': 'Peta POI Bandung',
@@ -134,8 +134,8 @@
    'tp.page.upload.btn_cancel': 'Batalkan',
    'tp.page.upload.btn_upload': 'Upload',
    //gallery
-   'gal.eyebrow': 'Gallery',
-   'gal.title': 'Traveler Moments',
+   'gal.eyebrow': 'Galeri',
+   'gal.title': 'Moment Terbaik',
    'gal.page.rand.uploader': 'Foto dari',
    'gal.page.hero.title': 'Bagikan',
    'gal.page.hero.title.em': 'Pengalamanmu',
@@ -147,8 +147,8 @@
    'gal.page.btn.login': 'Masuk',
    'gal.page.search.placeholder': 'Cari dari POI...',
    'gal.page.search.reset.title': 'Reset',
-   'gal.page.tab.gallery': 'Gallery',
-   'gal.page.tab.review': 'Review',
+   'gal.page.tab.gallery': 'Galeri',
+   'gal.page.tab.review': 'Ulasan',
    'gal.page.loading.photo': 'Memuat foto...',
    'gal.page.loading.review': 'Memuat review...',
    'gal.page.upload.modal.title': 'Upload Foto',
@@ -171,13 +171,14 @@
    'gal.page.review.cerita.placeholder': 'Ceritakan pengalamanmu...',
    'gal.page.btn.kirimreview': 'Kirim Review',
    //part.hotel
-   'h.eyebrow': 'Recommendations',
-   'h.title': 'Hotel Favorit',
+   'h.eyebrow': 'Rekomendasi',
+   'h.title': 'Penginapan',
    //part.cta.1
    'cta.1.title': 'Bandung Menantimu!',
    'cta.1.excerpt': 'Persiapkan mulai hari ini, cari hotel atau rencanakan destinasi favoritmu.',
    //part.review
    'r.eyebrow': 'Ulasan',
+   'r.title': 'Cerita Pengunjung',
    //part.blogs
    'b.eyebrow': 'Blogs',
    'b.title': 'Artikel',
@@ -197,7 +198,7 @@
    'f.info.3': 'Kritik dan Saran',
    'f.user.title': 'Untukmu',
    'f.user.1': 'Aktifitas',
-   'f.user.2': 'Perencana Perjalanan',
+   'f.user.2': 'Trip Planner',
    'f.user.3': 'Galeri & Ulasan',
    'f.follow.title': 'Ikuti Kami',
    //chatbot
@@ -206,7 +207,7 @@
    'search.bar': 'Cari...',
    //unsub
    'unsub.title': 'Batal Langganan Newsletter',
-   'unsun.excerpt': 'Masukkan email Anda untuk berhenti berlangganan.',
+   'unsub.excerpt': 'Masukkan email Anda untuk berhenti berlangganan.',
    //fp
    'fp.title': 'Lupa password?',
    'fp.excerpt': 'Masukkan emailmu dan kami akan kirim link reset password.',
@@ -511,7 +512,7 @@
    'btn.read.more': 'Read More',
    'btn.it': 'Create Itinerary',
    'btn.detail': 'View Details',
-   "btn.check": "Let's Check it",
+   "btn.check": "Let's Discover",
    'btn.subs': 'Subscribe',
    'btn.unsubs': 'Unsubscribe',
    'btn.login': 'Login',
@@ -560,7 +561,7 @@
    'it.eyebrow': 'Itinerary',
    'it.title': 'Make It For Me',
    'it.excerpt': 'Tell us what you want to do in Bandung, and let AI arrange your itinerary.',
-   'it.qp': 'Quick Picks',
+   'it.qp': 'Quick Picks:',
    'it.qp.1': 'Culinary',
    'it.qp.2': 'Nature',
    'it.qp.3': 'Shopping',
@@ -576,7 +577,7 @@
    'it.ticker': 'All-day Lembang nature tour... | Bandung factory outlet shopping itinerary... | Create a 2-day Bandung culinary itinerary...',
    //part.wisata
    'w.eyebrow': 'Recommendations',
-   'w.title': 'Favorite Attractions',
+   'w.title': 'Point Of Interest',
    //tp
    'tp.eyebrow': 'Trip Planner',
    'tp.title': 'Plan Your Holiday in Bandung',
@@ -635,7 +636,7 @@
    'tp.page.upload.btn_upload': 'Upload',
    //gallery
    'gal.eyebrow': 'Gallery',
-   'gal.title': 'Momen Wisatawan',
+   'gal.title': 'Great Moments',
    'gal.page.rand.uploader': 'Photo by',
    'gal.page.hero.title': 'Share Your',
    'gal.page.hero.title.em': 'Moments',
@@ -672,12 +673,13 @@
    'gal.page.btn.kirimreview': 'Submit Review',
    //part.hotel
    'h.eyebrow': 'Recommendations',
-   'h.title': 'Favorite Hotels',
+   'h.title': 'Accommodation',
    //part.cta.1
    'cta.1.title': 'Bandung Awaits You!',
    'cta.1.excerpt': 'Prepare starting today, find hotels or plan your favorite destinations.',
    //part.review
-   'r.eyebrow': 'Review',
+   'r.eyebrow': 'Reviews',
+   'r.title': 'Visitors Story',
    //part.blogs
    'b.eyebrow': 'Blogs',
    'b.title': 'Articles',
@@ -725,7 +727,7 @@
    'form.name.placeholder': 'Name',
    'form.username.label': 'Username',
    'form.username.placeholder': 'Username',
-   'form.username.desc': 'Only word, number and underscore.',
+   'form.username.desc': 'Only letters, numbers, and underscores..',
    //form
    'form.display.name': 'Display name..',
    'form.email.label': 'Email',
@@ -733,7 +735,7 @@
    'form.email.placeholder': 'name@email.com',
    'form.password.label': 'Password',
    'form.password.new.label': 'New password',
-   'form.password.placeholder': 'Min. 8 character',
+   'form.password.placeholder': 'Min. 8 characters',
    'form.password.repeat.label': 'Confirm password',
    'form.password.repeat.placeholder': 'Repeat your password',
    //login

@@ -4,7 +4,7 @@
   <div class="d-flex align-items-end justify-content-between mb-4">
    <div>
     <span class="text-eyebrow" data-bhs="gal.eyebrow">GALLERY</span>
-    <h2 class="text-sub-hero">Traveler <em class="styled">Mom</em>ents</h2>
+    <h2 class="text-sub-hero"><em class="styled" data-bhs="gal.title">Moment Terbaik</em></h2>
    </div>
    <a href="/gallery" class="link-all">
     <span data-bhs="btn.all">Lihat Semua</span> <i class="fas fa-arrow-right ms-2"></i>

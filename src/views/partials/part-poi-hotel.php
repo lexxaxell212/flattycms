@@ -5,8 +5,8 @@ require_once LIB_PATH . "v-poi-hotel.php";
 <div class="container">
  <section id="hotel-recommendations">
   <div class="mb-4">
-   <span class="text-eyebrow" data-bhs="h.eyebrow">Recommendations</span>
-   <h2 class="text-sub-hero mb-4" data-bhs="h.title">Hotel Favorit</h2>
+   <span class="text-eyebrow" data-bhs="h.eyebrow">Rekomendasi</span>
+   <h2 class="text-sub-hero mb-4" data-bhs="h.title">Penginapan</h2>
   </div>
   <div class="poi-hotel-grid" id="poiHotelGrid">
    <?php if (!empty($hotel_poi)): ?>

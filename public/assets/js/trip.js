@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
  const routeEmptyHTML = `<div id="routeEmpty" style="display:flex">
  <div class="route-empty">
  <i class="fa-solid fa-map-pin text-accent"></i>
- <span data-bhs="tp.page.map.route_empty">Pilih titik awal - Klik pin di map untuk tambah lokasi</span>
+ <span data-bhs="tp.page.map.route_empty">Pilih titik awal - Klik pin di map untuk tambah lokasi - Login untuk simpan</span>
  </div>
  </div>`;
 
@@ -644,7 +644,7 @@ document.addEventListener("DOMContentLoaded", () => {
      const el = document.createElement("button");
      el.type = "button";
      el.className = "btn-popup";
-     el.textContent = p.name;
+     el.innerHTML = `<span>${p.name}</span>`;
      el.addEventListener("click", () => {
       document.getElementById("uploadPoiId").value = p.id;
       document.getElementById("uploadPoiName").textContent = p.name;

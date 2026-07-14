@@ -153,7 +153,7 @@ if (
        value="<?= isset($_POST["username"])
        ? htmlspecialchars($_POST["username"])
        : "" ?>"
-       placeholder="Username" required autofocus>
+       placeholder="Username" required>
        <input type="password" class="form-control" name="password"
        placeholder="••••••••••" required>
       </div>

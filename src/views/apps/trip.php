@@ -272,7 +272,8 @@ $cats_json = json_encode($categories);
       </div>
      </div>
      <div id="tab-ai" class="tp-tab-content" style="display:none">
-      <div class="rounded-lg py-4 bg-card mx-auto mb-5" style="max-width:740px">
+      <img class="d-block mx-auto mb-4" src="/assets/images/undraw-newsfeed.svg" style="width:100%;max-width:400px;" />
+      <div class="rounded-lg py-2 bg-card mx-auto mb-5" style="max-width:740px">
        <div class="mb-4">
         <h2 class="text-center"><span data-bhs="it.title">Buatin Dong</span><em><i>!</i></em></h2>
        </div>

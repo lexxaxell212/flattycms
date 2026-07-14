@@ -83,7 +83,7 @@
     <div class="gal-review-card">
     <div class="gal-review-card__header">
     <div class="gal-review-card__user">
-    <img src="${r.avatar || BASE + "/uploads/default.jpg"}" class="gal-review-card__avatar" onerror="this.src='${BASE}/assets/images/avatar.png'">
+    <img src="${r.avatar || BASE + "/assets/images/avatar.png"}" class="gal-review-card__avatar" onerror="this.src='${BASE}/assets/images/avatar.png'">
     <div>
     <div class="gal-review-card__name">${r.user_name}</div>
     </div>

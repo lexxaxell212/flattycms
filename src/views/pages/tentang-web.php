@@ -16,7 +16,7 @@ $page_title = "Tentang Website";
   <div class="mb-5">
    <div class="row g-4 justify-content-center text-center">
     <div class="col-6 col-md-3">
-     <div class="fw-bold fs-2 text-primary"><?= $total_poi ?>+</div>
+     <div class="fw-bold fs-2 text-primary"><?= $total_poi ?></div>
      <div class="small text-muted" data-bhs="about.stat.destinasi">Destinasi Terdaftar</div>
     </div>
     <div class="col-6 col-md-3">

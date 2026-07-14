@@ -89,17 +89,17 @@ require_once SRC_PATH . "headerv2.php";
      pointer-events: none;
      -webkit-mask-image: radial-gradient(
      circle at var(--fl-x) var(--fl-y),
-     rgba(0, 0, 0, 0.35) 22px,
-     rgba(0, 0, 0, 0.45) 65px,
-     rgba(0, 0, 0, 0.75) 130px,
-     rgba(0, 0, 0, 0.95) 200px
+     rgba(0, 0, 0, 0.55) 22px,
+     rgba(0, 0, 0, 0.75) 65px,
+     rgba(0, 0, 0, 0.85) 100px,
+     rgba(0, 0, 0, 0.95) 150px
      );
      mask-image: radial-gradient(
      circle at var(--fl-x) var(--fl-y),
-     rgba(0, 0, 0, 0.35) 22px,
-     rgba(0, 0, 0, 0.45) 65px,
-     rgba(0, 0, 0, 0.75) 130px,
-     rgba(0, 0, 0, 0.95) 200px
+     rgba(0, 0, 0, 0.55) 22px,
+     rgba(0, 0, 0, 0.75) 65px,
+     rgba(0, 0, 0, 0.85) 100px,
+     rgba(0, 0, 0, 0.95) 150px
      );
     }
 
@@ -107,16 +107,16 @@ require_once SRC_PATH . "headerv2.php";
      .flashlight404 {
       -webkit-mask-image: radial-gradient(
       circle at var(--fl-x) var(--fl-y),
-      rgba(0, 0, 0, 0.35) 50px,
-      rgba(0, 0, 0, 0.45) 150px,
-      rgba(0, 0, 0, 0.75) 300px,
+      rgba(0, 0, 0, 0.55) 50px,
+      rgba(0, 0, 0, 0.75) 150px,
+      rgba(0, 0, 0, 0.85) 300px,
       rgba(0, 0, 0, 0.95) 400px
       );
       mask-image: radial-gradient(
       circle at var(--fl-x) var(--fl-y),
-      rgba(0, 0, 0, 0.35) 50px,
-      rgba(0, 0, 0, 0.45) 150px,
-      rgba(0, 0, 0, 0.75) 300px,
+      rgba(0, 0, 0, 0.55) 50px,
+      rgba(0, 0, 0, 0.75) 150px,
+      rgba(0, 0, 0, 0.85) 300px,
       rgba(0, 0, 0, 0.95) 400px
       );
      }
@@ -170,7 +170,7 @@ require_once SRC_PATH . "headerv2.php";
     window.addEventListener(
      "touchmove",
      e => {
-      if (e.target.closest("main.main-content")) return;
+      if (e.target.closest(".card")) return;
       if (e.touches.length > 0)
        setLight(e.touches[0].clientX, e.touches[0].clientY);
      },
@@ -182,7 +182,7 @@ require_once SRC_PATH . "headerv2.php";
     window.addEventListener(
      "touchstart",
      e => {
-      if (e.target.closest("main.main-content")) return;
+      if (e.target.closest(".card")) return;
       if (e.touches.length > 0)
        setLight(e.touches[0].clientX, e.touches[0].clientY);
      },

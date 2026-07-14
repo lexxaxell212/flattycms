@@ -7,6 +7,12 @@ $pdo = $GLOBALS['pdo'];
 $method = $_SERVER['REQUEST_METHOD'];
 $user_id = isset($_SESSION['user']) ? (int)$_SESSION['user']['id'] : null;
 
+function truncate_desc(?string $desc, int $len = 150): string {
+ $desc = $desc ?? '';
+ $cut = mb_substr($desc, 0, $len);
+ return $cut . (mb_strlen($desc) > $len ? '...' : '');
+}
+
 // ── GET ──────────────────────────────────────────────────────
 if ($method === 'GET') {
  if (!$user_id) {
@@ -60,7 +66,7 @@ if ($method === 'GET') {
      'longitude' => $row['longitude'],
      'address' => $row['address'],
      'poi_image' => $row['poi_image'],
-     'description' => $row['description'],
+     'description' => truncate_desc($row['description']),
      'order_index' => $row['order_index'],
      'distance_from_prev' => $row['distance_from_prev'],
      'note_id' => $row['note_id'],

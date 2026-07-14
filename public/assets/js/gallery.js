@@ -91,8 +91,8 @@
     grid.innerHTML = `
     <div class="col-12 text-center py-5 text-muted small justify-content-center">
     <i class="fa-solid fa-image fa-2x mb-3 d-block opacity-25 mx-auto"></i>
-    Belum ada foto${poi_id ? ' untuk lokasi ini': ''}
-    ${IS_LOGGED ? '<br><button class="btn btn-primary mt-4" id="btnEmptyUpload"><i class="fa-solid fa-camera me-1"></i>Upload pertama!</button>': ''}
+    Belum ada foto, jadilah uploader pertama ${poi_id ? ' untuk lokasi ini': ''}
+    ${IS_LOGGED ? '<br><button class="btn btn-primary mt-4" id="btnEmptyUpload"><i class="fa-solid fa-camera me-1"></i>Upload yuk!</button>': ''}
     </div>`;
     if (IS_LOGGED) document.getElementById('btnEmptyUpload')?.addEventListener('click', () => openUploadModal());
     renderPagination(0, 0);

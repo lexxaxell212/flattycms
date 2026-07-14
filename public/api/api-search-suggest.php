@@ -29,6 +29,7 @@ $results = array_merge($results, $stmt->fetchAll());
 $stmt = $pdo->query("
     SELECT id, title, excerpt AS description, slug, 'allcontent_posts' AS source, created_at
     FROM allcontent_posts
+    WHERE status = 'active'
     ORDER BY RAND()
     LIMIT 3
   ");

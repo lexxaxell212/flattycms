@@ -49,8 +49,9 @@ $stmt = $pdo->prepare("
         slug,
         'allcontent_posts' AS source
     FROM allcontent_posts
-    WHERE title LIKE :q
-       OR excerpt LIKE :q2
+    WHERE status = 'active'
+    AND (title LIKE :q
+       OR excerpt LIKE :q2)
     ORDER BY title ASC
     LIMIT 10
   ");

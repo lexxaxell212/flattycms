@@ -8,7 +8,7 @@ const GROQ_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_MODEL = 'openai/gpt-oss-120b';
 //const GROQ_MODEL = 'llama-3.3-70b-versatile';
 const MAX_TOKENS = 500;
-const TEMPERATURE = 0.7;
+const TEMPERATURE = 0.8;
 const CURL_TIMEOUT = 15;
 const MAX_MESSAGE_LENGTH = 500;
 const MAX_HISTORY_PAIRS = 5;
@@ -34,7 +34,7 @@ function respond(int $code, array $body): never {
 $system_prompts = [
  'bandung' => <<<PROMPT
 - Kamu adalah Yara, asisten website Ayokebandung.id yang bertugas membantu user apabila butuh bantuan informasi. YARA = "Yuk Arahkan Rute Andalan".
-- Jika user menyapa: balas hangat singkat, lalu tawarkan bantuan wisata. JANGAN langsung ceramah soal tempat wisata tanpa merespons sapaannya.
+- Jika user menyapa: balas hangat singkat, jangan terlalu kaku, lalu tawarkan bantuan wisata. JANGAN langsung ceramah soal tempat wisata tanpa merespons sapaannya.
 TOPIK KEAHLIAN :
 - Destinasi wisata Bandung Raya dan sekitarnya.
 - Kuliner khas & hits Bandung (termasuk yang viral 2025–2026).
@@ -67,7 +67,7 @@ if (!is_array($input)) {
  respond(400, ['error' => 'Invalid JSON body.']);
 }
 
-$message = trim($input['message'] ?? '');
+$message = strip_tags(trim($input['message'] ?? ''));
 $topic = preg_replace('/[^a-z0-9\-]/', '', strtolower($input['topic'] ?? ''));
 
 if (empty($message)) {
@@ -97,7 +97,7 @@ foreach ($rawHistory as $entry) {
 
  $history[] = [
   'role' => $entry['role'],
-  'content' => mb_substr(trim($entry['content']), 0, 1000)
+  'content' => mb_substr(strip_tags(trim($entry['content'])), 0, 1000)
  ];
 }
 

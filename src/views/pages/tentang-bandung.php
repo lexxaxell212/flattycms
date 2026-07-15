@@ -195,11 +195,11 @@ $page_title = "Tentang Bandung";
       <div class="d-flex flex-wrap gap-4 mt-4 justify-content-center">
        <a href="https://sadayana.bandung.go.id/" target="_blank" rel="noopener" class="text-center text-decoration-none">
         <i class="fa-solid fa-globe fs-4 d-block mb-1 text-primary mx-auto"></i>
-        <span class="small" data-bhs="modern.smartcity.link1">sadayana.bandung.go.id</span>
+        <span class="small" data-bhs="modern.smartcity.link1">Sadayana</span>
        </a>
        <a href="https://pelindung.bandung.go.id/" target="_blank" rel="noopener" class="text-center text-decoration-none">
         <i class="fa-solid fa-globe fs-4 d-block mb-1 text-primary mx-auto"></i>
-        <span class="small" data-bhs="modern.smartcity.link2">pelindung.bandung.go.id</span>
+        <span class="small" data-bhs="modern.smartcity.link2">Pelindung</span>
        </a>
       </div>
      </div>

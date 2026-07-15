@@ -64,7 +64,7 @@
   top: 0;
   display: inline-block;
   opacity: 0;
-  transform: translateX(-150px);
+  transform: translateX(-20px);
  }
  .hero-titles .title-main {
   display: inline-block;
@@ -99,10 +99,10 @@
    transform: translateX(0);
   }
   30% {
-   transform: translateX(125px);
+   transform: translateX(130px);
   }
   70% {
-   transform: translateX(125px);
+   transform: translateX(130px);
   }
   100% {
    transform: translateX(0);
@@ -140,10 +140,10 @@
     transform: translateX(0);
    }
    30% {
-    transform: translateX(250px);
+    transform: translateX(255px);
    }
    70% {
-    transform: translateX(250px);
+    transform: translateX(255px);
    }
    100% {
     transform: translateX(0);

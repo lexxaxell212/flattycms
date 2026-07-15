@@ -25,8 +25,8 @@ const CHATBOT_TEXT = {
   en: "Request timeout."
  },
  "chatbot.error.connection": {
-  id: "Koneksi bermasalah.",
-  en: "Connection problem.",
+  id: "Koneksi bermasalah. Coba ulang.",
+  en: "Connection problem. Try again.",
  },
  "chatbot.error.generic": {
   id: "Terjadi kesalahan.",
@@ -156,7 +156,7 @@ function addMessage(text, type = "loading") {
  if (type === "loading") {
   bubble.innerHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`;
  } else if (type === "error") {
-  bubble.innerHTML = `<span class="error-text">⚠️ ${escapeHTML(text)}</span>`;
+  bubble.innerHTML = `<span class="error-text"><i class="fas fa-triangle-exclamation me-1"></i> ${escapeHTML(text)}</span>`;
  } else {
   const label =
   type === "user" ? ct("chatbot.label.user"): ct("chatbot.label.ai");

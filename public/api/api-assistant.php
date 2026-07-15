@@ -6,7 +6,7 @@ verify_ajax_request('POST');
 const GROQ_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
 //const GROQ_MODEL = 'openai/gpt-oss-20b';
 const GROQ_MODEL = 'openai/gpt-oss-120b';
-//const GROQ_MODEL = 'llama-3.3-70b-versatile';
+//const GROQ_MODEL = 'llama-3.3-70b-versatile'; deprecated
 const MAX_TOKENS = 500;
 const TEMPERATURE = 0.8;
 const CURL_TIMEOUT = 15;

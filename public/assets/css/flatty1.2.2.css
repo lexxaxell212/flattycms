@@ -1942,7 +1942,7 @@ table tbody td {
 }
 
 .btn:disabled {
- opacity: 0.7;
+ opacity: 0.5;
  cursor: not-allowed;
 }
 
@@ -4710,7 +4710,7 @@ input[type="range"]::-moz-range-track {
  color: var(--text-white) !important;
 }
 .asl-nav-btn:disabled {
- opacity: 0.7;
+ opacity: 0.5;
  cursor: default;
 }
 @media (min-width: 1024px) {

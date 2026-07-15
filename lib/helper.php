@@ -77,6 +77,15 @@ function safe_html($value): string
  return htmlspecialchars($value ?? "", ENT_QUOTES, "UTF-8");
 }
 
+// Safe Url
+function safe_url($url) {
+ $url = trim($url ?? '');
+ if (!$url) return '';
+ // hanya izinkan http/https
+ if (!preg_match('#^https?://#i', $url)) return '';
+ return htmlspecialchars($url);
+}
+
 // Safe include
 function safe_include($file_path, $fallback_title = "Konten") {
  if (!file_exists($file_path)) {

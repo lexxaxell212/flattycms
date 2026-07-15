@@ -114,7 +114,7 @@ function generateStaticPage($slug, $html_content, $page_id, $title) {
                 </a>
                 <button onclick="copyLink()"
                    class="btn btn-outline-primary btn-fit">
-                  <i class="fa-brands fa-instagram"></i>
+                  <i class="fas fa-copy"></i>
                 </button>
               </div>
             </div>

@@ -93,6 +93,8 @@ $total = count($pois);
            data-address="<?= safe_html($p['address'] ?? '') ?>"
            data-desc="<?= safe_html($p['description'] ?? '') ?>"
            data-copyright="<?= safe_html($p['copyright'] ?? '') ?>"
+           data-website="<?= safe_html($p['website'] ?? '') ?>"
+           data-instagram="<?= safe_html($p['instagram'] ?? '') ?>"
            data-image="<?= safe_html($p['poi_image'] ?? '') ?>"
            data-active="<?= $p['is_active'] ?>">
            <i class="fa-solid fa-pen-to-square me-1"></i>Edit
@@ -175,6 +177,14 @@ $total = count($pois);
       <label class="form-label small fw-semibold">Copyright <span class="text-muted fw-normal">(opsional)</span></label>
       <textarea rows="3" id="poiCopyright" class="form-control" placeholder="Nama / Sumber foto..."></textarea>
      </div>
+     <div class="col-12 col-md-6">
+      <label class="form-label small fw-semibold">Website <span class="text-muted fw-normal">(opsional)</span></label>
+      <input type="url" id="poiWebsite" class="form-control" placeholder="https://...">
+     </div>
+     <div class="col-12 col-md-6">
+      <label class="form-label small fw-semibold">Instagram <span class="text-muted fw-normal">(opsional)</span></label>
+      <input type="text" id="poiInstagram" class="form-control" placeholder="@namaakun atau URL">
+     </div>
      <div class="col-12">
       <label class="form-label small fw-semibold">Gambar POI</label>
       <input type="file" id="poiImage" class="form-control form-control-sm" accept="image/jpeg,image/png,image/webp">
@@ -246,6 +256,14 @@ $total = count($pois);
      <div class="col-12">
       <label class="form-label small fw-semibold">Copyright <span class="text-muted fw-normal">(opsional)</span></label>
       <textarea rows="3" id="editPoiCopyright" class="form-control" placeholder="Nama / Sumber foto..."></textarea>
+     </div>
+     <div class="col-12 col-md-6">
+      <label class="form-label small fw-semibold">Website <span class="text-muted fw-normal">(opsional)</span></label>
+      <input type="url" id="editPoiWebsite" class="form-control" placeholder="https://...">
+     </div>
+     <div class="col-12 col-md-6">
+      <label class="form-label small fw-semibold">Instagram <span class="text-muted fw-normal">(opsional)</span></label>
+      <input type="text" id="editPoiInstagram" class="form-control" placeholder="@namaakun atau URL">
      </div>
      <div class="col-12">
       <label class="form-label small fw-semibold">Ganti Gambar <span class="text-muted fw-normal">(opsional)</span></label>
@@ -443,6 +461,8 @@ $total = count($pois);
     fd.append('address', document.getElementById('poiAddress').value.trim());
     fd.append('description', document.getElementById('poiDesc').value.trim());
     fd.append('copyright', document.getElementById('poiCopyright').value.trim());
+    fd.append('website', document.getElementById('poiWebsite').value.trim());
+    fd.append('instagram', document.getElementById('poiInstagram').value.trim());
     fd.append('is_active', document.getElementById('poiActive').checked ? 1: 0);
     const imgFile = document.getElementById('poiImage').files[0];
     if (imgFile) fd.append('poi_image', imgFile);
@@ -514,6 +534,8 @@ $total = count($pois);
     document.getElementById('editPoiAddress').value = this.dataset.address;
     document.getElementById('editPoiDesc').value = this.dataset.desc;
     document.getElementById('editPoiCopyright').value = this.dataset.copyright || '';
+    document.getElementById('editPoiWebsite').value = this.dataset.website || '';
+    document.getElementById('editPoiInstagram').value = this.dataset.instagram || '';
     document.getElementById('editPoiActive').checked = this.dataset.active === '1';
     document.getElementById('editPoiImage').value = '';
     document.getElementById('editPoiNewPreview').style.display = 'none';
@@ -562,6 +584,8 @@ $total = count($pois);
     fd.append('address', document.getElementById('editPoiAddress').value.trim());
     fd.append('description', document.getElementById('editPoiDesc').value.trim());
     fd.append('copyright', document.getElementById('editPoiCopyright').value.trim());
+    fd.append('website', document.getElementById('editPoiWebsite').value.trim());
+    fd.append('instagram', document.getElementById('editPoiInstagram').value.trim());
     fd.append('is_active', document.getElementById('editPoiActive').checked ? 1: 0);
     const imgFile = document.getElementById('editPoiImage').files[0];
     if (imgFile) fd.append('poi_image', imgFile);

@@ -24,6 +24,27 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
     <?= sanitizeHtml($poi['description'] ?? '') ?>
    </div>
   </section>
+  <section class="revealed">
+   <h2 class="h3 mb-3">POI Detail</h2>
+   <div class="d-flex justify-content-start row gap-2">
+    <div class="align-items-center">
+     <span class="fw-semibold text-muted"><i class="fas fa-location-dot me-2"></i></span>
+     <span class="fw-medium small"><?= htmlspecialchars($poi['name'] ?? '') ?></span>
+    </div>
+    <div class="align-items-center">
+     <span class="fw-semibold text-muted"><i class="fas fa-map-location-dot me-2"></i></span>
+     <span class="fw-medium small"><?= htmlspecialchars($poi['address'] ?? '') ?></span>
+    </div>
+    <div class="align-items-center">
+     <span class="fw-semibold text-muted"><i class="fas fa-link me-2"></i></span>
+     <a href="<?= safe_url($poi['website'] ?? '') ?>" target="_blank"><span><?= htmlspecialchars($poi['website'] ?? '-') ?></span></a>
+    </div>
+    <div class="align-items-center">
+     <span class="fw-semibold text-muted"><i class="fa-brands fa-instagram me-2"></i></span>
+     <a href="<?= safe_url($poi['instagram'] ?? '') ?>" target="_blank"><span><?= htmlspecialchars($poi['instagram'] ?? '-') ?></span></a>
+    </div>
+   </div>
+  </section>
   <hr class="my-4">
   <?php
   require_once LIB_PATH . "v-reactions-poi.php";
@@ -48,7 +69,7 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
     </div>
     <div class="gap-2 align-items-center">
      <?php $share_url = urlencode(BASE_URL . 'poi/' . $slug); ?>
-     <?php $share_title = urlencode(htmlspecialchars($poi['name'])); ?>
+     <?php $share_title = urlencode($poi['name'] ?? ''); ?>
      <a href="https://wa.me/?text=<?= $share_title ?>%20<?= $share_url ?>"
       target="_blank" rel="noopener"
       class="btn btn-outline-primary btn-fit">
@@ -61,7 +82,7 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
      </a>
      <button onclick="copyLink()"
       class="btn btn-outline-primary btn-fit">
-      <i class="fa-brands fa-instagram"></i>
+      <i class="fas fa-copy"></i>
      </button>
     </div>
    </div>

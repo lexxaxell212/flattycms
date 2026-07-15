@@ -73,8 +73,8 @@ function add_poi($data) {
  if (!$name || !$cat || !$lat || !$lng) return false;
  $slug = generate_poi_slug($name);
  $stmt = $pdo->prepare("
-        INSERT INTO poi (category_id, name, slug, description, address, latitude, longitude, is_active, poi_image, copyright)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO poi (category_id, name, slug, description, address, latitude, longitude, is_active, poi_image, copyright, website, instagram)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
  $stmt->execute([
   $cat, $name, $slug,
@@ -84,6 +84,8 @@ function add_poi($data) {
   isset($data['is_active']) ? (int)$data['is_active'] : 1,
   trim($data['poi_image'] ?? '') ?: null,
   trim($data['copyright'] ?? '') ?: null,
+  trim($data['website'] ?? '') ?: null,
+  trim($data['instagram'] ?? '') ?: null,
  ]);
  return (int)$pdo->lastInsertId();
 }
@@ -99,7 +101,8 @@ function update_poi($id, $data) {
  $stmt = $pdo->prepare("
         UPDATE poi SET
             category_id = ?, name = ?, slug = ?, description = ?,
-            address = ?, latitude = ?, longitude = ?, is_active = ?, copyright = ?
+            address = ?, latitude = ?, longitude = ?, is_active = ?, copyright = ?,
+            website = ?, instagram = ?
         WHERE id = ?
     ");
  $stmt->execute([
@@ -109,6 +112,8 @@ function update_poi($id, $data) {
   $lat, $lng,
   isset($data['is_active']) ? (int)$data['is_active'] : 1,
   trim($data['copyright'] ?? '') ?: null,
+  trim($data['website'] ?? '') ?: null,
+  trim($data['instagram'] ?? '') ?: null,
   $id,
  ]);
  return $stmt->rowCount() >= 0;

@@ -5,20 +5,20 @@ const TIMEOUT = 10000;
 
 const CHATBOT_TEXT = {
  "chatbot.welcome": {
-  id: "Wilujeng sumping! 👋 Yara siap bantu eksplor Bandung. Mau tanya apa nih..?",
-  en: "Welcome! 👋 Yara is ready to help you explore Bandung. What would you like to ask?",
+  id: "Wilujeng sumping! 👋 Saya siap bantu eksplor Bandung. Mau tanya apa nih..?",
+  en: "Welcome! 👋 I am ready to help you explore Bandung. What would you like to ask?",
  },
  "chatbot.cleared": {
-  id: "Chat dibersihkan. Ada yang bisa Yara bantu lagi? 😊",
-  en: "Chat cleared. Is there anything else Yara can help with? 😊",
+  id: "Chat dibersihkan. Ada yang bisa Saya bantu lagi? 😊",
+  en: "Chat cleared. Is there anything else I am can help with? 😊",
  },
  "chatbot.label.user": {
   id: "Kamu",
   en: "You"
  },
  "chatbot.label.ai": {
-  id: "Yara",
-  en: "Yara"
+  id: "Chat Bot",
+  en: "Chat Bot"
  },
  "chatbot.error.timeout": {
   id: "Request timeout.",

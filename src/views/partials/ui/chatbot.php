@@ -17,7 +17,7 @@
      </svg>
     </div>
     <div class="bot-meta">
-     <span class="bot-name">Yara</span>
+     <span class="bot-name">Chat Bot</span>
      <span class="bot-status" data-bhs="chatbot.meta">Asisten Chat</span>
     </div>
    </div>
@@ -42,7 +42,7 @@
      </button>
     </div>
     <div class="d-flex justify-content-start form-text text-muted small ms-4 p-0" style="margin-top:-4px">
-     <span>*Jawaban dari AI bisa saja salah, jangan lupa cek ulang</span>
+     <span>*Jawaban dari Chat Bot bisa saja salah, jangan lupa cek ulang</span>
     </div>
    </div>
   </div>

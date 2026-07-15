@@ -21,7 +21,7 @@ $page_title = "Tentang Website";
     </div>
     <div class="col-6 col-md-3">
      <div class="fw-bold fs-2 text-primary">24/7</div>
-     <div class="small text-muted" data-bhs="about.stat.ai">Asisten AI Siap Bantu</div>
+     <div class="small text-muted" data-bhs="about.stat.ai">Asisten Chat Siap Bantu</div>
     </div>
    </div>
   </div>

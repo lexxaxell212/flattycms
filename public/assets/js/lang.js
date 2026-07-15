@@ -480,7 +480,7 @@
    //Tentang
    'about.hero.lead': 'Platform digital yang membantumu menjelajahi Bandung dengan mudah, dari destinasi wisata hingga rencana perjalanan.',
    'about.stat.destinasi': 'Destinasi Terdaftar',
-   'about.stat.ai': 'Asisten AI Siap Bantu',
+   'about.stat.ai': 'Asisten Chat Siap Bantu',
    'about.misi.title': 'Misi Kami',
    'about.misi.body1': 'Bandung punya ratusan tempat menarik, tapi sering kali wisatawan bingung mulai dari mana. Ayokebandung.id hadir untuk menjembatani itu - menyatukan informasi destinasi, kuliner, budaya, dan akomodasi dalam satu platform, lengkap dengan alat bantu perencanaan perjalanan berbasis teknologi terkini.',
    'about.misi.body2': 'Kami percaya menjelajahi kota gak harus ribet. Cukup ceritakan maumu, biar sisanya kami bantu susun.',
@@ -982,7 +982,7 @@
    //Tentang
    'about.hero.lead': 'A digital platform that helps you explore Bandung with ease, from tourist destinations to trip planning.',
    'about.stat.destinasi': 'Registered Destinations',
-   'about.stat.ai': 'AI Assistant Ready to Help',
+   'about.stat.ai': 'Chat Assistant Ready to Help',
    'about.misi.title': 'Our Mission',
    'about.misi.body1': 'Bandung has hundreds of interesting places, but travelers are often unsure where to start. Ayokebandung.id is here to bridge that gap - bringing together information on destinations, food, culture, and accommodation in one platform, complete with trip-planning tools powered by the latest technology.',
    'about.misi.body2': 'We believe exploring a city shouldn\'t be complicated. Just tell us what you\'re after, and we\'ll help plan the rest.',

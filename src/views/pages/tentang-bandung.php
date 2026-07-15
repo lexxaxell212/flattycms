@@ -193,7 +193,7 @@ $page_title = "Tentang Bandung";
        smart city di Indonesia dan masuk dalam daftar 50 smart government dunia versi Eden Strategy Institute.
       </p>
       <div class="d-flex flex-wrap gap-4 mt-4 justify-content-center">
-       <a href="https://smartcity.bandung.go.id/" target="_blank" rel="noopener" class="text-center text-decoration-none">
+       <a href="https://sadayana.bandung.go.id/" target="_blank" rel="noopener" class="text-center text-decoration-none">
         <i class="fa-solid fa-globe fs-4 d-block mb-1 text-primary mx-auto"></i>
         <span class="small" data-bhs="modern.smartcity.link1">sadayana.bandung.go.id</span>
        </a>

@@ -37,11 +37,11 @@ $page_title = $poi['name'] . ' - ' . SITE_NAME;
     </div>
     <div class="align-items-center">
      <span class="fw-semibold text-muted"><i class="fas fa-link me-2"></i></span>
-     <a href="<?= safe_url($poi['website'] ?? '') ?>" target="_blank"><span><?= htmlspecialchars($poi['website'] ?? '-') ?></span></a>
+     <a href="<?= safe_url($poi['website']) ?>" target="_blank"><span><?= htmlspecialchars($poi['website'] ?? '') ?></span></a>
     </div>
     <div class="align-items-center">
      <span class="fw-semibold text-muted"><i class="fa-brands fa-instagram me-2"></i></span>
-     <a href="<?= safe_url($poi['instagram'] ?? '') ?>" target="_blank"><span><?= htmlspecialchars($poi['instagram'] ?? '-') ?></span></a>
+     <a href="<?= safe_url($poi['instagram']) ?>" target="_blank"><span><?= htmlspecialchars($poi['instagram'] ?? '') ?></span></a>
     </div>
    </div>
   </section>

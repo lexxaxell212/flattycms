@@ -3,7 +3,7 @@
   <section class="revealed">
    <div class="text-center">
     <div class="mb-5">
-     <h2 data-bhs="f.newsletter.title">NEWSLETTER</h2>
+     <h2 class="h3" data-bhs="f.newsletter.title">NEWSLETTER</h2>
      <p data-bhs="f.newsletter.excerpt">
       Dapatkan event dan update Bandung terkini via email.
      </p>
@@ -74,7 +74,7 @@
     </div>
    </div>
   </section>
-  <div class="footer-bottom ms-2" style="text-align: left">
+  <div class="footer-bottom">
    <span class="text-uppercase" style="font-size:0.72rem">
     <?= date("Y") ?> | <?= $s['site_name'] ?? SITE_NAME ?>
    </span>

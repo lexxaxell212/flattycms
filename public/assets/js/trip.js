@@ -287,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
    <p class="text-muted small">${escHtml(stripHtml(r.description || "Deskripsi belum tersedia."))}</p>
    </div>
    </div>
-   ${IS_LOGGED ? `<div class="mt-2"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Tambah catatan untuk POI ini..." value="${escHtml(r.note)}" style="font-size:.9rem" ${window.isLoadedTrip ? "disabled": ""}></div>`: ""}
+   ${IS_LOGGED ? `<div class="mt-2"><input type="text" class="form-control note-input" data-idx="${i}" placeholder="Catatan untuk POI ini" value="${escHtml(r.note)}" style="font-size:.9rem" ${window.isLoadedTrip ? "disabled": ""}></div>`: ""}
    </div>
    </div>`,
   )
